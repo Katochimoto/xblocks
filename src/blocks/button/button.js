@@ -1,26 +1,31 @@
 (function(xtag, xblocks) {
     'use strict';
 
+    var schema = (function(json) {
+        return json;
+    })(
+        /* borschik:include:button.json */
+    );
+
     xtag.register('xb-button', {
         lifecycle: {
             created: function() {
                 var data = {
-                    attrs: xblocks.attrs2obj(this),
-                    content: null
+                    attrs: xblocks.attrs2obj(this, {
+                        'xb-theme': 'normal',
+                        'xb-size': 'm'
+                    }),
+                    content: Modernizr.createshadowroot ? null : this.innerHTML
                 };
 
-                if (!data.attrs['xb-theme']) {
-                    data.attrs['xb-theme'] = 'normal';
-                }
+                var check = tv4.validateResult(data, schema);
 
-                if (!data.attrs['xb-size']) {
-                    data.attrs['xb-size'] = 'm';
+                if (!check.valid) {
+                    throw check;
                 }
 
 
-                if (!Modernizr.createshadowroot) {
-                    data.content = this.innerHTML;
-                }
+
 
                 var html = yr.run('main', data, 'template');
                 var css = '@import url(../src/blocks/button/button.css);';

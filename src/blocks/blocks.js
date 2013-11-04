@@ -17,7 +17,7 @@
     namespace.xblocks = xblocks;
 
 
-    xblocks.attrs2obj = function(element) {
+    xblocks.attrs2obj = function(element, def) {
         var out = {};
         for (var i = 0, attrs = element.attributes, l = attrs.length; i < l; i++) {
             var attr = attrs.item(i);
@@ -34,8 +34,17 @@
             }
         }
 
+        if (def) {
+            for (var name in def) {
+                if (!out.hasOwnProperty(name)) {
+                    out[name] = def[name];
+                }
+            }
+        }
+
         return out;
     };
+
 
 }());
 

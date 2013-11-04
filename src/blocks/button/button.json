@@ -1,60 +1,80 @@
 {
+    "type":"object",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "Button",
     "description": "Button params",
-    "type": "object",
-    "properties": {
-        "content": {
-            "type": "string"
-        },
+    "id": "http://jsonschema.net",
+    "required":false,
+    "properties":{
         "attrs": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "The unique identifier for a DOM",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "Name of the button",
-                    "type": "string"
-                },
-                "type": {
-                    "enum": ["file", "submit", "button"]
-                },
-                "xb-size": {
-                    "enum": ["s", "m", "l"],
-                    "default": "m"
-                },
-                "xb-theme": {
-                    "enum": ["dark", "normal", "action", "pseudo"],
-                    "default": "normal"
-                },
+            "type":"object",
+            "id": "http://jsonschema.net/attrs",
+            "required":false,
+            "properties":{
                 "class": {
+                    "type":"string",
                     "description": "Class of the button",
-                    "type": "string"
-                },
-                "href": {
-                    "description": "Href of the button",
-                    "type": "string"
-                },
-                "target": {
-                    "description": "Target of the button",
-                    "type": "string"
-                },
-                "xb-ico": {
-                    "description": "Ico of the button",
-                    "type": "string"
+                    "id": "http://jsonschema.net/attrs/class",
+                    "required":false
                 },
                 "disabled": {
-                    "description": "",
-                    "type": "boolean"
+                    "type":"boolean",
+                    "id": "http://jsonschema.net/attrs/disabled",
+                    "required":false
+                },
+                "href": {
+                    "type":"string",
+                    "description": "Href of the button",
+                    "id": "http://jsonschema.net/attrs/href",
+                    "required":false
+                },
+                "id": {
+                    "type":"string",
+                    "description": "The unique identifier for a DOM",
+                    "id": "http://jsonschema.net/attrs/id",
+                    "required":false
                 },
                 "multiple": {
-                    "description": "",
-                    "type": "boolean"
+                    "type":"boolean",
+                    "id": "http://jsonschema.net/attrs/multiple",
+                    "required":false
+                },
+                "name": {
+                    "type":"string",
+                    "description": "Name of the button",
+                    "id": "http://jsonschema.net/attrs/name",
+                    "required":false
+                },
+                "target": {
+                    "type":"string",
+                    "description": "Target of the button",
+                    "id": "http://jsonschema.net/attrs/target",
+                    "required":false
+                },
+                "type": {
+                    "id": "http://jsonschema.net/attrs/type",
+                    "required":false
+                },
+                "xb-ico": {
+                    "type":"string",
+                    "description": "Ico of the button",
+                    "id": "http://jsonschema.net/attrs/xb-ico",
+                    "required":false
+                },
+                "xb-size": {
+                    "id": "http://jsonschema.net/attrs/xb-size",
+                    "required":false
+                },
+                "xb-theme": {
+                    "id": "http://jsonschema.net/attrs/xb-theme",
+                    "required":false
                 }
             }
+        },
+        "content": {
+            "type":["string","null"],
+            "id": "http://jsonschema.net/content",
+            "required":false
         }
-    },
-    "required": []
+    }
 }
