@@ -1,26 +1,13 @@
-(function(xtag) {
+(function(xtag, xblocks) {
     'use strict';
 
     xtag.register('xb-button', {
         lifecycle: {
             created: function() {
                 var data = {
-                    attrs: {},
+                    attrs: xblocks.attrs2obj(this),
                     content: null
                 };
-
-                for (var i = 0, attrs = this.attributes, l = attrs.length; i < l; i++) {
-                    var attr = attrs.item(i);
-                    if (attr.nodeValue === 'true' || attr.nodeValue === 'false' || attr.nodeName === attr.nodeValue) {
-                        if (attr.nodeName === attr.nodeValue || attr.nodeValue === 'true') {
-                            data.attrs[attr.nodeName] = true;
-                        } else {
-                            data.attrs[attr.nodeName] = false;
-                        }
-                    } else {
-                        data.attrs[attr.nodeName] = attr.nodeValue;
-                    }
-                }
 
                 if (!data.attrs['xb-theme']) {
                     data.attrs['xb-theme'] = 'normal';
@@ -77,4 +64,4 @@
         }
     });
 
-})(xtag);
+})(xtag, xblocks);

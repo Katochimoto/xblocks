@@ -1,3 +1,5 @@
+module "xb-button"
+
 match / xb-button {
     <xb-button>
         apply .attrs.* xb-core-attrs
@@ -6,9 +8,9 @@ match / xb-button {
 }
 
 match .* attrs {
-    apply .attrs.* xb-core-attrs
+    apply . xb-core-attrs
 
-    if (.attrs.disabled) {
+    if (boolean(.disabled)) {
         @class += " nb-button_disabled"
     }
 }

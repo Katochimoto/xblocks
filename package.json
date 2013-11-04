@@ -15,6 +15,7 @@
         "stylobate-islands": "0.16.x"
     },
     "devDependencies": {
+        "tv4": "1.0.10",
         "nopt": "2.1.1",
         "yate": "0.0.64",
         "borschik": "0.4.x",

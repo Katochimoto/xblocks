@@ -22,10 +22,12 @@
                     "enum": ["file", "submit", "button"]
                 },
                 "xb-size": {
-                    "enum": ["small", "medium", "large"]
+                    "enum": ["s", "m", "l"],
+                    "default": "m"
                 },
                 "xb-theme": {
-                    "enum": ["dark", "normal", "action", "pseudo"]
+                    "enum": ["dark", "normal", "action", "pseudo"],
+                    "default": "normal"
                 },
                 "class": {
                     "description": "Class of the button",
