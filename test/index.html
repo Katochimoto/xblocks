@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+
+    <!-- libs -->
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script-->
+    <script type="text/javascript" src="../node_modules/expect.js/expect.js"></script>
+    <script type="text/javascript" src="../node_modules/mocha/mocha.js"></script>
+    <script type="text/javascript" src="../node_modules/yate/lib/runtime.js"></script>
+    <script type="text/javascript">mocha.setup('bdd')</script>
+
+    <!-- src -->
+    <script type="text/javascript" src="../lib/xblocks.yate.js"></script>
+    <script type="text/javascript" src="../lib/xblocks.js"></script>
+
+    <!-- spec -->
+    <script type="text/javascript" src="spec/blocks/button.js"></script>
+
+    <script type="text/javascript">window.onload = function() { mocha.run(); }</script>
+</head>
+<body>
+<div id="mocha"></div>
+</body>
+</html>

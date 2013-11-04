@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Button",
+    "description": "Button params",
+    "type": "object",
+    "properties": {
+        "content": {
+            "type": "string"
+        },
+        "attrs": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier for a DOM",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the button",
+                    "type": "string"
+                },
+                "type": {
+                    "enum": ["file", "submit", "button"]
+                },
+                "xb-size": {
+                    "enum": ["small", "medium", "large"]
+                },
+                "xb-theme": {
+                    "enum": ["dark", "normal", "action", "pseudo"]
+                },
+                "class": {
+                    "description": "Class of the button",
+                    "type": "string"
+                },
+                "href": {
+                    "description": "Href of the button",
+                    "type": "string"
+                },
+                "target": {
+                    "description": "Target of the button",
+                    "type": "string"
+                },
+                "xb-ico": {
+                    "description": "Ico of the button",
+                    "type": "string"
+                },
+                "disabled": {
+                    "description": "",
+                    "type": "boolean"
+                },
+                "multiple": {
+                    "description": "",
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "required": []
+}

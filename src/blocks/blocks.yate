@@ -1,0 +1,23 @@
+match .* xb-core-attrs {
+    value = scalar(.)
+
+    if (value == true()) {
+        @{name()} = name()
+
+    } else if (name() == 'class') {
+        @class += (
+            ' '
+            value
+        )
+
+    } else {
+        @{name()} = value
+    }
+}
+
+// TODO если createShadowRoot нет, то content не нужен
+match .* xb-core-content {
+    <content>
+        .content
+    </content>
+}
