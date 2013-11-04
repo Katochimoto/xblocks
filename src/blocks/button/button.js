@@ -30,17 +30,40 @@
                     data.attrs['xb-size'] = 'm';
                 }
 
-                data.content = this.innerHTML;
 
+                if (!Modernizr.createshadowroot) {
+                    data.content = this.innerHTML;
+                }
 
                 var html = yr.run('main', data, 'template');
-                //var template = xtag.createFragment(html);
-                //var root = this.createShadowRoot();
+                var css = '@import url(../src/blocks/button/button.css);';
 
-                //root.resetStyleInheritance = false;
-                //root.applyAuthorStyles = false;
-                //root.appendChild(template.cloneNode(true));
-                this.innerHTML = html;
+
+                if (Modernizr.createshadowroot) {
+                    var style = document.createElement('style');
+                    style.setAttribute('type', 'text/css');
+                    style.setAttribute('scoped', 'scoped');
+
+                    if (style.styleSheet){
+                        style.styleSheet.cssText = css;
+
+                    } else {
+                        style.appendChild(document.createTextNode(css));
+                    }
+
+                    var template = xtag.createFragment(html);
+                    var root = this.createShadowRoot();
+
+                    template.insertBefore(style, template.firstChild);
+
+                    root.resetStyleInheritance = false;
+                    root.applyAuthorStyles = false;
+                    root.appendChild(template.cloneNode(true));
+
+                } else {
+                    html = '<style type="text/css" scoped="scoped">' + css + '</style>' + html;
+                    this.innerHTML = html;
+                }
             }
         },
 

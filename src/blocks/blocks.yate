@@ -15,9 +15,10 @@ match .* xb-core-attrs {
     }
 }
 
-// TODO если createShadowRoot нет, то content не нужен
 match .* xb-core-content {
-    <content>
+    if (xb-modernizr('createshadowroot')) {
+        <content></content>
+    } else {
         .content
-    </content>
+    }
 }
