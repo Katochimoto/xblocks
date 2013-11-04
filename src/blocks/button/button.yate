@@ -14,14 +14,19 @@ match / style {
 }
 
 
-match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] template {
-apply . style
-<button class="nb-button nb-button_size_{.attrs.xb-size} nb-button_theme_{.attrs.xb-theme}">
+match .* attrs {
     apply .attrs.* xb-core-attrs
 
     if (.attrs.disabled) {
         @class += " nb-button_disabled"
     }
+}
+
+
+match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] template {
+apply . style
+<button class="nb-button nb-button_size_{.attrs.xb-size} nb-button_theme_{.attrs.xb-theme}">
+    apply .attrs.* attrs
 
     <span class="nb-button__text">
         apply . xb-core-content
@@ -32,11 +37,7 @@ apply . style
 match /[.attrs.href] template {
 apply . style
 <a class="nb-button nb-button_size_{.attrs.xb-size} nb-button_theme_{.attrs.xb-theme}">
-    apply .attrs.* xb-core-attrs
-
-    if (.disabled) {
-        @class += " nb-button_disabled"
-    }
+    apply .attrs.* attrs
 
     <span class="nb-button__text">
         apply . xb-core-content
@@ -47,11 +48,7 @@ apply . style
 match /[.attrs.type == 'file'] template {
 apply . style
 <label class="nb-button nb-button_size_{.attrs.xb-size} nb-button_type_attach nb-button_theme_{.attrs.xb-theme}">
-    apply .attrs.* xb-core-attrs
-
-    if (.attrs.disabled) {
-        @class += " nb-button_disabled"
-    }
+    apply .attrs.* attrs
 
     <span class="nb-file-intruder">
         <span class="nb-file-intruder__inner">
