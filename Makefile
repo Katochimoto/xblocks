@@ -9,7 +9,7 @@ CSS = $(patsubst %.styl, %.css, $(STYL))
 YATE = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.yate')
 JS = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.js')
 
-all: npm yate js $(CSS)
+all: npm lib/xblocks.yate.js lib/xblocks.js $(CSS)
 
 clean:
 	rm lib/xblocks.js
@@ -22,12 +22,12 @@ $(CSS): %.css: %.styl npm
 	node $(CURDIR)/bin/styl.js -styl=$< -css=$(CURDIR)/lib/blocks/$(notdir $@)
 
 
-yate: $(YATE) npm
-	$(NPM_BIN)/yate src/index.yate > lib/xblocks.yate.js
+lib/xblocks.yate.js: $(YATE) npm
+	$(NPM_BIN)/yate src/index.yate > $@
 
 
-js: $(JS) npm
-	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=lib/xblocks.js
+lib/xblocks.js: $(JS) npm
+	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=$@
 
 
 npm:
