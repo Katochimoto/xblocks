@@ -20,6 +20,7 @@ clean:
 $(CSS): %.css: %.styl npm
 	mkdir -p $(CURDIR)/lib/blocks
 	node $(CURDIR)/bin/styl.js -styl=$< -css=$(CURDIR)/lib/blocks/$(notdir $@)
+	$(NPM_BIN)/borschik --input=$(CURDIR)/lib/blocks/$(notdir $@) --minimize=yes --freeze=yes --output=$(CURDIR)/lib/blocks/_$(notdir $@)
 
 
 lib/xblocks.yate.js: $(YATE) npm
