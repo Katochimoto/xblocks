@@ -19,7 +19,7 @@ clean:
 
 $(CSS): %.css: %.styl npm
 	mkdir -p $(CURDIR)/lib/blocks
-	node $(CURDIR)/bin/styl.js -styl=$< -css=$(CURDIR)/lib/blocks/$(notdir $@)
+	node $(CURDIR)/bin/styl.js -input=$< -output=$(CURDIR)/lib/blocks/$(notdir $@)
 	$(NPM_BIN)/borschik --input=$(CURDIR)/lib/blocks/$(notdir $@) --minimize=yes --freeze=yes --output=$(CURDIR)/lib/blocks/_$(notdir $@)
 
 

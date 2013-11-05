@@ -7,13 +7,13 @@ var autoprefixer = require('autoprefixer');
 var CURDIR = path_.dirname(__dirname);
 
 var opts = {
-    styl: [String],
-    css: [String],
+    input: [String],
+    output: [String],
     ie: [Boolean]
 };
 
 var args = nopt(opts, {}, process.argv, 2);
-var filename = path_.basename(args.css);
+var filename = path_.basename(args.output);
 
 
 var content = [
@@ -24,7 +24,7 @@ var content = [
     'set-skin-namespace(\'islands\');',
     '@import "' + CURDIR + '/src/_colors.styl";',
     '@import "' + CURDIR + '/src/_layout.styl";',
-    '@import "' + args.styl + '";'
+    '@import "' + args.input + '";'
 ].join('\n');
 
 
@@ -43,6 +43,6 @@ style.render(function(err, css) {
         css = autoprefixer.compile(css);
     }
 
-    fs_.writeFileSync(args.css, css);
-    console.log('WRITE FILE: ', args.css);
+    fs_.writeFileSync(args.output, css);
+    console.log('WRITE FILE: ', args.output);
 });
