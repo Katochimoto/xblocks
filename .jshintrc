@@ -3,6 +3,13 @@
     "devel": true,
     "jquery": true,
     "globals": {
+        "process": false,
+        "__dirname": false,
+        "Modernizr": false,
+        "tv4": false,
+        "yr": false,
+        "xtag": false,
+        "xblocks": false,
         "require": false,
         "strftime": false,
         "module": false,

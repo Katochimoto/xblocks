@@ -69,7 +69,6 @@
     "excludeFiles": [
         "node_modules",
         "test",
-        "strftime.js",
-        "strftime.min.js"
+        "lib"
     ]
 }

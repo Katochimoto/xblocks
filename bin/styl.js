@@ -15,10 +15,6 @@ var opts = {
 var args = nopt(opts, {}, process.argv, 2);
 var filename = path_.basename(args.css);
 
-if (filename[0] === '_') {
-    return;
-}
-
 
 var content = [
     'ie = false;',

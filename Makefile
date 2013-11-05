@@ -4,25 +4,36 @@ export NPM_BIN
 
 MAKEFLAGS+=-j 4
 
-filesstyl=$(shell find $(CURDIR)/src -name '*.styl')
-filescss=$(patsubst %.styl, %.css, $(filesstyl))
-filesyate=$(shell find $(CURDIR)/src -name '*.yate')
-filesjs=$(shell find $(CURDIR)/src -name '*.js')
+STYL = $(shell find $(CURDIR)/src/blocks -type f -regex '^[^_]*\.styl')
+CSS = $(patsubst %.styl, %.css, $(STYL))
+YATE = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.yate')
+JS = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.js')
 
-all: npm yate javascript $(filescss)
+all: npm yate js $(CSS)
+
+clean:
+	rm lib/xblocks.js
+	rm lib/xblocks.yate.js
+	rm -rf lib/blocks
 
 
-$(filescss): %.css: %.styl npm
-	node $(CURDIR)/bin/styl.js -styl=$< -css=$@
+$(CSS): %.css: %.styl npm
+	mkdir -p $(CURDIR)/lib/blocks
+	node $(CURDIR)/bin/styl.js -styl=$< -css=$(CURDIR)/lib/blocks/$(notdir $@)
 
-yate: $(filesyate) npm
-	$(NPM_BIN)/yate $(CURDIR)/src/index.yate > lib/xblocks.yate.js
 
-javascript: $(filesjs) npm
+yate: $(YATE) npm
+	$(NPM_BIN)/yate src/index.yate > lib/xblocks.yate.js
+
+
+js: $(JS) npm
 	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=lib/xblocks.js
+
 
 npm:
 	npm install
+
+
 
 #build:
 #	./node_modules/.bin/requirer index.js strftime.js
@@ -30,11 +41,10 @@ npm:
 #prod: build
 #	./node_modules/.bin/uglifyjs -o strftime.min.js strftime.js
 
-#test:
+test:
+	./node_modules/.bin/jshint .
+	./node_modules/.bin/jscs .
 #	./node_modules/.bin/mocha --reporter dot $(TESTS)
-#	./node_modules/.bin/jshint .
-#	./node_modules/.bin/jscs .
 
-.PHONY: all
+.PHONY: all clean test
 
-#test
