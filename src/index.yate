@@ -1,4 +1,0 @@
-external scalar xb-modernizr(scalar)
-
-include 'blocks/blocks.yate'
-include 'blocks/button/button.yate'

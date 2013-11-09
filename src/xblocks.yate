@@ -1,3 +1,7 @@
+module "xblocks"
+
+external scalar xb-modernizr(scalar)
+
 match .* xb-core-attrs {
     value = scalar(.)
 

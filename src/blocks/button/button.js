@@ -1,11 +1,13 @@
 (function(xtag, xblocks) {
     'use strict';
 
-    var schema = (function(json) {
-        return json;
+    (function(schema) {
+        tv4.addSchema('http://xblocks.ru/button', schema);
     })(
-        /* borschik:include:button.json */
+        /* borschik:include:schema.json */
     );
+
+
 
     xtag.register('xb-button', {
         lifecycle: {
@@ -18,16 +20,18 @@
                     content: Modernizr.createshadowroot ? null : this.innerHTML
                 };
 
+
+                var schema = tv4.getSchema('http://xblocks.ru/button');
                 var check = tv4.validateResult(data, schema);
 
                 if (!check.valid) {
-                    throw check;
+                    throw check.error;
                 }
 
 
 
 
-                var html = yr.run('main', data, 'template');
+                var html = yr.run('button', data, 'template');
                 var css = '@import url(../src/blocks/button/button.css);';
 
 

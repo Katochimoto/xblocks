@@ -56,7 +56,8 @@
   display: inline-block;
   vertical-align: 0;
   padding: 0;
-  margin: -5em 0 0 -20em;
+  margin: -5em 0 0 -400px;
+  width: 500px;
   cursor: pointer;
   font-size: 80px;
   opacity: 0;
@@ -85,12 +86,14 @@
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   font-size: 15px;
   line-height: 22px;
   padding: 5px 15px;
   background: rgba(0,0,0,0.3);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.2)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
 }
 
@@ -111,11 +114,13 @@
 
 input[type=file]:active + .nb-button_theme_normal,
 .nb-button_theme_normal:not(.nb-button_disabled):active {
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
   box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
 }
 
 input[type=file]:active + .nb-button_theme_normal:before,
 .nb-button_theme_normal:not(.nb-button_disabled):active:before {
+  -webkit-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
   box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
 }
 
@@ -141,12 +146,14 @@ input[type=file]:focus + .nb-button_theme_normal,
 input[type=file]:focus + .nb-button_theme_normal:after,
 .nb-button_theme_normal:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_theme_normal:before {
   background: #f7f7f7;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#eee));
   background: -webkit-linear-gradient(#fff, #eee);
   background: linear-gradient(#fff, #eee);
 }
@@ -154,13 +161,15 @@ input[type=file]:focus + .nb-button_theme_normal:after,
 input[type=file]:hover + .nb-button_theme_normal,
 .nb-button_theme_normal:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.31);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.22), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.22)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
 }
 
 input[type=file]:hover + .nb-button_theme_normal:before,
 .nb-button_theme_normal:not(.nb-button_disabled):hover:before {
   background: #fbfaf9;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#f6f5f3));
   background: -webkit-linear-gradient(#fff, #f6f5f3);
   background: linear-gradient(#fff, #f6f5f3);
 }
@@ -175,12 +184,14 @@ input[type=file]:hover + .nb-button_theme_normal:before,
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   font-size: 13px;
   line-height: 18px;
   padding: 5px 13px;
   background: rgba(0,0,0,0.3);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.2)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
 }
 
@@ -201,11 +212,13 @@ input[type=file]:hover + .nb-button_theme_normal:before,
 
 input[type=file]:active + .nb-button_theme_normal.nb-button_size_s,
 .nb-button_theme_normal.nb-button_size_s:not(.nb-button_disabled):active {
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
   box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
 }
 
 input[type=file]:active + .nb-button_theme_normal.nb-button_size_s:before,
 .nb-button_theme_normal.nb-button_size_s:not(.nb-button_disabled):active:before {
+  -webkit-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
   box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
 }
 
@@ -231,12 +244,14 @@ input[type=file]:focus + .nb-button_theme_normal.nb-button_size_s,
 input[type=file]:focus + .nb-button_theme_normal.nb-button_size_s:after,
 .nb-button_theme_normal.nb-button_size_s:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_theme_normal.nb-button_size_s:before {
   background: #f7f7f7;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#eee));
   background: -webkit-linear-gradient(#fff, #eee);
   background: linear-gradient(#fff, #eee);
 }
@@ -244,13 +259,15 @@ input[type=file]:focus + .nb-button_theme_normal.nb-button_size_s:after,
 input[type=file]:hover + .nb-button_theme_normal.nb-button_size_s,
 .nb-button_theme_normal.nb-button_size_s:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.31);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.22), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.22)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
 }
 
 input[type=file]:hover + .nb-button_theme_normal.nb-button_size_s:before,
 .nb-button_theme_normal.nb-button_size_s:not(.nb-button_disabled):hover:before {
   background: #fbfaf9;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#f6f5f3));
   background: -webkit-linear-gradient(#fff, #f6f5f3);
   background: linear-gradient(#fff, #f6f5f3);
 }
@@ -265,12 +282,14 @@ input[type=file]:hover + .nb-button_theme_normal.nb-button_size_s:before,
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 8px 20px -5px rgba(0,0,0,0.25);
   box-shadow: 0 8px 20px -5px rgba(0,0,0,0.25);
   font-size: 15px;
   line-height: 22px;
   padding: 5px 15px;
   background: rgba(0,0,0,0.3);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.2)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
 }
 
@@ -292,6 +311,7 @@ input[type=file]:hover + .nb-button_theme_normal.nb-button_size_s:before,
 input[type=file]:active + .nb-button_flying,
 .nb-button_flying:not(.nb-button_disabled):active {
   top: 1px;
+  -webkit-box-shadow: 0 4px 10px -4px rgba(0,0,0,0.45);
   box-shadow: 0 4px 10px -4px rgba(0,0,0,0.45);
 }
 
@@ -312,12 +332,14 @@ input[type=file]:focus + .nb-button_flying,
 input[type=file]:focus + .nb-button_flying:after,
 .nb-button_flying:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_flying:before {
   background: #f7f7f7;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#eee));
   background: -webkit-linear-gradient(#fff, #eee);
   background: linear-gradient(#fff, #eee);
 }
@@ -325,13 +347,15 @@ input[type=file]:focus + .nb-button_flying:after,
 input[type=file]:hover + .nb-button_flying,
 .nb-button_flying:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.31);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.22), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.22)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
 }
 
 input[type=file]:hover + .nb-button_flying:before,
 .nb-button_flying:not(.nb-button_disabled):hover:before {
   background: #fbfaf9;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#f6f5f3));
   background: -webkit-linear-gradient(#fff, #f6f5f3);
   background: linear-gradient(#fff, #f6f5f3);
 }
@@ -346,12 +370,14 @@ input[type=file]:hover + .nb-button_flying:before,
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 8px 20px -5px rgba(0,0,0,0.25);
   box-shadow: 0 8px 20px -5px rgba(0,0,0,0.25);
   font-size: 13px;
   line-height: 18px;
   padding: 5px 13px;
   background: rgba(0,0,0,0.3);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.2)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
 }
 
@@ -373,6 +399,7 @@ input[type=file]:hover + .nb-button_flying:before,
 input[type=file]:active + .nb-button_flying.nb-button_size_s,
 .nb-button_flying.nb-button_size_s:not(.nb-button_disabled):active {
   top: 1px;
+  -webkit-box-shadow: 0 4px 10px -4px rgba(0,0,0,0.45);
   box-shadow: 0 4px 10px -4px rgba(0,0,0,0.45);
 }
 
@@ -393,12 +420,14 @@ input[type=file]:focus + .nb-button_flying.nb-button_size_s,
 input[type=file]:focus + .nb-button_flying.nb-button_size_s:after,
 .nb-button_flying.nb-button_size_s:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_flying.nb-button_size_s:before {
   background: #f7f7f7;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#eee));
   background: -webkit-linear-gradient(#fff, #eee);
   background: linear-gradient(#fff, #eee);
 }
@@ -406,13 +435,15 @@ input[type=file]:focus + .nb-button_flying.nb-button_size_s:after,
 input[type=file]:hover + .nb-button_flying.nb-button_size_s,
 .nb-button_flying.nb-button_size_s:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.31);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.22), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.22)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
 }
 
 input[type=file]:hover + .nb-button_flying.nb-button_size_s:before,
 .nb-button_flying.nb-button_size_s:not(.nb-button_disabled):hover:before {
   background: #fbfaf9;
+  background: -webkit-gradient(linear, top left, bottom left, from(#fff), to(#f6f5f3));
   background: -webkit-linear-gradient(#fff, #f6f5f3);
   background: linear-gradient(#fff, #f6f5f3);
 }
@@ -427,12 +458,14 @@ input[type=file]:hover + .nb-button_flying.nb-button_size_s:before,
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   font-size: 15px;
   line-height: 22px;
   padding: 5px 15px;
   background: rgba(83,56,0,0.47);
-  background: -webkit-linear-gradient(rgba(96, 64, 0, 0.4), rgba(70,47,0,0.54));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(96,64,0,0.4)), to(rgba(70,47,0,0.54)));
+  background: -webkit-linear-gradient(rgba(96,64,0,0.4), rgba(70,47,0,0.54));
   background: linear-gradient(rgba(96,64,0,0.4), rgba(70,47,0,0.54));
 }
 
@@ -453,11 +486,13 @@ input[type=file]:hover + .nb-button_flying.nb-button_size_s:before,
 
 input[type=file]:active + .nb-button_theme_action,
 .nb-button_theme_action:not(.nb-button_disabled):active {
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
   box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
 }
 
 input[type=file]:active + .nb-button_theme_action:before,
 .nb-button_theme_action:not(.nb-button_disabled):active:before {
+  -webkit-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
   box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
 }
 
@@ -483,12 +518,14 @@ input[type=file]:focus + .nb-button_theme_action,
 input[type=file]:focus + .nb-button_theme_action:after,
 .nb-button_theme_action:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_theme_action:before {
   background: #ffd630;
+  background: -webkit-gradient(linear, top left, bottom left, from(#ffdf60), to(#fc0));
   background: -webkit-linear-gradient(#ffdf60, #fc0);
   background: linear-gradient(#ffdf60, #fc0);
 }
@@ -496,13 +533,15 @@ input[type=file]:focus + .nb-button_theme_action:after,
 input[type=file]:hover:not(:checked) + .nb-button_theme_action,
 .nb-button_theme_action:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.31);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.22), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.22)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
 }
 
 input[type=file]:hover:not(:checked) + .nb-button_theme_action:before,
 .nb-button_theme_action:not(.nb-button_disabled):hover:before {
   background: #fd5;
+  background: -webkit-gradient(linear, top left, bottom left, from(#ffe681), to(#ffd428));
   background: -webkit-linear-gradient(#ffe681, #ffd428);
   background: linear-gradient(#ffe681, #ffd428);
 }
@@ -517,12 +556,14 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_action:before,
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   font-size: 13px;
   line-height: 18px;
   padding: 5px 13px;
   background: rgba(83,56,0,0.47);
-  background: -webkit-linear-gradient(rgba(96, 64, 0, 0.4), rgba(70,47,0,0.54));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(96,64,0,0.4)), to(rgba(70,47,0,0.54)));
+  background: -webkit-linear-gradient(rgba(96,64,0,0.4), rgba(70,47,0,0.54));
   background: linear-gradient(rgba(96,64,0,0.4), rgba(70,47,0,0.54));
 }
 
@@ -543,11 +584,13 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_action:before,
 
 input[type=file]:active + .nb-button_theme_action.nb-button_size_s,
 .nb-button_theme_action.nb-button_size_s:not(.nb-button_disabled):active {
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
   box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
 }
 
 input[type=file]:active + .nb-button_theme_action.nb-button_size_s:before,
 .nb-button_theme_action.nb-button_size_s:not(.nb-button_disabled):active:before {
+  -webkit-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
   box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
 }
 
@@ -573,12 +616,14 @@ input[type=file]:focus + .nb-button_theme_action.nb-button_size_s,
 input[type=file]:focus + .nb-button_theme_action.nb-button_size_s:after,
 .nb-button_theme_action.nb-button_size_s:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_theme_action.nb-button_size_s:before {
   background: #ffd630;
+  background: -webkit-gradient(linear, top left, bottom left, from(#ffdf60), to(#fc0));
   background: -webkit-linear-gradient(#ffdf60, #fc0);
   background: linear-gradient(#ffdf60, #fc0);
 }
@@ -586,13 +631,15 @@ input[type=file]:focus + .nb-button_theme_action.nb-button_size_s:after,
 input[type=file]:hover:not(:checked) + .nb-button_theme_action.nb-button_size_s,
 .nb-button_theme_action.nb-button_size_s:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.31);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.22), rgba(0,0,0,0.4));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.22)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
   background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.4));
 }
 
 input[type=file]:hover:not(:checked) + .nb-button_theme_action.nb-button_size_s:before,
 .nb-button_theme_action.nb-button_size_s:not(.nb-button_disabled):hover:before {
   background: #fd5;
+  background: -webkit-gradient(linear, top left, bottom left, from(#ffe681), to(#ffd428));
   background: -webkit-linear-gradient(#ffe681, #ffd428);
   background: linear-gradient(#ffe681, #ffd428);
 }
@@ -607,13 +654,15 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_action.nb-button_size_s:
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   font-size: 15px;
   line-height: 22px;
   padding: 5px 15px;
   color: #f2f2f2;
   background: rgba(0,0,0,0.77);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,0.84));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.7)), to(rgba(0,0,0,0.84)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.84));
   background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.84));
 }
 
@@ -634,11 +683,13 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_action.nb-button_size_s:
 
 input[type=file]:active + .nb-button_theme_dark,
 .nb-button_theme_dark:not(.nb-button_disabled):active {
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
   box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
 }
 
 input[type=file]:active + .nb-button_theme_dark:before,
 .nb-button_theme_dark:not(.nb-button_disabled):active:before {
+  -webkit-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
   box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
 }
 
@@ -664,27 +715,32 @@ input[type=file]:focus + .nb-button_theme_dark,
 input[type=file]:focus + .nb-button_theme_dark:after,
 .nb-button_theme_dark:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_theme_dark:before {
   background: #4f4f4f;
+  background: -webkit-gradient(linear, top left, bottom left, from(#5c5c5c), to(#424242));
   background: -webkit-linear-gradient(#5c5c5c, #424242);
   background: linear-gradient(#5c5c5c, #424242);
+  -webkit-box-shadow: inset 0 1px rgba(255,255,255,0.1);
   box-shadow: inset 0 1px rgba(255,255,255,0.1);
 }
 
 input[type=file]:hover:not(:checked) + .nb-button_theme_dark,
 .nb-button_theme_dark:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.74);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.66), rgba(0,0,0,0.82));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.66)), to(rgba(0,0,0,0.82)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.82));
   background: linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.82));
 }
 
 input[type=file]:hover:not(:checked) + .nb-button_theme_dark:before,
 .nb-button_theme_dark:not(.nb-button_disabled):hover:before {
   background: #575757;
+  background: -webkit-gradient(linear, top left, bottom left, from(#666), to(#474747));
   background: -webkit-linear-gradient(#666, #474747);
   background: linear-gradient(#666, #474747);
 }
@@ -699,13 +755,15 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark:before,
   user-select: none;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   box-shadow: 0 1px 0 rgba(0,0,0,0.07);
   font-size: 13px;
   line-height: 18px;
   padding: 5px 13px;
   color: #f2f2f2;
   background: rgba(0,0,0,0.77);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,0.84));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.7)), to(rgba(0,0,0,0.84)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.84));
   background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.84));
 }
 
@@ -726,11 +784,13 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark:before,
 
 input[type=file]:active + .nb-button_theme_dark.nb-button_size_s,
 .nb-button_theme_dark.nb-button_size_s:not(.nb-button_disabled):active {
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
   box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
 }
 
 input[type=file]:active + .nb-button_theme_dark.nb-button_size_s:before,
 .nb-button_theme_dark.nb-button_size_s:not(.nb-button_disabled):active:before {
+  -webkit-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
   box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
 }
 
@@ -756,27 +816,32 @@ input[type=file]:focus + .nb-button_theme_dark.nb-button_size_s,
 input[type=file]:focus + .nb-button_theme_dark.nb-button_size_s:after,
 .nb-button_theme_dark.nb-button_size_s:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-button_theme_dark.nb-button_size_s:before {
   background: #4f4f4f;
+  background: -webkit-gradient(linear, top left, bottom left, from(#5c5c5c), to(#424242));
   background: -webkit-linear-gradient(#5c5c5c, #424242);
   background: linear-gradient(#5c5c5c, #424242);
+  -webkit-box-shadow: inset 0 1px rgba(255,255,255,0.1);
   box-shadow: inset 0 1px rgba(255,255,255,0.1);
 }
 
 input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s,
 .nb-button_theme_dark.nb-button_size_s:not(.nb-button_disabled):hover {
   background: rgba(0,0,0,0.74);
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.66), rgba(0,0,0,0.82));
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(0,0,0,0.66)), to(rgba(0,0,0,0.82)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.82));
   background: linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.82));
 }
 
 input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s:before,
 .nb-button_theme_dark.nb-button_size_s:not(.nb-button_disabled):hover:before {
   background: #575757;
+  background: -webkit-gradient(linear, top left, bottom left, from(#666), to(#474747));
   background: -webkit-linear-gradient(#666, #474747);
   background: linear-gradient(#666, #474747);
 }
@@ -787,6 +852,7 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s:be
   vertical-align: baseline;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
   font-size: 15px;
   line-height: 22px;
@@ -818,16 +884,19 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s:be
 }
 
 .nb-button_theme_pseudo:not(.nb-button_disabled):hover {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
 }
 
 .nb-button_theme_pseudo:not(.nb-button_disabled):focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
   outline: 0;
 }
 
 .nb-button_theme_pseudo:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
@@ -838,6 +907,7 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s:be
   vertical-align: baseline;
   color: #333;
   border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
   font-size: 13px;
   line-height: 18px;
@@ -869,21 +939,25 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s:be
 }
 
 .nb-button_theme_pseudo.nb-button_size_s:not(.nb-button_disabled):hover {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
 }
 
 .nb-button_theme_pseudo.nb-button_size_s:not(.nb-button_disabled):focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
   outline: 0;
 }
 
 .nb-button_theme_pseudo.nb-button_size_s:not(.nb-button_disabled):focus:after {
   z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
 
 .nb-file-intruder__input:focus + .nb-file-intruder__focus {
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }

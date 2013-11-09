@@ -6,33 +6,58 @@ MAKEFLAGS+=-j 4
 
 STYL = $(shell find $(CURDIR)/src/blocks -type f -regex '^[^_]*\.styl')
 CSS = $(patsubst %.styl, %.css, $(STYL))
-YATE = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.yate')
+YATE = $(shell find $(CURDIR)/src/blocks -type f -regex '^[^_]*\.yate')
+YATE_JS = $(patsubst %.yate, %.yate.js, $(YATE))
 JS = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.js')
 
-all: npm lib/xblocks.yate.js lib/xblocks.js lib/xblocks.css $(CSS)
+all: npm src/xblocks.yate.js lib/xblocks.yate.js lib/xblocks.css lib/xblocks.js $(YATE_JS) $(CSS)
 
 clean:
-	rm lib/xblocks.js
-	rm lib/xblocks.yate.js
-	rm -rf lib/blocks
+	rm -f lib/xblocks.js
+	rm -f lib/_xblocks.js
+	rm -f lib/xblocks.yate.js
+	rm -f lib/_xblocks.yate.js
+	rm -f lib/xblocks.css
+	rm -f lib/_xblocks.css
+	find $(CURDIR)/src -type f -regex '.*\.\(css\|yate\.js\|yate\.obj\)' -delete
 
+
+### CSS ############################################
 
 $(CSS): %.css: %.styl npm
-	mkdir -p $(CURDIR)/lib/blocks
-	node $(CURDIR)/bin/styl.js -input=$< -output=$(CURDIR)/lib/blocks/$(notdir $@)
-	$(NPM_BIN)/borschik --input=$(CURDIR)/lib/blocks/$(notdir $@) --minimize=yes --freeze=yes --output=$(CURDIR)/lib/blocks/_$(notdir $@)
+	node $(CURDIR)/bin/styl.js -input=$< -output=$@
+	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
 
 
 lib/xblocks.css: $(CSS) npm
-	find $(CURDIR)/lib/blocks -type f -name '_*.css' | xargs cat > $@
+	find $(CURDIR)/src -type f -name '_*.css' | xargs cat > $@
+	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
 
 
-lib/xblocks.yate.js: $(YATE) npm
-	$(NPM_BIN)/yate src/index.yate > $@
 
 
-lib/xblocks.js: $(JS) npm
-	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=$@
+### YATE ###########################################
+
+src/xblocks.yate.js: src/xblocks.yate npm
+	$(NPM_BIN)/yate --output=src/xblocks.yate.js src/xblocks.yate
+
+
+$(YATE_JS): %.yate.js: %.yate npm src/xblocks.yate.js
+	$(NPM_BIN)/yate --import=$(CURDIR)/src/xblocks.yate.obj --output=$@ $<
+
+
+lib/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) npm
+	find $(CURDIR)/src -type f -name '*.yate.js' | sort -r | xargs cat > $@
+	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
+
+
+
+
+### JS #############################################
+
+lib/xblocks.js: src/xblocks.js $(JS) npm
+	$(NPM_BIN)/borschik --input=src/xblocks.js --minimize=no --output=$@
+	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
 
 
 npm:

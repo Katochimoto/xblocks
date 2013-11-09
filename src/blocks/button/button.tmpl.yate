@@ -1,0 +1,54 @@
+module "button"
+import "xblocks"
+
+match .* attrs {
+    apply . xb-core-attrs
+
+    if (boolean(.disabled)) {
+        @class += " nb-button_disabled"
+    }
+}
+
+match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] template {
+<button class="nb-button nb-button_size_{.attrs.xb-size} nb-button_theme_{.attrs.xb-theme}">
+    apply .attrs.* attrs
+
+    <span class="nb-button__text">
+        apply . xb-core-content
+    </span>
+</button>
+}
+
+match /[.attrs.href] template {
+<a class="nb-button nb-button_size_{.attrs.xb-size} nb-button_theme_{.attrs.xb-theme}">
+    apply .attrs.* attrs
+
+    <span class="nb-button__text">
+        apply . xb-core-content
+    </span>
+</a>
+}
+
+match /[.attrs.type == 'file'] template {
+<label class="nb-button nb-button_size_{.attrs.xb-size} nb-button_type_attach nb-button_theme_{.attrs.xb-theme}">
+    apply .attrs.* attrs
+
+    <span class="nb-file-intruder">
+        <span class="nb-file-intruder__inner">
+            <input class="nb-file-intruder__input" type="file">
+                if (.attrs.name) {
+                    @name = "{.attrs.name}"
+                }
+
+                if (.attrs.multiple) {
+                    @multiple = "multiple"
+                }
+            </input>
+            <span class="nb-file-intruder__focus"></span>
+        </span>
+    </span>
+    <span class="nb-button__text">
+        apply . xb-core-content
+    </span>
+</label>
+}
