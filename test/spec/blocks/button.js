@@ -11,10 +11,10 @@ describe('button', function() {
         var data = {
             content: 'nop',
             attrs: {
-                name: 'test'
+                name: 'test',
                 //href: 'http://ya.ru',
                 //target: '_blank',
-                //disabled: true
+                disabled: false
             }
         };
 

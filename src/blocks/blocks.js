@@ -46,5 +46,66 @@
     };
 
 
+    xblocks.elementUpdate = function(element, style) {
+        var tagName = element.tagName.toLowerCase();
+        var data = {
+            attrs: xblocks.attrs2obj(element, {
+                'xb-theme': 'normal',
+                'xb-size': 'm'
+            }),
+            content: null
+        };
+
+        if (!Modernizr.createshadowroot) {
+            var content = element.querySelector('content');
+            data.content = content && content.innerHTML || element.innerHTML;
+        }
+
+        if (tv4) {
+            var schema = tv4.getSchema('http://xblocks.ru/' + tagName);
+            var check = tv4.validateResult(data, schema);
+
+            if (!check.valid) {
+                throw check.error;
+            }
+        }
+
+        var html = yr.run(tagName, data, 'template');
+        var css = '@import url(' + style + ');';
+        var template = xtag.createFragment(html);
+        var eStyle = document.createElement('style');
+
+        eStyle.setAttribute('type', 'text/css');
+        eStyle.setAttribute('scoped', 'scoped');
+
+        if (eStyle.styleSheet) {
+            eStyle.styleSheet.cssText = css;
+
+        } else {
+            eStyle.appendChild(document.createTextNode(css));
+        }
+
+        template.insertBefore(eStyle, template.firstChild);
+
+
+        var root;
+        if (Modernizr.createshadowroot) {
+            root = element.shadowRoot || element.createShadowRoot();
+            root.resetStyleInheritance = false;
+            root.applyAuthorStyles = false;
+
+        } else {
+            root = element;
+        }
+
+        var child;
+        while (child = root.firstChild) {
+            root.removeChild(child);
+        }
+
+        root.appendChild(template.cloneNode(true));
+    };
+
+
 }());
 

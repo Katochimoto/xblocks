@@ -3,77 +3,77 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "Button",
     "description": "Button params",
-    "id": "http://xblocks.ru/button",
+    "id": "http://xblocks.ru/xb-button",
     "required":true,
     "properties":{
         "attrs": {
             "type":"object",
-            "id": "http://xblocks.ru/button/attrs",
+            "id": "http://xblocks.ru/xb-button/attrs",
             "required":true,
             "properties":{
                 "class": {
                     "type":"string",
                     "description": "Class of the button",
-                    "id": "http://xblocks.ru/button/attrs/class",
+                    "id": "http://xblocks.ru/xb-button/attrs/class",
                     "required":false
                 },
                 "disabled": {
                     "type":"boolean",
-                    "id": "http://xblocks.ru/button/attrs/disabled",
+                    "id": "http://xblocks.ru/xb-button/attrs/disabled",
                     "required":false
                 },
                 "href": {
                     "type":"string",
                     "description": "Href of the button",
-                    "id": "http://xblocks.ru/button/attrs/href",
+                    "id": "http://xblocks.ru/xb-button/attrs/href",
                     "required":false
                 },
                 "id": {
                     "type":"string",
                     "description": "The unique identifier for a DOM",
-                    "id": "http://xblocks.ru/button/attrs/id",
+                    "id": "http://xblocks.ru/xb-button/attrs/id",
                     "required":false
                 },
                 "multiple": {
                     "type":"boolean",
-                    "id": "http://xblocks.ru/button/attrs/multiple",
+                    "id": "http://xblocks.ru/xb-button/attrs/multiple",
                     "required":false
                 },
                 "name": {
                     "type":"string",
                     "description": "Name of the button",
-                    "id": "http://xblocks.ru/button/attrs/name",
+                    "id": "http://xblocks.ru/xb-button/attrs/name",
                     "required":false
                 },
                 "target": {
                     "type":"string",
                     "description": "Target of the button",
-                    "id": "http://xblocks.ru/button/attrs/target",
+                    "id": "http://xblocks.ru/xb-button/attrs/target",
                     "required":false
                 },
                 "type": {
-                    "id": "http://xblocks.ru/button/attrs/type",
+                    "id": "http://xblocks.ru/xb-button/attrs/type",
                     "required":false
                 },
                 "xb-ico": {
                     "type":"string",
                     "description": "Ico of the button",
-                    "id": "http://xblocks.ru/button/attrs/xb-ico",
+                    "id": "http://xblocks.ru/xb-button/attrs/xb-ico",
                     "required":false
                 },
                 "xb-size": {
-                    "id": "http://xblocks.ru/button/attrs/xb-size",
+                    "id": "http://xblocks.ru/xb-button/attrs/xb-size",
                     "required":false
                 },
                 "xb-theme": {
-                    "id": "http://xblocks.ru/button/attrs/xb-theme",
+                    "id": "http://xblocks.ru/xb-button/attrs/xb-theme",
                     "required":false
                 }
             }
         },
         "content": {
             "type":["string","null"],
-            "id": "http://xblocks.ru/button/content",
+            "id": "http://xblocks.ru/xb-button/content",
             "required":true
         }
     }

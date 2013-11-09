@@ -1,10 +1,10 @@
-module "button"
+module "xb-button"
 import "xblocks"
 
 match .* attrs {
     apply . xb-core-attrs
 
-    if (boolean(.disabled)) {
+    if (name() == 'disabled' && boolean(.)) {
         @class += " nb-button_disabled"
     }
 }

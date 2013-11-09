@@ -5,8 +5,10 @@ external scalar xb-modernizr(scalar)
 match .* xb-core-attrs {
     value = scalar(.)
 
-    if (value == true()) {
-        @{name()} = name()
+    if (name() == 'disabled' || name() == 'multiple') {
+        if (value == true()) {
+            @{name()} = name()
+        }
 
     } else if (name() == 'class') {
         @class += (
@@ -20,9 +22,9 @@ match .* xb-core-attrs {
 }
 
 match .* xb-core-content {
-    if (xb-modernizr('createshadowroot')) {
-        <content></content>
-    } else {
-        .content
-    }
+    <content>
+        if (!xb-modernizr('createshadowroot')) {
+            .content
+        }
+    </content>
 }
