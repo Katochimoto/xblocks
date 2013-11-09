@@ -46,6 +46,20 @@
     };
 
 
+    xblocks.elementHTML = function(element, html) {
+        if (typeof html !== 'undefined') {
+            element.innerHTML = html;
+        }
+
+        if (!Modernizr.createshadowroot) {
+            var content = element.querySelector('content');
+            return content && content.innerHTML || element.innerHTML;
+        }
+
+        return element.innerHTML;
+    };
+
+
     xblocks.elementUpdate = function(element, style) {
         element.observer.off();
 
@@ -59,8 +73,7 @@
         };
 
         if (!Modernizr.createshadowroot) {
-            var content = element.querySelector('content');
-            data.content = content && content.innerHTML || element.innerHTML;
+            data.content = xblocks.elementHTML(element);
         }
 
         if (tv4) {

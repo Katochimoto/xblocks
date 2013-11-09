@@ -29,15 +29,10 @@
         accessors: {
             value: {
                 get: function() {
-                    if (!Modernizr.createshadowroot) {
-                        var content = this.querySelector('content');
-                        return content && content.innerHTML || this.innerHTML;
-                    }
-
-                    return this.innerHTML;
+                    return xblocks.elementHTML(this);
                 },
                 set: function(value) {
-                    this.innerHTML = value;
+                    xblocks.elementHTML(this, value);
 
                     if (!Modernizr.createshadowroot) {
                         xblocks.elementUpdate(this, STYLE_SRC);
