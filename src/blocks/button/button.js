@@ -7,14 +7,14 @@
         /* borschik:include:schema.json */
     );
 
-    var STYLE_SRC = '../src/blocks/button/styl/_button.css';
-    //borschik.link('styl/_button.css')
+
 
     xtag.register('xb-button', {
         lifecycle: {
             created: function() {
                 this.observer.on();
-                xblocks.elementUpdate(this, STYLE_SRC);
+
+                xblocks.elementUpdate(this);
             },
             inserted: function() {
             },
@@ -22,21 +22,33 @@
                 this.observer.remove();
             },
             attributeChanged: function() {
-                xblocks.elementUpdate(this, STYLE_SRC);
+                xblocks.elementUpdate(this);
             }
         },
 
         accessors: {
+            defaultAttrs: {
+                get: function() {
+                    return {
+                        'xb-theme': 'normal',
+                        'xb-size': 'm'
+                    };
+                }
+            },
+
+            styleSource: {
+                get: function() {
+                    return '../src/blocks/button/styl/_button.css';
+                    //borschik.link('styl/_button.css')
+                }
+            },
+
             value: {
                 get: function() {
                     return xblocks.elementHTML(this);
                 },
                 set: function(value) {
-                    xblocks.elementHTML(this, value);
-
-                    if (!Modernizr.createshadowroot) {
-                        xblocks.elementUpdate(this, STYLE_SRC);
-                    }
+                    return xblocks.elementHTML(this, value);
                 }
             },
 
@@ -47,7 +59,7 @@
 
                     if (!Modernizr.createshadowroot) {
                         observer = this.__observer || (this.__observer = new MutationObserver(function() {
-                            xblocks.elementUpdate(that, STYLE_SRC);
+                            xblocks.elementUpdate(that);
                         }));
                     }
 

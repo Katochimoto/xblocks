@@ -49,26 +49,27 @@
     xblocks.elementHTML = function(element, html) {
         if (typeof html !== 'undefined') {
             element.innerHTML = html;
+
+            if (!Modernizr.createshadowroot) {
+                xblocks.elementUpdate(element);
+            }
         }
 
+        var content;
         if (!Modernizr.createshadowroot) {
-            var content = element.querySelector('content');
-            return content && content.innerHTML || element.innerHTML;
+            content = element.querySelector('content');
         }
 
-        return element.innerHTML;
+        return content && content.innerHTML || element.innerHTML;
     };
 
 
-    xblocks.elementUpdate = function(element, style) {
+    xblocks.elementUpdate = function(element) {
         element.observer.off();
 
         var tagName = element.tagName.toLowerCase();
         var data = {
-            attrs: xblocks.attrs2obj(element, {
-                'xb-theme': 'normal',
-                'xb-size': 'm'
-            }),
+            attrs: xblocks.attrs2obj(element, element.defaultAttrs),
             content: null
         };
 
@@ -86,21 +87,21 @@
         }
 
         var html = yr.run(tagName, data, 'template');
-        var css = '@import url(' + style + ');';
+        var css = '@import url(' + element.styleSource + ');';
         var template = xtag.createFragment(html);
-        var eStyle = document.createElement('style');
+        var style = document.createElement('style');
 
-        eStyle.setAttribute('type', 'text/css');
-        eStyle.setAttribute('scoped', 'scoped');
+        style.setAttribute('type', 'text/css');
+        style.setAttribute('scoped', 'scoped');
 
-        if (eStyle.styleSheet) {
-            eStyle.styleSheet.cssText = css;
+        if (style.styleSheet) {
+            style.styleSheet.cssText = css;
 
         } else {
-            eStyle.appendChild(document.createTextNode(css));
+            style.appendChild(document.createTextNode(css));
         }
 
-        template.insertBefore(eStyle, template.firstChild);
+        template.insertBefore(style, template.firstChild);
 
 
         var root;
