@@ -32,7 +32,7 @@ $(CSS): %.css: %.styl npm
 
 
 lib/xblocks.css: $(CSS) npm
-	find $(CURDIR)/src -type f -name '_*.css' | xargs cat > $@
+	find $(CURDIR)/src -type f -name '*.css' | xargs cat > $@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
