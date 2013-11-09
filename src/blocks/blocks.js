@@ -69,7 +69,7 @@
 
         var tagName = element.tagName.toLowerCase();
         var data = {
-            attrs: xblocks.attrs2obj(element, element.defaultAttrs),
+            attrs: xblocks.attrs2obj(element, element.defaultAttrs || {}),
             content: null
         };
 
@@ -87,22 +87,24 @@
         }
 
         var html = yr.run(tagName, data, 'template');
-        var css = '@import url(' + element.styleSource + ');';
         var template = xtag.createFragment(html);
-        var style = document.createElement('style');
 
-        style.setAttribute('type', 'text/css');
-        style.setAttribute('scoped', 'scoped');
+        if (element.styleSource) {
+            var css = '@import url(' + element.styleSource + ');';
+            var style = document.createElement('style');
 
-        if (style.styleSheet) {
-            style.styleSheet.cssText = css;
+            style.setAttribute('type', 'text/css');
+            style.setAttribute('scoped', 'scoped');
 
-        } else {
-            style.appendChild(document.createTextNode(css));
+            if (style.styleSheet) {
+                style.styleSheet.cssText = css;
+
+            } else {
+                style.appendChild(document.createTextNode(css));
+            }
+
+            template.insertBefore(style, template.firstChild);
         }
-
-        template.insertBefore(style, template.firstChild);
-
 
         var root;
         if (Modernizr.createshadowroot) {
