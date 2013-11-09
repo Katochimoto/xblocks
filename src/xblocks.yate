@@ -24,7 +24,7 @@ match .* xb-core-attrs {
 match .* xb-core-content {
     <content>
         if (!xb-modernizr('createshadowroot')) {
-            .content
+            html(.content)
         }
     </content>
 }

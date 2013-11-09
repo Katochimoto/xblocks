@@ -47,6 +47,8 @@
 
 
     xblocks.elementUpdate = function(element, style) {
+        element.observer.off();
+
         var tagName = element.tagName.toLowerCase();
         var data = {
             attrs: xblocks.attrs2obj(element, {
@@ -104,6 +106,8 @@
         }
 
         root.appendChild(template.cloneNode(true));
+
+        element.observer.on();
     };
 
 
