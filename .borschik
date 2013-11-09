@@ -3,6 +3,6 @@
         "./": "/"
     },
     "freeze_paths": {
-        "./": "lib/img/"
+        "src": "../lib/_"
     }
 }

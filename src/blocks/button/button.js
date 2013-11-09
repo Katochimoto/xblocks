@@ -32,7 +32,7 @@
 
 
                 var html = yr.run('button', data, 'template');
-                var css = '@import url(../src/blocks/button/button.css);';
+                var css = '@import url(' + borschik.link('styl/_button.css') + ');';
 
 
                 if (Modernizr.createshadowroot) {

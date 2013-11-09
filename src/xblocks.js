@@ -15,7 +15,7 @@
 
 })(yr);
 
-
+/* borschik:include:../node_modules/borschik/js/borschik.js */
 /* borschik:include:../node_modules/x-tag-core/dist/x-tag-core.js */
 /* borschik:include:../node_modules/tv4/tv4.js */
 /* borschik:include:blocks/blocks.js */

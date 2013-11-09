@@ -19,6 +19,8 @@ clean:
 	rm -f lib/_xblocks.yate.js
 	rm -f lib/xblocks.css
 	rm -f lib/_xblocks.css
+	rm -f lib/freeze-info.json
+	rm -rf lib/_
 	find $(CURDIR)/src -type f -regex '.*\.\(css\|yate\.js\|yate\.obj\)' -delete
 
 
@@ -26,12 +28,12 @@ clean:
 
 $(CSS): %.css: %.styl npm
 	node $(CURDIR)/bin/styl.js -input=$< -output=$@
-	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
+	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
 lib/xblocks.css: $(CSS) npm
 	find $(CURDIR)/src -type f -name '_*.css' | xargs cat > $@
-	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
+	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
 
@@ -48,16 +50,20 @@ $(YATE_JS): %.yate.js: %.yate npm src/xblocks.yate.js
 
 lib/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) npm
 	find $(CURDIR)/src -type f -name '*.yate.js' | sort -r | xargs cat > $@
-	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
+	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
 
 
 ### JS #############################################
 
+#freeze: $(CSS) $(YATE_JS) $(JS) npm
+#	$(NPM_BIN)/borschik freeze --minimize=no --input=src --output=lib/freeze-info.json
+
+
 lib/xblocks.js: src/xblocks.js $(JS) npm
 	$(NPM_BIN)/borschik --input=src/xblocks.js --minimize=no --output=$@
-	$(NPM_BIN)/borschik --input=$@ --minimize=yes --freeze=yes --output=$(dir $@)_$(notdir $@)
+	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
 npm:
