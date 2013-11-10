@@ -13,6 +13,16 @@
         return Modernizr[name];
     };
 
+    yr.externals['xb-inarray'] = function(name, array) {
+        var l = array.length;
+        while (l--) {
+            if (name == array[l]) {
+                return true;
+            }
+        }
+        return false;
+    };
+
 })(yr);
 
 /* borschik:include:../node_modules/borschik/js/borschik.js */

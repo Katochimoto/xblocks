@@ -14,7 +14,9 @@ describe('button', function() {
                 name: 'test',
                 //href: 'http://ya.ru',
                 //target: '_blank',
-                disabled: false
+                disabled: false,
+                'xb-size': 's',
+                'xb-theme': 'normal'
             }
         };
 

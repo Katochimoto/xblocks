@@ -53,7 +53,8 @@
                 },
                 "type": {
                     "id": "http://xblocks.ru/xb-button/attrs/type",
-                    "required":false
+                    "required":false,
+                    "type":"string"
                 },
                 "xb-ico": {
                     "type":"string",
@@ -63,10 +64,17 @@
                 },
                 "xb-size": {
                     "id": "http://xblocks.ru/xb-button/attrs/xb-size",
-                    "required":false
+                    "required":false,
+                    "enum": ["s", "m", "l"]
                 },
                 "xb-theme": {
                     "id": "http://xblocks.ru/xb-button/attrs/xb-theme",
+                    "required":false,
+                    "enum": ["normal", "action", "dark", "pseudo"]
+                },
+                "xb-flying": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-button/attrs/xb-flying",
                     "required":false
                 }
             }

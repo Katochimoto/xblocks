@@ -1,11 +1,16 @@
 module "xblocks"
 
 external scalar xb-modernizr(scalar)
+external scalar xb-inarray(scalar, array)
 
 match .* xb-core-attrs {
     value = scalar(.)
+    boolAttrs = [
+        'disabled'
+        'multiple'
+    ]
 
-    if (name() == 'disabled' || name() == 'multiple') {
+    if (xb-inarray(name(), boolAttrs)) {
         if (value == true()) {
             @{name()} = name()
         }

@@ -7,6 +7,10 @@ match .* attrs {
     if (name() == 'disabled' && boolean(.)) {
         @class += " nb-button_disabled"
     }
+
+    if (name() == 'xb-flying' && boolean(.)) {
+        @class += " nb-button_flying"
+    }
 }
 
 match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] template {
