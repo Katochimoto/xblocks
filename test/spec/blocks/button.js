@@ -11,12 +11,12 @@ describe('button', function() {
         var data = {
             content: 'nop',
             attrs: {
-                name: 'test',
+                name: 'test'
                 //href: 'http://ya.ru',
                 //target: '_blank',
-                'xb-checked': true,
-                'xb-size': 'm',
-                'xb-theme': 'normal'
+                //'xb-checked': true,
+                //'xb-size': 'm',
+                //'xb-theme': 'normal'
             }
         };
 

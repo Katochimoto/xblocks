@@ -15,10 +15,18 @@ match .* attrs {
     if (name() == 'xb-checked' && boolean(.)) {
         @class += " nb-button_checked"
     }
+
+    if (name() == 'xb-size') {
+        @class += " nb-button_size_{.}"
+    }
+
+    if (name() == 'xb-theme') {
+        @class += " nb-button_theme_{.}"
+    }
 }
 
 match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] template {
-<button class="nb-button nb-button_size_{.attrs.xb-size} nb-button_theme_{.attrs.xb-theme}">
+<button class="nb-button">
     apply .attrs.* attrs
 
     <span class="nb-button__text">
@@ -28,7 +36,7 @@ match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] temp
 }
 
 match /[.attrs.href] template {
-<a class="nb-button nb-button_size_{.attrs.xb-size} nb-button_theme_{.attrs.xb-theme}">
+<a class="nb-button">
     apply .attrs.* attrs
 
     <span class="nb-button__text">
@@ -38,7 +46,7 @@ match /[.attrs.href] template {
 }
 
 match /[.attrs.type == 'file'] template {
-<label class="nb-button nb-button_size_{.attrs.xb-size} nb-button_type_attach nb-button_theme_{.attrs.xb-theme}">
+<label class="nb-button nb-button_type_attach">
     apply .attrs.* attrs
 
     <span class="nb-file-intruder">
