@@ -4,7 +4,7 @@ export NPM_BIN
 
 MAKEFLAGS+=-j 4
 
-STYL = $(shell find $(CURDIR)/src/blocks -type f -regex '^[^_]*\.styl')
+STYL = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.styl')
 CSS = $(patsubst %.styl, %.css, $(STYL))
 YATE = $(shell find $(CURDIR)/src/blocks -type f -regex '^[^_]*\.yate')
 YATE_JS = $(patsubst %.yate, %.yate.js, $(YATE))
@@ -32,7 +32,7 @@ $(CSS): %.css: %.styl npm
 
 
 lib/xblocks.css: $(CSS) npm
-	find $(CURDIR)/src -type f -name '*.css' | xargs cat > $@
+	find $(CURDIR)/src -type f -regex '^[^_]*\.css' | sort -r | xargs cat > $@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 

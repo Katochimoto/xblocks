@@ -1,0 +1,7 @@
+xb-button {
+  display: inline-block;
+}
+
+xb-button:unresolved {
+  opacity: 0;
+}
