@@ -22,6 +22,11 @@
                     "id": "http://xblocks.ru/xb-button/attrs/disabled",
                     "required":false
                 },
+                "xb-checked": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-button/attrs/checked",
+                    "required":false
+                },
                 "href": {
                     "type":"string",
                     "description": "Href of the button",
@@ -54,7 +59,7 @@
                 "type": {
                     "id": "http://xblocks.ru/xb-button/attrs/type",
                     "required":false,
-                    "type":"string"
+                    "enum": ["button", "file", "submit"]
                 },
                 "xb-ico": {
                     "type":"string",
