@@ -27,10 +27,14 @@ match .* xb-core-attrs {
     }
 }
 
-match .* xb-core-content {
+match .* xb-core-content (escape = '') {
     <content>
         if (!xb-modernizr('createshadowroot')) {
-            html(.content)
+            if (boolean(escape)) {
+                .content
+            } else {
+                html(.content)
+            }
         }
     </content>
 }

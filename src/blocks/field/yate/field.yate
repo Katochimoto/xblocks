@@ -24,7 +24,45 @@ match / xb-field {
 </xb-field>
 }
 
-match / template {
+match /[.attrs.xb-postfix || .attrs.xb-prefix] template {
+<label class="xb-field_box">
+    apply .attrs.* attrs
+
+    if (.attrs.xb-prefix) {
+        <span class="field-left">
+            .attrs.xb-prefix
+        </span>
+    }
+
+    if (.attrs.xb-postfix) {
+        <span class="field-right">
+            .attrs.xb-postfix
+        </span>
+    }
+
+    <span class="field-content">
+        <input class="input-controller" type="text">
+            if (.attrs.name) {
+                @name = "{.attrs.name}"
+            }
+
+            if (.attrs.value) {
+                @value = "{.attrs.value}"
+            }
+        </input>
+        <span class="input-view">&nbsp;</span>
+    </span>
+</label>
+}
+
+match /[.attrs.rows || .attrs.cols] template {
+<textarea class="xb-field">
+    apply .attrs.* attrs
+    .content
+</textarea>
+}
+
+match /[!.attrs.rows && !.attrs.cols && !.attrs.xb-postfix && !.attrs.xb-prefix] template {
 <input class="xb-field" type="text">
     apply .attrs.* attrs
 </input>

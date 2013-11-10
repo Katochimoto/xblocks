@@ -12,12 +12,7 @@ describe('button', function() {
             content: 'nop',
             attrs: {
                 name: 'test',
-                //href: 'http://ya.ru',
-                //target: '_blank',
-                //'xb-checked': true,
-                'xb-size': 's',
-                disabled: false
-                //'xb-theme': 'normal'
+                'xb-prefix': 'test'
             }
         };
 

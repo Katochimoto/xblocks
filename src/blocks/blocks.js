@@ -97,6 +97,8 @@
             data.content = xblocks.elementHTML(element);
         }
 
+        console.log(data);
+
         if (tv4 && element.schema) {
             var schema = tv4.getSchema(element.schema);
             var check = tv4.validateResult(data, schema);
