@@ -32,4 +32,5 @@
 /* borschik:include:../node_modules/tv4/tv4.js */
 /* borschik:include:blocks/blocks.js */
 /* borschik:include:blocks/button/button.js */
+/* borschik:include:blocks/field/field.js */
 

@@ -97,8 +97,8 @@
             data.content = xblocks.elementHTML(element);
         }
 
-        if (tv4) {
-            var schema = tv4.getSchema('http://xblocks.ru/' + tagName);
+        if (tv4 && element.schema) {
+            var schema = tv4.getSchema(element.schema);
             var check = tv4.validateResult(data, schema);
 
             if (!check.valid) {

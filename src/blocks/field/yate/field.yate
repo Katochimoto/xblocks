@@ -1,0 +1,31 @@
+module "xb-field"
+import "xblocks"
+
+match .* attrs {
+    apply . xb-core-attrs
+
+    if (name() == 'disabled' && boolean(.)) {
+        @class += " is-disabled"
+    }
+
+    if (name() == 'xb-size') {
+        @class += " size_{.}"
+    }
+
+    if (name() == 'xb-theme') {
+        @class += " theme_{.}"
+    }
+}
+
+match / xb-field {
+<xb-field>
+    apply .attrs.* xb-core-attrs
+    .content
+</xb-field>
+}
+
+match / template {
+<input class="xb-field" type="text">
+    apply .attrs.* attrs
+</input>
+}

@@ -1,7 +1,7 @@
 (function(xtag, xblocks) {
     'use strict';
 
-    var SCHEMA_REL = 'http://xblocks.ru/xb-button';
+    var SCHEMA_REL = 'http://xblocks.ru/xb-field';
 
     (function(schema) {
         tv4 && tv4.addSchema(SCHEMA_REL, schema);
@@ -9,9 +9,7 @@
         /* borschik:include:schema.json */
     );
 
-
-
-    xtag.register('xb-button', {
+    xtag.register('xb-field', {
         lifecycle: {
             created: function() {
                 this.observer.on();
@@ -29,12 +27,12 @@
         },
 
         accessors: {
-            schema: {
+            /*schema: {
                 get: function() {
                     return SCHEMA_REL;
                 }
             },
-
+             */
             defaultAttrs: {
                 get: function() {
                     return {
@@ -46,19 +44,19 @@
 
             styleSource: {
                 get: function() {
-                    return '../src/blocks/button/styl/_button.css';
+                    return '../src/blocks/field/styl/_field.css';
                     //borschik.link('styl/_button.css')
                 }
             },
 
-            value: {
+            /*value: {
                 get: function() {
                     return xblocks.elementHTML(this);
                 },
                 set: function(value) {
                     return xblocks.elementHTML(this, value);
                 }
-            },
+            },*/
 
             observer: {
                 get: function() {
