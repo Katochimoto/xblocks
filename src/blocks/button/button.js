@@ -58,7 +58,7 @@
                     var observer;
 
                     if (!Modernizr.createshadowroot) {
-                        observer = this.__observer || (this.__observer = new MutationObserver(function() {
+                        observer = that.__observer || (that.__observer = new MutationObserver(function() {
                             xblocks.elementUpdate(that);
                         }));
                     }

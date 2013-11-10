@@ -4,6 +4,8 @@
         return !!document.createElement('div').createShadowRoot;
     });
 
+    Modernizr.addTest('stylescoped', 'scoped' in document.createElement('style'));
+
 })(Modernizr);
 
 

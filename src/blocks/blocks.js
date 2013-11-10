@@ -17,6 +17,26 @@
     namespace.xblocks = xblocks;
 
 
+    var __options = {
+        inlineStyle: Modernizr.stylescoped || Modernizr.createshadowroot
+    };
+
+    xblocks.option = function(name, value) {
+        if (typeof value === 'undefined') {
+            if (typeof name === 'string') {
+                return __options[name];
+            }
+
+        } else {
+            if (typeof name === 'string') {
+                return __options[name] = value;
+            }
+        }
+
+        return undefined;
+    };
+
+
     xblocks.attrs2obj = function(element, def) {
         var out = {};
         for (var i = 0, attrs = element.attributes, l = attrs.length; i < l; i++) {
@@ -89,7 +109,7 @@
         var html = yr.run(tagName, data, 'template');
         var template = xtag.createFragment(html);
 
-        if (element.styleSource) {
+        if (element.styleSource && xblocks.option('inlineStyle')) {
             var css = '@import url(' + element.styleSource + ');';
             var style = document.createElement('style');
 
