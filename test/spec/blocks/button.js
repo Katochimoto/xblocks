@@ -11,8 +11,8 @@ describe('button', function() {
         var data = {
             content: 'nop',
             attrs: {
-                name: 'test',
-                'xb-prefix': 'test'
+                name: 'te"st',
+                'xb-reset': true
             }
         };
 

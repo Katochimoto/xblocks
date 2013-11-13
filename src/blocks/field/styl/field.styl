@@ -1,37 +1,50 @@
-.xb-field
+/*.nb-input_type_simple
   kind: input
   skin: input
 
-.xb-field.size_s
-  skin: input small
+  &.nb-input_size_s
+    skin: input small
+    // reset default styles for <input type="search"/>
+    -webkit-appearance: textfield
 
-.xb-field_box
-  kind: field no-elements
+  &.nb-input_size_l
+    skin: input large
+    // reset default styles for <input type="search"/>
+    -webkit-appearance: textfield
+*/
+
+
+
+.xb-field_complex
+  kind: field $islands_s $islands_s
   skin: input-box
 
-.xb-field_box.size_s
-  skin: input-box small
+.xb-field_complex__content
+  kind: field-content
 
-.xb-field_box
-  .input-controller
-    kind: input
-    z-index: 9
-    width: 100%
-    height: 100%
+.xb-field_complex__controller
+  kind: input
+  z-index: 9
+  width: 100%
+  height: 100%
 
-    textarea&
-      vertical-align: top
-      resize: none
+  textarea&
+    vertical-align: top
+    resize: none
 
-  .input-view
-    kind: fill -1px
-    skin: input-view no-focus
+.xb-field_complex__view
+  border: 1px solid transparent
+  kind: fill -1px
+  skin: input-view no-focus
 
-    :not(.is-disabled):focus + &
-      skin: input_focus
+  :not(.is-disabled):focus + &
+    skin: input_focus
 
-  .field-left
-    kind: field-left 0.5*$islands_s $islands_s
+.xb-field_complex__reset
+  kind: field-right 0.5*$islands_s
+  skin: icon _remove with-hover
+  margin-right: $islands_s * -1
+  height: auto
 
-  .field-right
-    kind: field-right 0.5*$islands_s $islands_s
+  &:before
+    content: " "

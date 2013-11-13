@@ -1,3 +1,5 @@
+/* global escape  */
+
 (function(Modernizr) {
 
     Modernizr.addTest('createshadowroot', function() {
@@ -11,12 +13,16 @@
 
 (function(yr) {
 
+    yr.externals['xb-escape'] = function(value) {
+        return escape(value);
+    };
+
     yr.externals['xb-modernizr'] = function(name) {
         return Modernizr[name];
     };
 
     yr.externals['xb-inarray'] = function(name, array) {
-        var l = array.length;
+        var l = array && array.length || 0;
         while (l--) {
             if (name == array[l]) {
                 return true;
@@ -25,6 +31,13 @@
         return false;
     };
 
+    yr.externals['xb-empty-array'] = function(value) {
+        if (typeof value === 'object' && (value instanceof Array) && value.length) {
+            return false;
+        }
+
+        return true;
+    };
 })(yr);
 
 /* borschik:include:../node_modules/borschik/js/borschik.js */

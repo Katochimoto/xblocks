@@ -1,19 +1,13 @@
 module "xb-field"
 import "xblocks"
 
-match .* attrs {
-    apply . xb-core-attrs
-
+match .* attrs (array contains, reverse) {
     if (name() == 'disabled' && boolean(.)) {
         @class += " is-disabled"
     }
 
     if (name() == 'xb-size') {
-        @class += " size_{.}"
-    }
-
-    if (name() == 'xb-theme') {
-        @class += " theme_{.}"
+        @class += " nb-input_size_{.}"
     }
 }
 
@@ -24,8 +18,15 @@ match / xb-field {
 </xb-field>
 }
 
-match /[.attrs.xb-postfix || .attrs.xb-prefix] template {
-<label class="xb-field_box">
+match /[.attrs.xb-postfix || .attrs.xb-prefix || .attrs.xb-reset] template {
+controllerAttrs = [
+    'name'
+    'value'
+    'disabled'
+    'type'
+]
+
+<label class="xb-field_complex">
     apply .attrs.* attrs
 
     if (.attrs.xb-prefix) {
@@ -40,30 +41,28 @@ match /[.attrs.xb-postfix || .attrs.xb-prefix] template {
         </span>
     }
 
-    <span class="field-content">
-        <input class="input-controller" type="text">
-            if (.attrs.name) {
-                @name = "{.attrs.name}"
-            }
+    if (.attrs.xb-reset) {
+        <span class="xb-field_complex__reset js-reset"></span>
+    }
 
-            if (.attrs.value) {
-                @value = "{.attrs.value}"
-            }
+    <span class="xb-field_complex__content">
+        <input class="xb-field_complex__controller">
+            apply .attrs.* xb-core-attrs (controllerAttrs)
         </input>
-        <span class="input-view">&nbsp;</span>
+        <span class="xb-field_complex__view">&nbsp;</span>
     </span>
 </label>
 }
 
-match /[.attrs.rows || .attrs.cols] template {
-<textarea class="xb-field">
-    apply .attrs.* attrs
-    .content
-</textarea>
-}
-
-match /[!.attrs.rows && !.attrs.cols && !.attrs.xb-postfix && !.attrs.xb-prefix] template {
-<input class="xb-field" type="text">
-    apply .attrs.* attrs
-</input>
+match /[!(.attrs.xb-postfix || .attrs.xb-prefix || .attrs.xb-reset)] template {
+    if (.attrs.rows || .attrs.cols) {
+        <textarea class="nb-input nb-input_type_simple">
+            apply .attrs.* attrs
+            .content
+        </textarea>
+    } else {
+        <input class="nb-input nb-input_type_simple" type="text">
+            apply .attrs.* attrs
+        </input>
+    }
 }

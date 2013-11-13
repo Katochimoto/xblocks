@@ -36,7 +36,7 @@
             defaultAttrs: {
                 get: function() {
                     return {
-                        'xb-theme': 'normal',
+                        'type': 'text',
                         'xb-size': 'm'
                     };
                 }
@@ -96,7 +96,16 @@
                 if (this.hasAttribute('disabled')) {
                     event.preventDefault();
                     event.stopPropagation();
+                    return false;
                 }
+
+                if (xtag.hasClass(event.target, 'js-reset')) {
+                    xtag.query(this, 'input').forEach(function(elem) {
+                        elem.value = '';
+                    });
+                }
+
+                return true;
             }
         },
 

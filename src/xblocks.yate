@@ -1,9 +1,23 @@
 module "xblocks"
 
-external scalar xb-modernizr(scalar)
-external scalar xb-inarray(scalar, array)
+external scalar xb-escape(scalar)
+external boolean xb-modernizr(scalar)
+external boolean xb-inarray(scalar, array)
+external boolean xb-empty-array(array)
 
-match .* xb-core-attrs {
+match .* xb-core-attrs (array contains, ignore) {
+    if (xb-empty-array(contains)) {
+        apply . xb-core-attrs__common
+
+    } else if (ignore) {
+        apply .[!xb-inarray(name(), contains)] xb-core-attrs__common
+
+    } else {
+        apply .[xb-inarray(name(), contains)] xb-core-attrs__common
+    }
+}
+
+match .* xb-core-attrs__common {
     value = scalar(.)
     boolAttrs = [
         'disabled'

@@ -2,7 +2,15 @@ module "xb-button"
 import "xblocks"
 
 match .* attrs {
-    apply . xb-core-attrs
+    buttonAttrsIgnore = [
+        'xb-flying'
+        'xb-checked'
+        'xb-size'
+        'xb-theme'
+        'xb-ico'
+    ]
+
+    apply . xb-core-attrs (buttonAttrsIgnore, true())
 
     if (name() == 'disabled' && boolean(.)) {
         @class += " nb-button_disabled"
@@ -53,19 +61,19 @@ match /[.attrs.href] template {
 }
 
 match /[.attrs.type == 'file'] template {
+buttonAttrs = [
+    'name'
+    'multiple'
+    'disabled'
+]
+
 <label class="nb-button nb-button_type_attach">
     apply .attrs.* attrs
 
     <span class="nb-file-intruder">
         <span class="nb-file-intruder__inner">
             <input class="nb-file-intruder__input" type="file">
-                if (.attrs.name) {
-                    @name = "{.attrs.name}"
-                }
-
-                if (.attrs.multiple) {
-                    @multiple = "multiple"
-                }
+                apply . xb-core-attrs (buttonAttrs)
             </input>
             <span class="nb-file-intruder__focus"></span>
         </span>

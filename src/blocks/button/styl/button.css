@@ -77,7 +77,9 @@
 }
 
 .nb-button_theme_normal {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -175,7 +177,9 @@ input[type=file]:hover + .nb-button_theme_normal:before,
 }
 
 .nb-button_theme_normal.nb-button_size_s {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -273,7 +277,9 @@ input[type=file]:hover + .nb-button_theme_normal.nb-button_size_s:before,
 }
 
 .nb-button_flying {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -361,7 +367,9 @@ input[type=file]:hover + .nb-button_flying:before,
 }
 
 .nb-button_flying.nb-button_size_s {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -449,7 +457,9 @@ input[type=file]:hover + .nb-button_flying.nb-button_size_s:before,
 }
 
 .nb-button_theme_action {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -547,7 +557,9 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_action:before,
 }
 
 .nb-button_theme_action.nb-button_size_s {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -645,7 +657,9 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_action.nb-button_size_s:
 }
 
 .nb-button_theme_dark {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -746,7 +760,9 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark:before,
 }
 
 .nb-button_theme_dark.nb-button_size_s {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   -webkit-user-select: none;
@@ -847,7 +863,9 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s:be
 }
 
 .nb-button_theme_pseudo {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   color: #333;
@@ -902,7 +920,9 @@ input[type=file]:hover:not(:checked) + .nb-button_theme_dark.nb-button_size_s:be
 }
 
 .nb-button_theme_pseudo.nb-button_size_s {
-  font: 15px/22px Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
   position: relative;
   vertical-align: baseline;
   color: #333;
