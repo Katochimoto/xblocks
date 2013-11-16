@@ -1,14 +1,14 @@
 TESTS=test/spec/*.js
-NPM_BIN=$(CURDIR)/node_modules/.bin
+NPM_BIN=node_modules/.bin
 export NPM_BIN
 
 MAKEFLAGS+=-j 4
 
-STYL = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.styl')
+STYL = $(shell find src -type f -regex '^[^_]*\.styl')
 CSS = $(patsubst %.styl, %.css, $(STYL))
-YATE = $(shell find $(CURDIR)/src/blocks -type f -regex '^[^_]*\.yate')
+YATE = $(shell find src/blocks -type f -regex '^[^_]*\.yate')
 YATE_JS = $(patsubst %.yate, %.yate.js, $(YATE))
-JS = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.js')
+JS = $(shell find src -type f -regex '^[^_]*\.js')
 
 all: npm src/xblocks.yate.js lib/xblocks.yate.js lib/xblocks.css lib/xblocks.js lib/freeze.json $(YATE_JS) $(CSS)
 
@@ -21,18 +21,18 @@ clean:
 	rm -f lib/_xblocks.css
 	rm -f lib/freeze.json
 	rm -rf lib/_
-	find $(CURDIR)/src -type f -regex '.*\.\(css\|yate\.js\|yate\.obj\)' -delete
+	find src -type f -regex '.*\.\(css\|yate\.js\|yate\.obj\)' -delete
 
 
 ### CSS ############################################
 
 $(CSS): %.css: %.styl npm
-	node $(CURDIR)/bin/styl.js -input=$< -output=$@
+	node bin/styl.js -input=$< -output=$@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
 lib/xblocks.css: $(CSS) npm
-	find $(CURDIR)/src -type f -regex '^[^_]*\.css' | sort -r | xargs cat > $@
+	find src -type f -regex '^[^_]*\.css' | sort -r | xargs cat > $@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
@@ -45,11 +45,11 @@ src/xblocks.yate.js: src/xblocks.yate npm
 
 
 $(YATE_JS): %.yate.js: %.yate npm src/xblocks.yate.js
-	$(NPM_BIN)/yate --import=$(CURDIR)/src/xblocks.yate.obj --output=$@ $<
+	$(NPM_BIN)/yate --import=src/xblocks.yate.obj --output=$@ $<
 
 
 lib/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) npm
-	find $(CURDIR)/src -type f -name '*.yate.js' | sort -r | xargs cat > $@
+	find src -type f -name '*.yate.js' | sort -r | xargs cat > $@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
