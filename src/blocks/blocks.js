@@ -97,8 +97,6 @@
             data.content = xblocks.elementHTML(element);
         }
 
-        console.log(data);
-
         if (tv4 && element.schema) {
             var schema = tv4.getSchema(element.schema);
             var check = tv4.validateResult(data, schema);
@@ -138,11 +136,12 @@
             root = element;
         }
 
-        var child;
-        while (child = root.firstChild) {
-            root.removeChild(child);
-        }
+        //var child;
+        //while (child = root.firstChild) {
+        //    root.removeChild(child);
+        //}
 
+        xtag.innerHTML(root, '');
         root.appendChild(template.cloneNode(true));
 
         element.observer.on();

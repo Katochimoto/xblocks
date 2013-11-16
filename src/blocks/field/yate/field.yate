@@ -1,13 +1,19 @@
 module "xb-field"
 import "xblocks"
 
-match .* attrs (array contains, reverse) {
+match .* block-attrs {
+    attrsIgnore = [
+        'xb-size'
+    ]
+
+    apply . xb-core-attrs (attrsIgnore, true())
+
     if (name() == 'disabled' && boolean(.)) {
         @class += " is-disabled"
     }
 
     if (name() == 'xb-size') {
-        @class += " nb-input_size_{.}"
+        @class += " xb-field_size_{.}"
     }
 }
 
@@ -23,20 +29,19 @@ controllerAttrs = [
     'name'
     'value'
     'disabled'
-    'type'
 ]
 
 <label class="xb-field_complex">
-    apply .attrs.* attrs
+    apply .attrs.* block-attrs
 
     if (.attrs.xb-prefix) {
-        <span class="field-left">
+        <span class="xb-field_complex__left">
             .attrs.xb-prefix
         </span>
     }
 
     if (.attrs.xb-postfix) {
-        <span class="field-right">
+        <span class="xb-field_complex__right">
             .attrs.xb-postfix
         </span>
     }
@@ -46,7 +51,7 @@ controllerAttrs = [
     }
 
     <span class="xb-field_complex__content">
-        <input class="xb-field_complex__controller">
+        <input class="xb-field_complex__controller" type="text">
             apply .attrs.* xb-core-attrs (controllerAttrs)
         </input>
         <span class="xb-field_complex__view">&nbsp;</span>
@@ -55,14 +60,14 @@ controllerAttrs = [
 }
 
 match /[!(.attrs.xb-postfix || .attrs.xb-prefix || .attrs.xb-reset)] template {
-    if (.attrs.rows || .attrs.cols) {
-        <textarea class="nb-input nb-input_type_simple">
-            apply .attrs.* attrs
-            .content
-        </textarea>
-    } else {
-        <input class="nb-input nb-input_type_simple" type="text">
-            apply .attrs.* attrs
-        </input>
-    }
+if (.attrs.rows || .attrs.cols) {
+    <textarea class="xb-field_simple">
+        apply .attrs.* block-attrs
+        .content
+    </textarea>
+} else {
+    <input class="xb-field_simple" type="text">
+        apply .attrs.* block-attrs
+    </input>
+}
 }

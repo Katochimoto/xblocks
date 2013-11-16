@@ -1,29 +1,42 @@
-/*.nb-input_type_simple
+.xb-field_simple
   kind: input
-  skin: input
+  skin: input top
 
-  &.nb-input_size_s
-    skin: input small
+  &.xb-field_size_s
+    skin: input small top
     // reset default styles for <input type="search"/>
     -webkit-appearance: textfield
 
-  &.nb-input_size_l
-    skin: input large
+  &.xb-field_size_l
+    skin: input large top
     // reset default styles for <input type="search"/>
     -webkit-appearance: textfield
-*/
+
+  &.is-disabled
+    skin: disabled
+
 
 
 
 .xb-field_complex
   kind: field $islands_s $islands_s
-  skin: input-box
+  skin: input-box top
+  vertical-align: top
+
+  &.xb-field_size_s
+    skin: input-box small top
+
+  &.xb-field_size_l
+    skin: input-box large top
+
+  &.is-disabled
+    skin: disabled
 
 .xb-field_complex__content
   kind: field-content
 
 .xb-field_complex__controller
-  kind: input
+  kind: input top
   z-index: 9
   width: 100%
   height: 100%
@@ -43,8 +56,15 @@
 .xb-field_complex__reset
   kind: field-right 0.5*$islands_s
   skin: icon _remove with-hover
-  margin-right: $islands_s * -1
   height: auto
 
   &:before
-    content: " "
+    content: "\00a0"
+
+.xb-field_complex__left
+  kind: field-left 0.5*$islands_s
+  height: auto
+
+.xb-field_complex__right
+  kind: field-right 0.5*$islands_s
+  height: auto

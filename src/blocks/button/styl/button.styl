@@ -1,72 +1,110 @@
-/*:host
-  opacity: 0.6
-
-:host:hover
-  opacity: 1
-
-:host:active
-*/
-
-
 @import '_skin-dark'
 
-$skin-islands-button-content = '.nb-button__text'
-$skin-islands-button-disabled = '.nb-button_disabled'
+$skin-islands-button-content = '.xb-button__text'
+$skin-islands-button-disabled = '.xb-button_disabled'
 
 // Обычная кнопка
-.nb-button_theme_normal
+.xb-button_theme_normal
   kind: button
-  skin: button
+  skin: button top
 
-// Маленькая обычная кнопка
-.nb-button_theme_normal.nb-button_size_s
-  skin: button small
+  // Маленькая обычная кнопка
+  &.xb-button_size_s
+    skin: button small top
+
+    &.xb-button_checked
+      skin: button_checked
+
+  &.xb-button_checked
+    skin: button_checked
+
+
+
 
 
 // Летающая кнопка
-.nb-button_flying
-  skin: button fly
+.xb-button_flying
+  skin: button fly top
 
-// Маленькая летающая кнопка
-.nb-button_flying.nb-button_size_s
-  skin: button fly small
+  // Маленькая летающая кнопка
+  &.xb-button_size_s
+    skin: button fly small top
+
+    &.xb-button_checked
+      skin: button_checked fly
+
+  &.xb-button_checked
+    skin: button_checked fly
+
+
+
+
+
 
 // Кнопка-действие
-.nb-button_theme_action
+.xb-button_theme_action
   kind: button
-  skin: action-button
+  skin: action-button top
 
-// Маленькая кнопка-действие
-.nb-button_theme_action.nb-button_size_s
-  skin: action-button small
+  // Маленькая кнопка-действие
+  &.xb-button_size_s
+    skin: action-button small top
+
+    &.xb-button_checked
+      skin: button_checked
+
+  &.xb-button_checked
+    skin: button_checked
+
+
+
+
 
 // Темная кнопка
-.nb-button_theme_dark
+.xb-button_theme_dark
   kind: button
-  skin: dark-button
+  skin: dark-button top
 
-// Little black --dress-- button
-.nb-button_theme_dark.nb-button_size_s
-  skin: dark-button small
+  // Little black --dress-- button
+  &.xb-button_size_s
+    skin: dark-button small top
+
+    &.xb-button_checked
+      skin: button_checked
+
+  &.xb-button_checked
+    skin: button_checked
+
+
+
+
 
 // Псевдо-кнопка
-.nb-button_theme_pseudo
+.xb-button_theme_pseudo
   kind: button
-  skin: pseudo-button
+  skin: pseudo-button top
+  padding: 5px 15px
 
-// Маленькая псевдо-кнопка
-.nb-button_theme_pseudo.nb-button_size_s
-  skin: pseudo-button small
+  // Маленькая псевдо-кнопка
+  &.xb-button_size_s
+    skin: pseudo-button small top
+    padding: 5px 13px
+
+    &.xb-button_checked
+      skin: button_checked
+
+  &.xb-button_checked
+    skin: button_checked
+
+
+
+
 
 // Задизейбленная кнопка
-.nb-button_disabled
+.xb-button_disabled
   skin: disabled
 
-.nb-button_checked
-  skin: button_checked
 
-.nb-button_checked.nb-button_size_s
-  skin: button_checked small
 
 // Кнопка аттача
 

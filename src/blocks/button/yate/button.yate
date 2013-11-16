@@ -1,8 +1,8 @@
 module "xb-button"
 import "xblocks"
 
-match .* attrs {
-    buttonAttrsIgnore = [
+match .* block-attrs {
+    attrsIgnore = [
         'xb-flying'
         'xb-checked'
         'xb-size'
@@ -10,26 +10,26 @@ match .* attrs {
         'xb-ico'
     ]
 
-    apply . xb-core-attrs (buttonAttrsIgnore, true())
+    apply . xb-core-attrs (attrsIgnore, true())
 
     if (name() == 'disabled' && boolean(.)) {
-        @class += " nb-button_disabled"
+        @class += " xb-button_disabled"
     }
 
     if (name() == 'xb-flying' && boolean(.)) {
-        @class += " nb-button_flying"
+        @class += " xb-button_flying"
     }
 
     if (name() == 'xb-checked' && boolean(.)) {
-        @class += " nb-button_checked"
+        @class += " xb-button_checked"
     }
 
     if (name() == 'xb-size') {
-        @class += " nb-button_size_{.}"
+        @class += " xb-button_size_{.}"
     }
 
     if (name() == 'xb-theme') {
-        @class += " nb-button_theme_{.}"
+        @class += " xb-button_theme_{.}"
     }
 }
 
@@ -41,44 +41,44 @@ match / xb-button {
 }
 
 match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] template {
-<button class="nb-button">
-    apply .attrs.* attrs
+<button class="xb-button">
+    apply .attrs.* block-attrs
 
-    <span class="nb-button__text">
+    <span class="xb-button__text">
         apply . xb-core-content
     </span>
 </button>
 }
 
 match /[.attrs.href] template {
-<a class="nb-button">
-    apply .attrs.* attrs
+<a class="xb-button">
+    apply .attrs.* block-attrs
 
-    <span class="nb-button__text">
+    <span class="xb-button__text">
         apply . xb-core-content
     </span>
 </a>
 }
 
 match /[.attrs.type == 'file'] template {
-buttonAttrs = [
+controllerAttrs = [
     'name'
     'multiple'
     'disabled'
 ]
 
-<label class="nb-button nb-button_type_attach">
-    apply .attrs.* attrs
+<label class="xb-button xb-button_type_attach">
+    apply .attrs.* block-attrs
 
     <span class="nb-file-intruder">
         <span class="nb-file-intruder__inner">
             <input class="nb-file-intruder__input" type="file">
-                apply . xb-core-attrs (buttonAttrs)
+                apply . xb-core-attrs (controllerAttrs)
             </input>
             <span class="nb-file-intruder__focus"></span>
         </span>
     </span>
-    <span class="nb-button__text">
+    <span class="xb-button__text">
         apply . xb-core-content
     </span>
 </label>

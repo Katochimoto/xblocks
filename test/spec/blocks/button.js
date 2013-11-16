@@ -12,7 +12,14 @@ describe('button', function() {
             content: 'nop',
             attrs: {
                 name: 'te"st',
-                'xb-reset': true
+                'xb-size': 'm',
+                //'xb-theme': 'pseudo',
+                //'xb-checked': true,
+                //'xb-flying': true,
+                //'disabled': true,
+                'xb-reset': true,
+                'xb-prefix': 'qwe'
+                //'xb-postfix': 'qwe'
             }
         };
 
