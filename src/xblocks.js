@@ -68,3 +68,5 @@ borschik.addLinks(/* borschik:include:../lib/freeze.json */);
 /* borschik:include:blocks/button/button.js */
 /* borschik:include:blocks/field/field.js */
 
+xblocks.option('inlineStyle', false);
+

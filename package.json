@@ -39,7 +39,7 @@
         "requirer": "*",
         "mocha": "*",
         "expect.js": "*",
-        "x-tag-core": "x-tag/core#0.8.15"
+        "x-tag-core": "x-tag/core#0.8.18"
     },
     "engines": {
         "node": "*"

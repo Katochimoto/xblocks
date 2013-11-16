@@ -120,6 +120,7 @@ xb-field:unresolved {
   box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
   /* override for <input type="search"> */
+  font-family: Arial, sans-serif;
 }
 
 .xb-field_simple:not(.is-disabled):focus {
@@ -224,6 +225,7 @@ xb-field:unresolved {
   min-height: 32px;
   font-size: 15px;
   vertical-align: top;
+  font-family: Arial, sans-serif;
 }
 
 .xb-field_complex-left {

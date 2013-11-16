@@ -65,6 +65,15 @@
     };
 
 
+    xblocks.rootElement = function(element) {
+        if (Modernizr.createshadowroot) {
+            return element.shadowRoot;
+        }
+
+        return element;
+    };
+
+
     xblocks.elementHTML = function(element, html) {
         if (typeof html !== 'undefined') {
             element.innerHTML = html;
@@ -86,15 +95,16 @@
     xblocks.elementUpdate = function(element) {
         element.observer.off();
 
+        var isInlineStyle = element.styleSource && xblocks.option('inlineStyle');
         var tagName = element.tagName.toLowerCase();
         var data = {
             attrs: xblocks.attrs2obj(element, element.defaultAttrs || {}),
             content: null
         };
 
-        if (!Modernizr.createshadowroot) {
+        //if (!Modernizr.createshadowroot) {
             data.content = xblocks.elementHTML(element);
-        }
+        //}
 
         if (tv4 && element.schema) {
             var schema = tv4.getSchema(element.schema);
@@ -108,7 +118,7 @@
         var html = yr.run(tagName, data, 'template');
         var template = xtag.createFragment(html);
 
-        if (element.styleSource && xblocks.option('inlineStyle')) {
+        if (isInlineStyle) {
             var css = '@import url(' + element.styleSource + ');';
             var style = document.createElement('style');
 
@@ -128,8 +138,8 @@
         var root;
         if (Modernizr.createshadowroot) {
             root = element.shadowRoot || element.createShadowRoot();
-            root.resetStyleInheritance = false;
-            root.applyAuthorStyles = false;
+            root.resetStyleInheritance = !isInlineStyle;
+            root.applyAuthorStyles = !isInlineStyle;
 
         } else {
             root = element;

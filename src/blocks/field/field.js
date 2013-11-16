@@ -9,17 +9,30 @@
         /* borschik:include:schema.json */
     );
 
+
+    var events = {};
+
     xtag.register('xb-field', {
         lifecycle: {
             created: function() {
                 this.observer.on();
 
                 xblocks.elementUpdate(this);
+
+                events = xtag.addEvents(xblocks.rootElement(this), {
+                    'click:delegate(span.js-reset)': function() {
+                        xtag.query(this.parentNode, 'input').forEach(function(elem) {
+                            elem.setAttribute('value', '');
+                            elem.value = '';
+                        });
+                    }
+                });
             },
             inserted: function() {
             },
             removed: function() {
                 this.observer.remove();
+                xtag.removeEvents(events);
             },
             attributeChanged: function() {
                 xblocks.elementUpdate(this);
@@ -103,13 +116,6 @@
                     event.preventDefault();
                     event.stopPropagation();
                     return false;
-                }
-
-                if (xtag.hasClass(event.target, 'js-reset')) {
-                    xtag.query(this, 'input').forEach(function(elem) {
-                        elem.setAttribute('value', '');
-                        elem.value = '';
-                    });
                 }
 
                 return true;
