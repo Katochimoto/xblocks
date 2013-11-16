@@ -12,13 +12,13 @@ describe('button', function() {
             content: 'nop',
             attrs: {
                 name: 'te"st',
-                'xb-size': 'm',
+                'size': 'm',
                 //'xb-theme': 'pseudo',
                 //'xb-checked': true,
                 //'xb-flying': true,
                 //'disabled': true,
-                'xb-reset': true,
-                'xb-prefix': 'qwe'
+                'reset': true,
+                'prefix': 'qwe'
                 //'xb-postfix': 'qwe'
             }
         };

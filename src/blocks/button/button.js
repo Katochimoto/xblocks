@@ -38,8 +38,8 @@
             defaultAttrs: {
                 get: function() {
                     return {
-                        'xb-theme': 'normal',
-                        'xb-size': 'm'
+                        'theme': 'normal',
+                        'size': 'm'
                     };
                 }
             },

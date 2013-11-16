@@ -1,34 +1,24 @@
 module "xb-button"
 import "xblocks"
 
-match .* block-attrs (array ignore) {
-    attrsIgnore = [
-        'xb-flying'
-        'xb-checked'
-        'xb-size'
-        'xb-theme'
-        'xb-ico'
-    ]
-
-    apply . xb-core-attrs (xb-concat-array(attrsIgnore, ignore), true())
-
+match .* block-attrs {
     if (name() == 'disabled' && boolean(.)) {
         @class += " xb-button_disabled"
     }
 
-    if (name() == 'xb-flying' && boolean(.)) {
+    if (name() == 'flying' && boolean(.)) {
         @class += " xb-button_flying"
     }
 
-    if (name() == 'xb-checked' && boolean(.)) {
+    if (name() == 'checked' && boolean(.)) {
         @class += " xb-button_checked"
     }
 
-    if (name() == 'xb-size') {
+    if (name() == 'size') {
         @class += " xb-button_size_{.}"
     }
 
-    if (name() == 'xb-theme') {
+    if (name() == 'theme') {
         @class += " xb-button_theme_{.}"
     }
 }
@@ -41,8 +31,13 @@ match / xb-button {
 }
 
 match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] template {
+controllerAttrs = [
+    'name'
+    'disabled'
+]
 <button class="xb-button">
     apply .attrs.* block-attrs
+    apply .attrs.* xb-core-attrs (controllerAttrs)
 
     <span class="xb-button__text">
         apply . xb-core-content
@@ -51,8 +46,12 @@ match /[!.attrs.type || .attrs.type == 'button' || .attrs.type == 'submit'] temp
 }
 
 match /[.attrs.href] template {
+controllerAttrs = [
+    'name'
+]
 <a class="xb-button">
     apply .attrs.* block-attrs
+    apply .attrs.* xb-core-attrs (controllerAttrs)
 
     <span class="xb-button__text">
         apply . xb-core-content
@@ -68,12 +67,12 @@ controllerAttrs = [
 ]
 
 <label class="xb-button xb-button_type_attach">
-    apply .attrs.* block-attrs (controllerAttrs)
+    apply .attrs.* block-attrs
 
     <span class="nb-file-intruder">
         <span class="nb-file-intruder__inner">
             <input class="nb-file-intruder__input" type="file">
-                apply . xb-core-attrs (controllerAttrs)
+                apply .attrs.* xb-core-attrs (controllerAttrs)
             </input>
             <span class="nb-file-intruder__focus"></span>
         </span>

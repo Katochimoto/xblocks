@@ -37,7 +37,7 @@
                 get: function() {
                     return {
                         'type': 'text',
-                        'xb-size': 'm'
+                        'size': 'm'
                     };
                 }
             },

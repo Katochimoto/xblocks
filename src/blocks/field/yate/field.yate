@@ -1,21 +1,12 @@
 module "xb-field"
 import "xblocks"
 
-match .* block-attrs (array ignore) {
-    attrsIgnore = [
-        'xb-size'
-        'xb-reset'
-        'xb-prefix'
-        'xb-postfix'
-    ]
-
-    apply . xb-core-attrs (xb-concat-array(attrsIgnore, ignore), true())
-
+match .* block-attrs {
     if (name() == 'disabled' && boolean(.)) {
         @class += " is-disabled"
     }
 
-    if (name() == 'xb-size') {
+    if (name() == 'size') {
         @class += " xb-field_size_{.}"
     }
 }
@@ -27,51 +18,63 @@ match / xb-field {
 </xb-field>
 }
 
-match /[.attrs.xb-postfix || .attrs.xb-prefix || .attrs.xb-reset] template {
+match /[.attrs.postfix || .attrs.prefix || .attrs.reset] template {
 controllerAttrs = [
     'name'
-    'value'
     'disabled'
     'type'
 ]
 
 <label class="xb-field_complex">
-    apply .attrs.* block-attrs (controllerAttrs)
+    apply .attrs.* block-attrs
 
-    if (.attrs.xb-prefix) {
+    if (.attrs.prefix) {
         <span class="xb-field_complex__left">
-            .attrs.xb-prefix
+            .attrs.prefix
         </span>
     }
 
-    if (.attrs.xb-postfix) {
+    if (.attrs.postfix) {
         <span class="xb-field_complex__right">
-            .attrs.xb-postfix
+            .attrs.postfix
         </span>
     }
 
-    if (.attrs.xb-reset) {
+    if (.attrs.reset) {
         <span class="xb-field_complex__reset js-reset"></span>
     }
 
     <span class="xb-field_complex__content">
         <input class="xb-field_complex__controller" type="text">
             apply .attrs.* xb-core-attrs (controllerAttrs)
+            if (.content) {
+                @value = "{.content}"
+            }
         </input>
         <span class="xb-field_complex__view">&nbsp;</span>
     </span>
 </label>
 }
 
-match /[!(.attrs.xb-postfix || .attrs.xb-prefix || .attrs.xb-reset)] template {
+match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset)] template {
+controllerAttrs = [
+    'name'
+    'disabled'
+    'type'
+]
 if (.attrs.rows || .attrs.cols) {
     <textarea class="xb-field_simple">
         apply .attrs.* block-attrs
+        apply .attrs.* xb-core-attrs (controllerAttrs)
         .content
     </textarea>
 } else {
     <input class="xb-field_simple" type="text">
         apply .attrs.* block-attrs
+        apply .attrs.* xb-core-attrs (controllerAttrs)
+        if (.content) {
+            @value = "{.content}"
+        }
     </input>
 }
 }
