@@ -2,7 +2,6 @@
     'use strict';
 
     var xblocks = {};
-    xblocks.version = '0.0.1';
 
     var namespace;
 
