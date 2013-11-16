@@ -1,5 +1,8 @@
 /* global escape  */
 
+/* borschik:include:../lib/modernizr.js */
+/* borschik:include:../node_modules/yate/lib/runtime.js */
+
 (function(Modernizr) {
 
     Modernizr.addTest('createshadowroot', function() {
