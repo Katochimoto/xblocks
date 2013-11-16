@@ -18,7 +18,8 @@ describe('button', function() {
                 //'xb-flying': true,
                 //'disabled': true,
                 'reset': true,
-                'prefix': 'qwe'
+                'prefix': 'qwe',
+                'value': 'asd'
                 //'xb-postfix': 'qwe'
             }
         };

@@ -23,6 +23,7 @@ controllerAttrs = [
     'name'
     'disabled'
     'type'
+    'value'
 ]
 
 <label class="xb-field_complex">
@@ -47,9 +48,6 @@ controllerAttrs = [
     <span class="xb-field_complex__content">
         <input class="xb-field_complex__controller" type="text">
             apply .attrs.* xb-core-attrs (controllerAttrs)
-            if (boolean(.content)) {
-                @value = "{.content}"
-            }
         </input>
         <span class="xb-field_complex__view">&nbsp;</span>
     </span>
@@ -60,21 +58,20 @@ match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset)] template {
 controllerAttrs = [
     'name'
     'disabled'
-    'type'
 ]
 if (.attrs.rows || .attrs.cols) {
     <textarea class="xb-field_simple">
         apply .attrs.* block-attrs
         apply .attrs.* xb-core-attrs (controllerAttrs)
-        .content
+        apply . xb-core-content (true())
     </textarea>
 } else {
     <input class="xb-field_simple" type="text">
         apply .attrs.* block-attrs
-        apply .attrs.* xb-core-attrs (controllerAttrs)
-        if (boolean(.content)) {
-            @value = "{.content}"
-        }
+        apply .attrs.* xb-core-attrs (xb-concat-array(controllerAttrs, [
+            'type'
+            'value'
+        ]))
     </input>
 }
 }

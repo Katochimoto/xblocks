@@ -102,9 +102,9 @@
             content: null
         };
 
-        //if (!Modernizr.createshadowroot) {
+        if (!Modernizr.createshadowroot) {
             data.content = xblocks.elementHTML(element);
-        //}
+        }
 
         if (tv4 && element.schema) {
             var schema = tv4.getSchema(element.schema);
