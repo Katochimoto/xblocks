@@ -1,15 +1,26 @@
 {
     "name": "xblocks",
-    "description": "",
+    "description": "HTML custom elements",
     "version": "0.0.1",
+    "keywords": [
+        "x-tags",
+        "html5",
+        "custom elements"
+    ],
+    "homepage": "https://github.com/Katochimoto/xblocks",
     "author": {
         "name": "rikishi",
         "email": "bufpost@yandex.ru"
     },
     "bugs": {
-        "email": "bufpost@yandex.ru"
+        "email": "bufpost@yandex.ru",
+        "url": "https://github.com/Katochimoto/xblocks/issues"
     },
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Katochimoto/xblocks.git"
+    },
     "dependencies": {
         "stylobate": "*",
         "stylobate-islands": "*"
