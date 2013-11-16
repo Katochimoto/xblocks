@@ -56,7 +56,7 @@
                     return xblocks.elementHTML(this);
                 },
                 set: function(value) {
-                    return xblocks.elementHTML(this, value);
+                    xblocks.elementHTML(this, value);
                 }
             },
 

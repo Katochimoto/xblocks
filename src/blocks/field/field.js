@@ -49,14 +49,21 @@
                 }
             },
 
-            /*value: {
+            value: {
                 get: function() {
-                    return xblocks.elementHTML(this);
+                    var value;
+                    xtag.query(this, 'input').forEach(function(elem) {
+                        value = elem.value;
+                    });
+
+                    return value;
                 },
                 set: function(value) {
-                    return xblocks.elementHTML(this, value);
+                    xtag.query(this, 'input').forEach(function(elem) {
+                        elem.value = value;
+                    });
                 }
-            },*/
+            },
 
             observer: {
                 get: function() {
@@ -101,6 +108,7 @@
 
                 if (xtag.hasClass(event.target, 'js-reset')) {
                     xtag.query(this, 'input').forEach(function(elem) {
+                        elem.setAttribute('value', '');
                         elem.value = '';
                     });
                 }

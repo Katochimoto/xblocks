@@ -38,6 +38,21 @@
 
         return true;
     };
+
+    yr.externals['xb-concat-array'] = function() {
+        var ret = [];
+        var l = arguments.length;
+
+        while(l--) {
+            var val = arguments[l];
+            if (!yr.externals['xb-empty-array'](val)) {
+                ret = ret.concat(val);
+            }
+        }
+
+        return ret;
+    };
+
 })(yr);
 
 /* borschik:include:../node_modules/borschik/js/borschik.js */

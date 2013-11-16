@@ -1,12 +1,15 @@
 module "xb-field"
 import "xblocks"
 
-match .* block-attrs {
+match .* block-attrs (array ignore) {
     attrsIgnore = [
         'xb-size'
+        'xb-reset'
+        'xb-prefix'
+        'xb-postfix'
     ]
 
-    apply . xb-core-attrs (attrsIgnore, true())
+    apply . xb-core-attrs (xb-concat-array(attrsIgnore, ignore), true())
 
     if (name() == 'disabled' && boolean(.)) {
         @class += " is-disabled"
@@ -29,10 +32,11 @@ controllerAttrs = [
     'name'
     'value'
     'disabled'
+    'type'
 ]
 
 <label class="xb-field_complex">
-    apply .attrs.* block-attrs
+    apply .attrs.* block-attrs (controllerAttrs)
 
     if (.attrs.xb-prefix) {
         <span class="xb-field_complex__left">

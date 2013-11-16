@@ -1,7 +1,7 @@
 module "xb-button"
 import "xblocks"
 
-match .* block-attrs {
+match .* block-attrs (array ignore) {
     attrsIgnore = [
         'xb-flying'
         'xb-checked'
@@ -10,7 +10,7 @@ match .* block-attrs {
         'xb-ico'
     ]
 
-    apply . xb-core-attrs (attrsIgnore, true())
+    apply . xb-core-attrs (xb-concat-array(attrsIgnore, ignore), true())
 
     if (name() == 'disabled' && boolean(.)) {
         @class += " xb-button_disabled"
@@ -68,7 +68,7 @@ controllerAttrs = [
 ]
 
 <label class="xb-button xb-button_type_attach">
-    apply .attrs.* block-attrs
+    apply .attrs.* block-attrs (controllerAttrs)
 
     <span class="nb-file-intruder">
         <span class="nb-file-intruder__inner">

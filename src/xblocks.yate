@@ -4,6 +4,7 @@ external scalar xb-escape(scalar)
 external boolean xb-modernizr(scalar)
 external boolean xb-inarray(scalar, array)
 external boolean xb-empty-array(array)
+external array xb-concat-array(array, array)
 
 match .* xb-core-attrs (array contains, ignore) {
     if (xb-empty-array(contains)) {
