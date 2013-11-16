@@ -44,8 +44,7 @@
 
             styleSource: {
                 get: function() {
-                    return '../src/blocks/field/styl/_field.css';
-                    //borschik.link('styl/_button.css')
+                    return borschik.link('@field.css');
                 }
             },
 

@@ -46,8 +46,7 @@
 
             styleSource: {
                 get: function() {
-                    return '../src/blocks/button/styl/_button.css';
-                    //borschik.link('styl/_button.css')
+                    return borschik.link('@button.css');
                 }
             },
 

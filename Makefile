@@ -10,7 +10,7 @@ YATE = $(shell find $(CURDIR)/src/blocks -type f -regex '^[^_]*\.yate')
 YATE_JS = $(patsubst %.yate, %.yate.js, $(YATE))
 JS = $(shell find $(CURDIR)/src -type f -regex '^[^_]*\.js')
 
-all: npm src/xblocks.yate.js lib/xblocks.yate.js lib/xblocks.css lib/xblocks.js $(YATE_JS) $(CSS)
+all: npm src/xblocks.yate.js lib/xblocks.yate.js lib/xblocks.css lib/xblocks.js lib/freeze.json $(YATE_JS) $(CSS)
 
 clean:
 	rm -f lib/xblocks.js
@@ -19,7 +19,7 @@ clean:
 	rm -f lib/_xblocks.yate.js
 	rm -f lib/xblocks.css
 	rm -f lib/_xblocks.css
-	rm -f lib/freeze-info.json
+	rm -f lib/freeze.json
 	rm -rf lib/_
 	find $(CURDIR)/src -type f -regex '.*\.\(css\|yate\.js\|yate\.obj\)' -delete
 
@@ -54,14 +54,16 @@ lib/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) npm
 
 
 
+### FREEZE #########################################
+
+lib/freeze.json: $(CSS) npm
+	$(NPM_BIN)/borschik --tech=json --input=freeze.json --output=$@
+
+
 
 ### JS #############################################
 
-#freeze: $(CSS) $(YATE_JS) $(JS) npm
-#	$(NPM_BIN)/borschik freeze --minimize=no --input=src --output=lib/freeze-info.json
-
-
-lib/xblocks.js: src/xblocks.js $(JS) npm
+lib/xblocks.js: src/xblocks.js lib/freeze.json $(JS) npm
 	$(NPM_BIN)/borschik --input=src/xblocks.js --minimize=no --output=$@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
