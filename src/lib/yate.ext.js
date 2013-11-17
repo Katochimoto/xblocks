@@ -1,6 +1,6 @@
 /* global escape  */
 
-(function(yr) {
+(function(yr, Modernizr) {
     'use strict';
 
     var ext = yr.externals;
@@ -53,4 +53,4 @@
         return value.replace(prefix, '');
     };
 
-})(yr);
+})(yr, Modernizr);
