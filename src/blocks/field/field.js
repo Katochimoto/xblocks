@@ -9,15 +9,20 @@
         /* borschik:include:schema.json */
     );
 
+    function onupdate(element) {
+        element.__lock = true;
+        element.removeAttribute('value');
+        element.__controller = xblocks.rootElement(element).querySelector('input,textarea');
+        element.__lock = false;
+    }
+
     xtag.register('xb-field', {
         lifecycle: {
             created: function() {
-                this.observer.on();
-                xblocks.elementUpdate(this);
+                xblocks.log('created', this);
 
-                this.__lock = true;
-                this.removeAttribute('value');
-                this.__lock = false;
+                this.observer.on();
+                xblocks.elementUpdate(this, onupdate);
 
                 var that = this;
                 this.__events = xtag.addEvents(xblocks.rootElement(this), {
@@ -30,9 +35,7 @@
 
                         if (xtag.hasClass(event.target, 'js-reset')) {
                             that.__lock = true;
-                            xtag.query(this, 'input,textarea').forEach(function(elem) {
-                                elem.value = '';
-                            });
+                            that.__controller.value = '';
                             that.__lock = false;
                         }
 
@@ -69,21 +72,26 @@
                 });
             },
 
-            inserted: function() {},
+            inserted: function() {
+                xblocks.log('inserted', this);
+            },
 
             removed: function() {
+                xblocks.log('removed', this);
                 this.observer.remove();
                 xtag.removeEvents(xblocks.rootElement(this), this.__events);
                 delete this.__events;
+                delete this.__controller;
             },
 
             attributeChanged: function() {
                 if (this.__lock) {
+                    xblocks.log('attributeChanged', 'lock', arguments);
                     return;
                 }
 
-                xblocks.log('attributeChanged', this);
-                xblocks.elementUpdate(this);
+                xblocks.log('attributeChanged', this, arguments);
+                xblocks.elementUpdate(this, onupdate);
             }
         },
 
@@ -99,6 +107,7 @@
                     return {
                         'type': 'text',
                         'size': 'm',
+                        'rows': 1,
                         'value': this.value
                     };
                 }
@@ -112,28 +121,10 @@
 
             value: {
                 get: function() {
-                    var value;
-                    var root = xblocks.rootElement(this);
-
-                    if (root) {
-                        xtag.query(root, 'input,textarea').forEach(function(elem) {
-                            value = elem.value;
-                        });
-                    }
-
-                    return value;
+                    return this.__controller && this.__controller.value;
                 },
                 set: function(value) {
-                    this.__lock = true;
-                    var root = xblocks.rootElement(this);
-
-                    if (root) {
-                        xtag.query(root, 'input,textarea').forEach(function(elem) {
-                            elem.value = value;
-                        });
-                    }
-
-                    this.__lock = false;
+                    this.__controller.value = value;
                 }
             },
 
@@ -144,7 +135,8 @@
 
                     if (!Modernizr.createshadowroot) {
                         observer = that.__observer || (that.__observer = new MutationObserver(function() {
-                            xblocks.elementUpdate(that);
+                            xblocks.log('mutation', that);
+                            xblocks.elementUpdate(that, onupdate);
                         }));
                     }
 

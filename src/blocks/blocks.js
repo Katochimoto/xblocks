@@ -61,8 +61,8 @@
         var out = {};
         for (var i = 0, attrs = element.attributes, l = attrs.length; i < l; i++) {
             var attr = attrs.item(i);
-            if (attr.nodeValue === 'true' || attr.nodeValue === 'false' || attr.nodeName === attr.nodeValue) {
-                if (attr.nodeName === attr.nodeValue || attr.nodeValue === 'true') {
+            if (attr.value === 'true' || attr.value === 'false' || attr.nodeName === attr.value) {
+                if (attr.nodeName === attr.value || attr.value === 'true') {
                     out[attr.nodeName] = true;
 
                 } else {
@@ -70,7 +70,7 @@
                 }
 
             } else {
-                out[attr.nodeName] = attr.nodeValue;
+                out[attr.nodeName] = attr.value;
             }
         }
 
@@ -113,7 +113,7 @@
     };
 
 
-    xblocks.elementUpdate = function(element) {
+    xblocks.elementUpdate = function(element, onupdate) {
         xblocks.log('elementUpdate', element);
 
         element.observer.off();
@@ -175,6 +175,10 @@
         root.appendChild(template.cloneNode(true));
 
         element.observer.on();
+
+        if (onupdate) {
+            onupdate(element);
+        }
     };
 
 

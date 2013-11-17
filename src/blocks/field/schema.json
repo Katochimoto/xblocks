@@ -57,12 +57,12 @@
                 "rows": {
                     "id": "http://xblocks.ru/xb-field/attrs/rows",
                     "required":false,
-                    "type":"number"
+                    "type": ["string", "number"]
                 },
                 "cols": {
                     "id": "http://xblocks.ru/xb-field/attrs/cols",
                     "required":false,
-                    "type":"number"
+                    "type": ["string", "number"]
                 }
             }
         }
