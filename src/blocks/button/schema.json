@@ -64,22 +64,22 @@
                 "ico": {
                     "type":"string",
                     "description": "Ico of the button",
-                    "id": "http://xblocks.ru/xb-button/attrs/xb-ico",
+                    "id": "http://xblocks.ru/xb-button/attrs/ico",
                     "required":false
                 },
                 "size": {
-                    "id": "http://xblocks.ru/xb-button/attrs/xb-size",
+                    "id": "http://xblocks.ru/xb-button/attrs/size",
                     "required":false,
                     "enum": ["s", "m", "l"]
                 },
                 "theme": {
-                    "id": "http://xblocks.ru/xb-button/attrs/xb-theme",
+                    "id": "http://xblocks.ru/xb-button/attrs/theme",
                     "required":false,
                     "enum": ["normal", "action", "dark", "pseudo"]
                 },
                 "flying": {
                     "type":"boolean",
-                    "id": "http://xblocks.ru/xb-button/attrs/xb-flying",
+                    "id": "http://xblocks.ru/xb-button/attrs/flying",
                     "required":false
                 }
             }

@@ -1,3 +1,70 @@
 {
-
+    "type":"object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Button",
+    "description": "Button params",
+    "id": "http://xblocks.ru/xb-field",
+    "required":true,
+    "properties":{
+        "attrs": {
+            "type":"object",
+            "id": "http://xblocks.ru/xb-field/attrs",
+            "required":true,
+            "properties":{
+                "class": {
+                    "type":"string",
+                    "description": "Class of the button",
+                    "id": "http://xblocks.ru/xb-field/attrs/class",
+                    "required":false
+                },
+                "disabled": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-field/attrs/disabled",
+                    "required":false
+                },
+                "multiline": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-field/attrs/multiline",
+                    "required":false
+                },
+                "id": {
+                    "type":"string",
+                    "description": "The unique identifier for a DOM",
+                    "id": "http://xblocks.ru/xb-field/attrs/id",
+                    "required":false
+                },
+                "name": {
+                    "type":"string",
+                    "description": "Name of the button",
+                    "id": "http://xblocks.ru/xb-field/attrs/name",
+                    "required":false
+                },
+                "type": {
+                    "id": "http://xblocks.ru/xb-field/attrs/type",
+                    "required":false,
+                    "enum": ["text"]
+                },
+                "size": {
+                    "id": "http://xblocks.ru/xb-field/attrs/size",
+                    "required":false,
+                    "enum": ["s", "m", "l"]
+                },
+                "theme": {
+                    "id": "http://xblocks.ru/xb-field/attrs/theme",
+                    "required":false,
+                    "enum": ["normal", "action", "dark", "pseudo"]
+                },
+                "rows": {
+                    "id": "http://xblocks.ru/xb-field/attrs/rows",
+                    "required":false,
+                    "type":"number"
+                },
+                "cols": {
+                    "id": "http://xblocks.ru/xb-field/attrs/cols",
+                    "required":false,
+                    "type":"number"
+                }
+            }
+        }
+    }
 }

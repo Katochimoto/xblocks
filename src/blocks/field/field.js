@@ -9,48 +9,97 @@
         /* borschik:include:schema.json */
     );
 
-
-    var events = {};
-
     xtag.register('xb-field', {
         lifecycle: {
             created: function() {
                 this.observer.on();
-
                 xblocks.elementUpdate(this);
 
-                events = xtag.addEvents(xblocks.rootElement(this), {
-                    'click:delegate(span.js-reset)': function() {
-                        xtag.query(this.parentNode, 'input').forEach(function(elem) {
-                            elem.setAttribute('value', '');
-                            elem.value = '';
-                        });
+                this.__lock = true;
+                this.removeAttribute('value');
+                this.__lock = false;
+
+                var that = this;
+                this.__events = xtag.addEvents(xblocks.rootElement(this), {
+                    'click': function(event) {
+                        if (that.__lock || !xblocks.isEmptyAttr(that, 'disabled')) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            return false;
+                        }
+
+                        if (xtag.hasClass(event.target, 'js-reset')) {
+                            that.__lock = true;
+                            xtag.query(this, 'input,textarea').forEach(function(elem) {
+                                elem.value = '';
+                            });
+                            that.__lock = false;
+                        }
+
+                        return true;
                     }
+
+                    /*'keydown:delegate(input,textarea)': function() {
+                        if (that.__lock || !xblocks.isEmptyAttr(that, 'disabled')) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            return false;
+                        }
+
+                        that.__lock = true;
+                        that.setAttribute('value', this.value);
+                        that.value = this.value;
+                        that.__lock = false;
+                        return true;
+                    },
+
+                    'keyup:delegate(input,textarea)': function() {
+                        if (that.__lock || !xblocks.isEmptyAttr(that, 'disabled')) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            return false;
+                        }
+
+                        that.__lock = true;
+                        that.setAttribute('value', this.value);
+                        that.value = this.value;
+                        that.__lock = false;
+                        return true;
+                    }*/
                 });
             },
-            inserted: function() {
-            },
+
+            inserted: function() {},
+
             removed: function() {
                 this.observer.remove();
-                xtag.removeEvents(events);
+                xtag.removeEvents(xblocks.rootElement(this), this.__events);
+                delete this.__events;
             },
+
             attributeChanged: function() {
+                if (this.__lock) {
+                    return;
+                }
+
+                xblocks.log('attributeChanged', this);
                 xblocks.elementUpdate(this);
             }
         },
 
         accessors: {
-            /*schema: {
+            schema: {
                 get: function() {
                     return SCHEMA_REL;
                 }
             },
-             */
+
             defaultAttrs: {
                 get: function() {
                     return {
                         'type': 'text',
-                        'size': 'm'
+                        'size': 'm',
+                        'value': this.value
                     };
                 }
             },
@@ -64,16 +113,27 @@
             value: {
                 get: function() {
                     var value;
-                    xtag.query(this, 'input').forEach(function(elem) {
-                        value = elem.value;
-                    });
+                    var root = xblocks.rootElement(this);
+
+                    if (root) {
+                        xtag.query(root, 'input,textarea').forEach(function(elem) {
+                            value = elem.value;
+                        });
+                    }
 
                     return value;
                 },
                 set: function(value) {
-                    xtag.query(this, 'input').forEach(function(elem) {
-                        elem.value = value;
-                    });
+                    this.__lock = true;
+                    var root = xblocks.rootElement(this);
+
+                    if (root) {
+                        xtag.query(root, 'input,textarea').forEach(function(elem) {
+                            elem.value = value;
+                        });
+                    }
+
+                    this.__lock = false;
                 }
             },
 
@@ -107,18 +167,6 @@
                         }
                     };
                 }
-            }
-        },
-
-        events: {
-            click: function(event) {
-                if (this.hasAttribute('disabled')) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    return false;
-                }
-
-                return true;
             }
         },
 

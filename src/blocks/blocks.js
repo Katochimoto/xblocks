@@ -16,6 +16,13 @@
     namespace.xblocks = xblocks;
 
 
+    xblocks.log = function() {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift('[xblocks]');
+        console.log.apply(console, args);
+    };
+
+
     var __options = {
         inlineStyle: Modernizr.stylescoped || Modernizr.createshadowroot
     };
@@ -33,6 +40,20 @@
         }
 
         return undefined;
+    };
+
+
+    xblocks.isEmptyAttr = function(element, attrName) {
+        if (element.hasAttribute(attrName)) {
+            var value = element.getAttribute(attrName);
+            if (!value || value === 'false') {
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
     };
 
 
@@ -93,6 +114,8 @@
 
 
     xblocks.elementUpdate = function(element) {
+        xblocks.log('elementUpdate', element);
+
         element.observer.off();
 
         var isInlineStyle = element.styleSource && xblocks.option('inlineStyle');
@@ -137,18 +160,16 @@
 
         var root;
         if (Modernizr.createshadowroot) {
-            root = element.shadowRoot || element.createShadowRoot();
-            root.resetStyleInheritance = !isInlineStyle;
-            root.applyAuthorStyles = !isInlineStyle;
+            root = element.shadowRoot;
+            if (!root) {
+                root = element.createShadowRoot();
+                root.resetStyleInheritance = !isInlineStyle;
+                root.applyAuthorStyles = !isInlineStyle;
+            }
 
         } else {
             root = element;
         }
-
-        //var child;
-        //while (child = root.firstChild) {
-        //    root.removeChild(child);
-        //}
 
         xtag.innerHTML(root, '');
         root.appendChild(template.cloneNode(true));
