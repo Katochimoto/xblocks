@@ -51,7 +51,8 @@ xb-field:unresolved {
 }
 
 .xb-field_complex-left,
-.xb-field_complex__left {
+.xb-field_complex__left,
+.xb-field_complex__label {
   position: relative;
   z-index: 9;
   float: left;
@@ -326,6 +327,26 @@ textarea.xb-field_complex__controller {
   margin: -5px -5px -5px 0;
   padding: 5px 5px 5px 5px;
   height: auto;
+}
+
+.xb-field_complex__label {
+  margin: -5px 0 -5px -5px;
+  padding: 5px 5px 5px 5px;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  margin-right: 10px;
+  font-size: 16px;
+  background: -webkit-gradient(linear, top left, bottom left, from(rgba(255,225,120,0.1)), to(rgba(0,0,0,0.02)));
+  background: -webkit-linear-gradient(rgba(255,225,120,0.1), rgba(0,0,0,0.02));
+  background: linear-gradient(rgba(255,225,120,0.1), rgba(0,0,0,0.02));
+  height: auto;
+  margin-left: -10px;
+}
+
+.xb-field_complex__label:hover {
+  color: #d00;
 }.xb-button_theme_normal,
 .xb-button_theme_action,
 .xb-button_theme_dark,

@@ -63,6 +63,21 @@
                     "id": "http://xblocks.ru/xb-field/attrs/cols",
                     "required":false,
                     "type": ["string", "number"]
+                },
+                "label": {
+                    "id": "http://xblocks.ru/xb-field/attrs/label",
+                    "required":false,
+                    "type": "string"
+                },
+                "label-target": {
+                    "id": "http://xblocks.ru/xb-field/attrs/label-target",
+                    "required":false,
+                    "enum": ["_blank", "_parent", "_self", "_top"]
+                },
+                "label-href": {
+                    "id": "http://xblocks.ru/xb-field/attrs/label-href",
+                    "required":false,
+                    "type": "string"
                 }
             }
         }

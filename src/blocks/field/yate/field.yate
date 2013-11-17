@@ -17,7 +17,7 @@ match / xb-field {
 </xb-field>
 }
 
-match /[.attrs.postfix || .attrs.prefix || .attrs.reset] template {
+match /[.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label] template {
 controllerAttrs = [
     'name'
     'disabled'
@@ -25,6 +25,20 @@ controllerAttrs = [
 
 <label class="xb-field_complex">
     apply .attrs.* block-attrs
+
+    if (.attrs.label) {
+        <a class="xb-field_complex__label" href="#">
+            if (.attrs.label-href) {
+                @href = "{.attrs.label-href}"
+            }
+
+            if (.attrs.label-target) {
+                @target = "{.attrs.label-target}"
+            }
+
+            .attrs.label
+        </a>
+    }
 
     if (.attrs.prefix) {
         <span class="xb-field_complex__left">
@@ -64,7 +78,7 @@ controllerAttrs = [
 </label>
 }
 
-match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset)] template {
+match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label)] template {
 controllerAttrs = [
     'name'
     'disabled'
