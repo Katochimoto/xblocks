@@ -22,8 +22,8 @@ var content = [
     'rem = rem_px;',
     '@import "' + CURDIR + '/node_modules/stylobate-islands";',
     'set-skin-namespace(\'islands\');',
-    '@import "' + CURDIR + '/src/_colors.styl";',
-    '@import "' + CURDIR + '/src/_layout.styl";',
+    '@import "' + CURDIR + '/src/lib/styl/_colors.styl";',
+    '@import "' + CURDIR + '/src/lib/styl/_layout.styl";',
     '@import "' + args.input + '";'
 ].join('\n');
 

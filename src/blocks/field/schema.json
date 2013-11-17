@@ -42,7 +42,7 @@
                 "type": {
                     "id": "http://xblocks.ru/xb-field/attrs/type",
                     "required":false,
-                    "enum": ["text"]
+                    "enum": ["text", "number", "date", "datetime", "email", "month", "range", "search", "tel", "time", "url", "week", "color"]
                 },
                 "size": {
                     "id": "http://xblocks.ru/xb-field/attrs/size",
@@ -76,6 +76,11 @@
                 },
                 "label-href": {
                     "id": "http://xblocks.ru/xb-field/attrs/label-href",
+                    "required":false,
+                    "type": "string"
+                },
+                "placeholder": {
+                    "id": "http://xblocks.ru/xb-field/attrs/placeholder",
                     "required":false,
                     "type": "string"
                 }

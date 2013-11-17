@@ -56,7 +56,7 @@
                 delete this.__controller;
             },
 
-            attributeChanged: function() {
+            attributeChanged: function(attrName, oldValue, newValue) {
                 if (this.__lock) {
                     xblocks.log('attributeChanged', 'lock', arguments);
                     return;

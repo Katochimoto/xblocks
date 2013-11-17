@@ -63,8 +63,8 @@ lib/freeze.json: $(CSS) npm
 
 ### JS #############################################
 
-lib/xblocks.js: src/xblocks.js lib/freeze.json $(JS) npm
-	$(NPM_BIN)/borschik --input=src/xblocks.js --minimize=no --output=$@
+lib/xblocks.js: src/index.js lib/freeze.json $(JS) npm
+	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=$@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 

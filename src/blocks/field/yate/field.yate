@@ -21,6 +21,7 @@ match /[.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label] templat
 controllerAttrs = [
     'name'
     'disabled'
+    'placeholder'
 ]
 
 <label class="xb-field_complex">
@@ -65,7 +66,6 @@ controllerAttrs = [
         } else {
             <input class="xb-field_complex__controller" type="text">
                 apply .attrs.* xb-core-attrs (xb-concat-array(controllerAttrs, [
-                    'type'
                     'value'
                 ]))
             </input>
@@ -79,6 +79,7 @@ match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label)] temp
 controllerAttrs = [
     'name'
     'disabled'
+    'placeholder'
 ]
 if (.attrs.multiline) {
     <textarea class="xb-field_simple">
@@ -93,7 +94,6 @@ if (.attrs.multiline) {
     <input class="xb-field_simple" type="text">
         apply .attrs.* block-attrs
         apply .attrs.* xb-core-attrs (xb-concat-array(controllerAttrs, [
-            'type'
             'value'
         ]))
     </input>

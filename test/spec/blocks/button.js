@@ -11,6 +11,13 @@ describe('button', function() {
         var data = {
             content: 'nop',
             attrs: {
+                name: 'te"st'
+            }
+        };
+
+        var dataInput = {
+            content: 'nop',
+            attrs: {
                 name: 'te"st',
                 'size': 'm',
                 //'theme': 'pseudo',
@@ -23,7 +30,8 @@ describe('button', function() {
                 //'multiline': true,
                 'label': 'qwe',
                 'label-href': 'http://ya.ru',
-                'label-target': '_blank'
+                'label-target': '_blank',
+                'type': 'number'
                 //'postfix': 'qwe'
             }
         };
@@ -34,7 +42,7 @@ describe('button', function() {
         document.getElementById('mocha').appendChild(div.firstChild);
 
         div = document.createElement('div');
-        div.innerHTML = yr.run('xb-field', data, 'xb-field');
+        div.innerHTML = yr.run('xb-field', dataInput, 'xb-field');
 
         document.getElementById('mocha').appendChild(div.firstChild);
 
