@@ -1,6 +1,8 @@
 /* global escape  */
 
 (function(yr) {
+    'use strict';
+
     var ext = yr.externals;
 
     ext['xb-escape'] = function(value) {
