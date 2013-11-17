@@ -28,13 +28,10 @@ controllerAttrs = [
 
     if (.attrs.label) {
         <a class="xb-field_complex__label" href="#">
-            if (.attrs.label-href) {
-                @href = "{.attrs.label-href}"
-            }
-
-            if (.attrs.label-target) {
-                @target = "{.attrs.label-target}"
-            }
+            apply .attrs.* xb-core-attrs ([
+                'label-href'
+                'label-target'
+            ], false(), 'label-')
 
             .attrs.label
         </a>

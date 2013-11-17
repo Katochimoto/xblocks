@@ -56,6 +56,14 @@
         return ret;
     };
 
+    yr.externals['xb-prefix-rm'] = function(value, prefix) {
+        if (!prefix) {
+            return value;
+        }
+
+        return value.replace(prefix, '');
+    };
+
 })(yr);
 
 /* borschik:include:../node_modules/borschik/js/borschik.js */

@@ -17,11 +17,13 @@ describe('button', function() {
                 //'xb-checked': true,
                 //'xb-flying': true,
                 //'disabled': true,
-                'reset': true
+                'reset': true,
                 //'prefix': 'qwe',
                 //'value': 'asd'
                 //'multiline': true,
-                //'label': 'qwe'
+                'label': 'qwe',
+                'label-href': 'http://ya.ru',
+                'label-target': '_blank'
                 //'xb-postfix': 'qwe'
             }
         };

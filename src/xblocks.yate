@@ -5,40 +5,42 @@ external boolean xb-modernizr(scalar)
 external boolean xb-inarray(scalar, array)
 external boolean xb-empty-array(array)
 external array xb-concat-array(array, array)
+external scalar xb-prefix-rm(scalar, scalar)
 
-match .* xb-core-attrs (array contains, ignore) {
+match .* xb-core-attrs (array contains, ignore, prefix) {
     if (xb-empty-array(contains)) {
-        apply . xb-core-attrs__common
+        apply . xb-core-attrs__common (prefix)
 
     } else if (ignore) {
-        apply .[!xb-inarray(name(), contains)] xb-core-attrs__common
+        apply .[!xb-inarray(name(), contains)] xb-core-attrs__common (prefix)
 
     } else {
-        apply .[xb-inarray(name(), contains)] xb-core-attrs__common
+        apply .[xb-inarray(name(), contains)] xb-core-attrs__common (prefix)
     }
 }
 
-match .* xb-core-attrs__common {
+match .* xb-core-attrs__common (prefix) {
     value = scalar(.)
+    name = xb-prefix-rm(name(), prefix)
     boolAttrs = [
         'disabled'
         'multiple'
         'checked'
     ]
 
-    if (xb-inarray(name(), boolAttrs)) {
+    if (xb-inarray(name, boolAttrs)) {
         if (value == true()) {
-            @{name()} = name()
+            @{name} = "{name}"
         }
 
-    } else if (name() == 'class') {
+    } else if (name == 'class') {
         @class += (
             ' '
             value
         )
 
     } else {
-        @{name()} = value
+        @{name} = value
     }
 }
 
