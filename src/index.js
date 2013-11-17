@@ -7,7 +7,11 @@
 /* borschik:include:lib/modernizr.js */
 /* borschik:include:lib/modernizr.tests.js */
 /* borschik:include:lib/yate.ext.js */
+
 /* borschik:include:lib/xblocks.js */
+/* borschik:include:lib/xblocks/attrs.js */
+/* borschik:include:lib/xblocks/element.js */
+/* borschik:include:lib/xblocks/types/number.js */
 
 borschik.addLinks(/* borschik:include:../lib/freeze.json */);
 
