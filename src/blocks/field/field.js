@@ -41,34 +41,6 @@
 
                         return true;
                     }
-
-                    /*'keydown:delegate(input,textarea)': function() {
-                        if (that.__lock || !xblocks.isEmptyAttr(that, 'disabled')) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            return false;
-                        }
-
-                        that.__lock = true;
-                        that.setAttribute('value', this.value);
-                        that.value = this.value;
-                        that.__lock = false;
-                        return true;
-                    },
-
-                    'keyup:delegate(input,textarea)': function() {
-                        if (that.__lock || !xblocks.isEmptyAttr(that, 'disabled')) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            return false;
-                        }
-
-                        that.__lock = true;
-                        that.setAttribute('value', this.value);
-                        that.value = this.value;
-                        that.__lock = false;
-                        return true;
-                    }*/
                 });
             },
 

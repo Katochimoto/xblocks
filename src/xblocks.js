@@ -5,10 +5,7 @@
 
 (function(Modernizr) {
 
-    Modernizr.addTest('createshadowroot', function() {
-        return !!document.createElement('div').createShadowRoot;
-    });
-
+    Modernizr.addTest('createshadowroot', 'createShadowRoot' in document.createElement('div'));
     Modernizr.addTest('stylescoped', 'scoped' in document.createElement('style'));
 
 })(Modernizr);

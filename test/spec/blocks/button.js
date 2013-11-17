@@ -13,9 +13,9 @@ describe('button', function() {
             attrs: {
                 name: 'te"st',
                 'size': 'm',
-                //'xb-theme': 'pseudo',
-                //'xb-checked': true,
-                //'xb-flying': true,
+                //'theme': 'pseudo',
+                //'checked': true,
+                //'flying': true,
                 //'disabled': true,
                 'reset': true,
                 //'prefix': 'qwe',
@@ -24,7 +24,7 @@ describe('button', function() {
                 'label': 'qwe',
                 'label-href': 'http://ya.ru',
                 'label-target': '_blank'
-                //'xb-postfix': 'qwe'
+                //'postfix': 'qwe'
             }
         };
 
