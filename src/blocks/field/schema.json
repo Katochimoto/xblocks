@@ -83,6 +83,11 @@
                     "id": "http://xblocks.ru/xb-field/attrs/placeholder",
                     "required":false,
                     "type": "string"
+                },
+                "required": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-field/attrs/required",
+                    "required":false
                 }
             }
         }

@@ -136,6 +136,10 @@
 
         methods: {
 
+            validate: function() {
+
+            }
+
         }
     });
 

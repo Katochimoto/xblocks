@@ -26,6 +26,7 @@ match .* xb-core-attrs__common (prefix) {
         'disabled'
         'multiple'
         'checked'
+        'required'
     ]
 
     if (xb-inarray(name, boolAttrs)) {
