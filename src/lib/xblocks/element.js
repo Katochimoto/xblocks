@@ -20,7 +20,7 @@
         this.observeStart();
 
         this.on('inserted', function(/*event*/) {
-            xblocks.log('[field]', 'inserted', this);
+            xblocks.log('XBElement->inserted', this);
         });
 
         this.on('removed', function(/*event*/) {
@@ -33,11 +33,16 @@
 
         this.on('attributeChanged', function(/*attrName, oldValue, newValue*/) {
             if (this.__lock) {
-                xblocks.log('[field]', 'attributeChanged', 'lock', arguments);
+                xblocks.log('XBElement->attributeChanged', 'lock', arguments);
                 return;
             }
 
-            xblocks.log('[field]', 'attributeChanged', this, arguments);
+            xblocks.log('XBElement->attributeChanged', this, arguments);
+            this.update();
+        });
+
+        this.on('mutation', function() {
+            xblocks.log('XBElement->mutation', this);
             this.update();
         });
     }
@@ -68,8 +73,7 @@
         if (!Modernizr.createshadowroot && !this._observer) {
             var that = this;
             this._observer = new MutationObserver(function() {
-                xblocks.log('XBElement->mutation', that);
-                that.update();
+                that.trigger('mutation');
             });
         }
 
