@@ -114,14 +114,18 @@
 
 
     xblocks.elementUpdate = function(element, onupdate) {
-        xblocks.log('elementUpdate', element);
+        xblocks.element.update(element, onupdate);
+        /*xblocks.log('elementUpdate', element);
 
         element.observer.off();
 
         var isInlineStyle = element.styleSource && xblocks.option('inlineStyle');
         var tagName = element.tagName.toLowerCase();
+        var attrs = xblocks.attrs2obj(element, element.defaultAttrs || {});
+
+
         var data = {
-            attrs: xblocks.attrs2obj(element, element.defaultAttrs || {}),
+            attrs: attrs,
             content: null
         };
 
@@ -131,7 +135,7 @@
 
         if (tv4 && element.schema) {
             var schema = tv4.getSchema(element.schema);
-            var check = tv4.validateResult(data, schema);
+            var check = tv4.validateResult(xblocks.attrs.toSchemaObject(element), schema);
 
             if (!check.valid) {
                 throw check.error;
@@ -178,7 +182,7 @@
 
         if (onupdate) {
             onupdate(element);
-        }
+        }*/
     };
 
 

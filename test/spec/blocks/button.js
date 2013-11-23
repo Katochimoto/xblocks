@@ -31,15 +31,18 @@ describe('button', function() {
                 'label': 'qwe',
                 'label-href': 'http://ya.ru',
                 'label-target': '_blank',
+                'label-ico-qwe': '_blank',
+                'label-ico-asd': '_blank',
                 'type': 'number'
                 //'postfix': 'qwe'
             }
         };
 
-        var div = document.createElement('div');
-        div.innerHTML = yr.run('xb-button', data, 'xb-button');
+        var div;
+        //div = document.createElement('div');
+        //div.innerHTML = yr.run('xb-button', data, 'xb-button');
 
-        document.getElementById('mocha').appendChild(div.firstChild);
+        //document.getElementById('mocha').appendChild(div.firstChild);
 
         div = document.createElement('div');
         div.innerHTML = yr.run('xb-field', dataInput, 'xb-field');

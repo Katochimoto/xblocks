@@ -29,12 +29,8 @@ controllerAttrs = [
 
     if (.attrs.label) {
         <a class="xb-field_complex__label" href="#">
-            apply .attrs.* xb-core-attrs ([
-                'label-href'
-                'label-target'
-            ], false(), 'label-')
-
-            .attrs.label
+            apply .attrs.label.attrs.* xb-core-attrs
+            .attrs.label.content
         </a>
     }
 
@@ -81,6 +77,8 @@ controllerAttrs = [
     'disabled'
     'placeholder'
 ]
+
+
 if (.attrs.multiline) {
     <textarea class="xb-field_simple">
         apply .attrs.* block-attrs

@@ -4,13 +4,17 @@ export NPM_BIN
 
 MAKEFLAGS+=-j 4
 
+#.SECONDEXPANSION:
 STYL = $(shell find src -type f -regex '^[^_]*\.styl')
 CSS = $(patsubst %.styl, %.css, $(STYL))
 YATE = $(shell find src/blocks -type f -regex '^[^_]*\.yate')
 YATE_JS = $(patsubst %.yate, %.yate.js, $(YATE))
 JS = $(shell find src -type f -regex '^[^_]*\.js')
 
-all: npm src/xblocks.yate.js lib/xblocks.yate.js lib/xblocks.css lib/xblocks.js lib/freeze.json $(YATE_JS) $(CSS)
+.PHONY: all clean test
+
+
+all: node_modules src/xblocks.yate.js lib/xblocks.yate.js lib/xblocks.css lib/xblocks.js lib/freeze.json $(YATE_JS) $(CSS)
 
 clean:
 	rm -f lib/xblocks.js
@@ -26,12 +30,14 @@ clean:
 
 ### CSS ############################################
 
-$(CSS): %.css: %.styl npm
+#$(CSS): dir=-C $*
+$(CSS): node_modules
+$(CSS): %.css: %.styl
 	node bin/styl.js -input=$< -output=$@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
-lib/xblocks.css: $(CSS) npm
+lib/xblocks.css: $(CSS) node_modules
 	find src -type f -regex '^[^_]*\.css' | sort -r | xargs cat > $@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
@@ -40,15 +46,15 @@ lib/xblocks.css: $(CSS) npm
 
 ### YATE ###########################################
 
-src/xblocks.yate.js: src/xblocks.yate npm
+src/xblocks.yate.js: src/xblocks.yate node_modules
 	$(NPM_BIN)/yate --output=src/xblocks.yate.js src/xblocks.yate
 
 
-$(YATE_JS): %.yate.js: %.yate npm src/xblocks.yate.js
+$(YATE_JS): %.yate.js: %.yate node_modules src/xblocks.yate.js
 	$(NPM_BIN)/yate --import=src/xblocks.yate.obj --output=$@ $<
 
 
-lib/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) npm
+lib/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) node_modules
 	find src -type f -name '*.yate.js' | sort -r | xargs cat > $@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
@@ -56,20 +62,21 @@ lib/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) npm
 
 ### FREEZE #########################################
 
-lib/freeze.json: $(CSS) npm
+lib/freeze.json: $(CSS) node_modules
 	$(NPM_BIN)/borschik --tech=json --input=freeze.json --output=$@
 
 
 
 ### JS #############################################
 
-lib/xblocks.js: src/index.js lib/freeze.json $(JS) npm
+lib/xblocks.js: src/index.js lib/freeze.json $(JS) node_modules
 	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=$@
 	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
-npm:
+node_modules: package.json
 	npm install
+	touch node_modules
 
 
 
@@ -84,5 +91,5 @@ test:
 	./node_modules/.bin/jscs .
 #	./node_modules/.bin/mocha --reporter dot $(TESTS)
 
-.PHONY: all clean test
+
 

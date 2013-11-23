@@ -4,6 +4,8 @@
 /* borschik:include:../node_modules/tv4/tv4.js */
 
 
+/* borschik:include:lib/array.js */
+/* borschik:include:lib/object.js */
 /* borschik:include:lib/modernizr.js */
 /* borschik:include:lib/modernizr.tests.js */
 /* borschik:include:lib/yate.ext.js */
@@ -15,6 +17,7 @@
 
 borschik.addLinks(/* borschik:include:../lib/freeze.json */);
 
+/* borschik:include:blocks/link/link.js */
 /* borschik:include:blocks/button/button.js */
 /* borschik:include:blocks/field/field.js */
 

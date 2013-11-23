@@ -1,8 +1,8 @@
 {
     "type":"object",
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "Button",
-    "description": "Button params",
+    "title": "Field",
+    "description": "Field params",
     "id": "http://xblocks.ru/xb-field",
     "required":true,
     "properties":{
@@ -13,7 +13,7 @@
             "properties":{
                 "class": {
                     "type":"string",
-                    "description": "Class of the button",
+                    "description": "Class of the field",
                     "id": "http://xblocks.ru/xb-field/attrs/class",
                     "required":false
                 },
@@ -35,7 +35,7 @@
                 },
                 "name": {
                     "type":"string",
-                    "description": "Name of the button",
+                    "description": "Name of the field",
                     "id": "http://xblocks.ru/xb-field/attrs/name",
                     "required":false
                 },
@@ -64,21 +64,6 @@
                     "required":false,
                     "type": ["string", "number"]
                 },
-                "label": {
-                    "id": "http://xblocks.ru/xb-field/attrs/label",
-                    "required":false,
-                    "type": "string"
-                },
-                "label-target": {
-                    "id": "http://xblocks.ru/xb-field/attrs/label-target",
-                    "required":false,
-                    "enum": ["_blank", "_parent", "_self", "_top"]
-                },
-                "label-href": {
-                    "id": "http://xblocks.ru/xb-field/attrs/label-href",
-                    "required":false,
-                    "type": "string"
-                },
                 "placeholder": {
                     "id": "http://xblocks.ru/xb-field/attrs/placeholder",
                     "required":false,
@@ -88,6 +73,17 @@
                     "type":"boolean",
                     "id": "http://xblocks.ru/xb-field/attrs/required",
                     "required":false
+                },
+                "value": {
+                    "id": "http://xblocks.ru/xb-field/attrs/value",
+                    "required":false,
+                    "type": "string"
+                },
+
+
+
+                "label": {
+                    "$ref": "http://xblocks.ru/xb-link"
                 }
             }
         }

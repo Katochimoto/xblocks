@@ -3,7 +3,9 @@
 
     xblocks = xblocks || {};
     var attrs = xblocks.attrs = {};
-    var ATTRS_SEP = '-';
+
+    attrs.SEPARATOR = '-';
+    attrs.ATTR_COMPLEX_VALUE = '_';
 
     /**
      * @param {Object} [obj]
@@ -27,7 +29,7 @@
         this[name] = value;
     };
 
-    AttrsPlain.prototype.empty = function(name) {
+    AttrsPlain.prototype.isEmpty = function(name) {
         return !this[name];
     };
 
@@ -62,10 +64,15 @@
         AttrsComplex.superclass.constructor.apply(this, arguments);
     };
 
-    extend(AttrsComplex, AttrsPlain);
+    Object.extend(AttrsComplex, AttrsPlain);
 
-    AttrsComplex.prototype.value = function() {
-        return this._;
+
+    AttrsComplex.prototype.getValue = function() {
+        return this[attrs.ATTR_COMPLEX_VALUE];
+    };
+
+    AttrsComplex.prototype.setValue = function(value) {
+        this[attrs.ATTR_COMPLEX_VALUE] = value;
     };
 
     AttrsComplex.prototype.get = function(name) {
@@ -76,8 +83,8 @@
         ns(this, name, value);
     };
 
-    AttrsComplex.prototype.empty = function(name) {
-        return isEmpty(fns(this, name));
+    AttrsComplex.prototype.isEmpty = function(name) {
+        return Object.isEmpty(fns(this, name));
     };
 
     /**
@@ -91,17 +98,17 @@
      * @returns {AttrsPlain}
      */
     AttrsComplex.prototype.toPlain = function() {
-        var obj = new AttrsPlain();
+        var plainObject = new AttrsPlain();
 
         function z(ns, o) {
+            if ((o instanceof AttrsComplex) && ns.length) {
+                plainObject[ns.join(attrs.SEPARATOR)] = o.getValue();
+            }
+
             for (var key in o) {
-                if (o.hasOwnProperty(key)) {
-                    if (o.value()) {
-                        obj[ns.join(ATTRS_SEP)] = o.value();
-                    } else {
-                        ns.push(key);
-                        z(ns, o[key]);
-                    }
+                if (o.hasOwnProperty(key) && (o[key] instanceof AttrsComplex)) {
+                    ns.push(key);
+                    z(ns, o[key]);
                 }
             }
 
@@ -110,41 +117,38 @@
 
         z([], this);
 
-        return obj;
+        return plainObject;
     };
 
-
     /**
-     *
-     * @param {Object} child
-     * @param {Object} parent
+     * @returns {Object}
      */
-    function extend(child, parent) {
-        var f = function() {};
-        f.prototype = parent.prototype;
-        child.prototype = new f();
-        child.prototype.constructor = child;
-        child.superclass = parent.prototype;
-    }
+    AttrsComplex.prototype.toSchema = function() {
+        var schema = {};
 
-    /**
-     *
-     * @param {Object} obj
-     * @returns {Boolean}
-     */
-    function isEmpty(obj) {
-        if (typeof obj !== 'object') {
-            return true;
-        }
+        function z(schema, complex) {
+            schema.content = complex.getValue();
+            schema.attrs = {};
 
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                return false;
+            for (var key in complex) {
+                if (complex.hasOwnProperty(key) && (complex[key] instanceof AttrsComplex)) {
+                    if (Object.isEmpty(complex[key], [attrs.ATTR_COMPLEX_VALUE])) {
+                        schema.attrs[key] = complex[key].getValue();
+
+                    } else {
+                        schema.attrs[key] = {};
+                        z(schema.attrs[key], complex[key]);
+                    }
+                }
             }
         }
 
-        return true;
-    }
+        z(schema, this);
+
+        return JSON.parse(JSON.stringify(schema));
+    };
+
+
 
     /**
      *
@@ -154,26 +158,28 @@
      * @returns {Object}
      */
     function ns(target, name, value) {
-        var _ns = target;
-        var _name = name.split(ATTRS_SEP);
+        var namespace = target;
+        var sname = name.split(attrs.SEPARATOR);
 
-        for (var i = 0, l = _name.length; i < l; i++) {
-            var part = _name[i];
-            var type = typeof(_ns[part]);
+        for (var i = 0, l = sname.length; i < l; i++) {
+            var part = sname[i];
+            var type = typeof(namespace[part]);
             if (type === 'undefined') {
-                _ns = _ns[part] = target[part] || new AttrsComplex();
+                namespace = namespace[part] = target[part] || new AttrsComplex();
             } else if (type !== 'object') {
-                _ns = _ns[part] = new AttrsComplex({ _: _ns[part] });
+                var obj = {};
+                obj[attrs.ATTR_COMPLEX_VALUE] = namespace[part];
+                namespace = namespace[part] = new AttrsComplex(obj);
             } else {
-                _ns = _ns[part];
+                namespace = namespace[part];
             }
         }
 
         if (value) {
-            _ns._ = value;
+            namespace[attrs.ATTR_COMPLEX_VALUE] = value;
         }
 
-        return _ns;
+        return namespace;
     }
 
     /**
@@ -182,39 +188,23 @@
      * @returns {*}
      */
     function fns(target, name) {
-        var _ns = target;
-        var _name = name.split(ATTRS_SEP);
+        var namespace = target;
+        var sname = name.split(attrs.SEPARATOR);
 
-        for (var i = 0, l = _name.length; i < l; i++) {
-            var part = _name[i];
-            var type = typeof(_ns[part]);
+        for (var i = 0, l = sname.length; i < l; i++) {
+            var part = sname[i];
+            var type = typeof(namespace[part]);
             if (type !== 'object') {
                 return undefined;
             } else {
-                _ns = _ns[part];
+                namespace = namespace[part];
             }
         }
 
-        return _ns;
+        return namespace;
     }
 
-    /**
-     *
-     * @param element
-     * @returns {Object}
-     */
-    attrs.toObject = function(element) {
-        var obj = new AttrsComplex();
-        var plain = attrs.toPlainObject(element);
 
-        for (var key in plain) {
-            if (plain.hasOwnProperty(key)) {
-                ns(obj, key, plain[key]);
-            }
-        }
-
-        return obj;
-    };
 
     /**
      *
@@ -240,6 +230,24 @@
         }
 
         return obj;
+    };
+
+    /**
+     *
+     * @param element
+     * @returns {Object}
+     */
+    attrs.toComplexObject = function(element) {
+        return attrs.toPlainObject(element).toComplex();
+    };
+
+    /**
+     *
+     * @param element
+     * @returns {Object}
+     */
+    attrs.toSchemaObject = function(element) {
+        return attrs.toComplexObject(element).toSchema();
     };
 
 
