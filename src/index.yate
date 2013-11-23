@@ -1,0 +1,3 @@
+include 'lib/yate/xblocks.yate'
+include 'blocks/button/yate/button.yate'
+include 'blocks/field/yate/field.yate'

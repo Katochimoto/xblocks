@@ -1,9 +1,0 @@
-xb-button,
-xb-field {
-  display: inline-block;
-}
-
-xb-button:unresolved,
-xb-field:unresolved {
-  opacity: 0;
-}
