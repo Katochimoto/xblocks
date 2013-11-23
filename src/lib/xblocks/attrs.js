@@ -21,14 +21,29 @@
         }
     };
 
+    /**
+     *
+     * @param {String} name
+     * @returns {*}
+     */
     AttrsPlain.prototype.get = function(name) {
         return this[name];
     };
 
+    /**
+     *
+     * @param {String} name
+     * @param {*} value
+     */
     AttrsPlain.prototype.set = function(name, value) {
         this[name] = value;
     };
 
+    /**
+     *
+     * @param {String} name
+     * @returns {boolean}
+     */
     AttrsPlain.prototype.isEmpty = function(name) {
         return !this[name];
     };
@@ -75,14 +90,29 @@
         this[attrs.ATTR_COMPLEX_VALUE] = value;
     };
 
+    /**
+     *
+     * @param {String} name
+     * @returns {AttrsComplex|undefined}
+     */
     AttrsComplex.prototype.get = function(name) {
         return fns(this, name);
     };
 
+    /**
+     *
+     * @param {String} name
+     * @param {*} value
+     */
     AttrsComplex.prototype.set = function(name, value) {
         ns(this, name, value);
     };
 
+    /**
+     *
+     * @param {String} name
+     * @returns {Boolean}
+     */
     AttrsComplex.prototype.isEmpty = function(name) {
         return Object.isEmpty(fns(this, name));
     };
@@ -208,8 +238,8 @@
 
     /**
      *
-     * @param element
-     * @returns {Object}
+     * @param {HTMLElement} element
+     * @returns {AttrsPlain}
      */
     attrs.toPlainObject = function(element) {
         var obj = new AttrsPlain();
@@ -234,8 +264,8 @@
 
     /**
      *
-     * @param element
-     * @returns {Object}
+     * @param {HTMLElement} element
+     * @returns {AttrsComplex}
      */
     attrs.toComplexObject = function(element) {
         return attrs.toPlainObject(element).toComplex();
@@ -243,11 +273,30 @@
 
     /**
      *
-     * @param element
+     * @param {HTMLElement} element
      * @returns {Object}
      */
     attrs.toSchemaObject = function(element) {
         return attrs.toComplexObject(element).toSchema();
+    };
+
+    /**
+     *
+     * @param {HTMLElement} element
+     * @param {String} attrName
+     * @returns {Boolean}
+     */
+    attrs.isEmpty = function(element, attrName) {
+        if (element.hasAttribute(attrName)) {
+            var value = element.getAttribute(attrName);
+            if (!value || value === 'false') {
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
     };
 
 

@@ -28,7 +28,7 @@
                 var that = this;
                 this.__events = xtag.addEvents(xblocks.rootElement(this), {
                     'click': function(event) {
-                        if (that.__lock || !xblocks.isEmptyAttr(that, 'disabled')) {
+                        if (that.__lock || !xblocks.attrs.isEmpty(that, 'disabled')) {
                             event.preventDefault();
                             event.stopPropagation();
                             return false;

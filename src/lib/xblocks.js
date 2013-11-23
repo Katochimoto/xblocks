@@ -54,50 +54,6 @@
         return undefined;
     };
 
-
-    xblocks.isEmptyAttr = function(element, attrName) {
-        if (element.hasAttribute(attrName)) {
-            var value = element.getAttribute(attrName);
-            if (!value || value === 'false') {
-                return true;
-            }
-
-            return false;
-        }
-
-        return true;
-    };
-
-
-    xblocks.attrs2obj = function(element, def) {
-        var out = {};
-        for (var i = 0, attrs = element.attributes, l = attrs.length; i < l; i++) {
-            var attr = attrs.item(i);
-            if (attr.value === 'true' || attr.value === 'false' || attr.nodeName === attr.value) {
-                if (attr.nodeName === attr.value || attr.value === 'true') {
-                    out[attr.nodeName] = true;
-
-                } else {
-                    out[attr.nodeName] = false;
-                }
-
-            } else {
-                out[attr.nodeName] = attr.value;
-            }
-        }
-
-        if (def) {
-            for (var name in def) {
-                if (!out.hasOwnProperty(name)) {
-                    out[name] = def[name];
-                }
-            }
-        }
-
-        return out;
-    };
-
-
     xblocks.rootElement = function(element) {
         if (Modernizr.createshadowroot) {
             return element.shadowRoot;
