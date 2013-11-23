@@ -4,4 +4,3 @@ node_modules
 build
 *.yate.js
 *.yate.obj
-!lib/*.yate.js

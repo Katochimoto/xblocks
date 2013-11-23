@@ -3,6 +3,6 @@
         "./": "/"
     },
     "freeze_paths": {
-        "src": "../lib/_"
+        "src": "../build/_"
     }
 }
