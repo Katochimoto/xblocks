@@ -14,10 +14,10 @@ JS = $(shell find src -type f -regex '^[^_]*\.js')
 .PHONY: all clean test
 
 
-all: node_modules build/xblocks.css build/_xblocks.css build/xblocks.yate.js
+all: node_modules build/xblocks.yate.js build/_xblocks.css build/xblocks.yate.js src/lib/yate/xblocks.yate.js $(YATE_JS)
 
 
-#src/xblocks.yate.js build/xblocks.yate.js build/xblocks.css build/xblocks.js build/freeze.json $(YATE_JS)
+#build/xblocks.js build/freeze.json
 
 clean:
 	rm -f build/xblocks.js
@@ -33,12 +33,9 @@ clean:
 
 ### CSS ############################################
 
-build/xblocks.css: node_modules
-build/xblocks.css: $(shell find src -type f -name '*\.styl')
-	node bin/styl.js -input=src/index.styl -output=$@
-
 build/_xblocks.css: node_modules
-build/_xblocks.css: build/xblocks.css
+build/_xblocks.css: $(shell find src -type f -name '*\.styl')
+	node bin/styl.js -input=src/index.styl -output=build/xblocks.css
 	$(NPM_BIN)/borschik --input=build/xblocks.css --output=build/_xblocks.css
 
 
@@ -58,22 +55,21 @@ build/_xblocks.css: build/xblocks.css
 
 ### YATE ###########################################
 
-#build/xblocks.yate.js: node_modules
-#build/xblocks.yate.js: $(shell find src -type f -name '*\.yate')
-#	$(NPM_BIN)/yate --output=build/xblocks.yate.js src/index.yate
+
+src/lib/yate/xblocks.yate.js: node_modules
+src/lib/yate/xblocks.yate.js: src/lib/yate/xblocks.yate
+	$(NPM_BIN)/yate --output=$@ src/lib/yate/xblocks.yate
+
+$(YATE_JS): node_modules
+$(YATE_JS): src/lib/yate/xblocks.yate.js
+$(YATE_JS): %.yate.js: %.yate
+	$(NPM_BIN)/yate --import=src/lib/yate/xblocks.yate.obj --output=$@ $<
 
 
-#src/xblocks.yate.js: src/xblocks.yate node_modules
-#	$(NPM_BIN)/yate --output=src/xblocks.yate.js src/xblocks.yate
-
-
-#$(YATE_JS): %.yate.js: %.yate node_modules src/xblocks.yate.js
-#	$(NPM_BIN)/yate --import=src/xblocks.yate.obj --output=$@ $<
-
-
-#build/xblocks.yate.js: src/xblocks.yate.js $(YATE_JS) node_modules
-#	find src -type f -name '*.yate.js' | sort -r | xargs cat > $@
-#	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
+build/xblocks.yate.js: node_modules
+build/xblocks.yate.js: src/lib/yate/xblocks.yate.js $(YATE_JS)
+	find src -type f -name '*.yate.js' | sort -r | xargs cat > $@
+	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
 
 
 
