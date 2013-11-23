@@ -22,6 +22,18 @@
         console.log.apply(console, args);
     };
 
+    xblocks.log.time = function(name) {
+        name = '[xblocks] ' + name;
+        console.time(name);
+        //console.profile();
+    };
+
+    xblocks.log.timeEnd = function(name) {
+        name = '[xblocks] ' + name;
+        //console.profileEnd();
+        console.timeEnd(name);
+    };
+
 
     var __options = {
         inlineStyle: Modernizr.stylescoped || Modernizr.createshadowroot

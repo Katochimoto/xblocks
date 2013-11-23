@@ -19,7 +19,8 @@
     xtag.register('xb-field', {
         lifecycle: {
             created: function() {
-                xblocks.log('created', this);
+                xblocks.log('[field]', 'created', this);
+                xblocks.log.time('[field] created');
 
                 this.observer.on();
                 xblocks.elementUpdate(this, onupdate);
@@ -42,14 +43,16 @@
                         return true;
                     }
                 });
+
+                xblocks.log.timeEnd('[field] created');
             },
 
             inserted: function() {
-                xblocks.log('inserted', this);
+                xblocks.log('[field]', 'inserted', this);
             },
 
             removed: function() {
-                xblocks.log('removed', this);
+                xblocks.log('[field]', 'removed', this);
                 this.observer.remove();
                 xtag.removeEvents(xblocks.rootElement(this), this.__events);
                 delete this.__events;
@@ -58,11 +61,11 @@
 
             attributeChanged: function(attrName, oldValue, newValue) {
                 if (this.__lock) {
-                    xblocks.log('attributeChanged', 'lock', arguments);
+                    xblocks.log('[field]', 'attributeChanged', 'lock', arguments);
                     return;
                 }
 
-                xblocks.log('attributeChanged', this, arguments);
+                xblocks.log('[field]', 'attributeChanged', this, arguments);
                 xblocks.elementUpdate(this, onupdate);
             }
         },
@@ -107,7 +110,7 @@
 
                     if (!Modernizr.createshadowroot) {
                         observer = that.__observer || (that.__observer = new MutationObserver(function() {
-                            xblocks.log('mutation', that);
+                            xblocks.log('[field]', 'mutation', that);
                             xblocks.elementUpdate(that, onupdate);
                         }));
                     }

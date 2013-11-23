@@ -10,11 +10,12 @@ MAKEFLAGS+=-j 4
 YATE = $(shell find src/blocks -type f -regex '^[^_]*\.yate')
 YATE_JS = $(patsubst %.yate, %.yate.js, $(YATE))
 JS = $(shell find src -type f -regex '^[^_]*\.js')
+JSON = $(shell find src -type f -name '*\.json')
 
 .PHONY: all clean test
 
 
-all: node_modules build/xblocks.yate.js build/_xblocks.css build/xblocks.yate.js src/lib/yate/xblocks.yate.js $(YATE_JS)
+all: node_modules build/_xblocks.js build/xblocks.yate.js build/_xblocks.css build/xblocks.yate.js src/lib/yate/xblocks.yate.js $(YATE_JS)
 
 
 #build/xblocks.js build/freeze.json
@@ -82,9 +83,10 @@ build/xblocks.yate.js: src/lib/yate/xblocks.yate.js $(YATE_JS)
 
 ### JS #############################################
 
-#build/xblocks.js: src/index.js build/freeze.json $(JS) node_modules
-#	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=$@
-#	$(NPM_BIN)/borschik --input=$@ --output=$(dir $@)_$(notdir $@)
+build/_xblocks.js: node_modules
+build/_xblocks.js: src/index.js $(JS) $(JSON)
+	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=build/xblocks.js
+	$(NPM_BIN)/borschik --input=build/xblocks.js --output=build/_xblocks.js
 
 
 node_modules: package.json

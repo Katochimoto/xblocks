@@ -40,11 +40,7 @@
                     "id": "http://xblocks.ru/xb-link/attrs/name",
                     "required":false
                 },
-                "target": {
-                    "id": "http://xblocks.ru/xb-link/attrs/target",
-                    "enum": ["_blank", "_parent", "_self", "_top"],
-                    "required":false
-                }
+                "target": { "$ref": "http://xblocks.ru/xb-attrs-target" }
             }
         },
         "content": {

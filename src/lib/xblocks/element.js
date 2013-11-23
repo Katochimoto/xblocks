@@ -6,6 +6,8 @@
 
 
     el.html = function(element, html) {
+        xblocks.log('element->html', element, html);
+
         if (typeof html !== 'undefined') {
             element.innerHTML = html;
 
@@ -23,7 +25,9 @@
     };
 
     el.update = function(element, onupdate) {
-        xblocks.log('element update', element);
+        xblocks.log('element->update', element);
+        xblocks.log.time('element->update');
+
         element.observer && element.observer.off();
 
         var module = element.tagName.toLowerCase();
@@ -66,6 +70,7 @@
         root.appendChild(template.cloneNode(true));
 
         element.observer && element.observer.on();
+        xblocks.log.timeEnd('element->update');
 
         if (onupdate) {
             onupdate(element);

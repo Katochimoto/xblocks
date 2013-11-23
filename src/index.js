@@ -4,6 +4,13 @@
 /* borschik:include:../node_modules/tv4/tv4.js */
 
 
+/* borschik:include:lib/xblocks/attrs/target.js */
+/* borschik:include:lib/xblocks/attrs/theme.js */
+/* borschik:include:lib/xblocks/attrs/size.js */
+
+
+
+
 /* borschik:include:lib/array.js */
 /* borschik:include:lib/object.js */
 /* borschik:include:lib/modernizr.js */
@@ -15,9 +22,10 @@
 /* borschik:include:lib/xblocks/element.js */
 /* borschik:include:lib/xblocks/types/number.js */
 
-borschik.addLinks(/* borschik:include:../lib/freeze.json */);
+//borschik.addLinks();
 
 /* borschik:include:blocks/link/link.js */
+/* borschik:include:blocks/ico/ico.js */
 /* borschik:include:blocks/button/button.js */
 /* borschik:include:blocks/field/field.js */
 

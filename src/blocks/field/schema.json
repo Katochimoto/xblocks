@@ -44,16 +44,8 @@
                     "required":false,
                     "enum": ["text", "number", "date", "datetime", "email", "month", "range", "search", "tel", "time", "url", "week", "color"]
                 },
-                "size": {
-                    "id": "http://xblocks.ru/xb-field/attrs/size",
-                    "required":false,
-                    "enum": ["s", "m", "l"]
-                },
-                "theme": {
-                    "id": "http://xblocks.ru/xb-field/attrs/theme",
-                    "required":false,
-                    "enum": ["normal", "action", "dark", "pseudo"]
-                },
+                "size": { "$ref": "http://xblocks.ru/xb-attrs-size" },
+                "theme": { "$ref": "http://xblocks.ru/xb-attrs-theme" },
                 "rows": {
                     "id": "http://xblocks.ru/xb-field/attrs/rows",
                     "required":false,
@@ -82,9 +74,7 @@
 
 
 
-                "label": {
-                    "$ref": "http://xblocks.ru/xb-link"
-                }
+                "label": { "$ref": "http://xblocks.ru/xb-link" }
             }
         }
     }

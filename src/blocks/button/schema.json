@@ -61,31 +61,18 @@
                     "required":false,
                     "enum": ["button", "file", "submit"]
                 },
-                "ico": {
-                    "type":"string",
-                    "description": "Ico of the button",
-                    "id": "http://xblocks.ru/xb-button/attrs/ico",
-                    "required":false
-                },
-                "size": {
-                    "id": "http://xblocks.ru/xb-button/attrs/size",
-                    "required":false,
-                    "enum": ["s", "m", "l"]
-                },
-                "theme": {
-                    "id": "http://xblocks.ru/xb-button/attrs/theme",
-                    "required":false,
-                    "enum": ["normal", "action", "dark", "pseudo"]
-                },
                 "flying": {
                     "type":"boolean",
                     "id": "http://xblocks.ru/xb-button/attrs/flying",
                     "required":false
-                }
+                },
+                "ico": { "$ref": "http://xblocks.ru/xb-ico" },
+                "size": { "$ref": "http://xblocks.ru/xb-attrs-size" },
+                "theme": { "$ref": "http://xblocks.ru/xb-attrs-theme" }
             }
         },
         "content": {
-            "type":["string","null"],
+            "type":["string"],
             "id": "http://xblocks.ru/xb-button/content",
             "required":true
         }
