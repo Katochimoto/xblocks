@@ -13,9 +13,11 @@
 
     function XBElement(node, params) {
         this.node = node;
+        this.controller = null;
         this.module = node.tagName.toLowerCase();
         this.schema = params.schema;
-        this.defaultAttrs = params.defaultAttrs;
+        this.events = {};
+
 
         this.observeStart();
 
@@ -24,24 +26,21 @@
         });
 
         this.on('removed', function(/*event*/) {
-            /*xblocks.log('[field]', 'removed', this);
-             this.observer.remove();
-             xtag.removeEvents(xblocks.rootElement(this), this.__events);
-             delete this.__events;
-             delete this.__controller;*/
+            xblocks.log('XBElement->removed', this);
+
+            this.off();
+            this.observeStop();
+
+            delete this.controller;
+            delete this.observer;
         });
 
-        this.on('attributeChanged', function(/*attrName, oldValue, newValue*/) {
-            if (this.__lock) {
-                xblocks.log('XBElement->attributeChanged', 'lock', arguments);
-                return;
-            }
-
-            xblocks.log('XBElement->attributeChanged', this, arguments);
+        this.on('attributeChanged', function(/*event*/) {
+            xblocks.log('XBElement->attributeChanged', this);
             this.update();
         });
 
-        this.on('mutation', function() {
+        this.on('mutation', function(/*event*/) {
             xblocks.log('XBElement->mutation', this);
             this.update();
         });
@@ -50,53 +49,119 @@
     var proto = XBElement.prototype;
 
     proto.isLock = function() {
-
+        return this._lock;
     };
 
-    proto.on = function() {
+    proto.lock = function(isLock) {
+        this._lock = !!isLock;
 
+        if (this._lock) {
+            this.observeStop();
+
+        } else {
+            this.observeStart();
+        }
     };
 
-    proto.off = function() {
+    proto.on = function(name, callback) {
+        var cb;
+        var that = this;
 
+        if (name === 'click') {
+            cb = function(event) {
+                if (!xblocks.attrs.isEmpty(that.node, 'disabled')) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+
+                return callback.call(that, event);
+            };
+
+        } else {
+            cb = function(event) {
+                return callback.call(that, event);
+            };
+        }
+
+        var event = xtag.addEvent(this.root(), name, cb);
+        this.events[name] = this.events[name] || [];
+        this.events[name].push(event);
+        return event;
     };
 
-    proto.trigger = function() {
+    proto.off = function(name, event) {
+        var l;
+        var type;
 
+        if (!name && !event) {
+            this.events = {};
+            for (type in this.events) {
+                if (this.events.hasOwnProperty(type)) {
+                    l = this.events[type].length;
+                    while (l--) {
+                        xtag.removeEvent(this.root(), this.events[type][l]);
+                    }
+                }
+            }
+
+        } else if (name && !event) {
+            this.events[name] = [];
+            l = this.events[name].length;
+            while (l--) {
+                xtag.removeEvent(this.root(), this.events[name][l]);
+            }
+
+        } else if (name && event) {
+            this.events[name].splice(this.events[name].indexOf(event), 1);
+            xtag.removeEvent(this.root(), event);
+        }
     };
 
-    proto.remove = function() {
+    proto.trigger = function(name, data) {
+        if (this.isLock()) {
+            return;
+        }
 
+        xtag.fireEvent(this.root(), name, {
+            detail: {
+                params: data
+            }
+        });
     };
 
     proto.observeStart = function() {
-        if (!Modernizr.createshadowroot && !this._observer) {
+        xblocks.log.time('XBElement->observeStart');
+        if (!Modernizr.createshadowroot && !this.observer) {
             var that = this;
-            this._observer = new MutationObserver(function() {
+            this.observer = new MutationObserver(function() {
                 that.trigger('mutation');
             });
         }
 
-        if (this._observer) {
-            this._observer.disconnect();
-            this._observer.observe(this.node, { childList: true, subtree: true, characterData: true });
+        if (this.observer) {
+            this.observer.disconnect();
+            this.observer.observe(this.node, { childList: true, subtree: true, characterData: true });
         }
+        xblocks.log.timeEnd('XBElement->observeStart');
     };
 
     proto.observeStop = function() {
-        if (this._observer) {
-            this._observer.disconnect();
+        xblocks.log.time('XBElement->observeStop');
+        if (this.observer) {
+            this.observer.disconnect();
         }
+        xblocks.log.timeEnd('XBElement->observeStop');
     };
 
     proto.update = function() {
         xblocks.log('XBElement->update', this);
         xblocks.log.time('XBElement->update');
 
-        this.observeStop();
+        this.lock(true);
 
         var plainAttrs = xblocks.attrs.toPlainObject(this.node);
-        Object.merge(plainAttrs, this.defaultAttrs || {});
+        Object.merge(plainAttrs, this.node.defaultAttrs || {});
 
         var complexAttrs = plainAttrs.toComplex();
         if (!Modernizr.createshadowroot) {
@@ -121,13 +186,11 @@
         xtag.innerHTML(root, '');
         root.appendChild(template.cloneNode(true));
 
-        this.observeStart();
+        this.lock(false);
 
         xblocks.log.timeEnd('XBElement->update');
 
-        //if (onupdate) {
-        //    onupdate(this.node);
-        //}
+        this.trigger('update');
     };
 
     proto.html = function(html) {

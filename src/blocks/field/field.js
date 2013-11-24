@@ -12,94 +12,69 @@
     xtag.register('xb-field', {
         lifecycle: {
             created: function() {
-                this.__xb = xblocks.element.create(this, {
-                    schema: SCHEMA_REL,
-                    defaultAttrs: {
-                        type: 'text',
-                        size: 'm',
-                        rows: 1
-                    }
+                this.xblock = xblocks.element.create(this, {
+                    schema: SCHEMA_REL
                 });
 
-                xblocks.log('[field]', 'created', this.__xb);
+                xblocks.log('[field]', 'created', this.xblock);
                 xblocks.log.time('[field] created');
 
-
-
-                this.__xb.on('update', function() {
-                    element.__lock = true;
-                    element.removeAttribute('value');
-                    element.__controller = xblocks.rootElement(element).querySelector('input,textarea');
-                    element.__lock = false;
+                this.xblock.on('update', function() {
+                    this.lock(true);
+                    this.node.removeAttribute('value');
+                    this.controller = this.root().querySelector('input,textarea');
+                    this.lock(false);
                 });
 
-                this.__xb.on('click', function(event) {
-                    if (this.isLock() || !xblocks.attrs.isEmpty(that, 'disabled')) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        return false;
-                    }
-
+                this.xblock.on('click', function(event) {
                     if (xtag.hasClass(event.target, 'js-reset')) {
-                        that.__lock = true;
-                        that.__controller.value = '';
-                        that.__lock = false;
+                        this.lock(true);
+                        this.controller.value = '';
+                        this.lock(false);
                     }
 
                     return true;
                 });
 
-                this.__xb.update();
-
-
-
-
-
-                /*xblocks.elementUpdate(this, onupdate);
-
-                var that = this;
-                this.__events = xtag.addEvents(xblocks.rootElement(this), {
-                    'click': function(event) {
-                        if (that.__lock || !xblocks.attrs.isEmpty(that, 'disabled')) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            return false;
-                        }
-
-                        if (xtag.hasClass(event.target, 'js-reset')) {
-                            that.__lock = true;
-                            that.__controller.value = '';
-                            that.__lock = false;
-                        }
-
-                        return true;
-                    }
-                });*/
+                this.xblock.update();
 
                 xblocks.log.timeEnd('[field] created');
             },
 
 
             inserted: function() {
-                this.__xb.trigger('inserted');
+                this.xblock.trigger('inserted');
             },
 
             removed: function() {
-                this.__xb.trigger('removed');
+                this.xblock.trigger('removed');
             },
 
             attributeChanged: function(attrName, oldValue, newValue) {
-                this.__xb.trigger('attributeChanged', attrName, oldValue, newValue);
+                this.xblock.trigger('attributeChanged', [ attrName, oldValue, newValue ]);
             }
         },
 
         accessors: {
+            defaultAttrs: {
+                get: function() {
+                    return {
+                        type: 'text',
+                        size: 'm',
+                        rows: 1,
+                        value: this.value
+                    };
+                }
+            },
             value: {
                 get: function() {
-                    return this.__controller && this.__controller.value;
+                    return this.xblock.controller && this.xblock.controller.value;
                 },
+
                 set: function(value) {
-                    this.__controller.value = value;
+                    if (this.xblock.controller) {
+                        this.xblock.controller.value = value;
+                    }
                 }
             }
         },

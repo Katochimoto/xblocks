@@ -59,6 +59,8 @@
      * @returns {AttrsComplex}
      */
     AttrsPlain.prototype.toComplex = function() {
+        xblocks.log.time('AttrsPlain->toComplex');
+
         var obj = new AttrsComplex();
 
         for (var key in this) {
@@ -67,6 +69,7 @@
             }
         }
 
+        xblocks.log.timeEnd('AttrsPlain->toComplex');
         return obj;
     };
 
@@ -128,6 +131,8 @@
      * @returns {AttrsPlain}
      */
     AttrsComplex.prototype.toPlain = function() {
+        xblocks.log.time('AttrsComplex->toPlain');
+
         var plainObject = new AttrsPlain();
 
         function z(ns, o) {
@@ -147,6 +152,7 @@
 
         z([], this);
 
+        xblocks.log.timeEnd('AttrsComplex->toPlain');
         return plainObject;
     };
 
@@ -154,28 +160,34 @@
      * @returns {Object}
      */
     AttrsComplex.prototype.toSchema = function() {
+        xblocks.log.time('AttrsComplex->toSchema');
+
         var schema = {};
+        var stack = [];
+        stack.push([this, schema]);
 
-        function z(schema, complex) {
-            schema.content = complex.getValue();
-            schema.attrs = {};
+        var ns;
+        while (ns = stack.pop()) {
+            ns[1].content = ns[0].getValue();
+            ns[1].attrs = {};
 
-            for (var key in complex) {
-                if (complex.hasOwnProperty(key) && (complex[key] instanceof AttrsComplex)) {
-                    if (Object.isEmpty(complex[key], [attrs.ATTR_COMPLEX_VALUE])) {
-                        schema.attrs[key] = complex[key].getValue();
+            for (var key in ns[0]) {
+                if (ns[0].hasOwnProperty(key) && (ns[0][key] instanceof AttrsComplex)) {
+                    if (Object.isEmpty(ns[0][key], attrs.ATTR_COMPLEX_VALUE)) {
+                        ns[1].attrs[key] = ns[0][key].getValue();
 
                     } else {
-                        schema.attrs[key] = {};
-                        z(schema.attrs[key], complex[key]);
+                        ns[1].attrs[key] = {};
+                        stack.push([ns[0][key], ns[1].attrs[key]]);
                     }
                 }
             }
         }
 
-        z(schema, this);
+        schema = JSON.parse(JSON.stringify(schema));
 
-        return JSON.parse(JSON.stringify(schema));
+        xblocks.log.timeEnd('AttrsComplex->toSchema');
+        return schema;
     };
 
 
@@ -242,7 +254,9 @@
      * @returns {AttrsPlain}
      */
     attrs.toPlainObject = function(element) {
-        var obj = new AttrsPlain();
+        xblocks.log.time('attrs->toPlainObject');
+
+        var plain = new AttrsPlain();
         var i = 0;
         var attributes = element.attributes;
         var l = attributes.length;
@@ -256,10 +270,11 @@
                 val = (name === val || val === 'true');
             }
 
-            obj[name] = val;
+            plain[name] = val;
         }
 
-        return obj;
+        xblocks.log.timeEnd('attrs->toPlainObject');
+        return plain;
     };
 
     /**
