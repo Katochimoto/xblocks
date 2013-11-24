@@ -1,14 +1,6 @@
 (function(xtag, xblocks) {
     'use strict';
 
-    var SCHEMA_REL = 'http://xblocks.ru/xb-link';
-
-    (function(schema) {
-        tv4 && tv4.addSchema(SCHEMA_REL, schema);
-    })(/* borschik:include:schema.json */);
-
-
-
     xtag.register('xb-link', {
         lifecycle: {
             created: function() {
@@ -29,7 +21,7 @@
         accessors: {
             schema: {
                 get: function() {
-                    return SCHEMA_REL;
+                    return 'http://xblocks.ru/xb-link';
                 }
             },
 

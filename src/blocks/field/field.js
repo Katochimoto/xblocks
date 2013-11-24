@@ -1,19 +1,11 @@
 (function(xtag, xblocks, Modernizr, tv4) {
     'use strict';
 
-    var SCHEMA_REL = 'http://xblocks.ru/xb-field';
-
-    (function(schema) {
-        tv4 && tv4.addSchema(SCHEMA_REL, schema);
-    })(
-        /* borschik:include:schema.json */
-    );
-
     xtag.register('xb-field', {
         lifecycle: {
             created: function() {
                 this.xblock = xblocks.element.create(this, {
-                    schema: SCHEMA_REL
+                    schema: 'http://xblocks.ru/xb-field'
                 });
 
                 xblocks.log('[field]', 'created', this.xblock);

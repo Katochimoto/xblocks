@@ -1,4 +1,6 @@
-{
+(function(tv4, schema) {
+    tv4 && tv4.addSchema('http://xblocks.ru/xb-link', schema);
+})(tv4, {
     "type":"object",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "Link",
@@ -49,4 +51,4 @@
             "required":true
         }
     }
-}
+});
