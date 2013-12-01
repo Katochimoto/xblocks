@@ -28,6 +28,11 @@
                     return true;
                 });
 
+                this.xblock.on('inserted', function() {
+                    xblocks.types.number(this).init();
+                    //console.log(this.controller);
+                });
+
                 this.xblock.update();
 
                 xblocks.log.timeEnd('[field] created');
