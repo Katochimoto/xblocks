@@ -4,27 +4,32 @@
     xtag.register('xb-button', {
         lifecycle: {
             created: function() {
-                this.observer.on();
+                this.xblock = xblocks.element.create(this, {
+                    schema: 'http://xblocks.ru/xb-button'
+                });
 
-                xblocks.elementUpdate(this);
+                xblocks.log('[button]', 'created', this.xblock);
+                xblocks.log.time('[button] created');
+
+                this.xblock.update();
+
+                xblocks.log.timeEnd('[button] created');
             },
+
             inserted: function() {
+                this.xblock.trigger('inserted');
             },
+
             removed: function() {
-                this.observer.remove();
+                this.xblock.trigger('removed');
             },
+
             attributeChanged: function() {
-                xblocks.elementUpdate(this);
+                this.xblock.trigger('attributeChanged', [ attrName, oldValue, newValue ]);
             }
         },
 
         accessors: {
-            schema: {
-                get: function() {
-                    return 'http://xblocks.ru/xb-button';
-                }
-            },
-
             defaultAttrs: {
                 get: function() {
                     return {
@@ -34,50 +39,12 @@
                 }
             },
 
-            styleSource: {
-                get: function() {
-                    return borschik.link('@button.css');
-                }
-            },
-
             value: {
                 get: function() {
-                    return xblocks.elementHTML(this);
+                    return this.xblock.html();
                 },
                 set: function(value) {
-                    xblocks.elementHTML(this, value);
-                }
-            },
-
-            observer: {
-                get: function() {
-                    var that = this;
-                    var observer;
-
-                    if (!Modernizr.createshadowroot) {
-                        observer = that.__observer || (that.__observer = new MutationObserver(function() {
-                            xblocks.elementUpdate(that);
-                        }));
-                    }
-
-                    return {
-                        on: function() {
-                            observer && observer.observe(that, {
-                                childList: true,
-                                subtree: true,
-                                characterData: true
-                            });
-                        },
-
-                        off: function() {
-                            observer && observer.disconnect();
-                        },
-
-                        remove: function() {
-                            observer && observer.disconnect();
-                            delete that.__observer;
-                        }
-                    };
+                    this.xblock.html(value);
                 }
             }
         },

@@ -1,4 +1,4 @@
-(function(xtag, xblocks, Modernizr, tv4) {
+(function(xtag, xblocks) {
     'use strict';
 
     xtag.register('xb-field', {
@@ -80,5 +80,5 @@
         }
     });
 
-})(xtag, xblocks, Modernizr, tv4);
+})(xtag, xblocks);
 

@@ -1,6 +1,4 @@
-(function(tv4, schema) {
-    tv4 && tv4.addSchema('http://xblocks.ru/xb-ico', schema);
-})(tv4, {
+tv4.addSchema('http://xblocks.ru/xb-ico', {
     "type":"object",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "Ico",
