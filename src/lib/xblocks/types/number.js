@@ -4,37 +4,34 @@
     xblocks = xblocks || {};
     xblocks.types = xblocks.types || {};
 
-    xblocks.types.number = (function() {
+    xblocks.types.number = function(xbel) {
+        function onkeydown() {}
 
-        return function(field) {
-            function onkeydown() {}
+        function onkeypress() {}
 
-            function onkeypress() {}
+        function onkeyup() {}
 
-            function onkeyup() {}
+        function onfocusin() {}
 
-            function onfocusin() {}
+        function onfocusout() {}
 
-            function onfocusout() {}
-
-            return {
-                init: function() {
-                    onkeydown.event = field.on('keydown', onkeydown);
-                    onkeypress.event = field.on('keypress', onkeypress);
-                    onkeyup.event = field.on('keyup', onkeyup);
-                    onfocusin.event = field.on('focusin', onfocusin);
-                    onfocusout.event = field.on('focusout', onfocusout);
-                },
-                destroy: function() {
-                    field.off('keydown', onkeydown.event);
-                    field.off('keypress', onkeypress.event);
-                    field.off('keyup', onkeyup.event);
-                    field.off('focusin', onfocusin.event);
-                    field.off('focusout', onfocusout.event);
-                },
-                update: function() {}
-            };
+        return {
+            init: function() {
+                onkeydown.event = xbel.on('keydown', onkeydown);
+                onkeypress.event = xbel.on('keypress', onkeypress);
+                onkeyup.event = xbel.on('keyup', onkeyup);
+                onfocusin.event = xbel.on('focusin', onfocusin);
+                onfocusout.event = xbel.on('focusout', onfocusout);
+            },
+            destroy: function() {
+                xbel.off('keydown', onkeydown.event);
+                xbel.off('keypress', onkeypress.event);
+                xbel.off('keyup', onkeyup.event);
+                xbel.off('focusin', onfocusin.event);
+                xbel.off('focusout', onfocusout.event);
+            },
+            update: function() {}
         };
-    })();
+    };
 
 })(xtag, xblocks);
