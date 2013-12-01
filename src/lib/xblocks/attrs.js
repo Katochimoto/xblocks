@@ -157,7 +157,7 @@
     };
 
     /**
-     * @param {Boolean} [nesting=false]
+     * @param {Number} [nesting] вложенность
      * @return {Object}
      */
     AttrsComplex.prototype.toSchema = function(nesting) {
@@ -172,7 +172,7 @@
             ns[1].content = ns[0].getValue();
             ns[1].attrs = {};
 
-            if (ns[2] >= nesting) {
+            if (nesting > 0 && ns[2] >= nesting) {
                 ns[1].attrs = ns[0].toPlain();
                 continue;
             }

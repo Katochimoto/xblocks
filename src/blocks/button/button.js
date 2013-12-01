@@ -24,7 +24,7 @@
                 this.xblock.trigger('removed');
             },
 
-            attributeChanged: function() {
+            attributeChanged: function(attrName, oldValue, newValue) {
                 this.xblock.trigger('attributeChanged', [ attrName, oldValue, newValue ]);
             }
         },
