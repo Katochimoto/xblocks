@@ -24,7 +24,7 @@
     /**
      *
      * @param {String} name
-     * @returns {*}
+     * @return {*}
      */
     AttrsPlain.prototype.get = function(name) {
         return this[name];
@@ -42,21 +42,21 @@
     /**
      *
      * @param {String} name
-     * @returns {boolean}
+     * @return {boolean}
      */
     AttrsPlain.prototype.isEmpty = function(name) {
         return !this[name];
     };
 
     /**
-     * @returns {AttrsPlain}
+     * @return {AttrsPlain}
      */
     AttrsPlain.prototype.toPlain = function() {
         return this;
     };
 
     /**
-     * @returns {AttrsComplex}
+     * @return {AttrsComplex}
      */
     AttrsPlain.prototype.toComplex = function() {
         xblocks.log.time('AttrsPlain->toComplex');
@@ -96,7 +96,7 @@
     /**
      *
      * @param {String} name
-     * @returns {AttrsComplex|undefined}
+     * @return {AttrsComplex|undefined}
      */
     AttrsComplex.prototype.get = function(name) {
         return fns(this, name);
@@ -114,21 +114,21 @@
     /**
      *
      * @param {String} name
-     * @returns {Boolean}
+     * @return {Boolean}
      */
     AttrsComplex.prototype.isEmpty = function(name) {
         return Object.isEmpty(fns(this, name));
     };
 
     /**
-     * @returns {AttrsComplex}
+     * @return {AttrsComplex}
      */
     AttrsComplex.prototype.toComplex = function() {
         return this;
     };
 
     /**
-     * @returns {AttrsPlain}
+     * @return {AttrsPlain}
      */
     AttrsComplex.prototype.toPlain = function() {
         xblocks.log.time('AttrsComplex->toPlain');
@@ -136,7 +136,7 @@
         var plainObject = new AttrsPlain();
 
         function z(ns, o) {
-            if ((o instanceof AttrsComplex) && ns.length) {
+            if ((o instanceof AttrsComplex) && ns.length && typeof(o.getValue()) !== 'undefined') {
                 plainObject[ns.join(attrs.SEPARATOR)] = o.getValue();
             }
 
@@ -157,19 +157,25 @@
     };
 
     /**
-     * @returns {Object}
+     * @param {Boolean} [nesting=false]
+     * @return {Object}
      */
-    AttrsComplex.prototype.toSchema = function() {
+    AttrsComplex.prototype.toSchema = function(nesting) {
         xblocks.log.time('AttrsComplex->toSchema');
 
         var schema = {};
         var stack = [];
-        stack.push([this, schema]);
+        stack.push([this, schema, 0]);
 
         var ns;
         while (ns = stack.pop()) {
             ns[1].content = ns[0].getValue();
             ns[1].attrs = {};
+
+            if (ns[2] >= nesting) {
+                ns[1].attrs = ns[0].toPlain();
+                continue;
+            }
 
             for (var key in ns[0]) {
                 if (ns[0].hasOwnProperty(key) && (ns[0][key] instanceof AttrsComplex)) {
@@ -178,7 +184,7 @@
 
                     } else {
                         ns[1].attrs[key] = {};
-                        stack.push([ns[0][key], ns[1].attrs[key]]);
+                        stack.push([ns[0][key], ns[1].attrs[key], ++ns[2]]);
                     }
                 }
             }
@@ -197,7 +203,7 @@
      * @param {Object} target
      * @param {String} name
      * @param {*} [value]
-     * @returns {Object}
+     * @return {Object}
      */
     function ns(target, name, value) {
         var namespace = target;
@@ -227,7 +233,7 @@
     /**
      * @param {Object} target
      * @param {String} name
-     * @returns {*}
+     * @return {*}
      */
     function fns(target, name) {
         var namespace = target;
@@ -251,7 +257,7 @@
     /**
      *
      * @param {HTMLElement} element
-     * @returns {AttrsPlain}
+     * @return {AttrsPlain}
      */
     attrs.toPlainObject = function(element) {
         xblocks.log.time('attrs->toPlainObject');
@@ -280,7 +286,7 @@
     /**
      *
      * @param {HTMLElement} element
-     * @returns {AttrsComplex}
+     * @return {AttrsComplex}
      */
     attrs.toComplexObject = function(element) {
         return attrs.toPlainObject(element).toComplex();
@@ -289,7 +295,7 @@
     /**
      *
      * @param {HTMLElement} element
-     * @returns {Object}
+     * @return {Object}
      */
     attrs.toSchemaObject = function(element) {
         return attrs.toComplexObject(element).toSchema();
@@ -299,7 +305,7 @@
      *
      * @param {HTMLElement} element
      * @param {String} attrName
-     * @returns {Boolean}
+     * @return {Boolean}
      */
     attrs.isEmpty = function(element, attrName) {
         if (element.hasAttribute(attrName)) {

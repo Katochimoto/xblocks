@@ -39,14 +39,15 @@ describe('button', function() {
         };
 
         var div;
+        /*
         div = document.createElement('div');
         div.innerHTML = yr.run('xb-button', data, 'xb-button');
         document.getElementById('mocha').appendChild(div.firstChild);
+        */
 
-        //div = document.createElement('div');
-        //div.innerHTML = yr.run('xb-field', dataInput, 'xb-field');
-
-        //document.getElementById('mocha').appendChild(div.firstChild);
+        div = document.createElement('div');
+        div.innerHTML = yr.run('xb-field', dataInput, 'xb-field');
+        document.getElementById('mocha').appendChild(div.firstChild);
 
         //console.log(div.firstChild, mocha);
     });

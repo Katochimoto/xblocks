@@ -168,18 +168,18 @@
             complexAttrs.setValue(this.html());
         }
 
-        var schemaAttrs = complexAttrs.toSchema();
-
         if (tv4 && this.schema) {
             var schema = tv4.getSchema(this.schema);
-            var check = tv4.validateResult(schemaAttrs, schema);
+            var check = tv4.validateResult(complexAttrs.toSchema(), schema);
 
             if (!check.valid) {
                 throw check.error;
             }
         }
 
-        var html = yr.run(this.module, schemaAttrs, 'template');
+        // формируются только атрибуты первой вложенности toSchema(1)
+        // этого достаточно для описания псевдо-элементов, вложенных в текущий
+        var html = yr.run(this.module, complexAttrs.toSchema(1), 'template');
         var template = xtag.createFragment(html);
         var root = this.root();
 
