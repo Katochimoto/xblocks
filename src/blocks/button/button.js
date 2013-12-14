@@ -16,6 +16,8 @@
                 xblocks.log.timeEnd('[button] created');
             },
 
+
+
             inserted: function() {
                 this.xblock.trigger('inserted');
             },

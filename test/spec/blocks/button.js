@@ -2,7 +2,7 @@ if (typeof require == 'function') {
     /*jshint -W020 */
     //strftime = require('../../strftime');
     /*jshint -W020 */
-    expect = require('expect.js');
+    //expect = require('expect.js');
 }
 
 describe('button', function() {
@@ -11,7 +11,8 @@ describe('button', function() {
         var data = {
             content: 'nop',
             attrs: {
-                name: 'te"st'
+                name: 'te"st',
+                'size': 'm'
             }
         };
 
@@ -39,14 +40,38 @@ describe('button', function() {
         };
 
         var div;
-        /*
+
         div = document.createElement('div');
         div.innerHTML = yr.run('xb-button', data, 'xb-button');
         document.getElementById('mocha').appendChild(div.firstChild);
-        */
+
 
         div = document.createElement('div');
         div.innerHTML = yr.run('xb-field', dataInput, 'xb-field');
+        document.getElementById('mocha').appendChild(div.firstChild);
+
+
+        div = document.createElement('div');
+        div.innerHTML = yr.run('xb-link', {
+            content: 'normal'
+        }, 'xb-link');
+        document.getElementById('mocha').appendChild(div.firstChild);
+
+        div = document.createElement('div');
+        div.innerHTML = yr.run('xb-link', {
+            content: 'outer',
+            attrs: {
+                type: 'outer'            }
+        }, 'xb-link');
+        document.getElementById('mocha').appendChild(div.firstChild);
+
+        div = document.createElement('div');
+        div.innerHTML = yr.run('xb-link', {
+            content: 'pseudo',
+            attrs: {
+                type: 'pseudo'
+            }
+        }, 'xb-link');
         document.getElementById('mocha').appendChild(div.firstChild);
 
         //console.log(div.firstChild, mocha);

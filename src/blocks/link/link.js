@@ -4,80 +4,45 @@
     xtag.register('xb-link', {
         lifecycle: {
             created: function() {
-                this.observer.on();
+                this.xblock = xblocks.element.create(this, {
+                    schema: 'http://xblocks.ru/xb-link'
+                });
 
-                xblocks.elementUpdate(this);
+                xblocks.log('[link]', 'created', this.xblock);
+                xblocks.log.time('[link] created');
+
+                this.xblock.update();
+
+                xblocks.log.timeEnd('[link] created');
             },
+
+
             inserted: function() {
+                this.xblock.trigger('inserted');
             },
             removed: function() {
-                this.observer.remove();
+                this.xblock.trigger('removed');
             },
-            attributeChanged: function() {
-                xblocks.elementUpdate(this);
+            attributeChanged: function(attrName, oldValue, newValue) {
+                this.xblock.trigger('attributeChanged', [ attrName, oldValue, newValue ]);
             }
         },
 
         accessors: {
-            schema: {
-                get: function() {
-                    return 'http://xblocks.ru/xb-link';
-                }
-            },
-
             defaultAttrs: {
                 get: function() {
                     return {
-                        'theme': 'normal',
-                        'size': 'm'
+                        'type': 'normal'
                     };
-                }
-            },
-
-            styleSource: {
-                get: function() {
-                    return borschik.link('@link.css');
                 }
             },
 
             value: {
                 get: function() {
-                    return xblocks.elementHTML(this);
+                    return this.xblock.html();
                 },
                 set: function(value) {
-                    xblocks.elementHTML(this, value);
-                }
-            },
-
-            observer: {
-                get: function() {
-                    var that = this;
-                    var observer;
-
-                    if (!Modernizr.createshadowroot) {
-                        observer = that.__observer || (that.__observer = new MutationObserver(function() {
-                            xblocks.elementUpdate(that);
-                        }));
-                    }
-
-                    return {
-                        on: function() {
-                            observer && observer.observe(that, {
-                                childList: true,
-                                subtree: true,
-                                characterData: true
-                            });
-                        },
-
-                        off: function() {
-                            observer && observer.disconnect();
-                        },
-
-                        remove: function() {
-                            observer && observer.disconnect();
-                            delete that.__observer;
-                        }
-                    };
+                    this.xblock.html(value);
                 }
             }
         },

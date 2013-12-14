@@ -1,0 +1,34 @@
+module "xb-link"
+import "xblocks"
+
+match / xb-link {
+<xb-link>
+    apply .attrs.* xb-core-attrs
+    .content
+</xb-link>
+}
+
+match .* block-class {
+    if (name() == 'disabled' && boolean(.)) {
+        @class += " is-disabled"
+    }
+
+    if (name() == 'type') {
+        @class += " xb-link_{.}"
+    }
+}
+
+match / template {
+controllerAttrs = [
+    'name'
+    'href'
+    'id'
+    'target'
+]
+
+<a class="xb-link">
+    apply .attrs.* block-class
+    apply .attrs.* xb-core-attrs (controllerAttrs)
+    apply . xb-core-content
+</a>
+}

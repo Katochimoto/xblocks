@@ -1,7 +1,7 @@
 module "xb-button"
 import "xblocks"
 
-match .* block-attrs {
+match .* block-class {
     if (name() == 'disabled' && boolean(.)) {
         @class += " xb-button_disabled"
     }
@@ -36,7 +36,7 @@ controllerAttrs = [
     'disabled'
 ]
 <button class="xb-button">
-    apply .attrs.* block-attrs
+    apply .attrs.* block-class
     apply .attrs.* xb-core-attrs (controllerAttrs)
 
     <span class="xb-button__text">
@@ -50,7 +50,7 @@ controllerAttrs = [
     'name'
 ]
 <a class="xb-button">
-    apply .attrs.* block-attrs
+    apply .attrs.* block-class
     apply .attrs.* xb-core-attrs (controllerAttrs)
 
     <span class="xb-button__text">
@@ -67,7 +67,7 @@ controllerAttrs = [
 ]
 
 <label class="xb-button xb-button_type_attach">
-    apply .attrs.* block-attrs
+    apply .attrs.* block-class
 
     <span class="nb-file-intruder">
         <span class="nb-file-intruder__inner">

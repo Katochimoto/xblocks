@@ -40,6 +40,12 @@ tv4.addSchema('http://xblocks.ru/xb-link', {
                     "id": "http://xblocks.ru/xb-link/attrs/name",
                     "required":false
                 },
+                "type": {
+                    "description": "Type of the link",
+                    "id": "http://xblocks.ru/xb-link/attrs/type",
+                    "required":false,
+                    "enum": ["normal", "outer", "pseudo", "input"]
+                },
                 "target": { "$ref": "http://xblocks.ru/xb-attrs-target" }
             }
         },

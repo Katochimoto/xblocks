@@ -28,10 +28,10 @@ controllerAttrs = [
     apply .attrs.* block-class
 
     if (.attrs.label) {
-        <a class="xb-field_complex__label" href="#">
+        <xb-link href="#" type="input">
             apply .attrs.label.attrs.* xb-core-attrs
             .attrs.label.content
-        </a>
+        </xb-link>
     }
 
     if (.attrs.prefix) {

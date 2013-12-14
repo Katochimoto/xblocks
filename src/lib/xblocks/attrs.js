@@ -13,6 +13,24 @@
 
     /**
      *
+     * @param {Object} obj
+     * @returns {AttrsPlain}
+     */
+    attrs.plain = function(obj) {
+        return new AttrsPlain(obj);
+    };
+
+    /**
+     *
+     * @param {Object} obj
+     * @returns {AttrsComplex}
+     */
+    attrs.complex = function(obj) {
+        return new AttrsComplex(obj);
+    };
+
+    /**
+     *
      * @param {HTMLElement} element
      * @return {AttrsPlain}
      */

@@ -29,14 +29,19 @@
                 });
 
                 this.xblock.on('inserted', function() {
-                    xblocks.types.number(this).init();
-                    //console.log(this.controller);
+                    //xblocks.types.number(this).init();
                 });
 
                 this.xblock.update();
 
                 xblocks.log.timeEnd('[field] created');
             },
+
+
+
+
+
+
 
 
             inserted: function() {

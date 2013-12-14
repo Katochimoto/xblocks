@@ -51,12 +51,17 @@
         return true;
     };
 
-    Object.merge = function(target, source) {
-        for (var key in source) {
-            if (source.hasOwnProperty(key)) {
-                target[key] = source[key];
+    Object.merge = function(target) {
+        for (var i = 1, l = arguments.length; i < l; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                }
             }
         }
+
+        return target;
     };
 
 })();

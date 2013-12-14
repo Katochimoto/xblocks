@@ -1,22 +1,67 @@
 (function(xtag, xblocks, Modernizr, tv4, yr) {
     'use strict';
 
+    /** @namespace xblocks */
+
     xblocks = xblocks || {};
+
+    /**
+     * @namespace xblocks.element
+     * @memberOf xblocks
+     * @type {Object}
+     */
     xblocks.element = {};
 
+    /**
+     * @function create
+     * @memberOf xblocks.element
+     * @param {HTMLElement} node
+     * @param {Object} params
+     * @returns {XBElement}
+     */
     xblocks.element.create = function(node, params) {
         return new XBElement(node, params);
     };
 
 
-
-
+    /**
+     *
+     * @param {HTMLElement} node
+     * @param {Object} params
+     * @constructor
+     */
     function XBElement(node, params) {
+        /**
+         *
+         * @type {HTMLElement}
+         */
         this.node = node;
+        /**
+         *
+         * @type {HTMLElement|null}
+         */
         this.controller = null;
+        /**
+         *
+         * @type {String}
+         */
         this.module = node.tagName.toLowerCase();
+        /**
+         *
+         * @type {String}
+         */
         this.schema = params.schema;
+        /**
+         *
+         * @type {Object}
+         */
         this.events = {};
+        /**
+         *
+         * @type {boolean}
+         * @private
+         */
+        this._lock = false;
 
 
         this.observeStart();
@@ -48,10 +93,18 @@
 
     var proto = XBElement.prototype;
 
+    /**
+     * @method isLock
+     * @returns {Boolean}
+     */
     proto.isLock = function() {
         return this._lock;
     };
 
+    /**
+     * @method lock
+     * @param {Boolean} isLock
+     */
     proto.lock = function(isLock) {
         this._lock = !!isLock;
 
@@ -63,6 +116,12 @@
         }
     };
 
+    /**
+     * @method on
+     * @param {String} name
+     * @param {Function} callback
+     * @returns {Object}
+     */
     proto.on = function(name, callback) {
         var cb;
         var that = this;
@@ -90,6 +149,11 @@
         return event;
     };
 
+    /**
+     * @method off
+     * @param {String} [name]
+     * @param {Object} [event]
+     */
     proto.off = function(name, event) {
         var l;
         var type;
@@ -118,6 +182,11 @@
         }
     };
 
+    /**
+     * @method trigger
+     * @param {String} name
+     * @param {*} [data]
+     */
     proto.trigger = function(name, data) {
         if (this.isLock()) {
             return;
@@ -130,6 +199,9 @@
         });
     };
 
+    /**
+     * @method observeStart
+     */
     proto.observeStart = function() {
         xblocks.log.time('XBElement->observeStart');
         if (!Modernizr.createshadowroot && !this.observer) {
@@ -146,6 +218,9 @@
         xblocks.log.timeEnd('XBElement->observeStart');
     };
 
+    /**
+     * @method observeStop
+     */
     proto.observeStop = function() {
         xblocks.log.time('XBElement->observeStop');
         if (this.observer) {
@@ -154,14 +229,20 @@
         xblocks.log.timeEnd('XBElement->observeStop');
     };
 
+    /**
+     * @method update
+     */
     proto.update = function() {
         xblocks.log('XBElement->update', this);
         xblocks.log.time('XBElement->update');
 
         this.lock(true);
 
-        var plainAttrs = xblocks.attrs.toPlainObject(this.node);
-        Object.merge(plainAttrs, this.node.defaultAttrs || {});
+        var plainAttrs = Object.merge(
+            xblocks.attrs.plain({}),
+            this.node.defaultAttrs || {},
+            xblocks.attrs.toPlainObject(this.node)
+        );
 
         var complexAttrs = plainAttrs.toComplex();
         if (!Modernizr.createshadowroot) {
@@ -193,6 +274,11 @@
         this.trigger('update');
     };
 
+    /**
+     * @method html
+     * @param {String} [html]
+     * @returns {String}
+     */
     proto.html = function(html) {
         if (typeof html !== 'undefined') {
             this.node.innerHTML = html;
@@ -210,6 +296,10 @@
         return content && content.innerHTML || this.node.innerHTML;
     };
 
+    /**
+     * @method root
+     * @returns {HTMLElement|DocumentFragment}
+     */
     proto.root = function() {
         var root;
 

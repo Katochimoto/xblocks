@@ -19,19 +19,19 @@
     xblocks.log = function() {
         var args = Array.prototype.slice.call(arguments);
         args.unshift('[xblocks]');
-        console.log.apply(console, args);
+        //console.log.apply(console, args);
     };
 
     xblocks.log.time = function(name) {
         name = '[xblocks] ' + name;
-        console.time(name);
+        //console.time(name);
         //console.profile();
     };
 
     xblocks.log.timeEnd = function(name) {
         name = '[xblocks] ' + name;
         //console.profileEnd();
-        console.timeEnd(name);
+        //console.timeEnd(name);
     };
 
 
