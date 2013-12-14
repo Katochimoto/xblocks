@@ -20,10 +20,13 @@
 
 
                     // авторесайз поля по содержимому
-                    if (this.attrs.autosize) {
+                    if (this.attrs.autosize && !this.autosize) {
                         this.autosize = new Autosize(this.controller);
 
-                    } else if (this.autosize) {
+                    } else if (this.attrs.autosize && this.autosize) {
+                        this.autosize.setController(this.controller);
+
+                    } else if (!this.attrs.autosize && this.autosize) {
                         this.autosize = null;
                         delete this.autosize;
                     }
