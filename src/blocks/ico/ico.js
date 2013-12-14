@@ -4,27 +4,31 @@
     xtag.register('xb-ico', {
         lifecycle: {
             created: function() {
-                this.observer.on();
+                this.xblock = xblocks.element.create(this, {
+                    schema: 'http://xblocks.ru/xb-ico'
+                });
 
-                xblocks.elementUpdate(this);
+                xblocks.log('[ico]', 'created', this.xblock);
+                xblocks.log.time('[ico] created');
+
+                this.xblock.update();
+
+                xblocks.log.timeEnd('[ico] created');
             },
+
+
             inserted: function() {
+                this.xblock.trigger('inserted');
             },
             removed: function() {
-                this.observer.remove();
+                this.xblock.trigger('removed');
             },
-            attributeChanged: function() {
-                xblocks.elementUpdate(this);
+            attributeChanged: function(attrName, oldValue, newValue) {
+                this.xblock.trigger('attributeChanged', [ attrName, oldValue, newValue ]);
             }
         },
 
         accessors: {
-            schema: {
-                get: function() {
-                    return 'http://xblocks.ru/xb-ico';
-                }
-            },
-
             defaultAttrs: {
                 get: function() {
                     return {
@@ -32,67 +36,7 @@
                         'size': 'm'
                     };
                 }
-            },
-
-            styleSource: {
-                get: function() {
-                    return borschik.link('@link.css');
-                }
-            },
-
-            value: {
-                get: function() {
-                    return xblocks.elementHTML(this);
-                },
-                set: function(value) {
-                    xblocks.elementHTML(this, value);
-                }
-            },
-
-            observer: {
-                get: function() {
-                    var that = this;
-                    var observer;
-
-                    if (!Modernizr.createshadowroot) {
-                        observer = that.__observer || (that.__observer = new MutationObserver(function() {
-                            xblocks.elementUpdate(that);
-                        }));
-                    }
-
-                    return {
-                        on: function() {
-                            observer && observer.observe(that, {
-                                childList: true,
-                                subtree: true,
-                                characterData: true
-                            });
-                        },
-
-                        off: function() {
-                            observer && observer.disconnect();
-                        },
-
-                        remove: function() {
-                            observer && observer.disconnect();
-                            delete that.__observer;
-                        }
-                    };
-                }
             }
-        },
-
-        events: {
-            click: function(event) {
-                if (this.hasAttribute('disabled')) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-            }
-        },
-
-        methods: {
-
         }
     });
 
