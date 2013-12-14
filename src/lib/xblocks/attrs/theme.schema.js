@@ -3,6 +3,6 @@ tv4.addSchema('http://xblocks.ru/xb-attrs-theme', {
     "title": "Type theme",
     "description": "Type theme params",
     "id": "http://xblocks.ru/xb-attrs-theme",
-    "enum": ["normal", "action", "dark", "pseudo"],
+    "enum": ["normal", "action", "dark", "pseudo", "promo"],
     "required":false
 });

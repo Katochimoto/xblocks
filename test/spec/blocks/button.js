@@ -12,7 +12,9 @@ describe('button', function() {
             content: 'nop',
             attrs: {
                 name: 'te"st',
-                'size': 'm'
+                'size': 'xl',
+                href: '#',
+                theme: 'promo'
             }
         };
 

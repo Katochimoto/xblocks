@@ -3,6 +3,6 @@ tv4.addSchema('http://xblocks.ru/xb-attrs-size', {
     "title": "Type size",
     "description": "Type size params",
     "id": "http://xblocks.ru/xb-attrs-size",
-    "enum": ["s", "m", "l"],
+    "enum": ["s", "m", "l", "xl"],
     "required":false
 });
