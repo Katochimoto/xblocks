@@ -1,0 +1,43 @@
+module "xb-ico"
+import "xblocks"
+
+match / xb-ico {
+<xb-ico>
+    apply .attrs.* xb-core-attrs
+    if (.content) {
+        .content
+    } else {
+        "&nbsp;"
+    }
+</xb-ico>
+}
+
+match .* block-class {
+    if (name() == 'type') {
+        @class += " xb-ico_type_{.}"
+    }
+
+    if (name() == 'active' && boolean(.)) {
+        @class += " xb-ico_active"
+    }
+
+    if (name() == 'disabled' && boolean(.)) {
+        @class += " is-disabled"
+    }
+
+    if (name() == 'size') {
+        @class += " xb-ico_size_{.}"
+    }
+}
+
+match / template {
+controllerAttrs = [
+    'id'
+]
+
+<span class="xb-ico">
+    apply .attrs.* block-class
+    apply .attrs.* xb-core-attrs (controllerAttrs)
+    apply . xb-core-content
+</span>
+}

@@ -32,11 +32,32 @@
             defaultAttrs: {
                 get: function() {
                     return {
-                        'theme': 'normal',
                         'size': 'm'
                     };
                 }
+            },
+
+            value: {
+                get: function() {
+                    return this.xblock.html();
+                },
+                set: function(value) {
+                    this.xblock.html(value);
+                }
             }
+        },
+
+        events: {
+            click: function(event) {
+                if (this.hasAttribute('disabled')) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            }
+        },
+
+        methods: {
+
         }
     });
 

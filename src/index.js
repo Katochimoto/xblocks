@@ -12,10 +12,10 @@
 /* borschik:include:lib/xblocks/attrs/theme.schema.js */
 /* borschik:include:lib/xblocks/attrs/size.schema.js */
 
+/* borschik:include:blocks/ico/ico.schema.js */
 /* borschik:include:blocks/link/link.schema.js */
 /* borschik:include:blocks/field/field.schema.js */
 /* borschik:include:blocks/button/button.schema.js */
-/* borschik:include:blocks/field/field.schema.js */
 
 
 

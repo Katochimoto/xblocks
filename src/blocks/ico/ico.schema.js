@@ -27,6 +27,22 @@ tv4.addSchema('http://xblocks.ru/xb-ico', {
                     "type":"string",
                     "id": "http://xblocks.ru/xb-ico/attrs/alt",
                     "required":false
+                },
+                "active": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-ico/attrs/active",
+                    "required":false
+                },
+                "ico": {
+                    "description": "Type of the link",
+                    "id": "http://xblocks.ru/xb-ico/attrs/ico",
+                    "required":false,
+                    "enum": ["remove", "notification"]
+                },
+                "disabled": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-ico/attrs/disabled",
+                    "required":false
                 }
             }
         }

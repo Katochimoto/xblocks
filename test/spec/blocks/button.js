@@ -76,6 +76,16 @@ describe('button', function() {
         }, 'xb-link');
         document.getElementById('mocha').appendChild(div.firstChild);
 
+
+        div = document.createElement('div');
+        div.innerHTML = yr.run('xb-ico', {
+            attrs: {
+                type: 'remove',
+                active: true
+            }
+        }, 'xb-ico');
+        document.getElementById('mocha').appendChild(div.firstChild);
+
         //console.log(div.firstChild, mocha);
     });
 
