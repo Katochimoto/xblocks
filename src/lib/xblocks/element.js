@@ -16,11 +16,13 @@
      * @function create
      * @memberOf xblocks.element
      * @param {HTMLElement} node
-     * @param {Object} params
+     * @param {Object} [params]
+     * @param {Object} [proto]
      * @returns {XBElement}
      */
-    xblocks.element.create = function(node, params) {
-        return new XBElement(node, params);
+    xblocks.element.create = function(node, params, proto) {
+        proto = proto || {};
+        return Object.merge(new XBElement(node, params), proto);
     };
 
 
