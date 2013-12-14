@@ -25,19 +25,19 @@ describe('button', function() {
                 //'checked': true,
                 //'flying': true,
                 //'disabled': true,
-                //'reset': true,
-                //'prefix': 'qwe',
+                'reset': true,
+                'prefix': 'Prefix',
                 //'value': 'asd'
                 //'multiline': true,
-                /*'label': 'qwe',
+                'label': 'Label',
                 'label-href': 'http://ya.ru',
                 'label-target': '_blank',
                 'label-ico-qwe': '_blank',
                 'label-ico-asd': '_blank',
-                'type': 'number',*/
+                'type': 'number',
                 //'autosize': true,
                 //multiline: true
-                //'postfix': 'qwe'
+                'postfix': 'Postfix'
             }
         };
 
@@ -80,8 +80,8 @@ describe('button', function() {
         div = document.createElement('div');
         div.innerHTML = yr.run('xb-ico', {
             attrs: {
-                type: 'remove',
-                active: true
+                type: 'dropdown',
+                active: false
             }
         }, 'xb-ico');
         document.getElementById('mocha').appendChild(div.firstChild);

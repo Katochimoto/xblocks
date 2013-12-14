@@ -37,7 +37,7 @@ tv4.addSchema('http://xblocks.ru/xb-ico', {
                     "description": "Type of the link",
                     "id": "http://xblocks.ru/xb-ico/attrs/ico",
                     "required":false,
-                    "enum": ["remove", "notification"]
+                    "enum": ["remove", "notification", "check", "dropdown"]
                 },
                 "disabled": {
                     "type":"boolean",
