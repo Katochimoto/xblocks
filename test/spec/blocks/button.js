@@ -25,16 +25,18 @@ describe('button', function() {
                 //'checked': true,
                 //'flying': true,
                 //'disabled': true,
-                'reset': true,
+                //'reset': true,
                 //'prefix': 'qwe',
                 //'value': 'asd'
                 //'multiline': true,
-                'label': 'qwe',
+                /*'label': 'qwe',
                 'label-href': 'http://ya.ru',
                 'label-target': '_blank',
                 'label-ico-qwe': '_blank',
                 'label-ico-asd': '_blank',
-                'type': 'number'
+                'type': 'number',*/
+                //'autosize': true,
+                //multiline: true
                 //'postfix': 'qwe'
             }
         };

@@ -1,6 +1,8 @@
 (function(xtag, xblocks) {
     'use strict';
 
+    /* borschik:include:field.autosize.js */
+
     xtag.register('xb-field', {
         lifecycle: {
             created: function() {
@@ -15,6 +17,17 @@
                     this.lock(true);
                     this.node.removeAttribute('value');
                     this.controller = this.root().querySelector('input,textarea');
+
+
+                    // авторесайз поля по содержимому
+                    if (this.attrs.autosize) {
+                        this.autosize = new Autosize(this.controller);
+
+                    } else if (this.autosize) {
+                        this.autosize = null;
+                        delete this.autosize;
+                    }
+
                     this.lock(false);
                 });
 
@@ -22,10 +35,21 @@
                     if (xtag.hasClass(event.target, 'js-reset')) {
                         this.lock(true);
                         this.controller.value = '';
+
+                        if (this.autosize) {
+                            this.autosize.update(0);
+                        }
+
                         this.lock(false);
                     }
 
                     return true;
+                });
+
+                this.xblock.on('input:delegate(input,textarea)', function() {
+                    if (this.autosize) {
+                        this.autosize.update();
+                    }
                 });
 
                 this.xblock.on('inserted', function() {

@@ -6,6 +6,10 @@ match .* block-class {
         @class += " is-disabled"
     }
 
+    if (name() == 'autosize' && boolean(.)) {
+        @class += " xb-field_autosize"
+    }
+
     if (name() == 'size') {
         @class += " xb-field_size_{.}"
     }
@@ -17,7 +21,7 @@ match / xb-field {
 </xb-field>
 }
 
-match /[.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label] template {
+match /[.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label || .attrs.autosize] template {
 controllerAttrs = [
     'name'
     'disabled'
@@ -71,7 +75,7 @@ controllerAttrs = [
 </label>
 }
 
-match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label)] template {
+match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label || .attrs.autosize)] template {
 controllerAttrs = [
     'name'
     'disabled'

@@ -31,6 +31,12 @@
      * @constructor
      */
     function XBElement(node, params) {
+
+        /**
+         *
+         * @type {AttrsPlain}
+         */
+        this.attrs = {};
         /**
          *
          * @type {HTMLElement}
@@ -62,6 +68,8 @@
          * @private
          */
         this._lock = false;
+
+
 
 
         this.observeStart();
@@ -238,13 +246,13 @@
 
         this.lock(true);
 
-        var plainAttrs = Object.merge(
+        this.attrs = Object.merge(
             xblocks.attrs.plain({}),
             this.node.defaultAttrs || {},
             xblocks.attrs.toPlainObject(this.node)
         );
 
-        var complexAttrs = plainAttrs.toComplex();
+        var complexAttrs = this.attrs.toComplex();
         if (!Modernizr.createshadowroot) {
             complexAttrs.setValue(this.html());
         }

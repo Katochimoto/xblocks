@@ -22,6 +22,11 @@ tv4.addSchema('http://xblocks.ru/xb-field', {
                     "id": "http://xblocks.ru/xb-field/attrs/disabled",
                     "required":false
                 },
+                "autosize": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-field/attrs/autosize",
+                    "required":false
+                },
                 "multiline": {
                     "type":"boolean",
                     "id": "http://xblocks.ru/xb-field/attrs/multiline",
