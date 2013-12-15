@@ -47,7 +47,10 @@ tv4.addSchema('http://xblocks.ru/xb-field', {
                 "type": {
                     "id": "http://xblocks.ru/xb-field/attrs/type",
                     "required":false,
-                    "enum": ["text", "number", "date", "datetime", "email", "month", "range", "search", "tel", "time", "url", "week", "color"]
+                    "enum": [
+                        "text", "number", "date", "datetime", "email", "month",
+                        "range", "search", "tel", "time", "url", "week", "color"
+                    ]
                 },
                 "size": { "$ref": "http://xblocks.ru/xb-attrs-size" },
                 "theme": { "$ref": "http://xblocks.ru/xb-attrs-theme" },

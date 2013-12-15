@@ -28,10 +28,6 @@ match .* block-class {
     if (name() == 'size') {
         @class += " xb-ico_size_{.}"
     }
-
-    if (name() == 'class') {
-        @class += " {.}"
-    }
 }
 
 match / template {

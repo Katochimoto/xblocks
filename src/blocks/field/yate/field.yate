@@ -45,7 +45,9 @@ match /[.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label || .attr
     }
 
     if (.attrs.reset) {
-        <xb-ico class="xb-field_complex__reset js-reset" type="remove" active="true"></xb-ico>
+        <xb-ico class="xb-field_complex__reset js-reset"
+                type="remove"
+                active="true"></xb-ico>
     }
 
     <span class="xb-field_complex__content">

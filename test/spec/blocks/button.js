@@ -12,10 +12,10 @@ describe('button', function() {
             content: 'nop',
             attrs: {
                 name: 'te"st',
-                'size': 'xl',
-                href: '#',
-                theme: 'promo',
-                type: 'file',
+                //'size': 'xl',
+                //href: '#',
+                //theme: 'promo',
+                //type: 'file',
                 'ico-type': 'remove',
                 'ico-float': 'right'
             }
@@ -39,7 +39,7 @@ describe('button', function() {
                 //'label-target': '_blank',
                 //'label-ico-qwe': '_blank',
                 //'label-ico-asd': '_blank',
-                //'type': 'number',
+                'type': 'number',
                 //'autosize': true,
                 //multiline: true
                 //'postfix': 'Postfix',

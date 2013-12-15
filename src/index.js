@@ -29,7 +29,8 @@
 /* borschik:include:lib/xblocks.js */
 /* borschik:include:lib/xblocks/attrs.js */
 /* borschik:include:lib/xblocks/element.js */
-/* borschik:include:lib/xblocks/types/number.js */
+/* borschik:include:lib/xblocks/type/text.js */
+/* borschik:include:lib/xblocks/type/number.js */
 
 //borschik.addLinks();
 

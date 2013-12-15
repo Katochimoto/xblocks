@@ -56,21 +56,21 @@
                     this.node.removeAttribute('value');
                     this.controller = this.root().querySelector('input,textarea');
 
+                    requirejs([ 'type/' + this.attrs.type ], function(number) {
+
+                    });
+
                     // авторесайз поля по содержимому
                     this.autosizeInit();
 
                     this.lock(false);
                 });
 
-                this.xblock.on('click', function(event) {
-                    if (xtag.hasClass(event.target, 'js-reset')) {
-                        this.lock(true);
-                        this.controller.value = '';
-
-                        this.autosizeUpdate(0);
-                        this.lock(false);
-                    }
-
+                this.xblock.on('click:delegate(.js-reset)', function(event) {
+                    this.lock(true);
+                    this.controller.value = '';
+                    this.autosizeUpdate(0);
+                    this.lock(false);
                     return true;
                 });
 

@@ -85,17 +85,12 @@ controllerAttrs = [
 
 
 match .* template-content {
-if (.attrs.ico.attrs.float == 'right') {
-    apply . xb-core-content
-    apply .attrs.ico template-ico
-} else {
     apply .attrs.ico template-ico
     apply . xb-core-content
-}
 }
 
 match .attrs.ico template-ico {
-<xb-ico>
+<xb-ico class="xb-ico_float_{.attrs.float}">
     apply .attrs.* xb-core-attrs
     .content
 </xb-ico>
