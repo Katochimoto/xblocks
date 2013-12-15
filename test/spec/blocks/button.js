@@ -30,7 +30,7 @@ describe('button', function() {
                 //'checked': true,
                 //'flying': true,
                 //'disabled': true,
-                //'reset': true,
+                'reset': true,
                 //'prefix': 'Prefix',
                 //'value': 'asd'
                 //'multiline': true,
@@ -43,7 +43,7 @@ describe('button', function() {
                 //'autosize': true,
                 //multiline: true
                 //'postfix': 'Postfix',
-                readonly: true
+                //readonly: true
             }
         };
 
@@ -87,7 +87,8 @@ describe('button', function() {
         div.innerHTML = yr.run('xb-ico', {
             attrs: {
                 type: 'dropdown',
-                active: false
+                active: false,
+                class: 'asd'
             }
         }, 'xb-ico');
         document.getElementById('mocha').appendChild(div.firstChild);
