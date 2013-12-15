@@ -27,6 +27,8 @@ match .* xb-core-attrs__common (prefix) {
         'multiple'
         'checked'
         'required'
+        'readonly'
+        'selected'
     ]
 
     if (xb-inarray(name, boolAttrs)) {

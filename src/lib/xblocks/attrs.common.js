@@ -1,3 +1,5 @@
+/** @namespace attrs */
+
 /**
  *
  * @param {Object} target
@@ -13,7 +15,7 @@ function ns(target, name, value) {
         var part = sname[i];
         var type = typeof(namespace[part]);
         if (type === 'undefined') {
-            namespace = namespace[part] = target[part] || new AttrsComplex();
+            namespace = namespace[part] = new AttrsComplex(target[part] || {});
         } else if (type !== 'object') {
             var obj = {};
             obj[attrs.ATTR_COMPLEX_VALUE] = namespace[part];

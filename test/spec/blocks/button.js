@@ -14,7 +14,10 @@ describe('button', function() {
                 name: 'te"st',
                 'size': 'xl',
                 href: '#',
-                theme: 'promo'
+                theme: 'promo',
+                type: 'file',
+                'ico-type': 'remove',
+                'ico-float': 'right'
             }
         };
 
@@ -27,19 +30,20 @@ describe('button', function() {
                 //'checked': true,
                 //'flying': true,
                 //'disabled': true,
-                'reset': true,
-                'prefix': 'Prefix',
+                //'reset': true,
+                //'prefix': 'Prefix',
                 //'value': 'asd'
                 //'multiline': true,
-                'label': 'Label',
-                'label-href': 'http://ya.ru',
-                'label-target': '_blank',
-                'label-ico-qwe': '_blank',
-                'label-ico-asd': '_blank',
-                'type': 'number',
+                //'label': 'Label',
+                //'label-href': 'http://ya.ru',
+                //'label-target': '_blank',
+                //'label-ico-qwe': '_blank',
+                //'label-ico-asd': '_blank',
+                //'type': 'number',
                 //'autosize': true,
                 //multiline: true
-                'postfix': 'Postfix'
+                //'postfix': 'Postfix',
+                readonly: true
             }
         };
 

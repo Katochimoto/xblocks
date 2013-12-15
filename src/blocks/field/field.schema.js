@@ -71,6 +71,11 @@ tv4.addSchema('http://xblocks.ru/xb-field', {
                     "id": "http://xblocks.ru/xb-field/attrs/required",
                     "required":false
                 },
+                "readonly": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-field/attrs/readonly",
+                    "required":false
+                },
                 "value": {
                     "id": "http://xblocks.ru/xb-field/attrs/value",
                     "required":false,

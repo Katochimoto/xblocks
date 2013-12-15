@@ -22,12 +22,6 @@ match / xb-field {
 }
 
 match /[.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label || .attrs.autosize] template {
-controllerAttrs = [
-    'name'
-    'disabled'
-    'placeholder'
-]
-
 <label class="xb-field_complex">
     apply .attrs.* block-class
 
@@ -55,37 +49,34 @@ controllerAttrs = [
     }
 
     <span class="xb-field_complex__content">
-        if (.attrs.multiline) {
-            <textarea class="xb-field_complex__controller">
-                apply .attrs.* xb-core-attrs (xb-concat-array(controllerAttrs, [
-                    'rows'
-                    'cols'
-                ]))
-                .attrs.value
-            </textarea>
-        } else {
-            <input class="xb-field_complex__controller" type="text">
-                apply .attrs.* xb-core-attrs (xb-concat-array(controllerAttrs, [
-                    'value'
-                ]))
-            </input>
-        }
+        apply . template-controller ('xb-field_complex__controller', false())
         <span class="xb-field_complex__view">&nbsp;</span>
     </span>
 </label>
 }
 
 match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label || .attrs.autosize)] template {
+
+    apply . template-controller ('xb-field_simple', true())
+
+}
+
+match . template-controller (class, is-complex) {
 controllerAttrs = [
     'name'
     'disabled'
     'placeholder'
+    'readonly'
 ]
 
-
 if (.attrs.multiline) {
-    <textarea class="xb-field_simple">
-        apply .attrs.* block-class
+    <textarea>
+        @class = (
+            class
+        )
+        if (is-complex) {
+            apply .attrs.* block-class
+        }
         apply .attrs.* xb-core-attrs (xb-concat-array(controllerAttrs, [
             'rows'
             'cols'
@@ -93,8 +84,13 @@ if (.attrs.multiline) {
         .attrs.value
     </textarea>
 } else {
-    <input class="xb-field_simple" type="text">
-        apply .attrs.* block-class
+    <input type="text">
+        @class = (
+            class
+        )
+        if (is-complex) {
+            apply .attrs.* block-class
+        }
         apply .attrs.* xb-core-attrs (xb-concat-array(controllerAttrs, [
             'value'
         ]))

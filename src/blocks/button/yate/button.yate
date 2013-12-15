@@ -40,7 +40,7 @@ controllerAttrs = [
     apply .attrs.* xb-core-attrs (controllerAttrs)
 
     <span class="xb-button__text">
-        apply . xb-core-content
+        apply . template-content
     </span>
 </button>
 }
@@ -54,7 +54,7 @@ controllerAttrs = [
     apply .attrs.* xb-core-attrs (controllerAttrs)
 
     <span class="xb-button__text">
-        apply . xb-core-content
+        apply . template-content
     </span>
 </a>
 }
@@ -78,7 +78,25 @@ controllerAttrs = [
         </span>
     </span>
     <span class="xb-button__text">
-        apply . xb-core-content
+        apply . template-content
     </span>
 </label>
+}
+
+
+match .* template-content {
+if (.attrs.ico.attrs.float == 'right') {
+    apply . xb-core-content
+    apply .attrs.ico template-ico
+} else {
+    apply .attrs.ico template-ico
+    apply . xb-core-content
+}
+}
+
+match .attrs.ico template-ico {
+<xb-ico>
+    apply .attrs.* xb-core-attrs
+    .content
+</xb-ico>
 }

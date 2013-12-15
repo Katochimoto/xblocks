@@ -11,6 +11,12 @@
                 xblocks.log('[button]', 'created', this.xblock);
                 xblocks.log.time('[button] created');
 
+                this.xblock.on('update', function() {
+                    this.lock(true);
+                    this.node.removeAttribute('value');
+                    this.lock(false);
+                });
+
                 this.xblock.update();
 
                 xblocks.log.timeEnd('[button] created');
