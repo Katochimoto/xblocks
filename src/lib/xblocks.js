@@ -36,7 +36,7 @@
 
 
     var __options = {
-        inlineStyle: Modernizr.stylescoped || Modernizr.createshadowroot
+
     };
 
     xblocks.option = function(name, value) {
@@ -80,7 +80,11 @@
         return content && content.innerHTML || element.innerHTML;
     };
 
-
+    /* borschik:include:xblocks/attrs.js */
+    /* borschik:include:xblocks/element.js */
+    /* borschik:include:xblocks/type/text.js */
+    /* borschik:include:xblocks/type/date.js */
+    /* borschik:include:xblocks/type/number.js */
 
 }());
 

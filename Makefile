@@ -84,8 +84,8 @@ build/xblocks.yate.js: src/lib/yate/xblocks.yate.js $(YATE_JS)
 ### JS #############################################
 
 build/_xblocks.js: node_modules
-build/_xblocks.js: src/index.js $(JS) $(JSON)
-	$(NPM_BIN)/borschik --input=src/index.js --minimize=no --output=build/xblocks.js
+build/_xblocks.js: src/main.js $(JS) $(JSON)
+	$(NPM_BIN)/borschik --input=src/main.js --minimize=no --output=build/xblocks.js
 	$(NPM_BIN)/borschik --input=build/xblocks.js --output=build/_xblocks.js
 
 
@@ -96,7 +96,7 @@ node_modules: package.json
 
 
 #build:
-#	./node_modules/.bin/requirer index.js strftime.js
+#	./node_modules/.bin/requirer main.js strftime.js
 
 #prod: build
 #	./node_modules/.bin/uglifyjs -o strftime.min.js strftime.js

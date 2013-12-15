@@ -39,7 +39,13 @@
         "requirer": "*",
         "mocha": "*",
         "expect.js": "*",
-        "x-tag-core": "x-tag/core#0.8.20"
+        "x-tag-core": "x-tag/core#0.9.0",
+        "grunt": "~0.4.2",
+        "grunt-contrib-jshint": "~0.6.3",
+        "grunt-contrib-nodeunit": "~0.2.0",
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-contrib-concat": "*",
+        "grunt-borschik": "*"
     },
     "engines": {
         "node": "*"
