@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         dirs: {
             src: 'src',
-            dest: 'build/<%= pkg.name %>/<%= pkg.version %>/src'
+            dest: 'build/<%= pkg.name %>/<%= pkg.version %>'
         },
 
         borschik: {
