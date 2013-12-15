@@ -45,7 +45,8 @@
         "grunt-contrib-nodeunit": "~0.2.0",
         "grunt-contrib-uglify": "~0.2.2",
         "grunt-contrib-concat": "*",
-        "grunt-borschik": "*"
+        "grunt-borschik": "*",
+        "grunt-yate": "*"
     },
     "engines": {
         "node": "*"

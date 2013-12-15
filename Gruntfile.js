@@ -23,12 +23,24 @@ module.exports = function(grunt) {
                 src: '<%= dirs.dest %>/main.js',
                 dest: '<%= dirs.dest %>/main.min.js'
             }
-        }
+        },
 
+        yate: {
+            options: {},
+            dist: {
+                files: {
+                    '<%= dirs.dest %>/main.yate.js': [
+                        '<%= dirs.src %>/lib/yate/*.yate',
+                        '<%= dirs.src %>/blocks/**/*.yate'
+                    ]
+                }
+            }
+        }
 
     });
 
     grunt.loadNpmTasks('grunt-borschik');
+    grunt.loadNpmTasks('grunt-yate');
 
     grunt.registerTask('default', ['borschik']);
 };
