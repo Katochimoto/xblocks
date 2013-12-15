@@ -39,7 +39,7 @@ describe('button', function() {
                 //'label-target': '_blank',
                 //'label-ico-qwe': '_blank',
                 //'label-ico-asd': '_blank',
-                'type': 'number',
+                'type': 'date',
                 //'autosize': true,
                 //multiline: true
                 //'postfix': 'Postfix',

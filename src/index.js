@@ -30,6 +30,7 @@
 /* borschik:include:lib/xblocks/attrs.js */
 /* borschik:include:lib/xblocks/element.js */
 /* borschik:include:lib/xblocks/type/text.js */
+/* borschik:include:lib/xblocks/type/date.js */
 /* borschik:include:lib/xblocks/type/number.js */
 
 //borschik.addLinks();
@@ -40,4 +41,12 @@
 /* borschik:include:blocks/field/field.js */
 
 xblocks.option('inlineStyle', false);
+
+requirejs.config({
+    baseUrl: 'build',
+    shim: {
+        'jquery/ui': [ 'jquery' ],
+        'jquery/ui/datepicker': [ 'jquery', 'jquery/ui' ]
+    }
+});
 

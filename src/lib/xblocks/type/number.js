@@ -1,7 +1,9 @@
 (function(xtag) {
     'use strict';
 
-    define('type/number', function() {
+    define('type/number', function($) {
+        console.log(arguments);
+
         return function(xbel) {
             function onkeydown() {}
 
