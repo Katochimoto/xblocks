@@ -7,8 +7,36 @@ module.exports = function(grunt) {
             dest: 'build/<%= pkg.name %>/<%= pkg.version %>'
         },
 
+        watch: {
+            'src-js': {
+                files: [
+                    '<%= dirs.src %>/**/*.js'
+                ],
+                tasks: ['src-js']
+            },
+            'src-styl': {
+                files: [
+                    '<%= dirs.src %>/**/*.styl',
+                    '../node_modules/stylobate/**/*.styl',
+                    '../node_modules/stylobate-islands/**/*.styl'
+                ],
+                tasks: ['src-styl']
+            },
+            'src-yate': {
+                files: [
+                    '<%= dirs.src %>/**/*.yate'
+                ],
+                tasks: ['src-yate']
+            }
+        },
+
+        clean: {
+            'dest': '<%= dirs.dest %>',
+            'yate-tmp': '<%= dirs.dest %>/blocks'
+        },
+
         borschik: {
-            main: {
+            'js': {
                 options: {
                     minimize: 'no'
                 },
@@ -72,7 +100,7 @@ module.exports = function(grunt) {
 
         yate: {
             // формирование общих модулей
-            main: {
+            modules: {
                 options: {},
                 src: '<%= dirs.src %>/lib/yate/<%= pkg.name %>.yate',
                 dest: '<%= dirs.src %>/lib/yate/<%= pkg.name %>.yate.js'
@@ -98,10 +126,34 @@ module.exports = function(grunt) {
 
     });
 
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-borschik');
     grunt.loadNpmTasks('grunt-yate');
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['stylus', 'yate', 'concat', 'borschik']);
+    grunt.registerTask('src-yate', [
+        'yate',
+        'concat:yate',
+        'borschik:yate-minimize',
+        'clean:yate-tmp'
+    ]);
+
+    grunt.registerTask('src-styl', [
+        'stylus',
+        'borschik:css-minimize'
+    ]);
+
+    grunt.registerTask('src-js', [
+        'borschik:js',
+        'borschik:js-minimize'
+    ]);
+
+    grunt.registerTask('default', [
+        'clean:dest',
+        'src-yate',
+        'src-styl',
+        'src-js'
+    ]);
 };
