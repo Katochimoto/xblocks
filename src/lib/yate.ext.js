@@ -35,7 +35,7 @@
         var ret = [];
         var l = arguments.length;
 
-        while(l--) {
+        while (l--) {
             var val = arguments[l];
             if (!ext['xb-empty-array'](val)) {
                 ret = ret.concat(val);

@@ -1,5 +1,12 @@
 module.exports = function(grunt) {
 
+    //build/freeze.json: $(CSS) node_modules
+    //$(NPM_BIN)/borschik --tech=json --input=freeze.json --output=$@
+
+    //./node_modules/.bin/jshint .
+    //./node_modules/.bin/jscs .
+ 	//./node_modules/.bin/mocha --reporter dot $(TESTS
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         dirs: {
@@ -74,8 +81,12 @@ module.exports = function(grunt) {
                 options: {
                     separator: '\n;\n'
                 },
-                src: '<%= dirs.dest %>/blocks/*.yate.js',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.yate.js'
+                files: {
+                    '<%= dirs.dest %>/<%= pkg.name %>.yate.js': [
+                        '<%= dirs.src %>/lib/**/*.yate.js',
+                        '<%= dirs.dest %>/blocks/*.yate.js'
+                    ]
+                }
             }
         },
 

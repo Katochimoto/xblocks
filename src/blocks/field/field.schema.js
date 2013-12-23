@@ -84,6 +84,21 @@ tv4.addSchema('http://xblocks.ru/xb-field', {
                     "required":false,
                     "type": "string"
                 },
+                "prefix": {
+                    "id": "http://xblocks.ru/xb-field/attrs/prefix",
+                    "required":false,
+                    "type": "string"
+                },
+                "postfix": {
+                    "id": "http://xblocks.ru/xb-field/attrs/postfix",
+                    "required":false,
+                    "type": "string"
+                },
+                "reset": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-field/attrs/reset",
+                    "required":false
+                },
 
 
 
