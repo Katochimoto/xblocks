@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -13,71 +13,298 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Xblocks by Katochimoto</title>
-  </head>
+    <link rel="stylesheet" type="text/css" href="xblocks/0.0.2/xblocks.min.css" />
+    <script src="xblocks/0.0.2/xblocks.min.js"></script>
+    <script src="xblocks/0.0.2/xblocks.min.yate.js"></script>
 
-  <body>
-    <header>
-      <div class="inner">
+    <title>Xblocks by Katochimoto</title>
+</head>
+
+<body>
+<header>
+    <div class="inner">
         <h1>Xblocks</h1>
         <h2></h2>
         <a href="https://github.com/Katochimoto/xblocks" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+    </div>
+</header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
+<div id="content-wrapper">
+    <div class="inner clearfix">
         <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+            <h3>
+                <a name="welcome-to-github-pages" class="anchor" href="#ico">
+                    <span class="octicon octicon-link"></span>
+                </a>
+                Ico.
+            </h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+            <table>
+                <tr>
+                    <th colspan="2">Type</th>
+                    <th>Active</th>
+                    <th>Disabled</th>
+                </tr>
+                <tr>
+                    <td width="25%">remove</td>
+                    <td width="25%"><xb-ico type="remove"></xb-ico></td>
+                    <td width="25%"><xb-ico type="remove" active="true"></xb-ico></td>
+                    <td width="25%"><xb-ico type="remove" disabled="true"></xb-ico></td>
+                </tr>
+                <tr>
+                    <td>notification</td>
+                    <td><xb-ico type="notification"></xb-ico></td>
+                    <td><xb-ico type="notification" active="true"></xb-ico></td>
+                    <td><xb-ico type="notification" disabled="true"></xb-ico></td>
+                </tr>
+                <tr>
+                    <td>check</td>
+                    <td><xb-ico type="check"></xb-ico></td>
+                    <td><xb-ico type="check" active="true"></xb-ico></td>
+                    <td><xb-ico type="check" disabled="true"></xb-ico></td>
+                </tr>
+                <tr>
+                    <td>dropdown</td>
+                    <td><xb-ico type="dropdown"></xb-ico></td>
+                    <td><xb-ico type="dropdown" active="true"></xb-ico></td>
+                    <td><xb-ico type="dropdown" disabled="true"></xb-ico></td>
+                </tr>
+            </table>
+            <!--
+            <p>
+                This automatic page generator is the easiest way to create beautiful pages for all of your projects.
+                Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer,
+                and publish. After your page is generated, you can check out the new branch:
+            </p>
+            -->
+            <br>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<pre><code>&lt;xb-ico
+    type="remove"
+    active="true"
+    class="blabla"
+    id="qwe"
+    alt="qwe"
+    float="left"
+    disabled="true">&lt;/xb-ico></code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+            <!--
+            <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+            -->
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+            <h3>
+                <a name="designer-templates" class="anchor" href="#link">
+                    <span class="octicon octicon-link"></span>
+                </a>
+                Link.
+            </h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+            <table>
+                <tr>
+                    <th colspan="2">Type</th>
+                    <th>Disabled</th>
+                </tr>
+                <tr>
+                    <td width="20%">normal</td>
+                    <td width="40%"><xb-link type="normal" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td width="40%"><xb-link type="normal" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                </tr>
+                <tr>
+                    <td>outer</td>
+                    <td><xb-link type="outer" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td><xb-link type="outer" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                </tr>
+                <tr>
+                    <td>pseudo</td>
+                    <td><xb-link type="pseudo" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td><xb-link type="pseudo" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                </tr>
+                <tr>
+                    <td>input</td>
+                    <td><xb-link type="input" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td><xb-link type="input" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                </tr>
+            </table>
+            <br>
+<pre><code>&lt;xb-link
+    type="normal"
+    href="http://ya.ru"
+    target="_blank"
+    class="blabla"
+    id="qwe"
+    name="qwe"
+    disabled="true">Link&lt;/xb-link></code></pre>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+            <h3>
+                <a name="designer-templates" class="anchor" href="#button">
+                    <span class="octicon octicon-link"></span>
+                </a>
+                Button.
+            </h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+            <table>
+                <tr>
+                    <th colspan="2">Theme</th>
+                    <th>Flying</th>
+                    <th>Disabled</th>
+                    <th>Checked</th>
+                </tr>
+                <tr>
+                    <td width="15%">normal</td>
+                    <td><xb-button theme="normal">Button</xb-button></td>
+                    <td><xb-button theme="normal" flying="true">Button</xb-button></td>
+                    <td><xb-button theme="normal" disabled="true">Button</xb-button></td>
+                    <td><xb-button theme="normal" checked="true">Button</xb-button></td>
+                </tr>
+                <tr>
+                    <td>action</td>
+                    <td><xb-button theme="action">Button</xb-button></td>
+                    <td><xb-button theme="action" flying="true">Button</xb-button></td>
+                    <td><xb-button theme="action" disabled="true">Button</xb-button></td>
+                    <td><xb-button theme="action" checked="true">Button</xb-button></td>
+                </tr>
+                <tr>
+                    <td>dark</td>
+                    <td><xb-button theme="dark">Button</xb-button></td>
+                    <td><xb-button theme="dark" flying="true">Button</xb-button></td>
+                    <td><xb-button theme="dark" disabled="true">Button</xb-button></td>
+                    <td><xb-button theme="dark" checked="true">Button</xb-button></td>
+                </tr>
+                <tr>
+                    <td>pseudo</td>
+                    <td><xb-button theme="pseudo">Button</xb-button></td>
+                    <td><xb-button theme="pseudo" flying="true">Button</xb-button></td>
+                    <td><xb-button theme="pseudo" disabled="true">Button</xb-button></td>
+                    <td><xb-button theme="pseudo" checked="true">Button</xb-button></td>
+                </tr>
+                <tr>
+                    <td>promo</td>
+                    <td><xb-button theme="promo">Button</xb-button></td>
+                    <td><xb-button theme="promo" flying="true">Button</xb-button></td>
+                    <td><xb-button theme="promo" disabled="true">Button</xb-button></td>
+                    <td><xb-button theme="promo" checked="true">Button</xb-button></td>
+                </tr>
+            </table>
+            <br>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+            <xb-button theme="action" ico-type="remove" ico-float="left">Button</xb-button>
+            <xb-button theme="action" ico-type="remove" ico-float="right">Button</xb-button>
+            <br>  <br>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<pre><code>&lt;xb-button
+    theme="action"
+    size="s"
+    disabled="true"
+    class="blabla"
+    checked="true"
+    href="http://ya.ru"
+    id="qwe"
+    multiple="true"
+    name="qwe"
+    target="_blank"
+    type="button"
+    flying="true"
+    ico-...
+    >Button&lt;/xb-button></code></pre>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+            <h3>
+                <a name="designer-templates" class="anchor" href="#field">
+                    <span class="octicon octicon-link"></span>
+                </a>
+                Field.
+            </h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+            <p>
+                <xb-field autosize="true" value="autosize"></xb-field>
+            </p>
+            <p>
+                <xb-field autosize="true"
+                          multiline="true"
+                          value="autosize multiline"
+                          rows="5"
+                          cols="10"></xb-field>
+            </p>
+            <p>
+                <xb-field disabled="true" value="disabled"></xb-field>
+            </p>
+            <p>
+                <xb-field placeholder="placeholder "></xb-field>
+            </p>
+            <p>
+                <xb-field readonly="true" value="readonly"></xb-field>
+            </p>
+            <p>
+                <xb-field prefix="Prefix"></xb-field>
+            </p>
+            <p>
+                <xb-field postfix="Postfix"></xb-field>
+            </p>
+            <p>
+                <xb-field reset="true"></xb-field>
+            </p>
+            <p>
+                <xb-field reset="true" multiline="true" value="reset multiline" rows="5"></xb-field>
+            </p>
+            <p>
+                <xb-field label="Label" label-href="http://ya.ru" label-target="_blank"></xb-field>
+            </p>
+
+<pre><code>&lt;xb-field
+    reset="true"
+    postfix="qwe"
+    prefix="qwe"
+    value="qwe"
+    readonly="true"
+    required="true"
+    placeholder="qwe"
+    cols="6"
+    rows="6"
+    type="date"
+    name="asd"
+    id="qwe"
+    multiline="true"
+    autosize="true"
+    class="blabla"
+    disabled="true"
+    label="Label"
+    label-...>Link&lt;/xb-field></code></pre>
+            <!--
+            <p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+
+            <h3>
+                <a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+
+            <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+
+            <h3>
+                <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+            <p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+
+            <h3>
+                <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+            <p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+            -->
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/Katochimoto/xblocks/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/Katochimoto/xblocks/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+            <a href="https://github.com/Katochimoto/xblocks/zipball/master" class="button">
+                <small>Download</small>
+                .zip file
+            </a>
+            <a href="https://github.com/Katochimoto/xblocks/tarball/master" class="button">
+                <small>Download</small>
+                .tar.gz file
+            </a>
 
-          <p class="repo-owner"><a href="https://github.com/Katochimoto/xblocks"></a> is maintained by <a href="https://github.com/Katochimoto">Katochimoto</a>.</p>
+            <p class="repo-owner"><a href="https://github.com/Katochimoto/xblocks"></a> is maintained by <a href="https://github.com/Katochimoto">Katochimoto</a>.</p>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+            <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
-      </div>
     </div>
+</div>
 
-  
-  </body>
+
+</body>
 </html>
