@@ -7,9 +7,9 @@
     attrs.SEPARATOR = '-';
     attrs.ATTR_COMPLEX_VALUE = '_';
 
-    /* borschik:include:attrs.common.js */
-    /* borschik:include:attrs.plain.js */
-    /* borschik:include:attrs.complex.js */
+    /* borschik:include:attrs/common.js */
+    /* borschik:include:attrs/plain.js */
+    /* borschik:include:attrs/complex.js */
 
     /**
      *
