@@ -1,9 +1,15 @@
 /* borschik:include:../node_modules/yate/lib/runtime.js */
 /* borschik:include:../node_modules/borschik/js/borschik.js */
 /* borschik:include:../node_modules/x-tag-core/dist/x-tag-core.js */
+/* borschik:include:../node_modules/requirejs/require.js */
 
-
-
+requirejs.config({
+    baseUrl: 'build',
+    shim: {
+        'jquery/ui': [ 'jquery' ],
+        'jquery/ui/datepicker': [ 'jquery', 'jquery/ui' ]
+    }
+});
 
 
 /* borschik:include:../node_modules/tv4/tv4.js */
@@ -19,15 +25,9 @@
 
 
 
-/* borschik:include:lib/require.js */
 
-requirejs.config({
-    baseUrl: 'build',
-    shim: {
-        'jquery/ui': [ 'jquery' ],
-        'jquery/ui/datepicker': [ 'jquery', 'jquery/ui' ]
-    }
-});
+
+
 
 
 

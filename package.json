@@ -37,6 +37,7 @@
         "jshint": "*",
         "uglify-js": "*",
         "requirer": "*",
+        "requirejs": "*",
         "mocha": "*",
         "expect.js": "*",
         "x-tag-core": "x-tag/core#0.9.1",
