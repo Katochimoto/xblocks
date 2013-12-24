@@ -26,9 +26,6 @@
         "stylobate-islands": "*"
     },
     "devDependencies": {
-        "curl": "cujojs/curl#0.8.7",
-        "requirer": "*",
-
         "tv4": "*",
         "nopt": "*",
         "yate": "*",
@@ -39,6 +36,7 @@
         "jscs": "*",
         "jshint": "*",
         "uglify-js": "*",
+        "requirer": "*",
         "mocha": "*",
         "expect.js": "*",
         "x-tag-core": "x-tag/core#0.9.1",

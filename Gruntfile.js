@@ -14,20 +14,6 @@ module.exports = function(grunt) {
             dest: 'build/<%= pkg.name %>/<%= pkg.version %>'
         },
 
-        shell: {
-            'curl-create': {
-                command: 'node_modules/curl/bin/make.sh --NONE ' +
-                    '<%= dirs.src %>/lib/curl.js ' +
-                    'node_modules/curl/src/curl.js ' +
-                    'node_modules/curl/src/curl/plugin/js.js ' +
-                    'node_modules/curl/src/curl/plugin/css.js ' +
-                    'node_modules/curl/src/curl/loader/cjsm11.js'
-            },
-            'curl-remove': {
-                command: 'rm -f <%= dirs.src %>/lib/curl.js'
-            }
-        },
-
         watch: {
             'src-js': {
                 files: [
@@ -157,7 +143,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-shell');
 
     grunt.registerTask('src-yate', [
         'yate',
@@ -172,10 +157,8 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('src-js', [
-        'shell:curl-create',
         'borschik:js',
-        'borschik:js-minimize',
-        'shell:curl-remove'
+        'borschik:js-minimize'
     ]);
 
     grunt.registerTask('default', [
