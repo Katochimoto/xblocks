@@ -48,7 +48,7 @@
         "grunt-contrib-stylus": "*",
         "grunt-contrib-watch": "*",
         "grunt-borschik": "*",
-        "grunt-yate": "*",
+        "grunt-yate": "Lapple/grunt-yate#v0.0.16",
         "grunt-shell": "*",
         "grunt-contrib-clean": "*",
         "autoprefixer-stylus": "*",

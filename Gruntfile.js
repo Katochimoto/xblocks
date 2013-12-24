@@ -119,7 +119,7 @@ module.exports = function(grunt) {
 
             blocks: {
                 options: {
-                    modules: [
+                    import: [
                         '<%= dirs.src %>/lib/**/*.yate.obj'
                     ]
                 },
