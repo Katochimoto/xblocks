@@ -1,2 +1,18 @@
 module "xb-select"
 import "xblocks"
+
+
+match / xb-select {
+<xb-select>
+    apply .attrs.* xb-core-attrs
+    .content
+</xb-select>
+}
+
+
+match / template {
+    <xb-button>
+
+    </xb-button>
+}
+
