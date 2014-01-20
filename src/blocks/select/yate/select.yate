@@ -1,0 +1,2 @@
+module "xb-select"
+import "xblocks"
