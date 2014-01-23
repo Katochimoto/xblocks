@@ -1,7 +1,6 @@
 (function(xtag, xblocks) {
     'use strict';
 
-    xblocks = xblocks || {};
     var attrs = xblocks.attrs = {};
 
     attrs.SEPARATOR = '-';
