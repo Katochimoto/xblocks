@@ -3,8 +3,6 @@
 
     /** @namespace xblocks */
 
-    xblocks = xblocks || {};
-
     /**
      * @namespace xblocks.element
      * @memberOf xblocks
@@ -214,6 +212,7 @@
      */
     proto.observeStart = function() {
         xblocks.log.time('XBElement->observeStart');
+        
         if (!Modernizr.createshadowroot && !this.observer) {
             var that = this;
             this.observer = new MutationObserver(function() {
@@ -225,6 +224,7 @@
             this.observer.disconnect();
             this.observer.observe(this.node, { childList: true, subtree: true, characterData: true });
         }
+        
         xblocks.log.timeEnd('XBElement->observeStart');
     };
 
@@ -233,9 +233,11 @@
      */
     proto.observeStop = function() {
         xblocks.log.time('XBElement->observeStop');
+        
         if (this.observer) {
             this.observer.disconnect();
         }
+        
         xblocks.log.timeEnd('XBElement->observeStop');
     };
 
