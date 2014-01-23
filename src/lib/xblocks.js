@@ -40,13 +40,11 @@
     };
 
     xblocks.option = function(name, value) {
-        if (typeof value === 'undefined') {
-            if (typeof name === 'string') {
+        if (typeof name === 'string') {
+            if (typeof value === 'undefined') {
                 return __options[name];
-            }
 
-        } else {
-            if (typeof name === 'string') {
+            } else {
                 return __options[name] = value;
             }
         }
