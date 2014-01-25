@@ -33,7 +33,7 @@
      *
      * @param {Object} obj
      * @param {Array} [ignore]
-     * @returns {Boolean}
+     * @return {Boolean}
      */
     Object.isEmpty = function(obj, ignore) {
         if (typeof obj !== 'object') {

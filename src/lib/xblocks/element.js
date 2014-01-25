@@ -16,7 +16,7 @@
      * @param {HTMLElement} node
      * @param {Object} [params]
      * @param {Object} [proto]
-     * @returns {XBElement}
+     * @return {XBElement}
      */
     xblocks.element.create = function(node, params, proto) {
         proto = proto || {};
@@ -105,7 +105,7 @@
 
     /**
      * @method isLock
-     * @returns {Boolean}
+     * @return {Boolean}
      */
     proto.isLock = function() {
         return this._lock;
@@ -130,7 +130,7 @@
      * @method on
      * @param {String} name
      * @param {Function} callback
-     * @returns {Object}
+     * @return {Object}
      */
     proto.on = function(name, callback) {
         var cb;
@@ -291,7 +291,7 @@
     /**
      * @method html
      * @param {String} [html]
-     * @returns {String}
+     * @return {String}
      */
     proto.html = function(html) {
         if (typeof html !== 'undefined') {
@@ -312,7 +312,7 @@
 
     /**
      * @method root
-     * @returns {HTMLElement|DocumentFragment}
+     * @return {HTMLElement|DocumentFragment}
      */
     proto.root = function() {
         var root;

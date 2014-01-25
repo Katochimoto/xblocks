@@ -1,36 +1,49 @@
-(function(xtag, xblocks) {
+(function(xblocks) {
     'use strict';
 
+    /**
+     * @module xblocks.attrs
+     */
     var attrs = xblocks.attrs = {};
 
+    /**
+     * @type {string} разделитель названия атрибута
+     */
     attrs.SEPARATOR = '-';
-    attrs.ATTR_COMPLEX_VALUE = '_';
-
-    /* borschik:include:attrs/common.js */
-    /* borschik:include:attrs/plain.js */
-    /* borschik:include:attrs/complex.js */
 
     /**
+     * @type {string} значение атрибута в комплексном представлении
+     */
+    attrs.ATTR_COMPLEX_VALUE = '_';
+
+    /*! borschik:include:attrs/common.js */
+    /*! borschik:include:attrs/plain.js */
+    /*! borschik:include:attrs/complex.js */
+
+    /**
+     * Конструктор плоского представления атрибутов
      *
-     * @param {Object} obj
-     * @returns {AttrsPlain}
+     * @param {Object} obj объект атрибутов элемента
+     * @return {AttrsPlain}
      */
     attrs.plain = function(obj) {
         return new AttrsPlain(obj);
     };
 
     /**
+     * Конструктор комплексного представления атрибутов
      *
-     * @param {Object} obj
-     * @returns {AttrsComplex}
+     * @param {Object} obj объект атрибутов элемента
+     * @return {AttrsComplex}
      */
     attrs.complex = function(obj) {
         return new AttrsComplex(obj);
     };
 
     /**
+     * Выделение атрибутов элемента в плоском представлении
      *
-     * @param {HTMLElement} element
+     * @param {HTMLElement} element элемент
      * @return {AttrsPlain}
      */
     attrs.toPlainObject = function(element) {
@@ -58,8 +71,9 @@
     };
 
     /**
+     * Выделение атрибутов элемента в комплексном представлении
      *
-     * @param {HTMLElement} element
+     * @param {HTMLElement} element элемент
      * @return {AttrsComplex}
      */
     attrs.toComplexObject = function(element) {
@@ -67,8 +81,9 @@
     };
 
     /**
+     * Выделение атрибутов элемента в представлении, пригодном для проверки со схемой
      *
-     * @param {HTMLElement} element
+     * @param {HTMLElement} element элемент
      * @return {Object}
      */
     attrs.toSchemaObject = function(element) {
@@ -76,10 +91,11 @@
     };
 
     /**
+     * Проверка наличия определенного атрибута
      *
-     * @param {HTMLElement} element
-     * @param {String} attrName
-     * @return {Boolean}
+     * @param {HTMLElement} element элемент
+     * @param {String} attrName название атрибута
+     * @return {Boolean} true, если атрибут указан и его значение определено
      */
     attrs.isEmpty = function(element, attrName) {
         if (element.hasAttribute(attrName)) {
@@ -95,4 +111,4 @@
     };
 
 
-})(xtag, xblocks);
+}(xblocks));
