@@ -79,6 +79,7 @@
     };
 
     /* borschik:include:xblocks/attrs.js */
+    /* borschik:include:xblocks/block.js */
     /* borschik:include:xblocks/element.js */
     /* borschik:include:xblocks/type/text.js */
     /* borschik:include:xblocks/type/date.js */

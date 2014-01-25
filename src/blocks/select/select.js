@@ -1,10 +1,6 @@
-(function(xtag, xblocks) {
+(function(xblocks) {
     'use strict';
 
-    xtag.register('xb-select', {
-        lifecycle: {
+    var XBSelect = xblocks.create('xb-select');
 
-        }
-    });
-
-})(xtag, xblocks);
+}(xblocks));

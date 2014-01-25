@@ -28,6 +28,8 @@
      *
      * @param {HTMLElement} node
      * @param {Object} params
+     * @param {String} [params.schema]
+     * @param {Object} [params.attrs]
      * @constructor
      */
     function XBElement(node, params) {
@@ -252,7 +254,7 @@
 
         this.attrs = Object.merge(
             xblocks.attrs.plain({}),
-            this.node.defaultAttrs || {},
+            this.node.attrs || {},
             xblocks.attrs.toPlainObject(this.node)
         );
 
@@ -337,4 +339,4 @@
 
 
 
-})(xtag, xblocks, Modernizr, tv4, yr);
+}(xtag, xblocks, Modernizr, tv4, yr));
