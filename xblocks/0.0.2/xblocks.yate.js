@@ -1003,3 +1003,81 @@ var yr = yr || require('yate/lib/runtime.js');
     yr.register('xb-link', M);
 
 })();
+;
+
+var yr = yr || require('yate/lib/runtime.js');
+
+(function() {
+
+    var cmpNN = yr.cmpNN;
+    var cmpSN = yr.cmpSN;
+    var nodeset2xml = yr.nodeset2xml;
+    var nodeset2boolean = yr.nodeset2boolean;
+    var nodeset2attrvalue = yr.nodeset2attrvalue;
+    var nodeset2scalar = yr.nodeset2scalar;
+    var scalar2attrvalue = yr.scalar2attrvalue;
+    var xml2attrvalue = yr.xml2attrvalue;
+    var scalar2xml = yr.scalar2xml;
+    var xml2scalar = yr.xml2scalar;
+    var simpleScalar = yr.simpleScalar;
+    var simpleBoolean = yr.simpleBoolean;
+    var selectNametest = yr.selectNametest;
+    var closeAttrs = yr.closeAttrs;
+
+    var M = new yr.Module();
+
+    var j42 = [ ];
+
+    var j43 = [ 0, 'attrs', 0, '*' ];
+
+    var j44 = [ 0, 'content' ];
+
+    // match / : xb-select
+    M.t21 = function t21(m, c0, i0, l0, a0) {
+        var r0 = '';
+
+        r0 += closeAttrs(a0);
+        r0 += "<xb-select";
+        a0.a = {
+        };
+        a0.s = 'xb-select';
+        r0 += m.a(m, m.s(j43, c0), 'xb-core-attrs', a0)
+        r0 += closeAttrs(a0);
+        r0 += nodeset2xml( selectNametest('content', c0, []) );
+        r0 += "</xb-select>";
+
+        return r0;
+    };
+    M.t21.j = 1;
+    M.t21.a = 1;
+
+    // match / : template
+    M.t22 = function t22(m, c0, i0, l0, a0) {
+        var r0 = '';
+
+        r0 += closeAttrs(a0);
+        r0 += "<xb-button>";
+        r0 += "</xb-button>";
+
+        return r0;
+    };
+    M.t22.j = 1;
+    M.t22.a = 1;
+
+    M.matcher = {
+        "xb-select": {
+            "": [
+                "t21"
+            ]
+        },
+        "template": {
+            "": [
+                "t22"
+            ]
+        }
+    };
+    M.imports = ["xblocks"];
+
+    yr.register('xb-select', M);
+
+})();
