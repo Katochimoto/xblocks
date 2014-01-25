@@ -23,10 +23,8 @@
     /**
      * Конструктор плоского представления атрибутов
      *
-     * ### Examples:
-     *
-     *     xblocks.attrs.plain({ 'name': 'test', 'class': 'test' })
-     *
+     * @example <caption>Example usage of plain.</caption>
+     * xblocks.attrs.plain({ 'name': 'test', 'class': 'test' })
      * @param {Object} obj объект атрибутов элемента
      * @return {AttrsPlain}
      */
