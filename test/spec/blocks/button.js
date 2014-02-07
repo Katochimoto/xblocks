@@ -1,9 +1,7 @@
-if (typeof require == 'function') {
-    /*jshint -W020 */
-    //expect = require('expect.js');
-}
+var expect = chai.expect;
 
 describe('button', function() {
-
-
+    it('asd', function() {
+        expect('bar').to.equal('bar');
+    });
 });
