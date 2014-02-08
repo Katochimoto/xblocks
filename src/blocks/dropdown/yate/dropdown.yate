@@ -1,0 +1,19 @@
+module "xb-dropdown"
+import "xblocks"
+
+
+match / xb-dropdown {
+<xb-dropdown>
+    apply .attrs.* xb-core-attrs
+    .content
+</xb-dropdown>
+}
+
+
+match / template {
+<div class="xb-dropdown">
+    apply .attrs.* xb-core-attrs
+    apply . xb-core-content
+</div>
+}
+

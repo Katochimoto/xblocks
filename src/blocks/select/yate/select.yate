@@ -11,13 +11,14 @@ match / xb-select {
 
 
 match / template {
-<label>
+<div class="xb-select">
     <xb-button>
         apply .attrs.button.attrs.* xb-core-attrs
     </xb-button>
-    <div class="" style="position: absolute;background: white;min-width: 100px;border: 1px solid;">
-        apply . xb-core-content
-    </div>
-</label>
+    <xb-dropdown class="xb-select_dropdown">
+        apply .attrs.dropdown.attrs.* xb-core-attrs
+        html(.content)
+    </xb-dropdown>
+</div>
 }
 

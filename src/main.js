@@ -41,6 +41,8 @@
 /*! borschik:include:blocks/button/button.js */
 /*! borschik:include:blocks/field/field.js */
 /*! borschik:include:blocks/select/select.js */
+/*! borschik:include:blocks/dropdown/dropdown.js */
+
 
 
 
