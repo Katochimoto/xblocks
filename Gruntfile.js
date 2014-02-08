@@ -14,7 +14,20 @@ module.exports = function(grunt) {
             dest: 'build/<%= pkg.name %>/<%= pkg.version %>'
         },
 
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js',
+                autoWatch: true
+                //background: true
+            }
+        },
+
         watch: {
+            //karma: {
+            //    files: ['test/**/*.js'],
+            //    tasks: ['karma:unit:run']
+            //},
+
             'src-js': {
                 files: [
                     '<%= dirs.src %>/**/*.js'
@@ -137,6 +150,7 @@ module.exports = function(grunt) {
 
     });
 
+    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-borschik');
     grunt.loadNpmTasks('grunt-yate');
