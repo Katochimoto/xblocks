@@ -278,7 +278,10 @@
 
         // формируются только атрибуты первой вложенности toSchema(1)
         // этого достаточно для описания псевдо-элементов, вложенных в текущий
-        var html = yr.run(this.module, complexAttrs.toSchema(1), 'template');
+        var tmplData = complexAttrs.toSchema(1);
+        tmplData['__contentClass'] = this.getClassContent();
+
+        var html = yr.run(this.module, tmplData, 'template');
         var template = xtag.createFragment(html);
         var root = this.root();
 
@@ -308,7 +311,7 @@
 
         var content;
         if (!Modernizr.createshadowroot) {
-            content = this.node.querySelector('content');
+            content = this.node.querySelector('.' + this.getClassContent());
         }
 
         if (content) {
@@ -339,6 +342,10 @@
         }
 
         return root;
+    };
+
+    proto.getClassContent = function() {
+        return this.module + '-content';
     };
 
 

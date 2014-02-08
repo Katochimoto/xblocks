@@ -48,7 +48,7 @@ match .* xb-core-attrs__common (prefix) {
 }
 
 match .* xb-core-content (escape = '') {
-    <content>
+    <content class="{.__contentClass}">
         if (!xb-modernizr('createshadowroot')) {
             if (boolean(escape)) {
                 .content
