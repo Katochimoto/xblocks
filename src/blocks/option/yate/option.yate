@@ -1,0 +1,18 @@
+module "xb-option"
+import "xblocks"
+
+
+match / xb-option {
+<xb-option>
+    apply .attrs.* xb-core-attrs
+    .content
+</xb-option>
+}
+
+
+match / template {
+<div class="xb-option">
+    apply . xb-core-content
+</div>
+}
+

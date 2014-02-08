@@ -1,0 +1,18 @@
+module "xb-optgroup"
+import "xblocks"
+
+
+match / xb-optgroup {
+<xb-optgroup>
+    apply .attrs.* xb-core-attrs
+    .content
+</xb-optgroup>
+}
+
+
+match / template {
+<div class="xb-optgroup">
+    apply . xb-core-content
+</div>
+}
+

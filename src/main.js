@@ -34,11 +34,14 @@
 
 //borschik.addLinks();
 
+/*! borschik:include:blocks/optgroup/optgroup.js */
+/*! borschik:include:blocks/option/option.js */
 /*! borschik:include:blocks/link/link.js */
 /*! borschik:include:blocks/ico/ico.js */
 /*! borschik:include:blocks/button/button.js */
 /*! borschik:include:blocks/field/field.js */
 /*! borschik:include:blocks/select/select.js */
+
 
 
 

@@ -265,12 +265,16 @@
 
         if (tv4 && this.schema) {
             var schema = tv4.getSchema(this.schema);
-            var check = tv4.validateResult(complexAttrs.toSchema(), schema);
 
-            if (!check.valid) {
-                throw check.error;
+            if (schema) {
+                var check = tv4.validateResult(complexAttrs.toSchema(), schema);
+
+                if (!check.valid) {
+                    throw check.error;
+                }
             }
         }
+
 
         // формируются только атрибуты первой вложенности toSchema(1)
         // этого достаточно для описания псевдо-элементов, вложенных в текущий
@@ -307,7 +311,12 @@
             content = this.node.querySelector('content');
         }
 
-        return content && content.innerHTML || this.node.innerHTML;
+        if (content) {
+            return content.innerHTML;
+
+        } else {
+            return this.node.innerHTML;
+        }
     };
 
     /**

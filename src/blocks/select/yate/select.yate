@@ -15,11 +15,9 @@ match / template {
     <xb-button>
         apply .attrs.button.attrs.* xb-core-attrs
     </xb-button>
-
-    <input type="text" tabindex="0" disabled="disabled" />
-
-
-    apply . xb-core-content
+    <div class="" style="position: absolute;background: white;min-width: 100px;border: 1px solid;">
+        apply . xb-core-content
+    </div>
 </label>
 }
 

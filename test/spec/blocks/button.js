@@ -40,6 +40,4 @@ describe('Кнопка', function() {
     it('свойство attrs содержит объект атрибутов по умолчанию', function() {
         expect(this.el.attrs).to.eql({ theme: 'normal', size: 'm' });
     });
-
-
 });
