@@ -14,6 +14,7 @@ module.exports = function(grunt) {
             dest: 'build/<%= pkg.name %>/<%= pkg.version %>'
         },
 
+        // @see https://github.com/karma-runner/grunt-karma
         karma: {
             unit: {
                 configFile: 'karma.conf.js',

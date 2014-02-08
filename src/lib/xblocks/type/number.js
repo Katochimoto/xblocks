@@ -1,6 +1,7 @@
 (function(xtag) {
     'use strict';
 
+    /*
     define('type/number', function($) {
         return function(xbel) {
             function onkeydown() {}
@@ -32,5 +33,6 @@
             };
         };
     });
+    */
 
 })(xtag);
