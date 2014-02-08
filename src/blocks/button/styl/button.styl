@@ -1,7 +1,7 @@
 @import '_skin-dark'
 
 $skin-islands-button-content = '.xb-button__text'
-$skin-islands-button-disabled = '.xb-button_disabled'
+$skin-islands-button-disabled = '.is-disabled'
 
 // Обычная кнопка
 .xb-button_theme_normal
@@ -17,6 +17,9 @@ $skin-islands-button-disabled = '.xb-button_disabled'
 
   &.xb-button_checked
     skin: button_checked
+
+  &.is-disabled
+    skin: disabled
 
 
 // Промо кнопка
@@ -47,6 +50,9 @@ $skin-islands-button-disabled = '.xb-button_disabled'
 
   &.xb-button_checked
     skin: button_checked
+
+  &.is-disabled
+    skin: disabled
 
 
 
@@ -93,7 +99,8 @@ $skin-islands-button-disabled = '.xb-button_disabled'
     &.xb-button_checked
       skin: button_checked
 
-
+  &.is-disabled
+    skin: disabled
 
 
 
@@ -115,7 +122,8 @@ $skin-islands-button-disabled = '.xb-button_disabled'
   &.xb-button_checked
     skin: button_checked
 
-
+  &.is-disabled
+    skin: disabled
 
 
 
@@ -134,7 +142,8 @@ $skin-islands-button-disabled = '.xb-button_disabled'
   &.xb-button_checked
     skin: button_checked
 
-
+  &.is-disabled
+    skin: disabled
 
 
 
@@ -155,14 +164,8 @@ $skin-islands-button-disabled = '.xb-button_disabled'
   &.xb-button_checked
     skin: button_checked
 
-
-
-
-
-// Задизейбленная кнопка
-.xb-button_disabled
-  skin: disabled
-
+  &.is-disabled
+    skin: disabled
 
 
 // Кнопка аттача

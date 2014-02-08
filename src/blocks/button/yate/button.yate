@@ -3,7 +3,7 @@ import "xblocks"
 
 match .* block-class {
     if (name() == 'disabled' && boolean(.)) {
-        @class += " xb-button_disabled"
+        @class += " is-disabled"
     }
 
     if (name() == 'flying' && boolean(.)) {

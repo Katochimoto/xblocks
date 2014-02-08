@@ -3,4 +3,21 @@
 
     var XBSelect = xblocks.create('xb-select');
 
+    XBSelect.attrs = {
+        get: function() {
+            return {
+                button: {
+                    attrs: {
+                        'theme': 'normal',
+                        'size': 'm',
+                        'ico-type': 'dropdown',
+                        'ico-float': 'right'
+                    }
+                }
+            };
+        }
+    };
+
+    XBSelect.register();
+
 }(xblocks));

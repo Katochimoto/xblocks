@@ -33,6 +33,11 @@ tv4.addSchema('http://xblocks.ru/xb-select', {
                     "description": "Name of the select",
                     "id": "http://xblocks.ru/xb-select/attrs/name",
                     "required":false
+                },
+                "multiple": {
+                    "type":"boolean",
+                    "id": "http://xblocks.ru/xb-select/attrs/multiple",
+                    "required":false
                 }
             }
         },

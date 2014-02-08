@@ -14,6 +14,7 @@
 /*! borschik:include:blocks/link/link.schema.js */
 /*! borschik:include:blocks/field/field.schema.js */
 /*! borschik:include:blocks/button/button.schema.js */
+/*! borschik:include:blocks/select/select.schema.js */
 
 
 
@@ -37,6 +38,7 @@
 /*! borschik:include:blocks/ico/ico.js */
 /*! borschik:include:blocks/button/button.js */
 /*! borschik:include:blocks/field/field.js */
+/*! borschik:include:blocks/select/select.js */
 
 
 
