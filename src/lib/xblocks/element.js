@@ -286,6 +286,9 @@
         var root = this.root();
 
         xtag.innerHTML(root, '');
+        //while (root.firstChild) {
+        //    root.removeChild(root.firstChild);
+        //}
         root.appendChild(template.cloneNode(true));
 
         this.lock(false);

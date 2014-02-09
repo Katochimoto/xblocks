@@ -1,6 +1,10 @@
 module "xb-select"
 import "xblocks"
 
+match .* block-class {
+
+}
+
 
 match / xb-select {
 <xb-select>
@@ -12,6 +16,7 @@ match / xb-select {
 
 match / template {
 <div class="xb-select">
+    apply .attrs.* block-class
     <xb-button>
         apply .attrs.button.attrs.* xb-core-attrs
     </xb-button>

@@ -82,6 +82,7 @@
         xtag.register(this._name, {
             lifecycle: {
                 created: function() {
+
                     this.xblock = xblocks.element.create(this, {
                         schema: that._schema
                     }, that._proto);
@@ -97,21 +98,51 @@
                         this.lock(false);
                     });
 
+                    this.xblock.on('mutation', function() {
+                        this.lock(true);
+                        that.trigger('mutation', this.node);
+                        this.lock(false);
+                    });
+
                     this.xblock.update();
 
                     xblocks.log.timeEnd('[' + that._name + '] created');
                 },
 
+
+
+
                 inserted: function() {
+                    if (this.xblock.isLock()) {
+                        return;
+                    }
+
+                    this.xblock.lock(true);
                     this.xblock.trigger('inserted');
+                    that.trigger('inserted', this);
+                    this.xblock.lock(false);
                 },
 
                 removed: function() {
+                    if (this.xblock.isLock()) {
+                        return;
+                    }
+
+                    this.xblock.lock(true);
                     this.xblock.trigger('removed');
+                    that.trigger('removed', this);
+                    this.xblock.lock(false);
                 },
 
                 attributeChanged: function(attrName, oldValue, newValue) {
+                    if (this.xblock.isLock()) {
+                        return;
+                    }
+
+                    this.xblock.lock(true);
                     this.xblock.trigger('attributeChanged', [ attrName, oldValue, newValue ]);
+                    that.trigger('attributeChanged', this, [ attrName, oldValue, newValue ]);
+                    this.xblock.lock(false);
                 }
             },
 

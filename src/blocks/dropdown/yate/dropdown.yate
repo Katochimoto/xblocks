@@ -1,6 +1,10 @@
 module "xb-dropdown"
 import "xblocks"
 
+match .* block-class {
+
+}
+
 
 match / xb-dropdown {
 <xb-dropdown>
@@ -12,7 +16,7 @@ match / xb-dropdown {
 
 match / template {
 <div class="xb-dropdown">
-    apply .attrs.* xb-core-attrs
+    apply .attrs.* block-class
     apply . xb-core-content
 </div>
 }

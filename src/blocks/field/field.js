@@ -1,7 +1,7 @@
 (function(xblocks) {
     'use strict';
 
-    /* borschik:include:field.autosize.js */
+    /*! borschik:include:field.autosize.js */
 
     var XBField = xblocks.create('xb-field', {
 
