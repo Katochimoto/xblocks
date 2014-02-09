@@ -18,6 +18,12 @@
         }
     };
 
+    XBSelect.items = {
+        get: function() {
+            return this.xblock.getHtml();
+        }
+    };
+
     XBSelect.on('create', function() {
 
     });

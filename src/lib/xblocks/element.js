@@ -260,7 +260,7 @@
 
         var complexAttrs = this.attrs.toComplex();
         if (!Modernizr.createshadowroot) {
-            complexAttrs.setValue(this.html());
+            complexAttrs.setValue(this.getHtml());
         }
 
         if (tv4 && this.schema) {
@@ -279,16 +279,13 @@
         // формируются только атрибуты первой вложенности toSchema(1)
         // этого достаточно для описания псевдо-элементов, вложенных в текущий
         var tmplData = complexAttrs.toSchema(1);
-        tmplData['__contentClass'] = this.getClassContent();
+        tmplData['__contentClass'] = this.getContentClass();
 
         var html = yr.run(this.module, tmplData, 'template');
         var template = xtag.createFragment(html);
         var root = this.root();
 
         xtag.innerHTML(root, '');
-        //while (root.firstChild) {
-        //    root.removeChild(root.firstChild);
-        //}
         root.appendChild(template.cloneNode(true));
 
         this.lock(false);
@@ -298,32 +295,27 @@
         this.trigger('update');
     };
 
-    /**
-     * @method html
-     * @param {String} [html]
-     * @return {String}
-     */
-    proto.html = function(html) {
-        if (typeof html !== 'undefined') {
-            this.node.innerHTML = html;
+    proto.setHtml = function(html) {
+        this.node.innerHTML = html;
 
-            if (!Modernizr.createshadowroot) {
-                this.update();
-            }
-        }
-
-        var content;
         if (!Modernizr.createshadowroot) {
-            content = this.node.querySelector('.' + this.getClassContent());
-        }
-
-        if (content) {
-            return content.innerHTML;
-
-        } else {
-            return this.node.innerHTML;
+            this.update();
         }
     };
+
+    proto.getHtml = function() {
+        var node = this.getContentNode();
+        /*var tmpl = node.querySelector('template');
+
+        if (tmpl) {
+            node = document.createElement('div');
+            node.appendChild(tmpl.content.cloneNode(true));
+        }*/
+
+        return node.innerHTML;
+    };
+
+
 
     /**
      * @method root
@@ -347,8 +339,17 @@
         return root;
     };
 
-    proto.getClassContent = function() {
+    proto.getContentClass = function() {
         return this.module + '-content';
+    };
+
+    proto.getContentNode = function() {
+        var content;
+        if (!Modernizr.createshadowroot) {
+            content = this.node.querySelector('.' + this.getContentClass());
+        }
+
+        return content || this.node;
     };
 
 
