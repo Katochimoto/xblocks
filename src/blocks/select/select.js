@@ -13,11 +13,6 @@
                         'ico-type': 'dropdown',
                         'ico-float': 'right'
                     }
-                },
-                dropdown: {
-                    attrs: {
-                        target: 'xb-button'
-                    }
                 }
             };
         }
