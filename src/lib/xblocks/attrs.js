@@ -1,20 +1,21 @@
 (function(xblocks) {
-    'use strict';
 
     /**
      * @module xblocks.attrs
      */
-    var attrs = xblocks.attrs = {};
+    xblocks.attrs = {
 
-    /**
-     * @type {string} разделитель названия атрибута
-     */
-    attrs.SEPARATOR = '-';
+        /**
+         * @type {string} разделитель названия атрибута
+         */
+        SEPARATOR: '-',
 
-    /**
-     * @type {string} значение атрибута в комплексном представлении
-     */
-    attrs.ATTR_COMPLEX_VALUE = '_';
+        /**
+         * @type {string} значение атрибута в комплексном представлении
+         */
+        ATTR_COMPLEX_VALUE: '_'
+    };
+
 
     /*! borschik:include:attrs/common.js */
     /*! borschik:include:attrs/plain.js */
@@ -25,22 +26,40 @@
      *
      * @example <caption>Example usage of plain.</caption>
      * xblocks.attrs.plain({ 'name': 'test', 'class': 'test' })
-     * @param {Object} obj объект атрибутов элемента
-     * @return {AttrsPlain}
+     *
+     * @param {Object} [obj] объект атрибутов элемента
+     * @return {xblocks.attrs,AttrsPlain}
      */
-    attrs.plain = function(obj) {
-        return new AttrsPlain(obj);
+    xblocks.attrs.plain = function(obj) {
+        return new xblocks.attrs.AttrsPlain(obj);
     };
 
     /**
      * Конструктор комплексного представления атрибутов
      *
-     * @param {Object} obj объект атрибутов элемента
-     * @return {AttrsComplex}
+     * @param {Object} [obj] объект атрибутов элемента
+     * @return {xblocks.attrs.AttrsComplex}
      */
-    attrs.complex = function(obj) {
-        return new AttrsComplex(obj);
+    xblocks.attrs.complex = function(obj) {
+        return new xblocks.attrs.AttrsComplex(obj);
     };
+
+    /**
+     * @param {Object} obj
+     * @returns {boolean}
+     */
+    xblocks.attrs.isComplex = function(obj) {
+        return (obj instanceof xblocks.attrs.AttrsComplex);
+    };
+
+    /**
+     * @param {Object} obj
+     * @returns {boolean}
+     */
+    xblocks.attrs.isPlain = function(obj) {
+        return (obj instanceof xblocks.attrs.AttrsPlain);
+    };
+
 
     /**
      * Выделение атрибутов элемента в плоском представлении
@@ -48,10 +67,10 @@
      * @param {HTMLElement} element элемент
      * @return {AttrsPlain}
      */
-    attrs.toPlainObject = function(element) {
+    xblocks.attrs.toPlainObject = function(element) {
         xblocks.log.time('attrs->toPlainObject');
 
-        var plain = new AttrsPlain();
+        var plain = xblocks.attrs.plain();
         var i = 0;
         var attributes = element.attributes;
         var l = attributes.length;
@@ -78,8 +97,8 @@
      * @param {HTMLElement} element элемент
      * @return {AttrsComplex}
      */
-    attrs.toComplexObject = function(element) {
-        return attrs.toPlainObject(element).toComplex();
+    xblocks.attrs.toComplexObject = function(element) {
+        return xblocks.attrs.toPlainObject(element).toComplex();
     };
 
     /**
@@ -88,8 +107,8 @@
      * @param {HTMLElement} element элемент
      * @return {Object}
      */
-    attrs.toSchemaObject = function(element) {
-        return attrs.toComplexObject(element).toSchema();
+    xblocks.attrs.toSchemaObject = function(element) {
+        return xblocks.attrs.toComplexObject(element).toSchema();
     };
 
     /**
@@ -99,7 +118,7 @@
      * @param {String} attrName название атрибута
      * @return {Boolean} true, если атрибут указан и его значение определено
      */
-    attrs.isEmpty = function(element, attrName) {
+    xblocks.attrs.isEmpty = function(element, attrName) {
         if (element.hasAttribute(attrName)) {
             var value = element.getAttribute(attrName);
             if (!value || value === 'false') {

@@ -1,5 +1,4 @@
 (function(xblocks, Modernizr) {
-    'use strict';
 
     xblocks.log = function() {
         var args = Array.prototype.slice.call(arguments);
@@ -22,7 +21,6 @@
     xblocks.setZeroTimeout = (function() {
         var timers = [];
         var message = '{ "message": "zero-timeout" }';
-        var isPostMessage = ('postMessage' in window) && (!document['documentMode'] || document['documentMode'] >= 9);
         var handleMessage = function(event) {
             if (event.source == window && event.data == message) {
                 event.stopPropagation();
@@ -32,7 +30,7 @@
             }
         };
 
-        if (isPostMessage) {
+        if (Modernizr.postmessage) {
             if (window.addEventListener) {
                 window.addEventListener('message', handleMessage, true);
             } else if (window.attachEvent) {
@@ -41,7 +39,7 @@
         }
 
         return function(callback) {
-            if (isPostMessage) {
+            if (Modernizr.postmessage) {
                 timers.push(callback);
                 window.postMessage(message, '*');
             } else {

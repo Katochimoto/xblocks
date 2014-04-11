@@ -1,5 +1,5 @@
 (function(Modernizr) {
-    'use strict';
+
 
     /** @namespace Modernizr */
 
@@ -14,6 +14,5 @@
      */
 
     Modernizr.addTest('createshadowroot', 'createShadowRoot' in document.createElement('div'));
-    Modernizr.addTest('stylescoped', 'scoped' in document.createElement('style'));
 
 })(Modernizr);

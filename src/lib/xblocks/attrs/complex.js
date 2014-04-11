@@ -2,120 +2,116 @@
  * @param {Object} [obj]
  * @constructor
  */
-function AttrsComplex(obj) {
-    AttrsComplex.superclass.constructor.apply(this, arguments);
-}
-
-Object.extend(AttrsComplex, AttrsPlain);
-
-
-AttrsComplex.prototype.getValue = function() {
-    return this[attrs.ATTR_COMPLEX_VALUE];
+xblocks.attrs.AttrsComplex = function(obj) {
+    xblocks.attrs.AttrsPlain.apply(this, arguments);
 };
 
-AttrsComplex.prototype.setValue = function(value) {
-    this[attrs.ATTR_COMPLEX_VALUE] = value;
-};
+xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototype, {
+    'constructor': xblocks.attrs.AttrsComplex,
 
-/**
- *
- * @param {String} name
- * @return {AttrsComplex|undefined}
- */
-AttrsComplex.prototype.get = function(name) {
-    return fns(this, name);
-};
+    getValue: function() {
+        return this[xblocks.attrs.ATTR_COMPLEX_VALUE];
+    },
 
-/**
- *
- * @param {String} name
- * @param {*} value
- */
-AttrsComplex.prototype.set = function(name, value) {
-    ns(this, name, value);
-};
+    setValue: function(value) {
+        this[xblocks.attrs.ATTR_COMPLEX_VALUE] = value;
+    },
 
-/**
- *
- * @param {String} name
- * @return {Boolean}
- */
-AttrsComplex.prototype.isEmpty = function(name) {
-    return Object.isEmpty(fns(this, name));
-};
+    /**
+     * @param {String} name
+     * @return {xblocks.attrs.AttrsComplex|undefined}
+     */
+    get: function(name) {
+        return xblocks.attrs._fns(this, name);
+    },
 
-/**
- * @return {AttrsComplex}
- */
-AttrsComplex.prototype.toComplex = function() {
-    return this;
-};
+    /**
+     * @param {String} name
+     * @param {*} value
+     */
+    set: function(name, value) {
+        xblocks.attrs._ns(this, name, value);
+    },
 
-/**
- * @return {AttrsPlain}
- */
-AttrsComplex.prototype.toPlain = function() {
-    xblocks.log.time('AttrsComplex->toPlain');
+    /**
+     * @param {String} name
+     * @return {Boolean}
+     */
+    isEmpty: function(name) {
+        return _.isEmpty(this.get(name));
+    },
 
-    var plainObject = new AttrsPlain();
+    /**
+     * @return {xblocks.attrs.AttrsComplex}
+     */
+    toComplex: function() {
+        return this;
+    },
 
-    function z(ns, o) {
-        if ((o instanceof AttrsComplex) && ns.length && typeof(o.getValue()) !== 'undefined') {
-            plainObject[ns.join(attrs.SEPARATOR)] = o.getValue();
-        }
+    /**
+     * @return {xblocks.attrs.AttrsPlain}
+     */
+    toPlain: function() {
+        xblocks.log.time('AttrsComplex->toPlain');
 
-        for (var key in o) {
-            if (o.hasOwnProperty(key) && (o[key] instanceof AttrsComplex)) {
-                ns.push(key);
-                z(ns, o[key]);
+        var plainObject = xblocks.attrs.plain();
+
+        function z(ns, o) {
+            if (xblocks.attrs.isComplex(o) && ns.length && typeof(o.getValue()) !== 'undefined') {
+                plainObject[ns.join(attrs.SEPARATOR)] = o.getValue();
             }
+
+            for (var key in o) {
+                if (o.hasOwnProperty(key) && xblocks.attrs.isComplex(o[key])) {
+                    ns.push(key);
+                    z(ns, o[key]);
+                }
+            }
+
+            ns.pop();
         }
 
-        ns.pop();
-    }
+        z([], this);
 
-    z([], this);
+        xblocks.log.timeEnd('AttrsComplex->toPlain');
+        return plainObject;
+    },
 
-    xblocks.log.timeEnd('AttrsComplex->toPlain');
-    return plainObject;
-};
+    /**
+     * @param {Number} [nesting] вложенность
+     * @return {Object}
+     */
+    toSchema: function(nesting) {
+        xblocks.log.time('AttrsComplex->toSchema');
 
-/**
- * @param {Number} [nesting] вложенность
- * @return {Object}
- */
-AttrsComplex.prototype.toSchema = function(nesting) {
-    xblocks.log.time('AttrsComplex->toSchema');
+        var schema = {};
+        var stack = [];
+        stack.push([ this, schema, 0 ]);
 
-    var schema = {};
-    var stack = [];
-    stack.push([this, schema, 0]);
+        var ns;
+        while((ns = stack.pop())) {
+            ns[1].content = ns[0].getValue();
+            ns[1].attrs = {};
 
-    var ns;
-    while (ns = stack.pop()) {
-        ns[1].content = ns[0].getValue();
-        ns[1].attrs = {};
+            if (nesting > 0 && ns[2] >= nesting) {
+                ns[1].attrs = ns[0].toPlain();
+                continue;
+            }
 
-        if (nesting > 0 && ns[2] >= nesting) {
-            ns[1].attrs = ns[0].toPlain();
-            continue;
-        }
+            for (var key in ns[0]) {
+                if (ns[0].hasOwnProperty(key) && xblocks.attrs.isComplex(ns[0][key])) {
+                    if (_.isEmpty(ns[0][key], xblocks.attrs.ATTR_COMPLEX_VALUE)) {
+                        ns[1].attrs[key] = ns[0][key].getValue();
 
-        for (var key in ns[0]) {
-            if (ns[0].hasOwnProperty(key) && (ns[0][key] instanceof AttrsComplex)) {
-                if (Object.isEmpty(ns[0][key], attrs.ATTR_COMPLEX_VALUE)) {
-                    ns[1].attrs[key] = ns[0][key].getValue();
-
-                } else {
-                    ns[1].attrs[key] = {};
-                    stack.push([ns[0][key], ns[1].attrs[key], ++ns[2]]);
+                    } else {
+                        ns[1].attrs[key] = {};
+                        stack.push([ns[0][key], ns[1].attrs[key], ++ns[2]]);
+                    }
                 }
             }
         }
+
+        xblocks.log.timeEnd('AttrsComplex->toSchema');
+        return _.cloneDeep(schema);
     }
-
-    schema = JSON.parse(JSON.stringify(schema));
-
-    xblocks.log.timeEnd('AttrsComplex->toSchema');
-    return schema;
-};
+});

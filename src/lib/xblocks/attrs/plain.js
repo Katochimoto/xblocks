@@ -2,64 +2,66 @@
  * @param {Object} [obj]
  * @constructor
  */
-function AttrsPlain(obj) {
-    if (typeof obj === 'object') {
-        for (var name in obj) {
-            if (obj.hasOwnProperty(name)) {
-                this[name] = obj[name];
-            }
-        }
+xblocks.attrs.AttrsPlain = function(obj) {
+    if (_.isPlainObject(obj)) {
+        _.forOwn(obj, function(value, key) {
+            this[key] = value;
+        }, this);
     }
-}
-
-/**
- *
- * @param {String} name
- * @return {*}
- */
-AttrsPlain.prototype.get = function(name) {
-    return this[name];
 };
 
-/**
- *
- * @param {String} name
- * @param {*} value
- */
-AttrsPlain.prototype.set = function(name, value) {
-    this[name] = value;
-};
+xblocks.attrs.AttrsPlain.prototype = {
+    /**
+     * @param {String} name
+     * @return {*}
+     */
+    get: function(name) {
+        return this[name];
+    },
 
-/**
- *
- * @param {String} name
- * @return {boolean}
- */
-AttrsPlain.prototype.isEmpty = function(name) {
-    return !this[name];
-};
+    /**
+     * @param {String} name
+     * @param {*} value
+     */
+    set: function(name, value) {
+        this[name] = value;
+    },
 
-/**
- * @return {AttrsPlain}
- */
-AttrsPlain.prototype.toPlain = function() {
-    return this;
-};
+    /**
+     * @param {String} name
+     * @return {boolean}
+     */
+    isEmpty: function(name) {
+        return !this[name];
+    },
 
-/**
- * @return {AttrsComplex}
- */
-AttrsPlain.prototype.toComplex = function() {
-    xblocks.log.time('AttrsPlain->toComplex');
+    /**
+     * @return {xblocks.attrs.AttrsPlain}
+     */
+    toPlain: function() {
+        return this;
+    },
 
-    var obj = new AttrsComplex();
+    /**
+     * @return {xblocks.attrs.AttrsComplex}
+     */
+    toComplex: function() {
+        xblocks.log.time('AttrsPlain->toComplex');
 
-    for (var key in this) {
-        if (this.hasOwnProperty(key)) {
-            ns(obj, key, this[key]);
-        }
+        var complex = xblocks.attrs.complex();
+        _.forOwn(this, this._toComplex, complex);
+
+        xblocks.log.timeEnd('AttrsPlain->toComplex');
+        return complex;
+    },
+
+    /**
+     * @this {xblocks.attrs.AttrsComplex}
+     * @param value
+     * @param key
+     * @private
+     */
+    _toComplex: function(value, key) {
+        xblocks.attrs._ns(this, key, value);
     }
-
-    xblocks.log.timeEnd('AttrsPlain->toComplex');
-    return obj;
 };

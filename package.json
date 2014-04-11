@@ -1,7 +1,7 @@
 {
     "name": "xblocks",
     "description": "HTML custom elements",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "keywords": [
         "x-tags",
         "html5",
@@ -26,21 +26,26 @@
         "stylobate-islands": "*"
     },
     "devDependencies": {
+        "react-tools": "*",
+        "x-tag-core": "x-tag/core#0.9.5",
+        "borschik": "*",
+        "stylus": "*",
+
+        "jscs": "*",
+        "jshint": "*",
+
+
+
+
         "tv4": "*",
         "nopt": "*",
         "yate": "*",
-        "borschik": "*",
         "autoprefixer": "*",
-        "stylus": "*",
         "csso": "*",
-        "jscs": "*",
-        "jshint": "*",
         "uglify-js": "*",
         "requirer": "*",
         "requirejs": "*",
         "curl": "cujojs/curl#0.8.10",
-
-        "x-tag-core": "x-tag/core#0.9.5",
 
         "grunt": "~0.4.2",
         "grunt-contrib-jshint": "~0.6.3",
@@ -49,11 +54,12 @@
         "grunt-contrib-concat": "*",
         "grunt-contrib-stylus": "*",
         "grunt-contrib-watch": "*",
+        "grunt-contrib-clean": "*",
         "grunt-borschik": "*",
         "grunt-yate": "*",
         "grunt-shell": "*",
         "grunt-karma": "*",
-        "grunt-contrib-clean": "*",
+        "grunt-react": "*",
         "autoprefixer-stylus": "*",
         "csso-stylus": "*",
 
