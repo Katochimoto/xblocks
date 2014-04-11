@@ -12,12 +12,11 @@ xblocks.attrs._ns = function(target, name, value) {
 
     for (var i = 0, l = sname.length; i < l; i++) {
         var part = sname[i];
-        var type = typeof(namespace[part]);
 
-        if (type === 'undefined') {
+        if (_.isUndefined(namespace[part])) {
             namespace = namespace[part] = xblocks.attrs.complex(target[part] || {});
 
-        } else if (type !== 'object') {
+        } else if (!_.isPlainObject(namespace[part])) {
             var obj = {};
             obj[xblocks.attrs.ATTR_COMPLEX_VALUE] = namespace[part];
             namespace = namespace[part] = xblocks.attrs.complex(obj);
@@ -46,9 +45,8 @@ xblocks.attrs._fns = function(target, name) {
 
     for (var i = 0, l = sname.length; i < l; i++) {
         var part = sname[i];
-        var type = typeof(namespace[part]);
 
-        if (type !== 'object') {
+        if (!_.isPlainObject(namespace[part])) {
             return undefined;
 
         } else {
