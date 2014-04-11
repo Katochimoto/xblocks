@@ -13,6 +13,11 @@
      * @memberOf Modernizr
      */
 
+    /**
+     * @property {boolean} postmessage postMessage support
+     * @memberOf Modernizr
+     */
+
     Modernizr.addTest('createshadowroot', 'createShadowRoot' in document.createElement('div'));
 
 })(Modernizr);

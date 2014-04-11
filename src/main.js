@@ -1,8 +1,9 @@
-(function(global) {
+(function() {
     'use strict';
 
     /*! borschik:include:external/es5-shim.js */
     /*! borschik:include:external/modernizr.js */
+    /*! borschik:include:external/modernizr.tests.js */
     /*! borschik:include:external/lodash.js */
     /*! borschik:include:external/react-with-addons.js */
     /*! borschik:include:../node_modules/borschik/js/borschik.js */
@@ -27,9 +28,8 @@
 
 
 
-    /*! borschik:include:lib/modernizr.tests.js */
-    /*! borschik:include:lib/yate.ext.js */
 
+    /*! borschik:include:lib/yate.ext.js */
     /*! borschik:include:lib/xblocks.js */
 
     /*! borschik:include:blocks/optgroup/optgroup.js */
@@ -42,4 +42,4 @@
     /*! borschik:include:blocks/dropdown/dropdown.js */
 
 
-}(this));
+}());

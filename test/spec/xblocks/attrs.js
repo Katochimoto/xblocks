@@ -1,0 +1,5 @@
+describe('xblocks.attrs', function() {
+
+
+
+});

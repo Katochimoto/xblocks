@@ -1,4 +1,7 @@
 (function() {
+    /**
+     * @module xblocks
+     */
     var xblocks = {};
 
     var namespace;
