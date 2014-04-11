@@ -9,10 +9,16 @@ xblocks.attrs.AttrsComplex = function(obj) {
 xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototype, {
     'constructor': xblocks.attrs.AttrsComplex,
 
+    /**
+     * @returns {*}
+     */
     getValue: function() {
         return this[xblocks.attrs.ATTR_COMPLEX_VALUE];
     },
 
+    /**
+     * @param {*} value
+     */
     setValue: function(value) {
         this[xblocks.attrs.ATTR_COMPLEX_VALUE] = value;
     },
