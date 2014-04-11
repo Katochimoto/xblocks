@@ -38,9 +38,9 @@
         "uglify-js": "*",
         "requirer": "*",
         "requirejs": "*",
-        "curl": "cujojs/curl#0.8.8",
+        "curl": "cujojs/curl#0.8.10",
 
-        "x-tag-core": "x-tag/core#0.9.2",
+        "x-tag-core": "x-tag/core#0.9.5",
 
         "grunt": "~0.4.2",
         "grunt-contrib-jshint": "~0.6.3",
@@ -63,8 +63,6 @@
         "karma-sinon-expect": "*",
         "karma-chai-plugins": "~0.2.0",
         "karma-phantomjs-launcher": "*",
-        "karma-chrome-launcher": "*",
-        "karma-firefox-launcher": "*",
         "karma": "*"
     },
     "engines": {
