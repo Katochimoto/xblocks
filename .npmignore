@@ -2,6 +2,7 @@
 .borschik
 .npm-debug.log
 node_modules
+external
 build
 test
 .travis.yml

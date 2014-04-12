@@ -27,17 +27,12 @@
     },
     "devDependencies": {
         "react-tools": "*",
-        "x-tag-core": "x-tag/core#0.9.5",
         "borschik": "*",
         "stylus": "*",
 
         "jscs": "1.0.8",
         "jshint": "2.3.0",
 
-
-
-
-        "tv4": "*",
         "nopt": "*",
         "yate": "*",
         "autoprefixer": "*",
@@ -60,6 +55,7 @@
         "grunt-shell": "*",
         "grunt-karma": "*",
         "grunt-react": "*",
+        "grunt-modernizr": "*",
         "autoprefixer-stylus": "*",
         "csso-stylus": "*",
 

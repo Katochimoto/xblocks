@@ -1,5 +1,5 @@
 /* global escape  */
-
+/*
 (function(yr, Modernizr) {
     'use strict';
 
@@ -54,3 +54,4 @@
     };
 
 })(yr, Modernizr);
+*/

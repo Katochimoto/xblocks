@@ -1,29 +1,38 @@
 (function() {
     'use strict';
 
-    /*! borschik:include:external/es5-shim.js */
-    /*! borschik:include:external/modernizr.js */
-    /*! borschik:include:external/modernizr.tests.js */
-    /*! borschik:include:external/lodash.js */
-    /*! borschik:include:external/react-with-addons.js */
-    /*! borschik:include:../node_modules/borschik/js/borschik.js */
-    /*! borschik:include:../node_modules/x-tag-core/dist/x-tag-core.js */
+    (function() {
+        /*! borschik:include:../external/es5-shim/es5-shim.js */
+    }.call(this));
 
+    (function() {
+        /*! borschik:include:../external/modernizr.js */
+    }.call(this));
 
+    (function() {
+        /*! borschik:include:../external/lodash/dist/lodash.js */
+    }.call(this));
 
-    /*! borschik:include:../node_modules/tv4/tv4.js */
+    (function() {
+        /*! borschik:include:external/react-with-addons.js */
+    }.call(this));
 
-    /*! borschik:include:lib/xblocks/attrs/schema/target.js */
-    /*! borschik:include:lib/xblocks/attrs/schema/theme.js */
-    /*! borschik:include:lib/xblocks/attrs/schema/size.js */
+    (function() {
+        /*! borschik:include:../node_modules/borschik/js/borschik.js */
+    }.call(this));
 
-    /*! borschik:include:blocks/ico/ico.schema.js */
-    /*! borschik:include:blocks/link/link.schema.js */
-    /*! borschik:include:blocks/field/field.schema.js */
-    /*! borschik:include:blocks/button/button.schema.js */
-    /*! borschik:include:blocks/select/select.schema.js */
+    (function() {
+        /*! borschik:include:../external/x-tag-core/dist/x-tag-core.js */
+    }.call(this));
 
+    (function() {
+        /*! borschik:include:../external/q/release/2.0.0/q.js */
+    }.call(this));
 
+    (function() {
+        /*! borschik:include:../external/tv4/tv4.js */
+        /*! borschik:include:main.schema.js */
+    }.call(this));
 
 
 
@@ -32,14 +41,6 @@
     /*! borschik:include:lib/yate.ext.js */
     /*! borschik:include:lib/xblocks.js */
 
-    /*! borschik:include:blocks/optgroup/optgroup.js */
-    /*! borschik:include:blocks/option/option.js */
-    /*! borschik:include:blocks/link/link.js */
-    /*! borschik:include:blocks/ico/ico.js */
-    /*! borschik:include:blocks/button/button.js */
-    /*! borschik:include:blocks/field/field.js */
-    /*! borschik:include:blocks/select/select.js */
-    /*! borschik:include:blocks/dropdown/dropdown.js */
+    /*! borschik:include:main.blocks.js */
 
-
-}());
+}.call(this));

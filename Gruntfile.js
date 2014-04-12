@@ -43,17 +43,16 @@ module.exports = function(grunt) {
                 ],
                 tasks: ['src-styl']
             },
-            'src-yate': {
+            'src-react': {
                 files: [
-                    '<%= dirs.src %>/**/*.yate'
+                    '<%= dirs.src %>/**/*.jsx'
                 ],
-                tasks: ['src-yate']
+                tasks: ['src-js']
             }
         },
 
         clean: {
-            'dest': '<%= dirs.dest %>',
-            'yate-tmp': '<%= dirs.dest %>/blocks'
+            'dest': '<%= dirs.dest %>'
         },
 
         borschik: {
@@ -79,28 +78,6 @@ module.exports = function(grunt) {
                 },
                 src: '<%= dirs.dest %>/<%= pkg.name %>.css',
                 dest: '<%= dirs.dest %>/<%= pkg.name %>.min.css'
-            },
-
-            'yate-minimize': {
-                options: {
-                    minimize: 'yes'
-                },
-                src: '<%= dirs.dest %>/<%= pkg.name %>.yate.js',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.min.yate.js'
-            }
-        },
-
-        concat: {
-            yate: {
-                options: {
-                    separator: '\n;\n'
-                },
-                files: {
-                    '<%= dirs.dest %>/<%= pkg.name %>.yate.js': [
-                        '<%= dirs.src %>/lib/**/*.yate.js',
-                        '<%= dirs.dest %>/blocks/*.yate.js'
-                    ]
-                }
             }
         },
 
@@ -123,27 +100,40 @@ module.exports = function(grunt) {
             }
         },
 
-        yate: {
-            // формирование общих модулей
-            modules: {
-                options: {},
-                src: '<%= dirs.src %>/lib/yate/<%= pkg.name %>.yate',
-                dest: '<%= dirs.src %>/lib/yate/<%= pkg.name %>.yate.js'
-            },
-
-            blocks: {
-                options: {
-                    import: [
-                        '<%= dirs.src %>/lib/**/*.yate.obj'
-                    ]
+        modernizr: {
+            dist: {
+                devFile: 'remote',
+                outputFile: 'external/modernizr.js',
+                extra: {
+                    shiv: false,
+                    printshiv: false,
+                    load: false,
+                    mq: false,
+                    cssclasses: false
                 },
+                extensibility: {
+                    addtest: true
+                },
+                uglify: false,
+                parseFiles: false,
+                tests: [
+                    'postmessage', 'style_scoped'
+                ],
+                customTests: [
+                    'src/external/modernizr.tests.js'
+                ]
+            }
+        },
+
+        react: {
+            dynamic_mappings: {
                 files: [
                     {
-                        dest: '<%= dirs.dest %>/blocks/',
-                        src: '<%= dirs.src %>/blocks/**/*.yate',
-                        ext: '.yate.js',
                         expand: true,
-                        flatten: true
+                        cwd: 'src',
+                        src: ['**/*.jsx'],
+                        dest: 'src',
+                        ext: '.jsx.js'
                     }
                 ]
             }
@@ -154,17 +144,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-borschik');
-    grunt.loadNpmTasks('grunt-yate');
     grunt.loadNpmTasks('grunt-contrib-stylus');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-modernizr');
+    grunt.loadNpmTasks('grunt-react');
 
-    grunt.registerTask('src-yate', [
-        'yate',
-        'concat:yate',
-        'borschik:yate-minimize',
-        'clean:yate-tmp'
-    ]);
 
     grunt.registerTask('src-styl', [
         'stylus',
@@ -172,13 +156,14 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('src-js', [
+        'react',
         'borschik:js',
         'borschik:js-minimize'
     ]);
 
     grunt.registerTask('default', [
+        'modernizr',
         'clean:dest',
-        'src-yate',
         'src-styl',
         'src-js'
     ]);

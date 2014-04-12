@@ -1,4 +1,4 @@
-describe('xblocks.attrs', function() {
+describe.only('xblocks.attrs', function() {
 
 
 

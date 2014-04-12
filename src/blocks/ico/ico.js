@@ -1,5 +1,6 @@
-(function(xblocks) {
-    'use strict';
+(function(xblocks, React) {
+
+    /*! borschik:include:ico.jsx.js */
 
     var XBIco = xblocks.create('xb-ico');
 
@@ -23,5 +24,5 @@
 
     XBIco.register();
 
-}(xblocks));
+}(xblocks, React));
 

@@ -1,7 +1,9 @@
 .idea
 .npm-debug.log
 node_modules
+external
 build
 *.yate.js
 *.yate.obj
+*.jsx.js
 #!build/*.yate.js

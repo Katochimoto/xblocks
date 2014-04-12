@@ -20,8 +20,10 @@
 
 
     /*! borschik:include:xblocks/utils.js */
+    /*! borschik:include:xblocks/callbacks.js */
     /*! borschik:include:xblocks/attrs.js */
     /*! borschik:include:xblocks/dom.js */
+    /*! borschik:include:xblocks/view.js */
     /*! borschik:include:xblocks/block.js */
     /*! borschik:include:xblocks/element.js */
 

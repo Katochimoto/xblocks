@@ -1,5 +1,6 @@
 node_modules
 build
-src/external
+external
 **/*.yate.js
+**/*.jsx.js
 test

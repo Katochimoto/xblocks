@@ -1,6 +1,4 @@
-(function(xtag, xblocks, Modernizr, tv4, yr) {
-    'use strict';
-
+(function(xtag, xblocks, Modernizr, tv4) {
     /** @namespace xblocks */
 
     /**
@@ -11,242 +9,57 @@
     xblocks.element = {};
 
     /**
-     * @function create
-     * @memberOf xblocks.element
      * @param {HTMLElement} node
-     * @param {Object} [params]
-     * @param {Object} [proto]
      * @return {XBElement}
      */
-    xblocks.element.create = function(node, params, proto) {
-        proto = proto || {};
-        return Object.merge(new XBElement(node, params), proto);
+    xblocks.element.create = function(node) {
+        return new XBElement(node);
     };
 
 
     /**
      *
      * @param {HTMLElement} node
-     * @param {Object} params
-     * @param {String} [params.schema]
-     * @param {Object} [params.attrs]
      * @constructor
      */
-    function XBElement(node, params) {
+    function XBElement(node) {
 
         /**
-         *
-         * @type {AttrsPlain}
-         */
-        this.attrs = {};
-        /**
-         *
-         * @type {HTMLElement}
-         */
-        this.node = node;
-        /**
-         *
-         * @type {HTMLElement|null}
-         */
-        this.controller = null;
-        /**
-         *
          * @type {String}
          */
-        this.module = node.tagName.toLowerCase();
+        this.name = node.tagName.toLowerCase();
+
         /**
-         *
          * @type {String}
          */
-        this.schema = params.schema;
-        /**
-         *
-         * @type {Object}
-         */
-        this.events = {};
-        /**
-         *
-         * @type {boolean}
-         * @private
-         */
-        this._lock = false;
+        this.schema = 'http://xblocks.ru/' + this.name;
 
-
-
-
-        this.observeStart();
-
-        this.on('inserted', function(/*event*/) {
-            xblocks.log('XBElement->inserted', this);
+        var view = xblocks.view.get(this.name)({
+            element: node
         });
 
-        this.on('removed', function(/*event*/) {
-            xblocks.log('XBElement->removed', this);
+        this.component = React.renderComponent(view, node);
 
-            this.off();
-            this.observeStop();
+        var that = this;
 
-            delete this.controller;
-            delete this.observer;
+        this.observer = new MutationObserver(function() {
+            //that.component.setState(that.component.getInitialState());
+            //that.component.forceUpdate();
         });
 
-        this.on('attributeChanged', function(/*event*/) {
-            xblocks.log('XBElement->attributeChanged', this);
-            this.update();
-        });
-
-        this.on('mutation', function(/*event*/) {
-            xblocks.log('XBElement->mutation', this);
-            this.update();
+        this.observer.disconnect();
+        this.observer.observe(node, {
+            childList: true,
+            //attributes: true,
+            characterData: true,
+            subtree: true
         });
     }
 
-    var proto = XBElement.prototype;
 
-    /**
-     * @method isLock
-     * @return {Boolean}
-     */
-    proto.isLock = function() {
-        return this._lock;
-    };
+    /*
 
-    /**
-     * @method lock
-     * @param {Boolean} isLock
-     */
-    proto.lock = function(isLock) {
-        this._lock = !!isLock;
-
-        if (this._lock) {
-            this.observeStop();
-
-        } else {
-            this.observeStart();
-        }
-    };
-
-    /**
-     * @method on
-     * @param {String} name
-     * @param {Function} callback
-     * @return {Object}
-     */
-    proto.on = function(name, callback) {
-        var cb;
-        var that = this;
-
-        if (name === 'click') {
-            cb = function(event) {
-                if (!xblocks.attrs.isEmpty(that.node, 'disabled')) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    return false;
-                }
-
-                return callback.call(that, event);
-            };
-
-        } else {
-            cb = function(event) {
-                return callback.call(that, event);
-            };
-        }
-
-        var event = xtag.addEvent(this.root(), name, cb);
-        this.events[name] = this.events[name] || [];
-        this.events[name].push(event);
-        return event;
-    };
-
-    /**
-     * @method off
-     * @param {String} [name]
-     * @param {Object} [event]
-     */
-    proto.off = function(name, event) {
-        var l;
-        var type;
-
-        if (!name && !event) {
-            this.events = {};
-            for (type in this.events) {
-                if (this.events.hasOwnProperty(type)) {
-                    l = this.events[type].length;
-                    while (l--) {
-                        xtag.removeEvent(this.root(), this.events[type][l]);
-                    }
-                }
-            }
-
-        } else if (name && !event) {
-            this.events[name] = [];
-            l = this.events[name].length;
-            while (l--) {
-                xtag.removeEvent(this.root(), this.events[name][l]);
-            }
-
-        } else if (name && event) {
-            this.events[name].splice(this.events[name].indexOf(event), 1);
-            xtag.removeEvent(this.root(), event);
-        }
-    };
-
-    /**
-     * @method trigger
-     * @param {String} name
-     * @param {*} [data]
-     */
-    proto.trigger = function(name, data) {
-        if (this.isLock()) {
-            return;
-        }
-
-        xtag.fireEvent(this.root(), name, {
-            detail: {
-                params: data
-            }
-        });
-    };
-
-    /**
-     * @method observeStart
-     */
-    proto.observeStart = function() {
-        xblocks.log.time('XBElement->observeStart');
-        
-        if (!Modernizr.createshadowroot && !this.observer) {
-            var that = this;
-            this.observer = new MutationObserver(function() {
-                that.trigger('mutation');
-            });
-        }
-
-        if (this.observer) {
-            this.observer.disconnect();
-            this.observer.observe(this.node, { childList: true, subtree: true, characterData: true });
-        }
-        
-        xblocks.log.timeEnd('XBElement->observeStart');
-    };
-
-    /**
-     * @method observeStop
-     */
-    proto.observeStop = function() {
-        xblocks.log.time('XBElement->observeStop');
-        
-        if (this.observer) {
-            this.observer.disconnect();
-        }
-        
-        xblocks.log.timeEnd('XBElement->observeStop');
-    };
-
-    /**
-     * @method update
-     */
-    proto.update = function() {
+    XBElement.prototype.update = function() {
         xblocks.log('XBElement->update', this);
         xblocks.log.time('XBElement->update');
 
@@ -305,22 +118,13 @@
 
     proto.getHtml = function() {
         var node = this.getContentNode();
-        /*var tmpl = node.querySelector('template');
 
-        if (tmpl) {
-            node = document.createElement('div');
-            node.appendChild(tmpl.content.cloneNode(true));
-        }*/
 
         return node.innerHTML;
     };
 
 
 
-    /**
-     * @method root
-     * @return {HTMLElement|DocumentFragment}
-     */
     proto.root = function() {
         var root;
 
@@ -353,10 +157,11 @@
     };
 
 
+    */
 
 
 
 
 
 
-}(xtag, xblocks, Modernizr, tv4, yr));
+}(xtag, xblocks, Modernizr, tv4));

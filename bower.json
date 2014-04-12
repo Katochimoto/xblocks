@@ -1,0 +1,12 @@
+{
+    "name": "xblocks",
+    "version": "0.1.0",
+    "dependencies": {
+        "q": "2.0.0",
+        "lodash": "2.4.1",
+        "x-tag-core": "0.9.5",
+        "es5-shim": "2.3.0",
+        "tv4": "1.0.15"
+    },
+    "directory": "external"
+}

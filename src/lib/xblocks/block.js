@@ -1,60 +1,14 @@
 (function(xtag, xblocks) {
-    'use strict';
 
-    xblocks.create = function(blockName, protoElement) {
-        return new XBlock(blockName, protoElement);
+    xblocks.create = function(blockName) {
+        return new XBlock(blockName);
     };
 
-
-    function XBlock(blockName, protoElement) {
+    function XBlock(blockName) {
         this._name = blockName;
-        this._schema = 'http://xblocks.ru/' + blockName;
-        this._events = {};
-        this._proto = protoElement || {};
     }
 
-    var proto = XBlock.prototype;
-
-    proto.on = function(name, callback) {
-        this.off(name, callback);
-        this._events[name] = this._events[name] || [];
-        this._events[name].push(callback);
-        return this;
-    };
-
-    proto.off = function(name, callback) {
-        if (!name && !callback) {
-            this._events = {};
-
-        } else if (name && !callback) {
-            this._events[name] = [];
-
-        } else if (name && callback) {
-            this._events[name] = this._events[name] || [];
-            this._events[name].splice(this._events[name].indexOf(callback), 1);
-        }
-
-        return this;
-    };
-
-    /**
-     *
-     * @param name
-     * @param context
-     * @param [args]
-     */
-    proto.trigger = function(name, context, args) {
-        if (this._events[name]) {
-            args = args || [];
-            for (var i = 0; i < this._events[name].length; i++) {
-                this._events[name][i].apply(context, args);
-            }
-        }
-        return this;
-    };
-
-    proto.register = function() {
-        var that = this;
+    XBlock.prototype.register = function() {
         var accessors = {};
         var methods = {};
 
@@ -67,15 +21,13 @@
                 continue;
             }
 
-            if (typeof(this[prop]) === 'object' &&
-                (typeof(this[prop].get) === 'function' || typeof(this[prop].set) === 'function')) {
-
-                accessors[prop] = this[prop];
+            if (_.isPlainObject(this[prop]) && (_.isFunction(this[prop].get) || _.isFunction(this[prop].set))) {
+                accessors[prop] = _.cloneDeep(this[prop]);
                 continue;
             }
 
-            if (typeof(this[prop]) === 'function') {
-                methods[prop] = this[prop];
+            if (_.isFunction(this[prop])) {
+                methods[prop] = _.cloneDeep(this[prop]);
             }
         }
 
@@ -83,14 +35,19 @@
             lifecycle: {
                 created: function() {
 
+                    this.xblock = xblocks.element.create(this);
+
+                    /*var blockName = this.tagName.toLowerCase();
+                    var component = xblocks.view.get(blockName);
+
+                    React.renderComponent(component({}), this);*/
+
+                    /*
                     this.xblock = xblocks.element.create(this, {
                         schema: that._schema
-                    }, that._proto);
+                    });
 
                     that.trigger('create', this);
-
-                    xblocks.log('[' + that._name + ']', 'created', this.xblock);
-                    xblocks.log.time('[' + that._name + '] created');
 
                     this.xblock.on('update', function() {
                         this.lock(true);
@@ -105,13 +62,10 @@
                     });
 
                     this.xblock.update();
+                    */
+                }
 
-                    xblocks.log.timeEnd('[' + that._name + '] created');
-                },
-
-
-
-
+                /*
                 inserted: function() {
                     if (this.xblock.isLock()) {
                         return;
@@ -144,6 +98,7 @@
                     that.trigger('attributeChanged', this, [ attrName, oldValue, newValue ]);
                     this.xblock.lock(false);
                 }
+                */
             },
 
             accessors: accessors,
@@ -151,12 +106,14 @@
             methods: methods,
 
             events: {
+                /*
                 click: function(event) {
                     if (this.hasAttribute('disabled')) {
                         event.preventDefault();
                         event.stopPropagation();
                     }
                 }
+                */
             }
         });
     };
