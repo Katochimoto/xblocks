@@ -31,8 +31,8 @@
         "borschik": "*",
         "stylus": "*",
 
-        "jscs": "*",
-        "jshint": "*",
+        "jscs": "1.0.8",
+        "jshint": "2.3.0",
 
 
 
@@ -63,15 +63,22 @@
         "autoprefixer-stylus": "*",
         "csso-stylus": "*",
 
-        "chai": "~1.9.0",
-        "mocha": "*",
-        "karma-mocha": "*",
-        "karma-sinon-expect": "*",
-        "karma-chai-plugins": "~0.2.0",
-        "karma-phantomjs-launcher": "*",
-        "karma": "*"
+        "mocha": "~1.17.0",
+        "karma-mocha": "~0.1.1",
+        "karma-mocha-debug": "~0.1",
+        "karma-sinon-expect": "~0.1.2",
+        "karma-borschik-preprocessor": "~0.1.3",
+        "karma-jsx-preprocessor": "~0.0.9",
+        "karma-phantomjs-launcher": "~0.1.0",
+        "karma": "~0.11.13"
     },
     "engines": {
         "node": "*"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/jshint . && ./node_modules/.bin/jscs . && npm run-script unit-test",
+        "validate": "grep -n '\\.only(' $(find test -name '*.js') && exit 1 || exit 0",
+        "karma-test": "./node_modules/karma/bin/karma start",
+        "unit-test": "npm run-script karma-test"
     }
 }

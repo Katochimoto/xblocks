@@ -15,7 +15,8 @@
         "module": false,
         "expect": false,
         "it": false,
-        "describe": false
+        "describe": false,
+        "_": false
     },
 
     "bitwise": true,

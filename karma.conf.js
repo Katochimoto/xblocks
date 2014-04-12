@@ -22,7 +22,7 @@ module.exports = function(config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['Chrome'], //PhantomJS
+        browsers: ['PhantomJS'], //Chrome
         captureTimeout: 60000,
         singleRun: false
     });

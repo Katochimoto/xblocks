@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         dirs: {
             src: 'src',
-            dest: 'build/<%= pkg.name %>/<%= pkg.version %>'
+            dest: 'build/<%= pkg.name %>'
         },
 
         // @see https://github.com/karma-runner/grunt-karma

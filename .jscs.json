@@ -69,6 +69,8 @@
     "excludeFiles": [
         "node_modules",
         "test",
-        "lib"
+        "src/external",
+        "build",
+        "**/*.yate.js"
     ]
 }

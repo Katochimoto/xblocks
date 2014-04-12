@@ -1,4 +1,5 @@
 (function() {
+
     /**
      * @module xblocks
      */
@@ -8,6 +9,7 @@
 
     if (typeof module !== 'undefined') {
         namespace = module.exports = xblocks;
+
     } else {
         namespace = (function() {
             return this || (1, eval)('this');

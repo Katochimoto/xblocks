@@ -64,7 +64,7 @@ xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototy
 
         function z(ns, o) {
             if (xblocks.attrs.isComplex(o) && ns.length && !_.isUndefined(o.getValue())) {
-                plainObject[ns.join(attrs.SEPARATOR)] = o.getValue();
+                plainObject[ns.join(xblocks.attrs.SEPARATOR)] = o.getValue();
             }
 
             for (var key in o) {
