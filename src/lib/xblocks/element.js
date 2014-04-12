@@ -1,4 +1,4 @@
-(function(xtag, xblocks, Modernizr, tv4) {
+(function(xtag, xblocks, React) {
     /** @namespace xblocks */
 
     /**
@@ -34,26 +34,53 @@
          */
         this.schema = 'http://xblocks.ru/' + this.name;
 
-        var view = xblocks.view.get(this.name)({
-            element: node
+        var view = xblocks.view.get(this.name);
+        var component;
+
+        init();
+
+        /*var observerParams = { childList: true, characterData: true, subtree: true };
+        var observer = new MutationObserver(function(r) {
+            if (component.isMounted()) {
+                destroy();
+                init(_.debounce(function() {
+                    observer.observe(node, observerParams);
+                }, 1));
+            }
         });
 
-        this.component = React.renderComponent(view, node);
+        observer.observe(node, observerParams);*/
 
-        var that = this;
+        this.init = init;
+        this.update = update;
+        this.destroy = destroy;
 
-        this.observer = new MutationObserver(function() {
-            //that.component.setState(that.component.getInitialState());
-            //that.component.forceUpdate();
-        });
 
-        this.observer.disconnect();
-        this.observer.observe(node, {
-            childList: true,
-            //attributes: true,
-            characterData: true,
-            subtree: true
-        });
+        function init(callback) {
+            if (!component || !component.isMounted()) {
+                component = React.renderComponent(view({ element: node }), node, callback);
+
+            } else if (component.isMounted()) {
+                callback && callback.call(component);
+            }
+        }
+
+        function destroy() {
+            //observer.disconnect();
+            if (component.isMounted()) {
+                try {
+                    React.unmountComponentAtNode(node);
+                    component.unmountComponent();
+                } catch (e) {
+                }
+            }
+        }
+
+        function update(state) {
+            init(function() {
+                this.setState(state);
+            });
+        }
     }
 
 
@@ -164,4 +191,4 @@
 
 
 
-}(xtag, xblocks, Modernizr, tv4));
+}(xtag, xblocks, React));

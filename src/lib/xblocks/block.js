@@ -11,6 +11,7 @@
     XBlock.prototype.register = function() {
         var accessors = {};
         var methods = {};
+        var blockName = this._name;
 
         for (var prop in this) {
             if (!this.hasOwnProperty(prop)) {
@@ -31,74 +32,25 @@
             }
         }
 
-        xtag.register(this._name, {
+        xtag.register(blockName, {
             lifecycle: {
                 created: function() {
-
                     this.xblock = xblocks.element.create(this);
+                },
 
-                    /*var blockName = this.tagName.toLowerCase();
-                    var component = xblocks.view.get(blockName);
-
-                    React.renderComponent(component({}), this);*/
-
-                    /*
-                    this.xblock = xblocks.element.create(this, {
-                        schema: that._schema
-                    });
-
-                    that.trigger('create', this);
-
-                    this.xblock.on('update', function() {
-                        this.lock(true);
-                        that.trigger('update', this.node);
-                        this.lock(false);
-                    });
-
-                    this.xblock.on('mutation', function() {
-                        this.lock(true);
-                        that.trigger('mutation', this.node);
-                        this.lock(false);
-                    });
-
-                    this.xblock.update();
-                    */
-                }
-
-                /*
                 inserted: function() {
-                    if (this.xblock.isLock()) {
-                        return;
-                    }
 
-                    this.xblock.lock(true);
-                    this.xblock.trigger('inserted');
-                    that.trigger('inserted', this);
-                    this.xblock.lock(false);
                 },
 
                 removed: function() {
-                    if (this.xblock.isLock()) {
-                        return;
-                    }
-
-                    this.xblock.lock(true);
-                    this.xblock.trigger('removed');
-                    that.trigger('removed', this);
-                    this.xblock.lock(false);
+                    this.xblock.destroy();
                 },
 
                 attributeChanged: function(attrName, oldValue, newValue) {
-                    if (this.xblock.isLock()) {
-                        return;
-                    }
-
-                    this.xblock.lock(true);
-                    this.xblock.trigger('attributeChanged', [ attrName, oldValue, newValue ]);
-                    that.trigger('attributeChanged', this, [ attrName, oldValue, newValue ]);
-                    this.xblock.lock(false);
+                    var state = {};
+                    state[attrName] = newValue;
+                    this.xblock.update(state);
                 }
-                */
             },
 
             accessors: accessors,

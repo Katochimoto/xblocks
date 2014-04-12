@@ -29,8 +29,10 @@ xblocks.view.register('xb-ico', React.createClass({
 
         classes = cx(classes);
 
+        var value = this.state.value || ' ';
+
         return (
-            <span className={classes}>&nbsp;</span>
+            <span className={classes}>{value}</span>
         );
     }
 }));

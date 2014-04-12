@@ -14,11 +14,11 @@
 
     XBIco.value = {
         get: function() {
-            return this.xblock.getHtml();
+            return this.innerHTML;
         },
 
         set: function(value) {
-            this.xblock.setHtml(value);
+            this.innerHTML = value;
         }
     };
 

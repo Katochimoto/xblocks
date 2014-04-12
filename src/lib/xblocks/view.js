@@ -1,15 +1,13 @@
-(function(xblocks) {
-
-    var CACHE = {};
+(function(xblocks, React) {
 
     xblocks.view = {};
 
     xblocks.view.register = function(blockName, component) {
-        CACHE[blockName] = component;
+        React.DOM[blockName] = component;
     };
 
     xblocks.view.get = function(blockName) {
-        return CACHE[blockName];
+        return React.DOM[blockName];
     };
 
-}(xblocks));
+}(xblocks, React));
