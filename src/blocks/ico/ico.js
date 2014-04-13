@@ -12,16 +12,6 @@
         }
     };
 
-    XBIco.value = {
-        get: function() {
-            return this.innerHTML;
-        },
-
-        set: function(value) {
-            this.innerHTML = value;
-        }
-    };
-
     XBIco.register();
 
 }(xblocks, React));
