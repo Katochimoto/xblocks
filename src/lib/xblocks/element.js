@@ -16,7 +16,6 @@
         return new XBElement(node);
     };
 
-
     /**
      * @param {HTMLElement} node
      * @constructor
@@ -25,19 +24,20 @@
         this._name = node.tagName.toLowerCase();
         this._schema = 'http://xblocks.ru/' + this._name;
         this._node = node;
-        this._observer = new MutationObserver(_.bind(this._onMutationObserver, this));
         this._component = null;
-        this._onMutationObserverInit = _.debounce(this._onInit, 1);
 
-        this._init(this._onInit);
+        var observerInit = _.debounce(_.bind(this.init, this), 1);
+        this._observer = new MutationObserver(_.bind(function(records) {
+            if (records.some(this._checkMutation, this) && this._isMountedComponent()) {
+                this.destroy();
+                observerInit();
+            }
+        }, this));
     }
 
-    /**
-     * @this {React.Constructor}
-     * @param {XBElement} xbelement
-     * @private
-     */
-    XBElement.prototype._onMutationObserverInit = _.noop;
+    XBElement.prototype._isMountedComponent = function() {
+        return this._component && this._component.isMounted();
+    };
 
     /**
      * @param {MutationRecord} record
@@ -48,47 +48,23 @@
         return record.type === 'childList' && record.target === this._node;
     };
 
-    /**
-     * @this {React.Constructor}
-     * @param {XBElement} xbelement
-     * @private
-     */
-    XBElement.prototype._onInit = function(xbelement) {
-        xbelement._observer.observe(xbelement._node, {
-            childList: true,
-            characterData: true,
-            subtree: true
-        });
-    };
-
-    /**
-     * @param {MutationRecord[]} records
-     * @private
-     */
-    XBElement.prototype._onMutationObserver = function(records) {
-        if (records.some(this._checkMutation, this) && this._isMountedComponent()) {
-            this.destroy();
-            this._init(this._onMutationObserverInit);
-        }
-    };
-
-    /**
-     * @param {Function} [callback]
-     * @private
-     */
-    XBElement.prototype._init = function(callback) {
-        callback = _.partial(callback  || _.noop, this);
-
+    XBElement.prototype.init = function() {
         if (this._isMountedComponent()) {
-            callback.call(this._component);
-
-        } else {
-            this._component = React.renderComponent(
-                xblocks.view.get(this._name)({ element: this._node }),
-                this._node,
-                callback
-            );
+            return;
         }
+
+        this._component = React.renderComponent(
+            xblocks.view.get(this._name)({ element: this._node }),
+            this._node,
+            _.bind(function() {
+                this._observer.disconnect();
+                this._observer.observe(this._node, {
+                    childList: true,
+                    characterData: true,
+                    subtree: true
+                });
+            }, this)
+        );
     };
 
     XBElement.prototype.destroy = function() {
@@ -98,6 +74,7 @@
             try {
                 React.unmountComponentAtNode(this._node);
                 this._component.unmountComponent();
+                this._component = null;
             } catch (e) {
             }
         }
@@ -113,9 +90,7 @@
         }
     };
 
-    XBElement.prototype._isMountedComponent = function() {
-        return this._component && this._component.isMounted();
-    };
+
 
 
     /*

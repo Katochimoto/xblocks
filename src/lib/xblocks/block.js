@@ -39,7 +39,7 @@
                 },
 
                 inserted: function() {
-
+                    this.xblock.init();
                 },
 
                 removed: function() {
