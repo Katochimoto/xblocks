@@ -66,7 +66,7 @@
      * @private
      */
     XBElement.prototype._onMutationObserver = function(records) {
-        if (records.some(this._checkMutation, this) && this._component.isMounted()) {
+        if (records.some(this._checkMutation, this) && this._isMountedComponent()) {
             this.destroy();
             this._init(this._onMutationObserverInit);
         }
@@ -79,25 +79,22 @@
     XBElement.prototype._init = function(callback) {
         callback = _.partial(callback  || _.noop, this);
 
-        if (!this._component || !this._component.isMounted()) {
+        if (this._isMountedComponent()) {
+            callback.call(this._component);
 
+        } else {
             this._component = React.renderComponent(
                 xblocks.view.get(this._name)({ element: this._node }),
                 this._node,
                 callback
             );
-
-        } else if (this._component.isMounted()) {
-            callback.call(this._component);
         }
     };
 
     XBElement.prototype.destroy = function() {
-        if (this._observer) {
-            this._observer.disconnect();
-        }
+        this._observer.disconnect();
 
-        if (this._component && this._component.isMounted()) {
+        if (this._isMountedComponent()) {
             try {
                 React.unmountComponentAtNode(this._node);
                 this._component.unmountComponent();
@@ -111,10 +108,13 @@
      */
     XBElement.prototype.update = function(state) {
         state = _.isPlainObject(state) ? state : {};
-        this._init(function() {
-            console.log(this, arguments);
-            this.setState(state);
-        });
+        if (this._isMountedComponent()) {
+            this._component.setState(state);
+        }
+    };
+
+    XBElement.prototype._isMountedComponent = function() {
+        return this._component && this._component.isMounted();
     };
 
 
