@@ -18,70 +18,104 @@
 
 
     /**
-     *
      * @param {HTMLElement} node
      * @constructor
      */
     function XBElement(node) {
+        this._name = node.tagName.toLowerCase();
+        this._schema = 'http://xblocks.ru/' + this._name;
+        this._node = node;
+        this._observer = new MutationObserver(_.bind(this._onMutationObserver, this));
+        this._component = null;
+        this._onMutationObserverInit = _.debounce(this._onInit, 1);
 
-        /**
-         * @type {String}
-         */
-        this.name = node.tagName.toLowerCase();
-
-        /**
-         * @type {String}
-         */
-        this.schema = 'http://xblocks.ru/' + this.name;
-
-        var view = xblocks.view.get(this.name);
-        var component;
-
-        init();
-
-        /*var observerParams = { childList: true, characterData: true, subtree: true };
-        var observer = new MutationObserver(function(r) {
-            if (component.isMounted()) {
-                destroy();
-                init(_.debounce(function() {
-                    observer.observe(node, observerParams);
-                }, 1));
-            }
-        });
-
-        observer.observe(node, observerParams);*/
-
-        this.init = init;
-        this.update = update;
-        this.destroy = destroy;
-
-
-        function init(callback) {
-            if (!component || !component.isMounted()) {
-                component = React.renderComponent(view({ element: node }), node, callback);
-
-            } else if (component.isMounted()) {
-                callback && callback.call(component);
-            }
-        }
-
-        function destroy() {
-            //observer.disconnect();
-            if (component.isMounted()) {
-                try {
-                    React.unmountComponentAtNode(node);
-                    component.unmountComponent();
-                } catch (e) {
-                }
-            }
-        }
-
-        function update(state) {
-            init(function() {
-                this.setState(state);
-            });
-        }
+        this._init(this._onInit);
     }
+
+    /**
+     * @this {React.Constructor}
+     * @param {XBElement} xbelement
+     * @private
+     */
+    XBElement.prototype._onMutationObserverInit = _.noop;
+
+    /**
+     * @param {MutationRecord} record
+     * @returns {boolean}
+     * @private
+     */
+    XBElement.prototype._checkMutation = function(record) {
+        return record.type === 'childList' && record.target === this._node;
+    };
+
+    /**
+     * @this {React.Constructor}
+     * @param {XBElement} xbelement
+     * @private
+     */
+    XBElement.prototype._onInit = function(xbelement) {
+        xbelement._observer.observe(xbelement._node, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+    };
+
+    /**
+     * @param {MutationRecord[]} records
+     * @private
+     */
+    XBElement.prototype._onMutationObserver = function(records) {
+        if (records.some(this._checkMutation, this) && this._component.isMounted()) {
+            this.destroy();
+            this._init(this._onMutationObserverInit);
+        }
+    };
+
+    /**
+     * @param {Function} [callback]
+     * @private
+     */
+    XBElement.prototype._init = function(callback) {
+        callback = _.partial(callback  || _.noop, this);
+
+        if (!this._component || !this._component.isMounted()) {
+
+            this._component = React.renderComponent(
+                xblocks.view.get(this._name)({ element: this._node }),
+                this._node,
+                callback
+            );
+
+        } else if (this._component.isMounted()) {
+            callback.call(this._component);
+        }
+    };
+
+    XBElement.prototype.destroy = function() {
+        if (this._observer) {
+            this._observer.disconnect();
+        }
+
+        if (this._component && this._component.isMounted()) {
+            try {
+                React.unmountComponentAtNode(this._node);
+                this._component.unmountComponent();
+            } catch (e) {
+            }
+        }
+    };
+
+    /**
+     * @param {Object} state
+     */
+    XBElement.prototype.update = function(state) {
+        state = _.isPlainObject(state) ? state : {};
+        this._init(function() {
+            console.log(this, arguments);
+            this.setState(state);
+        });
+    };
 
 
     /*
