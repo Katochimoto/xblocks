@@ -3,6 +3,14 @@
  */
 xblocks.dom.attrs = {};
 
+xblocks.dom.attrs.getRealValue = function(name, value) {
+    if (value === 'true' || value === 'false' || name === value) {
+        return (name === value || value === 'true');
+    }
+
+    return value;
+};
+
 /**
  * Выделение атрибутов элемента в плоском представлении
  *
@@ -20,13 +28,7 @@ xblocks.dom.attrs.toPlainObject = function(element) {
     for (i = 0; i < l; i++) {
         var attr = attributes.item(i);
         var name = attr.nodeName;
-        var val = attr.value;
-
-        if (val === 'true' || val === 'false' || name === val) {
-            val = (name === val || val === 'true');
-        }
-
-        plain[name] = val;
+        plain[name] = xblocks.dom.attrs.getRealValue(name, attr.value);
     }
 
     xblocks.log.timeEnd('attrs->toPlainObject');

@@ -5,10 +5,7 @@ xblocks.view.register('xb-ico', React.createClass({
     displayName: 'xb-ico',
 
     getInitialState: function() {
-        return _.assign({},
-            this.props.element.attrs || {},
-            xblocks.dom.attrs.toPlainObject(this.props.element)
-        );
+        return this.props.element.xblock.getState();
     },
 
     render: function() {

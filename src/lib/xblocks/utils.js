@@ -86,4 +86,26 @@
         return content && content.innerHTML || element.innerHTML;
     };
 
+    /**
+     *
+     * @param {Object} obj
+     * @param {Array} [ignore]
+     * @return {Boolean}
+     */
+    xblocks.isEmptyObject = function(obj, ignore) {
+        if (typeof obj !== 'object') {
+            return true;
+        }
+
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (!ignore || (ignore && ignore.indexOf(key) === -1)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
 }(xblocks, Modernizr));

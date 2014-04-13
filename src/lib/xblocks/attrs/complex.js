@@ -58,9 +58,7 @@ xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototy
      * @return {xblocks.attrs.AttrsPlain}
      */
     toPlain: function() {
-        xblocks.log.time('AttrsComplex->toPlain');
-
-        var plainObject = xblocks.attrs.plain();
+        var plainObject = xblocks.attrs.plain({});
 
         function z(ns, o) {
             if (xblocks.attrs.isComplex(o) && ns.length && !_.isUndefined(o.getValue())) {
@@ -79,7 +77,6 @@ xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototy
 
         z([], this);
 
-        xblocks.log.timeEnd('AttrsComplex->toPlain');
         return plainObject;
     },
 
@@ -88,14 +85,12 @@ xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototy
      * @return {Object}
      */
     toSchema: function(nesting) {
-        xblocks.log.time('AttrsComplex->toSchema');
-
         var schema = {};
         var stack = [];
-        stack.push([ this, schema, 0 ]);
+        stack.push([this, schema, 0]);
 
         var ns;
-        while((ns = stack.pop())) {
+        while (ns = stack.pop()) {
             ns[1].content = ns[0].getValue();
             ns[1].attrs = {};
 
@@ -106,7 +101,7 @@ xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototy
 
             for (var key in ns[0]) {
                 if (ns[0].hasOwnProperty(key) && xblocks.attrs.isComplex(ns[0][key])) {
-                    if (_.isEmpty(ns[0][key], xblocks.attrs.ATTR_COMPLEX_VALUE)) {
+                    if (xblocks.isEmptyObject(ns[0][key], xblocks.attrs.ATTR_COMPLEX_VALUE)) {
                         ns[1].attrs[key] = ns[0][key].getValue();
 
                     } else {
@@ -117,7 +112,6 @@ xblocks.attrs.AttrsComplex.prototype = _.create(xblocks.attrs.AttrsPlain.prototy
             }
         }
 
-        xblocks.log.timeEnd('AttrsComplex->toSchema');
-        return _.cloneDeep(schema);
+        return JSON.parse(JSON.stringify(schema));
     }
 });

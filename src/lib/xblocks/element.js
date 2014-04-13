@@ -84,10 +84,41 @@
      * @param {Object} state
      */
     XBElement.prototype.update = function(state) {
-        state = _.isPlainObject(state) ? state : {};
-        if (this._isMountedComponent()) {
-            this._component.setState(state);
+        if (!this._isMountedComponent()) {
+            return;
         }
+
+        state = _.isPlainObject(state) ? state : {};
+        state = _.extend(this.getState(), state);
+
+        /*var complexState = state.toComplex();
+
+         if (tv4) {
+         var schema = tv4.getSchema(this._schema);
+
+         if (schema) {
+         var check = tv4.validateResult(complexState.toSchema(), schema);
+         if (!check.valid) {
+         throw check.error;
+         }
+         }
+         }
+
+         return complexState.toSchema(1);
+         */
+
+        this._component.setState(state);
+    };
+
+    /**
+     * @returns {Object}
+     */
+    XBElement.prototype.getState = function() {
+        return _.extend(
+            _.isPlainObject(this._node.state) ? this._node.state : {},
+            xblocks.dom.attrs.toPlainObject(this._node).toObject(),
+            (this._isMountedComponent() && _.isPlainObject(this._component.state)) ? this._component.state : {}
+        );
     };
 
 

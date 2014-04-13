@@ -4,7 +4,7 @@
 
     var XBIco = xblocks.create('xb-ico');
 
-    XBIco.attrs = {
+    XBIco.state = {
         get: function() {
             return {
                 size: 'm'

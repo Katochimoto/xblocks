@@ -35,6 +35,10 @@ xblocks.attrs.AttrsPlain.prototype = {
         return !this[name];
     },
 
+    toObject: function() {
+        return JSON.parse(JSON.stringify(this));
+    },
+
     /**
      * @return {xblocks.attrs.AttrsPlain}
      */

@@ -48,7 +48,7 @@
 
                 attributeChanged: function(attrName, oldValue, newValue) {
                     var state = {};
-                    state[attrName] = newValue;
+                    state[attrName] = xblocks.dom.attrs.getRealValue(attrName, newValue);
                     this.xblock.update(state);
                 }
             },
