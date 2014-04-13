@@ -13,7 +13,8 @@ xblocks.view.register('xb-ico', React.createClass({
         var classes = {
             'xb-ico': true,
             'xb-ico_active': this.state.active,
-            'is-disabled': this.state.disabled
+            'is-disabled': this.state.disabled,
+            '_content': true
         };
 
         if (this.state.type) {
