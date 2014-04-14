@@ -26,6 +26,6 @@
     }.call(this));
 
     /*! borschik:include:lib/xblocks.js */
-    /*! borschik:include:main.blocks.js */
+    /*! borschik:include:blocks.js */
 
 }.call(this));
