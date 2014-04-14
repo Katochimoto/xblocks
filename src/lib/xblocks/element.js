@@ -28,7 +28,7 @@
 
         var init = function() {
             this._component = React.renderComponent(
-                xblocks.view.get(name)(this.getProps()),
+                xblocks.view.get(name)(this._getNodeProps()),
                 this._node,
                 this._observerBind.bind(this)
             );
@@ -68,7 +68,7 @@
         }
 
         props = _.isPlainObject(props) ? props : {};
-        props = _.extend(this.getProps(), props);
+        props = _.extend(this._getNodeProps(), props);
 
         this._component.setProps(props);
     };
@@ -76,7 +76,7 @@
     /**
      * @returns {Object}
      */
-    XBElement.prototype.getProps = function() {
+    XBElement.prototype._getNodeProps = function() {
         return xblocks.dom.attrs.toPlainObject(this._node).toObject();
     };
 

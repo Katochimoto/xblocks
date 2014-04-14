@@ -6,7 +6,8 @@
         "lodash": "2.4.1",
         "x-tag-core": "0.9.5",
         "es5-shim": "2.3.0",
-        "tv4": "1.0.15"
+        "tv4": "1.0.15",
+        "react": "0.10.0"
     },
     "directory": "external"
 }
