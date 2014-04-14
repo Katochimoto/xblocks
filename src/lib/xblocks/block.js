@@ -39,17 +39,17 @@
                 },
 
                 inserted: function() {
-                    this.xblock.init();
                 },
 
                 removed: function() {
                     this.xblock.destroy();
+                    delete this.xblock;
                 },
 
                 attributeChanged: function(attrName, oldValue, newValue) {
-                    var state = {};
-                    state[attrName] = xblocks.dom.attrs.getRealValue(attrName, newValue);
-                    this.xblock.update(state);
+                    var props = {};
+                    props[attrName] = xblocks.dom.attrs.getRealValue(attrName, newValue);
+                    this.xblock.update(props);
                 }
             },
 

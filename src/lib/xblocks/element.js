@@ -21,51 +21,30 @@
      * @constructor
      */
     function XBElement(node) {
-        this._name = node.tagName.toLowerCase();
-        this._schema = 'http://xblocks.ru/' + this._name;
         this._node = node;
         this._component = null;
 
-        var observerInit = _.debounce(_.bind(this.init, this), 1);
-        this._observer = new MutationObserver(_.bind(function(records) {
+        var name = node.tagName.toLowerCase();
+
+        var init = function() {
+            this._component = React.renderComponent(
+                xblocks.view.get(name)(this.getProps()),
+                this._node,
+                this._observerBind.bind(this)
+            );
+        }.bind(this);
+
+        var observerInit = _.debounce(init, 1);
+
+        this._observer = new MutationObserver(function(records) {
             if (records.some(this._checkMutation, this) && this._isMountedComponent()) {
                 this.destroy();
                 observerInit();
             }
-        }, this));
+        }.bind(this));
+
+        init();
     }
-
-    XBElement.prototype._isMountedComponent = function() {
-        return this._component && this._component.isMounted();
-    };
-
-    /**
-     * @param {MutationRecord} record
-     * @returns {boolean}
-     * @private
-     */
-    XBElement.prototype._checkMutation = function(record) {
-        return record.type === 'childList' && record.target === this._node;
-    };
-
-    XBElement.prototype.init = function() {
-        if (this._isMountedComponent()) {
-            return;
-        }
-
-        this._component = React.renderComponent(
-            xblocks.view.get(this._name)({ element: this._node }),
-            this._node,
-            _.bind(function() {
-                this._observer.disconnect();
-                this._observer.observe(this._node, {
-                    childList: true,
-                    characterData: true,
-                    subtree: true
-                });
-            }, this)
-        );
-    };
 
     XBElement.prototype.destroy = function() {
         this._observer.disconnect();
@@ -81,46 +60,47 @@
     };
 
     /**
-     * @param {Object} state
+     * @param {Object} props
      */
-    XBElement.prototype.update = function(state) {
+    XBElement.prototype.update = function(props) {
         if (!this._isMountedComponent()) {
             return;
         }
 
-        state = _.isPlainObject(state) ? state : {};
-        state = _.extend(this.getState(), state);
+        props = _.isPlainObject(props) ? props : {};
+        props = _.extend(this.getProps(), props);
 
-        /*var complexState = state.toComplex();
-
-         if (tv4) {
-         var schema = tv4.getSchema(this._schema);
-
-         if (schema) {
-         var check = tv4.validateResult(complexState.toSchema(), schema);
-         if (!check.valid) {
-         throw check.error;
-         }
-         }
-         }
-
-         return complexState.toSchema(1);
-         */
-
-        this._component.setState(state);
+        this._component.setProps(props);
     };
 
     /**
      * @returns {Object}
      */
-    XBElement.prototype.getState = function() {
-        return _.extend(
-            _.isPlainObject(this._node.state) ? this._node.state : {},
-            xblocks.dom.attrs.toPlainObject(this._node).toObject(),
-            (this._isMountedComponent() && _.isPlainObject(this._component.state)) ? this._component.state : {}
-        );
+    XBElement.prototype.getProps = function() {
+        return xblocks.dom.attrs.toPlainObject(this._node).toObject();
     };
 
+    XBElement.prototype._isMountedComponent = function() {
+        return (this._component && this._component.isMounted());
+    };
+
+    /**
+     * @param {MutationRecord} record
+     * @returns {boolean}
+     * @private
+     */
+    XBElement.prototype._checkMutation = function(record) {
+        return (record.type === 'childList' && record.target === this._node);
+    };
+
+    XBElement.prototype._observerBind = function() {
+        this._observer.disconnect();
+        this._observer.observe(this._node, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+    };
 
 
 
