@@ -10,7 +10,6 @@ module.exports = function(config) {
         ],
         files: [
             'build/**/xblocks.js',
-            'build/**/xblocks.yate.js',
             'test/**/*.js'
         ],
         exclude: [],
