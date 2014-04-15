@@ -7,5 +7,4 @@
 
     /*! borschik:include:dom/attrs.js */
 
-
 }(xblocks));

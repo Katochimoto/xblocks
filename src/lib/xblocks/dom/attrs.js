@@ -3,8 +3,20 @@
  */
 xblocks.dom.attrs = {};
 
+xblocks.dom.attrs.ARRTS_BOOLEAN = [
+    'checked', 'selected', 'disabled', 'readonly', 'multiple', 'ismap', 'defer'
+];
+
+/**
+ * @param {string} name
+ * @param {string} value
+ * @returns {string|boolean}
+ */
 xblocks.dom.attrs.getRealValue = function(name, value) {
-    if (value === 'true' || value === 'false' || name === value) {
+    if (value === 'true'
+        || value === 'false'
+        || (xblocks.dom.attrs.ARRTS_BOOLEAN.indexOf(name) !== -1 && name === value)
+    ) {
         return (name === value || value === 'true');
     }
 
@@ -13,64 +25,19 @@ xblocks.dom.attrs.getRealValue = function(name, value) {
 
 /**
  * Выделение атрибутов элемента в плоском представлении
- *
- * @param {HTMLElement} element элемент
- * @return {xblocks.attrs.AttrsPlain}
+ * @param {HTMLElement} element
+ * @return {object}
  */
-xblocks.dom.attrs.toPlainObject = function(element) {
-    xblocks.log.time('attrs->toPlainObject');
-
-    var plain = xblocks.attrs.plain();
-    var i = 0;
-    var attributes = element.attributes;
-    var l = attributes.length;
-
-    for (i = 0; i < l; i++) {
-        var attr = attributes.item(i);
-        var name = attr.nodeName;
-        plain[name] = xblocks.dom.attrs.getRealValue(name, attr.value);
+xblocks.dom.attrs.toObject = function(element) {
+    if (element.nodeType !== 1) {
+        return {};
     }
 
-    xblocks.log.timeEnd('attrs->toPlainObject');
-    return plain;
-};
+    var attrs = {};
 
-/**
- * Выделение атрибутов элемента в комплексном представлении
- *
- * @param {HTMLElement} element элемент
- * @return {xblocks.attrs.AttrsComplex}
- */
-xblocks.dom.attrs.toComplexObject = function(element) {
-    return xblocks.dom.attrs.toPlainObject(element).toComplex();
-};
+    Array.prototype.forEach.call(element.attributes, function(attr) {
+        attrs[attr.nodeName] = xblocks.dom.attrs.getRealValue(attr.nodeName, attr.value);
+    });
 
-/**
- * Выделение атрибутов элемента в представлении, пригодном для проверки со схемой
- *
- * @param {HTMLElement} element элемент
- * @return {Object}
- */
-xblocks.dom.attrs.toSchemaObject = function(element) {
-    return xblocks.dom.attrs.toComplexObject(element).toSchema();
-};
-
-/**
- * Проверка наличия определенного атрибута
- *
- * @param {HTMLElement} element элемент
- * @param {String} attrName название атрибута
- * @return {Boolean} true, если атрибут указан и его значение определено
- */
-xblocks.dom.attrs.isEmpty = function(element, attrName) {
-    if (element.hasAttribute(attrName)) {
-        var value = element.getAttribute(attrName);
-        if (!value || value === 'false') {
-            return true;
-        }
-
-        return false;
-    }
-
-    return true;
+    return attrs;
 };

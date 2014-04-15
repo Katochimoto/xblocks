@@ -1,5 +1,8 @@
 (function(xblocks, React) {
 
+    /**
+     * @module xblocks.view
+     */
     xblocks.view = {};
 
     xblocks.view.register = function(blockName, component) {
