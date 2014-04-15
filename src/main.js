@@ -25,7 +25,10 @@
         /*! borschik:include:../external/x-tag-core/dist/x-tag-core.js */
     }.call(this));
 
-    /*! borschik:include:lib/xblocks.js */
+    (function() {
+        /*! borschik:include:../node_modules/xblocks-core/xblocks.js */
+    }.call(this));
+
     /*! borschik:include:blocks.js */
 
 }.call(this));

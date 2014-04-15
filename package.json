@@ -27,6 +27,8 @@
         "stylobate-islands": "*"
     },
     "devDependencies": {
+        "xblocks-core": "*",
+
         "borschik": "*",
         "stylus": "*",
 
