@@ -103,7 +103,7 @@ module.exports = function(grunt) {
         modernizr: {
             dist: {
                 devFile: 'remote',
-                outputFile: 'external/modernizr.js',
+                outputFile: 'bower_components/modernizr.js',
                 extra: {
                     shiv: false,
                     printshiv: false,

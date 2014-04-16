@@ -2,8 +2,7 @@
 
     /*! borschik:include:ico.jsx.js */
 
-    var XBIco = xblocks.create('xb-ico');
-    XBIco.register();
+    xblocks.create('xb-ico');
 
 }(xblocks, React));
 
