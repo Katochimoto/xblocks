@@ -2,7 +2,7 @@
 .borschik
 .npm-debug.log
 node_modules
-external
+bower_components
 build
 test
 .travis.yml

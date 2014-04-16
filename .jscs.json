@@ -69,7 +69,7 @@
     "excludeFiles": [
         "node_modules",
         "test",
-        "external",
+        "bower_components",
         "build",
         "**/*.yate.js",
         "**/*.jsx.js"

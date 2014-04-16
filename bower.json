@@ -5,7 +5,8 @@
         "lodash": "2.4.1",
         "x-tag-core": "0.9.5",
         "es5-shim": "2.3.0",
-        "react": "0.10.0"
+        "react": "0.10.0",
+        "xblocks-core": "*"
     },
-    "directory": "external"
+    "directory": "bower_components"
 }

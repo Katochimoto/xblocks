@@ -2,19 +2,19 @@
     'use strict';
 
     (function() {
-        /*! borschik:include:../external/es5-shim/es5-shim.js */
+        /*! borschik:include:../bower_components/es5-shim/es5-shim.js */
     }.call(this));
 
     (function() {
-        /*! borschik:include:../external/modernizr.js */
+        /*! borschik:include:../bower_components/modernizr.js */
     }.call(this));
 
     (function() {
-        /*! borschik:include:../external/lodash/dist/lodash.js */
+        /*! borschik:include:../bower_components/lodash/dist/lodash.js */
     }.call(this));
 
     (function() {
-        /*! borschik:include:../external/react/react-with-addons.js */
+        /*! borschik:include:../bower_components/react/react-with-addons.js */
     }.call(this));
 
     (function() {
@@ -22,11 +22,11 @@
     }.call(this));
 
     (function() {
-        /*! borschik:include:../external/x-tag-core/dist/x-tag-core.js */
+        /*! borschik:include:../bower_components/x-tag-core/dist/x-tag-core.js */
     }.call(this));
 
     (function() {
-        /*! borschik:include:../node_modules/xblocks-core/xblocks.js */
+        /*! borschik:include:../bower_components/xblocks-core/xblocks.js */
     }.call(this));
 
     /*! borschik:include:blocks.js */

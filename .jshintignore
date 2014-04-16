@@ -1,6 +1,6 @@
 node_modules
 build
-external
+bower_components
 **/*.yate.js
 **/*.jsx.js
 test

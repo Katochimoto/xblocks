@@ -10,7 +10,6 @@ xblocks.view.register('xb-ico', React.createClass({
         'alt': React.PropTypes.string,
         'size': React.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
         'type': React.PropTypes.oneOf(['remove', 'notification', 'check', 'dropdown']),
-        'float': React.PropTypes.oneOf(['left', 'right']),
         'active': React.PropTypes.bool,
         'disabled': React.PropTypes.bool
     },

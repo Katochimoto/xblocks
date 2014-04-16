@@ -7,5 +7,5 @@
         "es5-shim": "2.3.0",
         "react": "0.10.0"
     },
-    "directory": "external"
+    "directory": "bower_components"
 }
