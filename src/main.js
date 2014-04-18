@@ -1,6 +1,4 @@
 (function() {
-    'use strict';
-
     (function() {
         /*! borschik:include:../bower_components/es5-shim/es5-shim.js */
     }.call(this));

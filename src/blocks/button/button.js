@@ -1,16 +1,16 @@
 (function(xblocks) {
-    'use strict';
+    /*! borschik:include:button.jsx.js */
 
-    var XBButton = xblocks.create('xb-button');
+    xblocks.create('xb-button', {
+        prototype: Object.create(HTMLButtonElement.prototype)
+    });
 
-    XBButton.attrs = {
-        get: function() {
-            return {
-                theme: 'normal',
-                size: 'm'
-            };
-        }
-    };
+
+
+
+
+
+    /*
 
     XBButton.value = {
         get: function() {
@@ -27,6 +27,7 @@
     });
 
     XBButton.register();
+    */
 
 }(xblocks));
 

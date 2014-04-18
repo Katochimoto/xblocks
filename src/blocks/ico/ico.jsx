@@ -8,6 +8,7 @@ xblocks.view.register('xb-ico', React.createClass({
         'id': React.PropTypes.string,
         'class': React.PropTypes.string,
         'alt': React.PropTypes.string,
+        'children': React.PropTypes.renderable,
         'size': React.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
         'type': React.PropTypes.oneOf(['remove', 'notification', 'check', 'dropdown']),
         'active': React.PropTypes.bool,
@@ -39,10 +40,10 @@ xblocks.view.register('xb-ico', React.createClass({
 
         classes = cx(classes);
 
-        var value = this.props.value || ' ';
+        var children = this.props.children || ' ';
 
         return (
-            <span className={classes}>{value}</span>
+            <span className={classes}>{children}</span>
         );
     }
 }));
