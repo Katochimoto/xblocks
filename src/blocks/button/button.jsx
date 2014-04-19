@@ -49,7 +49,8 @@
             return {
                 'size': 'm',
                 'theme': 'normal',
-                'type': 'button'
+                'type': 'button',
+                'children': ' '
             };
         },
 
