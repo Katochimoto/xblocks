@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 (function(xblocks, React) {
 
-xblocks.view.register('xb-ico', React.createClass({
+xblocks.view.register('xb-ico', {
     displayName: 'xb-ico',
 
     propTypes: {
@@ -38,6 +38,10 @@ xblocks.view.register('xb-ico', React.createClass({
             classes['xb-ico_size_' + this.props.size] = true;
         }
 
+        if (this.props.className) {
+            classes[this.props.className] = true;
+        }
+
         classes = cx(classes);
 
         var children = this.props.children || ' ';
@@ -46,6 +50,6 @@ xblocks.view.register('xb-ico', React.createClass({
             <span className={classes}>{children}</span>
         );
     }
-}));
+});
 
 }(xblocks, React));
