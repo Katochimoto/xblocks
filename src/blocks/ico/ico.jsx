@@ -38,10 +38,6 @@ xblocks.view.register('xb-ico', {
             classes['xb-ico_size_' + this.props.size] = true;
         }
 
-        if (this.props.className) {
-            classes[this.props.className] = true;
-        }
-
         classes = cx(classes);
 
         var children = this.props.children || ' ';
