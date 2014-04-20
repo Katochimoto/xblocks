@@ -2,27 +2,64 @@
 (function(xblocks, React) {
 
     var XBButtonContent = React.createClass({
+        propTypes: {
+            'content': React.PropTypes.renderable,
+            'ico': React.PropTypes.object
+        },
+
+        statics: {
+            mapIcoProps: function(props) {
+                var regIcoProp = /^xb-ico-/;
+                return xblocks.mapObject(props, function(name, descr) {
+                    return {
+                        'name': name.replace(regIcoProp, ''),
+                        'descr': descr
+                    };
+                });
+            }
+        },
+
         getDefaultProps: function() {
-            return { 'content': ' ' };
+            return {
+                'content': ' ',
+                'ico': {}
+            };
         },
 
         shouldComponentUpdate: function(nextProps) {
-            return (nextProps.content !== this.props.content);
+            return !xblocks.equals(nextProps, this.props);
         },
 
         render: function() {
-            var XBIco = xblocks.view.get('xb-ico');
+            var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
+
+            var children = [
+                <span key="content" className="_content">{this.props.content}</span>
+            ];
+
+            if (!xblocks.isEmptyObject(icoProps) && icoProps.type) {
+                icoProps.key = 'ico';
+                var icoView = xblocks.view.get('xb-ico')(icoProps);
+
+                if (!icoProps.float || icoProps.float === 'left') {
+                    children.unshift(<span key="sep"> </span>);
+                    children.unshift(icoView);
+
+                } else if (icoProps.float === 'right') {
+                    children.push(<span key="sep"> </span>);
+                    children.push(icoView);
+                }
+            }
 
             return (
                 <span className="xb-button__text">
-                    <span className="_content">{this.props.content}</span>
-                    <XBIco type="remove" />
+                    {children}
                 </span>
             );
         }
     });
 
-    xblocks.view.register('xb-button', {
+    var XBButton = xblocks.view.register('xb-button', {
         displayName: 'xb-button',
 
         propTypes: {
@@ -43,6 +80,15 @@
             'multiple': React.PropTypes.bool,
             'autofocus': React.PropTypes.bool,
             'disabled': React.PropTypes.bool
+        },
+
+        statics: {
+            filterIcoProps: function(props) {
+                var regIcoProp = /^xb-ico-/;
+                return xblocks.filterObject(props, function(name) {
+                    return regIcoProp.test(name);
+                });
+            }
         },
 
         getDefaultProps: function() {
@@ -74,6 +120,8 @@
 
             classes = cx(classes);
 
+            var icoProps = XBButton.filterIcoProps(this.props);
+
             if (this.props.href) {
                 return (
                     <a className={classes}
@@ -82,7 +130,7 @@
                         target={this.props.target}
                         autoFocus={this.props.autofocus}>
 
-                        <XBButtonContent content={this.props.children} />
+                        <XBButtonContent ico={icoProps} content={this.props.children} />
                     </a>
                 );
 
@@ -102,7 +150,7 @@
                                 <span className="nb-file-intruder__focus" />
                             </span>
                         </span>
-                        <XBButtonContent content={this.props.children} />
+                        <XBButtonContent ico={icoProps} content={this.props.children} />
                     </label>
                 );
 
@@ -116,7 +164,7 @@
                         disabled={this.props.disabled ? 'disabled' : ''}
                         autoFocus={this.props.autofocus}>
 
-                        <XBButtonContent content={this.props.children} />
+                        <XBButtonContent ico={icoProps} content={this.props.children} />
                     </button>
                 );
             }

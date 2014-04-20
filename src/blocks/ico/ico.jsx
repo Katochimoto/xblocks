@@ -8,9 +8,10 @@ xblocks.view.register('xb-ico', {
         'id': React.PropTypes.string,
         'class': React.PropTypes.string,
         'alt': React.PropTypes.string,
+        'value': React.PropTypes.string,
         'children': React.PropTypes.renderable,
         'size': React.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
-        'type': React.PropTypes.oneOf(['remove', 'notification', 'check', 'dropdown']),
+        'type': React.PropTypes.oneOf(['remove', 'notification', 'check', 'dropdown']).isRequired,
         'active': React.PropTypes.bool,
         'disabled': React.PropTypes.bool
     },
@@ -41,8 +42,10 @@ xblocks.view.register('xb-ico', {
 
         classes = cx(classes);
 
+        var content = this.props.value || this.props.children;
+
         return (
-            <span className={classes}>{this.props.children}</span>
+            <span className={classes}>{content}</span>
         );
     }
 });
