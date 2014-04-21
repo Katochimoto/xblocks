@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                 options: {
                     minimize: 'no'
                 },
-                src: '<%= dirs.src %>/main.js',
+                src: '<%= dirs.src %>/xblocks.js',
                 dest: '<%= dirs.dest %>/<%= pkg.name %>.js'
             },
 
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '<%= dirs.dest %>/<%= pkg.name %>.css': '<%= dirs.src %>/main.styl'
+                    '<%= dirs.dest %>/<%= pkg.name %>.css': '<%= dirs.src %>/xblocks.styl'
                 }
             }
         },
