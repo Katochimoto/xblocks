@@ -1,5 +1,5 @@
 
-/* line 35 : /home/rikishi/webhome/xblocks/src/main.styl */
+/* line 35 : /home/rikishi/webhome/xblocks/src/xblocks.styl */
 
 /* line 1 : /home/rikishi/webhome/xblocks/node_modules/stylus/lib/functions/index.styl */
 
@@ -683,7 +683,7 @@
 
 /* line 1 : /home/rikishi/webhome/xblocks/node_modules/stylobate-islands/lib/skins/menu/skin-islands-menu.styl */
 
-/* line 11 : /home/rikishi/webhome/xblocks/src/main.styl */
+/* line 11 : /home/rikishi/webhome/xblocks/src/xblocks.styl */
 xb-button,
 xb-field,
 xb-ico,
@@ -691,12 +691,12 @@ xb-select {
   display: inline-block;
 }
 
-/* line 17 : /home/rikishi/webhome/xblocks/src/main.styl */
+/* line 17 : /home/rikishi/webhome/xblocks/src/xblocks.styl */
 xb-link {
   display: inline;
 }
 
-/* line 23 : /home/rikishi/webhome/xblocks/src/main.styl */
+/* line 23 : /home/rikishi/webhome/xblocks/src/xblocks.styl */
 xb-option,
 xb-optgroup,
 xb-dropdown {
@@ -705,13 +705,13 @@ xb-dropdown {
 
 /* line 61 : /home/rikishi/webhome/xblocks/node_modules/stylobate-islands/lib/skins/menu/skin-islands-menu.styl */
 
-/* line 61 : /home/rikishi/webhome/xblocks/src/lib/styl/_colors.styl */
+/* line 61 : /home/rikishi/webhome/xblocks/src/styl/_colors.styl */
 
-/* line 35 : /home/rikishi/webhome/xblocks/src/lib/styl/_colors.styl */
+/* line 35 : /home/rikishi/webhome/xblocks/src/styl/_colors.styl */
 
-/* line 1 : /home/rikishi/webhome/xblocks/src/lib/styl/_layout.styl */
+/* line 1 : /home/rikishi/webhome/xblocks/src/styl/_layout.styl */
 
-/* line 13 : /home/rikishi/webhome/xblocks/src/lib/styl/_layout.styl */
+/* line 13 : /home/rikishi/webhome/xblocks/src/styl/_layout.styl */
 
 /* line 175 : /home/rikishi/webhome/xblocks/src/blocks/button/styl/button.styl */
 

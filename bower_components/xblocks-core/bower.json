@@ -1,0 +1,46 @@
+{
+  "name": "xblocks-core",
+  "version": "0.0.14",
+  "main": "xblocks-core.js",
+  "ignore": [
+    ".npmignore",
+    ".idea",
+    ".git",
+    ".npm-debug.log",
+    "node_modules",
+    "build",
+    "test",
+    ".gitignore",
+    ".jscs.json",
+    ".jshintignore",
+    ".jshintrc",
+    ".travis.yml",
+    "Makefile",
+    "src",
+    "**/.*",
+    "bower_components",
+    "tests",
+    "package.json"
+  ],
+  "devDependencies": {
+    "borschik": "1.0.2",
+    "jscs": "1.3.0",
+    "jshint": "2.5.0",
+    "mocha": "1.18.2",
+    "expect.js": "0.3.1"
+  },
+  "homepage": "https://github.com/Katochimoto/xblocks-core",
+  "authors": [
+    "rikishi <bufpost@yandex.ru>"
+  ],
+  "description": "HTML core custom elements",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "x-tag",
+    "React",
+    "html5"
+  ],
+  "license": "MIT"
+}
