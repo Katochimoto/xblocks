@@ -1,8 +1,10 @@
 /** @jsx React.DOM */
 (function(xblocks, React) {
 
-    var XBButtonContent = React.createClass({
+    var XBButtonContent = xblocks.view.create({
         propTypes: {
+            '_uid': React.PropTypes.string,
+
             'content': React.PropTypes.renderable,
             'ico': React.PropTypes.object
         },
@@ -21,7 +23,8 @@
 
         getDefaultProps: function() {
             return {
-                'content': ' ',
+                '_uid': '',
+                'content': String.fromCharCode(160),
                 'ico': {}
             };
         },
@@ -34,7 +37,7 @@
             var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
 
             var children = [
-                <span key="content" className="_content">{this.props.content}</span>
+                <span key="content" data-xb-content={this.props._uid}>{this.props.content}</span>
             ];
 
             if (!xblocks.isEmptyObject(icoProps) && icoProps.type) {
@@ -42,11 +45,11 @@
                 var icoView = xblocks.view.get('xb-ico')(icoProps);
 
                 if (!icoProps.float || icoProps.float === 'left') {
-                    children.unshift(<span key="sep"> </span>);
+                    children.unshift(<span key="sep">&nbsp;</span>);
                     children.unshift(icoView);
 
                 } else if (icoProps.float === 'right') {
-                    children.push(<span key="sep"> </span>);
+                    children.push(<span key="sep">&nbsp;</span>);
                     children.push(icoView);
                 }
             }
@@ -63,6 +66,8 @@
         displayName: 'xb-button',
 
         propTypes: {
+            '_uid': React.PropTypes.string,
+
             'id': React.PropTypes.string,
             'class': React.PropTypes.string,
             'children': React.PropTypes.renderable,
@@ -93,15 +98,15 @@
 
         getDefaultProps: function() {
             return {
+                '_uid': '',
                 'size': 'm',
                 'theme': 'normal',
                 'type': 'button',
-                'children': ' '
+                'children': String.fromCharCode(160)
             };
         },
 
         render: function() {
-            var cx = React.addons.classSet;
             var classes = {
                 'xb-button': true,
                 'is-disabled': this.props.disabled,
@@ -118,7 +123,7 @@
                 classes['xb-button_size_' + this.props.size] = true;
             }
 
-            classes = cx(classes);
+            classes = React.addons.classSet(classes);
 
             var icoProps = XBButton.filterIcoProps(this.props);
 
@@ -130,7 +135,7 @@
                         target={this.props.target}
                         autoFocus={this.props.autofocus}>
 
-                        <XBButtonContent ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </a>
                 );
 
@@ -150,7 +155,7 @@
                                 <span className="nb-file-intruder__focus" />
                             </span>
                         </span>
-                        <XBButtonContent ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </label>
                 );
 
@@ -164,7 +169,7 @@
                         disabled={this.props.disabled ? 'disabled' : ''}
                         autoFocus={this.props.autofocus}>
 
-                        <XBButtonContent ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </button>
                 );
             }
