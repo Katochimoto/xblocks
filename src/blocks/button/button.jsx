@@ -2,6 +2,8 @@
 (function(xblocks, React) {
 
     var XBButtonContent = xblocks.view.create({
+        displayName: 'XBButtonContent',
+
         propTypes: {
             '_uid': React.PropTypes.string,
 
@@ -12,7 +14,7 @@
         statics: {
             mapIcoProps: function(props) {
                 var regIcoProp = /^xb-ico-/;
-                return xblocks.mapObject(props, function(name, descr) {
+                return xblocks.utils.mapObject(props, function(name, descr) {
                     return {
                         'name': name.replace(regIcoProp, ''),
                         'descr': descr
@@ -30,7 +32,7 @@
         },
 
         shouldComponentUpdate: function(nextProps) {
-            return !xblocks.equals(nextProps, this.props);
+            return !xblocks.utils.equals(nextProps, this.props);
         },
 
         render: function() {
@@ -40,7 +42,7 @@
                 <span key="content" data-xb-content={this.props._uid}>{this.props.content}</span>
             ];
 
-            if (!xblocks.isEmptyObject(icoProps) && icoProps.type) {
+            if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';
                 var icoView = xblocks.view.get('xb-ico')(icoProps);
 
@@ -90,7 +92,7 @@
         statics: {
             filterIcoProps: function(props) {
                 var regIcoProp = /^xb-ico-/;
-                return xblocks.filterObject(props, function(name) {
+                return xblocks.utils.filterObject(props, function(name) {
                     return regIcoProp.test(name);
                 });
             }
