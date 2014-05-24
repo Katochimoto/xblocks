@@ -15,14 +15,14 @@
                 'normal',
                 'action',
                 'dark',
-                'pseudo',
-                'promo',
                 'flying',
-                'pseudo-inverted'
+                'pseudo-inverted',
+                'pseudo',
+                'promo'
             ]),
             'checked': React.PropTypes.bool,
 
-            'type': React.PropTypes.oneOf([ 'button', 'file', 'submit', 'label', 'span' ]),
+            'type': React.PropTypes.oneOf([ 'button', 'file', 'submit', 'label', 'span', 'link' ]),
             'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
             'value': React.PropTypes.string,
             'href': React.PropTypes.string,
@@ -72,7 +72,7 @@
 
             var icoProps = XBButton.filterIcoProps(this.props);
 
-            if (this.props.href) {
+            if (this.props.type === 'link') {
                 return (
                     <a className={classes}
                         href={this.props.href}
@@ -93,8 +93,8 @@
                                     type="file"
                                     name={this.props.name}
                                     title={this.props.title}
-                                    disabled={this.props.disabled ? 'disabled' : ''}
-                                    multiple={this.props.multiple ? 'multiple' : ''}
+                                    disabled={this.props.disabled ? 'disabled' : undefined}
+                                    multiple={this.props.multiple ? 'multiple' : undefined}
                                     autoFocus={this.props.autofocus} />
 
                                 <span className="_file-intruder-focus" />
@@ -130,7 +130,7 @@
                         title={this.props.title}
                         name={this.props.name}
                         value={this.props.value}
-                        disabled={this.props.disabled ? 'disabled' : ''}
+                        disabled={this.props.disabled ? 'disabled' : undefined}
                         autoFocus={this.props.autofocus}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
