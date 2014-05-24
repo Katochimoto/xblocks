@@ -1,75 +1,12 @@
 /** @jsx React.DOM */
 (function(xblocks, React) {
 
-    var XBButtonContent = xblocks.view.create({
-        displayName: 'XBButtonContent',
-
-        propTypes: {
-            '_uid': React.PropTypes.string,
-
-            'content': React.PropTypes.renderable,
-            'ico': React.PropTypes.object
-        },
-
-        statics: {
-            mapIcoProps: function(props) {
-                var regIcoProp = /^xb-ico-/;
-                return xblocks.utils.mapObject(props, function(name, descr) {
-                    return {
-                        'name': name.replace(regIcoProp, ''),
-                        'descr': descr
-                    };
-                });
-            }
-        },
-
-        getDefaultProps: function() {
-            return {
-                '_uid': '',
-                'content': String.fromCharCode(160),
-                'ico': {}
-            };
-        },
-
-        shouldComponentUpdate: function(nextProps) {
-            return !xblocks.utils.equals(nextProps, this.props);
-        },
-
-        render: function() {
-            var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
-
-            var children = [
-                <span key="content" data-xb-content={this.props._uid}>{this.props.content}</span>
-            ];
-
-            if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
-                icoProps.key = 'ico';
-                var icoView = xblocks.view.get('xb-ico')(icoProps);
-
-                if (!icoProps.float || icoProps.float === 'left') {
-                    children.unshift(<span key="sep">&nbsp;</span>);
-                    children.unshift(icoView);
-
-                } else if (icoProps.float === 'right') {
-                    children.push(<span key="sep">&nbsp;</span>);
-                    children.push(icoView);
-                }
-            }
-
-            return (
-                <span className="_content">
-                    {children}
-                </span>
-            );
-        }
-    });
+    /*! borschik:include:button-content.jsx.js */
 
     var XBButton = xblocks.view.register('xb-button', {
         displayName: 'xb-button',
 
         propTypes: {
-            '_uid': React.PropTypes.string,
-
             'id': React.PropTypes.string,
             'class': React.PropTypes.string,
             'children': React.PropTypes.renderable,
@@ -109,7 +46,6 @@
 
         getDefaultProps: function() {
             return {
-                '_uid': '',
                 'size': 'm',
                 'theme': 'normal',
                 'type': 'button',
@@ -142,7 +78,7 @@
                         href={this.props.href}
                         name={this.props.name}
                         target={this.props.target}
-                        autoFocus={this.props.autofocus}>
+                        title={this.props.title}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </a>
@@ -150,9 +86,7 @@
 
             } else if (this.props.type === 'file') {
                 return (
-                    <label className={classes}
-                        autoFocus={this.props.autofocus}>
-
+                    <label className={classes}>
                         <span className="_file-intruder">
                             <span className="_file-intruder-inner">
                                 <input className="_file-intruder-input"
@@ -160,7 +94,8 @@
                                     name={this.props.name}
                                     title={this.props.title}
                                     disabled={this.props.disabled ? 'disabled' : ''}
-                                    multiple={this.props.multiple ? 'multiple' : ''} />
+                                    multiple={this.props.multiple ? 'multiple' : ''}
+                                    autoFocus={this.props.autofocus} />
 
                                 <span className="_file-intruder-focus" />
                             </span>
@@ -174,7 +109,7 @@
                     <label className={classes}
                         form={this.props.form}
                         for={this.props.for}
-                        autoFocus={this.props.autofocus}>
+                        title={this.props.title}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </label>
@@ -192,6 +127,7 @@
                     <button className={classes}
                         type={this.props.type}
                         form={this.props.form}
+                        title={this.props.title}
                         name={this.props.name}
                         value={this.props.value}
                         disabled={this.props.disabled ? 'disabled' : ''}
