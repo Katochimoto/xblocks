@@ -51,33 +51,41 @@ module.exports = function(grunt) {
             }
         },
 
-        clean: {
-            'dest': '<%= dirs.dest %>'
-        },
+
 
         borschik: {
             'js': {
                 options: {
-                    minimize: 'no'
+                    freeze: true,
+                    minimize: false
                 },
-                src: '<%= dirs.src %>/xblocks.js',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.js'
+                src: 'src/xblocks.js',
+                dest: 'src/_xblocks.js'
             },
 
             'js-minimize': {
                 options: {
-                    minimize: 'yes'
+                    minimize: true
                 },
-                src: '<%= dirs.dest %>/<%= pkg.name %>.js',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.min.js'
+                src: 'src/_xblocks.js',
+                dest: 'src/_xblocks.min.js'
             },
 
             'css-minimize': {
                 options: {
-                    minimize: 'yes'
+                    minimize: true
                 },
-                src: '<%= dirs.dest %>/<%= pkg.name %>.css',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.min.css'
+                src: 'src/xblocks.css',
+                dest: 'src/xblocks.min.css'
+            },
+
+            'css-freeze': {
+                options: {
+                    freeze: true,
+                    minimize: false
+                },
+                src: 'src/xblocks.css',
+                dest: 'src/_xblocks.css'
             }
         },
 
@@ -85,17 +93,19 @@ module.exports = function(grunt) {
             main: {
                 options: {
                     compress: false,
-                    linenos: true,
+                    linenos: false,
                     urlfunc: 'embedurl',
+                    'resolve url': true,
                     use: [
                         require('autoprefixer-stylus')
                     ],
                     define: {
-                        ie: false
+                        ie: false,
+                        ns: 'xb'
                     }
                 },
                 files: {
-                    '<%= dirs.dest %>/<%= pkg.name %>.css': '<%= dirs.src %>/xblocks.styl'
+                    'src/xblocks.css': 'src/xblocks.styl'
                 }
             }
         },
@@ -137,6 +147,64 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+
+
+        rename: {
+            'css-freeze': {
+                files: [
+                    {
+                        src: 'src/_xblocks.css',
+                        dest: 'src/xblocks.css'
+                    }
+                ]
+            }
+        },
+
+        copy: {
+            css: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/',
+                        src: 'pic/*',
+                        dest: 'build/'
+                    },
+                    {
+                        src: 'src/xblocks.css',
+                        dest: 'build/xblocks.css'
+                    },
+                    {
+                        src: 'src/xblocks.min.css',
+                        dest: 'build/xblocks.min.css'
+                    }
+                ]
+            },
+            js: {
+                files: [
+                    {
+                        src: 'src/_xblocks.js',
+                        dest: 'build/xblocks.js'
+                    },
+                    {
+                        src: 'src/_xblocks.min.js',
+                        dest: 'build/xblocks.min.js'
+                    }
+                ]
+            }
+        },
+
+        clean: {
+            'dest': '<%= dirs.dest %>',
+            'css-src': [
+                'src/pic/',
+                'src/xblocks.css',
+                'src/xblocks.min.css'
+            ],
+            'js-src': [
+                'src/_xblocks.js',
+                'src/_xblocks.min.js'
+            ]
         }
 
     });
@@ -148,21 +216,29 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-modernizr');
     grunt.loadNpmTasks('grunt-react');
+    grunt.loadNpmTasks('grunt-rename');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
 
     grunt.registerTask('src-styl', [
         'stylus',
-        'borschik:css-minimize'
+        'borschik:css-freeze',
+        'rename:css-freeze',
+        'borschik:css-minimize',
+        'copy:css',
+        'clean:css-src'
     ]);
 
     grunt.registerTask('src-js', [
         'react',
         'borschik:js',
-        'borschik:js-minimize'
+        'borschik:js-minimize',
+        'copy:js',
+        'clean:js-src'
     ]);
 
     grunt.registerTask('default', [
-        'modernizr',
+        //'modernizr',
         'clean:dest',
         'src-styl',
         'src-js'

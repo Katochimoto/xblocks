@@ -1,8 +1,0 @@
-{
-    "paths": {
-        "./": "/"
-    },
-    "freeze_paths": {
-        "src": "../build/_"
-    }
-}

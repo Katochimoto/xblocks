@@ -1,69 +1,4 @@
-/*
-.xb-ico_type_remove
-  skin: icon_remove
-
-  &.xb-ico_active
-    skin: icon _remove with-hover
-
-  &.is-disabled
-    skin: disabled
-
-
-.xb-ico_type_notification
-  skin: icon_notification
-
-  &.xb-ico_active
-    skin: icon _notification with-hover
-
-  &.is-disabled
-    skin: disabled
-
-
-.xb-ico_type_check
-  skin: icon_check
-
-  &.xb-ico_active
-    skin: icon _check with-hover
-
-  &.is-disabled
-    skin: disabled
-
-
-.xb-ico_type_dropdown
-  skin: icon_dropdown
-
-  &.xb-ico_active
-    skin: icon _dropdown with-hover
-
-  &.is-disabled
-    skin: disabled
-
-
-.xb-ico_float_right
-  margin: 0 -5px 0 5px
-  float: right
-
-.xb-ico_float_left
-  margin: 0 5px 0 -5px
-  float: left
-*/
-
-
-
 $svg ?= {}
-
-.nb-icon
-  kind: icon (size 16px 16px)
-
-  // Move this to a skin?
-  .nb-button &
-  ._nb-select-a &
-    margin-right: $islands_xs
-    margin-left: -1*$islands_xs
-
-  ._nb-with-only-button &
-    margin-right: -1*$islands_xs
-    margin-left: -1*$islands_xs
 
 $svg-icons = 'close' 'download' 'upload' 'eye' 'link' 'trash' 'people' 'help' 'print' 'services' 'settings' 'attention' 'three-dots' 'play' 'pause' 'mail' 'link-white' 'download-white' 'upload-white' 'trash-white' 'vk' 'twitter' 'odnoklassniki'
 
@@ -72,13 +7,51 @@ $svg["sizes"] = {
   m: 3.2*rem
 }
 
-for $size-name, $size-value in $svg.sizes
-  for $icon in $svg-icons
-    .nb-{$size-name}-{$icon}-icon
-      background-image: url('i/' + $icon + '.svg')
+.{ns}-ico
+  kind: icon (size 16px 16px)
+
+  &._disabled
+    skin: disabled
+
+  &._active
+    skin: icon with-hover
+
+  /*
+  // Move this to a skin?
+  .{ns}-button &
+  ._{ns}-select-a &
+    margin-right: $islands_xs
+    margin-left: -1*$islands_xs
+
+  ._{ns}-with-only-button &
+    margin-right: -1*$islands_xs
+    margin-left: -1*$islands_xs
+  */
+
+  for $size-name, $size-value in $svg.sizes
+    &._size-{$size-name}
       width: $size-value
       height: $size-value
 
+  for $icon in $svg-icons
+    &._type-{$icon}
+      background-image: url('img/' + $icon + '.svg')
+
+  &._type-remove
+    skin: icon_remove
+
+  &._type-notification
+    skin: icon_notification
+    width: auto !important
+    height: auto !important
+
+  &._type-check
+    skin: icon_check
+
+  &._type-dropdown
+    skin: icon_dropdown
+
+
 // Compensate visual shift for link icon
-.nb-s-icon-link
-  left: 2px
+//.{ns}-ico-s-link
+//  left: 2px

@@ -12,8 +12,36 @@ xblocks.view.register('xb-ico', {
         'alt': React.PropTypes.string,
         'value': React.PropTypes.string,
         'children': React.PropTypes.renderable,
-        'size': React.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
-        'type': React.PropTypes.oneOf(['remove', 'notification', 'check', 'dropdown']).isRequired,
+        'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+        'type': React.PropTypes.oneOf([
+            'attention',
+            'close',
+            'check',
+            'download',
+            'download-white',
+            'dropdown',
+            'eye',
+            'link',
+            'link-white',
+            'mail',
+            'notification',
+            'odnoklassniki',
+            'pause',
+            'people',
+            'play',
+            'print',
+            'remove',
+            'services',
+            'settings',
+            'three-dots',
+            'trash',
+            'trash-white',
+            'twitter',
+            'help',
+            'upload',
+            'upload-white',
+            'vk'
+        ]).isRequired,
         'active': React.PropTypes.bool,
         'disabled': React.PropTypes.bool
     },
@@ -21,7 +49,7 @@ xblocks.view.register('xb-ico', {
     getDefaultProps: function() {
         return {
             '_uid': '',
-            'size': 'm',
+            'size': 's',
             'children': String.fromCharCode(160)
         };
     },
@@ -29,16 +57,16 @@ xblocks.view.register('xb-ico', {
     render: function() {
         var classes = {
             'xb-ico': true,
-            'xb-ico_active': this.props.active,
-            'is-disabled': this.props.disabled
+            '_active': this.props.active,
+            '_disabled': this.props.disabled
         };
 
         if (this.props.type) {
-            classes['xb-ico_type_' + this.props.type] = true;
+            classes['_type-' + this.props.type] = true;
         }
 
         if (this.props.size) {
-            classes['xb-ico_size_' + this.props.size] = true;
+            classes['_size-' + this.props.size] = true;
         }
 
         classes = React.addons.classSet(classes);
