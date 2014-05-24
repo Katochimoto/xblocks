@@ -92,6 +92,7 @@
             'name': React.PropTypes.string,
             'title': React.PropTypes.string,
             'form': React.PropTypes.string,
+            'for': React.PropTypes.string,
             'multiple': React.PropTypes.bool,
             'autofocus': React.PropTypes.bool,
             'disabled': React.PropTypes.bool
@@ -171,6 +172,8 @@
             } else if (this.props.type === 'label') {
                 return (
                     <label className={classes}
+                        form={this.props.form}
+                        for={this.props.for}
                         autoFocus={this.props.autofocus}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
@@ -179,9 +182,7 @@
 
             } else if (this.props.type === 'span') {
                 return (
-                    <span className={classes}
-                        autoFocus={this.props.autofocus}>
-
+                    <span className={classes}>
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </span>
                 );
