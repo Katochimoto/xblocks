@@ -1,178 +1,116 @@
 @import '_skin-dark'
 
-$skin-islands-button-content = '.xb-button__text'
-$skin-islands-button-disabled = '.is-disabled'
+$skin-islands-button-content = ' > ._content'
+$skin-islands-button-disabled = '._disabled'
 
-// Обычная кнопка
-.xb-button_theme_normal
+.{ns}-button
   kind: button
-  skin: button
+  position: relative // Why is it there?
+  text-align: center // Fixes #323
 
-  // Маленькая обычная кнопка
-  &.xb-button_size_s
-    skin: button small
+  &._checked
+    skin: button_pressed
 
-    &.xb-button_checked
-      skin: button_checked
-
-  &.xb-button_checked
-    skin: button_checked
-
-  &.is-disabled
+  &._disabled
     skin: disabled
 
+  &._theme-normal
+    skin: button
 
-// Промо кнопка
-.xb-button_theme_promo
-  kind: button
-  skin: promo-button
+    &._size-s
+      skin: button small
 
-  // Маленькая промо кнопка
-  &.xb-button_size_s
-    skin: promo-button small
+    &._size-l
+      skin: button large
 
-    &.xb-button_checked
-      skin: button_checked
-
-  // Большая промо кнопка
-  &.xb-button_size_l
-    skin: promo-button large
-
-    &.xb-button_checked
-      skin: button_checked
-
-  // Очень большая промо кнопка
-  &.xb-button_size_xl
-    skin: promo-button xlarge
-
-    &.xb-button_checked
-      skin: button_checked
-
-  &.xb-button_checked
-    skin: button_checked
-
-  &.is-disabled
-    skin: disabled
+    &._size-xl
+      skin: button xlarge
 
 
+  &._theme-flying
+    skin: button fly
+
+    &._size-s
+      skin: button fly small
+
+    &._size-l
+      skin: button fly large
+
+    &._size-xl
+      skin: button fly xlarge
 
 
-// Летающая кнопка
-.xb-button_flying
-  skin: button fly
+  &._theme-action
+    skin: action-button
 
-  // Маленькая летающая кнопка
-  &.xb-button_size_s
-    skin: button fly small
+    &._size-s
+      skin: action-button small
 
-    &.xb-button_checked
-      skin: button_checked fly
+    &._size-l
+      skin: action-button large
 
-  &.xb-button_checked
-    skin: button_checked fly
+    &._size-xl
+      skin: action-button xlarge
 
 
-  &.xb-button_theme_promo
-    skin: promo-button fly
+  &._theme-dark
+    skin: dark-button
 
-    // Маленькая промо кнопка
-    &.xb-button_size_s
-      skin: promo-button fly small
+    &._size-s
+      skin: dark-button small
 
-      &.xb-button_checked
-        skin: button_checked
+    &._size-l
+      skin: dark-button large
 
-    // Большая промо кнопка
-    &.xb-button_size_l
-      skin: promo-button fly large
-
-      &.xb-button_checked
-        skin: button_checked
-
-    // Очень большая промо кнопка
-    &.xb-button_size_xl
-      skin: promo-button fly xlarge
-
-      &.xb-button_checked
-        skin: button_checked
-
-    &.xb-button_checked
-      skin: button_checked
-
-  &.is-disabled
-    skin: disabled
+    &._size-xl
+      skin: dark-button xlarge
 
 
+  &._theme-pseudo
+    skin: pseudo-button
+
+    &._size-s
+      skin: pseudo-button small
+
+    &._size-l
+      skin: pseudo-button large
+
+    &._size-xl
+      skin: pseudo-button xlarge
 
 
+  &._theme-pseudo-inverted
+    skin: pseudo-button _inverted
+
+    &._size-s
+      skin: pseudo-button _inverted small
+
+    &._size-l
+      skin: pseudo-button _inverted large
+
+    &._size-xl
+      skin: pseudo-button _inverted xlarge
 
 
-// Кнопка-действие
-.xb-button_theme_action
-  kind: button
-  skin: action-button
+  &._theme-promo
+    skin: promo-button
 
-  // Маленькая кнопка-действие
-  &.xb-button_size_s
-    skin: action-button small
+    &._size-s
+      skin: promo-button small
 
-    &.xb-button_checked
-      skin: button_checked
+    &._size-l
+      skin: promo-button large
 
-  &.xb-button_checked
-    skin: button_checked
-
-  &.is-disabled
-    skin: disabled
+    &._size-xl
+      skin: promo-button xlarge
 
 
+  // Кнопка аттача
+  & ._file-intruder
+    kind: file-intruder \
+      (-inner '&-inner') \
+      (-input '&-input') \
+      (-focus '&-focus' 'islands-button_focus_style')
 
-// Темная кнопка
-.xb-button_theme_dark
-  kind: button
-  skin: dark-button
-
-  // Little black --dress-- button
-  &.xb-button_size_s
-    skin: dark-button small
-
-    &.xb-button_checked
-      skin: button_checked
-
-  &.xb-button_checked
-    skin: button_checked
-
-  &.is-disabled
-    skin: disabled
-
-
-
-// Псевдо-кнопка
-.xb-button_theme_pseudo
-  kind: button
-  skin: pseudo-button
-  padding: 5px 15px
-
-  // Маленькая псевдо-кнопка
-  &.xb-button_size_s
-    skin: pseudo-button small
-    padding: 5px 13px
-
-    &.xb-button_checked
-      skin: button_checked
-
-  &.xb-button_checked
-    skin: button_checked
-
-  &.is-disabled
-    skin: disabled
-
-
-// Кнопка аттача
-
-.nb-file-intruder
-  kind: file-intruder \
-  (-inner '&__inner') \
-  (-input '&__input') \
-  (-focus '&__focus' 'islands-button_focus_style')
-
+  &.ui-state-active
+    skin: button_pressed

@@ -57,7 +57,7 @@
             }
 
             return (
-                <span className="xb-button__text">
+                <span className="_content">
                     {children}
                 </span>
             );
@@ -73,16 +73,24 @@
             'id': React.PropTypes.string,
             'class': React.PropTypes.string,
             'children': React.PropTypes.renderable,
-            'size': React.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
-            'theme': React.PropTypes.oneOf(['normal', 'action', 'dark', 'pseudo', 'promo']),
+            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'theme': React.PropTypes.oneOf([
+                'normal',
+                'action',
+                'dark',
+                'pseudo',
+                'promo',
+                'flying',
+                'pseudo-inverted'
+            ]),
             'checked': React.PropTypes.bool,
-            'flying': React.PropTypes.bool,
 
-            'type': React.PropTypes.oneOf(['button', 'file', 'submit']),
-            'target': React.PropTypes.oneOf(['_blank', '_self', '_parent', '_top']),
+            'type': React.PropTypes.oneOf([ 'button', 'file', 'submit', 'label', 'span' ]),
+            'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
             'value': React.PropTypes.string,
             'href': React.PropTypes.string,
             'name': React.PropTypes.string,
+            'title': React.PropTypes.string,
             'form': React.PropTypes.string,
             'multiple': React.PropTypes.bool,
             'autofocus': React.PropTypes.bool,
@@ -111,18 +119,16 @@
         render: function() {
             var classes = {
                 'xb-button': true,
-                'is-disabled': this.props.disabled,
-                'xb-button_flying': this.props.flying,
-                'xb-button_checked': this.props.checked,
-                'xb-button_type_attach': (this.props.type === 'file')
+                '_disabled': this.props.disabled,
+                '_checked': this.props.checked
             };
 
             if (this.props.theme) {
-                classes['xb-button_theme_' + this.props.theme] = true;
+                classes['_theme-' + this.props.theme] = true;
             }
 
             if (this.props.size) {
-                classes['xb-button_size_' + this.props.size] = true;
+                classes['_size-' + this.props.size] = true;
             }
 
             classes = React.addons.classSet(classes);
@@ -146,19 +152,38 @@
                     <label className={classes}
                         autoFocus={this.props.autofocus}>
 
-                        <span className="nb-file-intruder">
-                            <span className="nb-file-intruder__inner">
-                                <input className="nb-file-intruder__input"
+                        <span className="_file-intruder">
+                            <span className="_file-intruder-inner">
+                                <input className="_file-intruder-input"
                                     type="file"
                                     name={this.props.name}
+                                    title={this.props.title}
                                     disabled={this.props.disabled ? 'disabled' : ''}
                                     multiple={this.props.multiple ? 'multiple' : ''} />
 
-                                <span className="nb-file-intruder__focus" />
+                                <span className="_file-intruder-focus" />
                             </span>
                         </span>
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </label>
+                );
+
+            } else if (this.props.type === 'label') {
+                return (
+                    <label className={classes}
+                        autoFocus={this.props.autofocus}>
+
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
+                    </label>
+                );
+
+            } else if (this.props.type === 'span') {
+                return (
+                    <span className={classes}
+                        autoFocus={this.props.autofocus}>
+
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
+                    </span>
                 );
 
             } else {
