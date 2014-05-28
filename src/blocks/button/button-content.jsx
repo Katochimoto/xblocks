@@ -33,9 +33,14 @@ var XBButtonContent = xblocks.view.create({
 
     render: function() {
         var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
+        var classes = {
+            '_content-inner': Boolean(this.props.content)
+        };
+
+        classes = React.addons.classSet(classes);
 
         var children = [
-            <span key="content" data-xb-content={this.props._uid}>{this.props.content}</span>
+            <span className={classes} key="content" data-xb-content={this.props._uid}>{this.props.content}</span>
         ];
 
         if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
@@ -43,11 +48,9 @@ var XBButtonContent = xblocks.view.create({
             var icoView = xblocks.view.get('xb-ico')(icoProps);
 
             if (!icoProps.float || icoProps.float === 'left') {
-                children.unshift(<span key="sep">&nbsp;</span>);
                 children.unshift(icoView);
 
             } else if (icoProps.float === 'right') {
-                children.push(<span key="sep">&nbsp;</span>);
                 children.push(icoView);
             }
         }
