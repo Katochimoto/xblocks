@@ -22,7 +22,7 @@
             ]),
             'checked': React.PropTypes.bool,
 
-            'type': React.PropTypes.oneOf([ 'button', 'file', 'submit', 'label', 'span', 'link' ]),
+            'type': React.PropTypes.oneOf([ 'button', 'file', 'submit', 'label', 'inline', 'link' ]),
             'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
             'value': React.PropTypes.string,
             'href': React.PropTypes.string,
@@ -30,6 +30,7 @@
             'title': React.PropTypes.string,
             'form': React.PropTypes.string,
             'for': React.PropTypes.string,
+            'tabindex': React.PropTypes.string,
             'multiple': React.PropTypes.bool,
             'autofocus': React.PropTypes.bool,
             'disabled': React.PropTypes.bool
@@ -71,6 +72,11 @@
             classes = React.addons.classSet(classes);
 
             var icoProps = XBButton.filterIcoProps(this.props);
+            var tabIndex = this.props.tabindex;
+
+            if (this.props.disabled) {
+                tabIndex = '-1';
+            }
 
             if (this.props.type === 'link') {
                 return (
@@ -78,7 +84,8 @@
                         href={this.props.href}
                         name={this.props.name}
                         target={this.props.target}
-                        title={this.props.title}>
+                        title={this.props.title}
+                        tabindex={tabIndex}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </a>
@@ -86,7 +93,9 @@
 
             } else if (this.props.type === 'file') {
                 return (
-                    <label className={classes}>
+                    <label className={classes}
+                        tabindex={tabIndex}>
+
                         <span className="_file-intruder">
                             <span className="_file-intruder-inner">
                                 <input className="_file-intruder-input"
@@ -109,15 +118,18 @@
                     <label className={classes}
                         form={this.props.form}
                         for={this.props.for}
-                        title={this.props.title}>
+                        title={this.props.title}
+                        tabindex={tabIndex}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </label>
                 );
 
-            } else if (this.props.type === 'span') {
+            } else if (this.props.type === 'inline') {
                 return (
-                    <span className={classes}>
+                    <span className={classes}
+                        tabindex={tabIndex}>
+
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </span>
                 );
@@ -130,6 +142,7 @@
                         title={this.props.title}
                         name={this.props.name}
                         value={this.props.value}
+                        tabindex={tabIndex}
                         disabled={this.props.disabled ? 'disabled' : undefined}
                         autoFocus={this.props.autofocus}>
 
