@@ -34,7 +34,7 @@ var XBButtonContent = xblocks.view.create({
     render: function() {
         var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
         var classes = {
-            '_content-inner': Boolean(this.props.content)
+            '_content-defined': Boolean(this.props.content)
         };
 
         classes = React.addons.classSet(classes);
