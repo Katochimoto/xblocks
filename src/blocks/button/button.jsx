@@ -85,7 +85,7 @@
                         name={this.props.name}
                         target={this.props.target}
                         title={this.props.title}
-                        tabindex={tabIndex}>
+                        tabIndex={tabIndex}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </a>
@@ -94,7 +94,7 @@
             } else if (this.props.type === 'file') {
                 return (
                     <label className={classes}
-                        tabindex={tabIndex}>
+                        tabIndex={tabIndex}>
 
                         <span className="_file-intruder">
                             <span className="_file-intruder-inner">
@@ -117,9 +117,9 @@
                 return (
                     <label className={classes}
                         form={this.props.form}
-                        for={this.props.for}
+                        htmlFor={this.props['for']}
                         title={this.props.title}
-                        tabindex={tabIndex}>
+                        tabIndex={tabIndex}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </label>
@@ -128,7 +128,7 @@
             } else if (this.props.type === 'inline') {
                 return (
                     <span className={classes}
-                        tabindex={tabIndex}>
+                        tabIndex={tabIndex}>
 
                         <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
                     </span>
@@ -142,7 +142,7 @@
                         title={this.props.title}
                         name={this.props.name}
                         value={this.props.value}
-                        tabindex={tabIndex}
+                        tabIndex={tabIndex}
                         disabled={this.props.disabled ? 'disabled' : undefined}
                         autoFocus={this.props.autofocus}>
 
