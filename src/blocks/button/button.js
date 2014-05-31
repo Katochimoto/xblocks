@@ -9,7 +9,7 @@
                 },
                 set: function(isDisabled) {
                     if (isDisabled) {
-                        this.setAttribute('disabled', 'disabled');
+                        this.setAttribute('disabled', '');
                     } else {
                         this.removeAttribute('disabled');
                     }

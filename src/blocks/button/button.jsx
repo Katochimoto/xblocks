@@ -87,7 +87,7 @@
                         title={this.props.title}
                         tabIndex={tabIndex}>
 
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
                     </a>
                 );
 
@@ -109,7 +109,7 @@
                                 <span className="_file-intruder-focus" />
                             </span>
                         </span>
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
                     </label>
                 );
 
@@ -121,7 +121,7 @@
                         title={this.props.title}
                         tabIndex={tabIndex}>
 
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
                     </label>
                 );
 
@@ -130,7 +130,7 @@
                     <span className={classes}
                         tabIndex={tabIndex}>
 
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
                     </span>
                 );
 
@@ -146,7 +146,7 @@
                         disabled={this.props.disabled ? 'disabled' : undefined}
                         autoFocus={this.props.autofocus}>
 
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps} content={this.props.children} />
+                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
                     </button>
                 );
             }

@@ -4,8 +4,7 @@ var XBButtonContent = xblocks.view.create({
     displayName: 'XBButtonContent',
 
     propTypes: {
-        'ico': React.PropTypes.object,
-        'content': React.PropTypes.renderable
+        'ico': React.PropTypes.object
     },
 
     statics: {
@@ -22,8 +21,7 @@ var XBButtonContent = xblocks.view.create({
 
     getDefaultProps: function() {
         return {
-            'ico': {},
-            'content': String.fromCharCode(160)
+            'ico': {}
         };
     },
 
@@ -33,14 +31,8 @@ var XBButtonContent = xblocks.view.create({
 
     render: function() {
         var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
-        var classes = {
-            '_content-defined': Boolean(this.props.content)
-        };
-
-        classes = React.addons.classSet(classes);
-
         var children = [
-            <span className={classes} key="content" data-xb-content={this.props._uid}>{this.props.content}</span>
+            <span key="content" data-xb-content={this.props._uid}>{this.props.children}</span>
         ];
 
         if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {

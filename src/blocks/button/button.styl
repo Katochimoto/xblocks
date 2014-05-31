@@ -9,10 +9,10 @@ $skin-islands-button-disabled = '._disabled'
   text-align: center // Fixes #323
 
   & > ._content
-    & > .xb-ico + ._content-defined
-      margin-left: 5px
+    & > .xb-ico:first-child:not(:only-child)
+      margin-right: 5px
 
-    & > ._content-defined + .xb-ico
+    & > .xb-ico:last-child:not(:only-child)
       margin-left: 5px
 
   &._checked
