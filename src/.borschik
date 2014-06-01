@@ -1,0 +1,8 @@
+{
+    "paths": {
+        "blocks/": "pic/"
+    },
+    "freeze_paths": {
+        "blocks/**": "pic/"
+    }
+}

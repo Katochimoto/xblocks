@@ -1,7 +1,5 @@
 .idea
 .npm-debug.log
 node_modules
-build
-*.yate.js
-*.yate.obj
-#!build/*.yate.js
+bower_components
+*.jsx.js

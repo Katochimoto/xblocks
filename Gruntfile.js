@@ -1,17 +1,10 @@
 module.exports = function(grunt) {
 
-    //build/freeze.json: $(CSS) node_modules
-    //$(NPM_BIN)/borschik --tech=json --input=freeze.json --output=$@
-
-    //./node_modules/.bin/jshint .
-    //./node_modules/.bin/jscs .
- 	//./node_modules/.bin/mocha --reporter dot $(TESTS
-
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         dirs: {
             src: 'src',
-            dest: 'build/<%= pkg.name %>/<%= pkg.version %>'
+            dest: 'build/<%= pkg.name %>'
         },
 
         // @see https://github.com/karma-runner/grunt-karma
@@ -24,11 +17,6 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            //karma: {
-            //    files: ['test/**/*.js'],
-            //    tasks: ['karma:unit:run']
-            //},
-
             'src-js': {
                 files: [
                     '<%= dirs.src %>/**/*.js'
@@ -43,64 +31,49 @@ module.exports = function(grunt) {
                 ],
                 tasks: ['src-styl']
             },
-            'src-yate': {
+            'src-react': {
                 files: [
-                    '<%= dirs.src %>/**/*.yate'
+                    '<%= dirs.src %>/**/*.jsx'
                 ],
-                tasks: ['src-yate']
+                tasks: ['src-js']
             }
         },
 
-        clean: {
-            'dest': '<%= dirs.dest %>',
-            'yate-tmp': '<%= dirs.dest %>/blocks'
-        },
+
 
         borschik: {
             'js': {
                 options: {
-                    minimize: 'no'
+                    freeze: true,
+                    minimize: false
                 },
-                src: '<%= dirs.src %>/main.js',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.js'
+                src: 'src/xblocks.js',
+                dest: 'src/_xblocks.js'
             },
 
             'js-minimize': {
                 options: {
-                    minimize: 'yes'
+                    minimize: true
                 },
-                src: '<%= dirs.dest %>/<%= pkg.name %>.js',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.min.js'
+                src: 'src/_xblocks.js',
+                dest: 'src/_xblocks.min.js'
             },
 
             'css-minimize': {
                 options: {
-                    minimize: 'yes'
+                    minimize: true
                 },
-                src: '<%= dirs.dest %>/<%= pkg.name %>.css',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.min.css'
+                src: 'src/xblocks.css',
+                dest: 'src/xblocks.min.css'
             },
 
-            'yate-minimize': {
+            'css-freeze': {
                 options: {
-                    minimize: 'yes'
+                    freeze: true,
+                    minimize: false
                 },
-                src: '<%= dirs.dest %>/<%= pkg.name %>.yate.js',
-                dest: '<%= dirs.dest %>/<%= pkg.name %>.min.yate.js'
-            }
-        },
-
-        concat: {
-            yate: {
-                options: {
-                    separator: '\n;\n'
-                },
-                files: {
-                    '<%= dirs.dest %>/<%= pkg.name %>.yate.js': [
-                        '<%= dirs.src %>/lib/**/*.yate.js',
-                        '<%= dirs.dest %>/blocks/*.yate.js'
-                    ]
-                }
+                src: 'src/xblocks.css',
+                dest: 'src/_xblocks.css'
             }
         },
 
@@ -108,8 +81,9 @@ module.exports = function(grunt) {
             main: {
                 options: {
                     compress: false,
-                    linenos: true,
+                    linenos: false,
                     urlfunc: 'embedurl',
+                    'resolve url': true,
                     use: [
                         require('autoprefixer-stylus')
                     ],
@@ -118,67 +92,141 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '<%= dirs.dest %>/<%= pkg.name %>.css': '<%= dirs.src %>/main.styl'
+                    'src/xblocks.css': 'src/xblocks.styl'
                 }
             }
         },
 
-        yate: {
-            // формирование общих модулей
-            modules: {
-                options: {},
-                src: '<%= dirs.src %>/lib/yate/<%= pkg.name %>.yate',
-                dest: '<%= dirs.src %>/lib/yate/<%= pkg.name %>.yate.js'
-            },
-
-            blocks: {
-                options: {
-                    import: [
-                        '<%= dirs.src %>/lib/**/*.yate.obj'
-                    ]
+        modernizr: {
+            dist: {
+                devFile: 'remote',
+                outputFile: 'bower_components/modernizr.js',
+                extra: {
+                    shiv: false,
+                    printshiv: false,
+                    load: false,
+                    mq: false,
+                    cssclasses: false
                 },
+                extensibility: {
+                    addtest: true
+                },
+                uglify: false,
+                parseFiles: false,
+                tests: [
+                    'postmessage', 'style_scoped'
+                ],
+                customTests: [
+                    'src/external/modernizr.tests.js'
+                ]
+            }
+        },
+
+        react: {
+            dynamic_mappings: {
                 files: [
                     {
-                        dest: '<%= dirs.dest %>/blocks/',
-                        src: '<%= dirs.src %>/blocks/**/*.yate',
-                        ext: '.yate.js',
                         expand: true,
-                        flatten: true
+                        cwd: 'src',
+                        src: ['**/*.jsx'],
+                        dest: 'src',
+                        ext: '.jsx.js'
                     }
                 ]
             }
+        },
+
+
+        rename: {
+            'css-freeze': {
+                files: [
+                    {
+                        src: 'src/_xblocks.css',
+                        dest: 'src/xblocks.css'
+                    }
+                ]
+            }
+        },
+
+        copy: {
+            css: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/',
+                        src: 'pic/*',
+                        dest: 'build/'
+                    },
+                    {
+                        src: 'src/xblocks.css',
+                        dest: 'build/xblocks.css'
+                    },
+                    {
+                        src: 'src/xblocks.min.css',
+                        dest: 'build/xblocks.min.css'
+                    }
+                ]
+            },
+            js: {
+                files: [
+                    {
+                        src: 'src/_xblocks.js',
+                        dest: 'build/xblocks.js'
+                    },
+                    {
+                        src: 'src/_xblocks.min.js',
+                        dest: 'build/xblocks.min.js'
+                    }
+                ]
+            }
+        },
+
+        clean: {
+            'dest': '<%= dirs.dest %>',
+            'css-src': [
+                'src/pic/',
+                'src/xblocks.css',
+                'src/xblocks.min.css'
+            ],
+            'js-src': [
+                'src/_xblocks.js',
+                'src/_xblocks.min.js'
+            ]
         }
 
     });
 
-    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-borschik');
-    grunt.loadNpmTasks('grunt-yate');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-stylus');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-borschik');
+    grunt.loadNpmTasks('grunt-modernizr');
+    grunt.loadNpmTasks('grunt-react');
+    grunt.loadNpmTasks('grunt-rename');
 
-    grunt.registerTask('src-yate', [
-        'yate',
-        'concat:yate',
-        'borschik:yate-minimize',
-        'clean:yate-tmp'
-    ]);
+
 
     grunt.registerTask('src-styl', [
         'stylus',
-        'borschik:css-minimize'
+        'borschik:css-freeze',
+        'rename:css-freeze',
+        'borschik:css-minimize',
+        'copy:css',
+        'clean:css-src'
     ]);
 
     grunt.registerTask('src-js', [
+        'react',
         'borschik:js',
-        'borschik:js-minimize'
+        'borschik:js-minimize',
+        'copy:js',
+        'clean:js-src'
     ]);
 
     grunt.registerTask('default', [
+        //'modernizr',
         'clean:dest',
-        'src-yate',
         'src-styl',
         'src-js'
     ]);

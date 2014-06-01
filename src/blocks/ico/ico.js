@@ -1,27 +1,8 @@
 (function(xblocks) {
-    'use strict';
 
-    var XBIco = xblocks.create('xb-ico');
+    /*! borschik:include:ico.jsx.js */
 
-    XBIco.attrs = {
-        get: function() {
-            return {
-                size: 'm'
-            };
-        }
-    };
-
-    XBIco.value = {
-        get: function() {
-            return this.xblock.getHtml();
-        },
-
-        set: function(value) {
-            this.xblock.setHtml(value);
-        }
-    };
-
-    XBIco.register();
+    xblocks.create('xb-ico');
 
 }(xblocks));
 

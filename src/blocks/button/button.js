@@ -1,32 +1,33 @@
 (function(xblocks) {
-    'use strict';
+    /*! borschik:include:button.jsx.js */
 
-    var XBButton = xblocks.create('xb-button');
+    xblocks.create('xb-button', {
+        prototype: Object.create(HTMLButtonElement.prototype),
 
-    XBButton.attrs = {
-        get: function() {
-            return {
-                theme: 'normal',
-                size: 'm'
-            };
-        }
-    };
-
-    XBButton.value = {
-        get: function() {
-            return this.xblock.getHtml();
+        accessors: {
+            disabled: {
+                get: function() {
+                    return Boolean(xblocks.dom.attrs.getRealValue('disabled', this.getAttribute('disabled')));
+                },
+                set: function(isDisabled) {
+                    if (isDisabled) {
+                        this.setAttribute('disabled', '');
+                    } else {
+                        this.removeAttribute('disabled');
+                    }
+                }
+            }
         },
 
-        set: function(value) {
-            this.xblock.setHtml(value);
-        }
-    };
+        methods: {
+            focus: function() {
+                this.firstChild.focus();
+            },
 
-    XBButton.on('update', function() {
-        this.removeAttribute('value');
+            blur: function() {
+                this.firstChild.blur();
+            }
+        }
     });
 
-    XBButton.register();
-
 }(xblocks));
-

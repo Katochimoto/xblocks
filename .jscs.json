@@ -69,6 +69,8 @@
     "excludeFiles": [
         "node_modules",
         "test",
-        "lib"
+        "bower_components",
+        "build",
+        "**/*.jsx.js"
     ]
 }

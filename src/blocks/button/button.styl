@@ -1,0 +1,122 @@
+@import '_skin-dark'
+
+$skin-islands-button-content = ' > ._content'
+$skin-islands-button-disabled = '._disabled'
+
+.xb-button
+  kind: button
+  position: relative // Why is it there?
+  text-align: center // Fixes #323
+
+  & > ._content
+    & > ._content-content:not(:empty) + .xb-ico,
+    & > .xb-ico + ._content-content:not(:empty)
+      margin-left: 5px
+
+
+  &._checked
+    skin: button_pressed
+
+  &._disabled
+    skin: disabled
+
+  &._theme-normal
+    skin: button
+
+    &._size-s
+      skin: button small
+
+    &._size-l
+      skin: button large
+
+    &._size-xl
+      skin: button xlarge
+
+
+  &._theme-flying
+    skin: button fly
+
+    &._size-s
+      skin: button fly small
+
+    &._size-l
+      skin: button fly large
+
+    &._size-xl
+      skin: button fly xlarge
+
+
+  &._theme-action
+    skin: action-button
+
+    &._size-s
+      skin: action-button small
+
+    &._size-l
+      skin: action-button large
+
+    &._size-xl
+      skin: action-button xlarge
+
+
+  &._theme-dark
+    skin: dark-button
+
+    &._size-s
+      skin: dark-button small
+
+    &._size-l
+      skin: dark-button large
+
+    &._size-xl
+      skin: dark-button xlarge
+
+
+  &._theme-pseudo
+    skin: pseudo-button
+
+    &._size-s
+      skin: pseudo-button small
+
+    &._size-l
+      skin: pseudo-button large
+
+    &._size-xl
+      skin: pseudo-button xlarge
+
+
+  &._theme-pseudo-inverted
+    skin: pseudo-button _inverted
+
+    &._size-s
+      skin: pseudo-button _inverted small
+
+    &._size-l
+      skin: pseudo-button _inverted large
+
+    &._size-xl
+      skin: pseudo-button _inverted xlarge
+
+
+  &._theme-promo
+    skin: promo-button
+
+    &._size-s
+      skin: promo-button small
+
+    &._size-l
+      skin: promo-button large
+
+    &._size-xl
+      skin: promo-button xlarge
+
+
+  // Кнопка аттача
+  & ._file-intruder
+    kind: file-intruder \
+      (-inner '&-inner') \
+      (-input '&-input') \
+      (-focus '&-focus' 'islands-button_focus_style')
+
+  &.ui-state-active
+    skin: button_pressed

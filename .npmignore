@@ -1,7 +1,8 @@
 .git
-.borschik
 .npm-debug.log
-node_modules
-build
-test
+.bowerrc
 .travis.yml
+node_modules
+bower_components
+test
+bower.json
