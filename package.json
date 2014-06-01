@@ -1,17 +1,18 @@
 {
     "name": "xblocks",
     "description": "HTML custom elements",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "keywords": [
-        "x-tags",
-        "React",
+        "x-tag",
+        "react",
         "html5",
-        "custom elements"
+        "xblocks"
     ],
     "homepage": "http://katochimoto.github.io/xblocks/",
     "author": {
-        "name": "rikishi",
-        "email": "bufpost@yandex.ru"
+        "name": "Rikishi",
+        "email": "bufpost@yandex.ru",
+        "url": "https://github.com/Katochimoto"
     },
     "bugs": {
         "email": "bufpost@yandex.ru",
@@ -22,67 +23,22 @@
         "type": "git",
         "url": "git@github.com:Katochimoto/xblocks.git"
     },
-    "dependencies": {
-        "es5-shim": "3.0.2",
-        "stylobate": "0.23.x",
-        "stylobate-islands": "0.26.x"
-    },
     "devDependencies": {
-        "xblocks-core": "*",
+        "stylobate": "0.24.2",
+        "stylobate-islands": "0.27.4",
 
-        "borschik": "0.4.x",
-        "stylus": "0.43.x",
-
-        "jscs": "1.0.8",
-        "jshint": "2.3.0",
-
-        "nopt": "*",
-        "yate": "*",
-        "autoprefixer": "1.x",
-        "csso": "1.3.x",
-        "uglify-js": "*",
-        "requirer": "*",
-        "requirejs": "*",
-        "curl": "cujojs/curl#0.8.10",
-
-        "grunt": "~0.4.2",
-        "grunt-contrib-jshint": "~0.6.3",
-        "grunt-contrib-nodeunit": "~0.2.0",
-        "grunt-contrib-uglify": "~0.2.2",
-        "grunt-contrib-concat": "*",
-        "grunt-contrib-stylus": "*",
-        "grunt-contrib-watch": "*",
-        "grunt-contrib-clean": "*",
-        "grunt-contrib-copy": "*",
-        "grunt-borschik": "*",
-        "grunt-rename": "*",
-        "grunt-yate": "*",
-        "grunt-shell": "*",
-        "grunt-karma": "*",
-        "grunt-react": "*",
-        "grunt-modernizr": "*",
-        "autoprefixer-stylus": "*",
-        "csso-stylus": "*",
-
-        "mocha": "~1.17.0",
-        "expect.js": "*",
-        "sinon": "*",
-
-        "karma": "~0.12.x",
-        "karma-mocha": "~0.1.x",
-        "karma-sinon-expect": "~0.1.x",
-        "karma-borschik-preprocessor": "~0.1.x",
-        "karma-yate-preprocessor": "~0.1.x",
-        "karma-phantomjs-launcher": "~0.1.x",
-        "karma-firefox-launcher": "~0.1.x"
+        "grunt": "0.4.5",
+        "autoprefixer-stylus": "0.1.0",
+        "grunt-contrib-clean": "0.5.0",
+        "grunt-contrib-copy": "0.5.0",
+        "grunt-borschik": "1.0.0",
+        "grunt-contrib-stylus": "0.16.0",
+        "grunt-contrib-watch": "0.6.1",
+        "grunt-react": "0.8.2",
+        "grunt-modernizr": "0.5.2",
+        "grunt-rename": "0.1.3"
     },
     "engines": {
         "node": "*"
-    },
-    "scripts": {
-        "test": "./node_modules/.bin/jshint . && ./node_modules/.bin/jscs . && npm run-script unit-test",
-        "validate": "grep -n '\\.only(' $(find test -name '*.js') && exit 1 || exit 0",
-        "karma-test": "./node_modules/karma/bin/karma start",
-        "unit-test": "npm run-script karma-test"
     }
 }

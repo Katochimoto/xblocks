@@ -71,7 +71,6 @@
         "test",
         "bower_components",
         "build",
-        "**/*.yate.js",
         "**/*.jsx.js"
     ]
 }

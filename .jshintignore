@@ -1,6 +1,5 @@
 node_modules
 build
 bower_components
-**/*.yate.js
 **/*.jsx.js
 test

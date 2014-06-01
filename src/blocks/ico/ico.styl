@@ -7,7 +7,7 @@ $svg["sizes"] = {
   m: 3.2*rem
 }
 
-.{ns}-ico
+.xb-ico
   kind: icon (size 16px 16px)
 
   &._disabled
@@ -15,18 +15,6 @@ $svg["sizes"] = {
 
   &._active
     skin: icon with-hover
-
-  /*
-  // Move this to a skin?
-  .{ns}-button &
-  ._{ns}-select-a &
-    margin-right: $islands_xs
-    margin-left: -1*$islands_xs
-
-  ._{ns}-with-only-button &
-    margin-right: -1*$islands_xs
-    margin-left: -1*$islands_xs
-  */
 
   for $size-name, $size-value in $svg.sizes
     &._size-{$size-name}
@@ -51,7 +39,3 @@ $svg["sizes"] = {
   &._type-dropdown
     skin: icon_dropdown
 
-
-// Compensate visual shift for link icon
-//.{ns}-ico-s-link
-//  left: 2px

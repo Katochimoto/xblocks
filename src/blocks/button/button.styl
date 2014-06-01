@@ -3,17 +3,16 @@
 $skin-islands-button-content = ' > ._content'
 $skin-islands-button-disabled = '._disabled'
 
-.{ns}-button
+.xb-button
   kind: button
   position: relative // Why is it there?
   text-align: center // Fixes #323
 
   & > ._content
-    & > .xb-ico:first-child:not(:only-child)
-      margin-right: 5px
-
-    & > .xb-ico:last-child:not(:only-child)
+    & > ._content-content:not(:empty) + .xb-ico,
+    & > .xb-ico + ._content-content:not(:empty)
       margin-left: 5px
+
 
   &._checked
     skin: button_pressed

@@ -1,11 +1,11 @@
 {
     "name": "xblocks",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "dependencies": {
-        "lodash": "2.4.1",
-        "x-tag-core": "0.9.5",
-        "es5-shim": "2.3.0",
-        "react": "0.10.0"
+        "x-tag-core": "0.9.7",
+        "es5-shim": "3.4.0",
+        "react": "0.10.0",
+        "xblocks-core": "*"
     },
     "directory": "bower_components"
 }

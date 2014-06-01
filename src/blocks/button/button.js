@@ -1,7 +1,9 @@
 (function(xblocks) {
     /*! borschik:include:button.jsx.js */
 
-    var base = {
+    xblocks.create('xb-button', {
+        prototype: Object.create(HTMLButtonElement.prototype),
+
         accessors: {
             disabled: {
                 get: function() {
@@ -15,11 +17,17 @@
                     }
                 }
             }
-        }
-    };
+        },
 
-    xblocks.create('xb-button', xblocks.utils.merge(true, base, {
-        prototype: Object.create(HTMLButtonElement.prototype)
-    }));
+        methods: {
+            focus: function() {
+                this.firstChild.focus();
+            },
+
+            blur: function() {
+                this.firstChild.blur();
+            }
+        }
+    });
 
 }(xblocks));

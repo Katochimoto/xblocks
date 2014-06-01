@@ -1,12 +1,5 @@
 module.exports = function(grunt) {
 
-    //build/freeze.json: $(CSS) node_modules
-    //$(NPM_BIN)/borschik --tech=json --input=freeze.json --output=$@
-
-    //./node_modules/.bin/jshint .
-    //./node_modules/.bin/jscs .
- 	//./node_modules/.bin/mocha --reporter dot $(TESTS
-
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         dirs: {
@@ -24,11 +17,6 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            //karma: {
-            //    files: ['test/**/*.js'],
-            //    tasks: ['karma:unit:run']
-            //},
-
             'src-js': {
                 files: [
                     '<%= dirs.src %>/**/*.js'
@@ -100,8 +88,7 @@ module.exports = function(grunt) {
                         require('autoprefixer-stylus')
                     ],
                     define: {
-                        ie: false,
-                        ns: 'xb'
+                        ie: false
                     }
                 },
                 files: {
@@ -209,15 +196,15 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-borschik');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-borschik');
     grunt.loadNpmTasks('grunt-modernizr');
     grunt.loadNpmTasks('grunt-react');
     grunt.loadNpmTasks('grunt-rename');
-    grunt.loadNpmTasks('grunt-contrib-copy');
+
 
 
     grunt.registerTask('src-styl', [
