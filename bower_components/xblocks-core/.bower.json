@@ -1,33 +1,18 @@
 {
   "name": "xblocks-core",
-  "version": "0.0.14",
+  "version": "0.0.19",
   "main": "xblocks-core.js",
   "ignore": [
-    ".npmignore",
-    ".idea",
-    ".git",
-    ".npm-debug.log",
+    "**/.*",
     "node_modules",
-    "build",
+    "bower_components",
     "test",
-    ".gitignore",
-    ".jscs.json",
-    ".jshintignore",
-    ".jshintrc",
-    ".travis.yml",
     "Makefile",
     "src",
-    "**/.*",
-    "bower_components",
-    "tests",
     "package.json"
   ],
   "devDependencies": {
-    "borschik": "1.0.2",
-    "jscs": "1.3.0",
-    "jshint": "2.5.0",
-    "mocha": "1.18.2",
-    "expect.js": "0.3.1"
+    "borschik": "0.4.1"
   },
   "homepage": "https://github.com/Katochimoto/xblocks-core",
   "authors": [
@@ -39,15 +24,15 @@
   ],
   "keywords": [
     "x-tag",
-    "React",
+    "react",
     "html5"
   ],
   "license": "MIT",
-  "_release": "0.0.14",
+  "_release": "0.0.19",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.14",
-    "commit": "3bae83bf72213c212531b958e0e14f093883fb1a"
+    "tag": "v0.0.19",
+    "commit": "a8e540b129b082f8c709f41d55583f6af84f3ff1"
   },
   "_source": "git://github.com/Katochimoto/xblocks-core.git",
   "_target": "*",

@@ -39,10 +39,7 @@
      * @property {Function} replaceProps
      * @property {Function} setProps
      * @property {Function} isMounted
-     *
      */
-
-
 
     /**
      * @namespace xblocks
@@ -66,38 +63,116 @@
 (function(xblocks) {
 
     /**
-     * @param {?object} to
-     * @param {object} from
+     * @namespace
+     */
+    xblocks.utils = {};
+
+    xblocks.utils.REG_TYPE_EXTRACT = /\s([a-zA-Z]+)/;
+
+    xblocks.utils.support = {
+        template: ('content' in document.createElement('template'))
+    };
+
+    /**
+     * Generate unique string
+     * @returns {string}
+     */
+    xblocks.utils.uid = function() {
+        return Math.floor((1 + Math.random()) * 0x10000000 + Date.now()).toString(36);
+    };
+
+    /**
      * @returns {object}
      */
-    xblocks.merge = function(to, from) {
-        if (xblocks.type(to) !== 'object') {
-            to = {};
+    xblocks.utils.merge = function() {
+        var options, name, src, copy, copyIsArray, clone,
+            target = arguments[0] || {},
+            i = 1,
+            length = arguments.length,
+            deep = false;
+
+        if ( typeof target === 'boolean' ) {
+            deep = target;
+
+            target = arguments[ i ] || {};
+            i++;
         }
 
-        Object.keys(from).forEach(function(property) {
-            Object.defineProperty(to, property, Object.getOwnPropertyDescriptor(from, property));
-        });
+        if ( typeof target !== 'object' && xblocks.utils.type(target) !== 'function' ) {
+            target = {};
+        }
 
-        return to;
+        if ( i === length ) {
+            target = this;
+            i--;
+        }
+
+        for ( ; i < length; i++ ) {
+            if ( (options = arguments[ i ]) != null ) {
+                // Extend the base object
+                for ( name in options ) {
+                    src = target[ name ];
+                    copy = options[ name ];
+
+                    if ( target === copy ) {
+                        continue;
+                    }
+
+                    if ( deep && copy && ( xblocks.utils.isPlainObject(copy) || (copyIsArray = Array.isArray(copy)) ) ) {
+                        if ( copyIsArray ) {
+                            copyIsArray = false;
+                            clone = src && Array.isArray(src) ? src : [];
+
+                        } else {
+                            clone = src && xblocks.utils.isPlainObject(src) ? src : {};
+                        }
+
+                        target[ name ] = xblocks.utils.merge( deep, clone, copy );
+
+                    } else if ( copy !== undefined ) {
+                        target[ name ] = copy;
+                    }
+                }
+            }
+        }
+
+        return target;
     };
 
     /**
      * @param {*} param
      * @returns {string}
      */
-    xblocks.type = function(param) {
-        return ({}).toString.call(param).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+    xblocks.utils.type = function(param) {
+        return ({}).toString.call(param).match(xblocks.utils.REG_TYPE_EXTRACT)[1].toLowerCase();
     };
 
-    xblocks.noop = function() {};
+    /**
+     * @param {*} obj
+     * @returns {boolean}
+     */
+    xblocks.utils.isPlainObject = function(obj) {
+        if (xblocks.utils.type(obj) !== 'object' || obj.nodeType || xblocks.utils.isWindow(obj)) {
+            return false;
+        }
+
+        if (obj.constructor && !obj.constructor.prototype.hasOwnProperty('isPrototypeOf')) {
+            return false;
+        }
+
+        return true;
+    };
+
+    xblocks.utils.isWindow = function(obj) {
+        return obj != null && obj === obj.window;
+    };
 
     /**
      * @param {*} x
      * @param {*} y
      * @returns {boolean}
      */
-    xblocks.equals = function(x, y) {
+    xblocks.utils.equals = function(x, y) {
         if (x === y) {
             return true;
         }
@@ -127,7 +202,7 @@
                 return false;
             }
 
-            if (!xblocks.equals(x[p], y[p])) {
+            if (!xblocks.utils.equals(x[p], y[p])) {
                 return false;
             }
         }
@@ -145,15 +220,14 @@
      * @param {*} obj
      * @returns {boolean}
      */
-    xblocks.isEmptyObject = function(obj) {
-        if (xblocks.type(obj) !== 'object') {
+    xblocks.utils.isEmptyObject = function(obj) {
+        if (xblocks.utils.type(obj) !== 'object') {
             return true;
         }
 
-        for (var i in obj) {
-            if (obj.hasOwnProperty(i)) {
-                return false;
-            }
+        var name;
+        for (name in obj) {
+            return false;
         }
 
         return true;
@@ -164,7 +238,7 @@
      * @param {function} [callback]
      * @returns {object}
      */
-    xblocks.filterObject = function(from, callback) {
+    xblocks.utils.filterObject = function(from, callback) {
         var out = {};
 
         Object.keys(from).forEach(function(property) {
@@ -182,13 +256,13 @@
      * @param {function} [callback]
      * @returns {object}
      */
-    xblocks.mapObject = function(from, callback) {
+    xblocks.utils.mapObject = function(from, callback) {
         var out = {};
 
         Object.keys(from).forEach(function(property) {
             var descr = Object.getOwnPropertyDescriptor(from, property);
             var map = callback && callback(property, descr);
-            if (xblocks.type(map) === 'object') {
+            if (xblocks.utils.type(map) === 'object') {
                 Object.defineProperty(out, map.name, map.descr);
             }
         });
@@ -204,18 +278,30 @@
 (function(xblocks) {
 
     /**
-     * @module xblocks.dom
+     * @namespace
      */
     xblocks.dom = {};
 
     /* xblocks/dom/attrs.js begin */
 /**
- * @module xblocks.dom.attrs
+ * @namespace
  */
 xblocks.dom.attrs = {};
 
+/**
+ * @type {string[]}
+ */
 xblocks.dom.attrs.ARRTS_BOOLEAN = [
-    'checked', 'selected', 'disabled', 'readonly', 'multiple', 'ismap', 'defer', 'autofocus', 'xb-static'
+    'active',
+    'autofocus',
+    'checked',
+    'defer',
+    'disabled',
+    'ismap',
+    'multiple',
+    'readonly',
+    'selected',
+    'xb-static'
 ];
 
 /**
@@ -271,16 +357,36 @@ xblocks.dom.attrs.toObject = function(element) {
     xblocks.view = {};
 
     /**
-     * @param {string} blockName
      * @param {object} component
      */
-    xblocks.view.register = function(blockName, component) {
+    xblocks.view.create = function(component) {
         component.mixins = Array.isArray(component.mixins) ? component.mixins: [];
         component.mixins.push(XBView);
 
-        return (React.DOM[blockName] = React.createClass(component));
+        component.propTypes = xblocks.utils.isPlainObject(component.propTypes) ? component.propTypes : {};
+        component.propTypes._uid = React.PropTypes.string;
+
+        return React.createClass(component);
     };
 
+    /**
+     * @param {string} blockName
+     * @param {object} component
+     * @throws
+     */
+    xblocks.view.register = function(blockName, component) {
+        if (React.DOM.hasOwnProperty(blockName)) {
+            throw 'Specified item "' + blockName + '" is already defined';
+        }
+
+        React.DOM[blockName] = xblocks.view.create(component);
+        return React.DOM[blockName];
+    };
+
+    /**
+     * @param {string} blockName
+     * @returns {*}
+     */
     xblocks.view.get = function(blockName) {
         return React.DOM[blockName];
     };
@@ -294,31 +400,65 @@ xblocks.dom.attrs.toObject = function(element) {
 
     /**
      * @param {String} blockName
-     * @param {Object} options
+     * @param {?Object} options
      * @returns {HTMLElement}
      */
     xblocks.create = function(blockName, options) {
-        options = typeof(options) === 'object' ? options : {};
+        options = xblocks.utils.isPlainObject(options) ? options : {};
 
-        options.lifecycle = {
-            /**
-             * @this {HTMLElement}
-             */
-            created: function() {
+        xblocks.utils.merge(true, options, {
+            lifecycle: {
                 /**
-                 * @type {XBElement}
+                 * @this {HTMLElement}
                  */
-                this.xblock = xblocks.element.create(this);
+                created: function() {
+                    /**
+                     * @type {XBElement}
+                     */
+                    this.xblock = xblocks.element.create(this);
+                },
+
+                /**
+                 * @this {HTMLElement}
+                 */
+                removed: function() {
+                    this.xblock.destroy();
+                    delete this.xblock;
+                },
+
+                /**
+                 * @this {HTMLElement}
+                 */
+                attributeChanged: function(attrName, oldValue, newValue) {
+                    if (this.xblock._isMountedComponent()) {
+                        return;
+                    }
+
+                    // removeAttribute('xb-static')
+                    if (attrName === 'xb-static' && newValue === null) {
+                        this.xblock._repaint();
+                    }
+                }
             },
 
-            /**
-             * @this {HTMLElement}
-             */
-            removed: function() {
-                this.xblock.destroy();
-                delete this.xblock;
+            accessors: {
+                content: {
+                    /**
+                     * @this {HTMLElement}
+                     */
+                    get: function() {
+                        return this.xblock._getNodeContent();
+                    },
+
+                    /**
+                     * @this {HTMLElement}
+                     */
+                    set: function(content) {
+                        this.xblock._setNodeContent(content);
+                    }
+                }
             }
-        };
+        });
 
         return xtag.register(blockName, options);
     };
@@ -348,11 +488,18 @@ xblocks.dom.attrs.toObject = function(element) {
      * @constructor
      */
     function XBElement(node) {
+        this._uid = xblocks.utils.uid();
         this._name = node.tagName.toLowerCase();
         this._node = node;
 
-        this._init(null, this._callbackInit);
+        this._init(this._getNodeProps(), this._getNodeContent(), this._callbackInit);
     }
+
+    /**
+     * @type {string}
+     * @private
+     */
+    XBElement.prototype._uid = undefined;
 
     /**
      * @type {string}
@@ -409,44 +556,47 @@ xblocks.dom.attrs.toObject = function(element) {
             return;
         }
 
-        var nextProps = this._getNodeProps(props);
+        var nextProps = this._getNodeProps();
         var action = 'setProps';
+
+        xblocks.utils.merge(true, nextProps, props);
 
         // merge of new and current properties
         // and the exclusion of remote properties
         if (Array.isArray(removeProps) && removeProps.length) {
             action = 'replaceProps';
             var currentProps = this._getCurrentProps();
-            nextProps = xblocks.merge(currentProps, nextProps);
-            nextProps = xblocks.filterObject(nextProps, function(name) {
+            nextProps = xblocks.utils.merge(true, currentProps, nextProps);
+            nextProps = xblocks.utils.filterObject(nextProps, function(name) {
                 return removeProps.indexOf(name) === -1;
             });
         }
 
         if (nextProps.hasOwnProperty('xb-static')) {
             this._repaint();
+
         } else {
             this._component[action](nextProps);
+            this._upgradeNode();
         }
     };
 
     /**
      * @param {object} [props]
+     * @param {string} [children]
      * @param {function} [callback]
      * @private
      */
-    XBElement.prototype._init = function(props, callback) {
+    XBElement.prototype._init = function(props, children, callback) {
         if (this._isMountedComponent()) {
             return;
         }
 
-        // save last children and props after repaint
-        var nextProps = this._getNodeProps(props);
-        // TODO fix the search for static content item
-        var children = this._node.innerHTML || nextProps.children;
-        var view = xblocks.view.get(this._name)(nextProps, children);
+        props['_uid'] = this._uid;
 
-        if (nextProps.hasOwnProperty('xb-static')) {
+        var view = xblocks.view.get(this._name)(props, children);
+
+        if (props.hasOwnProperty('xb-static')) {
             this.unmount();
             xtag.innerHTML(
                 this._node,
@@ -466,9 +616,10 @@ xblocks.dom.attrs.toObject = function(element) {
      * @private
      */
     XBElement.prototype._repaint = function() {
-        var currentProps = this._getCurrentProps();
+        var props = xblocks.utils.merge(true, this._getNodeProps(), this._getCurrentProps());
+        var children = this._getNodeContent();
         this.destroy();
-        this._init(currentProps, this._callbackRepaint);
+        this._init(props, children, this._callbackRepaint);
     };
 
     /**
@@ -488,7 +639,8 @@ xblocks.dom.attrs.toObject = function(element) {
     XBElement.prototype._callbackRepaint = function() {
         xtag.fireEvent(this._node, 'xb-repaint', {
             bubbles: false,
-            cancelable: false
+            cancelable: false,
+            detail: { xblock: this }
         });
     };
 
@@ -497,6 +649,8 @@ xblocks.dom.attrs.toObject = function(element) {
      * @private
      */
     XBElement.prototype._callbackRender = function(callback) {
+        this._upgradeNode();
+
         if (!this._observer) {
             this._observer = new MutationObserver(this._callbackMutation.bind(this));
         }
@@ -538,18 +692,80 @@ xblocks.dom.attrs.toObject = function(element) {
         }
     };
 
+    XBElement.prototype._upgradeNode = function() {
+        if (window.CustomElements) {
+            CustomElements.upgradeAll(this._node);
+        }
+    };
+
     /**
-     * @param {object} [props]
      * @returns {object}
      */
-    XBElement.prototype._getNodeProps = function(props) {
-        var nodeProps = xblocks.dom.attrs.toObject(this._node);
+    XBElement.prototype._getNodeProps = function() {
+        return xblocks.dom.attrs.toObject(this._node);
+    };
 
-        if (xblocks.type(props) === 'object') {
-            xblocks.merge(nodeProps, props);
+    /**
+     * @returns {?HTMLElement}
+     * @private
+     */
+    XBElement.prototype._getNodeContentElement = function() {
+        if (!this._node.childNodes.length) {
+            return;
         }
 
-        return nodeProps;
+        var contents = xtag.query(this._node, '[data-xb-content="' + this._uid + '"]');
+        if (contents.length === 1) {
+            return contents[0];
+        }
+
+        var script = xtag.queryChildren(this._node, 'script[type="text/template"]');
+        if (script.length === 1) {
+            return script[0];
+        }
+
+        if (xblocks.utils.support.template) {
+            var template = xtag.queryChildren(this._node, 'template');
+            if (template.length === 1) {
+                // FIXME temporarily, until the implementation of the DocumentFragment
+                var tmp = document.createElement('div');
+                tmp.appendChild(document.importNode(template[0].content, true));
+                return tmp;
+            }
+        }
+    };
+
+    /**
+     * @returns {string}
+     * @private
+     */
+    XBElement.prototype._getNodeContent = function() {
+        if (this._isMountedComponent()) {
+            return this._component.props.children;
+        }
+
+        var contentElement = this._getNodeContentElement();
+        if (contentElement) {
+            return contentElement.innerHTML;
+        }
+
+        return this._node.innerHTML;
+    };
+
+    /**
+     * @param {string} content
+     * @private
+     */
+    XBElement.prototype._setNodeContent = function(content) {
+        if (this._isMountedComponent()) {
+            this.update({ children: content });
+
+        } else {
+            var contentElement = this._getNodeContentElement();
+            if (contentElement) {
+                xtag.innerHTML(contentElement, content);
+            }
+        }
     };
 
     /**
@@ -561,6 +777,10 @@ xblocks.dom.attrs.toObject = function(element) {
         return (this._component && this._component.isMounted());
     };
 
+    /**
+     * @returns {?object}
+     * @private
+     */
     XBElement.prototype._getCurrentProps = function() {
         return this._isMountedComponent() ? this._component.props : null;
     };

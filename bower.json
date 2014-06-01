@@ -2,10 +2,11 @@
     "name": "xblocks-web",
     "version": "0.0.1",
     "dependencies": {
-        "x-tag-core": "0.9.5",
-        "es5-shim": "2.3.0",
+        "x-tag-core": "0.9.7",
+        "es5-shim": "3.4.0",
         "react": "0.10.0",
-        "xblocks-core": "*"
+        "xblocks-core": "*",
+        "xblocks": "*"
     },
     "directory": "bower_components"
 }
