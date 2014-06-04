@@ -135,7 +135,9 @@ var XBButtonContent = xblocks.view.create({
     render: function() {
         var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
         var children = [
-            React.DOM.span( {className:"_content-content", key:"content", 'data-xb-content':this.props._uid}, this.props.children)
+            React.DOM.span( {className:"_content-content",
+                key:"content",
+                'data-xb-content':this.props._uid}, this.props.children)
         ];
 
         if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
