@@ -1,6 +1,6 @@
 {
   "name": "xblocks-core",
-  "version": "0.0.19",
+  "version": "0.0.22",
   "main": "xblocks-core.js",
   "ignore": [
     "**/.*",
@@ -9,10 +9,13 @@
     "test",
     "Makefile",
     "src",
-    "package.json"
+    "package.json",
+    "karma.conf.js"
   ],
-  "devDependencies": {
-    "borschik": "0.4.1"
+  "dependencies": {
+    "x-tag-core": "0.9.7",
+    "es5-shim": "3.4.0",
+    "react": "0.10.0"
   },
   "homepage": "https://github.com/Katochimoto/xblocks-core",
   "authors": [
@@ -28,11 +31,11 @@
     "html5"
   ],
   "license": "MIT",
-  "_release": "0.0.19",
+  "_release": "0.0.22",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.19",
-    "commit": "a8e540b129b082f8c709f41d55583f6af84f3ff1"
+    "tag": "v0.0.22",
+    "commit": "15711d46b5538a1e6c4e2964fc31f5a7ff494439"
   },
   "_source": "git://github.com/Katochimoto/xblocks-core.git",
   "_target": "*",

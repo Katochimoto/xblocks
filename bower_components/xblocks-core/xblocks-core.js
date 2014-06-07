@@ -46,21 +46,224 @@
      */
     var xblocks = {};
 
-    var namespace;
+    var global = (function() {
+        return this || (1, eval)('this');
+    }());
 
-    if (typeof module !== 'undefined') {
-        namespace = module.exports = xblocks;
+    global.xblocks = xblocks;
 
-    } else {
-        namespace = (function() {
-            return this || (1, eval)('this');
-        }());
+
+    /* ../node_modules/setimmediate/setImmediate.js begin */
+(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
     }
 
-    namespace.xblocks = xblocks;
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var setImmediate;
+
+    function addFromSetImmediateArguments(args) {
+        tasksByHandle[nextHandle] = partiallyApplied.apply(undefined, args);
+        return nextHandle++;
+    }
+
+    // This function accepts the same arguments as setImmediate, but
+    // returns a function that requires no arguments.
+    function partiallyApplied(handler) {
+        var args = [].slice.call(arguments, 1);
+        return function() {
+            if (typeof handler === "function") {
+                handler.apply(undefined, args);
+            } else {
+                (new Function("" + handler))();
+            }
+        };
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(partiallyApplied(runIfPresent, handle), 0);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    task();
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function installNextTickImplementation() {
+        setImmediate = function() {
+            var handle = addFromSetImmediateArguments(arguments);
+            process.nextTick(partiallyApplied(runIfPresent, handle));
+            return handle;
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        setImmediate = function() {
+            var handle = addFromSetImmediateArguments(arguments);
+            global.postMessage(messagePrefix + handle, "*");
+            return handle;
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        setImmediate = function() {
+            var handle = addFromSetImmediateArguments(arguments);
+            channel.port2.postMessage(handle);
+            return handle;
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        setImmediate = function() {
+            var handle = addFromSetImmediateArguments(arguments);
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+            return handle;
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        setImmediate = function() {
+            var handle = addFromSetImmediateArguments(arguments);
+            setTimeout(partiallyApplied(runIfPresent, handle), 0);
+            return handle;
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(new Function("return this")()));
+
+/* ../node_modules/setimmediate/setImmediate.js end */
+
+    /* xblocks/customevent.js begin */
+/* global xblocks, global */
+(function(global, xblocks, undefined) {
+    'use strict';
+
+    if (!global.CustomEvent) {
+        var CustomEvent = function(event, params) {
+            params = xblocks.utils.merge({
+                bubbles: false,
+                cancelable: false,
+                detail: undefined
+
+            }, params || {});
+
+            var evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+            return evt;
+        };
+
+        CustomEvent.prototype = global.Event.prototype;
+
+        global.CustomEvent = CustomEvent;
+    }
+
+}(global, xblocks));
+
+/* xblocks/customevent.js end */
 
     /* xblocks/utils.js begin */
-(function(xblocks) {
+/* global xblocks, global */
+(function(global, xblocks, undefined) {
+    'use strict';
 
     /**
      * @namespace
@@ -70,7 +273,7 @@
     xblocks.utils.REG_TYPE_EXTRACT = /\s([a-zA-Z]+)/;
 
     xblocks.utils.support = {
-        template: ('content' in document.createElement('template'))
+        template: ('content' in global.document.createElement('template'))
     };
 
     /**
@@ -107,14 +310,14 @@
             i--;
         }
 
-        for ( ; i < length; i++ ) {
-            if ( (options = arguments[ i ]) != null ) {
+        for (; i < length; i++) {
+            if ((options = arguments[i]) !== null) {
                 // Extend the base object
-                for ( name in options ) {
-                    src = target[ name ];
-                    copy = options[ name ];
+                for (name in options) {
+                    src = target[name];
+                    copy = options[name];
 
-                    if ( target === copy ) {
+                    if (target === copy) {
                         continue;
                     }
 
@@ -127,10 +330,10 @@
                             clone = src && xblocks.utils.isPlainObject(src) ? src : {};
                         }
 
-                        target[ name ] = xblocks.utils.merge( deep, clone, copy );
+                        target[name] = xblocks.utils.merge( deep, clone, copy );
 
-                    } else if ( copy !== undefined ) {
-                        target[ name ] = copy;
+                    } else if (copy !== undefined) {
+                        target[name] = copy;
                     }
                 }
             }
@@ -144,7 +347,7 @@
      * @returns {string}
      */
     xblocks.utils.type = function(param) {
-        return ({}).toString.call(param).match(xblocks.utils.REG_TYPE_EXTRACT)[1].toLowerCase();
+        return Object.prototype.toString.call(param).match(xblocks.utils.REG_TYPE_EXTRACT)[1].toLowerCase();
     };
 
     /**
@@ -164,7 +367,7 @@
     };
 
     xblocks.utils.isWindow = function(obj) {
-        return obj != null && obj === obj.window;
+        return obj !== null && obj === obj.window;
     };
 
     /**
@@ -185,25 +388,24 @@
             return false;
         }
 
-        for (var p in x) {
-            if (!x.hasOwnProperty(p)) {
-                continue;
-            }
+        var p;
+        for (p in x) {
+            if (x.hasOwnProperty(p)) {
+                if (!y.hasOwnProperty(p)) {
+                    return false;
+                }
 
-            if (!y.hasOwnProperty(p)) {
-                return false;
-            }
+                if (x[p] === y[p]) {
+                    continue;
+                }
 
-            if (x[p] === y[p]) {
-                continue;
-            }
+                if (typeof(x[p]) !== 'object') {
+                    return false;
+                }
 
-            if (typeof(x[p]) !== 'object') {
-                return false;
-            }
-
-            if (!xblocks.utils.equals(x[p], y[p])) {
-                return false;
+                if (!xblocks.utils.equals(x[p], y[p])) {
+                    return false;
+                }
             }
         }
 
@@ -221,13 +423,10 @@
      * @returns {boolean}
      */
     xblocks.utils.isEmptyObject = function(obj) {
-        if (xblocks.utils.type(obj) !== 'object') {
-            return true;
-        }
-
-        var name;
-        for (name in obj) {
-            return false;
+        if (xblocks.utils.type(obj) === 'object') {
+            for (var name in obj) {
+                return false;
+            }
         }
 
         return true;
@@ -270,84 +469,109 @@
         return out;
     };
 
-}(xblocks));
+    /**
+     * @param {function} callback
+     * @param {*} args
+     * @returns {function}
+     */
+    xblocks.utils.lazyCall = function(callback, args) {
+        callback._args = (callback._args || []).concat(args);
+
+        if (!callback._timer) {
+            callback._timer = global.setImmediate(function() {
+                callback._timer = 0;
+                callback(callback._args.splice(0, callback._args.length));
+            });
+        }
+
+        return callback;
+    };
+
+}(global, xblocks));
 
 /* xblocks/utils.js end */
 
     /* xblocks/dom.js begin */
+/* global xblocks */
 (function(xblocks) {
+    'use strict';
 
     /**
      * @namespace
      */
     xblocks.dom = {};
 
-    /* xblocks/dom/attrs.js begin */
-/**
- * @namespace
- */
-xblocks.dom.attrs = {};
+    /**
+     * @namespace
+     */
+    xblocks.dom.attrs = {};
 
-/**
- * @type {string[]}
- */
-xblocks.dom.attrs.ARRTS_BOOLEAN = [
-    'active',
-    'autofocus',
-    'checked',
-    'defer',
-    'disabled',
-    'ismap',
-    'multiple',
-    'readonly',
-    'selected',
-    'xb-static'
-];
+    /**
+     * @type {string[]}
+     */
+    xblocks.dom.attrs.ARRTS_BOOLEAN = [
+        'active',
+        'autofocus',
+        'checked',
+        'defer',
+        'disabled',
+        'ismap',
+        'multiple',
+        'readonly',
+        'selected',
+        'xb-static'
+    ];
 
-/**
- * @param {string} name
- * @param {string} value
- * @returns {string|boolean}
- */
-xblocks.dom.attrs.getRealValue = function(name, value) {
-    if (value === 'true' ||
-        value === 'false' ||
-        xblocks.dom.attrs.ARRTS_BOOLEAN.indexOf(name) !== -1
-    ) {
-        return (value === '' || name === value || value === 'true');
-    }
+    /**
+     * @type {string[]}
+     */
+    xblocks.dom.attrs.XB_ATTRS = {
+        'STATIC': 'xb-static'
+    };
 
-    return value;
-};
+    /**
+     * @param {string} name
+     * @param {string} value
+     * @returns {string|boolean}
+     */
+    xblocks.dom.attrs.getRealValue = function(name, value) {
+        if (value === 'true' ||
+            value === 'false' ||
+            xblocks.dom.attrs.ARRTS_BOOLEAN.indexOf(name) !== -1
+            ) {
+            return (value === '' || name === value || value === 'true');
+        }
 
-/**
- * Выделение атрибутов элемента в плоском представлении
- * @param {HTMLElement} element
- * @return {object}
- */
-xblocks.dom.attrs.toObject = function(element) {
-    if (element.nodeType !== 1) {
-        return {};
-    }
+        return value;
+    };
 
-    var attrs = {};
+    /**
+     * Выделение атрибутов элемента в плоском представлении
+     * @param {HTMLElement} element
+     * @return {object}
+     */
+    xblocks.dom.attrs.toObject = function(element) {
+        if (element.nodeType !== 1) {
+            return {};
+        }
 
-    Array.prototype.forEach.call(element.attributes, function(attr) {
-        attrs[attr.nodeName] = xblocks.dom.attrs.getRealValue(attr.nodeName, attr.value);
-    });
+        var attrs = {};
 
-    return attrs;
-};
+        Array.prototype.forEach.call(element.attributes, function(attr) {
+            attrs[attr.nodeName] = xblocks.dom.attrs.getRealValue(attr.nodeName, attr.value);
+        });
 
-/* xblocks/dom/attrs.js end */
-
+        return attrs;
+    };
 
 }(xblocks));
 
 /* xblocks/dom.js end */
 
     /* xblocks/view.js begin */
-(function(xblocks, React) {
+/* global xblocks, global */
+(function(global, xblocks) {
+    'use strict';
 
     var XBView = {};
 
@@ -360,13 +584,19 @@ xblocks.dom.attrs.toObject = function(element) {
      * @param {object} component
      */
     xblocks.view.create = function(component) {
-        component.mixins = Array.isArray(component.mixins) ? component.mixins: [];
+        if (!Array.isArray(component.mixins)) {
+            component.mixins = [];
+        }
+
         component.mixins.push(XBView);
 
-        component.propTypes = xblocks.utils.isPlainObject(component.propTypes) ? component.propTypes : {};
-        component.propTypes._uid = React.PropTypes.string;
+        if (!xblocks.utils.isPlainObject(component.propTypes)) {
+            component.propTypes = {};
+        }
 
-        return React.createClass(component);
+        component.propTypes._uid = global.React.PropTypes.string;
+
+        return global.React.createClass(component);
     };
 
     /**
@@ -375,12 +605,12 @@ xblocks.dom.attrs.toObject = function(element) {
      * @throws
      */
     xblocks.view.register = function(blockName, component) {
-        if (React.DOM.hasOwnProperty(blockName)) {
+        if (global.React.DOM.hasOwnProperty(blockName)) {
             throw 'Specified item "' + blockName + '" is already defined';
         }
 
-        React.DOM[blockName] = xblocks.view.create(component);
-        return React.DOM[blockName];
+        global.React.DOM[blockName] = xblocks.view.create(component);
+        return global.React.DOM[blockName];
     };
 
     /**
@@ -388,15 +618,17 @@ xblocks.dom.attrs.toObject = function(element) {
      * @returns {*}
      */
     xblocks.view.get = function(blockName) {
-        return React.DOM[blockName];
+        return global.React.DOM[blockName];
     };
 
-}(xblocks, React));
+}(global, xblocks));
 
 /* xblocks/view.js end */
 
     /* xblocks/block.js begin */
-(function(xtag, xblocks) {
+/* global xblocks, global */
+(function(global, xblocks) {
+    'use strict';
 
     /**
      * @param {String} blockName
@@ -408,34 +640,26 @@ xblocks.dom.attrs.toObject = function(element) {
 
         xblocks.utils.merge(true, options, {
             lifecycle: {
-                /**
-                 * @this {HTMLElement}
-                 */
                 created: function() {
-                    /**
-                     * @type {XBElement}
-                     */
                     this.xblock = xblocks.element.create(this);
                 },
 
-                /**
-                 * @this {HTMLElement}
-                 */
+                inserted: function() {
+
+                },
+
                 removed: function() {
                     this.xblock.destroy();
                     delete this.xblock;
                 },
 
-                /**
-                 * @this {HTMLElement}
-                 */
                 attributeChanged: function(attrName, oldValue, newValue) {
                     if (this.xblock._isMountedComponent()) {
                         return;
                     }
 
                     // removeAttribute('xb-static')
-                    if (attrName === 'xb-static' && newValue === null) {
+                    if (attrName === xblocks.dom.attrs.XB_ATTRS.STATIC && newValue === null) {
                         this.xblock._repaint();
                     }
                 }
@@ -444,14 +668,14 @@ xblocks.dom.attrs.toObject = function(element) {
             accessors: {
                 content: {
                     /**
-                     * @this {HTMLElement}
+                     * @return {string}
                      */
                     get: function() {
                         return this.xblock._getNodeContent();
                     },
 
                     /**
-                     * @this {HTMLElement}
+                     * @param {string} content
                      */
                     set: function(content) {
                         this.xblock._setNodeContent(content);
@@ -460,15 +684,17 @@ xblocks.dom.attrs.toObject = function(element) {
             }
         });
 
-        return xtag.register(blockName, options);
+        return global.xtag.register(blockName, options);
     };
 
-}(xtag, xblocks));
+}(global, xblocks));
 
 /* xblocks/block.js end */
 
     /* xblocks/element.js begin */
-(function(xtag, xblocks, React) {
+/* global xblocks, global */
+(function(global, xblocks, undefined) {
+    'use strict';
 
     /**
      * @module xblocks.element
@@ -529,7 +755,7 @@ xblocks.dom.attrs.toObject = function(element) {
      * Unmounts a component and removes it from the DOM
      */
     XBElement.prototype.destroy = function() {
-        React.unmountComponentAtNode(this._node);
+        global.React.unmountComponentAtNode(this._node);
         this.unmount();
     };
 
@@ -572,7 +798,7 @@ xblocks.dom.attrs.toObject = function(element) {
             });
         }
 
-        if (nextProps.hasOwnProperty('xb-static')) {
+        if (nextProps.hasOwnProperty(xblocks.dom.attrs.XB_ATTRS.STATIC)) {
             this._repaint();
 
         } else {
@@ -592,19 +818,21 @@ xblocks.dom.attrs.toObject = function(element) {
             return;
         }
 
-        props['_uid'] = this._uid;
+        props._uid = this._uid;
 
         var view = xblocks.view.get(this._name)(props, children);
 
-        if (props.hasOwnProperty('xb-static')) {
+        if (props.hasOwnProperty(xblocks.dom.attrs.XB_ATTRS.STATIC)) {
             this.unmount();
-            xtag.innerHTML(
-                this._node,
-                React.renderComponentToString(view)
-            );
+            this._node.innerHTML = global.React.renderComponentToStaticMarkup(view);
+            this._upgradeNode();
+
+            if (callback) {
+                callback.call(this);
+            }
 
         } else {
-            this._component = React.renderComponent(
+            this._component = global.React.renderComponent(
                 view,
                 this._node,
                 this._callbackRender.bind(this, callback)
@@ -626,22 +854,20 @@ xblocks.dom.attrs.toObject = function(element) {
      * @private
      */
     XBElement.prototype._callbackInit = function() {
-        xtag.fireEvent(this._node, 'xb-created', {
-            bubbles: false,
-            cancelable: false,
-            detail: { xblock: this }
-        });
+        var event = new global.CustomEvent('xb-created', { detail: { xblock: this } });
+        this._node.dispatchEvent(event);
+
+        xblocks.utils.lazyCall(_globalInitEvent, this._node);
     };
 
     /**
      * @private
      */
     XBElement.prototype._callbackRepaint = function() {
-        xtag.fireEvent(this._node, 'xb-repaint', {
-            bubbles: false,
-            cancelable: false,
-            detail: { xblock: this }
-        });
+        var event = new global.CustomEvent('xb-repaint', { detail: { xblock: this } });
+        this._node.dispatchEvent(event);
+
+        xblocks.utils.lazyCall(_globalRepaintEvent, this._node);
     };
 
     /**
@@ -693,8 +919,8 @@ xblocks.dom.attrs.toObject = function(element) {
     };
 
     XBElement.prototype._upgradeNode = function() {
-        if (window.CustomElements) {
-            CustomElements.upgradeAll(this._node);
+        if (global.CustomElements) {
+            global.CustomElements.upgradeAll(this._node);
         }
     };
 
@@ -711,28 +937,27 @@ xblocks.dom.attrs.toObject = function(element) {
      */
     XBElement.prototype._getNodeContentElement = function() {
         if (!this._node.childNodes.length) {
-            return;
+            return null;
         }
 
-        var contents = xtag.query(this._node, '[data-xb-content="' + this._uid + '"]');
-        if (contents.length === 1) {
-            return contents[0];
-        }
+        var element = this._node.querySelector('[data-xb-content="' + this._uid + '"]');
 
-        var script = xtag.queryChildren(this._node, 'script[type="text/template"]');
-        if (script.length === 1) {
-            return script[0];
-        }
+        if (!element) {
+            element = this._node.querySelector('script[type="text/template"]');
 
-        if (xblocks.utils.support.template) {
-            var template = xtag.queryChildren(this._node, 'template');
-            if (template.length === 1) {
-                // FIXME temporarily, until the implementation of the DocumentFragment
-                var tmp = document.createElement('div');
-                tmp.appendChild(document.importNode(template[0].content, true));
-                return tmp;
+            if (!element || element.parentNode !== this._node) {
+                element = this._node.querySelector('template');
+
+                if (element && element.parentNode === this._node) {
+                    // FIXME temporarily, until the implementation of the DocumentFragment
+                    var tmp = global.document.createElement('div');
+                    tmp.appendChild(global.document.importNode(element.content, true));
+                    element = tmp;
+                }
             }
         }
+
+        return element;
     };
 
     /**
@@ -763,7 +988,8 @@ xblocks.dom.attrs.toObject = function(element) {
         } else {
             var contentElement = this._getNodeContentElement();
             if (contentElement) {
-                xtag.innerHTML(contentElement, content);
+                contentElement.innerHTML = content;
+                this._upgradeNode();
             }
         }
     };
@@ -821,7 +1047,23 @@ xblocks.dom.attrs.toObject = function(element) {
         return record.attributeName;
     };
 
-}(xtag, xblocks, React));
+    /**
+     * @param {array} records
+     * @private
+     */
+    function _globalInitEvent(records) {
+        global.dispatchEvent(new global.CustomEvent('xb-created', { detail: { records: records } }));
+    }
+
+    /**
+     * @param {array} records
+     * @private
+     */
+    function _globalRepaintEvent(records) {
+        global.dispatchEvent(new global.CustomEvent('xb-repaint', { detail: { records: records } }));
+    }
+
+}(global, xblocks));
 
 /* xblocks/element.js end */
 

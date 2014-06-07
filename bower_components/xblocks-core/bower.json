@@ -1,31 +1,34 @@
 {
-  "name": "xblocks-core",
-  "version": "0.0.19",
-  "main": "xblocks-core.js",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "Makefile",
-    "src",
-    "package.json"
-  ],
-  "devDependencies": {
-      "borschik": "0.4.1"
-  },
-  "homepage": "https://github.com/Katochimoto/xblocks-core",
-  "authors": [
-    "rikishi <bufpost@yandex.ru>"
-  ],
-  "description": "HTML core custom elements",
-  "moduleType": [
-    "globals"
-  ],
-  "keywords": [
-    "x-tag",
-    "react",
-    "html5"
-  ],
-  "license": "MIT"
+    "name": "xblocks-core",
+    "version": "0.0.22",
+    "main": "xblocks-core.js",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "Makefile",
+        "src",
+        "package.json",
+        "karma.conf.js"
+    ],
+    "dependencies": {
+        "x-tag-core": "0.9.7",
+        "es5-shim": "3.4.0",
+        "react": "0.10.0"
+    },
+    "homepage": "https://github.com/Katochimoto/xblocks-core",
+    "authors": [
+        "rikishi <bufpost@yandex.ru>"
+    ],
+    "description": "HTML core custom elements",
+    "moduleType": [
+        "globals"
+    ],
+    "keywords": [
+        "x-tag",
+        "react",
+        "html5"
+    ],
+    "license": "MIT"
 }
