@@ -5,7 +5,7 @@
         "x-tag-core": "0.9.7",
         "es5-shim": "3.4.0",
         "react": "0.10.0",
-        "xblocks-core": "Katochimoto/xblocks-core#master",
+        "xblocks-core": "*",
         "xblocks": "*"
     },
     "directory": "bower_components"
