@@ -1,6 +1,5 @@
 {
   "name": "xblocks-core",
-  "version": "0.0.22",
   "main": "xblocks-core.js",
   "ignore": [
     "**/.*",
@@ -31,13 +30,13 @@
     "html5"
   ],
   "license": "MIT",
-  "_release": "0.0.22",
+  "_release": "c86bd930d5",
   "_resolution": {
-    "type": "version",
-    "tag": "v0.0.22",
-    "commit": "15711d46b5538a1e6c4e2964fc31f5a7ff494439"
+    "type": "branch",
+    "branch": "master",
+    "commit": "c86bd930d51347b1f754b9c379755f7cd8a5a4fa"
   },
   "_source": "git://github.com/Katochimoto/xblocks-core.git",
-  "_target": "*",
-  "_originalSource": "xblocks-core"
+  "_target": "master",
+  "_originalSource": "Katochimoto/xblocks-core"
 }
