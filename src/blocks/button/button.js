@@ -1,33 +1,33 @@
-(function(xblocks) {
-    /*! borschik:include:button.jsx.js */
+/* global xblocks, global, React */
+/* jshint strict: false */
 
-    xblocks.create('xb-button', {
-        prototype: Object.create(HTMLButtonElement.prototype),
+/*! borschik:include:button.jsx.js */
 
-        accessors: {
-            disabled: {
-                get: function() {
-                    return Boolean(xblocks.dom.attrs.getRealValue('disabled', this.getAttribute('disabled')));
-                },
-                set: function(isDisabled) {
-                    if (isDisabled) {
-                        this.setAttribute('disabled', '');
-                    } else {
-                        this.removeAttribute('disabled');
-                    }
+xblocks.create('xb-button', {
+    prototype: Object.create(HTMLButtonElement.prototype),
+
+    accessors: {
+        disabled: {
+            get: function() {
+                return Boolean(xblocks.dom.attrs.getRealValue('disabled', this.getAttribute('disabled')));
+            },
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('disabled', '');
+                } else {
+                    this.removeAttribute('disabled');
                 }
             }
+        }
+    },
+
+    methods: {
+        focus: function() {
+            this.firstChild.focus();
         },
 
-        methods: {
-            focus: function() {
-                this.firstChild.focus();
-            },
-
-            blur: function() {
-                this.firstChild.blur();
-            }
+        blur: function() {
+            this.firstChild.blur();
         }
-    });
-
-}(xblocks));
+    }
+});

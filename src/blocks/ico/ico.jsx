@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
-(function(xblocks, React) {
+/* global xblocks, global, React */
+/* jshint strict: false */
 
 xblocks.view.register('xb-ico', {
     displayName: 'xb-ico',
@@ -75,5 +76,3 @@ xblocks.view.register('xb-ico', {
         );
     }
 });
-
-}(xblocks, React));

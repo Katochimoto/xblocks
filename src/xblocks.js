@@ -1,6 +1,12 @@
-(function() {
+(function(global) {
+    'use strict';
+
+    var React = global.React;
+    var xblocks = global.xblocks;
 
     /*! borschik:include:blocks/ico/ico.js */
     /*! borschik:include:blocks/button/button.js */
 
-}.call(this));
+}(function() {
+    return this || (1, eval)('this');
+}()));

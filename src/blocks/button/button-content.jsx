@@ -1,4 +1,5 @@
 /** @jsx React.DOM */
+/* jshint strict: false */
 
 var XBButtonContent = xblocks.view.create({
     displayName: 'XBButtonContent',
@@ -32,7 +33,9 @@ var XBButtonContent = xblocks.view.create({
     render: function() {
         var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
         var children = [
-            <span className="_content-content" key="content" data-xb-content={this.props._uid}>{this.props.children}</span>
+            <span className="_content-content"
+                key="content"
+                data-xb-content={this.props._uid}>{this.props.children}</span>
         ];
 
         if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
