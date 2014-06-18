@@ -1,4 +1,4 @@
-(function(global) {
+(function(global, undefined) {
     'use strict';
 
     var React = global.React;
@@ -117,6 +117,12 @@ xblocks.view.register('xb-link', {
         'type': React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
     },
 
+    getDefaultProps: function() {
+        return {
+            'type': 'normal'
+        };
+    },
+
     render: function() {
         var classes = {
             'xb-link': true,
@@ -150,7 +156,7 @@ xblocks.create('xb-link');
 /* blocks/link/link.js end */
 
     /* blocks/button/button.js begin */
-/* global xblocks, global, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /* blocks/button/button.jsx.js begin */

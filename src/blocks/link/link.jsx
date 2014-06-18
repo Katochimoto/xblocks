@@ -15,6 +15,12 @@ xblocks.view.register('xb-link', {
         'type': React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
     },
 
+    getDefaultProps: function() {
+        return {
+            'type': 'normal'
+        };
+    },
+
     render: function() {
         var classes = {
             'xb-link': true,
