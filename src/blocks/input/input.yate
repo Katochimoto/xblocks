@@ -22,39 +22,7 @@ match / xb-field {
 }
 
 match /[.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label || .attrs.autosize] template {
-<label class="xb-field_complex">
-    apply .attrs.* block-class
 
-    if (.attrs.label) {
-        <xb-link href="#" type="input">
-            apply .attrs.label.attrs.* xb-core-attrs
-            .attrs.label.content
-        </xb-link>
-    }
-
-    if (.attrs.prefix) {
-        <span class="xb-field_complex__left">
-            .attrs.prefix
-        </span>
-    }
-
-    if (.attrs.postfix) {
-        <span class="xb-field_complex__right">
-            .attrs.postfix
-        </span>
-    }
-
-    if (.attrs.reset) {
-        <xb-ico class="xb-field_complex__reset js-reset"
-                type="remove"
-                active="true"></xb-ico>
-    }
-
-    <span class="xb-field_complex__content">
-        apply . template-controller ('xb-field_complex__controller', false())
-        <span class="xb-field_complex__view">&nbsp;</span>
-    </span>
-</label>
 }
 
 match /[!(.attrs.postfix || .attrs.prefix || .attrs.reset || .attrs.label || .attrs.autosize)] template {

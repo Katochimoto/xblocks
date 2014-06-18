@@ -30,32 +30,32 @@
     :not(._disabled):focus + &
       skin: input_focus
 
-    & ._content
+    & > ._content
       kind: field-content
 
-    & ._controller
-      kind: input top
-      z-index: 9
-      width: 100%
-      height: 100%
+      & > ._controller
+        kind: input top
+        z-index: 9
+        width: 100%
+        height: 100%
 
-    textarea&
-      vertical-align: top
-      resize: none
+      & > textarea
+        vertical-align: top
+        resize: none
 
-    & ._view
-      border: 1px solid transparent
-      kind: fill -1px
-      skin: input-view no-focus
+      & > ._view
+        border: 1px solid transparent
+        kind: fill -1px
+        skin: input-view no-focus
 
     & ._reset
       kind: field-right 0.5*$islands_s
       height: auto
 
-    & ._left
+    & > ._left
       kind: field-left 0.5*$islands_s
       height: auto
 
-    & ._right
+    & > ._right
       kind: field-right 0.5*$islands_s
       height: auto
