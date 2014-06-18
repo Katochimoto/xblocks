@@ -1,4 +1,4 @@
-(function(global) {
+(function(global, undefined) {
     'use strict';
 
     var React = global.React;
