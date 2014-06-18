@@ -9,8 +9,8 @@ var XBInputController = xblocks.view.create({
         var classes;
         var content;
 
+
         if (this.props.multiline) {
-            classes._simple = true;
             content = this.props.value || this.props.children;
 
             classes = React.addons.classSet(classes);
@@ -26,7 +26,6 @@ var XBInputController = xblocks.view.create({
                 );
 
         } else {
-            classes._simple = true;
 
             classes = React.addons.classSet(classes);
 
@@ -88,49 +87,53 @@ xblocks.view.register('xb-input', {
             classes['_size-' + this.props.size] = true;
         }
 
-
-
-        var content;
-
         if (this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize) {
             classes._complex = true;
-
             classes = React.addons.classSet(classes);
 
+            var children = [];
+
+            if (this.props.label) {
+                children.push(xblocks.view.get('xb-link')({
+                    'type': 'input',
+                    'key': 'label'
+                }));
+            }
+
+            if (this.props.prefix) {
+                children.push(<span key="prefix" className="_left">{this.props.prefix}</span>);
+            }
+
+            if (this.props.postfix) {
+                children.push(<span key="postfix" className="_right">{this.props.postfix}</span>);
+            }
+
+            if (this.props.reset) {
+                children.push(xblocks.view.get('xb-ico')({
+                    'class': '_reset',
+                    'type': 'remove',
+                    'active': 'active',
+                    'key': 'reset'
+                }));
+            }
+
+            children.push(
+                <span key="content" className="_content">
+                    <XBInputController></XBInputController>
+                    <span className="_view">&nbsp;</span>
+                </span>
+            );
+
             return (
-                <label className={classes}>
-
-                if (.attrs.label) {
-                    <xb-link href="#" type="input">
-                    apply .attrs.label.attrs.* xb-core-attrs
-                    .attrs.label.content
-                    </xb-link>
-                    }
-
-                if (.attrs.prefix) {
-                    <span className="_left">{this.props.prefix}</span>
-                    }
-
-                if (.attrs.postfix) {
-                    <span className="_right">{this.props.postfix}</span>
-                    }
-
-                if (.attrs.reset) {
-                    <xb-ico class="xb-field_complex__reset js-reset"
-                    type="remove"
-                    active="true"></xb-ico>
-                    }
-
-                    <span className="_content">
-                        <XBInputController></XBInputController>
-                        <span className="_view">&nbsp;</span>
-                    </span>
-                </label>
+                <label className={classes}>{children}</label>
             );
 
         } else {
+            classes._simple = true;
+            classes = React.addons.classSet(classes);
+
             return (
-                <XBInputController></XBInputController>
+                <XBInputController className={classes}></XBInputController>
             );
         }
     }
