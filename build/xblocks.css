@@ -186,35 +186,35 @@ xb-dropdown {
 .xb-link._disabled .xb-link._disabled {
   opacity: 1;
 }
-.xb-link._type-normal {
+.xb-link._theme-normal {
   cursor: pointer;
   color: #22c;
   text-decoration: none;
   text-decoration: underline;
 }
-.xb-link._type-normal:hover {
+.xb-link._theme-normal:hover {
   color: #d00;
 }
-.xb-link._type-outer {
+.xb-link._theme-outer {
   cursor: pointer;
   color: #070;
   text-decoration: none;
   text-decoration: underline;
 }
-.xb-link._type-outer:hover {
+.xb-link._theme-outer:hover {
   color: #d00;
 }
-.xb-link._type-pseudo {
+.xb-link._theme-pseudo {
   cursor: pointer;
   color: #22c;
   text-decoration: none;
   text-decoration: none;
   border-bottom: 1px dotted;
 }
-.xb-link._type-pseudo:hover {
+.xb-link._theme-pseudo:hover {
   color: #d00;
 }
-.xb-link._type-input {
+.xb-link._theme-input {
   margin: -5px 0 -5px -5px;
   padding: 5px 5px 5px 5px;
   cursor: pointer;
@@ -229,12 +229,12 @@ xb-dropdown {
   height: auto;
   margin-left: -10px;
 }
-.xb-link._type-input {
+.xb-link._theme-input {
   position: relative;
   z-index: 9;
   float: left;
 }
-.xb-link._type-input:hover {
+.xb-link._theme-input:hover {
   color: #d00;
 }
 .xb-button {
