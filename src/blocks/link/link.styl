@@ -1,27 +1,19 @@
-.xb-link_normal
-  skin: link underline
-
-  &.is-disabled
+.xb-link
+  &._disabled
     skin: disabled
 
+  &._type-normal
+    skin: link underline
 
-.xb-link_outer
-  skin: outer-link underline
+  &._type-outer
+    skin: outer-link underline
 
-  &.is-disabled
-    skin: disabled
+  &._type-pseudo
+    skin: pseudo-link
 
-
-.xb-link_pseudo
-  skin: pseudo-link
-
-  &.is-disabled
-    skin: disabled
-
-
-/* ссылка внутри сложного инпута */
-.xb-link_input
-  kind: field-left 0.5*$islands_s
-  skin: input-label
-  height: auto
-  margin-left: $islands_s*-1
+  // ссылка внутри сложного инпута
+  &._type-input
+    kind: field-left 0.5*$islands_s
+    skin: input-label
+    height: auto
+    margin-left: $islands_s*-1

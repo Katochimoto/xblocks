@@ -178,6 +178,65 @@ xb-dropdown {
   width: 6px;
   height: 6px;
 }
+.xb-link._disabled {
+  cursor: default !important;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.xb-link._disabled .xb-link._disabled {
+  opacity: 1;
+}
+.xb-link._type-normal {
+  cursor: pointer;
+  color: #22c;
+  text-decoration: none;
+  text-decoration: underline;
+}
+.xb-link._type-normal:hover {
+  color: #d00;
+}
+.xb-link._type-outer {
+  cursor: pointer;
+  color: #070;
+  text-decoration: none;
+  text-decoration: underline;
+}
+.xb-link._type-outer:hover {
+  color: #d00;
+}
+.xb-link._type-pseudo {
+  cursor: pointer;
+  color: #22c;
+  text-decoration: none;
+  text-decoration: none;
+  border-bottom: 1px dotted;
+}
+.xb-link._type-pseudo:hover {
+  color: #d00;
+}
+.xb-link._type-input {
+  margin: -5px 0 -5px -5px;
+  padding: 5px 5px 5px 5px;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  margin-right: 10px;
+  font-size: 16px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255,225,120,0.1)), to(rgba(0,0,0,0.02)));
+  background: -webkit-linear-gradient(rgba(255,225,120,0.1), rgba(0,0,0,0.02));
+  background: linear-gradient(rgba(255,225,120,0.1), rgba(0,0,0,0.02));
+  height: auto;
+  margin-left: -10px;
+}
+.xb-link._type-input {
+  position: relative;
+  z-index: 9;
+  float: left;
+}
+.xb-link._type-input:hover {
+  color: #d00;
+}
 .xb-button {
   position: relative;
   text-align: center;
