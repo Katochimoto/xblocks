@@ -10,9 +10,6 @@
     kind: field $islands_s $islands_s
     skin: input-box
 
-    :not(._disabled):focus + &
-      skin: input_focus
-
     & > ._content
       kind: field-content
 
@@ -30,6 +27,11 @@
         border: 1px solid transparent
         kind: fill -1px
         skin: input-view no-focus
+
+    &:not(._disabled):focus,
+    &:not(._disabled)._focused
+      & > ._content > ._view
+        skin: input_focus
 
     & ._reset
       kind: field-right 0.5 * $islands_s

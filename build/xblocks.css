@@ -2416,14 +2416,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   z-index: 9;
   float: right;
 }
-:not(._disabled):focus + .xb-input._complex {
-  outline: none;
-  border-color: rgba(94,76,2,0.42);
-  border-top-color: rgba(78,62,2,0.515);
-  border-bottom-color: rgba(117,93,0,0.335);
-  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-}
 .xb-input._complex > ._content > ._controller {
   width: 400px;
   vertical-align: top;
@@ -2458,6 +2450,15 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
 /* override for <input type="search"> */
+}
+.xb-input._complex:not(._disabled):focus > ._content > ._view,
+.xb-input._complex:not(._disabled)._focused > ._content > ._view {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
 }
 .xb-input._complex ._reset {
   margin: -5px -5px -5px 0;

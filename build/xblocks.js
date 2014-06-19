@@ -540,7 +540,8 @@ xblocks.view.register('xb-input', {
 
     getDefaultProps: function() {
         return {
-            'type': 'text'
+            'type': 'text',
+            'size': 'm'
         };
     },
 
