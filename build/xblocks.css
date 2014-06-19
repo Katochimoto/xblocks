@@ -10,6 +10,18 @@
   padding: 0;
   border: none;
 }
+.xb-input._simple,
+.xb-input._complex > ._content > ._controller {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+}
+.xb-input._simple:focus,
+.xb-input._complex > ._content > ._controller:focus {
+  outline: none;
+}
 .xb-ico._type-remove,
 .xb-ico,
 .xb-ico._type-notification,
@@ -49,7 +61,7 @@
   opacity: 1;
 }
 xb-button,
-xb-field,
+xb-input,
 xb-ico,
 xb-select {
   display: inline-block;
@@ -229,7 +241,9 @@ xb-dropdown {
   height: auto;
   margin-left: -10px;
 }
-.xb-link._theme-input {
+.xb-link._theme-input,
+.xb-input._complex-left,
+.xb-input._complex > ._left {
   position: relative;
   z-index: 9;
   float: left;
@@ -2315,6 +2329,286 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
 }
 .xb-button.ui-state-active  > ._content {
   top: 1px;
+}
+.xb-input._simple {
+  width: 400px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+  font-family: Arial, sans-serif;
+  -webkit-appearance: textfield;
+}
+.xb-input._simple,
+.xb-input._complex,
+.xb-input._complex > ._content > ._controller {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 100%;
+  cursor: text;
+  vertical-align: baseline;
+}
+.xb-input._simple:focus {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._simple:focus {
+  z-index: 9;
+}
+.xb-input._complex {
+  width: 400px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
+}
+.xb-input._complex-content,
+.xb-input._complex > ._content {
+  position: static;
+  display: block;
+  overflow: hidden;
+  height: 100%;
+}
+.xb-input._complex-left {
+  margin: -10px 0 -10px -10px;
+  padding: 10px 10px 10px 10px;
+}
+.xb-input._complex-right {
+  margin: -10px -10px -10px 0;
+  padding: 10px 10px 10px 10px;
+}
+.xb-input._complex-right,
+.xb-input._complex ._reset,
+.xb-input._complex > ._right {
+  position: relative;
+  z-index: 9;
+  float: right;
+}
+:not(._disabled):focus + .xb-input._complex {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._complex > ._content > ._controller {
+  width: 400px;
+  vertical-align: top;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+}
+.xb-input._complex > ._content > textarea {
+  vertical-align: top;
+  resize: none;
+}
+.xb-input._complex > ._content > ._view {
+  border: 1px solid transparent;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+}
+.xb-input._complex ._reset {
+  margin: -5px -5px -5px 0;
+  padding: 5px 5px 5px 5px;
+  margin-right: -10px;
+  height: auto;
+}
+.xb-input._complex ._reset:before {
+  content: " ";
+}
+.xb-input._complex > ._left {
+  margin: -5px 0 -5px -5px;
+  padding: 5px 5px 5px 5px;
+  margin-left: -10px;
+  height: auto;
+}
+.xb-input._complex > ._right {
+  margin: -5px -5px -5px 0;
+  padding: 5px 5px 5px 5px;
+  margin-right: -10px;
+  height: auto;
+}
+.xb-input._focused {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._disabled {
+  cursor: default !important;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.xb-input._disabled .xb-input._disabled {
+  opacity: 1;
+}
+.xb-input._autosize {
+  width: auto !important;
+}
+.xb-input._size-s {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 16px;
+  min-height: 28px;
+  font-size: 13px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+}
+.xb-input._size-s:focus {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._size-s:focus {
+  z-index: 9;
+}
+.xb-input._size-l {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+}
+.xb-input._size-l:focus {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._size-l:focus {
+  z-index: 9;
+}
+.xb-input._size-xl {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+}
+.xb-input._size-xl:focus {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._size-xl:focus {
+  z-index: 9;
 }
 ._hidden,
 .nb-is-hidden,

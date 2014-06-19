@@ -2,45 +2,7 @@
 /* global xblocks, React */
 /* jshint strict: false */
 
-var XBInputController = xblocks.view.create({
-    displayName: 'XBInputController',
-
-    render: function() {
-        var classes;
-        var content;
-
-
-        if (this.props.multiline) {
-            content = this.props.value || this.props.children;
-
-            classes = React.addons.classSet(classes);
-
-            return (
-                <textarea className={classes}
-                disabled={this.props.disabled ? 'disabled' : undefined}
-                tabIndex={tabIndex}
-                name={this.props.name}
-                rows={this.props.rows}
-                cols={this.props.cols}
-                autoFocus={this.props.autofocus}>{content}</textarea>
-                );
-
-        } else {
-
-            classes = React.addons.classSet(classes);
-
-            return (
-                <input className={classes}
-                disabled={this.props.disabled ? 'disabled' : undefined}
-                tabIndex={tabIndex}
-                name={this.props.name}
-                type="text"
-                value={this.props.value}
-                autoFocus={this.props.autofocus}/>
-                );
-        }
-    }
-});
+/*! borschik:include:input-controller.jsx.js */
 
 xblocks.view.register('xb-input', {
     displayName: 'xb-input',
@@ -72,56 +34,81 @@ xblocks.view.register('xb-input', {
 
     getDefaultProps: function() {
         return {
-            'type': 'text'
+            'type': 'text',
+            'size': 'm'
         };
     },
 
+    _isComplex: function() {
+        return this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize;
+    },
+
     render: function() {
+        var props = xblocks.utils.merge({}, this.props);
+        var isComplex = this._isComplex();
         var classes = {
             'xb-input': true,
-            '_disabled': this.props.disabled,
-            '_autosize': this.props.autosize
+            '_disabled': props.disabled,
+            '_autosize': props.autosize
         };
 
-        if (this.props.size) {
-            classes['_size-' + this.props.size] = true;
+        if (props.size) {
+            classes['_size-' + props.size] = true;
         }
 
-        if (this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize) {
+        if (isComplex) {
             classes._complex = true;
-            classes = React.addons.classSet(classes);
+        } else {
+            classes._simple = true;
+        }
 
+        classes = React.addons.classSet(classes);
+
+
+
+        if (isComplex) {
             var children = [];
 
-            if (this.props.label) {
+            if (props.label) {
                 children.push(xblocks.view.get('xb-link')({
                     'type': 'input',
                     'key': 'label'
                 }));
             }
 
-            if (this.props.prefix) {
-                children.push(<span key="prefix" className="_left">{this.props.prefix}</span>);
+            if (props.prefix) {
+                children.push(
+                    <span key="prefix" className="_left">{props.prefix}</span>
+                );
             }
 
-            if (this.props.postfix) {
-                children.push(<span key="postfix" className="_right">{this.props.postfix}</span>);
+            if (props.postfix) {
+                children.push(
+                    <span key="postfix" className="_right">{props.postfix}</span>
+                );
             }
 
-            if (this.props.reset) {
+            if (props.reset) {
                 children.push(xblocks.view.get('xb-ico')({
                     'class': '_reset',
                     'type': 'remove',
-                    'active': 'active',
+                    'active': true,
                     'key': 'reset'
                 }));
             }
 
+            var controllerProps = xblocks.utils.merge({}, props);
+            controllerProps['class'] = '_controller';
+            controllerProps['key'] = 'controller';
+
             children.push(
-                <span key="content" className="_content">
-                    <XBInputController></XBInputController>
-                    <span className="_view">&nbsp;</span>
-                </span>
+                React.DOM.span({
+                    'key': 'content',
+                    'className': '_content'
+                }, [
+                    XBInputController(controllerProps),
+                    React.DOM.span({ 'key': 'view', 'className': '_view' })
+                ])
             );
 
             return (
@@ -129,11 +116,10 @@ xblocks.view.register('xb-input', {
             );
 
         } else {
-            classes._simple = true;
-            classes = React.addons.classSet(classes);
+            props['class'] = classes;
 
             return (
-                <XBInputController className={classes}></XBInputController>
+                XBInputController(props)
             );
         }
     }

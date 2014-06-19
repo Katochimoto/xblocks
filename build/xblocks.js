@@ -4,6 +4,46 @@
     var React = global.React;
     var xblocks = global.xblocks;
 
+    xblocks.dom.attrs.ARRTS_BOOLEAN = xblocks.dom.attrs.ARRTS_BOOLEAN.concat([
+        'multiline',
+        'autosize',
+        'required',
+        'reset'
+    ]);
+
+    xblocks.utils.compact = function(data) {
+        for (var prop in data) {
+            if (data.hasOwnProperty(prop)) {
+                if (!data[prop]) {
+                    delete data[prop];
+                }
+            }
+        }
+
+        return data;
+    };
+
+    xblocks.utils.toAttrsName = function(name) {
+        switch (name) {
+            case 'class':
+                return 'className';
+            case 'tabindex':
+                return 'tabIndex';
+            case 'autofocus':
+                return 'autoFocus';
+            default:
+                return name;
+        }
+    };
+
+    xblocks.utils.normalizeAttrsName = function(data) {
+        var attrs = {};
+        Object.keys(data).forEach(function(key) {
+            attrs[xblocks.utils.toAttrsName(key)] = data[key];
+        });
+        return attrs;
+    };
+
     /* blocks/ico/ico.js begin */
 /* global xblocks, global, React */
 /* jshint strict: false */
@@ -409,6 +449,193 @@ xblocks.create('xb-button', {
 });
 
 /* blocks/button/button.js end */
+
+    /* blocks/input/input.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+/* blocks/input/input.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, React */
+/* jshint strict: false */
+
+/* blocks/input/input-controller.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, React */
+/* jshint strict: false */
+
+var XBInputController = xblocks.view.create({
+    displayName: 'XBInputController',
+
+    propTypes: {
+        'class': React.PropTypes.string,
+        'name': React.PropTypes.string,
+        'disabled': React.PropTypes.bool,
+        'multiline': React.PropTypes.bool,
+        'required': React.PropTypes.bool,
+        'readonly': React.PropTypes.bool,
+        'autofocus': React.PropTypes.bool,
+        'rows': React.PropTypes.string,
+        'cols': React.PropTypes.string,
+        'placeholder': React.PropTypes.string,
+        'value': React.PropTypes.string,
+        'tabindex': React.PropTypes.string
+    },
+
+    shouldComponentUpdate: function(nextProps) {
+        return !xblocks.utils.equals(nextProps, this.props);
+    },
+
+    render: function() {
+        var props = xblocks.utils.merge({}, this.props);
+        props = xblocks.utils.compact(props);
+        props = xblocks.utils.normalizeAttrsName(props);
+
+        if (props.disabled) {
+            props.tabIndex = '-1';
+        }
+
+        var element = 'input';
+
+        if (props.multiline) {
+            element = 'textarea';
+        }
+
+        return (
+            React.DOM[element](props)
+        );
+    }
+});
+
+/* blocks/input/input-controller.jsx.js end */
+
+
+xblocks.view.register('xb-input', {
+    displayName: 'xb-input',
+
+    propTypes: {
+        'id': React.PropTypes.string,
+        'class': React.PropTypes.string,
+        'name': React.PropTypes.string,
+        'disabled': React.PropTypes.bool,
+        'autosize': React.PropTypes.bool,
+        'multiline': React.PropTypes.bool,
+        'required': React.PropTypes.bool,
+        'readonly': React.PropTypes.bool,
+        'reset': React.PropTypes.bool,
+        'autofocus': React.PropTypes.bool,
+        'type': React.PropTypes.oneOf([
+            'text', 'number', 'date', 'datetime', 'email', 'month',
+            'range', 'search', 'tel', 'time', 'url', 'week', 'color'
+        ]),
+        'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+        'rows': React.PropTypes.string,
+        'cols': React.PropTypes.string,
+        'placeholder': React.PropTypes.string,
+        'value': React.PropTypes.string,
+        'prefix': React.PropTypes.string,
+        'postfix': React.PropTypes.string,
+        'tabindex': React.PropTypes.string
+    },
+
+    getDefaultProps: function() {
+        return {
+            'type': 'text'
+        };
+    },
+
+    _isComplex: function() {
+        return this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize;
+    },
+
+    render: function() {
+        var props = xblocks.utils.merge({}, this.props);
+        var isComplex = this._isComplex();
+        var classes = {
+            'xb-input': true,
+            '_disabled': props.disabled,
+            '_autosize': props.autosize
+        };
+
+        if (props.size) {
+            classes['_size-' + props.size] = true;
+        }
+
+        if (isComplex) {
+            classes._complex = true;
+        } else {
+            classes._simple = true;
+        }
+
+        classes = React.addons.classSet(classes);
+
+
+
+        if (isComplex) {
+            var children = [];
+
+            if (props.label) {
+                children.push(xblocks.view.get('xb-link')({
+                    'type': 'input',
+                    'key': 'label'
+                }));
+            }
+
+            if (props.prefix) {
+                children.push(
+                    React.DOM.span( {key:"prefix", className:"_left"}, props.prefix)
+                );
+            }
+
+            if (props.postfix) {
+                children.push(
+                    React.DOM.span( {key:"postfix", className:"_right"}, props.postfix)
+                );
+            }
+
+            if (props.reset) {
+                children.push(xblocks.view.get('xb-ico')({
+                    'class': '_reset',
+                    'type': 'remove',
+                    'active': true,
+                    'key': 'reset'
+                }));
+            }
+
+            var controllerProps = xblocks.utils.merge({}, props);
+            controllerProps['class'] = '_controller';
+            controllerProps['key'] = 'controller';
+
+            children.push(
+                React.DOM.span({
+                    'key': 'content',
+                    'className': '_content'
+                }, [
+                    XBInputController(controllerProps),
+                    React.DOM.span({ 'key': 'view', 'className': '_view' })
+                ])
+            );
+
+            return (
+                React.DOM.label( {className:classes}, children)
+            );
+
+        } else {
+            props['class'] = classes;
+
+            return (
+                XBInputController(props)
+            );
+        }
+    }
+});
+
+/* blocks/input/input.jsx.js end */
+
+
+xblocks.create('xb-input');
+
+/* blocks/input/input.js end */
 
 
 }(function() {
