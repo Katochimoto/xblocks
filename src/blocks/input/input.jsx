@@ -38,6 +38,7 @@ xblocks.view.register('xb-input', {
 
     getDefaultProps: function() {
         return {
+            'value': '',
             'type': 'text',
             'size': 'm'
         };
@@ -45,6 +46,10 @@ xblocks.view.register('xb-input', {
 
     _isComplex: function() {
         return (this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize);
+    },
+
+    _resetClick: function() {
+        this.refs.controller.setState({ 'value': '' });
     },
 
     render: function() {
@@ -94,7 +99,11 @@ xblocks.view.register('xb-input', {
 
             if (props.reset) {
                 children.push(
-                    React.DOM.span({ key: 'reset', className: '_reset' })
+                    React.DOM.span({
+                        key: 'reset',
+                        className: '_reset',
+                        onClick: this._resetClick
+                    })
                 );
             }
 
@@ -102,6 +111,7 @@ xblocks.view.register('xb-input', {
             controllerProps['class'] = '_controller';
             /* jshint -W069 */
             controllerProps['key'] = 'controller';
+            controllerProps['ref'] = 'controller';
 
             children.push(
                 React.DOM.span({
@@ -119,6 +129,7 @@ xblocks.view.register('xb-input', {
 
         } else {
             props['class'] = classes;
+            props['ref'] = 'controller';
 
             return (
                 XBInputController(props)

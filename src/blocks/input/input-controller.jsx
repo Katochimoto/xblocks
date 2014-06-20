@@ -21,34 +21,65 @@ var XBInputController = xblocks.view.create({
         'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ])
     },
 
-    shouldComponentUpdate: function(nextProps) {
-        return !xblocks.utils.equals(nextProps, this.props);
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return !xblocks.utils.equals(nextProps, this.props) ||
+            !xblocks.utils.equals(nextState, this.state);
+    },
+
+    getInitialState: function() {
+        return {
+            'value': this.props.value
+        };
+    },
+
+    getDefaultProps: function() {
+        return {
+            'value': ''
+        };
+    },
+
+    _onchange: function(event) {
+        this.setState({ 'value': event.target.value });
     },
 
     render: function() {
-        var props = xblocks.utils.merge({}, this.props);
-        props = xblocks.utils.compact(props);
-        props = xblocks.utils.normalizeAttrsName(props);
-
-        if (props.disabled) {
-            props.tabIndex = '-1';
+        var tabIndex = this.props.tabindex;
+        if (this.props.disabled && tabIndex) {
+            tabIndex = '-1';
         }
 
-        var element;
-
-        if (props.multiline) {
-            element = 'textarea';
-            delete props.autocomplete;
+        if (this.props.multiline) {
+            return (
+                <textarea value={this.state.value}
+                    className={this.props['class']}
+                    name={this.props.name}
+                    disabled={this.props.disabled}
+                    required={this.props.required}
+                    readonly={this.props.readonly}
+                    autoFocus={this.props.autofocus}
+                    rows={this.props.rows}
+                    cols={this.props.cols}
+                    placeholder={this.props.placeholder}
+                    tabIndex={tabIndex}
+                    autocomplete={this.props.autocomplete}
+                    onChange={this._onchange}></textarea>
+            );
 
         } else {
-            element = 'input';
-            props.type = 'text';
-            delete props.rows;
-            delete props.cols;
+            return (
+                <input value={this.state.value}
+                    type="text"
+                    className={this.props['class']}
+                    name={this.props.name}
+                    disabled={this.props.disabled}
+                    required={this.props.required}
+                    readonly={this.props.readonly}
+                    autoFocus={this.props.autofocus}
+                    placeholder={this.props.placeholder}
+                    tabIndex={tabIndex}
+                    autocomplete={this.props.autocomplete}
+                    onChange={this._onchange}/>
+            );
         }
-
-        return (
-            React.DOM[element](props)
-        );
     }
 });
