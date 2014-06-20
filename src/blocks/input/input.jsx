@@ -40,7 +40,8 @@ xblocks.view.register('xb-input', {
         return {
             'value': '',
             'type': 'text',
-            'size': 'm'
+            'size': 'm',
+            'rows': '1'
         };
     },
 

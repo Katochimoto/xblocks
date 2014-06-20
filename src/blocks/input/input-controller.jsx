@@ -12,6 +12,7 @@ var XBInputController = xblocks.view.create({
         'multiline': React.PropTypes.bool,
         'required': React.PropTypes.bool,
         'readonly': React.PropTypes.bool,
+        'autosize': React.PropTypes.bool,
         'autofocus': React.PropTypes.bool,
         'rows': React.PropTypes.string,
         'cols': React.PropTypes.string,
@@ -36,6 +37,29 @@ var XBInputController = xblocks.view.create({
         return {
             'value': ''
         };
+    },
+
+    componentDidUpdate: function() {
+        this._recalculateSize();
+    },
+
+    componentDidMount: function() {
+        this._recalculateSize();
+    },
+
+    _recalculateSize: function() {
+        var node = this.getDOMNode();
+
+        if (this.props.autosize) {
+            if (this.props.multiline) {
+                node.style.height = '0px';
+                node.style.height = node.scrollHeight + 'px';
+
+            } else {
+                node.style.width = '20px';
+                node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
+            }
+        }
     },
 
     _onchange: function(event) {

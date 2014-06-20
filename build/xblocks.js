@@ -473,6 +473,7 @@ var XBInputController = xblocks.view.create({
         'multiline': React.PropTypes.bool,
         'required': React.PropTypes.bool,
         'readonly': React.PropTypes.bool,
+        'autosize': React.PropTypes.bool,
         'autofocus': React.PropTypes.bool,
         'rows': React.PropTypes.string,
         'cols': React.PropTypes.string,
@@ -499,6 +500,29 @@ var XBInputController = xblocks.view.create({
         };
     },
 
+    componentDidUpdate: function() {
+        this._recalculateSize();
+    },
+
+    componentDidMount: function() {
+        this._recalculateSize();
+    },
+
+    _recalculateSize: function() {
+        var node = this.getDOMNode();
+
+        if (this.props.autosize) {
+            if (this.props.multiline) {
+                node.style.height = '0px';
+                node.style.height = node.scrollHeight + 'px';
+
+            } else {
+                node.style.width = '20px';
+                node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
+            }
+        }
+    },
+
     _onchange: function(event) {
         this.setState({ 'value': event.target.value });
     },
@@ -512,34 +536,34 @@ var XBInputController = xblocks.view.create({
         if (this.props.multiline) {
             return (
                 React.DOM.textarea( {value:this.state.value,
-                className:this.props['class'],
-                name:this.props.name,
-                disabled:this.props.disabled,
-                required:this.props.required,
-                readonly:this.props.readonly,
-                autoFocus:this.props.autofocus,
-                rows:this.props.rows,
-                cols:this.props.cols,
-                placeholder:this.props.placeholder,
-                tabIndex:tabIndex,
-                autocomplete:this.props.autocomplete,
-                onChange:this._onchange})
+                    className:this.props['class'],
+                    name:this.props.name,
+                    disabled:this.props.disabled,
+                    required:this.props.required,
+                    readonly:this.props.readonly,
+                    autoFocus:this.props.autofocus,
+                    rows:this.props.rows,
+                    cols:this.props.cols,
+                    placeholder:this.props.placeholder,
+                    tabIndex:tabIndex,
+                    autocomplete:this.props.autocomplete,
+                    onChange:this._onchange})
             );
 
         } else {
             return (
                 React.DOM.input( {value:this.state.value,
-                type:"text",
-                className:this.props['class'],
-                name:this.props.name,
-                disabled:this.props.disabled,
-                required:this.props.required,
-                readonly:this.props.readonly,
-                autoFocus:this.props.autofocus,
-                placeholder:this.props.placeholder,
-                tabIndex:tabIndex,
-                autocomplete:this.props.autocomplete,
-                onChange:this._onchange})
+                    type:"text",
+                    className:this.props['class'],
+                    name:this.props.name,
+                    disabled:this.props.disabled,
+                    required:this.props.required,
+                    readonly:this.props.readonly,
+                    autoFocus:this.props.autofocus,
+                    placeholder:this.props.placeholder,
+                    tabIndex:tabIndex,
+                    autocomplete:this.props.autocomplete,
+                    onChange:this._onchange})
             );
         }
     }
@@ -584,7 +608,8 @@ xblocks.view.register('xb-input', {
         return {
             'value': '',
             'type': 'text',
-            'size': 'm'
+            'size': 'm',
+            'rows': '1'
         };
     },
 
