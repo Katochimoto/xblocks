@@ -7,7 +7,6 @@
     xblocks.dom.attrs.ARRTS_BOOLEAN = xblocks.dom.attrs.ARRTS_BOOLEAN.concat([
         'multiline',
         'autosize',
-        'required',
         'reset'
     ]);
 

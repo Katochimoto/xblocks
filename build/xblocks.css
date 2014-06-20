@@ -23,6 +23,7 @@
   outline: none;
 }
 .xb-ico._type-remove,
+.xb-input._complex > ._reset,
 .xb-ico,
 .xb-ico._type-notification,
 .xb-ico._type-check,
@@ -33,7 +34,8 @@
   margin-top: -0.2em;
   background: 50% no-repeat;
 }
-.xb-ico._type-remove {
+.xb-ico._type-remove,
+.xb-input._complex > ._reset {
   width: 16px;
   height: 16px;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDEuMjA5Yy0zLjc1MSAwLTYuNzkxIDMuMDQtNi43OTEgNi43OTEgMCAzLjc0OSAzLjA0IDYuNzg5IDYuNzkxIDYuNzg5IDMuNzQ5IDAgNi43ODktMy4wNCA2Ljc4OS02Ljc4OSAwLTMuNzUxLTMuMDQtNi43OTEtNi43ODktNi43OTF6bTMuOTkgOS4zNTVsLTEuNDI2IDEuNDI2LTIuNTY0LTIuNTY0LTIuNTY0IDIuNTY0LTEuNDI2LTEuNDI2IDIuNTY0LTIuNTY0LTIuNTY0LTIuNTY0IDEuNDI2LTEuNDI2IDIuNTY0IDIuNTY0IDIuNTY0LTIuNTY0IDEuNDI2IDEuNDI2LTIuNTY0IDIuNTY0IDIuNTY0IDIuNTY0eiIvPjwvc3ZnPg==");
@@ -53,11 +55,13 @@
   -webkit-box-shadow: 0 1px 0 1px rgba(0,0,0,0.1), 0 5px 10px -5px rgba(0,0,0,0.5);
   box-shadow: 0 1px 0 1px rgba(0,0,0,0.1), 0 5px 10px -5px rgba(0,0,0,0.5);
 }
-.xb-ico._active {
+.xb-ico._active,
+.xb-input._complex > ._reset {
   cursor: pointer;
   opacity: 0.2;
 }
-.xb-ico._active:hover {
+.xb-ico._active:hover,
+.xb-input._complex > ._reset:hover {
   opacity: 1;
 }
 xb-button,
@@ -2383,6 +2387,125 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
 .xb-input._simple:focus {
   z-index: 9;
 }
+.xb-input._simple._size-s {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 16px;
+  min-height: 28px;
+  font-size: 13px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+}
+.xb-input._simple._size-s:focus {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._simple._size-s:focus {
+  z-index: 9;
+}
+.xb-input._simple._size-l {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+}
+.xb-input._simple._size-l:focus {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._simple._size-l:focus {
+  z-index: 9;
+}
+.xb-input._simple._size-xl {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
+  border-color: rgba(0,0,0,0.27);
+  border-top-color: rgba(0,0,0,0.38);
+  border-bottom-color: rgba(0,0,0,0.16);
+  background: #fff;
+/* ie fallback */
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+  background: -webkit-linear-gradient(#fff, #fff);
+  background: linear-gradient(#fff, #fff);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-background-size: 16px 16px;
+  background-size: 16px 16px;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+/* override for <input type="search"> */
+}
+.xb-input._simple._size-xl:focus {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._simple._size-xl:focus {
+  z-index: 9;
+}
+.xb-input._simple._focused:not(:focus) {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
 .xb-input._complex {
   width: 400px;
   -webkit-box-sizing: border-box;
@@ -2410,11 +2533,41 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   padding: 10px 10px 10px 10px;
 }
 .xb-input._complex-right,
-.xb-input._complex ._reset,
+.xb-input._complex > ._reset,
 .xb-input._complex > ._right {
   position: relative;
   z-index: 9;
   float: right;
+}
+.xb-input._complex._size-s {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 16px;
+  min-height: 28px;
+  font-size: 13px;
+}
+.xb-input._complex._size-l {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
+}
+.xb-input._complex._size-xl {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  line-height: 20px;
+  min-height: 32px;
+  font-size: 15px;
 }
 .xb-input._complex > ._content > ._controller {
   width: 400px;
@@ -2423,7 +2576,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   width: 100%;
   height: 100%;
 }
-.xb-input._complex > ._content > textarea {
+.xb-input._complex > ._content > textarea._controller {
   vertical-align: top;
   resize: none;
 }
@@ -2451,23 +2604,14 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   -webkit-appearance: none;
 /* override for <input type="search"> */
 }
-.xb-input._complex:not(._disabled):focus > ._content > ._view,
-.xb-input._complex:not(._disabled)._focused > ._content > ._view {
-  outline: none;
-  border-color: rgba(94,76,2,0.42);
-  border-top-color: rgba(78,62,2,0.515);
-  border-bottom-color: rgba(117,93,0,0.335);
-  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-}
-.xb-input._complex ._reset {
+.xb-input._complex > ._reset {
   margin: -5px -5px -5px 0;
   padding: 5px 5px 5px 5px;
   margin-right: -10px;
   height: auto;
 }
-.xb-input._complex ._reset:before {
-  content: " ";
+.xb-input._complex > ._reset:before {
+  content: " ";
 }
 .xb-input._complex > ._left {
   margin: -5px 0 -5px -5px;
@@ -2481,7 +2625,15 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   margin-right: -10px;
   height: auto;
 }
-.xb-input._focused {
+.xb-input._complex:not(._disabled) > ._content > ._controller:focus + ._view {
+  outline: none;
+  border-color: rgba(94,76,2,0.42);
+  border-top-color: rgba(78,62,2,0.515);
+  border-bottom-color: rgba(117,93,0,0.335);
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._complex._focused:not(._disabled) > ._content > ._controller:not(:focus) + ._view {
   outline: none;
   border-color: rgba(94,76,2,0.42);
   border-top-color: rgba(78,62,2,0.515);
@@ -2499,117 +2651,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
 }
 .xb-input._autosize {
   width: auto !important;
-}
-.xb-input._size-s {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid transparent;
-  padding: 5px 10px;
-  line-height: 16px;
-  min-height: 28px;
-  font-size: 13px;
-  border-color: rgba(0,0,0,0.27);
-  border-top-color: rgba(0,0,0,0.38);
-  border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
-/* ie fallback */
-  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
-  background: -webkit-linear-gradient(#fff, #fff);
-  background: linear-gradient(#fff, #fff);
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-background-size: 16px 16px;
-  background-size: 16px 16px;
-  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
-/* override for <input type="search"> */
-}
-.xb-input._size-s:focus {
-  outline: none;
-  border-color: rgba(94,76,2,0.42);
-  border-top-color: rgba(78,62,2,0.515);
-  border-bottom-color: rgba(117,93,0,0.335);
-  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-}
-.xb-input._size-s:focus {
-  z-index: 9;
-}
-.xb-input._size-l {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid transparent;
-  padding: 5px 10px;
-  line-height: 20px;
-  min-height: 32px;
-  font-size: 15px;
-  border-color: rgba(0,0,0,0.27);
-  border-top-color: rgba(0,0,0,0.38);
-  border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
-/* ie fallback */
-  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
-  background: -webkit-linear-gradient(#fff, #fff);
-  background: linear-gradient(#fff, #fff);
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-background-size: 16px 16px;
-  background-size: 16px 16px;
-  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
-/* override for <input type="search"> */
-}
-.xb-input._size-l:focus {
-  outline: none;
-  border-color: rgba(94,76,2,0.42);
-  border-top-color: rgba(78,62,2,0.515);
-  border-bottom-color: rgba(117,93,0,0.335);
-  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-}
-.xb-input._size-l:focus {
-  z-index: 9;
-}
-.xb-input._size-xl {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid transparent;
-  padding: 5px 10px;
-  line-height: 20px;
-  min-height: 32px;
-  font-size: 15px;
-  border-color: rgba(0,0,0,0.27);
-  border-top-color: rgba(0,0,0,0.38);
-  border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
-/* ie fallback */
-  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
-  background: -webkit-linear-gradient(#fff, #fff);
-  background: linear-gradient(#fff, #fff);
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-background-size: 16px 16px;
-  background-size: 16px 16px;
-  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
-/* override for <input type="search"> */
-}
-.xb-input._size-xl:focus {
-  outline: none;
-  border-color: rgba(94,76,2,0.42);
-  border-top-color: rgba(78,62,2,0.515);
-  border-bottom-color: rgba(117,93,0,0.335);
-  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-}
-.xb-input._size-xl:focus {
-  z-index: 9;
 }
 ._hidden,
 .nb-is-hidden,

@@ -1,8 +1,11 @@
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, XBInputController */
 /* jshint strict: false */
 
 /*! borschik:include:input-controller.jsx.js */
+
+// TODO "list" attribute
+// TODO "pattern" attribute
 
 xblocks.view.register('xb-input', {
     displayName: 'xb-input',
@@ -23,6 +26,7 @@ xblocks.view.register('xb-input', {
             'range', 'search', 'tel', 'time', 'url', 'week', 'color'
         ]),
         'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+        'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
         'rows': React.PropTypes.string,
         'cols': React.PropTypes.string,
         'placeholder': React.PropTypes.string,
@@ -40,7 +44,7 @@ xblocks.view.register('xb-input', {
     },
 
     _isComplex: function() {
-        return this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize;
+        return (this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize);
     },
 
     render: function() {
@@ -48,8 +52,8 @@ xblocks.view.register('xb-input', {
         var isComplex = this._isComplex();
         var classes = {
             'xb-input': true,
-            '_disabled': props.disabled,
-            '_autosize': props.autosize
+            '_disabled': Boolean(props.disabled),
+            '_autosize': Boolean(props.autosize)
         };
 
         if (props.size) {
@@ -78,27 +82,25 @@ xblocks.view.register('xb-input', {
 
             if (props.prefix) {
                 children.push(
-                    <span key="prefix" className="_left">{props.prefix}</span>
+                    React.DOM.span({ key: 'prefix', className: '_left' }, props.prefix)
                 );
             }
 
             if (props.postfix) {
                 children.push(
-                    <span key="postfix" className="_right">{props.postfix}</span>
+                    React.DOM.span({ key: 'postfix', className: '_right' }, props.postfix)
                 );
             }
 
             if (props.reset) {
-                children.push(xblocks.view.get('xb-ico')({
-                    'class': '_reset',
-                    'type': 'remove',
-                    'active': true,
-                    'key': 'reset'
-                }));
+                children.push(
+                    React.DOM.span({ key: 'reset', className: '_reset' })
+                );
             }
 
             var controllerProps = xblocks.utils.merge({}, props);
             controllerProps['class'] = '_controller';
+            /* jshint -W069 */
             controllerProps['key'] = 'controller';
 
             children.push(
@@ -112,7 +114,7 @@ xblocks.view.register('xb-input', {
             );
 
             return (
-                <label className={classes}>{children}</label>
+                React.DOM.label({ className: classes }, children)
             );
 
         } else {
