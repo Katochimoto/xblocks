@@ -468,33 +468,26 @@ var XBInputController = xblocks.view.create({
     displayName: 'XBInputController',
 
     propTypes: {
-        'class': React.PropTypes.string,
+        'className': React.PropTypes.string,
         'name': React.PropTypes.string,
         'disabled': React.PropTypes.bool,
         'multiline': React.PropTypes.bool,
         'required': React.PropTypes.bool,
-        'readonly': React.PropTypes.bool,
+        'readOnly': React.PropTypes.bool,
         'autosize': React.PropTypes.bool,
-        'autofocus': React.PropTypes.bool,
+        'autoFocus': React.PropTypes.bool,
         'rows': React.PropTypes.string,
         'cols': React.PropTypes.string,
         'placeholder': React.PropTypes.string,
         'value': React.PropTypes.string,
-        'tabindex': React.PropTypes.string,
-        'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ])
+        'tabIndex': React.PropTypes.string,
+        'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+        'onChange': React.PropTypes.func,
+        'onHintToggle': React.PropTypes.func
     },
 
-    shouldComponentUpdate: function(nextProps, nextState) {
-        return (
-            !xblocks.utils.equals(nextProps, this.props) ||
-            !xblocks.utils.equals(nextState, this.state)
-        );
-    },
-
-    getInitialState: function() {
-        return {
-            'value': this.props.value
-        };
+    shouldComponentUpdate: function(nextProps) {
+        return (!xblocks.utils.equals(nextProps, this.props));
     },
 
     getDefaultProps: function() {
@@ -503,9 +496,9 @@ var XBInputController = xblocks.view.create({
         };
     },
 
-    componentDidUpdate: function(prevProps, prevState) {
+    componentDidUpdate: function(prevProps) {
         this._recalculateSize();
-        this._dispatchEventToggleHint(prevState.value, this.state.value);
+        this._dispatchEventToggleHint(prevProps.value, this.props.value);
     },
 
     componentDidMount: function() {
@@ -518,11 +511,7 @@ var XBInputController = xblocks.view.create({
 
         /* jshint -W016 */
         if (hasPrevValue ^ hasNestValue) {
-            xblocks.utils.dispatchEvent(this.getDOMNode(), '_hint-toggle', {
-                detail: {
-                    toggle: (hasPrevValue && !hasNestValue)
-                }
-            });
+            this.props.onHintToggle(hasPrevValue && !hasNestValue);
         }
     },
 
@@ -541,47 +530,43 @@ var XBInputController = xblocks.view.create({
         }
     },
 
-    _onchange: function(event) {
-        this.setState({ 'value': event.target.value });
-    },
-
     render: function() {
-        var tabIndex = this.props.tabindex;
+        var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';
         }
 
         if (this.props.multiline) {
             return (
-                React.DOM.textarea( {value:this.state.value,
-                    className:this.props['class'],
+                React.DOM.textarea( {value:this.props.value,
+                    className:this.props.className,
                     name:this.props.name,
                     disabled:this.props.disabled,
                     required:this.props.required,
-                    readOnly:this.props.readonly,
-                    autoFocus:this.props.autofocus,
+                    readOnly:this.props.readOnly,
+                    autoFocus:this.props.autoFocus,
                     rows:this.props.rows,
                     cols:this.props.cols,
                     placeholder:this.props.placeholder,
                     tabIndex:tabIndex,
                     autocomplete:this.props.autocomplete,
-                    onChange:this._onchange})
+                    onChange:this.props.onChange})
             );
 
         } else {
             return (
-                React.DOM.input( {value:this.state.value,
+                React.DOM.input( {value:this.props.value,
                     type:"text",
-                    className:this.props['class'],
+                    className:this.props.className,
                     name:this.props.name,
                     disabled:this.props.disabled,
                     required:this.props.required,
-                    readOnly:this.props.readonly,
-                    autoFocus:this.props.autofocus,
+                    readOnly:this.props.readOnly,
+                    autoFocus:this.props.autoFocus,
                     placeholder:this.props.placeholder,
                     tabIndex:tabIndex,
                     autocomplete:this.props.autocomplete,
-                    onChange:this._onchange})
+                    onChange:this.props.onChange})
             );
         }
     }
@@ -623,6 +608,13 @@ xblocks.view.register('xb-input', {
         'tabindex': React.PropTypes.string
     },
 
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return (
+            !xblocks.utils.equals(nextProps, this.props) ||
+            !xblocks.utils.equals(nextState, this.state)
+        );
+    },
+
     getDefaultProps: function() {
         return {
             'value': '',
@@ -632,17 +624,22 @@ xblocks.view.register('xb-input', {
         };
     },
 
+    getInitialState: function() {
+        return {
+            'value': this.props.value
+        };
+    },
+
     componentDidMount: function() {
-        this.refs.controller.getDOMNode().addEventListener('_hint-toggle', this._hintToggle, false);
         this.refs.controller._dispatchEventToggleHint('', this.props.value);
     },
 
-    componentWillUnmount: function() {
-        this.refs.controller.getDOMNode().removeEventListener('_hint-toggle', this._hintToggle, false);
+    _onChange: function(event) {
+        this.setState({ 'value': event.target.value });
     },
 
-    _hintToggle: function(event) {
-        this.refs.placeholder.getDOMNode().style.visibility = event.detail.toggle ? 'inherit' : 'hidden';
+    _onHintToggle: function(toggle) {
+        this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
     },
 
     _isComplex: function() {
@@ -656,21 +653,20 @@ xblocks.view.register('xb-input', {
     },
 
     _resetClick: function() {
-        this.refs.controller.setState({ 'value': '' });
+        this.setState({ 'value': '' });
     },
 
     render: function() {
-        var props = xblocks.utils.merge({}, this.props);
         var isComplex = this._isComplex();
         var classes = {
             'xb-input': true,
-            '_disabled': Boolean(props.disabled),
-            '_autosize': Boolean(props.autosize),
-            '_ghost': Boolean(props.ghost)
+            '_disabled': Boolean(this.props.disabled),
+            '_autosize': Boolean(this.props.autosize),
+            '_ghost': Boolean(this.props.ghost)
         };
 
-        if (props.size) {
-            classes['_size-' + props.size] = true;
+        if (this.props.size) {
+            classes['_size-' + this.props.size] = true;
         }
 
         if (isComplex) {
@@ -686,70 +682,85 @@ xblocks.view.register('xb-input', {
         if (isComplex) {
             var children = [];
 
-            if (props.placeholder) {
+            if (this.props.placeholder) {
                 children.push(
                     React.DOM.span( {ref:"placeholder", key:"placeholder", className:"_hint"}, 
-                        React.DOM.span( {className:"_hint-inner"}, props.placeholder)
+                        React.DOM.span( {className:"_hint-inner"}, this.props.placeholder)
                     )
                 );
             }
 
-            if (props.label) {
+            if (this.props.label) {
                 children.push(xblocks.view.get('xb-link')({
                     'type': 'input',
                     'key': 'label'
                 }));
             }
 
-            if (props.prefix) {
+            if (this.props.prefix) {
                 children.push(
-                    React.DOM.span({ key: 'prefix', className: '_left' }, props.prefix)
+                    React.DOM.span( {key:"prefix", className:"_left"}, this.props.prefix)
                 );
             }
 
-            if (props.postfix) {
+            if (this.props.postfix) {
                 children.push(
-                    React.DOM.span({ key: 'postfix', className: '_right' }, props.postfix)
+                    React.DOM.span( {key:"postfix", className:"_right"}, this.props.postfix)
                 );
             }
 
-            if (props.reset) {
+            if (this.props.reset) {
                 children.push(
-                    React.DOM.span({
-                        key: 'reset',
-                        className: '_reset',
-                        onClick: this._resetClick
-                    })
+                    React.DOM.span( {key:"reset", className:"_reset", onClick:this._resetClick})
                 );
             }
-
-            var controllerProps = xblocks.utils.merge({}, props);
-            controllerProps['class'] = '_controller';
-            /* jshint -W069 */
-            controllerProps['key'] = 'controller';
-            controllerProps['ref'] = 'controller';
-            delete controllerProps.placeholder;
 
             children.push(
-                React.DOM.span({
-                    'key': 'content',
-                    'className': '_content'
-                }, [
-                    XBInputController(controllerProps),
-                    React.DOM.span({ 'key': 'view', 'className': '_view' })
-                ])
+                React.DOM.span( {key:"content", className:"_content"}, 
+                    XBInputController( {key:"controller",
+                        ref:"controller",
+                        className:"_controller",
+                        value:this.state.value,
+                        name:this.props.name,
+                        disabled:this.props.disabled,
+                        required:this.props.required,
+                        readOnly:this.props.readonly,
+                        multiline:this.props.multiline,
+                        autoFocus:this.props.autofocus,
+                        rows:this.props.rows,
+                        cols:this.props.cols,
+                        tabIndex:this.props.tabindex,
+                        autocomplete:this.props.autocomplete,
+                        onChange:this._onChange,
+                        onHintToggle:this._onHintToggle}),
+                    React.DOM.span( {key:"view", className:"_view"})
+                )
             );
 
             return (
-                React.DOM.label({ className: classes }, children)
+                React.DOM.label( {className:classes}, children)
             );
 
         } else {
-            props['class'] = classes;
-            props['ref'] = 'controller';
 
-            return (
-                XBInputController(props)
+           return (
+                XBInputController( {key:"controller",
+                    ref:"controller",
+                    className:classes,
+                    value:this.state.value,
+                    name:this.props.name,
+                    disabled:this.props.disabled,
+                    required:this.props.required,
+                    readOnly:this.props.readonly,
+                    multiline:this.props.multiline,
+                    autoFocus:this.props.autofocus,
+                    rows:this.props.rows,
+                    cols:this.props.cols,
+                    placeholder:this.props.placeholder,
+                    tabIndex:this.props.tabindex,
+                    autocomplete:this.props.autocomplete,
+                    onChange:this._onChange,
+                    onHintToggle:this._onHintToggle})
             );
         }
     }
@@ -758,7 +769,34 @@ xblocks.view.register('xb-input', {
 /* blocks/input/input.jsx.js end */
 
 
-xblocks.create('xb-input');
+xblocks.create('xb-input', {
+    accessors: {
+        value: {
+            get: function() {
+                if (this.xblock._isMountedComponent()) {
+                    return this.xblock._component.state.value;
+
+                } else {
+                    var controlNode = this.querySelector('input,textarea');
+                    return (controlNode ? controlNode.value : '');
+                }
+            },
+            set: function(value) {
+                if (this.xblock._isMountedComponent()) {
+                    this.xblock._component.setState({
+                        'value': String(value)
+                    });
+
+                } else {
+                    var controlNode = this.querySelector('input,textarea');
+                    if (controlNode) {
+                        controlNode.value = String(value);
+                    }
+                }
+            }
+        }
+    }
+});
 
 /* blocks/input/input.js end */
 

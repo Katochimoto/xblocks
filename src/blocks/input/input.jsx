@@ -37,6 +37,13 @@ xblocks.view.register('xb-input', {
         'tabindex': React.PropTypes.string
     },
 
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return (
+            !xblocks.utils.equals(nextProps, this.props) ||
+            !xblocks.utils.equals(nextState, this.state)
+        );
+    },
+
     getDefaultProps: function() {
         return {
             'value': '',
@@ -46,17 +53,22 @@ xblocks.view.register('xb-input', {
         };
     },
 
+    getInitialState: function() {
+        return {
+            'value': this.props.value
+        };
+    },
+
     componentDidMount: function() {
-        this.refs.controller.getDOMNode().addEventListener('_hint-toggle', this._hintToggle, false);
         this.refs.controller._dispatchEventToggleHint('', this.props.value);
     },
 
-    componentWillUnmount: function() {
-        this.refs.controller.getDOMNode().removeEventListener('_hint-toggle', this._hintToggle, false);
+    _onChange: function(event) {
+        this.setState({ 'value': event.target.value });
     },
 
-    _hintToggle: function(event) {
-        this.refs.placeholder.getDOMNode().style.visibility = event.detail.toggle ? 'inherit' : 'hidden';
+    _onHintToggle: function(toggle) {
+        this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
     },
 
     _isComplex: function() {
@@ -70,21 +82,20 @@ xblocks.view.register('xb-input', {
     },
 
     _resetClick: function() {
-        this.refs.controller.setState({ 'value': '' });
+        this.setState({ 'value': '' });
     },
 
     render: function() {
-        var props = xblocks.utils.merge({}, this.props);
         var isComplex = this._isComplex();
         var classes = {
             'xb-input': true,
-            '_disabled': Boolean(props.disabled),
-            '_autosize': Boolean(props.autosize),
-            '_ghost': Boolean(props.ghost)
+            '_disabled': Boolean(this.props.disabled),
+            '_autosize': Boolean(this.props.autosize),
+            '_ghost': Boolean(this.props.ghost)
         };
 
-        if (props.size) {
-            classes['_size-' + props.size] = true;
+        if (this.props.size) {
+            classes['_size-' + this.props.size] = true;
         }
 
         if (isComplex) {
@@ -100,70 +111,85 @@ xblocks.view.register('xb-input', {
         if (isComplex) {
             var children = [];
 
-            if (props.placeholder) {
+            if (this.props.placeholder) {
                 children.push(
                     <span ref="placeholder" key="placeholder" className="_hint">
-                        <span className="_hint-inner">{props.placeholder}</span>
+                        <span className="_hint-inner">{this.props.placeholder}</span>
                     </span>
                 );
             }
 
-            if (props.label) {
+            if (this.props.label) {
                 children.push(xblocks.view.get('xb-link')({
                     'type': 'input',
                     'key': 'label'
                 }));
             }
 
-            if (props.prefix) {
+            if (this.props.prefix) {
                 children.push(
-                    React.DOM.span({ key: 'prefix', className: '_left' }, props.prefix)
+                    <span key="prefix" className="_left">{this.props.prefix}</span>
                 );
             }
 
-            if (props.postfix) {
+            if (this.props.postfix) {
                 children.push(
-                    React.DOM.span({ key: 'postfix', className: '_right' }, props.postfix)
+                    <span key="postfix" className="_right">{this.props.postfix}</span>
                 );
             }
 
-            if (props.reset) {
+            if (this.props.reset) {
                 children.push(
-                    React.DOM.span({
-                        key: 'reset',
-                        className: '_reset',
-                        onClick: this._resetClick
-                    })
+                    <span key="reset" className="_reset" onClick={this._resetClick}></span>
                 );
             }
-
-            var controllerProps = xblocks.utils.merge({}, props);
-            controllerProps['class'] = '_controller';
-            /* jshint -W069 */
-            controllerProps['key'] = 'controller';
-            controllerProps['ref'] = 'controller';
-            delete controllerProps.placeholder;
 
             children.push(
-                React.DOM.span({
-                    'key': 'content',
-                    'className': '_content'
-                }, [
-                    XBInputController(controllerProps),
-                    React.DOM.span({ 'key': 'view', 'className': '_view' })
-                ])
+                <span key="content" className="_content">
+                    <XBInputController key="controller"
+                        ref="controller"
+                        className="_controller"
+                        value={this.state.value}
+                        name={this.props.name}
+                        disabled={this.props.disabled}
+                        required={this.props.required}
+                        readOnly={this.props.readonly}
+                        multiline={this.props.multiline}
+                        autoFocus={this.props.autofocus}
+                        rows={this.props.rows}
+                        cols={this.props.cols}
+                        tabIndex={this.props.tabindex}
+                        autocomplete={this.props.autocomplete}
+                        onChange={this._onChange}
+                        onHintToggle={this._onHintToggle}/>
+                    <span key="view" className="_view"></span>
+                </span>
             );
 
             return (
-                React.DOM.label({ className: classes }, children)
+                <label className={classes}>{children}</label>
             );
 
         } else {
-            props['class'] = classes;
-            props['ref'] = 'controller';
 
-            return (
-                XBInputController(props)
+           return (
+                <XBInputController key="controller"
+                    ref="controller"
+                    className={classes}
+                    value={this.state.value}
+                    name={this.props.name}
+                    disabled={this.props.disabled}
+                    required={this.props.required}
+                    readOnly={this.props.readonly}
+                    multiline={this.props.multiline}
+                    autoFocus={this.props.autofocus}
+                    rows={this.props.rows}
+                    cols={this.props.cols}
+                    placeholder={this.props.placeholder}
+                    tabIndex={this.props.tabindex}
+                    autocomplete={this.props.autocomplete}
+                    onChange={this._onChange}
+                    onHintToggle={this._onHintToggle}/>
             );
         }
     }
