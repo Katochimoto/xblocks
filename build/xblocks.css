@@ -2506,6 +2506,12 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
 }
+.xb-input._simple._ghost:not(:focus):not(:hover):not(._focused) {
+  border: none;
+  background: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 .xb-input._complex {
   width: 400px;
   -webkit-box-sizing: border-box;
@@ -2642,6 +2648,12 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border-bottom-color: rgba(117,93,0,0.335);
   -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+}
+.xb-input._complex._ghost:not(._focused):not(:hover) > ._content > ._controller:not(:focus) + ._view {
+  border: none;
+  background: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .xb-input._disabled {
   cursor: default !important;

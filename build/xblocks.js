@@ -7,7 +7,8 @@
     xblocks.dom.attrs.ARRTS_BOOLEAN = xblocks.dom.attrs.ARRTS_BOOLEAN.concat([
         'multiline',
         'autosize',
-        'reset'
+        'reset',
+        'ghost'
     ]);
 
     xblocks.utils.compact = function(data) {
@@ -589,6 +590,7 @@ xblocks.view.register('xb-input', {
         'readonly': React.PropTypes.bool,
         'reset': React.PropTypes.bool,
         'autofocus': React.PropTypes.bool,
+        'ghost': React.PropTypes.bool,
         'type': React.PropTypes.oneOf([
             'text', 'number', 'date', 'datetime', 'email', 'month',
             'range', 'search', 'tel', 'time', 'url', 'week', 'color'
@@ -609,12 +611,16 @@ xblocks.view.register('xb-input', {
             'value': '',
             'type': 'text',
             'size': 'm',
-            'rows': '1'
+            'rows': '4'
         };
     },
 
     _isComplex: function() {
-        return (this.props.postfix || this.props.prefix || this.props.reset || this.props.label || this.props.autosize);
+        return (this.props.postfix ||
+            this.props.prefix ||
+            this.props.reset ||
+            this.props.label ||
+            this.props.autosize);
     },
 
     _resetClick: function() {
@@ -627,7 +633,8 @@ xblocks.view.register('xb-input', {
         var classes = {
             'xb-input': true,
             '_disabled': Boolean(props.disabled),
-            '_autosize': Boolean(props.autosize)
+            '_autosize': Boolean(props.autosize),
+            '_ghost': Boolean(props.ghost)
         };
 
         if (props.size) {

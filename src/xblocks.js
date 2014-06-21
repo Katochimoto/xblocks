@@ -7,7 +7,8 @@
     xblocks.dom.attrs.ARRTS_BOOLEAN = xblocks.dom.attrs.ARRTS_BOOLEAN.concat([
         'multiline',
         'autosize',
-        'reset'
+        'reset',
+        'ghost'
     ]);
 
     xblocks.utils.compact = function(data) {

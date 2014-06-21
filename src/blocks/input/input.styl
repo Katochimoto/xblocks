@@ -18,6 +18,11 @@
     &._focused:not(:focus)
       skin: input_focus
 
+    &._ghost:not(:focus):not(:hover):not(._focused)
+      border: none
+      background: none
+      box-shadow: none
+
 
   &._complex
     kind: field $islands_s $islands_s
@@ -82,6 +87,14 @@
     & > ._content
       & > ._controller:not(:focus) + ._view
         skin: input_focus
+
+
+  &._complex._ghost:not(._focused):not(:hover)
+    & > ._content
+      & > ._controller:not(:focus) + ._view
+        border: none
+        background: none
+        box-shadow: none
 
 
   &._disabled
