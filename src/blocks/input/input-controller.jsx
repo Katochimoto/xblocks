@@ -21,7 +21,8 @@ var XBInputController = xblocks.view.create({
         'tabIndex': React.PropTypes.string,
         'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
         'onChange': React.PropTypes.func,
-        'onHintToggle': React.PropTypes.func
+        'onHintToggle': React.PropTypes.func,
+        'isPlaceholderHint': React.PropTypes.bool
     },
 
     getDefaultProps: function() {
@@ -40,12 +41,14 @@ var XBInputController = xblocks.view.create({
     },
 
     _dispatchEventToggleHint: function(prevValue, nextValue) {
-        var hasPrevValue = Boolean(prevValue);
-        var hasNestValue = Boolean(nextValue);
+        if (this.props.isPlaceholderHint) {
+            var hasPrevValue = Boolean(prevValue);
+            var hasNestValue = Boolean(nextValue);
 
-        /* jshint -W016 */
-        if (hasPrevValue ^ hasNestValue) {
-            this.props.onHintToggle(hasPrevValue && !hasNestValue);
+            /* jshint -W016 */
+            if (hasPrevValue ^ hasNestValue) {
+                this.props.onHintToggle(hasPrevValue && !hasNestValue);
+            }
         }
     },
 

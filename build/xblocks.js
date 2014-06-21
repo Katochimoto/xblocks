@@ -483,11 +483,8 @@ var XBInputController = xblocks.view.create({
         'tabIndex': React.PropTypes.string,
         'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
         'onChange': React.PropTypes.func,
-        'onHintToggle': React.PropTypes.func
-    },
-
-    shouldComponentUpdate: function(nextProps) {
-        return (!xblocks.utils.equals(nextProps, this.props));
+        'onHintToggle': React.PropTypes.func,
+        'isPlaceholderHint': React.PropTypes.bool
     },
 
     getDefaultProps: function() {
@@ -506,12 +503,14 @@ var XBInputController = xblocks.view.create({
     },
 
     _dispatchEventToggleHint: function(prevValue, nextValue) {
-        var hasPrevValue = Boolean(prevValue);
-        var hasNestValue = Boolean(nextValue);
+        if (this.props.isPlaceholderHint) {
+            var hasPrevValue = Boolean(prevValue);
+            var hasNestValue = Boolean(nextValue);
 
-        /* jshint -W016 */
-        if (hasPrevValue ^ hasNestValue) {
-            this.props.onHintToggle(hasPrevValue && !hasNestValue);
+            /* jshint -W016 */
+            if (hasPrevValue ^ hasNestValue) {
+                this.props.onHintToggle(hasPrevValue && !hasNestValue);
+            }
         }
     },
 
@@ -677,12 +676,15 @@ xblocks.view.register('xb-input', {
 
         classes = React.addons.classSet(classes);
 
+        var isPlaceholderHint = false;
 
 
         if (isComplex) {
             var children = [];
 
             if (this.props.placeholder) {
+                isPlaceholderHint = true;
+
                 children.push(
                     React.DOM.span( {ref:"placeholder", key:"placeholder", className:"_hint"}, 
                         React.DOM.span( {className:"_hint-inner"}, this.props.placeholder)
@@ -731,8 +733,10 @@ xblocks.view.register('xb-input', {
                         cols:this.props.cols,
                         tabIndex:this.props.tabindex,
                         autocomplete:this.props.autocomplete,
+                        autosize:this.props.autosize,
                         onChange:this._onChange,
-                        onHintToggle:this._onHintToggle}),
+                        onHintToggle:this._onHintToggle,
+                        isPlaceholderHint:isPlaceholderHint}),
                     React.DOM.span( {key:"view", className:"_view"})
                 )
             );
@@ -759,8 +763,10 @@ xblocks.view.register('xb-input', {
                     placeholder:this.props.placeholder,
                     tabIndex:this.props.tabindex,
                     autocomplete:this.props.autocomplete,
+                    autosize:this.props.autosize,
                     onChange:this._onChange,
-                    onHintToggle:this._onHintToggle})
+                    onHintToggle:this._onHintToggle,
+                    isPlaceholderHint:isPlaceholderHint})
             );
         }
     }

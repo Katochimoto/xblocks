@@ -106,12 +106,15 @@ xblocks.view.register('xb-input', {
 
         classes = React.addons.classSet(classes);
 
+        var isPlaceholderHint = false;
 
 
         if (isComplex) {
             var children = [];
 
             if (this.props.placeholder) {
+                isPlaceholderHint = true;
+
                 children.push(
                     <span ref="placeholder" key="placeholder" className="_hint">
                         <span className="_hint-inner">{this.props.placeholder}</span>
@@ -160,8 +163,10 @@ xblocks.view.register('xb-input', {
                         cols={this.props.cols}
                         tabIndex={this.props.tabindex}
                         autocomplete={this.props.autocomplete}
+                        autosize={this.props.autosize}
                         onChange={this._onChange}
-                        onHintToggle={this._onHintToggle}/>
+                        onHintToggle={this._onHintToggle}
+                        isPlaceholderHint={isPlaceholderHint}/>
                     <span key="view" className="_view"></span>
                 </span>
             );
@@ -188,8 +193,10 @@ xblocks.view.register('xb-input', {
                     placeholder={this.props.placeholder}
                     tabIndex={this.props.tabindex}
                     autocomplete={this.props.autocomplete}
+                    autosize={this.props.autosize}
                     onChange={this._onChange}
-                    onHintToggle={this._onHintToggle}/>
+                    onHintToggle={this._onHintToggle}
+                    isPlaceholderHint={isPlaceholderHint}/>
             );
         }
     }
