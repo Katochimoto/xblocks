@@ -46,12 +46,27 @@ xblocks.view.register('xb-input', {
         };
     },
 
+    componentDidMount: function() {
+        this.refs.controller.getDOMNode().addEventListener('_hint-toggle', this._hintToggle, false);
+        this.refs.controller._dispatchEventToggleHint('', this.props.value);
+    },
+
+    componentWillUnmount: function() {
+        this.refs.controller.getDOMNode().removeEventListener('_hint-toggle', this._hintToggle, false);
+    },
+
+    _hintToggle: function(event) {
+        this.refs.placeholder.getDOMNode().style.visibility = event.detail.toggle ? 'inherit' : 'hidden';
+    },
+
     _isComplex: function() {
-        return (this.props.postfix ||
+        return (
+            this.props.postfix ||
             this.props.prefix ||
             this.props.reset ||
             this.props.label ||
-            this.props.autosize);
+            this.props.autosize
+        );
     },
 
     _resetClick: function() {
@@ -84,6 +99,14 @@ xblocks.view.register('xb-input', {
 
         if (isComplex) {
             var children = [];
+
+            if (props.placeholder) {
+                children.push(
+                    <span ref="placeholder" key="placeholder" className="_hint">
+                        <span className="_hint-inner">{props.placeholder}</span>
+                    </span>
+                );
+            }
 
             if (props.label) {
                 children.push(xblocks.view.get('xb-link')({
@@ -119,6 +142,7 @@ xblocks.view.register('xb-input', {
             /* jshint -W069 */
             controllerProps['key'] = 'controller';
             controllerProps['ref'] = 'controller';
+            delete controllerProps.placeholder;
 
             children.push(
                 React.DOM.span({

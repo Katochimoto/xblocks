@@ -25,8 +25,8 @@
         "url": "git@github.com:Katochimoto/xblocks.git"
     },
     "devDependencies": {
-        "stylobate": "0.24.2",
-        "stylobate-islands": "0.27.4",
+        "stylobate": "0.24.x",
+        "stylobate-islands": "0.27.x",
 
         "grunt": "0.4.5",
         "autoprefixer-stylus": "0.1.0",

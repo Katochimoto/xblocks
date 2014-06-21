@@ -77,6 +77,15 @@
       margin-right: $islands_s * -1
       height: auto
 
+    & > ._hint
+      skin: 'input-placeholder' (-inner '& > ._hint-inner') (-ghost '& > ._hint-ghost')
+
+    &._size-s
+      & > ._hint
+        & > ._hint-inner
+          line-height: $islands_m
+          font-size: $islands_text_s
+
 
   &._complex:not(._disabled)
     & > ._content

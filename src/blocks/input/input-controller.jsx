@@ -23,8 +23,10 @@ var XBInputController = xblocks.view.create({
     },
 
     shouldComponentUpdate: function(nextProps, nextState) {
-        return !xblocks.utils.equals(nextProps, this.props) ||
-            !xblocks.utils.equals(nextState, this.state);
+        return (
+            !xblocks.utils.equals(nextProps, this.props) ||
+            !xblocks.utils.equals(nextState, this.state)
+        );
     },
 
     getInitialState: function() {
@@ -39,12 +41,27 @@ var XBInputController = xblocks.view.create({
         };
     },
 
-    componentDidUpdate: function() {
+    componentDidUpdate: function(prevProps, prevState) {
         this._recalculateSize();
+        this._dispatchEventToggleHint(prevState.value, this.state.value);
     },
 
     componentDidMount: function() {
         this._recalculateSize();
+    },
+
+    _dispatchEventToggleHint: function(prevValue, nextValue) {
+        var hasPrevValue = Boolean(prevValue);
+        var hasNestValue = Boolean(nextValue);
+
+        /* jshint -W016 */
+        if (hasPrevValue ^ hasNestValue) {
+            xblocks.utils.dispatchEvent(this.getDOMNode(), '_hint-toggle', {
+                detail: {
+                    toggle: (hasPrevValue && !hasNestValue)
+                }
+            });
+        }
     },
 
     _recalculateSize: function() {
