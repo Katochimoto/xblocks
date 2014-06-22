@@ -6,6 +6,7 @@
 
 // TODO "list" attribute
 // TODO "pattern" attribute
+// TODO "title"attribute
 
 xblocks.view.register('xb-input', {
     displayName: 'xb-input',
