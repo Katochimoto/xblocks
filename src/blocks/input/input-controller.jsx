@@ -20,6 +20,7 @@ var XBInputController = xblocks.view.create({
         'value': React.PropTypes.string,
         'tabIndex': React.PropTypes.string,
         'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+
         'onChange': React.PropTypes.func,
         'onHintToggle': React.PropTypes.func,
         'isPlaceholderHint': React.PropTypes.bool

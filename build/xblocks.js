@@ -482,6 +482,7 @@ var XBInputController = xblocks.view.create({
         'value': React.PropTypes.string,
         'tabIndex': React.PropTypes.string,
         'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+
         'onChange': React.PropTypes.func,
         'onHintToggle': React.PropTypes.func,
         'isPlaceholderHint': React.PropTypes.bool
@@ -630,17 +631,35 @@ xblocks.view.register('xb-input', {
     },
 
     componentDidMount: function() {
+        // check show or hide placeholder after mount element
         this.refs.controller._dispatchEventToggleHint('', this.props.value);
     },
 
+    /**
+     * Remember current value in state
+     * @param {Event} event
+     * @private
+     */
     _onChange: function(event) {
-        this.setState({ 'value': event.target.value });
+        this.setState({
+            'value': event.target.value
+        });
     },
 
+    /**
+     * Show or hide placeholder
+     * @param {boolean} toggle
+     * @private
+     */
     _onHintToggle: function(toggle) {
         this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
     },
 
+    /**
+     * Check show complex input
+     * @returns {boolean}
+     * @private
+     */
     _isComplex: function() {
         return (
             this.props.postfix ||
@@ -651,8 +670,14 @@ xblocks.view.register('xb-input', {
         );
     },
 
-    _resetClick: function() {
-        this.setState({ 'value': '' });
+    /**
+     * Click reset button
+     * @private
+     */
+    _onClickReset: function() {
+        this.setState({
+            'value': ''
+        });
     },
 
     render: function() {
@@ -713,7 +738,7 @@ xblocks.view.register('xb-input', {
 
             if (this.props.reset) {
                 children.push(
-                    React.DOM.span( {key:"reset", className:"_reset", onClick:this._resetClick})
+                    React.DOM.span( {key:"reset", className:"_reset", onClick:this._onClickReset})
                 );
             }
 
