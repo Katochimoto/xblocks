@@ -4,13 +4,6 @@
     var React = global.React;
     var xblocks = global.xblocks;
 
-    xblocks.dom.attrs.ARRTS_BOOLEAN = xblocks.dom.attrs.ARRTS_BOOLEAN.concat([
-        'multiline',
-        'autosize',
-        'reset',
-        'ghost'
-    ]);
-
     xblocks.utils.compact = function(data) {
         for (var prop in data) {
             if (data.hasOwnProperty(prop)) {
@@ -196,7 +189,7 @@ xblocks.create('xb-link');
 /* blocks/link/link.js end */
 
     /* blocks/button/button.js begin */
-/* global xblocks */
+/* global xblocks, React */
 /* jshint strict: false */
 
 /* blocks/button/button.jsx.js begin */
@@ -425,8 +418,9 @@ xblocks.create('xb-button', {
     accessors: {
         disabled: {
             get: function() {
-                return Boolean(xblocks.dom.attrs.getRealValue('disabled', this.getAttribute('disabled')));
+                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
             },
+
             set: function(isDisabled) {
                 if (isDisabled) {
                     this.setAttribute('disabled', '');
@@ -577,6 +571,7 @@ var XBInputController = xblocks.view.create({
 
 // TODO "list" attribute
 // TODO "pattern" attribute
+// TODO "title" attribute
 
 xblocks.view.register('xb-input', {
     displayName: 'xb-input',

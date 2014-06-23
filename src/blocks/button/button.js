@@ -1,4 +1,4 @@
-/* global xblocks */
+/* global xblocks, React */
 /* jshint strict: false */
 
 /*! borschik:include:button.jsx.js */
@@ -9,8 +9,9 @@ xblocks.create('xb-button', {
     accessors: {
         disabled: {
             get: function() {
-                return Boolean(xblocks.dom.attrs.getRealValue('disabled', this.getAttribute('disabled')));
+                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
             },
+
             set: function(isDisabled) {
                 if (isDisabled) {
                     this.setAttribute('disabled', '');

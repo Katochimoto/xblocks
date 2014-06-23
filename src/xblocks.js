@@ -4,13 +4,6 @@
     var React = global.React;
     var xblocks = global.xblocks;
 
-    xblocks.dom.attrs.ARRTS_BOOLEAN = xblocks.dom.attrs.ARRTS_BOOLEAN.concat([
-        'multiline',
-        'autosize',
-        'reset',
-        'ghost'
-    ]);
-
     xblocks.utils.compact = function(data) {
         for (var prop in data) {
             if (data.hasOwnProperty(prop)) {
