@@ -445,7 +445,7 @@ xblocks.create('xb-button', {
 /* blocks/button/button.js end */
 
     /* blocks/input/input.js begin */
-/* global xblocks */
+/* global xblocks, React */
 /* jshint strict: false */
 
 /* blocks/input/input.jsx.js begin */
@@ -807,6 +807,7 @@ xblocks.create('xb-input', {
                     return (controlNode ? controlNode.value : '');
                 }
             },
+
             set: function(value) {
                 if (this.xblock._isMountedComponent()) {
                     this.xblock._component.setState({
@@ -820,6 +821,30 @@ xblocks.create('xb-input', {
                     }
                 }
             }
+        },
+
+        disabled: {
+            get: function() {
+                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+            },
+
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('disabled', '');
+                } else {
+                    this.removeAttribute('disabled');
+                }
+            }
+        }
+    },
+
+    methods: {
+        focus: function() {
+            this.querySelector('input,textarea').focus();
+        },
+
+        blur: function() {
+            this.querySelector('input,textarea').blur();
         }
     }
 });
