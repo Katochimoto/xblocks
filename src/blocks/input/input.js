@@ -4,6 +4,8 @@
 /*! borschik:include:input.jsx.js */
 
 xblocks.create('xb-input', {
+    prototype: Object.create(HTMLElement.prototype),
+
     accessors: {
         value: {
             get: function() {
@@ -48,11 +50,17 @@ xblocks.create('xb-input', {
 
     methods: {
         focus: function() {
-            this.querySelector('input,textarea').focus();
+            var controlNode = this.querySelector('input,textarea');
+            if (controlNode) {
+                controlNode.focus();
+            }
         },
 
         blur: function() {
-            this.querySelector('input,textarea').blur();
+            var controlNode = this.querySelector('input,textarea');
+            if (controlNode) {
+                controlNode.blur();
+            }
         }
     }
 });

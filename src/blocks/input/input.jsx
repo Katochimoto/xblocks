@@ -8,7 +8,7 @@
 // TODO "pattern" attribute
 // TODO "title" attribute
 
-xblocks.view.register('xb-input', {
+var XBInput = xblocks.view.register('xb-input', {
     displayName: 'xb-input',
 
     propTypes: {
@@ -36,6 +36,15 @@ xblocks.view.register('xb-input', {
         'prefix': React.PropTypes.string,
         'postfix': React.PropTypes.string,
         'tabindex': React.PropTypes.string
+    },
+
+    statics: {
+        filterLinkProps: function(props) {
+            return xblocks.utils.mapObject(
+                xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
+                xblocks.utils.mapPropsPrefixLink
+            );
+        }
     },
 
     shouldComponentUpdate: function(nextProps, nextState) {
@@ -95,7 +104,6 @@ xblocks.view.register('xb-input', {
             this.props.postfix ||
             this.props.prefix ||
             this.props.reset ||
-            this.props.label ||
             this.props.autosize
         );
     },
@@ -111,7 +119,9 @@ xblocks.view.register('xb-input', {
     },
 
     render: function() {
-        var isComplex = this._isComplex();
+        var linkProps = XBInput.filterLinkProps(this.props);
+        var hasLink = !xblocks.utils.isEmptyObject(linkProps);
+        var isComplex = (this._isComplex() || hasLink);
         var classes = {
             'xb-input': true,
             '_disabled': Boolean(this.props.disabled),
@@ -133,7 +143,6 @@ xblocks.view.register('xb-input', {
 
         var isPlaceholderHint = false;
 
-
         if (isComplex) {
             var children = [];
 
@@ -147,11 +156,11 @@ xblocks.view.register('xb-input', {
                 );
             }
 
-            if (this.props.label) {
-                children.push(xblocks.view.get('xb-link')({
-                    'type': 'input',
-                    'key': 'label'
-                }));
+            if (hasLink) {
+                linkProps['theme'] = 'input';
+                linkProps['key'] = 'label';
+
+                children.push(xblocks.view.get('xb-link')(linkProps));
             }
 
             if (this.props.prefix) {
