@@ -244,6 +244,7 @@ xb-dropdown {
   background: linear-gradient(rgba(255,225,120,0.1), rgba(0,0,0,0.02));
   height: auto;
   margin-left: -10px;
+  font-family: Arial, sans-serif;
 }
 .xb-link._theme-input,
 .xb-input._complex-left,
