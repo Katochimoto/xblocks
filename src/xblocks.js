@@ -6,6 +6,7 @@
 
 
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
+    xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
     xblocks.utils.filterPropsPrefixLink = function(name) {
         return xblocks.utils.REG_PROPS_PREFIX_LINK.test(name);
@@ -14,6 +15,17 @@
     xblocks.utils.mapPropsPrefixLink = function(name, descr) {
         return {
             'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_LINK, ''),
+            'descr': descr
+        };
+    };
+
+    xblocks.utils.filterPropsPrefixIco = function(name) {
+        return xblocks.utils.REG_PROPS_PREFIX_ICO.test(name);
+    };
+
+    xblocks.utils.mapPropsPrefixIco = function(name, descr) {
+        return {
+            'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_ICO, ''),
             'descr': descr
         };
     };

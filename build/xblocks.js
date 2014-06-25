@@ -6,6 +6,7 @@
 
 
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
+    xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
     xblocks.utils.filterPropsPrefixLink = function(name) {
         return xblocks.utils.REG_PROPS_PREFIX_LINK.test(name);
@@ -14,6 +15,17 @@
     xblocks.utils.mapPropsPrefixLink = function(name, descr) {
         return {
             'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_LINK, ''),
+            'descr': descr
+        };
+    };
+
+    xblocks.utils.filterPropsPrefixIco = function(name) {
+        return xblocks.utils.REG_PROPS_PREFIX_ICO.test(name);
+    };
+
+    xblocks.utils.mapPropsPrefixIco = function(name, descr) {
+        return {
+            'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_ICO, ''),
             'descr': descr
         };
     };
@@ -222,18 +234,6 @@ var XBButtonContent = xblocks.view.create({
         'ico': React.PropTypes.object
     },
 
-    statics: {
-        mapIcoProps: function(props) {
-            var regIcoProp = /^xb-ico-/;
-            return xblocks.utils.mapObject(props, function(name, descr) {
-                return {
-                    'name': name.replace(regIcoProp, ''),
-                    'descr': descr
-                };
-            });
-        }
-    },
-
     getDefaultProps: function() {
         return {
             'ico': {}
@@ -245,7 +245,7 @@ var XBButtonContent = xblocks.view.create({
     },
 
     render: function() {
-        var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
+        var icoProps = xblocks.utils.merge({}, this.props.ico);
         var children = [
             React.DOM.span( {className:"_content-content",
                 key:"content",
@@ -308,10 +308,10 @@ var XBButton = xblocks.view.register('xb-button', {
 
     statics: {
         filterIcoProps: function(props) {
-            var regIcoProp = /^xb-ico-/;
-            return xblocks.utils.filterObject(props, function(name) {
-                return regIcoProp.test(name);
-            });
+            return xblocks.utils.mapObject(
+                xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
+                xblocks.utils.mapPropsPrefixIco
+            );
         }
     },
 

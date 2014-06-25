@@ -8,18 +8,6 @@ var XBButtonContent = xblocks.view.create({
         'ico': React.PropTypes.object
     },
 
-    statics: {
-        mapIcoProps: function(props) {
-            var regIcoProp = /^xb-ico-/;
-            return xblocks.utils.mapObject(props, function(name, descr) {
-                return {
-                    'name': name.replace(regIcoProp, ''),
-                    'descr': descr
-                };
-            });
-        }
-    },
-
     getDefaultProps: function() {
         return {
             'ico': {}
@@ -31,7 +19,7 @@ var XBButtonContent = xblocks.view.create({
     },
 
     render: function() {
-        var icoProps = XBButtonContent.mapIcoProps(this.props.ico);
+        var icoProps = xblocks.utils.merge({}, this.props.ico);
         var children = [
             <span className="_content-content"
                 key="content"

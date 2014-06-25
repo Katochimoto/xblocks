@@ -39,10 +39,10 @@ var XBButton = xblocks.view.register('xb-button', {
 
     statics: {
         filterIcoProps: function(props) {
-            var regIcoProp = /^xb-ico-/;
-            return xblocks.utils.filterObject(props, function(name) {
-                return regIcoProp.test(name);
-            });
+            return xblocks.utils.mapObject(
+                xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
+                xblocks.utils.mapPropsPrefixIco
+            );
         }
     },
 
