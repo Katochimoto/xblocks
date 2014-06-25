@@ -35,7 +35,8 @@ var XBInput = xblocks.view.register('xb-input', {
         'value': React.PropTypes.string,
         'prefix': React.PropTypes.string,
         'postfix': React.PropTypes.string,
-        'tabindex': React.PropTypes.string
+        'tabindex': React.PropTypes.string,
+        'xb-link': React.PropTypes.string
     },
 
     statics: {
@@ -104,7 +105,8 @@ var XBInput = xblocks.view.register('xb-input', {
             this.props.postfix ||
             this.props.prefix ||
             this.props.reset ||
-            this.props.autosize
+            this.props.autosize ||
+            this.props['xb-link']
         );
     },
 
@@ -119,9 +121,7 @@ var XBInput = xblocks.view.register('xb-input', {
     },
 
     render: function() {
-        var linkProps = XBInput.filterLinkProps(this.props);
-        var hasLink = !xblocks.utils.isEmptyObject(linkProps);
-        var isComplex = (this._isComplex() || hasLink);
+        var isComplex = this._isComplex();
         var classes = {
             'xb-input': true,
             '_disabled': Boolean(this.props.disabled),
@@ -156,11 +156,12 @@ var XBInput = xblocks.view.register('xb-input', {
                 );
             }
 
-            if (hasLink) {
+            if (this.props['xb-link']) {
+                var linkProps = XBInput.filterLinkProps(this.props);
                 linkProps['theme'] = 'input';
                 linkProps['key'] = 'label';
 
-                children.push(xblocks.view.get('xb-link')(linkProps));
+                children.push(xblocks.view.get('xb-link')(linkProps, this.props['xb-link']));
             }
 
             if (this.props.prefix) {
