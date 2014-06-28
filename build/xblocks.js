@@ -102,6 +102,18 @@ xblocks.mixin.eChecked = {
     accessors: {
         checked: {
             get: function() {
+                return xblocks.dom.attrs.valueConversion('checked', this.getAttribute('checked'), React.PropTypes.bool);
+            },
+
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('checked', '');
+                } else {
+                    this.removeAttribute('checked');
+                }
+            }
+            /*
+            get: function() {
                 if (this.xblock._isMountedComponent()) {
                     return this.xblock._component.state.checked;
 
@@ -124,6 +136,7 @@ xblocks.mixin.eChecked = {
                     }
                 }
             }
+            */
         }
     }
 };
