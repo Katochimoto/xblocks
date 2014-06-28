@@ -190,6 +190,24 @@ xblocks.mixin.eInputValueProps = {
 
 /* mixin/eInputValueProps.js end */
 
+    /* mixin/eFocusFirstChild.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.mixin.eFocusFirstChild = {
+    methods: {
+        focus: function() {
+            this.firstChild.focus();
+        },
+
+        blur: function() {
+            this.firstChild.blur();
+        }
+    }
+};
+
+/* mixin/eFocusFirstChild.js end */
+
 
     /* blocks/ico/ico.js begin */
 /* global xblocks, global, React */
@@ -562,19 +580,10 @@ var XBButton = xblocks.view.register('xb-button', {
 
 xblocks.create('xb-button', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eFocusFirstChild,
 
     {
-        prototype: Object.create(HTMLButtonElement.prototype),
-
-        methods: {
-            focus: function() {
-                this.firstChild.focus();
-            },
-
-            blur: function() {
-                this.firstChild.blur();
-            }
-        }
+        prototype: Object.create(HTMLButtonElement.prototype)
     }
 ]);
 
@@ -1082,19 +1091,10 @@ xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
+    xblocks.mixin.eFocusFirstChild,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype),
-
-        methods: {
-            focus: function() {
-                this.firstChild.focus();
-            },
-
-            blur: function() {
-                this.firstChild.blur();
-            }
-        }
+        prototype: Object.create(HTMLInputElement.prototype)
     }
 ]);
 
@@ -1214,19 +1214,10 @@ xblocks.create('xb-radio', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
+    xblocks.mixin.eFocusFirstChild,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype),
-
-        methods: {
-            focus: function() {
-                this.firstChild.focus();
-            },
-
-            blur: function() {
-                this.firstChild.blur();
-            }
-        }
+        prototype: Object.create(HTMLInputElement.prototype)
     }
 ]);
 

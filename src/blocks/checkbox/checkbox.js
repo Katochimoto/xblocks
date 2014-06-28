@@ -7,18 +7,9 @@ xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
+    xblocks.mixin.eFocusFirstChild,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype),
-
-        methods: {
-            focus: function() {
-                this.firstChild.focus();
-            },
-
-            blur: function() {
-                this.firstChild.blur();
-            }
-        }
+        prototype: Object.create(HTMLInputElement.prototype)
     }
 ]);

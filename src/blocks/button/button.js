@@ -5,18 +5,9 @@
 
 xblocks.create('xb-button', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eFocusFirstChild,
 
     {
-        prototype: Object.create(HTMLButtonElement.prototype),
-
-        methods: {
-            focus: function() {
-                this.firstChild.focus();
-            },
-
-            blur: function() {
-                this.firstChild.blur();
-            }
-        }
+        prototype: Object.create(HTMLButtonElement.prototype)
     }
 ]);
