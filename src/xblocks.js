@@ -70,7 +70,7 @@
     };
 
     xblocks.mixin = {};
-    /*! borschik:include:mixin/disabled.js */
+    /*! borschik:include:mixin/eDisabled.js */
 
     /*! borschik:include:blocks/ico/ico.js */
     /*! borschik:include:blocks/link/link.js */

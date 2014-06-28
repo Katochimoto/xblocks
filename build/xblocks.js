@@ -70,11 +70,11 @@
     };
 
     xblocks.mixin = {};
-    /* mixin/disabled.js begin */
+    /* mixin/eDisabled.js begin */
 /* global xblocks, React */
 /* jshint strict: false */
 
-xblocks.mixin.disabled = {
+xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
             get: function() {
@@ -92,7 +92,7 @@ xblocks.mixin.disabled = {
     }
 };
 
-/* mixin/disabled.js end */
+/* mixin/eDisabled.js end */
 
 
     /* blocks/ico/ico.js begin */
@@ -473,7 +473,7 @@ var XBButton = xblocks.view.register('xb-button', {
 
 
 xblocks.create('xb-button', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLButtonElement.prototype),
@@ -854,7 +854,7 @@ var XBInput = xblocks.view.register('xb-input', {
 
 
 xblocks.create('xb-input', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLElement.prototype),
@@ -993,7 +993,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
 
 
 xblocks.create('xb-checkbox', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
@@ -1126,7 +1126,7 @@ var XBRadio = xblocks.view.register('xb-radio', {
 
 
 xblocks.create('xb-radio', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

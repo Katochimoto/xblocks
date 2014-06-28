@@ -1,7 +1,7 @@
 /* global xblocks, React */
 /* jshint strict: false */
 
-xblocks.mixin.disabled = {
+xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
             get: function() {

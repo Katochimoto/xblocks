@@ -4,7 +4,7 @@
 /*! borschik:include:input.jsx.js */
 
 xblocks.create('xb-input', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLElement.prototype),

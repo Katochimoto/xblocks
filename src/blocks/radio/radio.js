@@ -4,7 +4,7 @@
 /*! borschik:include:radio.jsx.js */
 
 xblocks.create('xb-radio', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

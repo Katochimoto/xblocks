@@ -4,7 +4,7 @@
 /*! borschik:include:button.jsx.js */
 
 xblocks.create('xb-button', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLButtonElement.prototype),

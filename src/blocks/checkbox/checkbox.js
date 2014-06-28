@@ -4,7 +4,7 @@
 /*! borschik:include:checkbox.jsx.js */
 
 xblocks.create('xb-checkbox', [
-    xblocks.mixin.disabled,
+    xblocks.mixin.eDisabled,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
