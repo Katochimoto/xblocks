@@ -118,6 +118,78 @@ xblocks.mixin.eChecked = {
 
 /* mixin/eChecked.js end */
 
+    /* mixin/eInputValueState.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.mixin.eInputValueState = {
+    accessors: {
+        value: {
+            get: function() {
+                if (this.xblock._isMountedComponent()) {
+                    return this.xblock._component.state.value;
+
+                } else {
+                    var controlNode = this.querySelector('input,textarea');
+                    return (controlNode ? controlNode.value : '');
+                }
+            },
+
+            set: function(value) {
+                if (this.xblock._isMountedComponent()) {
+                    this.xblock._component.setState({
+                        'value': String(value)
+                    });
+
+                } else {
+                    var controlNode = this.querySelector('input,textarea');
+                    if (controlNode) {
+                        controlNode.value = String(value);
+                    }
+                }
+            }
+        }
+    }
+};
+
+/* mixin/eInputValueState.js end */
+
+    /* mixin/eInputValueProps.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.mixin.eInputValueProps = {
+    accessors: {
+        value: {
+            get: function() {
+                if (this.xblock._isMountedComponent()) {
+                    return this.xblock._component.props.value;
+
+                } else {
+                    var controlNode = this.querySelector('input,textarea');
+                    return (controlNode ? controlNode.value : '');
+                }
+            },
+
+            set: function(value) {
+                if (this.xblock._isMountedComponent()) {
+                    this.xblock._component.setProps({
+                        'value': String(value)
+                    });
+
+                } else {
+                    var controlNode = this.querySelector('input,textarea');
+                    if (controlNode) {
+                        controlNode.value = String(value);
+                    }
+                }
+            }
+        }
+    }
+};
+
+/* mixin/eInputValueProps.js end */
+
 
     /* blocks/ico/ico.js begin */
 /* global xblocks, global, React */
@@ -871,37 +943,10 @@ var XBInput = xblocks.view.register('xb-input', {
 
 xblocks.create('xb-input', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eInputValueState,
 
     {
         prototype: Object.create(HTMLElement.prototype),
-
-        accessors: {
-            value: {
-                get: function() {
-                    if (this.xblock._isMountedComponent()) {
-                        return this.xblock._component.state.value;
-
-                    } else {
-                        var controlNode = this.querySelector('input,textarea');
-                        return (controlNode ? controlNode.value : '');
-                    }
-                },
-
-                set: function(value) {
-                    if (this.xblock._isMountedComponent()) {
-                        this.xblock._component.setState({
-                            'value': String(value)
-                        });
-
-                    } else {
-                        var controlNode = this.querySelector('input,textarea');
-                        if (controlNode) {
-                            controlNode.value = String(value);
-                        }
-                    }
-                }
-            }
-        },
 
         methods: {
             focus: function() {
@@ -1036,37 +1081,10 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
 xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
+    xblocks.mixin.eInputValueProps,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
-
-        accessors: {
-            value: {
-                get: function() {
-                    if (this.xblock._isMountedComponent()) {
-                        return this.xblock._component.props.value;
-
-                    } else {
-                        var controlNode = this.querySelector('input');
-                        return (controlNode ? controlNode.value : '');
-                    }
-                },
-
-                set: function(value) {
-                    if (this.xblock._isMountedComponent()) {
-                        this.xblock._component.setProps({
-                            'value': String(value)
-                        });
-
-                    } else {
-                        var controlNode = this.querySelector('input');
-                        if (controlNode) {
-                            controlNode.value = String(value);
-                        }
-                    }
-                }
-            }
-        },
 
         methods: {
             focus: function() {
@@ -1195,37 +1213,10 @@ var XBradio = xblocks.view.register('xb-radio', {
 xblocks.create('xb-radio', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
+    xblocks.mixin.eInputValueProps,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
-
-        accessors: {
-            value: {
-                get: function() {
-                    if (this.xblock._isMountedComponent()) {
-                        return this.xblock._component.props.value;
-
-                    } else {
-                        var controlNode = this.querySelector('input');
-                        return (controlNode ? controlNode.value : '');
-                    }
-                },
-
-                set: function(value) {
-                    if (this.xblock._isMountedComponent()) {
-                        this.xblock._component.setProps({
-                            'value': String(value)
-                        });
-
-                    } else {
-                        var controlNode = this.querySelector('input');
-                        if (controlNode) {
-                            controlNode.value = String(value);
-                        }
-                    }
-                }
-            }
-        },
 
         methods: {
             focus: function() {
