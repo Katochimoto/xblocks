@@ -94,6 +94,30 @@ xblocks.mixin.eDisabled = {
 
 /* mixin/eDisabled.js end */
 
+    /* mixin/eChecked.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.mixin.eChecked = {
+    accessors: {
+        checked: {
+            get: function() {
+                return xblocks.dom.attrs.valueConversion('checked', this.getAttribute('checked'), React.PropTypes.bool);
+            },
+
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('checked', '');
+                } else {
+                    this.removeAttribute('checked');
+                }
+            }
+        }
+    }
+};
+
+/* mixin/eChecked.js end */
+
 
     /* blocks/ico/ico.js begin */
 /* global xblocks, global, React */
@@ -322,7 +346,6 @@ var XBButton = xblocks.view.register('xb-button', {
             'pseudo',
             'promo'
         ]),
-        'checked': React.PropTypes.bool,
         'type': React.PropTypes.oneOf([
             'label',
             'inline',
@@ -330,10 +353,7 @@ var XBButton = xblocks.view.register('xb-button', {
             'file',
 
             'button',
-            'submit',
-
-            'radio',
-            'checkbox'
+            'submit'
         ]),
         'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
         'value': React.PropTypes.string,
@@ -369,8 +389,7 @@ var XBButton = xblocks.view.register('xb-button', {
     render: function() {
         var classes = {
             'xb-button': true,
-            '_disabled': this.props.disabled,
-            '_checked': this.props.checked
+            '_disabled': this.props.disabled
         };
 
         if (this.props.theme) {
@@ -426,10 +445,7 @@ var XBButton = xblocks.view.register('xb-button', {
                 )
             );
 
-        } else if (type === 'label' || type === 'radio' || type === 'checkbox') {
-            
-
-
+        } else if (type === 'label') {
             return (
                 React.DOM.label( {className:classes,
                     form:this.props.form,
@@ -994,6 +1010,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
 
 xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eChecked,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
@@ -1127,6 +1144,7 @@ var XBRadio = xblocks.view.register('xb-radio', {
 
 xblocks.create('xb-radio', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eChecked,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

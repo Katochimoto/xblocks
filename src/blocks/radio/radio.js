@@ -5,6 +5,7 @@
 
 xblocks.create('xb-radio', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eChecked,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

@@ -5,6 +5,7 @@
 
 xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eChecked,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

@@ -71,6 +71,7 @@
 
     xblocks.mixin = {};
     /*! borschik:include:mixin/eDisabled.js */
+    /*! borschik:include:mixin/eChecked.js */
 
     /*! borschik:include:blocks/ico/ico.js */
     /*! borschik:include:blocks/link/link.js */
