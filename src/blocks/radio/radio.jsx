@@ -2,7 +2,7 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBRadio = xblocks.view.register('xb-radio', {
+var XBradio = xblocks.view.register('xb-radio', {
     displayName: 'xb-radio',
 
     propTypes: {
@@ -27,8 +27,32 @@ var XBRadio = xblocks.view.register('xb-radio', {
         return {
             'size': 'm',
             'children': '',
-            'value': 'on'
+            'value': 'on',
+            'checked': false
         };
+    },
+
+    getInitialState: function() {
+        return {
+            'checked': this.props.checked
+        };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            'checked': nextProps.checked
+        });
+    },
+
+    /**
+     * Remember current checked in state
+     * @param {Event} event
+     * @private
+     */
+    _onChange: function(event) {
+        this.setState({
+            'checked': event.target.checked
+        });
     },
 
     render: function() {
@@ -61,10 +85,11 @@ var XBRadio = xblocks.view.register('xb-radio', {
                     name={this.props.name}
                     value={this.props.value}
                     disabled={this.props.disabled}
-                    defaultChecked={this.props.checked}
+                    checked={this.state.checked}
                     autoFocus={this.props.autofocus}
                     readOnly={this.props.readonly}
-                    required={this.props.required}/>
+                    required={this.props.required}
+                    onChange={this._onChange}/>
 
                 <span className="_xb-radio_flag">
                     <span className="_xb-radio_flag-icon"></span>

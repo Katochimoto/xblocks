@@ -27,8 +27,32 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         return {
             'size': 'm',
             'children': '',
-            'value': 'on'
+            'value': 'on',
+            'checked': false
         };
+    },
+
+    getInitialState: function() {
+        return {
+            'checked': this.props.checked
+        };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            'checked': nextProps.checked
+        });
+    },
+
+    /**
+     * Remember current checked in state
+     * @param {Event} event
+     * @private
+     */
+    _onChange: function(event) {
+        this.setState({
+            'checked': event.target.checked
+        });
     },
 
     render: function() {
@@ -61,10 +85,11 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
                     name={this.props.name}
                     value={this.props.value}
                     disabled={this.props.disabled}
-                    defaultChecked={this.props.checked}
+                    checked={this.state.checked}
                     autoFocus={this.props.autofocus}
                     readOnly={this.props.readonly}
-                    required={this.props.required}/>
+                    required={this.props.required}
+                    onChange={this._onChange}/>
 
                 <span className="_xb-checkbox_flag">
                     <span className="_xb-checkbox_flag-icon"></span>
