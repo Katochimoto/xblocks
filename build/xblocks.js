@@ -50,6 +50,10 @@
                 return 'tabIndex';
             case 'autofocus':
                 return 'autoFocus';
+            case 'checked':
+                return 'defaultChecked';
+            case 'readonly':
+                return 'readOnly';
             default:
                 return name;
         }
@@ -291,8 +295,14 @@ var XBButton = xblocks.view.register('xb-button', {
             'promo'
         ]),
         'checked': React.PropTypes.bool,
-
-        'type': React.PropTypes.oneOf([ 'button', 'file', 'submit', 'label', 'inline', 'link' ]),
+        'type': React.PropTypes.oneOf([
+            'button',
+            'file',
+            'submit',
+            'label',
+            'inline',
+            'link'
+        ]),
         'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
         'value': React.PropTypes.string,
         'href': React.PropTypes.string,
@@ -882,6 +892,144 @@ xblocks.create('xb-input', {
 });
 
 /* blocks/input/input.js end */
+
+    /* blocks/checkbox/checkbox.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+/* blocks/checkbox/checkbox.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, global, React */
+/* jshint strict: false */
+
+var XBCheckbox = xblocks.view.register('xb-checkbox', {
+    displayName: 'xb-checkbox',
+
+    propTypes: {
+        'id': React.PropTypes.string,
+        'class': React.PropTypes.string,
+        'children': React.PropTypes.renderable,
+        'size': React.PropTypes.oneOf([ 's', 'm' ]),
+        'value': React.PropTypes.string,
+        'name': React.PropTypes.string,
+        'title': React.PropTypes.string,
+        'form': React.PropTypes.string,
+        'tabindex': React.PropTypes.number,
+        'autofocus': React.PropTypes.bool,
+        'checked': React.PropTypes.bool,
+        'disabled': React.PropTypes.bool,
+        'readonly': React.PropTypes.bool,   // native not work
+        'required': React.PropTypes.bool
+    },
+
+    getDefaultProps: function() {
+        return {
+            'size': 'm',
+            'children': '',
+            'value': 'on'
+        };
+    },
+
+    render: function() {
+        var classes = {
+            'xb-checkbox': true,
+            '_disabled': this.props.disabled
+        };
+
+        if (this.props.size) {
+            classes['_size-' + this.props.size] = true;
+        }
+
+        classes = React.addons.classSet(classes);
+
+        var tabIndex = this.props.tabindex;
+
+        if (this.props.disabled) {
+            tabIndex = '-1';
+        }
+
+        return (
+            React.DOM.label( {className:classes, title:this.props.title}, 
+                React.DOM.input( {type:"checkbox",
+                    className:"_xb-checkbox_controller",
+                    name:this.props.name,
+                    value:this.props.value,
+                    form:this.props.form,
+                    tabIndex:tabIndex,
+                    disabled:this.props.disabled,
+                    defaultChecked:this.props.checked,
+                    autoFocus:this.props.autofocus,
+                    readOnly:this.props.readonly,
+                    required:this.props.required}),
+                React.DOM.span( {className:"_xb-checkbox_flag"}, 
+                    React.DOM.span( {className:"_xb-checkbox_flag-icon"})
+                ),
+                React.DOM.span( {className:"_xb-checkbox_label"}, this.props.children)
+            )
+        );
+    }
+});
+
+/* blocks/checkbox/checkbox.jsx.js end */
+
+
+xblocks.create('xb-checkbox', {
+    prototype: Object.create(HTMLInputElement.prototype),
+
+    accessors: {
+        value: {
+            get: function() {
+                if (this.xblock._isMountedComponent()) {
+                    return this.xblock._component.props.value;
+
+                } else {
+                    var controlNode = this.querySelector('input');
+                    return (controlNode ? controlNode.value : '');
+                }
+            },
+
+            set: function(value) {
+                if (this.xblock._isMountedComponent()) {
+                    this.xblock._component.setProps({
+                        'value': String(value)
+                    });
+
+                } else {
+                    var controlNode = this.querySelector('input');
+                    if (controlNode) {
+                        controlNode.value = String(value);
+                    }
+                }
+            }
+        },
+
+        disabled: {
+            get: function() {
+                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+            },
+
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('disabled', '');
+                } else {
+                    this.removeAttribute('disabled');
+                }
+            }
+        }
+    },
+
+    methods: {
+        focus: function() {
+            this.firstChild.focus();
+        },
+
+        blur: function() {
+            this.firstChild.blur();
+        }
+    }
+});
+
+/* blocks/checkbox/checkbox.js end */
 
 
 }(function() {

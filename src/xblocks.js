@@ -50,6 +50,10 @@
                 return 'tabIndex';
             case 'autofocus':
                 return 'autoFocus';
+            case 'checked':
+                return 'defaultChecked';
+            case 'readonly':
+                return 'readOnly';
             default:
                 return name;
         }
@@ -67,6 +71,7 @@
     /*! borschik:include:blocks/link/link.js */
     /*! borschik:include:blocks/button/button.js */
     /*! borschik:include:blocks/input/input.js */
+    /*! borschik:include:blocks/checkbox/checkbox.js */
 
 }(function() {
     return this || (1, eval)('this');

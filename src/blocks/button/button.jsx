@@ -22,8 +22,14 @@ var XBButton = xblocks.view.register('xb-button', {
             'promo'
         ]),
         'checked': React.PropTypes.bool,
-
-        'type': React.PropTypes.oneOf([ 'button', 'file', 'submit', 'label', 'inline', 'link' ]),
+        'type': React.PropTypes.oneOf([
+            'button',
+            'file',
+            'submit',
+            'label',
+            'inline',
+            'link'
+        ]),
         'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
         'value': React.PropTypes.string,
         'href': React.PropTypes.string,

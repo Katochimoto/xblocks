@@ -1,0 +1,60 @@
+/* global xblocks, React */
+/* jshint strict: false */
+
+/*! borschik:include:checkbox.jsx.js */
+
+xblocks.create('xb-checkbox', {
+    prototype: Object.create(HTMLInputElement.prototype),
+
+    accessors: {
+        value: {
+            get: function() {
+                if (this.xblock._isMountedComponent()) {
+                    return this.xblock._component.props.value;
+
+                } else {
+                    var controlNode = this.querySelector('input');
+                    return (controlNode ? controlNode.value : '');
+                }
+            },
+
+            set: function(value) {
+                if (this.xblock._isMountedComponent()) {
+                    this.xblock._component.setProps({
+                        'value': String(value)
+                    });
+
+                } else {
+                    var controlNode = this.querySelector('input');
+                    if (controlNode) {
+                        controlNode.value = String(value);
+                    }
+                }
+            }
+        },
+
+        disabled: {
+            get: function() {
+                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+            },
+
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('disabled', '');
+                } else {
+                    this.removeAttribute('disabled');
+                }
+            }
+        }
+    },
+
+    methods: {
+        focus: function() {
+            this.firstChild.focus();
+        },
+
+        blur: function() {
+            this.firstChild.blur();
+        }
+    }
+});

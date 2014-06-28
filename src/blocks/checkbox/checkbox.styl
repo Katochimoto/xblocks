@@ -1,0 +1,32 @@
+.xb-checkbox
+  kind: block inline
+  skin: para no-margin
+  cursor: pointer
+  vertical-align: inherit
+  font-size: inherit
+  line-height: inherit
+
+  &._disabled
+    skin: disabled
+
+  &._size-s
+    skin: para2 no-margin
+    vertical-align: inherit
+    font-size: inherit
+    line-height: inherit
+
+    & > ._xb-checkbox_flag
+      skin: para2 no-margin
+
+._xb-checkbox_flag
+  kind: icon
+  skin: checkbox (-icon '& > ._xb-checkbox_flag-icon')
+
+._xb-checkbox_controller
+  kind: hidden visually
+
+  &:checked + ._xb-checkbox_flag
+    skin: button_checked
+
+  &:focus + ._xb-checkbox_flag
+    skin: button_focus
