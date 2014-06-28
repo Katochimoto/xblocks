@@ -72,6 +72,7 @@
     /*! borschik:include:blocks/button/button.js */
     /*! borschik:include:blocks/input/input.js */
     /*! borschik:include:blocks/checkbox/checkbox.js */
+    /*! borschik:include:blocks/radio/radio.js */
 
 }(function() {
     return this || (1, eval)('this');

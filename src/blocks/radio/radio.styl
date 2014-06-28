@@ -1,0 +1,32 @@
+.xb-radio
+  kind: block inline
+  skin: para no-margin
+  cursor: pointer
+  vertical-align: inherit
+  font-size: inherit
+  line-height: inherit
+
+  &._disabled
+    skin: disabled
+
+  &._size-s
+    skin: para2 no-margin
+    vertical-align: inherit
+    font-size: inherit
+    line-height: inherit
+
+    & > ._xb-radio_flag
+      skin: para2 no-margin
+
+._xb-radio_flag
+  kind: icon
+  skin: radio (-icon '& > ._xb-radio_flag-icon')
+
+._xb-radio_controller
+  kind: hidden visually
+
+  &:checked + ._xb-radio_flag
+    skin: button_checked
+
+  &:focus + ._xb-radio_flag
+    skin: button_focus

@@ -28,7 +28,8 @@
 .xb-ico._type-notification,
 .xb-ico._type-check,
 .xb-ico._type-dropdown,
-._xb-checkbox_flag {
+._xb-checkbox_flag,
+._xb-radio_flag {
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -2813,7 +2814,8 @@ input[type=file]:focus + ._xb-checkbox_flag:after,
 input:not(:checked) + ._xb-checkbox_flag > ._xb-checkbox_flag-icon {
   visibility: hidden;
 }
-._xb-checkbox_controller {
+._xb-checkbox_controller,
+._xb-radio_controller {
   position: absolute !important;
   clip: rect(1px,1px,1px,1px) !important;
 }
@@ -2840,6 +2842,144 @@ input:not(:checked) + ._xb-checkbox_flag > ._xb-checkbox_flag-icon {
   outline: 0;
 }
 ._xb-checkbox_controller:focus + ._xb-checkbox_flag:after {
+  z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  border-radius: inherit;
+}
+.xb-radio {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 15px;
+  line-height: 22px;
+  cursor: pointer;
+  vertical-align: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.xb-radio._disabled {
+  cursor: default !important;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.xb-radio._disabled .xb-radio._disabled {
+  opacity: 1;
+}
+.xb-radio._size-s {
+  font-size: 13px;
+  line-height: 18px;
+  vertical-align: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.xb-radio._size-s > ._xb-radio_flag {
+  font-size: 13px;
+  line-height: 18px;
+}
+._xb-radio_flag {
+  font-size: 15px;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #000;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+  width: 1em;
+  height: 1em;
+  padding: 0 1px 1px 0;
+  line-height: 1em;
+  background: rgba(0,0,0,0.3);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.2)), to(rgba(0,0,0,0.4)));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+._xb-radio_flag:before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
+  border-radius: 2px;
+}
+._xb-radio_flag  > ._content {
+  position: relative;
+  display: block;
+}
+._xb-radio_flag:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+input[type=file]:focus + ._xb-radio_flag,
+._xb-radio_flag:focus {
+  outline: 0;
+}
+input[type=file]:focus + ._xb-radio_flag:after,
+._xb-radio_flag:focus:after {
+  z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  border-radius: inherit;
+}
+._xb-radio_flag:before {
+  background: #f7f7f7;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+  background: -webkit-linear-gradient(#fff, #eee);
+  background: linear-gradient(#fff, #eee);
+}
+._xb-radio_flag:before {
+  border-radius: 50%;
+}
+._xb-radio_flag > ._xb-radio_flag-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px;
+  background: #000;
+  border-radius: 50%;
+}
+input:not(:checked) + ._xb-radio_flag > ._xb-radio_flag-icon {
+  visibility: hidden;
+}
+._xb-radio_controller:checked + ._xb-radio_flag,
+._xb-radio_controller:checked + ._xb-radio_flag:hover {
+  background: rgba(255,236,166,0.4);
+  -webkit-box-shadow: 0 1px 7px rgba(30,23,0,0.8) inset, 0 2px 0 -1px rgba(255,255,255,0.2);
+  box-shadow: 0 1px 7px rgba(30,23,0,0.8) inset, 0 2px 0 -1px rgba(255,255,255,0.2);
+}
+._xb-radio_controller:checked + ._xb-radio_flag:before,
+._xb-radio_controller:checked + ._xb-radio_flag:hover:before {
+  background: #fff1be;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffeca6), to(#fff6d5));
+  background: -webkit-linear-gradient(#ffeca6, #fff6d5);
+  background: linear-gradient(#ffeca6, #fff6d5);
+  -webkit-box-shadow: 0 1px 3px -1px rgba(0,0,0,0.45) inset;
+  box-shadow: 0 1px 3px -1px rgba(0,0,0,0.45) inset;
+}
+._xb-radio_controller:checked + ._xb-radio_flag  > ._content,
+._xb-radio_controller:checked + ._xb-radio_flag:hover  > ._content {
+  top: 1px;
+}
+._xb-radio_controller:focus + ._xb-radio_flag {
+  outline: 0;
+}
+._xb-radio_controller:focus + ._xb-radio_flag:after {
   z-index: 9;
   -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);

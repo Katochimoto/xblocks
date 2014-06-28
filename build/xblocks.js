@@ -1031,6 +1031,144 @@ xblocks.create('xb-checkbox', {
 
 /* blocks/checkbox/checkbox.js end */
 
+    /* blocks/radio/radio.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+/* blocks/radio/radio.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, global, React */
+/* jshint strict: false */
+
+var XBRadio = xblocks.view.register('xb-radio', {
+    displayName: 'xb-radio',
+
+    propTypes: {
+        'id': React.PropTypes.string,
+        'class': React.PropTypes.string,
+        'children': React.PropTypes.renderable,
+        'size': React.PropTypes.oneOf([ 's', 'm' ]),
+        'value': React.PropTypes.string,
+        'name': React.PropTypes.string,
+        'title': React.PropTypes.string,
+        'form': React.PropTypes.string,
+        'tabindex': React.PropTypes.number,
+        'autofocus': React.PropTypes.bool,
+        'checked': React.PropTypes.bool,
+        'disabled': React.PropTypes.bool,
+        'readonly': React.PropTypes.bool,   // native not work
+        'required': React.PropTypes.bool
+    },
+
+    getDefaultProps: function() {
+        return {
+            'size': 'm',
+            'children': '',
+            'value': 'on'
+        };
+    },
+
+    render: function() {
+        var classes = {
+            'xb-radio': true,
+            '_disabled': this.props.disabled
+        };
+
+        if (this.props.size) {
+            classes['_size-' + this.props.size] = true;
+        }
+
+        classes = React.addons.classSet(classes);
+
+        var tabIndex = this.props.tabindex;
+
+        if (this.props.disabled) {
+            tabIndex = '-1';
+        }
+
+        return (
+            React.DOM.label( {className:classes, title:this.props.title}, 
+                React.DOM.input( {type:"radio",
+                    className:"_xb-radio_controller",
+                    name:this.props.name,
+                    value:this.props.value,
+                    form:this.props.form,
+                    tabIndex:tabIndex,
+                    disabled:this.props.disabled,
+                    defaultChecked:this.props.checked,
+                    autoFocus:this.props.autofocus,
+                    readOnly:this.props.readonly,
+                    required:this.props.required}),
+                React.DOM.span( {className:"_xb-radio_flag"}, 
+                    React.DOM.span( {className:"_xb-radio_flag-icon"})
+                ),
+                React.DOM.span( {className:"_xb-radio_label"}, this.props.children)
+            )
+        );
+    }
+});
+
+/* blocks/radio/radio.jsx.js end */
+
+
+xblocks.create('xb-radio', {
+    prototype: Object.create(HTMLInputElement.prototype),
+
+    accessors: {
+        value: {
+            get: function() {
+                if (this.xblock._isMountedComponent()) {
+                    return this.xblock._component.props.value;
+
+                } else {
+                    var controlNode = this.querySelector('input');
+                    return (controlNode ? controlNode.value : '');
+                }
+            },
+
+            set: function(value) {
+                if (this.xblock._isMountedComponent()) {
+                    this.xblock._component.setProps({
+                        'value': String(value)
+                    });
+
+                } else {
+                    var controlNode = this.querySelector('input');
+                    if (controlNode) {
+                        controlNode.value = String(value);
+                    }
+                }
+            }
+        },
+
+        disabled: {
+            get: function() {
+                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+            },
+
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('disabled', '');
+                } else {
+                    this.removeAttribute('disabled');
+                }
+            }
+        }
+    },
+
+    methods: {
+        focus: function() {
+            this.firstChild.focus();
+        },
+
+        blur: function() {
+            this.firstChild.blur();
+        }
+    }
+});
+
+/* blocks/radio/radio.js end */
+
 
 }(function() {
     return this || (1, eval)('this');
