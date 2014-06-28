@@ -2969,11 +2969,6 @@ input:not(:checked) + ._xb-radio_flag > ._xb-radio_flag-icon {
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
 }
-._hidden,
-.nb-is-hidden,
-._nb-is-hidden {
-  display: none !important;
-}
 ._link {
   color: #22c;
   cursor: pointer;
@@ -2989,15 +2984,14 @@ a._link {
 ._link_outer {
   color: #070;
 }
-.is-disabled,
-.nb-is-disabled,
-._nb-is-disabled {
+._disabled {
   cursor: default !important;
   opacity: 0.6;
   pointer-events: none;
 }
-.is-disabled .is-disabled,
-.nb-is-disabled .nb-is-disabled,
-._nb-is-disabled ._nb-is-disabled {
+._disabled ._disabled {
   opacity: 1;
+}
+._hidden {
+  display: none !important;
 }

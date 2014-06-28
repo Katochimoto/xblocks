@@ -1,9 +1,3 @@
-// We need to deprecate `_hidden` somehow
-._hidden,
-.nb-is-hidden
-._nb-is-hidden
-  kind: hidden
-
 // global class for links
 ._link
   color: #22C
@@ -20,7 +14,9 @@ a._link
   color: #070
 
 // We need to deprecate is-disabled in favor of nb-is-disabled
-.is-disabled,
-.nb-is-disabled
-._nb-is-disabled
+._disabled
   kind: disabled 0.6
+
+// We need to deprecate `_hidden` somehow
+._hidden
+  kind: hidden
