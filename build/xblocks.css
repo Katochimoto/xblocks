@@ -281,6 +281,12 @@ xb-dropdown {
 .xb-button > ._content > .xb-ico + ._content-content:not(:empty) {
   margin-left: 5px;
 }
+.xb-button > ._content > .xb-ico:first-child {
+  margin-left: -5px;
+}
+.xb-button > ._content > .xb-ico:last-child {
+  margin-right: -5px;
+}
 .xb-button._disabled {
   cursor: default !important;
   opacity: 0.6;
