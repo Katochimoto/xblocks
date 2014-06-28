@@ -119,7 +119,7 @@ xblocks.mixin.eChecked = {
 /* mixin/eChecked.js end */
 
     /* mixin/eInputValueState.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 xblocks.mixin.eInputValueState = {
@@ -155,7 +155,7 @@ xblocks.mixin.eInputValueState = {
 /* mixin/eInputValueState.js end */
 
     /* mixin/eInputValueProps.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 xblocks.mixin.eInputValueProps = {
