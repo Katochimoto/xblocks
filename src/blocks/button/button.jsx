@@ -126,6 +126,9 @@ var XBButton = xblocks.view.register('xb-button', {
             );
 
         } else if (type === 'label' || type === 'radio' || type === 'checkbox') {
+            
+
+
             return (
                 <label className={classes}
                     form={this.props.form}

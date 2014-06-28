@@ -69,6 +69,32 @@
         return attrs;
     };
 
+    xblocks.mixin = {};
+    /* mixin/disabled.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.mixin.disabled = {
+    accessors: {
+        disabled: {
+            get: function() {
+                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+            },
+
+            set: function(isDisabled) {
+                if (isDisabled) {
+                    this.setAttribute('disabled', '');
+                } else {
+                    this.removeAttribute('disabled');
+                }
+            }
+        }
+    }
+};
+
+/* mixin/disabled.js end */
+
+
     /* blocks/ico/ico.js begin */
 /* global xblocks, global, React */
 /* jshint strict: false */
@@ -401,6 +427,9 @@ var XBButton = xblocks.view.register('xb-button', {
             );
 
         } else if (type === 'label' || type === 'radio' || type === 'checkbox') {
+            
+
+
             return (
                 React.DOM.label( {className:classes,
                     form:this.props.form,
@@ -443,35 +472,23 @@ var XBButton = xblocks.view.register('xb-button', {
 /* blocks/button/button.jsx.js end */
 
 
-xblocks.create('xb-button', {
-    prototype: Object.create(HTMLButtonElement.prototype),
+xblocks.create('xb-button', [
+    xblocks.mixin.disabled,
 
-    accessors: {
-        disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+    {
+        prototype: Object.create(HTMLButtonElement.prototype),
+
+        methods: {
+            focus: function() {
+                this.firstChild.focus();
             },
 
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
-                }
+            blur: function() {
+                this.firstChild.blur();
             }
         }
-    },
-
-    methods: {
-        focus: function() {
-            this.firstChild.focus();
-        },
-
-        blur: function() {
-            this.firstChild.blur();
-        }
     }
-});
+]);
 
 /* blocks/button/button.js end */
 
@@ -836,67 +853,57 @@ var XBInput = xblocks.view.register('xb-input', {
 /* blocks/input/input.jsx.js end */
 
 
-xblocks.create('xb-input', {
-    prototype: Object.create(HTMLElement.prototype),
+xblocks.create('xb-input', [
+    xblocks.mixin.disabled,
 
-    accessors: {
-        value: {
-            get: function() {
-                if (this.xblock._isMountedComponent()) {
-                    return this.xblock._component.state.value;
+    {
+        prototype: Object.create(HTMLElement.prototype),
 
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : '');
-                }
-            },
+        accessors: {
+            value: {
+                get: function() {
+                    if (this.xblock._isMountedComponent()) {
+                        return this.xblock._component.state.value;
 
-            set: function(value) {
-                if (this.xblock._isMountedComponent()) {
-                    this.xblock._component.setState({
-                        'value': String(value)
-                    });
+                    } else {
+                        var controlNode = this.querySelector('input,textarea');
+                        return (controlNode ? controlNode.value : '');
+                    }
+                },
 
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    if (controlNode) {
-                        controlNode.value = String(value);
+                set: function(value) {
+                    if (this.xblock._isMountedComponent()) {
+                        this.xblock._component.setState({
+                            'value': String(value)
+                        });
+
+                    } else {
+                        var controlNode = this.querySelector('input,textarea');
+                        if (controlNode) {
+                            controlNode.value = String(value);
+                        }
                     }
                 }
             }
         },
 
-        disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+        methods: {
+            focus: function() {
+                var controlNode = this.querySelector('input,textarea');
+                if (controlNode) {
+                    controlNode.focus();
+                }
             },
 
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
+            blur: function() {
+                var controlNode = this.querySelector('input,textarea');
+                if (controlNode) {
+                    controlNode.blur();
                 }
             }
         }
-    },
-
-    methods: {
-        focus: function() {
-            var controlNode = this.querySelector('input,textarea');
-            if (controlNode) {
-                controlNode.focus();
-            }
-        },
-
-        blur: function() {
-            var controlNode = this.querySelector('input,textarea');
-            if (controlNode) {
-                controlNode.blur();
-            }
-        }
     }
-});
+]);
 
 /* blocks/input/input.js end */
 
@@ -922,7 +929,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         'title': React.PropTypes.string,
         'form': React.PropTypes.string,
         'for': React.PropTypes.string,
-        'tabindex': React.PropTypes.number,
+        'tabindex': React.PropTypes.string,
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
         'disabled': React.PropTypes.bool,
@@ -985,61 +992,51 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
 /* blocks/checkbox/checkbox.jsx.js end */
 
 
-xblocks.create('xb-checkbox', {
-    prototype: Object.create(HTMLInputElement.prototype),
+xblocks.create('xb-checkbox', [
+    xblocks.mixin.disabled,
 
-    accessors: {
-        value: {
-            get: function() {
-                if (this.xblock._isMountedComponent()) {
-                    return this.xblock._component.props.value;
+    {
+        prototype: Object.create(HTMLInputElement.prototype),
 
-                } else {
-                    var controlNode = this.querySelector('input');
-                    return (controlNode ? controlNode.value : '');
-                }
-            },
+        accessors: {
+            value: {
+                get: function() {
+                    if (this.xblock._isMountedComponent()) {
+                        return this.xblock._component.props.value;
 
-            set: function(value) {
-                if (this.xblock._isMountedComponent()) {
-                    this.xblock._component.setProps({
-                        'value': String(value)
-                    });
+                    } else {
+                        var controlNode = this.querySelector('input');
+                        return (controlNode ? controlNode.value : '');
+                    }
+                },
 
-                } else {
-                    var controlNode = this.querySelector('input');
-                    if (controlNode) {
-                        controlNode.value = String(value);
+                set: function(value) {
+                    if (this.xblock._isMountedComponent()) {
+                        this.xblock._component.setProps({
+                            'value': String(value)
+                        });
+
+                    } else {
+                        var controlNode = this.querySelector('input');
+                        if (controlNode) {
+                            controlNode.value = String(value);
+                        }
                     }
                 }
             }
         },
 
-        disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+        methods: {
+            focus: function() {
+                this.firstChild.focus();
             },
 
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
-                }
+            blur: function() {
+                this.firstChild.blur();
             }
         }
-    },
-
-    methods: {
-        focus: function() {
-            this.firstChild.focus();
-        },
-
-        blur: function() {
-            this.firstChild.blur();
-        }
     }
-});
+]);
 
 /* blocks/checkbox/checkbox.js end */
 
@@ -1065,7 +1062,7 @@ var XBRadio = xblocks.view.register('xb-radio', {
         'title': React.PropTypes.string,
         'form': React.PropTypes.string,
         'for': React.PropTypes.string,
-        'tabindex': React.PropTypes.number,
+        'tabindex': React.PropTypes.string,
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
         'disabled': React.PropTypes.bool,
@@ -1128,61 +1125,51 @@ var XBRadio = xblocks.view.register('xb-radio', {
 /* blocks/radio/radio.jsx.js end */
 
 
-xblocks.create('xb-radio', {
-    prototype: Object.create(HTMLInputElement.prototype),
+xblocks.create('xb-radio', [
+    xblocks.mixin.disabled,
 
-    accessors: {
-        value: {
-            get: function() {
-                if (this.xblock._isMountedComponent()) {
-                    return this.xblock._component.props.value;
+    {
+        prototype: Object.create(HTMLInputElement.prototype),
 
-                } else {
-                    var controlNode = this.querySelector('input');
-                    return (controlNode ? controlNode.value : '');
-                }
-            },
+        accessors: {
+            value: {
+                get: function() {
+                    if (this.xblock._isMountedComponent()) {
+                        return this.xblock._component.props.value;
 
-            set: function(value) {
-                if (this.xblock._isMountedComponent()) {
-                    this.xblock._component.setProps({
-                        'value': String(value)
-                    });
+                    } else {
+                        var controlNode = this.querySelector('input');
+                        return (controlNode ? controlNode.value : '');
+                    }
+                },
 
-                } else {
-                    var controlNode = this.querySelector('input');
-                    if (controlNode) {
-                        controlNode.value = String(value);
+                set: function(value) {
+                    if (this.xblock._isMountedComponent()) {
+                        this.xblock._component.setProps({
+                            'value': String(value)
+                        });
+
+                    } else {
+                        var controlNode = this.querySelector('input');
+                        if (controlNode) {
+                            controlNode.value = String(value);
+                        }
                     }
                 }
             }
         },
 
-        disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+        methods: {
+            focus: function() {
+                this.firstChild.focus();
             },
 
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
-                }
+            blur: function() {
+                this.firstChild.blur();
             }
         }
-    },
-
-    methods: {
-        focus: function() {
-            this.firstChild.focus();
-        },
-
-        blur: function() {
-            this.firstChild.blur();
-        }
     }
-});
+]);
 
 /* blocks/radio/radio.js end */
 

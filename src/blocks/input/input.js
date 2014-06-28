@@ -3,64 +3,54 @@
 
 /*! borschik:include:input.jsx.js */
 
-xblocks.create('xb-input', {
-    prototype: Object.create(HTMLElement.prototype),
+xblocks.create('xb-input', [
+    xblocks.mixin.disabled,
 
-    accessors: {
-        value: {
-            get: function() {
-                if (this.xblock._isMountedComponent()) {
-                    return this.xblock._component.state.value;
+    {
+        prototype: Object.create(HTMLElement.prototype),
 
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : '');
-                }
-            },
+        accessors: {
+            value: {
+                get: function() {
+                    if (this.xblock._isMountedComponent()) {
+                        return this.xblock._component.state.value;
 
-            set: function(value) {
-                if (this.xblock._isMountedComponent()) {
-                    this.xblock._component.setState({
-                        'value': String(value)
-                    });
+                    } else {
+                        var controlNode = this.querySelector('input,textarea');
+                        return (controlNode ? controlNode.value : '');
+                    }
+                },
 
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    if (controlNode) {
-                        controlNode.value = String(value);
+                set: function(value) {
+                    if (this.xblock._isMountedComponent()) {
+                        this.xblock._component.setState({
+                            'value': String(value)
+                        });
+
+                    } else {
+                        var controlNode = this.querySelector('input,textarea');
+                        if (controlNode) {
+                            controlNode.value = String(value);
+                        }
                     }
                 }
             }
         },
 
-        disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+        methods: {
+            focus: function() {
+                var controlNode = this.querySelector('input,textarea');
+                if (controlNode) {
+                    controlNode.focus();
+                }
             },
 
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
+            blur: function() {
+                var controlNode = this.querySelector('input,textarea');
+                if (controlNode) {
+                    controlNode.blur();
                 }
             }
         }
-    },
-
-    methods: {
-        focus: function() {
-            var controlNode = this.querySelector('input,textarea');
-            if (controlNode) {
-                controlNode.focus();
-            }
-        },
-
-        blur: function() {
-            var controlNode = this.querySelector('input,textarea');
-            if (controlNode) {
-                controlNode.blur();
-            }
-        }
     }
-});
+]);

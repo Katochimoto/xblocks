@@ -15,7 +15,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         'title': React.PropTypes.string,
         'form': React.PropTypes.string,
         'for': React.PropTypes.string,
-        'tabindex': React.PropTypes.number,
+        'tabindex': React.PropTypes.string,
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
         'disabled': React.PropTypes.bool,

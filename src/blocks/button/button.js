@@ -3,32 +3,20 @@
 
 /*! borschik:include:button.jsx.js */
 
-xblocks.create('xb-button', {
-    prototype: Object.create(HTMLButtonElement.prototype),
+xblocks.create('xb-button', [
+    xblocks.mixin.disabled,
 
-    accessors: {
-        disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+    {
+        prototype: Object.create(HTMLButtonElement.prototype),
+
+        methods: {
+            focus: function() {
+                this.firstChild.focus();
             },
 
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
-                }
+            blur: function() {
+                this.firstChild.blur();
             }
         }
-    },
-
-    methods: {
-        focus: function() {
-            this.firstChild.focus();
-        },
-
-        blur: function() {
-            this.firstChild.blur();
-        }
     }
-});
+]);

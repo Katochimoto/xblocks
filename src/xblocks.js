@@ -69,6 +69,9 @@
         return attrs;
     };
 
+    xblocks.mixin = {};
+    /*! borschik:include:mixin/disabled.js */
+
     /*! borschik:include:blocks/ico/ico.js */
     /*! borschik:include:blocks/link/link.js */
     /*! borschik:include:blocks/button/button.js */
