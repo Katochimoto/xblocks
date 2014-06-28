@@ -54,6 +54,8 @@
                 return 'defaultChecked';
             case 'readonly':
                 return 'readOnly';
+            case 'for':
+                return 'htmlFor';
             default:
                 return name;
         }
@@ -296,12 +298,16 @@ var XBButton = xblocks.view.register('xb-button', {
         ]),
         'checked': React.PropTypes.bool,
         'type': React.PropTypes.oneOf([
-            'button',
-            'file',
-            'submit',
             'label',
             'inline',
-            'link'
+            'link',
+            'file',
+
+            'button',
+            'submit',
+
+            'radio',
+            'checkbox'
         ]),
         'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
         'value': React.PropTypes.string,
@@ -353,12 +359,13 @@ var XBButton = xblocks.view.register('xb-button', {
 
         var icoProps = XBButton.filterIcoProps(this.props);
         var tabIndex = this.props.tabindex;
+        var type = this.props.type;
 
         if (this.props.disabled) {
             tabIndex = '-1';
         }
 
-        if (this.props.type === 'link') {
+        if (type === 'link') {
             return (
                 React.DOM.a( {className:classes,
                     href:this.props.href,
@@ -371,7 +378,7 @@ var XBButton = xblocks.view.register('xb-button', {
                 )
             );
 
-        } else if (this.props.type === 'file') {
+        } else if (type === 'file') {
             return (
                 React.DOM.label( {className:classes,
                     tabIndex:tabIndex}, 
@@ -382,8 +389,8 @@ var XBButton = xblocks.view.register('xb-button', {
                                 type:"file",
                                 name:this.props.name,
                                 title:this.props.title,
-                                disabled:this.props.disabled ? 'disabled' : undefined,
-                                multiple:this.props.multiple ? 'multiple' : undefined,
+                                disabled:this.props.disabled,
+                                multiple:this.props.multiple,
                                 autoFocus:this.props.autofocus} ),
 
                             React.DOM.span( {className:"_file-intruder-focus"} )
@@ -393,7 +400,7 @@ var XBButton = xblocks.view.register('xb-button', {
                 )
             );
 
-        } else if (this.props.type === 'label') {
+        } else if (type === 'label' || type === 'radio' || type === 'checkbox') {
             return (
                 React.DOM.label( {className:classes,
                     form:this.props.form,
@@ -405,7 +412,7 @@ var XBButton = xblocks.view.register('xb-button', {
                 )
             );
 
-        } else if (this.props.type === 'inline') {
+        } else if (type === 'inline') {
             return (
                 React.DOM.span( {className:classes,
                     tabIndex:tabIndex}, 
@@ -417,13 +424,13 @@ var XBButton = xblocks.view.register('xb-button', {
         } else {
             return (
                 React.DOM.button( {className:classes,
-                    type:this.props.type,
+                    type:type,
                     form:this.props.form,
                     title:this.props.title,
                     name:this.props.name,
                     value:this.props.value,
                     tabIndex:tabIndex,
-                    disabled:this.props.disabled ? 'disabled' : undefined,
+                    disabled:this.props.disabled,
                     autoFocus:this.props.autofocus}, 
 
                     XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
@@ -914,6 +921,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         'name': React.PropTypes.string,
         'title': React.PropTypes.string,
         'form': React.PropTypes.string,
+        'for': React.PropTypes.string,
         'tabindex': React.PropTypes.number,
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
@@ -949,22 +957,26 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         }
 
         return (
-            React.DOM.label( {className:classes, title:this.props.title}, 
+            React.DOM.label( {className:classes,
+                title:this.props.title,
+                form:this.props.form,
+                htmlFor:this.props['for'],
+                tabIndex:tabIndex}, 
+
                 React.DOM.input( {type:"checkbox",
                     className:"_xb-checkbox_controller",
                     name:this.props.name,
                     value:this.props.value,
-                    form:this.props.form,
-                    tabIndex:tabIndex,
                     disabled:this.props.disabled,
                     defaultChecked:this.props.checked,
                     autoFocus:this.props.autofocus,
                     readOnly:this.props.readonly,
                     required:this.props.required}),
+
                 React.DOM.span( {className:"_xb-checkbox_flag"}, 
                     React.DOM.span( {className:"_xb-checkbox_flag-icon"})
                 ),
-                React.DOM.span( {className:"_xb-checkbox_label"}, this.props.children)
+                React.DOM.span( {'data-xb-content':this.props._uid}, this.props.children)
             )
         );
     }
@@ -1052,6 +1064,7 @@ var XBRadio = xblocks.view.register('xb-radio', {
         'name': React.PropTypes.string,
         'title': React.PropTypes.string,
         'form': React.PropTypes.string,
+        'for': React.PropTypes.string,
         'tabindex': React.PropTypes.number,
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
@@ -1087,22 +1100,26 @@ var XBRadio = xblocks.view.register('xb-radio', {
         }
 
         return (
-            React.DOM.label( {className:classes, title:this.props.title}, 
+            React.DOM.label( {className:classes,
+                title:this.props.title,
+                form:this.props.form,
+                htmlFor:this.props['for'],
+                tabIndex:tabIndex}, 
+
                 React.DOM.input( {type:"radio",
                     className:"_xb-radio_controller",
                     name:this.props.name,
                     value:this.props.value,
-                    form:this.props.form,
-                    tabIndex:tabIndex,
                     disabled:this.props.disabled,
                     defaultChecked:this.props.checked,
                     autoFocus:this.props.autofocus,
                     readOnly:this.props.readonly,
                     required:this.props.required}),
+
                 React.DOM.span( {className:"_xb-radio_flag"}, 
                     React.DOM.span( {className:"_xb-radio_flag-icon"})
                 ),
-                React.DOM.span( {className:"_xb-radio_label"}, this.props.children)
+                React.DOM.span( {'data-xb-content':this.props._uid}, this.props.children)
             )
         );
     }

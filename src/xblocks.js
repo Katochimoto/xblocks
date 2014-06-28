@@ -54,6 +54,8 @@
                 return 'defaultChecked';
             case 'readonly':
                 return 'readOnly';
+            case 'for':
+                return 'htmlFor';
             default:
                 return name;
         }

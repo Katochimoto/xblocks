@@ -14,6 +14,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         'name': React.PropTypes.string,
         'title': React.PropTypes.string,
         'form': React.PropTypes.string,
+        'for': React.PropTypes.string,
         'tabindex': React.PropTypes.number,
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
@@ -49,22 +50,26 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         }
 
         return (
-            <label className={classes} title={this.props.title}>
+            <label className={classes}
+                title={this.props.title}
+                form={this.props.form}
+                htmlFor={this.props['for']}
+                tabIndex={tabIndex}>
+
                 <input type="checkbox"
                     className="_xb-checkbox_controller"
                     name={this.props.name}
                     value={this.props.value}
-                    form={this.props.form}
-                    tabIndex={tabIndex}
                     disabled={this.props.disabled}
                     defaultChecked={this.props.checked}
                     autoFocus={this.props.autofocus}
                     readOnly={this.props.readonly}
                     required={this.props.required}/>
+
                 <span className="_xb-checkbox_flag">
                     <span className="_xb-checkbox_flag-icon"></span>
                 </span>
-                <span className="_xb-checkbox_label">{this.props.children}</span>
+                <span data-xb-content={this.props._uid}>{this.props.children}</span>
             </label>
         );
     }
