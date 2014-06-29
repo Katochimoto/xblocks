@@ -112,6 +112,20 @@ $skin-islands-button-disabled = '._disabled'
       skin: promo-button xlarge
 
 
+  &._theme-check
+    kind: block inline
+    vertical-align: baseline
+
+    & > ._controller
+      kind: hidden visually
+
+      &:checked + .xb-button
+        skin: button_checked
+
+      &:focus + .xb-button
+        skin: button_focus
+
+
   // Кнопка аттача
   & ._file-intruder
     kind: file-intruder \

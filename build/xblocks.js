@@ -102,14 +102,25 @@ xblocks.mixin.eChecked = {
     accessors: {
         checked: {
             get: function() {
-                return xblocks.dom.attrs.valueConversion('checked', this.getAttribute('checked'), React.PropTypes.bool);
+                if (this.xblock._isMountedComponent()) {
+                    return this.xblock._component.state.checked;
+
+                } else {
+                    return Boolean(this.querySelector('input:checked'));
+                }
             },
 
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('checked', '');
+            set: function(isChecked) {
+                if (this.xblock._isMountedComponent()) {
+                    this.xblock.update({
+                        'checked': Boolean(isChecked)
+                    });
+
                 } else {
-                    this.removeAttribute('checked');
+                    var controlNode = this.querySelector('input');
+                    if (controlNode) {
+                        controlNode.checked = Boolean(isChecked);
+                    }
                 }
             }
         }
@@ -443,7 +454,10 @@ var XBButton = xblocks.view.register('xb-button', {
             'file',
 
             'button',
-            'submit'
+            'submit',
+
+            'checkbox',
+            'radio'
         ]),
         'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
         'value': React.PropTypes.string,
@@ -455,7 +469,11 @@ var XBButton = xblocks.view.register('xb-button', {
         'tabindex': React.PropTypes.string,
         'multiple': React.PropTypes.bool,
         'autofocus': React.PropTypes.bool,
-        'disabled': React.PropTypes.bool
+        'disabled': React.PropTypes.bool,
+
+        'checked': React.PropTypes.bool,
+        'readonly': React.PropTypes.bool,   // native not work
+        'required': React.PropTypes.bool
     },
 
     statics: {
@@ -472,8 +490,32 @@ var XBButton = xblocks.view.register('xb-button', {
             'size': 'm',
             'theme': 'normal',
             'type': 'button',
+            'checked': false,
             'children': String.fromCharCode(160)
         };
+    },
+
+    getInitialState: function() {
+        return {
+            'checked': this.props.checked
+        };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            'checked': nextProps.checked
+        });
+    },
+
+    /**
+     * Remember current checked in state
+     * @param {Event} event
+     * @private
+     */
+    _onChange: function(event) {
+        this.setState({
+            'checked': event.target.checked
+        });
     },
 
     render: function() {
@@ -535,16 +577,50 @@ var XBButton = xblocks.view.register('xb-button', {
                 )
             );
 
-        } else if (type === 'label') {
+        } else if (type === 'label' || type === 'checkbox' || type === 'radio') {
+            var children = [];
+
+            if (type === 'checkbox' || type === 'radio') {
+                var value = this.props.value || 'on';
+
+                children.push(
+                    React.DOM.input( {key:"controller",
+                        type:type,
+                        className:"_controller",
+                        name:this.props.name,
+                        value:this.props.value,
+                        disabled:this.props.disabled,
+                        checked:this.state.checked,
+                        autoFocus:this.props.autofocus,
+                        readOnly:this.props.readonly,
+                        required:this.props.required,
+                        onChange:this._onChange})
+                );
+
+                children.push(XBButton(xblocks.utils.merge({}, this.props, {
+                    'key': 'content',
+                    'type': 'inline'
+                })));
+
+                classes = React.addons.classSet({
+                    'xb-button': true,
+                    '_theme-check': true
+                });
+
+            } else {
+                children.push(
+                    XBButtonContent( {key:"content",
+                        _uid:this.props._uid,
+                        ico:icoProps}, this.props.children)
+                );
+            }
+
             return (
                 React.DOM.label( {className:classes,
                     form:this.props.form,
                     htmlFor:this.props['for'],
                     title:this.props.title,
-                    tabIndex:tabIndex}, 
-
-                    XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
-                )
+                    tabIndex:tabIndex}, children)
             );
 
         } else if (type === 'inline') {
@@ -580,6 +656,8 @@ var XBButton = xblocks.view.register('xb-button', {
 
 xblocks.create('xb-button', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eChecked,
+    xblocks.mixin.eInputValueProps,
     xblocks.mixin.eFocusFirstChild,
 
     {
