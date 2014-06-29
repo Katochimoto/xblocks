@@ -4,7 +4,7 @@
 
 /*! borschik:include:button-content.jsx.js */
 
-var XBButton = xblocks.view.register('xb-button', {
+var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
     displayName: 'xb-button',
 
     propTypes: {
@@ -81,21 +81,6 @@ var XBButton = xblocks.view.register('xb-button', {
         });
     },
 
-    _onChangeCheckedApply: function(checkedList) {
-        this.setState({
-            'checked': checkedList[checkedList.length - 1]
-        });
-    },
-
-    /**
-     * Remember current checked in state
-     * @param {Event} event
-     * @private
-     */
-    _onChangeChecked: function(event) {
-        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
-    },
-
     render: function() {
         var classes = {
             'xb-button': true,
@@ -162,7 +147,8 @@ var XBButton = xblocks.view.register('xb-button', {
                 var value = this.props.value || 'on';
 
                 children.push(
-                    <input key="controller"
+                    <input key="checkControl"
+                        ref="checkControl"
                         type={type}
                         className="_controller"
                         name={this.props.name}
@@ -227,4 +213,4 @@ var XBButton = xblocks.view.register('xb-button', {
             );
         }
     }
-});
+} ]);

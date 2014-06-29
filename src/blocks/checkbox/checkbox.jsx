@@ -2,7 +2,7 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBCheckbox = xblocks.view.register('xb-checkbox', {
+var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, {
     displayName: 'xb-checkbox',
 
     propTypes: {
@@ -44,21 +44,6 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         });
     },
 
-    _onChangeCheckedApply: function(checkedList) {
-        this.setState({
-            'checked': checkedList[checkedList.length - 1]
-        });
-    },
-
-    /**
-     * Remember current checked in state
-     * @param {Event} event
-     * @private
-     */
-    _onChangeChecked: function(event) {
-        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
-    },
-
     render: function() {
         var classes = {
             'xb-checkbox': true,
@@ -85,6 +70,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
                 tabIndex={tabIndex}>
 
                 <input type="checkbox"
+                    ref="checkControl"
                     className="_xb-checkbox_controller"
                     name={this.props.name}
                     value={this.props.value}
@@ -102,4 +88,4 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
             </label>
         );
     }
-});
+} ]);

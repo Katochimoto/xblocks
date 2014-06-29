@@ -2,7 +2,7 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBradio = xblocks.view.register('xb-radio', {
+var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
     displayName: 'xb-radio',
 
     propTypes: {
@@ -44,21 +44,6 @@ var XBradio = xblocks.view.register('xb-radio', {
         });
     },
 
-    _onChangeCheckedApply: function(checkedList) {
-        this.setState({
-            'checked': checkedList[checkedList.length - 1]
-        });
-    },
-
-    /**
-     * Remember current checked in state
-     * @param {Event} event
-     * @private
-     */
-    _onChangeChecked: function(event) {
-        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
-    },
-
     render: function() {
         var classes = {
             'xb-radio': true,
@@ -85,6 +70,7 @@ var XBradio = xblocks.view.register('xb-radio', {
                 tabIndex={tabIndex}>
 
                 <input type="radio"
+                    ref="checkControl"
                     className="_xb-radio_controller"
                     name={this.props.name}
                     value={this.props.value}
@@ -102,4 +88,4 @@ var XBradio = xblocks.view.register('xb-radio', {
             </label>
         );
     }
-});
+} ]);

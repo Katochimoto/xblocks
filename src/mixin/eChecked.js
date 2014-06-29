@@ -6,7 +6,7 @@ xblocks.mixin.eChecked = {
         checked: {
             get: function() {
                 if (this.xblock._isMountedComponent()) {
-                    return this.xblock._component.state.checked;
+                    return this.xblock._component.isChecked();
 
                 } else {
                     return Boolean(this.querySelector('input:checked'));

@@ -103,7 +103,7 @@ xblocks.mixin.eChecked = {
         checked: {
             get: function() {
                 if (this.xblock._isMountedComponent()) {
-                    return this.xblock._component.state.checked;
+                    return this.xblock._component.isChecked();
 
                 } else {
                     return Boolean(this.querySelector('input:checked'));
@@ -218,6 +218,34 @@ xblocks.mixin.eFocusFirstChild = {
 };
 
 /* mixin/eFocusFirstChild.js end */
+
+
+    /* mixin/vChecked.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.mixin.vChecked = {
+    isChecked: function() {
+        return this.refs.checkControl.getDOMNode().checked;
+    },
+
+    _onChangeCheckedApply: function(checkedList) {
+        this.setState({
+            'checked': checkedList[checkedList.length - 1]
+        });
+    },
+
+    /**
+     * Remember current checked in state
+     * @param {Event} event
+     * @private
+     */
+    _onChangeChecked: function(event) {
+        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
+    }
+};
+
+/* mixin/vChecked.js end */
 
 
     /* blocks/ico/ico.js begin */
@@ -430,7 +458,7 @@ var XBButtonContent = xblocks.view.create({
 /* blocks/button/button-content.jsx.js end */
 
 
-var XBButton = xblocks.view.register('xb-button', {
+var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
     displayName: 'xb-button',
 
     propTypes: {
@@ -507,21 +535,6 @@ var XBButton = xblocks.view.register('xb-button', {
         });
     },
 
-    _onChangeCheckedApply: function(checkedList) {
-        this.setState({
-            'checked': checkedList[checkedList.length - 1]
-        });
-    },
-
-    /**
-     * Remember current checked in state
-     * @param {Event} event
-     * @private
-     */
-    _onChangeChecked: function(event) {
-        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
-    },
-
     render: function() {
         var classes = {
             'xb-button': true,
@@ -588,7 +601,8 @@ var XBButton = xblocks.view.register('xb-button', {
                 var value = this.props.value || 'on';
 
                 children.push(
-                    React.DOM.input( {key:"controller",
+                    React.DOM.input( {key:"checkControl",
+                        ref:"checkControl",
                         type:type,
                         className:"_controller",
                         name:this.props.name,
@@ -653,7 +667,7 @@ var XBButton = xblocks.view.register('xb-button', {
             );
         }
     }
-});
+} ]);
 
 /* blocks/button/button.jsx.js end */
 
@@ -1068,7 +1082,7 @@ xblocks.create('xb-input', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBCheckbox = xblocks.view.register('xb-checkbox', {
+var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, {
     displayName: 'xb-checkbox',
 
     propTypes: {
@@ -1110,21 +1124,6 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         });
     },
 
-    _onChangeCheckedApply: function(checkedList) {
-        this.setState({
-            'checked': checkedList[checkedList.length - 1]
-        });
-    },
-
-    /**
-     * Remember current checked in state
-     * @param {Event} event
-     * @private
-     */
-    _onChangeChecked: function(event) {
-        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
-    },
-
     render: function() {
         var classes = {
             'xb-checkbox': true,
@@ -1151,6 +1150,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
                 tabIndex:tabIndex}, 
 
                 React.DOM.input( {type:"checkbox",
+                    ref:"checkControl",
                     className:"_xb-checkbox_controller",
                     name:this.props.name,
                     value:this.props.value,
@@ -1168,7 +1168,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
             )
         );
     }
-});
+} ]);
 
 /* blocks/checkbox/checkbox.jsx.js end */
 
@@ -1195,7 +1195,7 @@ xblocks.create('xb-checkbox', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBradio = xblocks.view.register('xb-radio', {
+var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
     displayName: 'xb-radio',
 
     propTypes: {
@@ -1237,21 +1237,6 @@ var XBradio = xblocks.view.register('xb-radio', {
         });
     },
 
-    _onChangeCheckedApply: function(checkedList) {
-        this.setState({
-            'checked': checkedList[checkedList.length - 1]
-        });
-    },
-
-    /**
-     * Remember current checked in state
-     * @param {Event} event
-     * @private
-     */
-    _onChangeChecked: function(event) {
-        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
-    },
-
     render: function() {
         var classes = {
             'xb-radio': true,
@@ -1278,6 +1263,7 @@ var XBradio = xblocks.view.register('xb-radio', {
                 tabIndex:tabIndex}, 
 
                 React.DOM.input( {type:"radio",
+                    ref:"checkControl",
                     className:"_xb-radio_controller",
                     name:this.props.name,
                     value:this.props.value,
@@ -1295,7 +1281,7 @@ var XBradio = xblocks.view.register('xb-radio', {
             )
         );
     }
-});
+} ]);
 
 /* blocks/radio/radio.jsx.js end */
 
