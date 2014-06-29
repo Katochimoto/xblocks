@@ -507,15 +507,19 @@ var XBButton = xblocks.view.register('xb-button', {
         });
     },
 
+    _onChangeCheckedApply: function(checkedList) {
+        this.setState({
+            'checked': checkedList[checkedList.length - 1]
+        });
+    },
+
     /**
      * Remember current checked in state
      * @param {Event} event
      * @private
      */
-    _onChange: function(event) {
-        this.setState({
-            'checked': event.target.checked
-        });
+    _onChangeChecked: function(event) {
+        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
     },
 
     render: function() {
@@ -594,7 +598,7 @@ var XBButton = xblocks.view.register('xb-button', {
                         autoFocus:this.props.autofocus,
                         readOnly:this.props.readonly,
                         required:this.props.required,
-                        onChange:this._onChange})
+                        onChange:this._onChangeChecked})
                 );
 
                 children.push(XBButton(xblocks.utils.merge({}, this.props, {
@@ -1106,15 +1110,19 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         });
     },
 
+    _onChangeCheckedApply: function(checkedList) {
+        this.setState({
+            'checked': checkedList[checkedList.length - 1]
+        });
+    },
+
     /**
      * Remember current checked in state
      * @param {Event} event
      * @private
      */
-    _onChange: function(event) {
-        this.setState({
-            'checked': event.target.checked
-        });
+    _onChangeChecked: function(event) {
+        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
     },
 
     render: function() {
@@ -1151,7 +1159,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
                     autoFocus:this.props.autofocus,
                     readOnly:this.props.readonly,
                     required:this.props.required,
-                    onChange:this._onChange}),
+                    onChange:this._onChangeChecked}),
 
                 React.DOM.span( {className:"_xb-checkbox_flag"}, 
                     React.DOM.span( {className:"_xb-checkbox_flag-icon"})
@@ -1229,15 +1237,19 @@ var XBradio = xblocks.view.register('xb-radio', {
         });
     },
 
+    _onChangeCheckedApply: function(checkedList) {
+        this.setState({
+            'checked': checkedList[checkedList.length - 1]
+        });
+    },
+
     /**
      * Remember current checked in state
      * @param {Event} event
      * @private
      */
-    _onChange: function(event) {
-        this.setState({
-            'checked': event.target.checked
-        });
+    _onChangeChecked: function(event) {
+        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
     },
 
     render: function() {
@@ -1274,7 +1286,7 @@ var XBradio = xblocks.view.register('xb-radio', {
                     autoFocus:this.props.autofocus,
                     readOnly:this.props.readonly,
                     required:this.props.required,
-                    onChange:this._onChange}),
+                    onChange:this._onChangeChecked}),
 
                 React.DOM.span( {className:"_xb-radio_flag"}, 
                     React.DOM.span( {className:"_xb-radio_flag-icon"})

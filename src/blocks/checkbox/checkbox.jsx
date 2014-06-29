@@ -44,15 +44,19 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
         });
     },
 
+    _onChangeCheckedApply: function(checkedList) {
+        this.setState({
+            'checked': checkedList[checkedList.length - 1]
+        });
+    },
+
     /**
      * Remember current checked in state
      * @param {Event} event
      * @private
      */
-    _onChange: function(event) {
-        this.setState({
-            'checked': event.target.checked
-        });
+    _onChangeChecked: function(event) {
+        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
     },
 
     render: function() {
@@ -89,7 +93,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', {
                     autoFocus={this.props.autofocus}
                     readOnly={this.props.readonly}
                     required={this.props.required}
-                    onChange={this._onChange}/>
+                    onChange={this._onChangeChecked}/>
 
                 <span className="_xb-checkbox_flag">
                     <span className="_xb-checkbox_flag-icon"></span>
