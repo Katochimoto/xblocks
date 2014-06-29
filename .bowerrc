@@ -1,6 +1,6 @@
 {
     "name": "xblocks",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "dependencies": {
         "x-tag-core": "0.9.7",
         "es5-shim": "3.4.0",
