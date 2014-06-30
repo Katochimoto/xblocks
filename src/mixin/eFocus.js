@@ -2,21 +2,13 @@
 /* jshint strict: false */
 
 xblocks.mixin.eFocus = {
-    accessors: {
-        _focusControl: {
-            get: function() {
-                return this.firstChild;
-            }
-        }
-    },
-
     methods: {
         focus: function() {
-            this._focusControl.focus();
+            this.firstChild.focus();
         },
 
         blur: function() {
-            this._focusControl.blur();
+            this.firstChild.blur();
         }
     }
 };

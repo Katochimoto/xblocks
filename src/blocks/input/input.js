@@ -9,15 +9,6 @@ xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLElement.prototype),
-
-        accessors: {
-            _focusControl: {
-                get: function() {
-                    var controlNode = this.getElementsByClassName('_xb-input_controller');
-                    return (controlNode.length ? controlNode[0] : undefined);
-                }
-            }
-        }
+        prototype: Object.create(HTMLElement.prototype)
     }
 ]);

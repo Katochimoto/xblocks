@@ -211,21 +211,13 @@ xblocks.mixin.eInputValueProps = {
 /* jshint strict: false */
 
 xblocks.mixin.eFocus = {
-    accessors: {
-        _focusControl: {
-            get: function() {
-                return this.firstChild;
-            }
-        }
-    },
-
     methods: {
         focus: function() {
-            this._focusControl.focus();
+            this.firstChild.focus();
         },
 
         blur: function() {
-            this._focusControl.blur();
+            this.firstChild.blur();
         }
     }
 };
@@ -771,8 +763,6 @@ var XBInputController = xblocks.view.create({
     },
 
     render: function() {
-        var classes = React.addons.classSet('_xb-input_controller', this.props.className);
-
         var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';
@@ -781,7 +771,7 @@ var XBInputController = xblocks.view.create({
         if (this.props.multiline) {
             return (
                 React.DOM.textarea( {value:this.props.value,
-                    className:classes,
+                    className:this.props.className,
                     name:this.props.name,
                     disabled:this.props.disabled,
                     required:this.props.required,
@@ -799,7 +789,7 @@ var XBInputController = xblocks.view.create({
             return (
                 React.DOM.input( {value:this.props.value,
                     type:"text",
-                    className:classes,
+                    className:this.props.className,
                     name:this.props.name,
                     disabled:this.props.disabled,
                     required:this.props.required,
@@ -1059,16 +1049,7 @@ xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLElement.prototype),
-
-        accessors: {
-            _focusControl: {
-                get: function() {
-                    var controlNode = this.getElementsByClassName('_xb-input_controller');
-                    return (controlNode.length ? controlNode[0] : undefined);
-                }
-            }
-        }
+        prototype: Object.create(HTMLElement.prototype)
     }
 ]);
 
