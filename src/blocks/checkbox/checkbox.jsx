@@ -32,18 +32,6 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
         };
     },
 
-    getInitialState: function() {
-        return {
-            'checked': this.props.checked
-        };
-    },
-
-    componentWillReceiveProps: function(nextProps) {
-        this.setState({
-            'checked': nextProps.checked
-        });
-    },
-
     render: function() {
         var classes = {
             'xb-checkbox': true,
@@ -71,17 +59,16 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
 
                 <input type="checkbox"
                     ref="checkControl"
-                    className="_xb-checkbox_controller"
+                    className="_xb-check_controller"
                     name={this.props.name}
                     value={this.props.value}
                     disabled={this.props.disabled}
-                    checked={this.state.checked}
+                    defaultChecked={this.props.checked}
                     autoFocus={this.props.autofocus}
                     readOnly={this.props.readonly}
-                    required={this.props.required}
-                    onChange={this._onChangeChecked}/>
+                    required={this.props.required}/>
 
-                <span className="_xb-checkbox_flag">
+                <span className="_xb-checkbox_flag _xb-check_flag">
                     <span className="_xb-checkbox_flag-icon"></span>
                 </span>
                 <span data-xb-content={this.props._uid}>{this.props.children}</span>

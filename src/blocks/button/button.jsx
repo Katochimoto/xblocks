@@ -69,18 +69,6 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
         };
     },
 
-    getInitialState: function() {
-        return {
-            'checked': this.props.checked
-        };
-    },
-
-    componentWillReceiveProps: function(nextProps) {
-        this.setState({
-            'checked': nextProps.checked
-        });
-    },
-
     render: function() {
         var classes = {
             'xb-button': true,
@@ -150,15 +138,14 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                     <input key="checkControl"
                         ref="checkControl"
                         type={type}
-                        className="_controller"
+                        className="_xb-check_controller"
                         name={this.props.name}
                         value={this.props.value}
                         disabled={this.props.disabled}
-                        checked={this.state.checked}
+                        defaultChecked={this.props.checked}
                         autoFocus={this.props.autofocus}
                         readOnly={this.props.readonly}
-                        required={this.props.required}
-                        onChange={this._onChangeChecked}/>
+                        required={this.props.required}/>
                 );
 
                 children.push(XBButton(xblocks.utils.merge({}, this.props, {
@@ -168,7 +155,8 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
 
                 classes = React.addons.classSet({
                     'xb-button': true,
-                    '_theme-check': true
+                    '_theme-check': true,
+                    '_disabled': this.props.disabled
                 });
 
             } else {

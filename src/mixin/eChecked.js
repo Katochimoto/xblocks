@@ -9,20 +9,21 @@ xblocks.mixin.eChecked = {
                     return this.xblock._component.isChecked();
 
                 } else {
-                    return Boolean(this.querySelector('input:checked'));
+                    var controlNode = this.getElementsByClassName('_xb-check_controller');
+                    if (controlNode.length) {
+                        return controlNode[0].checked;
+                    }
                 }
             },
 
             set: function(isChecked) {
                 if (this.xblock._isMountedComponent()) {
-                    this.xblock.update({
-                        'checked': Boolean(isChecked)
-                    });
+                    this.xblock._component.setChecked(isChecked);
 
                 } else {
-                    var controlNode = this.querySelector('input');
-                    if (controlNode) {
-                        controlNode.checked = Boolean(isChecked);
+                    var controlNode = this.getElementsByClassName('_xb-check_controller');
+                    if (controlNode.length) {
+                        controlNode[0].checked = Boolean(isChecked);
                     }
                 }
             }

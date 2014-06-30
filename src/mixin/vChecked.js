@@ -2,22 +2,22 @@
 /* jshint strict: false */
 
 xblocks.mixin.vChecked = {
-    isChecked: function() {
-        return this.refs.checkControl.getDOMNode().checked;
-    },
 
-    _onChangeCheckedApply: function(checkedList) {
-        this.setState({
-            'checked': checkedList[checkedList.length - 1]
-        });
+    /**
+     * @returns {boolean}
+     */
+    isChecked: function() {
+        if (this.refs.checkControl) {
+            return this.refs.checkControl.getDOMNode().checked;
+        }
     },
 
     /**
-     * Remember current checked in state
-     * @param {Event} event
-     * @private
+     * @param {boolean} isChecked
      */
-    _onChangeChecked: function(event) {
-        xblocks.utils.lazy(this._onChangeCheckedApply, event.target.checked);
+    setChecked: function(isChecked) {
+        if (this.refs.checkControl) {
+            this.refs.checkControl.getDOMNode().checked = Boolean(isChecked);
+        }
     }
 };
