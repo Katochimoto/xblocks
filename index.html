@@ -79,20 +79,22 @@
             -->
             <br>
 
+            <a href="https://github.com/Katochimoto/xblocks/blob/master/src/blocks/ico/ico.jsx#L9-L45"
+               target="_blank">Full list attributes on Github</a>
 <pre><code>&lt;xb-ico
     type="remove"
-    active="true"
     class="blabla"
     id="qwe"
     alt="qwe"
     float="left"
-    disabled="true">&lt;/xb-ico></code></pre>
+    disabled
+    active>&lt;/xb-ico></code></pre>
+
 
             <!--
             <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
             -->
 
-            <!--
             <h3>
                 <a name="designer-templates" class="anchor" href="#link">
                     <span class="octicon octicon-link"></span>
@@ -107,35 +109,38 @@
                 </tr>
                 <tr>
                     <td width="20%">normal</td>
-                    <td width="40%"><xb-link type="normal" href="http://ya.ru" target="_blank">Link</xb-link></td>
-                    <td width="40%"><xb-link type="normal" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                    <td width="40%"><xb-link theme="normal" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td width="40%"><xb-link theme="normal" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
                 </tr>
                 <tr>
                     <td>outer</td>
-                    <td><xb-link type="outer" href="http://ya.ru" target="_blank">Link</xb-link></td>
-                    <td><xb-link type="outer" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                    <td><xb-link theme="outer" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td><xb-link theme="outer" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
                 </tr>
                 <tr>
                     <td>pseudo</td>
-                    <td><xb-link type="pseudo" href="http://ya.ru" target="_blank">Link</xb-link></td>
-                    <td><xb-link type="pseudo" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                    <td><xb-link theme="pseudo" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td><xb-link theme="pseudo" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
                 </tr>
                 <tr>
                     <td>input</td>
-                    <td><xb-link type="input" href="http://ya.ru" target="_blank">Link</xb-link></td>
-                    <td><xb-link type="input" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
+                    <td><xb-link theme="input" href="http://ya.ru" target="_blank">Link</xb-link></td>
+                    <td><xb-link theme="input" href="http://ya.ru" target="_blank" disabled="true">Link</xb-link></td>
                 </tr>
             </table>
             <br>
+
+            <a href="https://github.com/Katochimoto/xblocks/blob/master/src/blocks/link/link.jsx#L9-L15"
+               target="_blank">Full list attributes on Github</a>
 <pre><code>&lt;xb-link
-    type="normal"
+    theme="normal"
     href="http://ya.ru"
     target="_blank"
     class="blabla"
     id="qwe"
     name="qwe"
-    disabled="true">Link&lt;/xb-link></code></pre>
--->
+    disabled>Link&lt;/xb-link></code></pre>
+
             <h3>
                 <a name="designer-templates" class="anchor" href="#button">
                     <span class="octicon octicon-link"></span>
@@ -148,42 +153,36 @@
                     <th colspan="2">Theme</th>
                     <th>Flying</th>
                     <th>Disabled</th>
-                    <th>Checked</th>
                 </tr>
                 <tr>
                     <td width="15%">normal</td>
                     <td><xb-button theme="normal">Button</xb-button></td>
                     <td><xb-button theme="normal" flying="true">Button</xb-button></td>
                     <td><xb-button theme="normal" disabled="true">Button</xb-button></td>
-                    <td><xb-button theme="normal" checked="true">Button</xb-button></td>
                 </tr>
                 <tr>
                     <td>action</td>
                     <td><xb-button theme="action">Button</xb-button></td>
                     <td><xb-button theme="action" flying="true">Button</xb-button></td>
                     <td><xb-button theme="action" disabled="true">Button</xb-button></td>
-                    <td><xb-button theme="action" checked="true">Button</xb-button></td>
                 </tr>
                 <tr>
                     <td>dark</td>
                     <td><xb-button theme="dark">Button</xb-button></td>
                     <td><xb-button theme="dark" flying="true">Button</xb-button></td>
                     <td><xb-button theme="dark" disabled="true">Button</xb-button></td>
-                    <td><xb-button theme="dark" checked="true">Button</xb-button></td>
                 </tr>
                 <tr>
                     <td>pseudo</td>
                     <td><xb-button theme="pseudo">Button</xb-button></td>
                     <td><xb-button theme="pseudo" flying="true">Button</xb-button></td>
                     <td><xb-button theme="pseudo" disabled="true">Button</xb-button></td>
-                    <td><xb-button theme="pseudo" checked="true">Button</xb-button></td>
                 </tr>
                 <tr>
                     <td>promo</td>
                     <td><xb-button theme="promo">Button</xb-button></td>
                     <td><xb-button theme="promo" flying="true">Button</xb-button></td>
                     <td><xb-button theme="promo" disabled="true">Button</xb-button></td>
-                    <td><xb-button theme="promo" checked="true">Button</xb-button></td>
                 </tr>
             </table>
             <br>
@@ -192,85 +191,87 @@
             <xb-button theme="action" xb-ico-type="remove" xb-ico-float="right">Button</xb-button>
             <br>  <br>
 
+            <a href="https://github.com/Katochimoto/xblocks/blob/master/src/blocks/button/button.jsx#L11-L50"
+               target="_blank">Full list attributes on Github</a>
 <pre><code>&lt;xb-button
     theme="action"
     size="s"
-    disabled="true"
+    disabled
     class="blabla"
-    checked="true"
+    checked
     href="http://ya.ru"
     id="qwe"
-    multiple="true"
+    multiple
     name="qwe"
     target="_blank"
     type="button"
-    flying="true"
     xb-ico-...
     >Button&lt;/xb-button></code></pre>
 
-            <!--
             <h3>
                 <a name="designer-templates" class="anchor" href="#field">
                     <span class="octicon octicon-link"></span>
                 </a>
-                Field.
+                Input.
             </h3>
 
             <p>
-                <xb-field autosize="true" value="autosize"></xb-field>
+                <xb-input autosize="true" value="autosize"></xb-input>
             </p>
             <p>
-                <xb-field autosize="true"
+                <xb-input autosize="true"
                           multiline="true"
                           value="autosize multiline"
                           rows="5"
-                          cols="10"></xb-field>
+                          cols="10"></xb-input>
             </p>
             <p>
-                <xb-field disabled="true" value="disabled"></xb-field>
+                <xb-input disabled="true" value="disabled"></xb-input>
             </p>
             <p>
-                <xb-field placeholder="placeholder "></xb-field>
+                <xb-input placeholder="placeholder "></xb-input>
             </p>
             <p>
-                <xb-field readonly="true" value="readonly"></xb-field>
+                <xb-input readonly="true" value="readonly"></xb-input>
             </p>
             <p>
-                <xb-field prefix="Prefix"></xb-field>
+                <xb-input prefix="Prefix"></xb-input>
             </p>
             <p>
-                <xb-field postfix="Postfix"></xb-field>
+                <xb-input postfix="Postfix"></xb-input>
             </p>
             <p>
-                <xb-field reset="true"></xb-field>
+                <xb-input reset="true"></xb-input>
             </p>
             <p>
-                <xb-field reset="true" multiline="true" value="reset multiline" rows="5"></xb-field>
+                <xb-input reset="true" multiline="true" value="reset multiline" rows="5"></xb-input>
             </p>
             <p>
-                <xb-field label="Label" label-href="http://ya.ru" label-target="_blank"></xb-field>
+                <xb-input xb-link="Label" xb-link-href="http://ya.ru" xb-link-target="_blank"></xb-input>
             </p>
 
-<pre><code>&lt;xb-field
-    reset="true"
+            <a href="https://github.com/Katochimoto/xblocks/blob/master/src/blocks/input/input.jsx#L15-L39"
+               target="_blank">Full list attributes on Github</a>
+<pre><code>&lt;xb-input
+    reset
     postfix="qwe"
     prefix="qwe"
     value="qwe"
-    readonly="true"
-    required="true"
+    readonly
+    required
     placeholder="qwe"
     cols="6"
     rows="6"
     type="date"
     name="asd"
     id="qwe"
-    multiline="true"
-    autosize="true"
+    multiline
+    autosize
     class="blabla"
-    disabled="true"
-    label="Label"
-    label-...>Link&lt;/xb-field></code></pre>
-            -->
+    disabled
+    xb-link="Label"
+    xb-link-...>Link&lt;/xb-input></code></pre>
+
         </section>
 
         <aside id="sidebar">

@@ -1,6 +1,6 @@
 {
     "name": "xblocks-core",
-    "version": "0.0.23",
+    "version": "0.0.28",
     "main": "xblocks-core.js",
     "ignore": [
         "**/.*",
@@ -27,8 +27,10 @@
     ],
     "keywords": [
         "x-tag",
+        "x-tags",
         "react",
-        "html5"
+        "html5",
+        "xblocks"
     ],
     "license": "MIT"
 }

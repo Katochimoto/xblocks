@@ -1,5 +1,6 @@
 {
   "name": "xblocks-core",
+  "version": "0.0.28",
   "main": "xblocks-core.js",
   "ignore": [
     "**/.*",
@@ -26,17 +27,19 @@
   ],
   "keywords": [
     "x-tag",
+    "x-tags",
     "react",
-    "html5"
+    "html5",
+    "xblocks"
   ],
   "license": "MIT",
-  "_release": "c86bd930d5",
+  "_release": "0.0.28",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "c86bd930d51347b1f754b9c379755f7cd8a5a4fa"
+    "type": "version",
+    "tag": "v0.0.28",
+    "commit": "863433aa5310c7329eee87450b73b7a99e5deb9e"
   },
   "_source": "git://github.com/Katochimoto/xblocks-core.git",
-  "_target": "master",
-  "_originalSource": "Katochimoto/xblocks-core"
+  "_target": "*",
+  "_originalSource": "xblocks-core"
 }
