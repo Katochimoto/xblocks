@@ -74,7 +74,7 @@
     /*! borschik:include:mixin/eChecked.js */
     /*! borschik:include:mixin/eInputValueState.js */
     /*! borschik:include:mixin/eInputValueProps.js */
-    /*! borschik:include:mixin/eFocusFirstChild.js */
+    /*! borschik:include:mixin/eFocus.js */
 
     /*! borschik:include:mixin/vChecked.js */
 

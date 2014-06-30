@@ -54,9 +54,9 @@ var XBInputController = xblocks.view.create({
     },
 
     _recalculateSize: function() {
-        var node = this.getDOMNode();
-
         if (this.props.autosize) {
+            var node = this.getDOMNode();
+
             if (this.props.multiline) {
                 node.style.height = '0px';
                 node.style.height = node.scrollHeight + 'px';
@@ -69,6 +69,8 @@ var XBInputController = xblocks.view.create({
     },
 
     render: function() {
+        var classes = React.addons.classSet('_xb-input_controller', this.props.className);
+
         var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';
@@ -77,7 +79,7 @@ var XBInputController = xblocks.view.create({
         if (this.props.multiline) {
             return (
                 <textarea value={this.props.value}
-                    className={this.props.className}
+                    className={classes}
                     name={this.props.name}
                     disabled={this.props.disabled}
                     required={this.props.required}
@@ -95,7 +97,7 @@ var XBInputController = xblocks.view.create({
             return (
                 <input value={this.props.value}
                     type="text"
-                    className={this.props.className}
+                    className={classes}
                     name={this.props.name}
                     disabled={this.props.disabled}
                     required={this.props.required}

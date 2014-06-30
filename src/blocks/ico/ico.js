@@ -3,4 +3,6 @@
 
 /*! borschik:include:ico.jsx.js */
 
-xblocks.create('xb-ico');
+xblocks.create('xb-ico', [
+    xblocks.mixin.eDisabled
+]);

@@ -5,7 +5,11 @@ xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
             get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+                return xblocks.dom.attrs.valueConversion(
+                    'disabled',
+                    this.getAttribute('disabled'),
+                    React.PropTypes.bool
+                );
             },
 
             set: function(isDisabled) {

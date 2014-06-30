@@ -7,7 +7,7 @@ xblocks.create('xb-radio', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocusFirstChild,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype)

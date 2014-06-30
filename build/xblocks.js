@@ -78,7 +78,11 @@ xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
             get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+                return xblocks.dom.attrs.valueConversion(
+                    'disabled',
+                    this.getAttribute('disabled'),
+                    React.PropTypes.bool
+                );
             },
 
             set: function(isDisabled) {
@@ -202,23 +206,31 @@ xblocks.mixin.eInputValueProps = {
 
 /* mixin/eInputValueProps.js end */
 
-    /* mixin/eFocusFirstChild.js begin */
+    /* mixin/eFocus.js begin */
 /* global xblocks, React */
 /* jshint strict: false */
 
-xblocks.mixin.eFocusFirstChild = {
+xblocks.mixin.eFocus = {
+    accessors: {
+        _focusControl: {
+            get: function() {
+                return this.firstChild;
+            }
+        }
+    },
+
     methods: {
         focus: function() {
-            this.firstChild.focus();
+            this._focusControl.focus();
         },
 
         blur: function() {
-            this.firstChild.blur();
+            this._focusControl.blur();
         }
     }
 };
 
-/* mixin/eFocusFirstChild.js end */
+/* mixin/eFocus.js end */
 
 
     /* mixin/vChecked.js begin */
@@ -336,7 +348,9 @@ xblocks.view.register('xb-ico', {
 /* blocks/ico/ico.jsx.js end */
 
 
-xblocks.create('xb-ico');
+xblocks.create('xb-ico', [
+    xblocks.mixin.eDisabled
+]);
 
 /* blocks/ico/ico.js end */
 
@@ -396,7 +410,9 @@ xblocks.view.register('xb-link', {
 /* blocks/link/link.jsx.js end */
 
 
-xblocks.create('xb-link');
+xblocks.create('xb-link', [
+    xblocks.mixin.eDisabled
+]);
 
 /* blocks/link/link.js end */
 
@@ -665,7 +681,7 @@ xblocks.create('xb-button', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocusFirstChild,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLButtonElement.prototype)
@@ -740,9 +756,9 @@ var XBInputController = xblocks.view.create({
     },
 
     _recalculateSize: function() {
-        var node = this.getDOMNode();
-
         if (this.props.autosize) {
+            var node = this.getDOMNode();
+
             if (this.props.multiline) {
                 node.style.height = '0px';
                 node.style.height = node.scrollHeight + 'px';
@@ -755,6 +771,8 @@ var XBInputController = xblocks.view.create({
     },
 
     render: function() {
+        var classes = React.addons.classSet('_xb-input_controller', this.props.className);
+
         var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';
@@ -763,7 +781,7 @@ var XBInputController = xblocks.view.create({
         if (this.props.multiline) {
             return (
                 React.DOM.textarea( {value:this.props.value,
-                    className:this.props.className,
+                    className:classes,
                     name:this.props.name,
                     disabled:this.props.disabled,
                     required:this.props.required,
@@ -781,7 +799,7 @@ var XBInputController = xblocks.view.create({
             return (
                 React.DOM.input( {value:this.props.value,
                     type:"text",
-                    className:this.props.className,
+                    className:classes,
                     name:this.props.name,
                     disabled:this.props.disabled,
                     required:this.props.required,
@@ -1038,22 +1056,16 @@ var XBInput = xblocks.view.register('xb-input', {
 xblocks.create('xb-input', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eInputValueState,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLElement.prototype),
 
-        methods: {
-            focus: function() {
-                var controlNode = this.querySelector('input,textarea');
-                if (controlNode) {
-                    controlNode.focus();
-                }
-            },
-
-            blur: function() {
-                var controlNode = this.querySelector('input,textarea');
-                if (controlNode) {
-                    controlNode.blur();
+        accessors: {
+            _focusControl: {
+                get: function() {
+                    var controlNode = this.getElementsByClassName('_xb-input_controller');
+                    return (controlNode.length ? controlNode[0] : undefined);
                 }
             }
         }
@@ -1153,7 +1165,7 @@ xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocusFirstChild,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype)
@@ -1253,7 +1265,7 @@ xblocks.create('xb-radio', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocusFirstChild,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype)

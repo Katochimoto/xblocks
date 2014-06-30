@@ -6,22 +6,16 @@
 xblocks.create('xb-input', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eInputValueState,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLElement.prototype),
 
-        methods: {
-            focus: function() {
-                var controlNode = this.querySelector('input,textarea');
-                if (controlNode) {
-                    controlNode.focus();
-                }
-            },
-
-            blur: function() {
-                var controlNode = this.querySelector('input,textarea');
-                if (controlNode) {
-                    controlNode.blur();
+        accessors: {
+            _focusControl: {
+                get: function() {
+                    var controlNode = this.getElementsByClassName('_xb-input_controller');
+                    return (controlNode.length ? controlNode[0] : undefined);
                 }
             }
         }
