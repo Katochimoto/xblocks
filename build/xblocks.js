@@ -528,6 +528,7 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
             'theme': 'normal',
             'type': 'button',
             'checked': false,
+            'tabindex': '1',
             'children': String.fromCharCode(160)
         };
     },
@@ -571,20 +572,19 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
 
         } else if (type === 'file') {
             return (
-                React.DOM.label( {className:classes,
-                    tabIndex:tabIndex}, 
-
-                    React.DOM.span( {className:"_file-intruder"}, 
-                        React.DOM.span( {className:"_file-intruder-inner"}, 
-                            React.DOM.input( {className:"_file-intruder-input",
+                React.DOM.label( {className:classes}, 
+                    React.DOM.span( {className:"_xb-file-intruder"}, 
+                        React.DOM.span( {className:"_xb-file-intruder-inner"}, 
+                            React.DOM.input( {className:"_xb-file-intruder-input",
                                 type:"file",
                                 name:this.props.name,
                                 title:this.props.title,
                                 disabled:this.props.disabled,
                                 multiple:this.props.multiple,
-                                autoFocus:this.props.autofocus} ),
+                                autoFocus:this.props.autofocus,
+                                tabIndex:tabIndex}),
 
-                            React.DOM.span( {className:"_file-intruder-focus"} )
+                            React.DOM.span( {className:"_xb-file-intruder-focus"} )
                         )
                     ),
                     XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
@@ -608,7 +608,8 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                         defaultChecked:this.props.checked,
                         autoFocus:this.props.autofocus,
                         readOnly:this.props.readonly,
-                        required:this.props.required})
+                        required:this.props.required,
+                        tabIndex:tabIndex})
                 );
 
                 children.push(XBButton(xblocks.utils.merge({}, this.props, {
@@ -624,6 +625,20 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
 
             } else {
                 children.push(
+                    React.DOM.span( {key:"file-intruder", className:"_xb-file-intruder"}, 
+                        React.DOM.span( {className:"_xb-file-intruder-inner"}, 
+                            React.DOM.input( {className:"_xb-file-intruder-input",
+                                type:"button",
+                                disabled:this.props.disabled,
+                                autoFocus:this.props.autofocus,
+                                tabIndex:tabIndex}),
+
+                            React.DOM.span( {className:"_xb-file-intruder-focus"} )
+                        )
+                    )
+                );
+
+                children.push(
                     XBButtonContent( {key:"content",
                         _uid:this.props._uid,
                         ico:icoProps}, this.props.children)
@@ -634,15 +649,12 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                 React.DOM.label( {className:classes,
                     form:this.props.form,
                     htmlFor:this.props['for'],
-                    title:this.props.title,
-                    tabIndex:tabIndex}, children)
+                    title:this.props.title}, children)
             );
 
         } else if (type === 'inline') {
             return (
-                React.DOM.span( {className:classes,
-                    tabIndex:tabIndex}, 
-
+                React.DOM.span( {className:classes, tabIndex:tabIndex}, 
                     XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
                 )
             );

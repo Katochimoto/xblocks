@@ -65,6 +65,7 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
             'theme': 'normal',
             'type': 'button',
             'checked': false,
+            'tabindex': '1',
             'children': String.fromCharCode(160)
         };
     },
@@ -108,20 +109,19 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
 
         } else if (type === 'file') {
             return (
-                <label className={classes}
-                    tabIndex={tabIndex}>
-
-                    <span className="_file-intruder">
-                        <span className="_file-intruder-inner">
-                            <input className="_file-intruder-input"
+                <label className={classes}>
+                    <span className="_xb-file-intruder">
+                        <span className="_xb-file-intruder-inner">
+                            <input className="_xb-file-intruder-input"
                                 type="file"
                                 name={this.props.name}
                                 title={this.props.title}
                                 disabled={this.props.disabled}
                                 multiple={this.props.multiple}
-                                autoFocus={this.props.autofocus} />
+                                autoFocus={this.props.autofocus}
+                                tabIndex={tabIndex}/>
 
-                            <span className="_file-intruder-focus" />
+                            <span className="_xb-file-intruder-focus" />
                         </span>
                     </span>
                     <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
@@ -145,7 +145,8 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                         defaultChecked={this.props.checked}
                         autoFocus={this.props.autofocus}
                         readOnly={this.props.readonly}
-                        required={this.props.required}/>
+                        required={this.props.required}
+                        tabIndex={tabIndex}/>
                 );
 
                 children.push(XBButton(xblocks.utils.merge({}, this.props, {
@@ -161,6 +162,20 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
 
             } else {
                 children.push(
+                    <span key="file-intruder" className="_xb-file-intruder">
+                        <span className="_xb-file-intruder-inner">
+                            <input className="_xb-file-intruder-input"
+                                type="button"
+                                disabled={this.props.disabled}
+                                autoFocus={this.props.autofocus}
+                                tabIndex={tabIndex}/>
+
+                            <span className="_xb-file-intruder-focus" />
+                        </span>
+                    </span>
+                );
+
+                children.push(
                     <XBButtonContent key="content"
                         _uid={this.props._uid}
                         ico={icoProps}>{this.props.children}</XBButtonContent>
@@ -171,15 +186,12 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                 <label className={classes}
                     form={this.props.form}
                     htmlFor={this.props['for']}
-                    title={this.props.title}
-                    tabIndex={tabIndex}>{children}</label>
+                    title={this.props.title}>{children}</label>
             );
 
         } else if (type === 'inline') {
             return (
-                <span className={classes}
-                    tabIndex={tabIndex}>
-
+                <span className={classes} tabIndex={tabIndex}>
                     <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
                 </span>
             );

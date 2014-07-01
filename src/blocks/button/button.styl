@@ -8,6 +8,9 @@ $skin-islands-button-disabled = '._disabled'
   position: relative // Why is it there?
   text-align: center // Fixes #323
 
+  &:not(._theme-check):active
+    skin: button_pressed
+
   & > ._content
     & > ._content-content:not(:empty) + .xb-ico,
     & > .xb-ico + ._content-content:not(:empty)
@@ -115,12 +118,3 @@ $skin-islands-button-disabled = '._disabled'
   &._theme-check
     kind: block inline
     vertical-align: baseline
-
-
-  // Кнопка аттача
-  & ._file-intruder
-    kind: file-intruder \
-      (-inner '&-inner') \
-      (-input '&-input') \
-      (-focus '&-focus' 'islands-button_focus_style')
-
