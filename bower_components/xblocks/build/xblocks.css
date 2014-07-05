@@ -71,11 +71,34 @@ xb-input,
 xb-ico,
 xb-select,
 xb-checkbox,
-xb-radio {
+xb-radio,
+xb-link {
   display: inline-block;
 }
-xb-link {
-  display: inline;
+xb-button *,
+xb-input *,
+xb-ico *,
+xb-select *,
+xb-checkbox *,
+xb-radio *,
+xb-link *,
+xb-button *:before,
+xb-input *:before,
+xb-ico *:before,
+xb-select *:before,
+xb-checkbox *:before,
+xb-radio *:before,
+xb-link *:before,
+xb-button *:after,
+xb-input *:after,
+xb-ico *:after,
+xb-select *:after,
+xb-checkbox *:after,
+xb-radio *:after,
+xb-link *:after {
+  -webkit-box-sizing: initial;
+  -moz-box-sizing: initial;
+  box-sizing: initial;
 }
 xb-option,
 xb-optgroup,
@@ -244,6 +267,9 @@ xb-dropdown {
 .xb-link._theme-input:hover {
   color: #d00;
 }
+a.xb-button {
+  text-decoration: none;
+}
 .xb-button {
   position: relative;
   text-align: center;
@@ -261,6 +287,17 @@ xb-dropdown {
   -ms-user-select: none;
   user-select: none;
   vertical-align: baseline;
+}
+.xb-button:not(._theme-check):active {
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
+  box-shadow: inset 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
+}
+.xb-button:not(._theme-check):active:before {
+  -webkit-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
+  box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.5);
+}
+.xb-button:not(._theme-check):active  > ._content {
+  top: 1px;
 }
 .xb-button > ._content > ._content-content:not(:empty) + .xb-ico,
 .xb-button > ._content > .xb-ico + ._content-content:not(:empty) {
@@ -2266,45 +2303,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   vertical-align: top;
   vertical-align: baseline;
 }
-.xb-button ._file-intruder {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 11;
-}
-.xb-button ._file-intruder-input:focus + .xb-button ._file-intruder-focus {
-  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
-  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
-  border-radius: inherit;
-}
-.xb-button ._file-intruder-inner {
-  float: right;
-  text-align: right;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-.xb-button ._file-intruder-input {
-  position: relative;
-  z-index: 11;
-  display: inline-block;
-  vertical-align: 0;
-  padding: 0;
-  margin: -5em 0 0 -400px;
-  width: 500px;
-  cursor: pointer;
-  font-size: 80px;
-  opacity: 0;
-}
-.xb-button ._file-intruder-focus {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
 .xb-input._simple {
   width: 400px;
   -webkit-box-sizing: border-box;
@@ -2932,4 +2930,52 @@ a._link {
   -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
   border-radius: inherit;
+}
+._xb-file-intruder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+}
+._xb-file-intruder-input:focus + ._xb-file-intruder-focus {
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  border-radius: inherit;
+}
+._xb-file-intruder-inner {
+  float: right;
+  text-align: right;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+._xb-file-intruder-input {
+  position: relative;
+  z-index: 11;
+  display: inline-block;
+  vertical-align: 0;
+  padding: 0;
+  margin: -5em 0 0 -400px;
+  width: 500px;
+  cursor: pointer;
+  font-size: 80px;
+  opacity: 0;
+}
+._xb-file-intruder-focus {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+._xb-file-intruder-input[type="button"] {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: inherit;
+}
+._xb-file-intruder-input[type="file"] {
+  z-index: 0;
 }

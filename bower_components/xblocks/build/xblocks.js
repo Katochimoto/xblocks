@@ -2,6 +2,12 @@
     'use strict';
 
     var React = global.React;
+
+    /**
+     * HTML custom elements
+     * @namespace xblocks
+     * @version 0.2.4
+     */
     var xblocks = global.xblocks;
 
 
@@ -69,7 +75,12 @@
         return attrs;
     };
 
+    /**
+     * @memberOf xblocks
+     * @namespace xblocks.mixin
+     */
     xblocks.mixin = {};
+
     /* mixin/eDisabled.js begin */
 /* global xblocks, React */
 /* jshint strict: false */
@@ -78,7 +89,11 @@ xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
             get: function() {
-                return xblocks.dom.attrs.valueConversion('disabled', this.getAttribute('disabled'), React.PropTypes.bool);
+                return xblocks.dom.attrs.valueConversion(
+                    'disabled',
+                    this.getAttribute('disabled'),
+                    React.PropTypes.bool
+                );
             },
 
             set: function(isDisabled) {
@@ -98,9 +113,49 @@ xblocks.mixin.eDisabled = {
 /* global xblocks, React */
 /* jshint strict: false */
 
+/**
+ * Checked element interface
+ *
+ * <xb-checkbox name="a" checked>checkbox</xb-checkbox>
+ * <xb-radio name="b" checked>radio 1</xb-radio> <xb-radio name="b">radio 2</xb-radio>
+ * <xb-button name="c" type="checkbox" checked>button checkbox</xb-button>
+ * <xb-button name="d" type="radio" checked>button radio 1</xb-button> <xb-button name="d" type="radio">button radio 2</xb-button>
+ *
+ * @example
+ * xblocks.create('xb-checkbox', [
+ *     xblocks.mixin.eChecked,
+ *     {
+ *         accessors: { ... },
+ *         events: { ... },
+ *         methods: { ... }
+ *         ...
+ *     }
+ * ]);
+ *
+ * var e = document.createElement('xb-checkbox');
+ * // read
+ * console.log(e.checked)
+ * // false
+ *
+ * // write
+ * e.checked = true;
+ * // true
+ *
+ * // jquery write
+ * $(e).prop('checked', false)
+ * // false
+ *
+ * @memberOf xblocks.mixin
+ * @name eChecked
+ * @type {{accessors: {checked: {get: get, set: set}}}}
+ */
 xblocks.mixin.eChecked = {
     accessors: {
         checked: {
+            /**
+             * Getter checked value
+             * @returns {boolean|undefined}
+             */
             get: function() {
                 if (this.xblock._isMountedComponent()) {
                     return this.xblock._component.isChecked();
@@ -113,6 +168,10 @@ xblocks.mixin.eChecked = {
                 }
             },
 
+            /**
+             * Setter checked value
+             * @param {boolean} isChecked
+             */
             set: function(isChecked) {
                 if (this.xblock._isMountedComponent()) {
                     this.xblock._component.setChecked(isChecked);
@@ -202,11 +261,11 @@ xblocks.mixin.eInputValueProps = {
 
 /* mixin/eInputValueProps.js end */
 
-    /* mixin/eFocusFirstChild.js begin */
+    /* mixin/eFocus.js begin */
 /* global xblocks, React */
 /* jshint strict: false */
 
-xblocks.mixin.eFocusFirstChild = {
+xblocks.mixin.eFocus = {
     methods: {
         focus: function() {
             this.firstChild.focus();
@@ -218,7 +277,7 @@ xblocks.mixin.eFocusFirstChild = {
     }
 };
 
-/* mixin/eFocusFirstChild.js end */
+/* mixin/eFocus.js end */
 
 
     /* mixin/vChecked.js begin */
@@ -265,9 +324,11 @@ xblocks.view.register('xb-ico', {
         'id': React.PropTypes.string,
         'class': React.PropTypes.string,
         'alt': React.PropTypes.string,
+        'title': React.PropTypes.string,
         'value': React.PropTypes.string,
+        'tabindex': React.PropTypes.string,
         'children': React.PropTypes.renderable,
-        'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+        'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'type': React.PropTypes.oneOf([
             'attention',
             'close',
@@ -325,10 +386,19 @@ xblocks.view.register('xb-ico', {
 
         classes = React.addons.classSet(classes);
 
+        var tabIndex = this.props.tabindex;
+
+        if (this.props.disabled) {
+            tabIndex = '-1';
+        }
+
         var content = this.props.value || this.props.children;
 
         return (
-            React.DOM.span( {className:classes, 'data-xb-content':this.props._uid}, content)
+            React.DOM.span( {className:classes,
+                title:this.props.title,
+                tabIndex:tabIndex,
+                'data-xb-content':this.props._uid}, content)
         );
     }
 });
@@ -336,7 +406,31 @@ xblocks.view.register('xb-ico', {
 /* blocks/ico/ico.jsx.js end */
 
 
-xblocks.create('xb-ico');
+xblocks.create('xb-ico', [
+    xblocks.mixin.eDisabled,
+
+    {
+        accessors: {
+            active: {
+                get: function() {
+                    return xblocks.dom.attrs.valueConversion(
+                        'active',
+                        this.getAttribute('active'),
+                        React.PropTypes.bool
+                    );
+                },
+
+                set: function(isActive) {
+                    if (isActive) {
+                        this.setAttribute('active', '');
+                    } else {
+                        this.removeAttribute('active');
+                    }
+                }
+            }
+        }
+    }
+]);
 
 /* blocks/ico/ico.js end */
 
@@ -358,13 +452,15 @@ xblocks.view.register('xb-link', {
         'disabled': React.PropTypes.bool,
         'href': React.PropTypes.string,
         'name': React.PropTypes.string,
+        'tabindex': React.PropTypes.string,
         'target': React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
         'theme': React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
     },
 
     getDefaultProps: function() {
         return {
-            'theme': 'normal'
+            'theme': 'normal',
+            'tabindex': '1'
         };
     },
 
@@ -378,6 +474,12 @@ xblocks.view.register('xb-link', {
             classes['_theme-' + this.props.theme] = true;
         }
 
+        var tabIndex = this.props.tabindex;
+
+        if (this.props.disabled) {
+            tabIndex = '-1';
+        }
+
         classes = React.addons.classSet(classes);
 
         var content = this.props.value || this.props.children;
@@ -387,6 +489,7 @@ xblocks.view.register('xb-link', {
                 name:this.props.name,
                 href:this.props.href,
                 target:this.props.target,
+                tabIndex:tabIndex,
                 className:classes,
                 'data-xb-content':this.props._uid}, content)
         );
@@ -396,7 +499,9 @@ xblocks.view.register('xb-link', {
 /* blocks/link/link.jsx.js end */
 
 
-xblocks.create('xb-link');
+xblocks.create('xb-link', [
+    xblocks.mixin.eDisabled
+]);
 
 /* blocks/link/link.js end */
 
@@ -520,6 +625,7 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
             'theme': 'normal',
             'type': 'button',
             'checked': false,
+            'tabindex': '1',
             'children': String.fromCharCode(160)
         };
     },
@@ -563,20 +669,19 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
 
         } else if (type === 'file') {
             return (
-                React.DOM.label( {className:classes,
-                    tabIndex:tabIndex}, 
-
-                    React.DOM.span( {className:"_file-intruder"}, 
-                        React.DOM.span( {className:"_file-intruder-inner"}, 
-                            React.DOM.input( {className:"_file-intruder-input",
+                React.DOM.label( {className:classes}, 
+                    React.DOM.span( {className:"_xb-file-intruder"}, 
+                        React.DOM.span( {className:"_xb-file-intruder-inner"}, 
+                            React.DOM.input( {className:"_xb-file-intruder-input",
                                 type:"file",
                                 name:this.props.name,
                                 title:this.props.title,
                                 disabled:this.props.disabled,
                                 multiple:this.props.multiple,
-                                autoFocus:this.props.autofocus} ),
+                                autoFocus:this.props.autofocus,
+                                tabIndex:tabIndex}),
 
-                            React.DOM.span( {className:"_file-intruder-focus"} )
+                            React.DOM.span( {className:"_xb-file-intruder-focus"} )
                         )
                     ),
                     XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
@@ -600,12 +705,14 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                         defaultChecked:this.props.checked,
                         autoFocus:this.props.autofocus,
                         readOnly:this.props.readonly,
-                        required:this.props.required})
+                        required:this.props.required,
+                        tabIndex:tabIndex})
                 );
 
                 children.push(XBButton(xblocks.utils.merge({}, this.props, {
                     'key': 'content',
-                    'type': 'inline'
+                    'type': 'inline',
+                    'tabindex': null
                 })));
 
                 classes = React.addons.classSet({
@@ -615,6 +722,20 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                 });
 
             } else {
+                children.push(
+                    React.DOM.span( {key:"file-intruder", className:"_xb-file-intruder"}, 
+                        React.DOM.span( {className:"_xb-file-intruder-inner"}, 
+                            React.DOM.input( {className:"_xb-file-intruder-input",
+                                type:"button",
+                                disabled:this.props.disabled,
+                                autoFocus:this.props.autofocus,
+                                tabIndex:tabIndex}),
+
+                            React.DOM.span( {className:"_xb-file-intruder-focus"} )
+                        )
+                    )
+                );
+
                 children.push(
                     XBButtonContent( {key:"content",
                         _uid:this.props._uid,
@@ -626,15 +747,12 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
                 React.DOM.label( {className:classes,
                     form:this.props.form,
                     htmlFor:this.props['for'],
-                    title:this.props.title,
-                    tabIndex:tabIndex}, children)
+                    title:this.props.title}, children)
             );
 
         } else if (type === 'inline') {
             return (
-                React.DOM.span( {className:classes,
-                    tabIndex:tabIndex}, 
-
+                React.DOM.span( {className:classes, tabIndex:tabIndex}, 
                     XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
                 )
             );
@@ -665,7 +783,7 @@ xblocks.create('xb-button', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocusFirstChild,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLButtonElement.prototype)
@@ -740,9 +858,9 @@ var XBInputController = xblocks.view.create({
     },
 
     _recalculateSize: function() {
-        var node = this.getDOMNode();
-
         if (this.props.autosize) {
+            var node = this.getDOMNode();
+
             if (this.props.multiline) {
                 node.style.height = '0px';
                 node.style.height = node.scrollHeight + 'px';
@@ -1038,25 +1156,10 @@ var XBInput = xblocks.view.register('xb-input', {
 xblocks.create('xb-input', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eInputValueState,
+    xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLElement.prototype),
-
-        methods: {
-            focus: function() {
-                var controlNode = this.querySelector('input,textarea');
-                if (controlNode) {
-                    controlNode.focus();
-                }
-            },
-
-            blur: function() {
-                var controlNode = this.querySelector('input,textarea');
-                if (controlNode) {
-                    controlNode.blur();
-                }
-            }
-        }
+        prototype: Object.create(HTMLElement.prototype)
     }
 ]);
 
@@ -1097,7 +1200,8 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
             'size': 'm',
             'children': '',
             'value': 'on',
-            'checked': false
+            'checked': false,
+            'tabindex': '1'
         };
     },
 
@@ -1123,8 +1227,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
             React.DOM.label( {className:classes,
                 title:this.props.title,
                 form:this.props.form,
-                htmlFor:this.props['for'],
-                tabIndex:tabIndex}, 
+                htmlFor:this.props['for']}, 
 
                 React.DOM.input( {type:"checkbox",
                     ref:"checkControl",
@@ -1135,7 +1238,8 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
                     defaultChecked:this.props.checked,
                     autoFocus:this.props.autofocus,
                     readOnly:this.props.readonly,
-                    required:this.props.required}),
+                    required:this.props.required,
+                    tabIndex:tabIndex}),
 
                 React.DOM.span( {className:"_xb-checkbox_flag _xb-check_flag"}, 
                     React.DOM.span( {className:"_xb-checkbox_flag-icon"})
@@ -1153,7 +1257,7 @@ xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocusFirstChild,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype)
@@ -1197,7 +1301,8 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
             'size': 'm',
             'children': '',
             'value': 'on',
-            'checked': false
+            'checked': false,
+            'tabindex': '1'
         };
     },
 
@@ -1223,8 +1328,7 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
             React.DOM.label( {className:classes,
                 title:this.props.title,
                 form:this.props.form,
-                htmlFor:this.props['for'],
-                tabIndex:tabIndex}, 
+                htmlFor:this.props['for']}, 
 
                 React.DOM.input( {type:"radio",
                     ref:"checkControl",
@@ -1235,7 +1339,8 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
                     defaultChecked:this.props.checked,
                     autoFocus:this.props.autofocus,
                     readOnly:this.props.readonly,
-                    required:this.props.required}),
+                    required:this.props.required,
+                    tabIndex:tabIndex}),
 
                 React.DOM.span( {className:"_xb-radio_flag _xb-check_flag"}, 
                     React.DOM.span( {className:"_xb-radio_flag-icon"})
@@ -1253,7 +1358,7 @@ xblocks.create('xb-radio', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocusFirstChild,
+    xblocks.mixin.eFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype)

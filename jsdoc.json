@@ -1,0 +1,49 @@
+{
+    "markdown": {
+        "hardwrap": true,
+        "parser": "gfm",
+        "tags": [
+            "description",
+            "examples"
+        ]
+    },
+    "opts": {
+        "private": false,
+        "protected": false,
+        "template": "./node_modules/jaguarjs-jsdoc",
+        "tutorials": "./bower_components/xblocks/doc"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "source": {
+        "include": [
+            "./bower_components/xblocks/src",
+            "README.md"
+        ],
+        "includePattern": ".+\\.js(doc)?$"
+    },
+    "templates": {
+        "applicationName": "xblocks",
+        "cleverLinks": true,
+        "disqus": true,
+        "googleAnalytics": false,
+        "meta": {
+            "title": "",
+            "description": "",
+            "keyword": ""
+        },
+        "monospaceLinks": true,
+        "openGraph": false,
+        "scripts": [
+            "bower_components/es5-shim/es5-shim.js",
+            "bower_components/react/react-with-addons.js",
+            "bower_components/x-tag-core/dist/x-tag-core.js",
+            "bower_components/xblocks-core/xblocks-core.js",
+            "bower_components/xblocks/build/xblocks.js"
+        ],
+        "styles": [
+            "bower_components/xblocks/build/xblocks.css"
+        ]
+    }
+}

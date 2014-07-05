@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: xb-button</title>
+    
+    
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="bower_components/xblocks/build/xblocks.css">
+        
+    
+    
+    
+    <script>
+    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"xblocks","disqus":true,"googleAnalytics":false,"meta":{"title":"","description":"","keyword":""},"openGraph":false,"scripts":["bower_components/es5-shim/es5-shim.js","bower_components/react/react-with-addons.js","bower_components/x-tag-core/dist/x-tag-core.js","bower_components/xblocks-core/xblocks-core.js","bower_components/xblocks/build/xblocks.js"],"styles":["bower_components/xblocks/build/xblocks.css"],"default":{}};
+    </script>
+    
+
+    
+
+    
+        
+            <script src="bower_components/es5-shim/es5-shim.js"></script>
+        
+            <script src="bower_components/react/react-with-addons.js"></script>
+        
+            <script src="bower_components/x-tag-core/dist/x-tag-core.js"></script>
+        
+            <script src="bower_components/xblocks-core/xblocks-core.js"></script>
+        
+            <script src="bower_components/xblocks/build/xblocks.js"></script>
+        
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html">xblocks</a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="xblocks">
+            <span class="title">
+                <a href="xblocks.html">xblocks</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks.mixin">
+            <span class="title">
+                <a href="xblocks.mixin.html">xblocks.mixin</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+                
+                    <ul class="members itemMembers">
+                        <span class="subtitle">Static members</span>
+                        
+                        <li data-name="xblocks.mixin.eChecked"><a href="xblocks.mixin.html#eChecked">eChecked</a></li>
+                        
+                        <li data-name="xblocks.mixin.eDisabled"><a href="xblocks.mixin.html#eDisabled">eDisabled</a></li>
+                        
+                        <li data-name="xblocks.mixin.eFocus"><a href="xblocks.mixin.html#eFocus">eFocus</a></li>
+                        
+                    </ul>
+                
+
+                
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+
+    <div class="main">
+        
+            <h1 class="page-title">Tutorial: xb-button</h1>
+        
+
+        <section>
+    
+<header>
+    
+
+    <h2>xb-button</h2>
+</header>  
+
+<article>
+    <p><br/>
+Button html element.</p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-button
+    id=&quot;...&quot;
+    class=&quot;...&quot;
+    size=&quot;s|m|l|xl&quot;
+    theme=&quot;normal|action|dark|flying|pseudo-inverted|pseudo|promo&quot;
+    type=&quot;label|inline|link|file|button|submit|checkbox|radio&quot;
+    target=&quot;_blank|_self|_parent|_top&quot;
+    value=&quot;...&quot;
+    href=&quot;...&quot;
+    name=&quot;...&quot;
+    title=&quot;...&quot;
+    form=&quot;...&quot;
+    for=&quot;...&quot;
+    tabindex=&quot;...&quot;
+    multiple
+    autofocus
+    disabled
+    checked
+    readonly
+    required
+    xb-ico-...>&#60;/xb-button></code></pre><p><br/></p>
+<h4>Themes</h4><p><xb-button theme="normal">normal</xb-button></p>
+<p><xb-button theme="action">action</xb-button></p>
+<p><xb-button theme="dark">dark</xb-button></p>
+<p><xb-button theme="flying">flying</xb-button></p>
+<p><div style="background-color:#000;display: inline-block;padding: 10px;"><xb-button theme="pseudo-inverted">pseudo-inverted</xb-button></div></p>
+<p><xb-button theme="pseudo">pseudo</xb-button></p>
+<p><xb-button theme="promo">promo</xb-button></p>
+<p><br/></p>
+<h4>Types</h4><p><xb-button theme="normal" type="label">label</xb-button></p>
+<p><xb-button theme="normal" type="inline">inline</xb-button></p>
+<p><xb-button theme="normal" type="link" href="http://ya.ru" target="_blank">link</xb-button></p>
+<p><xb-button theme="normal" type="file">file</xb-button></p>
+<p><xb-button theme="normal" type="button">button</xb-button></p>
+<p><xb-button theme="normal" type="submit">submit</xb-button></p>
+<p><xb-button theme="normal" name="a" value="1" type="checkbox">checkbox 1</xb-button> <xb-button theme="normal" name="b" value="2" type="checkbox">checkbox 2</xb-button></p>
+<p><xb-button theme="normal" name="c" value="1" type="radio">radio 1</xb-button> <xb-button theme="normal" name="c" value="2" type="radio">radio 2</xb-button></p>
+</article>
+
+</section>  
+
+
+        
+        <!-- disqus code -->
+        <div id="disqus_thread"></div>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <!-- // disqus code -->
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Sat Jul 05 2014 22:59:20 GMT+0400 (MSK)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+
+
+</body>
+</html>

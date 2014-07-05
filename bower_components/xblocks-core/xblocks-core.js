@@ -346,7 +346,7 @@ xblocks.utils.isWindow = function(obj) {
 /* xblocks/utils/isWindow.js end */
 
 /* xblocks/utils/isPlainObject.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -354,7 +354,7 @@ xblocks.utils.isWindow = function(obj) {
  * @returns {boolean}
  */
 xblocks.utils.isPlainObject = function(obj) {
-    if (xblocks.utils.type(obj) !== 'object' || obj.nodeType || xblocks.utils.isWindow(obj)) {
+    if (xblocks.utils.type(obj) !== 'object') {
         return false;
     }
 
@@ -1042,6 +1042,7 @@ xblocks.element.prototype._init = function(props, children, callback) {
 };
 
 /**
+ * @param {function} [callback]
  * @private
  */
 xblocks.element.prototype._repaint = function(callback) {

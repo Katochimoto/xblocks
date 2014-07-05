@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: xb-ico</title>
+    
+    
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="bower_components/xblocks/build/xblocks.css">
+        
+    
+    
+    
+    <script>
+    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"xblocks","disqus":true,"googleAnalytics":false,"meta":{"title":"","description":"","keyword":""},"openGraph":false,"scripts":["bower_components/es5-shim/es5-shim.js","bower_components/react/react-with-addons.js","bower_components/x-tag-core/dist/x-tag-core.js","bower_components/xblocks-core/xblocks-core.js","bower_components/xblocks/build/xblocks.js"],"styles":["bower_components/xblocks/build/xblocks.css"],"default":{}};
+    </script>
+    
+
+    
+
+    
+        
+            <script src="bower_components/es5-shim/es5-shim.js"></script>
+        
+            <script src="bower_components/react/react-with-addons.js"></script>
+        
+            <script src="bower_components/x-tag-core/dist/x-tag-core.js"></script>
+        
+            <script src="bower_components/xblocks-core/xblocks-core.js"></script>
+        
+            <script src="bower_components/xblocks/build/xblocks.js"></script>
+        
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html">xblocks</a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="xblocks">
+            <span class="title">
+                <a href="xblocks.html">xblocks</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks.mixin">
+            <span class="title">
+                <a href="xblocks.mixin.html">xblocks.mixin</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+                
+                    <ul class="members itemMembers">
+                        <span class="subtitle">Static members</span>
+                        
+                        <li data-name="xblocks.mixin.eChecked"><a href="xblocks.mixin.html#eChecked">eChecked</a></li>
+                        
+                        <li data-name="xblocks.mixin.eDisabled"><a href="xblocks.mixin.html#eDisabled">eDisabled</a></li>
+                        
+                        <li data-name="xblocks.mixin.eFocus"><a href="xblocks.mixin.html#eFocus">eFocus</a></li>
+                        
+                    </ul>
+                
+
+                
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+
+    <div class="main">
+        
+            <h1 class="page-title">Tutorial: xb-ico</h1>
+        
+
+        <section>
+    
+<header>
+    
+
+    <h2>xb-ico</h2>
+</header>  
+
+<article>
+    <p><br/>
+Icon html element.</p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-ico
+    id=&quot;...&quot;
+    class=&quot;...&quot;
+    title=&quot;...&quot;
+    tabindex=&quot;...&quot;
+    value=&quot;...&quot;
+    size=&quot;s|m&quot;
+    type=&quot;attention|close|check|download|download-white|dropdown|eye|link|link-white|mail|notification|odnoklassniki|pause|people|play|print|remove|services|settings|three-dots|trash|trash-white|twitter|help|upload|upload-white|vk&quot;
+    active
+    disabled>&#60;/xb-ico></code></pre><p><br/><br/></p>
+<h4>Attributes</h4><h5>Value</h5><pre class="prettyprint source lang-html"><code>&#60;xb-ico type=&quot;notification&quot; value=&quot;attribute value&quot;>&#60;/xb-ico></code></pre><p><xb-ico value="attribute value" type="notification"></xb-ico>
+<br/></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-ico type=&quot;notification&quot;>children value&#60;/xb-ico></code></pre><p><xb-ico type="notification">children value</xb-ico>
+<br/><br/></p>
+<h5>Size</h5><pre class="prettyprint source lang-html"><code>&#60;xb-ico size=&quot;s&quot; type=&quot;...&quot;>&#60;/xb-ico></code></pre><p><xb-ico type="attention"></xb-ico> <code>attention</code>, <xb-ico type="close"></xb-ico> <code>close</code>, <xb-ico type="check"></xb-ico> <code>check</code>, <xb-ico type="download"></xb-ico> <code>download</code>, <span style="background-color:#000;"><xb-ico type="download-white"></xb-ico></span> <code>download-white</code>, <xb-ico type="dropdown"></xb-ico> <code>dropdown</code>, <xb-ico type="eye"></xb-ico> <code>eye</code>, <xb-ico type="link"></xb-ico> <code>link</code>, <span style="background-color:#000;"><xb-ico type="link-white"></xb-ico></span> <code>link-white</code>, <xb-ico type="mail"></xb-ico> <code>mail</code>, <xb-ico type="notification">test</xb-ico> <code>notification</code>, <xb-ico type="odnoklassniki"></xb-ico> <code>odnoklassniki</code>, <xb-ico type="pause"></xb-ico> <code>pause</code>, <xb-ico type="people"></xb-ico> <code>people</code>, <xb-ico type="play"></xb-ico> <code>play</code>, <xb-ico type="print"></xb-ico> <code>print</code>, <xb-ico type="remove"></xb-ico> <code>remove</code>, <xb-ico type="services"></xb-ico> <code>services</code>, <xb-ico type="settings"></xb-ico> <code>settings</code>, <xb-ico type="three-dots"></xb-ico> <code>three-dots</code>, <xb-ico type="trash"></xb-ico> <code>trash</code>, <span style="background-color:#000;"><xb-ico type="trash-white"></xb-ico></span> <code>trash-white</code>, <xb-ico type="twitter"></xb-ico> <code>twitter</code>, <xb-ico type="help"></xb-ico> <code>help</code>, <xb-ico type="upload"></xb-ico> <code>upload</code>, <span style="background-color:#000;"><xb-ico type="upload-white"></xb-ico></span> <code>upload-white</code>, <xb-ico type="vk"></xb-ico> <code>vk</code>
+<br/><br/></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-ico size=&quot;m&quot; type=&quot;...&quot;>&#60;/xb-ico></code></pre><p><xb-ico size="m" type="attention"></xb-ico> <code>attention</code>, <xb-ico size="m" type="close"></xb-ico> <code>close</code>, <xb-ico size="m" type="check"></xb-ico> <code>check</code>, <xb-ico size="m" type="download"></xb-ico> <code>download</code>, <span style="background-color:#000;"><xb-ico size="m" type="download-white"></xb-ico></span> <code>download-white</code>, <xb-ico size="m" type="dropdown"></xb-ico> <code>dropdown</code>, <xb-ico size="m" type="eye"></xb-ico> <code>eye</code>, <xb-ico size="m" type="link"></xb-ico> <code>link</code>, <span style="background-color:#000;"><xb-ico size="m" type="link-white"></xb-ico></span> <code>link-white</code>, <xb-ico size="m" type="mail"></xb-ico> <code>mail</code>, <xb-ico size="m" type="notification">test</xb-ico> <code>notification</code>, <xb-ico size="m" type="odnoklassniki"></xb-ico> <code>odnoklassniki</code>, <xb-ico size="m" type="pause"></xb-ico> <code>pause</code>, <xb-ico size="m" type="people"></xb-ico> <code>people</code>, <xb-ico size="m" type="play"></xb-ico> <code>play</code>, <xb-ico size="m" type="print"></xb-ico> <code>print</code>, <xb-ico size="m" type="remove"></xb-ico> <code>remove</code>, <xb-ico size="m" type="services"></xb-ico> <code>services</code>, <xb-ico size="m" type="settings"></xb-ico> <code>settings</code>, <xb-ico size="m" type="three-dots"></xb-ico> <code>three-dots</code>, <xb-ico size="m" type="trash"></xb-ico> <code>trash</code>, <span style="background-color:#000;"><xb-ico size="m" type="trash-white"></xb-ico></span> <code>trash-white</code>, <xb-ico size="m" type="twitter"></xb-ico> <code>twitter</code>, <xb-ico size="m" type="help"></xb-ico> <code>help</code>, <xb-ico size="m" type="upload"></xb-ico> <code>upload</code>, <span style="background-color:#000;"><xb-ico size="m" type="upload-white"></xb-ico></span> <code>upload-white</code>, <xb-ico size="m" type="vk"></xb-ico> <code>vk</code>
+<br/><br/></p>
+<h5>Type</h5><pre class="prettyprint source lang-html"><code>&#60;xb-ico type=&quot;...&quot;>&#60;/xb-ico></code></pre><p><xb-ico type="attention"></xb-ico> <code>attention</code>, <xb-ico type="close"></xb-ico> <code>close</code>, <xb-ico type="check"></xb-ico> <code>check</code>, <xb-ico type="download"></xb-ico> <code>download</code>, <span style="background-color:#000;"><xb-ico type="download-white"></xb-ico></span> <code>download-white</code>, <xb-ico type="dropdown"></xb-ico> <code>dropdown</code>, <xb-ico type="eye"></xb-ico> <code>eye</code>, <xb-ico type="link"></xb-ico> <code>link</code>, <span style="background-color:#000;"><xb-ico type="link-white"></xb-ico></span> <code>link-white</code>, <xb-ico type="mail"></xb-ico> <code>mail</code>, <xb-ico type="notification">test</xb-ico> <code>notification</code>, <xb-ico type="odnoklassniki"></xb-ico> <code>odnoklassniki</code>, <xb-ico type="pause"></xb-ico> <code>pause</code>, <xb-ico type="people"></xb-ico> <code>people</code>, <xb-ico type="play"></xb-ico> <code>play</code>, <xb-ico type="print"></xb-ico> <code>print</code>, <xb-ico type="remove"></xb-ico> <code>remove</code>, <xb-ico type="services"></xb-ico> <code>services</code>, <xb-ico type="settings"></xb-ico> <code>settings</code>, <xb-ico type="three-dots"></xb-ico> <code>three-dots</code>, <xb-ico type="trash"></xb-ico> <code>trash</code>, <span style="background-color:#000;"><xb-ico type="trash-white"></xb-ico></span> <code>trash-white</code>, <xb-ico type="twitter"></xb-ico> <code>twitter</code>, <xb-ico type="help"></xb-ico> <code>help</code>, <xb-ico type="upload"></xb-ico> <code>upload</code>, <span style="background-color:#000;"><xb-ico type="upload-white"></xb-ico></span> <code>upload-white</code>, <xb-ico type="vk"></xb-ico> <code>vk</code>
+<br/><br/></p>
+<h5>Active</h5><pre class="prettyprint source lang-html"><code>&#60;xb-ico active type=&quot;...&quot;>&#60;/xb-ico></code></pre><p><xb-ico active type="attention"></xb-ico> <code>attention</code>, <xb-ico active type="close"></xb-ico> <code>close</code>, <xb-ico active type="check"></xb-ico> <code>check</code>, <xb-ico active type="download"></xb-ico> <code>download</code>, <span style="background-color:#000;"><xb-ico active type="download-white"></xb-ico></span> <code>download-white</code>, <xb-ico active type="dropdown"></xb-ico> <code>dropdown</code>, <xb-ico active type="eye"></xb-ico> <code>eye</code>, <xb-ico active type="link"></xb-ico> <code>link</code>, <span style="background-color:#000;"><xb-ico active type="link-white"></xb-ico></span> <code>link-white</code>, <xb-ico active type="mail"></xb-ico> <code>mail</code>, <xb-ico active type="notification">test</xb-ico> <code>notification</code>, <xb-ico active type="odnoklassniki"></xb-ico> <code>odnoklassniki</code>, <xb-ico active type="pause"></xb-ico> <code>pause</code>, <xb-ico active type="people"></xb-ico> <code>people</code>, <xb-ico active type="play"></xb-ico> <code>play</code>, <xb-ico active type="print"></xb-ico> <code>print</code>, <xb-ico active type="remove"></xb-ico> <code>remove</code>, <xb-ico active type="services"></xb-ico> <code>services</code>, <xb-ico active type="settings"></xb-ico> <code>settings</code>, <xb-ico active type="three-dots"></xb-ico> <code>three-dots</code>, <xb-ico active type="trash"></xb-ico> <code>trash</code>, <span style="background-color:#000;"><xb-ico active type="trash-white"></xb-ico></span> <code>trash-white</code>, <xb-ico active type="twitter"></xb-ico> <code>twitter</code>, <xb-ico active type="help"></xb-ico> <code>help</code>, <xb-ico active type="upload"></xb-ico> <code>upload</code>, <span style="background-color:#000;"><xb-ico active type="upload-white"></xb-ico></span> <code>upload-white</code>, <xb-ico active type="vk"></xb-ico> <code>vk</code>
+<br/><br/></p>
+<h5>Disabled</h5><pre class="prettyprint source lang-html"><code>&#60;xb-ico disabled type=&quot;...&quot;>&#60;/xb-ico></code></pre><p><xb-ico disabled type="attention"></xb-ico> <code>attention</code>, <xb-ico disabled type="close"></xb-ico> <code>close</code>, <xb-ico disabled type="check"></xb-ico> <code>check</code>, <xb-ico disabled type="download"></xb-ico> <code>download</code>, <span style="background-color:#000;"><xb-ico disabled type="download-white"></xb-ico></span> <code>download-white</code>, <xb-ico disabled type="dropdown"></xb-ico> <code>dropdown</code>, <xb-ico disabled type="eye"></xb-ico> <code>eye</code>, <xb-ico disabled type="link"></xb-ico> <code>link</code>, <span style="background-color:#000;"><xb-ico disabled type="link-white"></xb-ico></span> <code>link-white</code>, <xb-ico disabled type="mail"></xb-ico> <code>mail</code>, <xb-ico disabled type="notification">test</xb-ico> <code>notification</code>, <xb-ico disabled type="odnoklassniki"></xb-ico> <code>odnoklassniki</code>, <xb-ico disabled type="pause"></xb-ico> <code>pause</code>, <xb-ico disabled type="people"></xb-ico> <code>people</code>, <xb-ico disabled type="play"></xb-ico> <code>play</code>, <xb-ico disabled type="print"></xb-ico> <code>print</code>, <xb-ico disabled type="remove"></xb-ico> <code>remove</code>, <xb-ico disabled type="services"></xb-ico> <code>services</code>, <xb-ico disabled type="settings"></xb-ico> <code>settings</code>, <xb-ico disabled type="three-dots"></xb-ico> <code>three-dots</code>, <xb-ico disabled type="trash"></xb-ico> <code>trash</code>, <span style="background-color:#000;"><xb-ico disabled type="trash-white"></xb-ico></span> <code>trash-white</code>, <xb-ico disabled type="twitter"></xb-ico> <code>twitter</code>, <xb-ico disabled type="help"></xb-ico> <code>help</code>, <xb-ico disabled type="upload"></xb-ico> <code>upload</code>, <span style="background-color:#000;"><xb-ico disabled type="upload-white"></xb-ico></span> <code>upload-white</code>, <xb-ico disabled type="vk"></xb-ico> <code>vk</code></p>
+</article>
+
+</section>  
+
+
+        
+        <!-- disqus code -->
+        <div id="disqus_thread"></div>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <!-- // disqus code -->
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Sat Jul 05 2014 22:59:20 GMT+0400 (MSK)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+
+
+</body>
+</html>

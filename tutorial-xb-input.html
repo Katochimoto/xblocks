@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: xb-input</title>
+    
+    
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="bower_components/xblocks/build/xblocks.css">
+        
+    
+    
+    
+    <script>
+    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"xblocks","disqus":true,"googleAnalytics":false,"meta":{"title":"","description":"","keyword":""},"openGraph":false,"scripts":["bower_components/es5-shim/es5-shim.js","bower_components/react/react-with-addons.js","bower_components/x-tag-core/dist/x-tag-core.js","bower_components/xblocks-core/xblocks-core.js","bower_components/xblocks/build/xblocks.js"],"styles":["bower_components/xblocks/build/xblocks.css"],"default":{}};
+    </script>
+    
+
+    
+
+    
+        
+            <script src="bower_components/es5-shim/es5-shim.js"></script>
+        
+            <script src="bower_components/react/react-with-addons.js"></script>
+        
+            <script src="bower_components/x-tag-core/dist/x-tag-core.js"></script>
+        
+            <script src="bower_components/xblocks-core/xblocks-core.js"></script>
+        
+            <script src="bower_components/xblocks/build/xblocks.js"></script>
+        
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html">xblocks</a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="xblocks">
+            <span class="title">
+                <a href="xblocks.html">xblocks</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks.mixin">
+            <span class="title">
+                <a href="xblocks.mixin.html">xblocks.mixin</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+                
+                    <ul class="members itemMembers">
+                        <span class="subtitle">Static members</span>
+                        
+                        <li data-name="xblocks.mixin.eChecked"><a href="xblocks.mixin.html#eChecked">eChecked</a></li>
+                        
+                        <li data-name="xblocks.mixin.eDisabled"><a href="xblocks.mixin.html#eDisabled">eDisabled</a></li>
+                        
+                        <li data-name="xblocks.mixin.eFocus"><a href="xblocks.mixin.html#eFocus">eFocus</a></li>
+                        
+                    </ul>
+                
+
+                
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+
+    <div class="main">
+        
+            <h1 class="page-title">Tutorial: xb-input</h1>
+        
+
+        <section>
+    
+<header>
+    
+
+    <h2>xb-input</h2>
+</header>  
+
+<article>
+    <p><br/>
+Input html element.</p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-input
+    id=&quot;...&quot;
+    class=&quot;...&quot;
+    name=&quot;...&quot;
+    type=&quot;text|number|date|datetime|email|month|range|search|tel|time|url|week|color&quot;
+    size=&quot;s|m|l|xl&quot;
+    autocomplete=&quot;on|off&quot;
+    rows=&quot;...&quot;
+    cols=&quot;...&quot;
+    placeholder=&quot;...&quot;
+    value=&quot;...&quot;
+    prefix=&quot;...&quot;
+    postfix=&quot;...&quot;
+    tabindex=&quot;...&quot;
+    disabled
+    autosize
+    multiline
+    required
+    readonly
+    reset
+    autofocus
+    ghost
+    xb-link=&quot;...&quot;
+    xb-link-...>&#60;/xb-input></code></pre><h4>Simple input</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input value=&quot;simple input&quot;>&#60;/xb-input></code></pre><p><xb-input value="simple input"></xb-input></p>
+<h4>Placeholder</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input placeholder=&quot;placeholder&quot;>&#60;/xb-input></code></pre><p><xb-input placeholder="placeholder"></xb-input></p>
+<h4>Size</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input size=&quot;s&quot;>&#60;/xb-input></code></pre><p><xb-input size="s"></xb-input></p>
+<h4>Multiline</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input value=&quot;multiline&quot; multiline>&#60;/xb-input></code></pre><p><xb-input value="multiline" multiline></xb-input></p>
+<h4>Prefix</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input prefix=&quot;prefix&quot;>&#60;/xb-input></code></pre><p><xb-input prefix="prefix"></xb-input></p>
+<h4>Postfix</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input postfix=&quot;postfix&quot;>&#60;/xb-input></code></pre><p><xb-input postfix="postfix"></xb-input></p>
+<h4>Autosize</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input autosize value=&quot;autosize&quot;>&#60;/xb-input></code></pre><p><xb-input autosize value="autosize"></xb-input></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-input autosize value=&quot;autosize&quot; multiline>&#60;/xb-input></code></pre><p><xb-input autosize value="autosize" multiline></xb-input></p>
+<h4>Readonly</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input readonly value=&quot;readonly&quot;>&#60;/xb-input></code></pre><p><xb-input readonly value="readonly"></xb-input></p>
+<h4>Disabled</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input disabled value=&quot;disabled&quot;>&#60;/xb-input></code></pre><p><xb-input disabled value="disabled"></xb-input></p>
+<h4>Reset</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input reset value=&quot;reset&quot;>&#60;/xb-input></code></pre><p><xb-input reset value="reset"></xb-input></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-input reset value=&quot;reset&quot; multiline>&#60;/xb-input></code></pre><p><xb-input reset value="reset" multiline></xb-input></p>
+<h4>Ghost</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input ghost value=&quot;ghost&quot;>&#60;/xb-input></code></pre><p><xb-input ghost value="ghost"></xb-input></p>
+<h4>xb-link</h4><pre class="prettyprint source lang-html"><code>&#60;xb-input xb-link=&quot;link&quot; xb-link-href=&quot;http://ya.ru&quot; xb-link-target=&quot;_blank&quot;>&#60;/xb-input></code></pre><p><xb-input xb-link="link" xb-link-href="http://ya.ru" xb-link-target="_blank"></xb-input></p>
+</article>
+
+</section>  
+
+
+        
+        <!-- disqus code -->
+        <div id="disqus_thread"></div>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <!-- // disqus code -->
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Sat Jul 05 2014 22:59:20 GMT+0400 (MSK)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+
+
+</body>
+</html>
