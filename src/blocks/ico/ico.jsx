@@ -9,9 +9,11 @@ xblocks.view.register('xb-ico', {
         'id': React.PropTypes.string,
         'class': React.PropTypes.string,
         'alt': React.PropTypes.string,
+        'title': React.PropTypes.string,
         'value': React.PropTypes.string,
+        'tabindex': React.PropTypes.string,
         'children': React.PropTypes.renderable,
-        'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+        'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'type': React.PropTypes.oneOf([
             'attention',
             'close',
@@ -69,10 +71,19 @@ xblocks.view.register('xb-ico', {
 
         classes = React.addons.classSet(classes);
 
+        var tabIndex = this.props.tabindex;
+
+        if (this.props.disabled) {
+            tabIndex = '-1';
+        }
+
         var content = this.props.value || this.props.children;
 
         return (
-            <span className={classes} data-xb-content={this.props._uid}>{content}</span>
+            <span className={classes}
+                title={this.props.title}
+                tabIndex={tabIndex}
+                data-xb-content={this.props._uid}>{content}</span>
         );
     }
 });

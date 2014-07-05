@@ -71,11 +71,34 @@ xb-input,
 xb-ico,
 xb-select,
 xb-checkbox,
-xb-radio {
+xb-radio,
+xb-link {
   display: inline-block;
 }
-xb-link {
-  display: inline;
+xb-button *,
+xb-input *,
+xb-ico *,
+xb-select *,
+xb-checkbox *,
+xb-radio *,
+xb-link *,
+xb-button *:before,
+xb-input *:before,
+xb-ico *:before,
+xb-select *:before,
+xb-checkbox *:before,
+xb-radio *:before,
+xb-link *:before,
+xb-button *:after,
+xb-input *:after,
+xb-ico *:after,
+xb-select *:after,
+xb-checkbox *:after,
+xb-radio *:after,
+xb-link *:after {
+  -webkit-box-sizing: initial;
+  -moz-box-sizing: initial;
+  box-sizing: initial;
 }
 xb-option,
 xb-optgroup,
@@ -243,6 +266,9 @@ xb-dropdown {
 }
 .xb-link._theme-input:hover {
   color: #d00;
+}
+a.xb-button {
+  text-decoration: none;
 }
 .xb-button {
   position: relative;

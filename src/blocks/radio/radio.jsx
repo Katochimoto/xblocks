@@ -28,7 +28,8 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
             'size': 'm',
             'children': '',
             'value': 'on',
-            'checked': false
+            'checked': false,
+            'tabindex': '1'
         };
     },
 
@@ -54,8 +55,7 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
             <label className={classes}
                 title={this.props.title}
                 form={this.props.form}
-                htmlFor={this.props['for']}
-                tabIndex={tabIndex}>
+                htmlFor={this.props['for']}>
 
                 <input type="radio"
                     ref="checkControl"
@@ -66,7 +66,8 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
                     defaultChecked={this.props.checked}
                     autoFocus={this.props.autofocus}
                     readOnly={this.props.readonly}
-                    required={this.props.required}/>
+                    required={this.props.required}
+                    tabIndex={tabIndex}/>
 
                 <span className="_xb-radio_flag _xb-check_flag">
                     <span className="_xb-radio_flag-icon"></span>

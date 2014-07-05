@@ -2,6 +2,12 @@
     'use strict';
 
     var React = global.React;
+
+    /**
+     * HTML custom elements
+     * @namespace xblocks
+     * @version 0.2.4
+     */
     var xblocks = global.xblocks;
 
 
@@ -69,7 +75,12 @@
         return attrs;
     };
 
+    /**
+     * @memberOf xblocks
+     * @namespace xblocks.mixin
+     */
     xblocks.mixin = {};
+
     /*! borschik:include:mixin/eDisabled.js */
     /*! borschik:include:mixin/eChecked.js */
     /*! borschik:include:mixin/eInputValueState.js */

@@ -151,7 +151,8 @@ var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
 
                 children.push(XBButton(xblocks.utils.merge({}, this.props, {
                     'key': 'content',
-                    'type': 'inline'
+                    'type': 'inline',
+                    'tabindex': null
                 })));
 
                 classes = React.addons.classSet({

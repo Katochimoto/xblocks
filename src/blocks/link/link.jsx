@@ -11,13 +11,15 @@ xblocks.view.register('xb-link', {
         'disabled': React.PropTypes.bool,
         'href': React.PropTypes.string,
         'name': React.PropTypes.string,
+        'tabindex': React.PropTypes.string,
         'target': React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
         'theme': React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
     },
 
     getDefaultProps: function() {
         return {
-            'theme': 'normal'
+            'theme': 'normal',
+            'tabindex': '1'
         };
     },
 
@@ -31,6 +33,12 @@ xblocks.view.register('xb-link', {
             classes['_theme-' + this.props.theme] = true;
         }
 
+        var tabIndex = this.props.tabindex;
+
+        if (this.props.disabled) {
+            tabIndex = '-1';
+        }
+
         classes = React.addons.classSet(classes);
 
         var content = this.props.value || this.props.children;
@@ -40,6 +48,7 @@ xblocks.view.register('xb-link', {
                 name={this.props.name}
                 href={this.props.href}
                 target={this.props.target}
+                tabIndex={tabIndex}
                 className={classes}
                 data-xb-content={this.props._uid}>{content}</a>
         );
