@@ -25,15 +25,15 @@
         "url": "git@github.com:Katochimoto/xblocks.git"
     },
     "devDependencies": {
-        "stylobate": "0.24.x",
-        "stylobate-islands": "0.27.x",
+        "stylobate": "0.25.x",
+        "stylobate-islands": "0.28.x",
 
         "grunt": "0.4.5",
         "autoprefixer-stylus": "0.1.0",
         "grunt-contrib-clean": "0.5.0",
         "grunt-contrib-copy": "0.5.0",
         "grunt-borschik": "1.0.0",
-        "grunt-contrib-stylus": "0.16.0",
+        "grunt-contrib-stylus": "0.18.0",
         "grunt-contrib-watch": "0.6.1",
         "grunt-react": "0.8.2",
         "grunt-modernizr": "0.5.2",

@@ -2317,7 +2317,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
   background: #fff;
-/* ie fallback */
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: linear-gradient(#fff, #fff);
@@ -2328,7 +2327,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
-/* override for <input type="search"> */
   font-family: Arial, sans-serif;
   -webkit-appearance: textfield;
 }
@@ -2369,7 +2367,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
   background: #fff;
-/* ie fallback */
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: linear-gradient(#fff, #fff);
@@ -2380,7 +2377,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
-/* override for <input type="search"> */
 }
 .xb-input._simple._size-s:focus {
   outline: none;
@@ -2406,7 +2402,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
   background: #fff;
-/* ie fallback */
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: linear-gradient(#fff, #fff);
@@ -2417,7 +2412,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
-/* override for <input type="search"> */
 }
 .xb-input._simple._size-l:focus {
   outline: none;
@@ -2443,7 +2437,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
   background: #fff;
-/* ie fallback */
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: linear-gradient(#fff, #fff);
@@ -2454,7 +2447,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
-/* override for <input type="search"> */
 }
 .xb-input._simple._size-xl:focus {
   outline: none;
@@ -2568,7 +2560,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
   background: #fff;
-/* ie fallback */
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: linear-gradient(#fff, #fff);
@@ -2579,7 +2570,6 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
-/* override for <input type="search"> */
 }
 .xb-input._complex > ._reset {
   margin: -5px -5px -5px 0;

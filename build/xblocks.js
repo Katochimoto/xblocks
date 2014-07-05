@@ -85,6 +85,39 @@
 /* global xblocks, React */
 /* jshint strict: false */
 
+/**
+ * Disabled element interface
+ *
+ * <xb-button disabled>button</xb-button>
+ *
+ * @example
+ * xblocks.create('xb-button', [
+ *     xblocks.mixin.eDisabled,
+ *     {
+ *         accessors: { ... },
+ *         events: { ... },
+ *         methods: { ... }
+ *         ...
+ *     }
+ * ]);
+ *
+ * var e = document.createElement('xb-button');
+ * // read
+ * console.log(e.disabled)
+ * // false
+ *
+ * // write
+ * e.disabled = true;
+ * // true
+ *
+ * // jquery write
+ * $(e).prop('disabled', false)
+ * // false
+ *
+ * @memberOf xblocks.mixin
+ * @name eDisabled
+ * @type {{accessors: {disabled: {get: get, set: set}}}}
+ */
 xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
@@ -265,6 +298,31 @@ xblocks.mixin.eInputValueProps = {
 /* global xblocks, React */
 /* jshint strict: false */
 
+/**
+ * Focus element interface
+ *
+ * @example
+ * xblocks.create('xb-button', [
+ *     xblocks.mixin.eFocus,
+ *     {
+ *         accessors: { ... },
+ *         events: { ... },
+ *         methods: { ... }
+ *         ...
+ *     }
+ * ]);
+ *
+ * var e = document.createElement('xb-button');
+ * // set focus
+ * e.focus();
+ *
+ * // set blur
+ * e.blur();
+ *
+ * @memberOf xblocks.mixin
+ * @name eFocus
+ * @type {{methods: {focus: focus, blur: blur}}}
+ */
 xblocks.mixin.eFocus = {
     methods: {
         focus: function() {
