@@ -1425,6 +1425,31 @@ xblocks.create('xb-radio', [
 
 /* blocks/radio/radio.js end */
 
+    /* blocks/select/select.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+/* blocks/select/select.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, global, React */
+/* jshint strict: false */
+
+
+
+/* blocks/select/select.jsx.js end */
+
+
+xblocks.create('xb-select', [
+    xblocks.mixin.eDisabled,
+    xblocks.mixin.eFocus,
+
+    {
+        prototype: Object.create(HTMLSelectElement.prototype)
+    }
+]);
+
+/* blocks/select/select.js end */
+
 
 }(function() {
     return this || (1, eval)('this');
