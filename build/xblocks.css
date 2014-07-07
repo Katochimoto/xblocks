@@ -29,7 +29,8 @@
 .xb-ico._type-check,
 .xb-ico._type-dropdown,
 ._xb-checkbox_flag,
-._xb-radio_flag {
+._xb-radio_flag,
+.xb-select > .xb-button > ._content:before {
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -2855,6 +2856,51 @@ input[type=file]:focus + ._xb-radio_flag:after,
 input:not(:checked) + ._xb-radio_flag > ._xb-radio_flag-icon {
   visibility: hidden;
 }
+.xb-select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+}
+.xb-select > ._controller {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.xb-select > ._controller,
+._xb-check_controller {
+  position: absolute !important;
+  clip: rect(1px,1px,1px,1px) !important;
+}
+.xb-select > .xb-button {
+  width: 100%;
+  text-align: left;
+}
+.xb-select > .xb-button > ._content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.xb-select > .xb-button > ._content:before {
+  content: " ";
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  margin-top: -0.33em;
+  -webkit-transform: scale(0.75) rotate(45deg);
+  -ms-transform: scale(0.75) rotate(45deg);
+  transform: scale(0.75) rotate(45deg);
+  float: right;
+  top: 0.7em;
+  left: -4px;
+  margin-right: -6px;
+  margin-left: 10px;
+  margin-right: -4px;
+}
+.xb-select > .xb-button > ._content:before {
+  width: 6px;
+  height: 6px;
+}
 ._link {
   color: #22c;
   cursor: pointer;
@@ -2880,10 +2926,6 @@ a._link {
 }
 ._hidden {
   display: none !important;
-}
-._xb-check_controller {
-  position: absolute !important;
-  clip: rect(1px,1px,1px,1px) !important;
 }
 ._xb-check_controller:checked + ._xb-check_flag,
 ._xb-check_controller:checked + .xb-button,
