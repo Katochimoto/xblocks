@@ -1,4 +1,4 @@
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /*! borschik:include:select.jsx.js */

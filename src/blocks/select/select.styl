@@ -23,3 +23,20 @@
         skin: icon_dropdown selecty
         margin-right: -4px
 
+
+._xb-select-dropdown
+  skin: isle fly, menu no-elements padded
+  position: absolute
+
+  & > ._group
+    reset: ul
+    list-style-type: none // move to reset
+
+    & > ._item
+      reset: li
+      list-style-type: none // move to reset
+
+      & > ._item-control
+        skin: menu-item
+        white-space: nowrap
+        padding-right: 21px

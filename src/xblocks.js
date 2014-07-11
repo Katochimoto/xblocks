@@ -14,6 +14,22 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
+    xblocks.utils.exportPropTypes = function(tagName) {
+        var props = xblocks.utils.propTypes(tagName);
+        var exportProps = {};
+        var prefix = tagName + '-';
+
+        for (var p in props) {
+            if (props.hasOwnProperty(p) && p[0] !== '_') {
+                exportProps[prefix + p] = props[p];
+            }
+        }
+
+        return {
+            'propTypes': exportProps
+        };
+    };
+
     xblocks.utils.filterPropsPrefixLink = function(name) {
         return xblocks.utils.REG_PROPS_PREFIX_LINK.test(name);
     };
@@ -88,6 +104,7 @@
     /*! borschik:include:mixin/eFocus.js */
 
     /*! borschik:include:mixin/vChecked.js */
+    /*! borschik:include:mixin/vCommonAttrs.js */
 
     /*! borschik:include:blocks/ico/ico.js */
     /*! borschik:include:blocks/link/link.js */
@@ -95,6 +112,7 @@
     /*! borschik:include:blocks/input/input.js */
     /*! borschik:include:blocks/checkbox/checkbox.js */
     /*! borschik:include:blocks/radio/radio.js */
+    /*! borschik:include:blocks/popup/popup.js */
     /*! borschik:include:blocks/select/select.js */
 
 }(function() {

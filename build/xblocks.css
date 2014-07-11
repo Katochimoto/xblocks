@@ -1,3 +1,12 @@
+._xb-select-dropdown > ._group,
+._xb-select-dropdown > ._group > ._item {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 .xb-button {
   padding: 0;
   margin: 0;
@@ -73,7 +82,8 @@ xb-ico,
 xb-select,
 xb-checkbox,
 xb-radio,
-xb-link {
+xb-link,
+xb-popup {
   display: inline-block;
 }
 xb-button *,
@@ -83,6 +93,7 @@ xb-select *,
 xb-checkbox *,
 xb-radio *,
 xb-link *,
+xb-popup *,
 xb-button *:before,
 xb-input *:before,
 xb-ico *:before,
@@ -90,21 +101,28 @@ xb-select *:before,
 xb-checkbox *:before,
 xb-radio *:before,
 xb-link *:before,
+xb-popup *:before,
 xb-button *:after,
 xb-input *:after,
 xb-ico *:after,
 xb-select *:after,
 xb-checkbox *:after,
 xb-radio *:after,
-xb-link *:after {
+xb-link *:after,
+xb-popup *:after {
   -webkit-box-sizing: initial;
   -moz-box-sizing: initial;
   box-sizing: initial;
 }
-xb-option,
-xb-optgroup,
-xb-dropdown {
-  display: block;
+xb-button[hidden],
+xb-input[hidden],
+xb-ico[hidden],
+xb-select[hidden],
+xb-checkbox[hidden],
+xb-radio[hidden],
+xb-link[hidden],
+xb-popup[hidden] {
+  display: none;
 }
 .xb-ico {
   width: 16px;
@@ -2900,6 +2918,39 @@ input:not(:checked) + ._xb-radio_flag > ._xb-radio_flag-icon {
 .xb-select > .xb-button > ._content:before {
   width: 6px;
   height: 6px;
+}
+._xb-select-dropdown {
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
+  padding: 5px 0;
+  position: absolute;
+}
+._xb-select-dropdown > ._group {
+  list-style-type: none;
+}
+._xb-select-dropdown > ._group > ._item {
+  list-style-type: none;
+}
+._xb-select-dropdown > ._group > ._item > ._item-control {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  font-size: 15px;
+  line-height: 22px;
+  padding: 5px 16px;
+  white-space: nowrap;
+  padding-right: 21px;
+}
+._xb-select-dropdown > ._group > ._item > ._item-control:hover {
+  background: rgba(255,193,0,0.37);
 }
 ._link {
   color: #22c;

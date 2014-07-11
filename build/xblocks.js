@@ -14,6 +14,22 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
+    xblocks.utils.exportPropTypes = function(tagName) {
+        var props = xblocks.utils.propTypes(tagName);
+        var exportProps = {};
+        var prefix = tagName + '-';
+
+        for (var p in props) {
+            if (props.hasOwnProperty(p) && p[0] !== '_') {
+                exportProps[prefix + p] = props[p];
+            }
+        }
+
+        return {
+            'propTypes': exportProps
+        };
+    };
+
     xblocks.utils.filterPropsPrefixLink = function(name) {
         return xblocks.utils.REG_PROPS_PREFIX_LINK.test(name);
     };
@@ -365,6 +381,25 @@ xblocks.mixin.vChecked = {
 
 /* mixin/vChecked.js end */
 
+    /* mixin/vCommonAttrs.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.mixin.vCommonAttrs = {
+    'propTypes': {
+        'accesskey': React.PropTypes.string,
+        'class': React.PropTypes.string,
+        'contextmenu': React.PropTypes.string,
+        'dir': React.PropTypes.oneOf([ 'ltr', 'rtl' ]),
+        'hidden': React.PropTypes.bool,
+        'spellcheck': React.PropTypes.bool,
+        'tabindex': React.PropTypes.string,
+        'title': React.PropTypes.string
+    }
+};
+
+/* mixin/vCommonAttrs.js end */
+
 
     /* blocks/ico/ico.js begin */
 /* global xblocks, global, React */
@@ -415,7 +450,7 @@ xblocks.view.register('xb-ico', {
             'upload',
             'upload-white',
             'vk'
-        ]).isRequired,
+        ]),
         'active': React.PropTypes.bool,
         'disabled': React.PropTypes.bool
     },
@@ -622,217 +657,222 @@ var XBButtonContent = xblocks.view.create({
 /* blocks/button/button-content.jsx.js end */
 
 
-var XBButton = xblocks.view.register('xb-button', [ xblocks.mixin.vChecked, {
-    displayName: 'xb-button',
+var XBButton = xblocks.view.register('xb-button', [
+    xblocks.mixin.vChecked,
+    xblocks.utils.exportPropTypes('xb-ico'),
 
-    propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
-        'children': React.PropTypes.renderable,
-        'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-        'theme': React.PropTypes.oneOf([
-            'normal',
-            'action',
-            'dark',
-            'flying',
-            'pseudo-inverted',
-            'pseudo',
-            'promo'
-        ]),
-        'type': React.PropTypes.oneOf([
-            'label',
-            'inline',
-            'link',
-            'file',
+    {
+        displayName: 'xb-button',
 
-            'button',
-            'submit',
+        propTypes: {
+            'id': React.PropTypes.string,
+            'class': React.PropTypes.string,
+            'children': React.PropTypes.renderable,
+            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'theme': React.PropTypes.oneOf([
+                'normal',
+                'action',
+                'dark',
+                'flying',
+                'pseudo-inverted',
+                'pseudo',
+                'promo'
+            ]),
+            'type': React.PropTypes.oneOf([
+                'label',
+                'inline',
+                'link',
+                'file',
 
-            'checkbox',
-            'radio'
-        ]),
-        'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-        'value': React.PropTypes.string,
-        'href': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'title': React.PropTypes.string,
-        'form': React.PropTypes.string,
-        'for': React.PropTypes.string,
-        'tabindex': React.PropTypes.string,
-        'multiple': React.PropTypes.bool,
-        'autofocus': React.PropTypes.bool,
-        'disabled': React.PropTypes.bool,
+                'button',
+                'submit',
 
-        'checked': React.PropTypes.bool,
-        'readonly': React.PropTypes.bool,   // native not work
-        'required': React.PropTypes.bool
-    },
+                'checkbox',
+                'radio'
+            ]),
+            'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
+            'value': React.PropTypes.string,
+            'href': React.PropTypes.string,
+            'name': React.PropTypes.string,
+            'title': React.PropTypes.string,
+            'form': React.PropTypes.string,
+            'for': React.PropTypes.string,
+            'tabindex': React.PropTypes.string,
+            'multiple': React.PropTypes.bool,
+            'autofocus': React.PropTypes.bool,
+            'disabled': React.PropTypes.bool,
 
-    statics: {
-        filterIcoProps: function(props) {
-            return xblocks.utils.mapObject(
-                xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
-                xblocks.utils.mapPropsPrefixIco
-            );
-        }
-    },
+            'checked': React.PropTypes.bool,
+            'readonly': React.PropTypes.bool,   // native not work
+            'required': React.PropTypes.bool
+        },
 
-    getDefaultProps: function() {
-        return {
-            'size': 'm',
-            'theme': 'normal',
-            'type': 'button',
-            'checked': false,
-            'tabindex': '1',
-            'children': String.fromCharCode(160)
-        };
-    },
-
-    render: function() {
-        var classes = {
-            'xb-button': true,
-            '_disabled': this.props.disabled
-        };
-
-        if (this.props.theme) {
-            classes['_theme-' + this.props.theme] = true;
-        }
-
-        if (this.props.size) {
-            classes['_size-' + this.props.size] = true;
-        }
-
-        classes = React.addons.classSet(classes);
-
-        var icoProps = XBButton.filterIcoProps(this.props);
-        var tabIndex = this.props.tabindex;
-        var type = this.props.type;
-
-        if (this.props.disabled) {
-            tabIndex = '-1';
-        }
-
-        if (type === 'link') {
-            return (
-                React.DOM.a( {className:classes,
-                    href:this.props.href,
-                    name:this.props.name,
-                    target:this.props.target,
-                    title:this.props.title,
-                    tabIndex:tabIndex}, 
-
-                    XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
-                )
-            );
-
-        } else if (type === 'file') {
-            return (
-                React.DOM.label( {className:classes}, 
-                    React.DOM.span( {className:"_xb-file-intruder"}, 
-                        React.DOM.span( {className:"_xb-file-intruder-inner"}, 
-                            React.DOM.input( {className:"_xb-file-intruder-input",
-                                type:"file",
-                                name:this.props.name,
-                                title:this.props.title,
-                                disabled:this.props.disabled,
-                                multiple:this.props.multiple,
-                                autoFocus:this.props.autofocus,
-                                tabIndex:tabIndex}),
-
-                            React.DOM.span( {className:"_xb-file-intruder-focus"} )
-                        )
-                    ),
-                    XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
-                )
-            );
-
-        } else if (type === 'label' || type === 'checkbox' || type === 'radio') {
-            var children = [];
-
-            if (type === 'checkbox' || type === 'radio') {
-                var value = this.props.value || 'on';
-
-                children.push(
-                    React.DOM.input( {key:"checkControl",
-                        ref:"checkControl",
-                        type:type,
-                        className:"_xb-check_controller",
-                        name:this.props.name,
-                        value:this.props.value,
-                        disabled:this.props.disabled,
-                        defaultChecked:this.props.checked,
-                        autoFocus:this.props.autofocus,
-                        readOnly:this.props.readonly,
-                        required:this.props.required,
-                        tabIndex:tabIndex})
+        statics: {
+            filterIcoProps: function(props) {
+                return xblocks.utils.mapObject(
+                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
+                    xblocks.utils.mapPropsPrefixIco
                 );
+            }
+        },
 
-                children.push(XBButton(xblocks.utils.merge({}, this.props, {
-                    'key': 'content',
-                    'type': 'inline',
-                    'tabindex': null
-                })));
+        getDefaultProps: function() {
+            return {
+                'size': 'm',
+                'theme': 'normal',
+                'type': 'button',
+                'checked': false,
+                'tabindex': '1',
+                'children': String.fromCharCode(160)
+            };
+        },
 
-                classes = React.addons.classSet({
-                    'xb-button': true,
-                    '_theme-check': true,
-                    '_disabled': this.props.disabled
-                });
+        render: function() {
+            var classes = {
+                'xb-button': true,
+                '_disabled': this.props.disabled
+            };
 
-            } else {
-                children.push(
-                    React.DOM.span( {key:"file-intruder", className:"_xb-file-intruder"}, 
-                        React.DOM.span( {className:"_xb-file-intruder-inner"}, 
-                            React.DOM.input( {className:"_xb-file-intruder-input",
-                                type:"button",
-                                disabled:this.props.disabled,
-                                autoFocus:this.props.autofocus,
-                                tabIndex:tabIndex}),
+            if (this.props.theme) {
+                classes['_theme-' + this.props.theme] = true;
+            }
 
-                            React.DOM.span( {className:"_xb-file-intruder-focus"} )
-                        )
+            if (this.props.size) {
+                classes['_size-' + this.props.size] = true;
+            }
+
+            classes = React.addons.classSet(classes);
+
+            var icoProps = XBButton.filterIcoProps(this.props);
+            var tabIndex = this.props.tabindex;
+            var type = this.props.type;
+
+            if (this.props.disabled) {
+                tabIndex = '-1';
+            }
+
+            if (type === 'link') {
+                return (
+                    React.DOM.a( {className:classes,
+                        href:this.props.href,
+                        name:this.props.name,
+                        target:this.props.target,
+                        title:this.props.title,
+                        tabIndex:tabIndex}, 
+
+                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
                     )
                 );
 
-                children.push(
-                    XBButtonContent( {key:"content",
-                        _uid:this.props._uid,
-                        ico:icoProps}, this.props.children)
+            } else if (type === 'file') {
+                return (
+                    React.DOM.label( {className:classes}, 
+                        React.DOM.span( {className:"_xb-file-intruder"}, 
+                            React.DOM.span( {className:"_xb-file-intruder-inner"}, 
+                                React.DOM.input( {className:"_xb-file-intruder-input",
+                                    type:"file",
+                                    name:this.props.name,
+                                    title:this.props.title,
+                                    disabled:this.props.disabled,
+                                    multiple:this.props.multiple,
+                                    autoFocus:this.props.autofocus,
+                                    tabIndex:tabIndex}),
+
+                                React.DOM.span( {className:"_xb-file-intruder-focus"} )
+                            )
+                        ),
+                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
+                    )
+                );
+
+            } else if (type === 'label' || type === 'checkbox' || type === 'radio') {
+                var children = [];
+
+                if (type === 'checkbox' || type === 'radio') {
+                    var value = this.props.value || 'on';
+
+                    children.push(
+                        React.DOM.input( {key:"checkControl",
+                            ref:"checkControl",
+                            type:type,
+                            className:"_xb-check_controller",
+                            name:this.props.name,
+                            value:this.props.value,
+                            disabled:this.props.disabled,
+                            defaultChecked:this.props.checked,
+                            autoFocus:this.props.autofocus,
+                            readOnly:this.props.readonly,
+                            required:this.props.required,
+                            tabIndex:tabIndex})
+                    );
+
+                    children.push(XBButton(xblocks.utils.merge({}, this.props, {
+                        'key': 'content',
+                        'type': 'inline',
+                        'tabindex': null
+                    })));
+
+                    classes = React.addons.classSet({
+                        'xb-button': true,
+                        '_theme-check': true,
+                        '_disabled': this.props.disabled
+                    });
+
+                } else {
+                    children.push(
+                        React.DOM.span( {key:"file-intruder", className:"_xb-file-intruder"}, 
+                            React.DOM.span( {className:"_xb-file-intruder-inner"}, 
+                                React.DOM.input( {className:"_xb-file-intruder-input",
+                                    type:"button",
+                                    disabled:this.props.disabled,
+                                    autoFocus:this.props.autofocus,
+                                    tabIndex:tabIndex}),
+
+                                React.DOM.span( {className:"_xb-file-intruder-focus"} )
+                            )
+                        )
+                    );
+
+                    children.push(
+                        XBButtonContent( {key:"content",
+                            _uid:this.props._uid,
+                            ico:icoProps}, this.props.children)
+                    );
+                }
+
+                return (
+                    React.DOM.label( {className:classes,
+                        form:this.props.form,
+                        htmlFor:this.props['for'],
+                        title:this.props.title}, children)
+                );
+
+            } else if (type === 'inline') {
+                return (
+                    React.DOM.span( {className:classes, tabIndex:tabIndex}, 
+                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
+                    )
+                );
+
+            } else {
+                return (
+                    React.DOM.button( {className:classes,
+                        type:type,
+                        form:this.props.form,
+                        title:this.props.title,
+                        name:this.props.name,
+                        value:this.props.value,
+                        tabIndex:tabIndex,
+                        disabled:this.props.disabled,
+                        autoFocus:this.props.autofocus}, 
+
+                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
+                    )
                 );
             }
-
-            return (
-                React.DOM.label( {className:classes,
-                    form:this.props.form,
-                    htmlFor:this.props['for'],
-                    title:this.props.title}, children)
-            );
-
-        } else if (type === 'inline') {
-            return (
-                React.DOM.span( {className:classes, tabIndex:tabIndex}, 
-                    XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
-                )
-            );
-
-        } else {
-            return (
-                React.DOM.button( {className:classes,
-                    type:type,
-                    form:this.props.form,
-                    title:this.props.title,
-                    name:this.props.name,
-                    value:this.props.value,
-                    tabIndex:tabIndex,
-                    disabled:this.props.disabled,
-                    autoFocus:this.props.autofocus}, 
-
-                    XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
-                )
-            );
         }
     }
-} ]);
+]);
 
 /* blocks/button/button.jsx.js end */
 
@@ -979,185 +1019,217 @@ var XBInputController = xblocks.view.create({
 // TODO "pattern" attribute
 // TODO "title" attribute
 
-var XBInput = xblocks.view.register('xb-input', {
-    displayName: 'xb-input',
+var XBInput = xblocks.view.register('xb-input', [
+    xblocks.utils.exportPropTypes('xb-link'),
 
-    propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'disabled': React.PropTypes.bool,
-        'autosize': React.PropTypes.bool,
-        'multiline': React.PropTypes.bool,
-        'required': React.PropTypes.bool,
-        'readonly': React.PropTypes.bool,
-        'reset': React.PropTypes.bool,
-        'autofocus': React.PropTypes.bool,
-        'ghost': React.PropTypes.bool,
-        'type': React.PropTypes.oneOf([
-            'text', 'number', 'date', 'datetime', 'email', 'month',
-            'range', 'search', 'tel', 'time', 'url', 'week', 'color'
-        ]),
-        'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-        'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-        'rows': React.PropTypes.string,
-        'cols': React.PropTypes.string,
-        'placeholder': React.PropTypes.string,
-        'value': React.PropTypes.string,
-        'prefix': React.PropTypes.string,
-        'postfix': React.PropTypes.string,
-        'tabindex': React.PropTypes.string,
-        'xb-link': React.PropTypes.string
-    },
+    {
+        displayName: 'xb-input',
 
-    statics: {
-        filterLinkProps: function(props) {
-            return xblocks.utils.mapObject(
-                xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
-                xblocks.utils.mapPropsPrefixLink
+        propTypes: {
+            'id': React.PropTypes.string,
+            'class': React.PropTypes.string,
+            'name': React.PropTypes.string,
+            'disabled': React.PropTypes.bool,
+            'autosize': React.PropTypes.bool,
+            'multiline': React.PropTypes.bool,
+            'required': React.PropTypes.bool,
+            'readonly': React.PropTypes.bool,
+            'reset': React.PropTypes.bool,
+            'autofocus': React.PropTypes.bool,
+            'ghost': React.PropTypes.bool,
+            'type': React.PropTypes.oneOf([
+                'text', 'number', 'date', 'datetime', 'email', 'month',
+                'range', 'search', 'tel', 'time', 'url', 'week', 'color'
+            ]),
+            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+            'rows': React.PropTypes.string,
+            'cols': React.PropTypes.string,
+            'placeholder': React.PropTypes.string,
+            'value': React.PropTypes.string,
+            'prefix': React.PropTypes.string,
+            'postfix': React.PropTypes.string,
+            'tabindex': React.PropTypes.string,
+            'xb-link': React.PropTypes.string
+        },
+
+        statics: {
+            filterLinkProps: function(props) {
+                return xblocks.utils.mapObject(
+                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
+                    xblocks.utils.mapPropsPrefixLink
+                );
+            }
+        },
+
+        shouldComponentUpdate: function(nextProps, nextState) {
+            return (
+                !xblocks.utils.equals(nextProps, this.props) ||
+                !xblocks.utils.equals(nextState, this.state)
             );
-        }
-    },
+        },
 
-    shouldComponentUpdate: function(nextProps, nextState) {
-        return (
-            !xblocks.utils.equals(nextProps, this.props) ||
-            !xblocks.utils.equals(nextState, this.state)
-        );
-    },
+        getDefaultProps: function() {
+            return {
+                'value': '',
+                'type': 'text',
+                'size': 'm',
+                'rows': '4'
+            };
+        },
 
-    getDefaultProps: function() {
-        return {
-            'value': '',
-            'type': 'text',
-            'size': 'm',
-            'rows': '4'
-        };
-    },
+        getInitialState: function() {
+            return {
+                'value': this.props.value
+            };
+        },
 
-    getInitialState: function() {
-        return {
-            'value': this.props.value
-        };
-    },
+        componentDidMount: function() {
+            // check show or hide placeholder after mount element
+            this.refs.controller._dispatchEventToggleHint('', this.props.value);
+        },
 
-    componentDidMount: function() {
-        // check show or hide placeholder after mount element
-        this.refs.controller._dispatchEventToggleHint('', this.props.value);
-    },
+        /**
+         * Remember current value in state
+         * @param {Event} event
+         * @private
+         */
+        _onChange: function(event) {
+            this.setState({
+                'value': event.target.value
+            });
+        },
 
-    /**
-     * Remember current value in state
-     * @param {Event} event
-     * @private
-     */
-    _onChange: function(event) {
-        this.setState({
-            'value': event.target.value
-        });
-    },
+        /**
+         * Show or hide placeholder
+         * @param {boolean} toggle
+         * @private
+         */
+        _onHintToggle: function(toggle) {
+            this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
+        },
 
-    /**
-     * Show or hide placeholder
-     * @param {boolean} toggle
-     * @private
-     */
-    _onHintToggle: function(toggle) {
-        this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
-    },
+        /**
+         * Check show complex input
+         * @returns {boolean}
+         * @private
+         */
+        _isComplex: function() {
+            return (
+                this.props.postfix ||
+                this.props.prefix ||
+                this.props.reset ||
+                this.props.autosize ||
+                this.props['xb-link']
+            );
+        },
 
-    /**
-     * Check show complex input
-     * @returns {boolean}
-     * @private
-     */
-    _isComplex: function() {
-        return (
-            this.props.postfix ||
-            this.props.prefix ||
-            this.props.reset ||
-            this.props.autosize ||
-            this.props['xb-link']
-        );
-    },
+        /**
+         * Click reset button
+         * @private
+         */
+        _onClickReset: function() {
+            this.setState({
+                'value': ''
+            });
+        },
 
-    /**
-     * Click reset button
-     * @private
-     */
-    _onClickReset: function() {
-        this.setState({
-            'value': ''
-        });
-    },
+        render: function() {
+            var isComplex = this._isComplex();
+            var classes = {
+                'xb-input': true,
+                '_disabled': Boolean(this.props.disabled),
+                '_autosize': Boolean(this.props.autosize),
+                '_ghost': Boolean(this.props.ghost)
+            };
 
-    render: function() {
-        var isComplex = this._isComplex();
-        var classes = {
-            'xb-input': true,
-            '_disabled': Boolean(this.props.disabled),
-            '_autosize': Boolean(this.props.autosize),
-            '_ghost': Boolean(this.props.ghost)
-        };
+            if (this.props.size) {
+                classes['_size-' + this.props.size] = true;
+            }
 
-        if (this.props.size) {
-            classes['_size-' + this.props.size] = true;
-        }
+            if (isComplex) {
+                classes._complex = true;
+            } else {
+                classes._simple = true;
+            }
 
-        if (isComplex) {
-            classes._complex = true;
-        } else {
-            classes._simple = true;
-        }
+            classes = React.addons.classSet(classes);
 
-        classes = React.addons.classSet(classes);
+            var isPlaceholderHint = false;
 
-        var isPlaceholderHint = false;
+            if (isComplex) {
+                var children = [];
 
-        if (isComplex) {
-            var children = [];
+                if (this.props.placeholder) {
+                    isPlaceholderHint = true;
 
-            if (this.props.placeholder) {
-                isPlaceholderHint = true;
+                    children.push(
+                        React.DOM.span( {ref:"placeholder", key:"placeholder", className:"_hint"}, 
+                            React.DOM.span( {className:"_hint-inner"}, this.props.placeholder)
+                        )
+                    );
+                }
+
+                if (this.props['xb-link']) {
+                    var linkProps = XBInput.filterLinkProps(this.props);
+                    linkProps['theme'] = 'input';
+                    linkProps['key'] = 'label';
+
+                    children.push(xblocks.view.get('xb-link')(linkProps, this.props['xb-link']));
+                }
+
+                if (this.props.prefix) {
+                    children.push(
+                        React.DOM.span( {key:"prefix", className:"_left"}, this.props.prefix)
+                    );
+                }
+
+                if (this.props.postfix) {
+                    children.push(
+                        React.DOM.span( {key:"postfix", className:"_right"}, this.props.postfix)
+                    );
+                }
+
+                if (this.props.reset) {
+                    children.push(
+                        React.DOM.span( {key:"reset", className:"_reset", onClick:this._onClickReset})
+                    );
+                }
 
                 children.push(
-                    React.DOM.span( {ref:"placeholder", key:"placeholder", className:"_hint"}, 
-                        React.DOM.span( {className:"_hint-inner"}, this.props.placeholder)
+                    React.DOM.span( {key:"content", className:"_content"}, 
+                        XBInputController( {key:"controller",
+                            ref:"controller",
+                            className:"_controller",
+                            value:this.state.value,
+                            name:this.props.name,
+                            disabled:this.props.disabled,
+                            required:this.props.required,
+                            readOnly:this.props.readonly,
+                            multiline:this.props.multiline,
+                            autoFocus:this.props.autofocus,
+                            rows:this.props.rows,
+                            cols:this.props.cols,
+                            tabIndex:this.props.tabindex,
+                            autocomplete:this.props.autocomplete,
+                            autosize:this.props.autosize,
+                            onChange:this._onChange,
+                            onHintToggle:this._onHintToggle,
+                            isPlaceholderHint:isPlaceholderHint}),
+                        React.DOM.span( {key:"view", className:"_view"})
                     )
                 );
-            }
 
-            if (this.props['xb-link']) {
-                var linkProps = XBInput.filterLinkProps(this.props);
-                linkProps['theme'] = 'input';
-                linkProps['key'] = 'label';
-
-                children.push(xblocks.view.get('xb-link')(linkProps, this.props['xb-link']));
-            }
-
-            if (this.props.prefix) {
-                children.push(
-                    React.DOM.span( {key:"prefix", className:"_left"}, this.props.prefix)
+                return (
+                    React.DOM.label( {className:classes}, children)
                 );
-            }
 
-            if (this.props.postfix) {
-                children.push(
-                    React.DOM.span( {key:"postfix", className:"_right"}, this.props.postfix)
-                );
-            }
+            } else {
 
-            if (this.props.reset) {
-                children.push(
-                    React.DOM.span( {key:"reset", className:"_reset", onClick:this._onClickReset})
-                );
-            }
-
-            children.push(
-                React.DOM.span( {key:"content", className:"_content"}, 
+               return (
                     XBInputController( {key:"controller",
                         ref:"controller",
-                        className:"_controller",
+                        className:classes,
                         value:this.state.value,
                         name:this.props.name,
                         disabled:this.props.disabled,
@@ -1167,46 +1239,18 @@ var XBInput = xblocks.view.register('xb-input', {
                         autoFocus:this.props.autofocus,
                         rows:this.props.rows,
                         cols:this.props.cols,
+                        placeholder:this.props.placeholder,
                         tabIndex:this.props.tabindex,
                         autocomplete:this.props.autocomplete,
                         autosize:this.props.autosize,
                         onChange:this._onChange,
                         onHintToggle:this._onHintToggle,
-                        isPlaceholderHint:isPlaceholderHint}),
-                    React.DOM.span( {key:"view", className:"_view"})
-                )
-            );
-
-            return (
-                React.DOM.label( {className:classes}, children)
-            );
-
-        } else {
-
-           return (
-                XBInputController( {key:"controller",
-                    ref:"controller",
-                    className:classes,
-                    value:this.state.value,
-                    name:this.props.name,
-                    disabled:this.props.disabled,
-                    required:this.props.required,
-                    readOnly:this.props.readonly,
-                    multiline:this.props.multiline,
-                    autoFocus:this.props.autofocus,
-                    rows:this.props.rows,
-                    cols:this.props.cols,
-                    placeholder:this.props.placeholder,
-                    tabIndex:this.props.tabindex,
-                    autocomplete:this.props.autocomplete,
-                    autosize:this.props.autosize,
-                    onChange:this._onChange,
-                    onHintToggle:this._onHintToggle,
-                    isPlaceholderHint:isPlaceholderHint})
-            );
+                        isPlaceholderHint:isPlaceholderHint})
+                );
+            }
         }
     }
-});
+]);
 
 /* blocks/input/input.jsx.js end */
 
@@ -1425,8 +1469,85 @@ xblocks.create('xb-radio', [
 
 /* blocks/radio/radio.js end */
 
+    /* blocks/popup/popup.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+/* blocks/popup/popup.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, global, React */
+/* jshint strict: false */
+
+var XBSelect = xblocks.view.register('xb-popup', [
+    xblocks.mixin.vCommonAttrs,
+
+    {
+        displayName: 'xb-popup',
+
+        propTypes: {
+            'children': React.PropTypes.renderable
+        },
+
+        render: function() {
+            return (
+                React.DOM.div( {'data-xb-content':this.props._uid,
+                    dangerouslySetInnerHTML:{__html: this.props.children}} )
+            );
+        }
+    }
+]);
+
+/* blocks/popup/popup.jsx.js end */
+
+
+xblocks.create('xb-popup', [
+    xblocks.mixin.eFocus,
+    xblocks.mixin.eHidden,
+
+    {
+        prototype: Object.create(HTMLElement.prototype),
+
+        accessors: {
+            options: {
+                get: function() {
+                    return this._options || (this._options = {
+                        'enabled': true,
+                        'element': null,
+                        'target': document.body,
+                        'attachment': 'middle center',
+                        'targetAttachment': 'middle center',
+                        'targetModifier': 'visible',
+                        'classPrefix': 'xb-popup',
+                        'optimizations': {
+                            'gpu': false
+                        },
+                        'classes': {
+                            'element': 'xb-popup'
+                        }
+                    });
+                }
+            }
+        },
+
+        events: {
+            'xb-created': function() {
+                this.setOptions({ element: this });
+                this._tether = new Tether(this.options);
+            }
+        },
+
+        methods: {
+            setOptions: function(nextOptions) {
+                this._options = xblocks.utils.merge(true, this.options, nextOptions);
+            }
+        }
+    }
+]);
+
+/* blocks/popup/popup.js end */
+
     /* blocks/select/select.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /* blocks/select/select.jsx.js begin */
@@ -1434,48 +1555,89 @@ xblocks.create('xb-radio', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBSelect = xblocks.view.register('xb-select', {
-    displayName: 'xb-select',
+var XBSelect = xblocks.view.register('xb-select', [
+    xblocks.mixin.vCommonAttrs,
 
-    propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
-        'children': React.PropTypes.renderable,
-        'tabindex': React.PropTypes.string,
-        'disabled': React.PropTypes.bool
-    },
+    {
+        displayName: 'xb-select',
 
-    getDefaultProps: function() {
-        return {
-            'disabled': false,
-            'tabindex': '1'
-        };
-    },
+        propTypes: {
+            'id': React.PropTypes.string,
+            'children': React.PropTypes.renderable,
+            'disabled': React.PropTypes.bool,
 
-    render: function() {
-        var classes = {
-            'xb-select': true,
-            '_disabled': this.props.disabled
-        };
+            'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+            'autocorrect':  React.PropTypes.oneOf([ 'on', 'off' ]),
+            'autocapitalize':  React.PropTypes.oneOf([ 'on', 'off' ]),
 
-        classes = React.addons.classSet(classes);
+            'size': React.PropTypes.string,
+            'autofocus': React.PropTypes.bool,
+            'form': React.PropTypes.string,
+            'multiple': React.PropTypes.bool,
+            'name': React.PropTypes.string,
+            'required': React.PropTypes.bool
+        },
 
-        var tabIndex = this.props.tabindex;
+        getDefaultProps: function() {
+            return {
+                'disabled': false,
+                'tabindex': '1'
+            };
+        },
 
-        if (this.props.disabled) {
-            tabIndex = '-1';
+        componentDidMount: function() {
+            new Tether({
+                element: this.refs.dropdown.getDOMNode(),
+                target: this.refs.control.getDOMNode(),
+                attachment: 'top left',
+                targetAttachment: 'bottom left',
+                classPrefix: 'xb-dialog',
+                constraints: [
+                    {
+                        to: 'window',
+                        attachment: 'together none'
+                    }
+                ],
+                optimizations: {
+                    gpu: false
+                },
+                classes: {
+                    element: 'xb-dialog'
+                }
+            });
+        },
+
+        render: function() {
+            var classes = {
+                'xb-select': true,
+                '_disabled': this.props.disabled
+            };
+
+            classes = React.addons.classSet(classes);
+
+            var tabIndex = this.props.tabindex;
+
+            if (this.props.disabled) {
+                tabIndex = '-1';
+            }
+
+            return (
+                React.DOM.div( {className:classes}, 
+                    React.DOM.input( {className:"_controller"} ),
+                    XBButton( {ref:"control",
+                        type:"inline"}),
+                    React.DOM.div( {ref:"dropdown", className:"_xb-select-dropdown"}, 
+                        React.DOM.ul( {className:"_group"}, 
+                            React.DOM.li( {className:"_item"}, React.DOM.a( {className:"_item-control"}, "1")),
+                            React.DOM.li( {className:"_item"}, React.DOM.a( {className:"_item-control"}, "2")),
+                            React.DOM.li( {className:"_item"}, React.DOM.a( {className:"_item-control"}, "3"))
+                        )
+                    )
+                )
+            );
         }
-
-        return (
-            React.DOM.span( {className:classes}, 
-                React.DOM.input( {className:"_controller"} ),
-                XBButton( {type:"inline"}),
-                React.DOM.span( {className:"_xb-select-dropdown"})
-            )
-        );
     }
-});
-
+]);
 
 /* blocks/select/select.jsx.js end */
 

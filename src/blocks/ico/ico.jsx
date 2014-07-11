@@ -42,7 +42,7 @@ xblocks.view.register('xb-ico', {
             'upload',
             'upload-white',
             'vk'
-        ]).isRequired,
+        ]),
         'active': React.PropTypes.bool,
         'disabled': React.PropTypes.bool
     },

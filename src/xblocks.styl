@@ -11,16 +11,15 @@ xb-ico,
 xb-select,
 xb-checkbox,
 xb-radio,
-xb-link
+xb-link,
+xb-popup
   display: inline-block
 
   & *, *:before, *:after
     box-sizing: initial
 
-xb-option,
-xb-optgroup,
-xb-dropdown
-  display: block
+  &[hidden]
+    display: none
 
 
 @import "styl/vars/colors"
@@ -32,6 +31,7 @@ xb-dropdown
 @import "blocks/input/input"
 @import "blocks/checkbox/checkbox"
 @import "blocks/radio/radio"
+@import "blocks/popup/popup"
 @import "blocks/select/select"
 
 @import "styl/global"
