@@ -388,7 +388,6 @@ xblocks.mixin.vChecked = {
 xblocks.mixin.vCommonAttrs = {
     'propTypes': {
         'accesskey': React.PropTypes.string,
-        'class': React.PropTypes.string,
         'contextmenu': React.PropTypes.string,
         'dir': React.PropTypes.oneOf([ 'ltr', 'rtl' ]),
         'hidden': React.PropTypes.bool,
