@@ -2874,6 +2874,15 @@ input[type=file]:focus + ._xb-radio_flag:after,
 input:not(:checked) + ._xb-radio_flag > ._xb-radio_flag-icon {
   visibility: hidden;
 }
+xb-popup {
+  display: none;
+}
+.xb-popup {
+  display: none;
+}
+.xb-popup-enabled {
+  display: inline-block;
+}
 .xb-select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

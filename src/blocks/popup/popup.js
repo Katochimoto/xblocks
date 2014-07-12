@@ -4,18 +4,19 @@
 /*! borschik:include:popup.jsx.js */
 
 xblocks.create('xb-popup', [
-    xblocks.mixin.eFocus,
-    xblocks.mixin.eHidden,
-
     {
         prototype: Object.create(HTMLElement.prototype),
 
         accessors: {
             options: {
                 get: function() {
-                    return this._options || (this._options = {
-                        'enabled': true,
-                        'element': null,
+                    if (this._options) {
+                        return this._options;
+                    }
+
+                    this._options = {
+                        'enabled': false,
+                        'element': this,
                         'target': document.body,
                         'attachment': 'middle center',
                         'targetAttachment': 'middle center',
@@ -27,21 +28,60 @@ xblocks.create('xb-popup', [
                         'classes': {
                             'element': 'xb-popup'
                         }
-                    });
-                }
-            }
-        },
+                    };
 
-        events: {
-            'xb-created': function() {
-                this.setOptions({ element: this });
-                this._tether = new Tether(this.options);
+                    return this._options;
+                }
+            },
+
+            tether: {
+                get: function() {
+                    if (this._tether) {
+                        return this._tether;
+                    }
+
+                    this._tether = new Tether(this.options);
+                    return this._tether;
+                }
             }
         },
 
         methods: {
             setOptions: function(nextOptions) {
                 this._options = xblocks.utils.merge(true, this.options, nextOptions);
+                this.tether.setOptions(this._options, false);
+            },
+
+            open: function(options) {
+                var tether = this.tether;
+
+                if (tether.enabled) {
+                    return false;
+                }
+
+                if (typeof(options) === 'object') {
+                    this.setOptions(options);
+                }
+
+                tether.enable(true);
+                return true;
+            },
+
+            close: function() {
+                var tether = this.tether;
+
+                if (!tether.enabled) {
+                    return false;
+                }
+
+                tether.disable();
+                tether.clearCache();
+                return true;
+            },
+
+            position: function() {
+                this.tether.position();
+                return true;
             }
         }
     }
