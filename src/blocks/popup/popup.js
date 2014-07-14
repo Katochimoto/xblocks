@@ -26,7 +26,8 @@ xblocks.create('xb-popup', [
                             'gpu': false
                         },
                         'classes': {
-                            'element': 'xb-popup'
+                            'element': 'xb-popup',
+                            'enabled': '_enabled'
                         }
                     };
 
@@ -48,8 +49,12 @@ xblocks.create('xb-popup', [
 
         methods: {
             setOptions: function(nextOptions) {
+                var tether = this.tether;
                 this._options = xblocks.utils.merge(true, this.options, nextOptions);
-                this.tether.setOptions(this._options, false);
+                tether.setOptions(this._options, false);
+                if (tether.enabled) {
+                    tether.position();
+                }
             },
 
             open: function(options) {

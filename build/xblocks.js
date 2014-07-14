@@ -1484,13 +1484,33 @@ var XBSelect = xblocks.view.register('xb-popup', [
         displayName: 'xb-popup',
 
         propTypes: {
+            'close': React.PropTypes.bool,
+            'popup-title': React.PropTypes.renderable,
             'children': React.PropTypes.renderable
         },
 
         render: function() {
-            return (
-                React.DOM.div( {'data-xb-content':this.props._uid,
+            var children = [
+                React.DOM.div( {className:"_content",
+                    key:"content",
+                    'data-xb-content':this.props._uid,
                     dangerouslySetInnerHTML:{__html: this.props.children}} )
+            ];
+
+            if (this.props['popup-title']) {
+                children.unshift(
+                    React.DOM.div( {key:"title", className:"_title"}, this.props['popup-title'])
+                );
+            }
+
+            if (this.props.close) {
+                children.unshift(
+                    React.DOM.a( {key:"close", className:"_close"}, "close")
+                );
+            }
+
+            return (
+                React.DOM.div( {className:"_theme-normal"}, children)
             );
         }
     }
@@ -1522,7 +1542,8 @@ xblocks.create('xb-popup', [
                             'gpu': false
                         },
                         'classes': {
-                            'element': 'xb-popup'
+                            'element': 'xb-popup',
+                            'enabled': '_enabled'
                         }
                     };
 
@@ -1544,8 +1565,12 @@ xblocks.create('xb-popup', [
 
         methods: {
             setOptions: function(nextOptions) {
+                var tether = this.tether;
                 this._options = xblocks.utils.merge(true, this.options, nextOptions);
-                this.tether.setOptions(this._options, false);
+                tether.setOptions(this._options, false);
+                if (tether.enabled) {
+                    tether.position();
+                }
             },
 
             open: function(options) {

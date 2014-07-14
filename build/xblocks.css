@@ -2880,8 +2880,37 @@ xb-popup {
 .xb-popup {
   display: none;
 }
-.xb-popup-enabled {
+.xb-popup._enabled {
   display: inline-block;
+}
+.xb-popup > ._theme-normal,
+.xb-popup > ._theme-modal {
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+.xb-popup > ._theme-normal > ._content,
+.xb-popup > ._theme-modal > ._content {
+  display: block;
+  padding: 0 20px 0 20px;
+}
+.xb-popup > ._theme-normal > ._content:before,
+.xb-popup > ._theme-modal > ._content:before {
+  content: "";
+  display: table;
+  margin-bottom: 16px;
+}
+.xb-popup > ._theme-normal > ._content:after,
+.xb-popup > ._theme-modal > ._content:after {
+  content: "";
+  display: table;
+  clear: both;
+  margin-top: 16px;
+}
+.xb-popup > ._theme-modal > ._content {
+  font: 0.9376em/1.4667em Arial, sans-serif;
+  padding: 0 10px;
 }
 .xb-select {
   -webkit-box-sizing: border-box;
