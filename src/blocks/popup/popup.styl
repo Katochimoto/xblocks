@@ -7,15 +7,63 @@ xb-popup
   &._enabled
     display: inline-block
 
-  & > ._theme-normal,
-  & > ._theme-modal
+  & > ._popup
     skin: popup
     overflow: hidden
 
     & > ._content
       skin: popup-content
 
-  & > ._theme-modal
-    & > ._content
-      font: $font-p1
-      padding: 0 $islands_s
+    & > ._close
+      skin: popup-close
+      width: 24px
+      height: 24px
+      top: 2px
+      right: 2px
+
+      & + ._title
+        padding-right: 2*$gapM !important
+
+    & > ._title
+      font: $font-h3
+      padding: $islands_s
+      display: block
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    &._theme-modal
+      & > ._content
+        font: $font-p1
+        padding: 0 $islands_s
+
+
+    &._theme-island
+      & > ._title
+        padding: 0 $gapM
+        height: 50px
+        line-height: @height
+        font-size: 1em
+        background: $backgroundPrimary
+        border-bottom: 1px solid darken($background, 16%)
+
+      & > ._content
+        padding: 0 $gapM
+
+    &._theme-error
+      & > ._content
+        line-height: 0
+
+    &._theme-blank
+      background-color: transparent
+      border: 0
+      box-shadow: none
+
+      & > ._content,
+      & > ._title
+        padding: 0
+
+      & > ._content:before,
+      & > ._content:after
+        margin: 0
+        display: none

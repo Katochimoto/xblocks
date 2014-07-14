@@ -1486,7 +1486,14 @@ var XBSelect = xblocks.view.register('xb-popup', [
         propTypes: {
             'close': React.PropTypes.bool,
             'popup-title': React.PropTypes.renderable,
-            'children': React.PropTypes.renderable
+            'children': React.PropTypes.renderable,
+            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
+        },
+
+        getDefaultProps: function() {
+            return {
+                'theme': 'normal'
+            };
         },
 
         render: function() {
@@ -1505,12 +1512,22 @@ var XBSelect = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    React.DOM.a( {key:"close", className:"_close"}, "close")
+                    React.DOM.a( {key:"close", className:"_close"})
                 );
             }
 
+            var classes = {
+                '_popup': true
+            };
+
+            if (this.props.theme) {
+                classes['_theme-' + this.props.theme] = true;
+            }
+
+            classes = React.addons.classSet(classes);
+
             return (
-                React.DOM.div( {className:"_theme-normal"}, children)
+                React.DOM.div( {className:classes}, children)
             );
         }
     }
