@@ -2,7 +2,7 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBSelect = xblocks.view.register('xb-popup', [
+var XBPopup = xblocks.view.register('xb-popup', [
     xblocks.mixin.vCommonAttrs,
 
     {
@@ -11,7 +11,6 @@ var XBSelect = xblocks.view.register('xb-popup', [
         propTypes: {
             'close': React.PropTypes.bool,
             'popup-title': React.PropTypes.renderable,
-            'children': React.PropTypes.renderable,
             'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
         },
 
@@ -40,6 +39,11 @@ var XBSelect = xblocks.view.register('xb-popup', [
                     <a key="close" className="_close"></a>
                 );
             }
+
+            children.push(this.template('xb-popup-buttons', {
+                'key': 'buttons',
+                'className': '_buttons'
+            }));
 
             var classes = {
                 '_popup': true

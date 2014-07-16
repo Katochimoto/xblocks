@@ -12,4 +12,4 @@
 -->
 
 
-<xb-popup>123</xb-popup>
+<xb-popup close><div>1</div></xb-popup>

@@ -21,7 +21,8 @@ xb-popup
       top: 2px
       right: 2px
 
-      & + ._title
+      & + ._title,
+      & + ._content
         padding-right: 2*$gapM !important
 
     & > ._title
@@ -31,6 +32,11 @@ xb-popup
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
+
+    & > ._buttons
+      padding: $islands_s
+      padding-top: $islands_s
+
 
     &._theme-modal
       & > ._content
@@ -50,9 +56,16 @@ xb-popup
       & > ._content
         padding: 0 $gapM
 
+      & > ._buttons
+        margin-top: -1px
+        padding: ($gapS + 1px) $gapS $gapS
+        box-shadow: inset 0 1px rgba($foreground, 0.15), 0 -2px rgba($foreground, 0.04)
+
+
     &._theme-error
       & > ._content
         line-height: 0
+
 
     &._theme-blank
       background-color: transparent
@@ -60,7 +73,8 @@ xb-popup
       box-shadow: none
 
       & > ._content,
-      & > ._title
+      & > ._title,
+      & > ._buttons
         padding: 0
 
       & > ._content:before,

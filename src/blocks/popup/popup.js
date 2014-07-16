@@ -7,6 +7,12 @@ xblocks.create('xb-popup', [
     {
         prototype: Object.create(HTMLElement.prototype),
 
+        events: {
+            'click:delegate(._close)': function() {
+                this.parentNode.parentNode.close();
+            }
+        },
+
         accessors: {
             options: {
                 get: function() {

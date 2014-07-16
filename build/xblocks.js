@@ -1477,7 +1477,7 @@ xblocks.create('xb-radio', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBSelect = xblocks.view.register('xb-popup', [
+var XBPopup = xblocks.view.register('xb-popup', [
     xblocks.mixin.vCommonAttrs,
 
     {
@@ -1486,7 +1486,6 @@ var XBSelect = xblocks.view.register('xb-popup', [
         propTypes: {
             'close': React.PropTypes.bool,
             'popup-title': React.PropTypes.renderable,
-            'children': React.PropTypes.renderable,
             'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
         },
 
@@ -1516,6 +1515,11 @@ var XBSelect = xblocks.view.register('xb-popup', [
                 );
             }
 
+            children.push(this.template('xb-popup-buttons', {
+                'key': 'buttons',
+                'className': '_buttons'
+            }));
+
             var classes = {
                 '_popup': true
             };
@@ -1539,6 +1543,12 @@ var XBSelect = xblocks.view.register('xb-popup', [
 xblocks.create('xb-popup', [
     {
         prototype: Object.create(HTMLElement.prototype),
+
+        events: {
+            'click:delegate(._close)': function() {
+                this.parentNode.parentNode.close();
+            }
+        },
 
         accessors: {
             options: {

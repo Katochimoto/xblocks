@@ -2918,7 +2918,8 @@ xb-popup {
   top: 2px;
   right: 2px;
 }
-.xb-popup > ._popup > ._close + ._title {
+.xb-popup > ._popup > ._close + ._title,
+.xb-popup > ._popup > ._close + ._content {
   padding-right: 32px !important;
 }
 .xb-popup > ._popup > ._title {
@@ -2928,6 +2929,10 @@ xb-popup {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.xb-popup > ._popup > ._buttons {
+  padding: 10px;
+  padding-top: 10px;
 }
 .xb-popup > ._popup._theme-modal > ._content {
   font: 0.9376em/1.4667em Arial, sans-serif;
@@ -2944,6 +2949,12 @@ xb-popup {
 .xb-popup > ._popup._theme-island > ._content {
   padding: 0 16px;
 }
+.xb-popup > ._popup._theme-island > ._buttons {
+  margin-top: -1px;
+  padding: 11px 10px 10px;
+  -webkit-box-shadow: inset 0 1px rgba(0,0,0,0.15), 0 -2px rgba(0,0,0,0.04);
+  box-shadow: inset 0 1px rgba(0,0,0,0.15), 0 -2px rgba(0,0,0,0.04);
+}
 .xb-popup > ._popup._theme-error > ._content {
   line-height: 0;
 }
@@ -2954,7 +2965,8 @@ xb-popup {
   box-shadow: none;
 }
 .xb-popup > ._popup._theme-blank > ._content,
-.xb-popup > ._popup._theme-blank > ._title {
+.xb-popup > ._popup._theme-blank > ._title,
+.xb-popup > ._popup._theme-blank > ._buttons {
   padding: 0;
 }
 .xb-popup > ._popup._theme-blank > ._content:before,
