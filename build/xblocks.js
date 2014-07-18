@@ -1491,6 +1491,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         getDefaultProps: function() {
             return {
+                'close': false,
                 'theme': 'normal'
             };
         },
