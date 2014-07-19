@@ -1485,9 +1485,10 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         propTypes: {
             'close': React.PropTypes.bool,
-            'popup-title': React.PropTypes.renderable,
             'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
         },
+
+        mixins: [ React.addons.PureRenderMixin ],
 
         getDefaultProps: function() {
             return {
@@ -1504,11 +1505,10 @@ var XBPopup = xblocks.view.register('xb-popup', [
                     dangerouslySetInnerHTML:{__html: this.props.children}} )
             ];
 
-            if (this.props['popup-title']) {
-                children.unshift(
-                    React.DOM.div( {key:"title", className:"_title"}, this.props['popup-title'])
-                );
-            }
+            children.unshift(this.template('xb-popup-title', {
+                'key': 'title',
+                'className': '_title'
+            }));
 
             if (this.props.close) {
                 children.unshift(
