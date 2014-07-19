@@ -20,22 +20,46 @@ xblocks.create('xb-popup', [
                         return this._options;
                     }
 
+                    var gpu = this.hasAttribute('optimizations-gpu') ?
+                        xblocks.dom.attrs.valueConversion('optimizations-gpu', this.getAttribute('optimizations-gpu'), React.PropTypes.bool) :
+                        false;
+
+                    var target = this.getAttribute('target') || document.body;
+                    var attachment = this.getAttribute('attachment') || 'middle center';
+                    var targetAttachment = this.getAttribute('target-attachment') || 'middle center';
+                    var targetModifier = this.getAttribute('target-modifier') || 'visible';
+                    var offset = this.getAttribute('offset');
+                    var targetOffset = this.getAttribute('target-offset');
+                    var constraints = this.getAttribute('constraints');
+
                     this._options = {
                         'enabled': false,
                         'element': this,
-                        'target': document.body,
-                        'attachment': 'middle center',
-                        'targetAttachment': 'middle center',
-                        'targetModifier': 'visible',
+                        'target': target,
+                        'attachment': attachment,
+                        'targetAttachment': targetAttachment,
+                        'targetModifier': targetModifier,
                         'classPrefix': 'xb-popup',
                         'optimizations': {
-                            'gpu': false
+                            'gpu': gpu
                         },
                         'classes': {
                             'element': 'xb-popup',
                             'enabled': '_enabled'
                         }
                     };
+
+                    if (offset) {
+                        this._options['offset'] = offset;
+                    }
+
+                    if (targetOffset) {
+                        this._options['targetOffset'] = targetOffset;
+                    }
+
+                    if (constraints) {
+                        this._options['constraints'] = JSON.parse(constraints);
+                    }
 
                     return this._options;
                 }
