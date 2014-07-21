@@ -23,6 +23,7 @@ xblocks.create('xb-popup', [
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
                         'optimizations-gpu': false,
                         'target': document.body,
+                        'target-parent': false,
                         'target-attachment': 'middle center',
                         'target-modifier': 'visible',
                         'target-offset': undefined,
@@ -35,6 +36,7 @@ xblocks.create('xb-popup', [
                         'enabled': false,
                         'element': this,
                         'target': tetherAttrs['target'],
+                        'targetParent': tetherAttrs['target-parent'],
                         'attachment': tetherAttrs['attachment'],
                         'targetAttachment': tetherAttrs['target-attachment'],
                         'targetModifier': tetherAttrs['target-modifier'],
@@ -58,6 +60,10 @@ xblocks.create('xb-popup', [
 
                     if (tetherAttrs['constraints']) {
                         this._options['constraints'] = JSON.parse(tetherAttrs['constraints']);
+                    }
+
+                    if (this._options['targetParent']) {
+                        this._options['target'] = this.parentNode;
                     }
 
                     return this._options;

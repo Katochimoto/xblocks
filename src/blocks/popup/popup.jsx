@@ -10,7 +10,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         propTypes: {
             'close': React.PropTypes.bool,
-            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
+            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank', 'menu' ])
         },
 
         mixins: [ React.addons.PureRenderMixin ],

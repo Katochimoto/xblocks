@@ -36,7 +36,7 @@
  */
 xblocks.mixin.eHidden = {
     accessors: {
-        disabled: {
+        hidden: {
             get: function() {
                 return xblocks.dom.attrs.valueConversion(
                     'hidden',
