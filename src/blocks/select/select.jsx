@@ -9,8 +9,6 @@ var XBSelect = xblocks.view.register('xb-select', [
         displayName: 'xb-select',
 
         propTypes: {
-            'id': React.PropTypes.string,
-            'children': React.PropTypes.renderable,
             'disabled': React.PropTypes.bool,
 
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),

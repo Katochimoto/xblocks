@@ -1558,22 +1558,45 @@ xblocks.create('xb-popup', [
                         return this._options;
                     }
 
+                    var tetherAttrs = xblocks.dom.attrs.get(this, {
+                        'optimizations-gpu': false,
+                        'target': document.body,
+                        'target-attachment': 'middle center',
+                        'target-modifier': 'visible',
+                        'target-offset': undefined,
+                        'attachment': 'middle center',
+                        'offset': undefined,
+                        'constraints': undefined
+                    });
+
                     this._options = {
                         'enabled': false,
                         'element': this,
-                        'target': document.body,
-                        'attachment': 'middle center',
-                        'targetAttachment': 'middle center',
-                        'targetModifier': 'visible',
+                        'target': tetherAttrs['target'],
+                        'attachment': tetherAttrs['attachment'],
+                        'targetAttachment': tetherAttrs['target-attachment'],
+                        'targetModifier': tetherAttrs['target-modifier'],
                         'classPrefix': 'xb-popup',
                         'optimizations': {
-                            'gpu': false
+                            'gpu': tetherAttrs['optimizations-gpu']
                         },
                         'classes': {
                             'element': 'xb-popup',
                             'enabled': '_enabled'
                         }
                     };
+
+                    if (tetherAttrs['offset']) {
+                        this._options['offset'] = tetherAttrs['offset'];
+                    }
+
+                    if (tetherAttrs['target-offset']) {
+                        this._options['targetOffset'] = tetherAttrs['target-offset'];
+                    }
+
+                    if (tetherAttrs['constraints']) {
+                        this._options['constraints'] = JSON.parse(tetherAttrs['constraints']);
+                    }
 
                     return this._options;
                 }
@@ -1654,8 +1677,6 @@ var XBSelect = xblocks.view.register('xb-select', [
         displayName: 'xb-select',
 
         propTypes: {
-            'id': React.PropTypes.string,
-            'children': React.PropTypes.renderable,
             'disabled': React.PropTypes.bool,
 
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),

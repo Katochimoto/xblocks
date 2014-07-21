@@ -20,28 +20,27 @@ xblocks.create('xb-popup', [
                         return this._options;
                     }
 
-                    var gpu = this.hasAttribute('optimizations-gpu') ?
-                        xblocks.dom.attrs.valueConversion('optimizations-gpu', this.getAttribute('optimizations-gpu'), React.PropTypes.bool) :
-                        false;
-
-                    var target = this.getAttribute('target') || document.body;
-                    var attachment = this.getAttribute('attachment') || 'middle center';
-                    var targetAttachment = this.getAttribute('target-attachment') || 'middle center';
-                    var targetModifier = this.getAttribute('target-modifier') || 'visible';
-                    var offset = this.getAttribute('offset');
-                    var targetOffset = this.getAttribute('target-offset');
-                    var constraints = this.getAttribute('constraints');
+                    var tetherAttrs = xblocks.dom.attrs.get(this, {
+                        'optimizations-gpu': false,
+                        'target': document.body,
+                        'target-attachment': 'middle center',
+                        'target-modifier': 'visible',
+                        'target-offset': undefined,
+                        'attachment': 'middle center',
+                        'offset': undefined,
+                        'constraints': undefined
+                    });
 
                     this._options = {
                         'enabled': false,
                         'element': this,
-                        'target': target,
-                        'attachment': attachment,
-                        'targetAttachment': targetAttachment,
-                        'targetModifier': targetModifier,
+                        'target': tetherAttrs['target'],
+                        'attachment': tetherAttrs['attachment'],
+                        'targetAttachment': tetherAttrs['target-attachment'],
+                        'targetModifier': tetherAttrs['target-modifier'],
                         'classPrefix': 'xb-popup',
                         'optimizations': {
-                            'gpu': gpu
+                            'gpu': tetherAttrs['optimizations-gpu']
                         },
                         'classes': {
                             'element': 'xb-popup',
@@ -49,16 +48,16 @@ xblocks.create('xb-popup', [
                         }
                     };
 
-                    if (offset) {
-                        this._options['offset'] = offset;
+                    if (tetherAttrs['offset']) {
+                        this._options['offset'] = tetherAttrs['offset'];
                     }
 
-                    if (targetOffset) {
-                        this._options['targetOffset'] = targetOffset;
+                    if (tetherAttrs['target-offset']) {
+                        this._options['targetOffset'] = tetherAttrs['target-offset'];
                     }
 
-                    if (constraints) {
-                        this._options['constraints'] = JSON.parse(constraints);
+                    if (tetherAttrs['constraints']) {
+                        this._options['constraints'] = JSON.parse(tetherAttrs['constraints']);
                     }
 
                     return this._options;
