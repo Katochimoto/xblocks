@@ -1,9 +1,9 @@
 /* global xblocks */
 /* jshint strict: false */
 
-/*! borschik:include:popup.jsx.js */
+/*! borschik:include:menu.jsx.js */
 
-xblocks.create('xb-popup', [
+xblocks.create('xb-menu', [
     {
         prototype: Object.create(HTMLElement.prototype),
 

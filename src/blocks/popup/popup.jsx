@@ -10,7 +10,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         propTypes: {
             'close': React.PropTypes.bool,
-            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank', 'menu' ])
+            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
         },
 
         mixins: [ React.addons.PureRenderMixin ],
@@ -54,11 +54,11 @@ var XBPopup = xblocks.view.register('xb-popup', [
                 classes['_theme-' + this.props.theme] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            var props = {
+                'className': React.addons.classSet(classes)
+            };
 
-            return (
-                <div className={classes}>{children}</div>
-            );
+            return React.DOM.div(props, children);
         }
     }
 ]);

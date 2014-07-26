@@ -1485,7 +1485,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         propTypes: {
             'close': React.PropTypes.bool,
-            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank', 'menu' ])
+            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
         },
 
         mixins: [ React.addons.PureRenderMixin ],
@@ -1529,11 +1529,11 @@ var XBPopup = xblocks.view.register('xb-popup', [
                 classes['_theme-' + this.props.theme] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            var props = {
+                'className': React.addons.classSet(classes)
+            };
 
-            return (
-                React.DOM.div( {className:classes}, children)
-            );
+            return React.DOM.div(props, children);
         }
     }
 ]);
@@ -1597,7 +1597,7 @@ xblocks.create('xb-popup', [
                     }
 
                     if (tetherAttrs['constraints']) {
-                        this._options['constraints'] = JSON.parse(tetherAttrs['constraints']);
+                        this._options['constraints'] = JSON.parse(decodeURIComponent(tetherAttrs['constraints']));
                     }
 
                     if (this._options['targetParent']) {
@@ -1642,6 +1642,7 @@ xblocks.create('xb-popup', [
                 }
 
                 tether.enable(true);
+                tether.target.xbPopup = this;
                 return true;
             },
 
@@ -1652,6 +1653,7 @@ xblocks.create('xb-popup', [
                     return false;
                 }
 
+                tether.target.xbPopup = null;
                 tether.disable();
                 tether.clearCache();
                 return true;

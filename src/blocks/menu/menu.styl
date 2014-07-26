@@ -1,0 +1,41 @@
+xb-menu
+  display: none
+
+.xb-menu
+  display: none
+
+  &._enabled
+    display: inline-block
+
+  & > ._popup
+    skin: popup
+    overflow: hidden
+
+    &._theme-menu
+      & > ._content
+        padding: 0
+
+        &:before,
+        &:after
+          margin: 0
+          display: none
+
+      & ul,
+      & li
+        margin: 0
+        padding: 0
+        list-style: none
+        outline: none
+
+      & li:empty
+        skin: menu-separator padded
+
+      & a
+        skin: menu-item (_hover '&:hover, &:focus')
+        outline: none
+
+        &:first-child
+          margin-top: ($islands_s / 2)
+
+        &:last-child
+          margin-bottom: ($islands_s / 2)
