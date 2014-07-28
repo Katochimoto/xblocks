@@ -3,7 +3,7 @@
 
 /*! borschik:include:popup.jsx.js */
 
-xblocks.create('xb-popup', [
+var XBPopupElement = xblocks.create('xb-popup', [
     {
         prototype: Object.create(HTMLElement.prototype),
 

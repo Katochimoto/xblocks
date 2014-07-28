@@ -4,7 +4,7 @@
     "dependencies": {
         "x-tag-core": "0.9.7",
         "es5-shim": "3.4.0",
-        "react": "0.11.0",
+        "react": "0.11.1",
         "tether": "0.6.5",
         "xblocks-core": "*"
     },

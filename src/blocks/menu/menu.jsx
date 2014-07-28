@@ -2,88 +2,81 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
+var XBMenu = xblocks.view.register('xb-menuitem', [
+    xblocks.mixin.vCommonAttrs,
+
+    {
+        displayName: 'xb-menuitem',
+
+        mixins: [ React.addons.PureRenderMixin ],
+
+        propTypes: {
+            'label': React.PropTypes.string
+        },
+
+        render: function() {
+            var children = [];
+            var props = {};
+
+            if (this.props.label) {
+                children.push(
+                    <a key="label">{this.props.label}</a>
+                );
+            }
+
+            if (this.props.children) {
+                children.push(
+                    <div className="_content"
+                        key="content"
+                        data-xb-content={this.props._uid}
+                        dangerouslySetInnerHTML={{__html: this.props.children}} />
+                );
+            }
+
+            return React.DOM.div(props, children);
+        }
+    }
+]);
+
 var XBMenu = xblocks.view.register('xb-menu', [
     xblocks.mixin.vCommonAttrs,
 
     {
         displayName: 'xb-menu',
 
-        propTypes: {
-            'close': React.PropTypes.bool,
-            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank', 'menu' ])
-        },
-
         mixins: [ React.addons.PureRenderMixin ],
+
+        propTypes: {
+            'type': React.PropTypes.oneOf([ 'context', 'toolbar', 'list' ])
+        },
 
         getDefaultProps: function() {
             return {
-                'close': false,
-                'theme': 'normal'
+                'type': 'list'
             };
         },
 
         render: function() {
-            var content = this.props.children;
-            var level = 0;
-            var constraints = encodeURIComponent(JSON.stringify([{
-                'to': 'window',
-                'attachment': 'together none'
-            }]));
-            var popupOpenTag = '<xb-popup theme="menu" constraints="' + constraints + '" attachment="top left" target-attachment="top right" target-parent optimizations-gpu>'
+            var children = [];
 
-            content = content.replace(/<(\/)?ul[^>]*>/ig, function(str, isClose) {
-                if (isClose) {
-                    level--;
-                }
-
-                if (level !== 0) {
-                    if (isClose) {
-                        str = str + '</xb-popup>';
-                    } else {
-                        str = popupOpenTag + str;
-                    }
-                }
-
-                if (!isClose) {
-                    level++;
-                }
-
-                return str;
-            });
-
-            var children = [
-                <div className="_content"
-                    key="content"
-                    data-xb-content={this.props._uid}
-                    dangerouslySetInnerHTML={{__html: content}} />
-            ];
-
-            children.unshift(this.template('xb-popup-title', {
-                'key': 'title',
-                'className': '_title'
-            }));
-
-            if (this.props.close) {
-                children.unshift(
-                    <a key="close" className="_close"></a>
+            if (this.props.children) {
+                children.push(
+                    <div className="_content"
+                        key="content"
+                        data-xb-content={this.props._uid}
+                        dangerouslySetInnerHTML={{__html: this.props.children}} />
                 );
             }
 
-            children.push(this.template('xb-popup-buttons', {
-                'key': 'buttons',
-                'className': '_buttons'
-            }));
+
 
             var classes = {
                 '_popup': true
             };
 
-            if (this.props.theme) {
-                classes['_theme-' + this.props.theme] = true;
-            }
-
             var props = {
-                'className': React.addons.classSet(classes),
+                'className': React.addons.classSet(classes)
+                /*
                 'tabIndex': '0',
                 'onMouseOver': function(event) {
                     console.log('onMouseOver', event.target);
@@ -103,6 +96,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
                 'onBlur': function(event) {
                     console.log('onBlur', event.target);
                 }
+                */
             };
 
             return React.DOM.div(props, children);

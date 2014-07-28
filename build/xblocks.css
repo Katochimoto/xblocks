@@ -87,7 +87,8 @@ xb-select,
 xb-checkbox,
 xb-radio,
 xb-link,
-xb-popup {
+xb-popup,
+xb-menu {
   display: inline-block;
 }
 xb-button *,
@@ -98,6 +99,7 @@ xb-checkbox *,
 xb-radio *,
 xb-link *,
 xb-popup *,
+xb-menu *,
 xb-button *:before,
 xb-input *:before,
 xb-ico *:before,
@@ -106,6 +108,7 @@ xb-checkbox *:before,
 xb-radio *:before,
 xb-link *:before,
 xb-popup *:before,
+xb-menu *:before,
 xb-button *:after,
 xb-input *:after,
 xb-ico *:after,
@@ -113,7 +116,8 @@ xb-select *:after,
 xb-checkbox *:after,
 xb-radio *:after,
 xb-link *:after,
-xb-popup *:after {
+xb-popup *:after,
+xb-menu *:after {
   -webkit-box-sizing: initial;
   -moz-box-sizing: initial;
   box-sizing: initial;
@@ -125,7 +129,21 @@ xb-select[hidden],
 xb-checkbox[hidden],
 xb-radio[hidden],
 xb-link[hidden],
-xb-popup[hidden] {
+xb-popup[hidden],
+xb-menu[hidden] {
+  display: none;
+}
+xb-menuitem {
+  display: block;
+}
+xb-menuitem *,
+xb-menuitem *:before,
+xb-menuitem *:after {
+  -webkit-box-sizing: initial;
+  -moz-box-sizing: initial;
+  box-sizing: initial;
+}
+xb-menuitem[hidden] {
   display: none;
 }
 .xb-ico {
@@ -2973,6 +2991,68 @@ xb-popup {
 .xb-popup > ._popup._theme-blank > ._content:after {
   margin: 0;
   display: none;
+}
+xb-menu {
+  display: none;
+}
+.xb-menu {
+  display: none;
+}
+.xb-menu._enabled {
+  display: inline-block;
+}
+.xb-menu > ._popup {
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+.xb-menu > ._popup._theme-menu > ._content {
+  padding: 0;
+}
+.xb-menu > ._popup._theme-menu > ._content:before,
+.xb-menu > ._popup._theme-menu > ._content:after {
+  margin: 0;
+  display: none;
+}
+.xb-menu > ._popup._theme-menu ul,
+.xb-menu > ._popup._theme-menu li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+.xb-menu > ._popup._theme-menu li:empty {
+  display: block;
+  border-top: 1px solid rgba(0,0,0,0.2);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.xb-menu > ._popup._theme-menu a {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  font-size: 15px;
+  line-height: 22px;
+  padding: 5px 16px;
+  outline: none;
+}
+.xb-menu > ._popup._theme-menu a:hover,
+.xb-menu > ._popup._theme-menu a:focus {
+  background: rgba(255,193,0,0.37);
+}
+.xb-menu > ._popup._theme-menu a:first-child {
+  margin-top: 5px;
+}
+.xb-menu > ._popup._theme-menu a:last-child {
+  margin-bottom: 5px;
 }
 .xb-select {
   -webkit-box-sizing: border-box;
