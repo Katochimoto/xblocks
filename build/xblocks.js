@@ -208,7 +208,7 @@ xblocks.mixin.eChecked = {
              * @returns {boolean|undefined}
              */
             get: function() {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     return this.xblock._component.isChecked();
 
                 } else {
@@ -224,7 +224,7 @@ xblocks.mixin.eChecked = {
              * @param {boolean} isChecked
              */
             set: function(isChecked) {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     this.xblock._component.setChecked(isChecked);
 
                 } else {
@@ -248,7 +248,7 @@ xblocks.mixin.eInputValueState = {
     accessors: {
         value: {
             get: function() {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     return this.xblock._component.state.value;
 
                 } else {
@@ -258,7 +258,7 @@ xblocks.mixin.eInputValueState = {
             },
 
             set: function(value) {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     this.xblock._component.setState({
                         'value': String(value)
                     });
@@ -284,7 +284,7 @@ xblocks.mixin.eInputValueProps = {
     accessors: {
         value: {
             get: function() {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     return this.xblock._component.props.value;
 
                 } else {
@@ -294,7 +294,7 @@ xblocks.mixin.eInputValueProps = {
             },
 
             set: function(value) {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     this.xblock._component.setProps({
                         'value': String(value)
                     });

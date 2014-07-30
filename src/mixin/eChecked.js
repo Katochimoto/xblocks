@@ -45,7 +45,7 @@ xblocks.mixin.eChecked = {
              * @returns {boolean|undefined}
              */
             get: function() {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     return this.xblock._component.isChecked();
 
                 } else {
@@ -61,7 +61,7 @@ xblocks.mixin.eChecked = {
              * @param {boolean} isChecked
              */
             set: function(isChecked) {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     this.xblock._component.setChecked(isChecked);
 
                 } else {

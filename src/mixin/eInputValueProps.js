@@ -5,7 +5,7 @@ xblocks.mixin.eInputValueProps = {
     accessors: {
         value: {
             get: function() {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     return this.xblock._component.props.value;
 
                 } else {
@@ -15,7 +15,7 @@ xblocks.mixin.eInputValueProps = {
             },
 
             set: function(value) {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     this.xblock._component.setProps({
                         'value': String(value)
                     });

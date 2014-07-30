@@ -5,7 +5,7 @@ xblocks.mixin.eInputValueState = {
     accessors: {
         value: {
             get: function() {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     return this.xblock._component.state.value;
 
                 } else {
@@ -15,7 +15,7 @@ xblocks.mixin.eInputValueState = {
             },
 
             set: function(value) {
-                if (this.xblock._isMountedComponent()) {
+                if (this.mounted) {
                     this.xblock._component.setState({
                         'value': String(value)
                     });
