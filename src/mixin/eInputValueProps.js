@@ -4,28 +4,18 @@
 xblocks.mixin.eInputValueProps = {
     accessors: {
         value: {
-            get: function() {
-                if (this.mounted) {
-                    return this.xblock._component.props.value;
-
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : 'on');
-                }
+            attribute: {
+                name: 'value'
             },
 
-            set: function(value) {
-                if (this.mounted) {
-                    this.xblock._component.setProps({
-                        'value': String(value)
-                    });
+            get: function() {
+                return '' + (this.getAttribute('value') || this.defaultValue || '');
+            }
+        },
 
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    if (controlNode) {
-                        controlNode.value = String(value);
-                    }
-                }
+        defaultValue: {
+            get: function() {
+                return '';
             }
         }
     }
