@@ -134,25 +134,12 @@
  *
  * @memberOf xblocks.mixin
  * @name eDisabled
- * @type {{accessors: {disabled: {get: get, set: set}}}}
  */
 xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion(
-                    'disabled',
-                    this.getAttribute('disabled'),
-                    React.PropTypes.bool
-                );
-            },
-
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
-                }
+            attribute: {
+                boolean: true
             }
         }
     }
@@ -198,42 +185,19 @@ xblocks.mixin.eDisabled = {
  *
  * @memberOf xblocks.mixin
  * @name eChecked
- * @type {{accessors: {checked: {get: get, set: set}}}}
  */
 xblocks.mixin.eChecked = {
     accessors: {
         checked: {
-            /**
-             * Getter checked value
-             * @returns {boolean|undefined}
-             */
-            get: function() {
-                if (this.mounted) {
-                    return this.xblock._component.isChecked();
-
-                } else {
-                    var controlNode = this.getElementsByClassName('_xb-check_controller');
-                    if (controlNode.length) {
-                        return controlNode[0].checked;
-                    }
-                }
-            },
-
-            /**
-             * Setter checked value
-             * @param {boolean} isChecked
-             */
-            set: function(isChecked) {
-                if (this.mounted) {
-                    this.xblock._component.setChecked(isChecked);
-
-                } else {
-                    var controlNode = this.getElementsByClassName('_xb-check_controller');
-                    if (controlNode.length) {
-                        controlNode[0].checked = Boolean(isChecked);
-                    }
-                }
+            attribute: {
+                boolean: true
             }
+        }
+    },
+
+    events: {
+        change: function(event) {
+            this.checked = event.target.checked;
         }
     }
 };
@@ -289,7 +253,7 @@ xblocks.mixin.eInputValueProps = {
 
                 } else {
                     var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : '');
+                    return (controlNode ? controlNode.value : 'on');
                 }
             },
 
@@ -1277,12 +1241,10 @@ xblocks.create('xb-input', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, {
+var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
     displayName: 'xb-checkbox',
 
     propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
         'children': React.PropTypes.renderable,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'value': React.PropTypes.string,
@@ -1294,7 +1256,6 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
         'disabled': React.PropTypes.bool,
-        'readonly': React.PropTypes.bool,   // native not work
         'required': React.PropTypes.bool
     },
 
@@ -1303,9 +1264,24 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
             'size': 'm',
             'children': '',
             'value': 'on',
+            'tabindex': '0',
             'checked': false,
-            'tabindex': '1'
+            'disabled': false,
+            'autofocus': false,
+            'required': false
         };
+    },
+
+    getInitialState: function() {
+        return {
+            'checked': this.props.checked
+        };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            'checked': nextProps.checked
+        });
     },
 
     render: function() {
@@ -1333,14 +1309,14 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
                 htmlFor:this.props['for']}, 
 
                 React.DOM.input( {type:"checkbox",
-                    ref:"checkControl",
                     className:"_xb-check_controller",
                     name:this.props.name,
                     value:this.props.value,
                     disabled:this.props.disabled,
                     defaultChecked:this.props.checked,
+                    checked:this.state.checked,
                     autoFocus:this.props.autofocus,
-                    readOnly:this.props.readonly,
+                    readOnly:true,
                     required:this.props.required,
                     tabIndex:tabIndex}),
 

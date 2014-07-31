@@ -32,25 +32,12 @@
  *
  * @memberOf xblocks.mixin
  * @name eDisabled
- * @type {{accessors: {disabled: {get: get, set: set}}}}
  */
 xblocks.mixin.eDisabled = {
     accessors: {
         disabled: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion(
-                    'disabled',
-                    this.getAttribute('disabled'),
-                    React.PropTypes.bool
-                );
-            },
-
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('disabled', '');
-                } else {
-                    this.removeAttribute('disabled');
-                }
+            attribute: {
+                boolean: true
             }
         }
     }

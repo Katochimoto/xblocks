@@ -10,7 +10,7 @@ xblocks.mixin.eInputValueProps = {
 
                 } else {
                     var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : '');
+                    return (controlNode ? controlNode.value : 'on');
                 }
             },
 

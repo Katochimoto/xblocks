@@ -35,42 +35,19 @@
  *
  * @memberOf xblocks.mixin
  * @name eChecked
- * @type {{accessors: {checked: {get: get, set: set}}}}
  */
 xblocks.mixin.eChecked = {
     accessors: {
         checked: {
-            /**
-             * Getter checked value
-             * @returns {boolean|undefined}
-             */
-            get: function() {
-                if (this.mounted) {
-                    return this.xblock._component.isChecked();
-
-                } else {
-                    var controlNode = this.getElementsByClassName('_xb-check_controller');
-                    if (controlNode.length) {
-                        return controlNode[0].checked;
-                    }
-                }
-            },
-
-            /**
-             * Setter checked value
-             * @param {boolean} isChecked
-             */
-            set: function(isChecked) {
-                if (this.mounted) {
-                    this.xblock._component.setChecked(isChecked);
-
-                } else {
-                    var controlNode = this.getElementsByClassName('_xb-check_controller');
-                    if (controlNode.length) {
-                        controlNode[0].checked = Boolean(isChecked);
-                    }
-                }
+            attribute: {
+                boolean: true
             }
+        }
+    },
+
+    events: {
+        change: function(event) {
+            this.checked = event.target.checked;
         }
     }
 };

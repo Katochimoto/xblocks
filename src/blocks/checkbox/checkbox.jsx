@@ -2,12 +2,10 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, {
+var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
     displayName: 'xb-checkbox',
 
     propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
         'children': React.PropTypes.renderable,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'value': React.PropTypes.string,
@@ -19,7 +17,6 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
         'disabled': React.PropTypes.bool,
-        'readonly': React.PropTypes.bool,   // native not work
         'required': React.PropTypes.bool
     },
 
@@ -28,9 +25,24 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
             'size': 'm',
             'children': '',
             'value': 'on',
+            'tabindex': '0',
             'checked': false,
-            'tabindex': '1'
+            'disabled': false,
+            'autofocus': false,
+            'required': false
         };
+    },
+
+    getInitialState: function() {
+        return {
+            'checked': this.props.checked
+        };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            'checked': nextProps.checked
+        });
     },
 
     render: function() {
@@ -58,14 +70,14 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ xblocks.mixin.vChecked, 
                 htmlFor={this.props['for']}>
 
                 <input type="checkbox"
-                    ref="checkControl"
                     className="_xb-check_controller"
                     name={this.props.name}
                     value={this.props.value}
                     disabled={this.props.disabled}
                     defaultChecked={this.props.checked}
+                    checked={this.state.checked}
                     autoFocus={this.props.autofocus}
-                    readOnly={this.props.readonly}
+                    readOnly={true}
                     required={this.props.required}
                     tabIndex={tabIndex}/>
 
