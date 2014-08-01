@@ -1356,8 +1356,6 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
     displayName: 'xb-radio',
 
     propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
         'children': React.PropTypes.renderable,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'value': React.PropTypes.string,
@@ -1369,7 +1367,6 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
         'autofocus': React.PropTypes.bool,
         'checked': React.PropTypes.bool,
         'disabled': React.PropTypes.bool,
-        'readonly': React.PropTypes.bool,   // native not work
         'required': React.PropTypes.bool
     },
 
@@ -1378,9 +1375,24 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
             'size': 'm',
             'children': '',
             'value': 'on',
+            'tabindex': '0',
             'checked': false,
-            'tabindex': '1'
+            'disabled': false,
+            'autofocus': false,
+            'required': false
         };
+    },
+
+    getInitialState: function() {
+        return {
+            'checked': this.props.checked
+        };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            'checked': nextProps.checked
+        });
     },
 
     render: function() {
@@ -1408,14 +1420,14 @@ var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
                 htmlFor:this.props['for']}, 
 
                 React.DOM.input( {type:"radio",
-                    ref:"checkControl",
                     className:"_xb-check_controller",
                     name:this.props.name,
                     value:this.props.value,
                     disabled:this.props.disabled,
                     defaultChecked:this.props.checked,
+                    checked:this.state.checked,
                     autoFocus:this.props.autofocus,
-                    readOnly:this.props.readonly,
+                    readOnly:true,
                     required:this.props.required,
                     tabIndex:tabIndex}),
 
@@ -1438,7 +1450,15 @@ xblocks.create('xb-radio', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype)
+        prototype: Object.create(HTMLInputElement.prototype),
+
+        accessors: {
+            defaultValue: {
+                get: function() {
+                    return 'on';
+                }
+            }
+        }
     }
 ]);
 

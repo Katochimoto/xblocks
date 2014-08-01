@@ -10,6 +10,14 @@ xblocks.create('xb-radio', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype)
+        prototype: Object.create(HTMLInputElement.prototype),
+
+        accessors: {
+            defaultValue: {
+                get: function() {
+                    return 'on';
+                }
+            }
+        }
     }
 ]);
