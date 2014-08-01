@@ -2,7 +2,7 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
+var XBradio = xblocks.view.register('xb-radio', [ {
     displayName: 'xb-radio',
 
     propTypes: {

@@ -613,15 +613,12 @@ var XBButtonContent = xblocks.view.create({
 
 
 var XBButton = xblocks.view.register('xb-button', [
-    xblocks.mixin.vChecked,
     xblocks.utils.exportPropTypes('xb-ico'),
 
     {
         displayName: 'xb-button',
 
         propTypes: {
-            'id': React.PropTypes.string,
-            'class': React.PropTypes.string,
             'children': React.PropTypes.renderable,
             'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'theme': React.PropTypes.oneOf([
@@ -653,12 +650,11 @@ var XBButton = xblocks.view.register('xb-button', [
             'form': React.PropTypes.string,
             'for': React.PropTypes.string,
             'tabindex': React.PropTypes.string,
+
             'multiple': React.PropTypes.bool,
             'autofocus': React.PropTypes.bool,
             'disabled': React.PropTypes.bool,
-
             'checked': React.PropTypes.bool,
-            'readonly': React.PropTypes.bool,   // native not work
             'required': React.PropTypes.bool
         },
 
@@ -676,10 +672,26 @@ var XBButton = xblocks.view.register('xb-button', [
                 'size': 'm',
                 'theme': 'normal',
                 'type': 'button',
+                'tabindex': '0',
+                'children': String.fromCharCode(160),
                 'checked': false,
-                'tabindex': '1',
-                'children': String.fromCharCode(160)
+                'multiple': false,
+                'autofocus': false,
+                'disabled': false,
+                'required': false
             };
+        },
+
+        getInitialState: function() {
+            return {
+                'checked': this.props.checked
+            };
+        },
+
+        componentWillReceiveProps: function(nextProps) {
+            this.setState({
+                'checked': nextProps.checked
+            });
         },
 
         render: function() {
@@ -744,19 +756,17 @@ var XBButton = xblocks.view.register('xb-button', [
                 var children = [];
 
                 if (type === 'checkbox' || type === 'radio') {
-                    var value = this.props.value || 'on';
-
                     children.push(
                         React.DOM.input( {key:"checkControl",
-                            ref:"checkControl",
                             type:type,
                             className:"_xb-check_controller",
                             name:this.props.name,
                             value:this.props.value,
                             disabled:this.props.disabled,
                             defaultChecked:this.props.checked,
+                            checked:this.state.checked,
                             autoFocus:this.props.autofocus,
-                            readOnly:this.props.readonly,
+                            readOnly:true,
                             required:this.props.required,
                             tabIndex:tabIndex})
                     );
@@ -839,7 +849,20 @@ xblocks.create('xb-button', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLButtonElement.prototype)
+        prototype: Object.create(HTMLButtonElement.prototype),
+
+        accessors: {
+            defaultValue: {
+                get: function() {
+                    var type = this.attrs.type;
+                    if (type === 'checkbox' || type === 'radio') {
+                        return 'on';
+                    }
+
+                    return '';
+                }
+            }
+        }
     }
 ]);
 
@@ -1352,7 +1375,7 @@ xblocks.create('xb-checkbox', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBradio = xblocks.view.register('xb-radio', [ xblocks.mixin.vChecked, {
+var XBradio = xblocks.view.register('xb-radio', [ {
     displayName: 'xb-radio',
 
     propTypes: {

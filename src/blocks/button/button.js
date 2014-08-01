@@ -10,6 +10,19 @@ xblocks.create('xb-button', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLButtonElement.prototype)
+        prototype: Object.create(HTMLButtonElement.prototype),
+
+        accessors: {
+            defaultValue: {
+                get: function() {
+                    var type = this.attrs.type;
+                    if (type === 'checkbox' || type === 'radio') {
+                        return 'on';
+                    }
+
+                    return '';
+                }
+            }
+        }
     }
 ]);
