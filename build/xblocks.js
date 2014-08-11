@@ -694,6 +694,12 @@ var XBButton = xblocks.view.register('xb-button', [
             });
         },
 
+        _onChange: function(event) {
+            this.setState({
+                'checked': event.target.checked
+            });
+        },
+
         render: function() {
             var classes = {
                 'xb-button': true,
@@ -767,6 +773,7 @@ var XBButton = xblocks.view.register('xb-button', [
                             checked:this.state.checked,
                             autoFocus:this.props.autofocus,
                             readOnly:true,
+                            onChange:this._onChange,
                             required:this.props.required,
                             tabIndex:tabIndex})
                     );
@@ -1297,6 +1304,12 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
         });
     },
 
+    _onChange: function(event) {
+        this.setState({
+            'checked': event.target.checked
+        });
+    },
+
     render: function() {
         var classes = {
             'xb-checkbox': true,
@@ -1330,6 +1343,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
                     checked:this.state.checked,
                     autoFocus:this.props.autofocus,
                     readOnly:true,
+                    onChange:this._onChange,
                     required:this.props.required,
                     tabIndex:tabIndex}),
 
@@ -1418,6 +1432,12 @@ var XBradio = xblocks.view.register('xb-radio', [ {
         });
     },
 
+    _onChange: function(event) {
+        this.setState({
+            'checked': event.target.checked
+        });
+    },
+
     render: function() {
         var classes = {
             'xb-radio': true,
@@ -1451,6 +1471,7 @@ var XBradio = xblocks.view.register('xb-radio', [ {
                     checked:this.state.checked,
                     autoFocus:this.props.autofocus,
                     readOnly:true,
+                    onChange:this._onChange,
                     required:this.props.required,
                     tabIndex:tabIndex}),
 
@@ -1810,7 +1831,7 @@ xblocks.create('xb-menuitem', [
 
 xblocks.create('xb-menu', [
     {
-        prototype: Object.create(XBPopupElement.prototype)
+        prototype: Object.create(new XBPopupElement())
     }
 ]);
 

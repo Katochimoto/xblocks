@@ -45,6 +45,12 @@ var XBradio = xblocks.view.register('xb-radio', [ {
         });
     },
 
+    _onChange: function(event) {
+        this.setState({
+            'checked': event.target.checked
+        });
+    },
+
     render: function() {
         var classes = {
             'xb-radio': true,
@@ -78,6 +84,7 @@ var XBradio = xblocks.view.register('xb-radio', [ {
                     checked={this.state.checked}
                     autoFocus={this.props.autofocus}
                     readOnly={true}
+                    onChange={this._onChange}
                     required={this.props.required}
                     tabIndex={tabIndex}/>
 

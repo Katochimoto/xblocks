@@ -86,6 +86,12 @@ var XBButton = xblocks.view.register('xb-button', [
             });
         },
 
+        _onChange: function(event) {
+            this.setState({
+                'checked': event.target.checked
+            });
+        },
+
         render: function() {
             var classes = {
                 'xb-button': true,
@@ -159,6 +165,7 @@ var XBButton = xblocks.view.register('xb-button', [
                             checked={this.state.checked}
                             autoFocus={this.props.autofocus}
                             readOnly={true}
+                            onChange={this._onChange}
                             required={this.props.required}
                             tabIndex={tabIndex}/>
                     );

@@ -11,6 +11,6 @@ xblocks.create('xb-menuitem', [
 
 xblocks.create('xb-menu', [
     {
-        prototype: Object.create(XBPopupElement.prototype)
+        prototype: Object.create(new XBPopupElement())
     }
 ]);
