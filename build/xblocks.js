@@ -1831,7 +1831,7 @@ xblocks.create('xb-menuitem', [
 
 xblocks.create('xb-menu', [
     {
-        prototype: Object.create(new XBPopupElement())
+        prototype: Object.create(XBPopupElement.prototype || new XBPopupElement())
     }
 ]);
 
