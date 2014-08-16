@@ -12,18 +12,47 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
         propTypes: {
             'label': React.PropTypes.string,
-            'disabled': React.PropTypes.bool
+            'disabled': React.PropTypes.bool,
+            'selected': React.PropTypes.bool
         },
 
         statics: {
             TMPL_GROUP_MENU: '<xb-menu constraints="<%=constraints%>" target-attachment="top right" attachment="top left" target=".<%=targetClass%>"><%=children%></xb-menu>'
         },
 
+        getDefaultProps: function() {
+            return {
+                'disabled': false,
+                'selected': false
+            };
+        },
+
+        getInitialState: function() {
+            return {
+                'selected': this.props.selected
+            };
+        },
+
+        componentWillReceiveProps: function(nextProps) {
+            this.setState({ 'selected': nextProps.selected });
+        },
+
+        /*
+        _onMouseOver: function() {
+            this.setState({ 'selected': true });
+        },
+
+        _onMouseOut: function() {
+            this.setState({ 'selected': false });
+        },
+        */
+
         render: function() {
             var classes = {
                 'xb-menuitem': true,
                 '_empty': !Boolean(this.props.label),
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                '_selected': this.state.selected
             };
 
             var children = '';
@@ -48,12 +77,12 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             classes = React.addons.classSet(classes);
 
             return (
-                <a className={classes}>
+                <div className={classes}>
                     <span>{this.props.label}</span>
                     <div className="_content"
                         data-xb-content={this.props._uid}
                         dangerouslySetInnerHTML={{__html: children}} />
-                </a>
+                </div>
             );
         }
     }

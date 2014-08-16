@@ -104,6 +104,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                 tether.enable(true);
                 tether.target.xbPopup = this;
+
+                xblocks.utils.dispatchEvent(this, 'open-after');
+
                 return true;
             },
 

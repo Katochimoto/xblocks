@@ -52,6 +52,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             return (
                 <div className={classes}
+                    tabIndex="0"
                     data-xb-content={this.props._uid}
                     dangerouslySetInnerHTML={{__html: this.props.children}} />
             );

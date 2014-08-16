@@ -1682,6 +1682,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                 tether.enable(true);
                 tether.target.xbPopup = this;
+
+                xblocks.utils.dispatchEvent(this, 'open-after');
+
                 return true;
             },
 
@@ -1729,18 +1732,47 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
         propTypes: {
             'label': React.PropTypes.string,
-            'disabled': React.PropTypes.bool
+            'disabled': React.PropTypes.bool,
+            'selected': React.PropTypes.bool
         },
 
         statics: {
             TMPL_GROUP_MENU: '<xb-menu constraints="<%=constraints%>" target-attachment="top right" attachment="top left" target=".<%=targetClass%>"><%=children%></xb-menu>'
         },
 
+        getDefaultProps: function() {
+            return {
+                'disabled': false,
+                'selected': false
+            };
+        },
+
+        getInitialState: function() {
+            return {
+                'selected': this.props.selected
+            };
+        },
+
+        componentWillReceiveProps: function(nextProps) {
+            this.setState({ 'selected': nextProps.selected });
+        },
+
+        /*
+        _onMouseOver: function() {
+            this.setState({ 'selected': true });
+        },
+
+        _onMouseOut: function() {
+            this.setState({ 'selected': false });
+        },
+        */
+
         render: function() {
             var classes = {
                 'xb-menuitem': true,
                 '_empty': !Boolean(this.props.label),
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                '_selected': this.state.selected
             };
 
             var children = '';
@@ -1765,7 +1797,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             classes = React.addons.classSet(classes);
 
             return (
-                React.DOM.a( {className:classes}, 
+                React.DOM.div( {className:classes}, 
                     React.DOM.span(null, this.props.label),
                     React.DOM.div( {className:"_content",
                         'data-xb-content':this.props._uid,
@@ -1780,8 +1812,18 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
 
 xblocks.create('xb-menuitem', [
+    xblocks.mixin.eDisabled,
+
     {
-        prototype: Object.create(HTMLElement.prototype)
+        prototype: Object.create(HTMLElement.prototype),
+
+        accessors: {
+            selected: {
+                attribute: {
+                    boolean: true
+                }
+            }
+        }
     }
 ]);
 
@@ -1846,6 +1888,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             return (
                 React.DOM.div( {className:classes,
+                    tabIndex:"0",
                     'data-xb-content':this.props._uid,
                     dangerouslySetInnerHTML:{__html: this.props.children}} )
             );
@@ -1857,12 +1900,119 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
 
 xblocks.create('xb-menu', [
+    xblocks.mixin.eFocus,
+
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         events: {
+            'open-after': function() {
+                this.focus();
+            },
+
             'close-before': function() {
                 Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
+                this._selectedItem = null;
+            },
+
+            // Escape
+            'keydown:keypass(27)': function() {
+                this.close();
+            },
+
+            'blur': function() {
+                //this.close();
+            },
+
+            // ArrowDown
+            'keydown:keypass(40)': function() {
+                var nextItem = this.querySelector('xb-menuitem[selected] + xb-menuitem:not([disabled])');
+                if (!nextItem) {
+                    nextItem = this.querySelector('xb-menuitem:not([disabled])');
+                }
+
+                if (this._selectedItem) {
+                    if (nextItem && this._selectedItem !== nextItem) {
+                        this._selectedItem.selected = false;
+                        this._selectedItem = null;
+                    }
+                }
+
+                if (nextItem) {
+                    nextItem.selected = true;
+                    this._selectedItem = nextItem;
+                }
+            },
+
+            // ArrowUp
+            'keydown:keypass(38)': function() {
+
+            },
+
+            // ArrowRight
+            'keydown:keypass(39)': function() {
+
+            },
+
+            // ArrowLeft
+            'keydown:keypass(37)': function() {
+
+            },
+
+            'mouseover:delegate(xb-menuitem)': function(event) {
+                xblocks.utils.event.mouseEnterFilter(this, event, function() {
+                    if (this.disabled) {
+                        return;
+                    }
+
+                    var menuNode = this.parentNode.parentNode;
+
+                    if (menuNode._selectedItem) {
+                        if (menuNode._selectedItem !== this) {
+                            menuNode._selectedItem.selected = false;
+                            menuNode._selectedItem = null;
+                        }
+
+                    } else {
+                        this.selected = true;
+                        menuNode._selectedItem = this;
+                    }
+                });
+            },
+
+            'mouseout:delegate(xb-menuitem)': function(event) {
+                xblocks.utils.event.mouseLeaveFilter(this, event, function() {
+                    if (this.disabled) {
+                        return;
+                    }
+
+                    var menuNode = this.parentNode.parentNode;
+
+                    if (menuNode._selectedItem && menuNode._selectedItem !== this) {
+                        menuNode._selectedItem.selected = false;
+                        menuNode._selectedItem = null;
+                    }
+
+                    this.selected = false;
+                    menuNode._selectedItem = null;
+                });
+            },
+
+            'mousemove:delegate(xb-menuitem)': function(event) {
+                if (this.disabled) {
+                    return;
+                }
+
+                var menuNode = this.parentNode.parentNode;
+
+                if (!menuNode._selectedItem || menuNode._selectedItem !== this) {
+                    if (menuNode._selectedItem) {
+                        menuNode._selectedItem.selected = false;
+                    }
+
+                    menuNode._selectedItem = this;
+                    this.selected = true;
+                }
             }
         }
     }

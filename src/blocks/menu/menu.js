@@ -4,12 +4,119 @@
 /*! borschik:include:menu.jsx.js */
 
 xblocks.create('xb-menu', [
+    xblocks.mixin.eFocus,
+
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         events: {
+            'open-after': function() {
+                this.focus();
+            },
+
             'close-before': function() {
                 Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
+                this._selectedItem = null;
+            },
+
+            // Escape
+            'keydown:keypass(27)': function() {
+                this.close();
+            },
+
+            'blur': function() {
+                //this.close();
+            },
+
+            // ArrowDown
+            'keydown:keypass(40)': function() {
+                var nextItem = this.querySelector('xb-menuitem[selected] + xb-menuitem:not([disabled])');
+                if (!nextItem) {
+                    nextItem = this.querySelector('xb-menuitem:not([disabled])');
+                }
+
+                if (this._selectedItem) {
+                    if (nextItem && this._selectedItem !== nextItem) {
+                        this._selectedItem.selected = false;
+                        this._selectedItem = null;
+                    }
+                }
+
+                if (nextItem) {
+                    nextItem.selected = true;
+                    this._selectedItem = nextItem;
+                }
+            },
+
+            // ArrowUp
+            'keydown:keypass(38)': function() {
+
+            },
+
+            // ArrowRight
+            'keydown:keypass(39)': function() {
+
+            },
+
+            // ArrowLeft
+            'keydown:keypass(37)': function() {
+
+            },
+
+            'mouseover:delegate(xb-menuitem)': function(event) {
+                xblocks.utils.event.mouseEnterFilter(this, event, function() {
+                    if (this.disabled) {
+                        return;
+                    }
+
+                    var menuNode = this.parentNode.parentNode;
+
+                    if (menuNode._selectedItem) {
+                        if (menuNode._selectedItem !== this) {
+                            menuNode._selectedItem.selected = false;
+                            menuNode._selectedItem = null;
+                        }
+
+                    } else {
+                        this.selected = true;
+                        menuNode._selectedItem = this;
+                    }
+                });
+            },
+
+            'mouseout:delegate(xb-menuitem)': function(event) {
+                xblocks.utils.event.mouseLeaveFilter(this, event, function() {
+                    if (this.disabled) {
+                        return;
+                    }
+
+                    var menuNode = this.parentNode.parentNode;
+
+                    if (menuNode._selectedItem && menuNode._selectedItem !== this) {
+                        menuNode._selectedItem.selected = false;
+                        menuNode._selectedItem = null;
+                    }
+
+                    this.selected = false;
+                    menuNode._selectedItem = null;
+                });
+            },
+
+            'mousemove:delegate(xb-menuitem)': function(event) {
+                if (this.disabled) {
+                    return;
+                }
+
+                var menuNode = this.parentNode.parentNode;
+
+                if (!menuNode._selectedItem || menuNode._selectedItem !== this) {
+                    if (menuNode._selectedItem) {
+                        menuNode._selectedItem.selected = false;
+                    }
+
+                    menuNode._selectedItem = this;
+                    this.selected = true;
+                }
             }
         }
     }

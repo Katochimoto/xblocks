@@ -3024,8 +3024,7 @@ xb-menu > ._popup:after {
   padding: 5px 16px;
   outline: none;
 }
-.xb-menuitem:hover,
-.xb-menuitem:focus {
+.xb-menuitem:hover {
   background: rgba(255,193,0,0.37);
 }
 .xb-menuitem:first-child {
@@ -3033,6 +3032,12 @@ xb-menu > ._popup:after {
 }
 .xb-menuitem:last-child {
   margin-bottom: 5px;
+}
+.xb-menuitem:hover {
+  background: inherit;
+}
+.xb-menuitem._selected {
+  background: rgba(255,193,0,0.37);
 }
 .xb-menuitem._empty {
   display: block;

@@ -1,5 +1,7 @@
+/*  (_hover '&:hover, &:focus') */
+
 .xb-menuitem
-  skin: menu-item (_hover '&:hover, &:focus')
+  skin: menu-item
   outline: none
 
   &:first-child
@@ -7,6 +9,12 @@
 
   &:last-child
     margin-bottom: ($islands_s / 2)
+
+  &:hover
+    background: inherit
+
+  &._selected
+    skin: menu-item_hover
 
   &._empty
     skin: menu-separator padded
