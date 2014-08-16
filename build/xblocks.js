@@ -1722,6 +1722,20 @@ var XBPopupElement = xblocks.create('xb-popup', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
+var XBMenuseparator = xblocks.view.register('xb-menuseparator', [
+    xblocks.mixin.vCommonAttrs,
+
+    {
+        displayName: 'xb-menuseparator',
+
+        render: function() {
+            return (
+                React.DOM.div( {className:"xb-menuseparator"} )
+            );
+        }
+    }
+]);
+
 var XBMenuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,
 
@@ -1731,7 +1745,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
         mixins: [ React.addons.PureRenderMixin ],
 
         propTypes: {
-            'label': React.PropTypes.string,
+            'label': React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
             'selected': React.PropTypes.bool
         },
@@ -1770,7 +1784,6 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
         render: function() {
             var classes = {
                 'xb-menuitem': true,
-                '_empty': !Boolean(this.props.label),
                 '_disabled': this.props.disabled,
                 '_selected': this.state.selected
             };
@@ -1810,6 +1823,12 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
 /* blocks/menu/menuitem.jsx.js end */
 
+
+xblocks.create('xb-menuseparator', [
+    {
+        prototype: Object.create(HTMLElement.prototype)
+    }
+]);
 
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,

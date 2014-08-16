@@ -134,17 +134,22 @@ xb-popup[hidden],
 xb-menu[hidden] {
   display: none;
 }
-xb-menuitem {
+xb-menuitem,
+xb-menuseparator {
   display: block;
 }
 xb-menuitem *,
+xb-menuseparator *,
 xb-menuitem *:before,
-xb-menuitem *:after {
+xb-menuseparator *:before,
+xb-menuitem *:after,
+xb-menuseparator *:after {
   -webkit-box-sizing: initial;
   -moz-box-sizing: initial;
   box-sizing: initial;
 }
-xb-menuitem[hidden] {
+xb-menuitem[hidden],
+xb-menuseparator[hidden] {
   display: none;
 }
 .xb-ico {
@@ -3039,13 +3044,6 @@ xb-menu > ._popup:after {
 .xb-menuitem._selected {
   background: rgba(255,193,0,0.37);
 }
-.xb-menuitem._empty {
-  display: block;
-  border-top: 1px solid rgba(0,0,0,0.2);
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding: 0;
-}
 .xb-menuitem._group:before {
   border-bottom: 2px solid;
   border-right: 2px solid;
@@ -3067,6 +3065,14 @@ xb-menu > ._popup:after {
 .xb-menuitem._group:before {
   width: 6px;
   height: 6px;
+}
+.xb-menuseparator {
+  display: block;
+  border-top: 1px solid rgba(0,0,0,0.2);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0;
+  outline: none;
 }
 .xb-select {
   -webkit-box-sizing: border-box;
