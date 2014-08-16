@@ -2,42 +2,6 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBMenu = xblocks.view.register('xb-menuitem', [
-    xblocks.mixin.vCommonAttrs,
-
-    {
-        displayName: 'xb-menuitem',
-
-        mixins: [ React.addons.PureRenderMixin ],
-
-        propTypes: {
-            'label': React.PropTypes.string
-        },
-
-        render: function() {
-            var children = [];
-            var props = {};
-
-            if (this.props.label) {
-                children.push(
-                    <a key="label">{this.props.label}</a>
-                );
-            }
-
-            if (this.props.children) {
-                children.push(
-                    <div className="_content"
-                        key="content"
-                        data-xb-content={this.props._uid}
-                        dangerouslySetInnerHTML={{__html: this.props.children}} />
-                );
-            }
-
-            return React.DOM.div(props, children);
-        }
-    }
-]);
-
 var XBMenu = xblocks.view.register('xb-menu', [
     xblocks.mixin.vCommonAttrs,
 
@@ -57,27 +21,14 @@ var XBMenu = xblocks.view.register('xb-menu', [
         },
 
         render: function() {
-            var children = [];
-
-            if (this.props.children) {
-                children.push(
-                    <div className="_content"
-                        key="content"
-                        data-xb-content={this.props._uid}
-                        dangerouslySetInnerHTML={{__html: this.props.children}} />
-                );
-            }
-
-
-
             var classes = {
                 '_popup': true
             };
 
+            classes = React.addons.classSet(classes);
+
+            /*
             var props = {
-                'className': React.addons.classSet(classes)
-                /*
-                'tabIndex': '0',
                 'onMouseOver': function(event) {
                     console.log('onMouseOver', event.target);
                 },
@@ -96,10 +47,14 @@ var XBMenu = xblocks.view.register('xb-menu', [
                 'onBlur': function(event) {
                     console.log('onBlur', event.target);
                 }
-                */
             };
+            */
 
-            return React.DOM.div(props, children);
+            return (
+                <div className={classes}
+                    data-xb-content={this.props._uid}
+                    dangerouslySetInnerHTML={{__html: this.props.children}} />
+            );
         }
     }
 ]);

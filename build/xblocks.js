@@ -1599,7 +1599,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     }
 
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
-                        'optimizations-gpu': false,
+                        'optimizations-gpu': true,
                         'target': document.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
@@ -1618,13 +1618,12 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'attachment': tetherAttrs['attachment'],
                         'targetAttachment': tetherAttrs['target-attachment'],
                         'targetModifier': tetherAttrs['target-modifier'],
-                        'classPrefix': 'xb-popup',
+                        'classPrefix': this.xtagName,
                         'optimizations': {
                             'gpu': tetherAttrs['optimizations-gpu']
                         },
                         'classes': {
-                            'element': 'xb-popup',
-                            'enabled': '_enabled'
+                            'element': this.xtagName
                         }
                     };
 
@@ -1693,6 +1692,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     return false;
                 }
 
+                xblocks.utils.dispatchEvent(this, 'close-before');
+
                 tether.target.xbPopup = null;
                 tether.disable();
                 tether.clearCache();
@@ -1709,16 +1710,16 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
 /* blocks/popup/popup.js end */
 
-    /* blocks/menu/menu.js begin */
+    /* blocks/menu/menuitem.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
-/* blocks/menu/menu.jsx.js begin */
+/* blocks/menu/menuitem.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBMenu = xblocks.view.register('xb-menuitem', [
+var XBMenuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,
 
     {
@@ -1727,32 +1728,73 @@ var XBMenu = xblocks.view.register('xb-menuitem', [
         mixins: [ React.addons.PureRenderMixin ],
 
         propTypes: {
-            'label': React.PropTypes.string
+            'label': React.PropTypes.string,
+            'disabled': React.PropTypes.bool
+        },
+
+        statics: {
+            TMPL_GROUP_MENU: '<xb-menu constraints="<%=constraints%>" target-attachment="top right" attachment="top left" target=".<%=targetClass%>"><%=children%></xb-menu>'
         },
 
         render: function() {
-            var children = [];
-            var props = {};
+            var classes = {
+                'xb-menuitem': true,
+                '_empty': !Boolean(this.props.label),
+                '_disabled': this.props.disabled
+            };
 
-            if (this.props.label) {
-                children.push(
-                    React.DOM.a( {key:"label"}, this.props.label)
-                );
-            }
+            var children = '';
 
             if (this.props.children) {
-                children.push(
-                    React.DOM.div( {className:"_content",
-                        key:"content",
-                        'data-xb-content':this.props._uid,
-                        dangerouslySetInnerHTML:{__html: this.props.children}} )
-                );
+                var targetClass = '_menuitem-target-' + this.props._uid;
+                var constraints = encodeURIComponent(JSON.stringify([{
+                    to: 'scrollParent',
+                    attachment: 'together'
+                }]));
+
+                classes[targetClass] = true;
+                classes['_group'] = true;
+
+                children = xblocks.utils.tmpl(XBMenuitem.TMPL_GROUP_MENU, {
+                    'constraints': constraints,
+                    'targetClass': targetClass,
+                    'children': this.props.children
+                });
             }
 
-            return React.DOM.div(props, children);
+            classes = React.addons.classSet(classes);
+
+            return (
+                React.DOM.a( {className:classes}, 
+                    React.DOM.span(null, this.props.label),
+                    React.DOM.div( {className:"_content",
+                        'data-xb-content':this.props._uid,
+                        dangerouslySetInnerHTML:{__html: children}} )
+                )
+            );
         }
     }
 ]);
+
+/* blocks/menu/menuitem.jsx.js end */
+
+
+xblocks.create('xb-menuitem', [
+    {
+        prototype: Object.create(HTMLElement.prototype)
+    }
+]);
+
+/* blocks/menu/menuitem.js end */
+
+    /* blocks/menu/menu.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+/* blocks/menu/menu.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, global, React */
+/* jshint strict: false */
 
 var XBMenu = xblocks.view.register('xb-menu', [
     xblocks.mixin.vCommonAttrs,
@@ -1773,27 +1815,14 @@ var XBMenu = xblocks.view.register('xb-menu', [
         },
 
         render: function() {
-            var children = [];
-
-            if (this.props.children) {
-                children.push(
-                    React.DOM.div( {className:"_content",
-                        key:"content",
-                        'data-xb-content':this.props._uid,
-                        dangerouslySetInnerHTML:{__html: this.props.children}} )
-                );
-            }
-
-
-
             var classes = {
                 '_popup': true
             };
 
+            classes = React.addons.classSet(classes);
+
+            /*
             var props = {
-                'className': React.addons.classSet(classes)
-                /*
-                'tabIndex': '0',
                 'onMouseOver': function(event) {
                     console.log('onMouseOver', event.target);
                 },
@@ -1812,10 +1841,14 @@ var XBMenu = xblocks.view.register('xb-menu', [
                 'onBlur': function(event) {
                     console.log('onBlur', event.target);
                 }
-                */
             };
+            */
 
-            return React.DOM.div(props, children);
+            return (
+                React.DOM.div( {className:classes,
+                    'data-xb-content':this.props._uid,
+                    dangerouslySetInnerHTML:{__html: this.props.children}} )
+            );
         }
     }
 ]);
@@ -1823,17 +1856,23 @@ var XBMenu = xblocks.view.register('xb-menu', [
 /* blocks/menu/menu.jsx.js end */
 
 
-xblocks.create('xb-menuitem', [
+xblocks.create('xb-menu', [
     {
-        prototype: Object.create(HTMLElement.prototype)
+        prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
+
+        events: {
+            'close-before': function() {
+                Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
+            }
+        }
     }
 ]);
 
-xblocks.create('xb-menu', [
-    {
-        prototype: Object.create(XBPopupElement.prototype || new XBPopupElement())
+function _blocksMenuInnerClose(target) {
+    if (target.xbPopup) {
+        target.xbPopup.close();
     }
-]);
+}
 
 /* blocks/menu/menu.js end */
 

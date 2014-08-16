@@ -3,14 +3,20 @@
 
 /*! borschik:include:menu.jsx.js */
 
-xblocks.create('xb-menuitem', [
+xblocks.create('xb-menu', [
     {
-        prototype: Object.create(HTMLElement.prototype)
+        prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
+
+        events: {
+            'close-before': function() {
+                Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
+            }
+        }
     }
 ]);
 
-xblocks.create('xb-menu', [
-    {
-        prototype: Object.create(XBPopupElement.prototype || new XBPopupElement())
+function _blocksMenuInnerClose(target) {
+    if (target.xbPopup) {
+        target.xbPopup.close();
     }
-]);
+}
