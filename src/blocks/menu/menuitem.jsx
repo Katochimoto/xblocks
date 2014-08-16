@@ -2,19 +2,15 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBMenuseparator = xblocks.view.register('xb-menuseparator', [
-    xblocks.mixin.vCommonAttrs,
+var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
+    displayName: 'xb-menuseparator',
 
-    {
-        displayName: 'xb-menuseparator',
-
-        render: function() {
-            return (
-                <div className="xb-menuseparator" />
-            );
-        }
+    render: function() {
+        return (
+            <div className="xb-menuseparator" />
+        );
     }
-]);
+});
 
 var XBMenuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,

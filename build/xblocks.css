@@ -3007,11 +3007,16 @@ xb-menu > ._popup {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
   overflow: hidden;
   padding: 0;
+  outline: none;
 }
 xb-menu > ._popup:before,
 xb-menu > ._popup:after {
   margin: 0;
   display: none;
+}
+xb-menu > ._popup:focus {
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
 }
 .xb-menuitem {
   position: relative;

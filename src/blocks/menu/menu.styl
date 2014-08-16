@@ -8,8 +8,12 @@ xb-menu
     skin: popup
     overflow: hidden
     padding: 0
+    outline: none
 
     &:before,
     &:after
       margin: 0
       display: none
+
+    &:focus
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7)

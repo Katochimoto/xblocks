@@ -1722,19 +1722,15 @@ var XBPopupElement = xblocks.create('xb-popup', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBMenuseparator = xblocks.view.register('xb-menuseparator', [
-    xblocks.mixin.vCommonAttrs,
+var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
+    displayName: 'xb-menuseparator',
 
-    {
-        displayName: 'xb-menuseparator',
-
-        render: function() {
-            return (
-                React.DOM.div( {className:"xb-menuseparator"} )
-            );
-        }
+    render: function() {
+        return (
+            React.DOM.div( {className:"xb-menuseparator"} )
+        );
     }
-]);
+});
 
 var XBMenuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,
@@ -1941,13 +1937,39 @@ xblocks.create('xb-menu', [
 
             'blur': function() {
                 //this.close();
+
+                if (this._selectedItem) {
+                    this._selectedItem.selected = false;
+                    this._selectedItem = null;
+                }
             },
 
             // ArrowDown
             'keydown:keypass(40)': function() {
-                var nextItem = this.querySelector('xb-menuitem[selected] + xb-menuitem:not([disabled])');
+                var nextItem;
+
+                if (this._selectedItem) {
+                    nextItem = this._selectedItem.nextElementSibling;
+
+                    while (nextItem) {
+                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
+                            break;
+                        }
+
+                        nextItem = nextItem.nextElementSibling;
+                    }
+                }
+
                 if (!nextItem) {
-                    nextItem = this.querySelector('xb-menuitem:not([disabled])');
+                    nextItem = this.querySelector('xb-menuitem');
+                }
+
+                while (nextItem) {
+                    if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
+                        break;
+                    }
+
+                    nextItem = nextItem.nextElementSibling;
                 }
 
                 if (this._selectedItem) {
@@ -1965,7 +1987,54 @@ xblocks.create('xb-menu', [
 
             // ArrowUp
             'keydown:keypass(38)': function() {
+                var nextItem;
 
+                if (this._selectedItem) {
+                    nextItem = this._selectedItem.previousElementSibling;
+
+                    while (nextItem) {
+                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
+                            break;
+                        }
+
+                        nextItem = nextItem.previousElementSibling;
+                    }
+
+                    if (!nextItem) {
+                        nextItem = this._selectedItem.parentNode.lastChild;
+                    }
+
+                    while (nextItem) {
+                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
+                            break;
+                        }
+
+                        nextItem = nextItem.previousElementSibling;
+                    }
+
+                } else {
+                    nextItem = this.querySelector('xb-menuitem');
+
+                    while (nextItem) {
+                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
+                            break;
+                        }
+
+                        nextItem = nextItem.nextElementSibling;
+                    }
+                }
+
+                if (this._selectedItem) {
+                    if (nextItem && this._selectedItem !== nextItem) {
+                        this._selectedItem.selected = false;
+                        this._selectedItem = null;
+                    }
+                }
+
+                if (nextItem) {
+                    nextItem.selected = true;
+                    this._selectedItem = nextItem;
+                }
             },
 
             // ArrowRight
@@ -2018,6 +2087,23 @@ xblocks.create('xb-menu', [
             },
 
             'mousemove:delegate(xb-menuitem)': function(event) {
+                if (this.disabled) {
+                    return;
+                }
+
+                var menuNode = this.parentNode.parentNode;
+
+                if (!menuNode._selectedItem || menuNode._selectedItem !== this) {
+                    if (menuNode._selectedItem) {
+                        menuNode._selectedItem.selected = false;
+                    }
+
+                    menuNode._selectedItem = this;
+                    this.selected = true;
+                }
+            },
+
+            'click:delegate(xb-menuitem)': function(event) {
                 if (this.disabled) {
                     return;
                 }
