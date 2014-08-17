@@ -16,82 +16,110 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
-    xblocks.utils.exportPropTypes = function(tagName) {
-        var props = xblocks.utils.propTypes(tagName);
-        var exportProps = {};
-        var prefix = tagName + '-';
+    /* utils/filterPropsPrefixLink.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
 
-        for (var p in props) {
-            if (props.hasOwnProperty(p) && p[0] !== '_') {
-                exportProps[prefix + p] = props[p];
+xblocks.utils.filterPropsPrefixLink = function(name) {
+    return xblocks.utils.REG_PROPS_PREFIX_LINK.test(name);
+};
+
+/* utils/filterPropsPrefixLink.js end */
+
+    /* utils/mapPropsPrefixLink.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.utils.mapPropsPrefixLink = function(name, descr) {
+    return {
+        'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_LINK, ''),
+        'descr': descr
+    };
+};
+
+/* utils/mapPropsPrefixLink.js end */
+
+    /* utils/filterPropsPrefixIco.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.utils.filterPropsPrefixIco = function(name) {
+    return xblocks.utils.REG_PROPS_PREFIX_ICO.test(name);
+};
+
+/* utils/filterPropsPrefixIco.js end */
+
+    /* utils/mapPropsPrefixIco.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.utils.mapPropsPrefixIco = function(name, descr) {
+    return {
+        'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_ICO, ''),
+        'descr': descr
+    };
+};
+
+/* utils/mapPropsPrefixIco.js end */
+
+    /* utils/exportPropTypes.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+xblocks.utils.exportPropTypes = function(tagName) {
+    var props = xblocks.utils.propTypes(tagName);
+    var exportProps = {};
+    var prefix = tagName + '-';
+
+    for (var p in props) {
+        if (props.hasOwnProperty(p) && p[0] !== '_') {
+            exportProps[prefix + p] = props[p];
+        }
+    }
+
+    return {
+        'propTypes': exportProps
+    };
+};
+
+/* utils/exportPropTypes.js end */
+
+    /* utils/resetLastRadioChecked.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+(function() {
+    var checkedCache = {};
+
+    /**
+     * FIXME don't work cloneNode
+     * @props {object} element
+     * @props {string} element._rootNodeID
+     * @props {string} name
+     */
+    xblocks.utils.resetLastRadioChecked = function(element, name) {
+        if (!element._rootNodeID) {
+            return;
+        }
+
+        name = String(name);
+        var lastCheckedRootNodeId = checkedCache[name];
+
+        if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
+            var rootNode = React.__internals.Mount.findReactContainerForID(lastCheckedRootNodeId);
+
+            if (rootNode) {
+                rootNode.checked = false;
             }
         }
 
-        return {
-            'propTypes': exportProps
-        };
+        checkedCache[name] = element._rootNodeID;
     };
 
-    xblocks.utils.filterPropsPrefixLink = function(name) {
-        return xblocks.utils.REG_PROPS_PREFIX_LINK.test(name);
-    };
+}());
 
-    xblocks.utils.mapPropsPrefixLink = function(name, descr) {
-        return {
-            'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_LINK, ''),
-            'descr': descr
-        };
-    };
+/* utils/resetLastRadioChecked.js end */
 
-    xblocks.utils.filterPropsPrefixIco = function(name) {
-        return xblocks.utils.REG_PROPS_PREFIX_ICO.test(name);
-    };
-
-    xblocks.utils.mapPropsPrefixIco = function(name, descr) {
-        return {
-            'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_ICO, ''),
-            'descr': descr
-        };
-    };
-
-    xblocks.utils.compact = function(data) {
-        for (var prop in data) {
-            if (data.hasOwnProperty(prop)) {
-                if (!data[prop]) {
-                    delete data[prop];
-                }
-            }
-        }
-
-        return data;
-    };
-
-    xblocks.utils.toAttrsName = function(name) {
-        switch (name) {
-            case 'class':
-                return 'className';
-            case 'tabindex':
-                return 'tabIndex';
-            case 'autofocus':
-                return 'autoFocus';
-            case 'checked':
-                return 'defaultChecked';
-            case 'readonly':
-                return 'readOnly';
-            case 'for':
-                return 'htmlFor';
-            default:
-                return name;
-        }
-    };
-
-    xblocks.utils.normalizeAttrsName = function(data) {
-        var attrs = {};
-        Object.keys(data).forEach(function(key) {
-            attrs[xblocks.utils.toAttrsName(key)] = data[key];
-        });
-        return attrs;
-    };
 
     /**
      * @memberOf xblocks
@@ -692,6 +720,18 @@ var XBButton = xblocks.view.register('xb-button', [
             this.setState({
                 'checked': nextProps.checked
             });
+        },
+
+        componentWillUpdate: function(nextProps, nextState) {
+            if (nextProps.type === 'radio' && nextState.checked) {
+                xblocks.utils.resetLastRadioChecked(this, nextProps.name);
+            }
+        },
+
+        componentWillMount: function() {
+            if (this.props.type === 'radio' && this.state.checked) {
+                xblocks.utils.resetLastRadioChecked(this, this.props.name);
+            }
         },
 
         _onChange: function(event) {
@@ -1432,6 +1472,18 @@ var XBradio = xblocks.view.register('xb-radio', [ {
         });
     },
 
+    componentWillUpdate: function(nextProps, nextState) {
+        if (nextState.checked) {
+            xblocks.utils.resetLastRadioChecked(this, nextProps.name);
+        }
+    },
+
+    componentWillMount: function() {
+        if (this.state.checked) {
+            xblocks.utils.resetLastRadioChecked(this, this.props.name);
+        }
+    },
+
     _onChange: function(event) {
         this.setState({
             'checked': event.target.checked
@@ -1961,7 +2013,7 @@ xblocks.create('xb-menu', [
                 }
 
                 if (!nextItem) {
-                    nextItem = this.querySelector('xb-menuitem');
+                    nextItem = this.firstChild.firstChild;
                 }
 
                 while (nextItem) {
@@ -2013,7 +2065,7 @@ xblocks.create('xb-menu', [
                     }
 
                 } else {
-                    nextItem = this.querySelector('xb-menuitem');
+                    nextItem = this.firstChild.firstChild;
 
                     while (nextItem) {
                         if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {

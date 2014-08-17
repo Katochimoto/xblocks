@@ -50,7 +50,7 @@ xblocks.create('xb-menu', [
                 }
 
                 if (!nextItem) {
-                    nextItem = this.querySelector('xb-menuitem');
+                    nextItem = this.firstChild.firstChild;
                 }
 
                 while (nextItem) {
@@ -102,7 +102,7 @@ xblocks.create('xb-menu', [
                     }
 
                 } else {
-                    nextItem = this.querySelector('xb-menuitem');
+                    nextItem = this.firstChild.firstChild;
 
                     while (nextItem) {
                         if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {

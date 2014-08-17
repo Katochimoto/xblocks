@@ -86,6 +86,18 @@ var XBButton = xblocks.view.register('xb-button', [
             });
         },
 
+        componentWillUpdate: function(nextProps, nextState) {
+            if (nextProps.type === 'radio' && nextState.checked) {
+                xblocks.utils.resetLastRadioChecked(this, nextProps.name);
+            }
+        },
+
+        componentWillMount: function() {
+            if (this.props.type === 'radio' && this.state.checked) {
+                xblocks.utils.resetLastRadioChecked(this, this.props.name);
+            }
+        },
+
         _onChange: function(event) {
             this.setState({
                 'checked': event.target.checked
