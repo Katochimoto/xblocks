@@ -21,6 +21,8 @@ xblocks.create('xb-menu', [
 
             // Escape
             'keydown:keypass(27)': function() {
+                // TODO при закрытии вложенного окна фокус должен переходить на предка
+
                 this.close();
             },
 
@@ -207,6 +209,8 @@ xblocks.create('xb-menu', [
                     menuNode._selectedItem = this;
                     this.selected = true;
                 }
+
+                this.opened = !this.opened;
             }
         }
     }

@@ -3,12 +3,6 @@
 
 /*! borschik:include:menuitem.jsx.js */
 
-xblocks.create('xb-menuseparator', [
-    {
-        prototype: Object.create(HTMLElement.prototype)
-    }
-]);
-
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
 
@@ -17,6 +11,12 @@ xblocks.create('xb-menuitem', [
 
         accessors: {
             selected: {
+                attribute: {
+                    boolean: true
+                }
+            },
+
+            opened: {
                 attribute: {
                     boolean: true
                 }

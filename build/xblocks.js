@@ -1765,11 +1765,11 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
 /* blocks/popup/popup.js end */
 
-    /* blocks/menu/menuitem.js begin */
+    /* blocks/menu/menuseparator.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
-/* blocks/menu/menuitem.jsx.js begin */
+/* blocks/menu/menuseparator.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, global, React */
 /* jshint strict: false */
@@ -1784,6 +1784,26 @@ var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
     }
 });
 
+/* blocks/menu/menuseparator.jsx.js end */
+
+
+xblocks.create('xb-menuseparator', [
+    {
+        prototype: Object.create(HTMLElement.prototype)
+    }
+]);
+
+/* blocks/menu/menuseparator.js end */
+
+    /* blocks/menu/menuitem.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+/* blocks/menu/menuitem.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, global, React */
+/* jshint strict: false */
+
 var XBMenuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,
 
@@ -1795,7 +1815,8 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
         propTypes: {
             'label': React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
-            'selected': React.PropTypes.bool
+            'selected': React.PropTypes.bool,
+            'opened': React.PropTypes.bool
         },
 
         statics: {
@@ -1805,18 +1826,57 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
         getDefaultProps: function() {
             return {
                 'disabled': false,
-                'selected': false
+                'selected': false,
+                'opened': false
             };
         },
 
         getInitialState: function() {
             return {
-                'selected': this.props.selected
+                'selected': this.props.selected,
+                'opened': this.props.opened
             };
         },
 
         componentWillReceiveProps: function(nextProps) {
-            this.setState({ 'selected': nextProps.selected });
+            this.setState({
+                'selected': nextProps.selected,
+                'opened': nextProps.opened
+            });
+        },
+
+        componentDidUpdate: function(prevProps, prevState) {
+            // TODO открыть и закрыть вложенное окно мож только если menuitem сам находится в открытом окне
+
+            var innerMenuNode;
+            if (!prevState.opened && this.state.opened) {
+                innerMenuNode = this._getInnerMenu();
+                if (innerMenuNode) {
+                    innerMenuNode.open();
+                }
+
+            } else if (prevState.opened && !this.state.opened) {
+                innerMenuNode = this._getInnerMenu();
+                if (innerMenuNode) {
+                    innerMenuNode.close();
+                }
+            }
+        },
+
+        componentWillUnmount: function() {
+            var innerMenuNode = this._getInnerMenu();
+            if (innerMenuNode && innerMenuNode.parentNode) {
+                innerMenuNode.parentNode.removeChild(innerMenuNode);
+            }
+        },
+
+        _getInnerMenuTargetClass: function() {
+            return '_menuitem-target-' + this.props._uid;
+        },
+
+        _getInnerMenu: function() {
+            var targetClass = this._getInnerMenuTargetClass();
+            return global.document.querySelector('xb-menu[target=".' + targetClass + '"]');
         },
 
         /*
@@ -1839,7 +1899,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             var children = '';
 
             if (this.props.children) {
-                var targetClass = '_menuitem-target-' + this.props._uid;
+                var targetClass = this._getInnerMenuTargetClass();
                 var constraints = encodeURIComponent(JSON.stringify([{
                     to: 'scrollParent',
                     attachment: 'together'
@@ -1872,12 +1932,6 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 /* blocks/menu/menuitem.jsx.js end */
 
 
-xblocks.create('xb-menuseparator', [
-    {
-        prototype: Object.create(HTMLElement.prototype)
-    }
-]);
-
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
 
@@ -1886,6 +1940,12 @@ xblocks.create('xb-menuitem', [
 
         accessors: {
             selected: {
+                attribute: {
+                    boolean: true
+                }
+            },
+
+            opened: {
                 attribute: {
                     boolean: true
                 }
@@ -2170,6 +2230,8 @@ xblocks.create('xb-menu', [
                     menuNode._selectedItem = this;
                     this.selected = true;
                 }
+
+                this.opened = !this.opened;
             }
         }
     }
