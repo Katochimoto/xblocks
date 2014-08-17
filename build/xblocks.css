@@ -40,7 +40,7 @@ xb-popup > ._popup > ._close,
 .xb-ico._type-dropdown,
 ._xb-checkbox_flag,
 ._xb-radio_flag,
-.xb-menuitem._group:before,
+.xb-menuitem._submenu:before,
 .xb-select > .xb-button > ._content:before {
   position: relative;
   display: inline-block;
@@ -3049,7 +3049,7 @@ xb-menu > ._popup:focus {
 .xb-menuitem._selected {
   background: rgba(255,193,0,0.37);
 }
-.xb-menuitem._group:before {
+.xb-menuitem._submenu:before {
   border-bottom: 2px solid;
   border-right: 2px solid;
   margin-top: -0.33em;
@@ -3067,7 +3067,7 @@ xb-menu > ._popup:focus {
   -ms-transform: scale(0.75) rotate(-45deg) translate(3px, 5px);
   transform: scale(0.75) rotate(-45deg) translate(3px, 5px);
 }
-.xb-menuitem._group:before {
+.xb-menuitem._submenu:before {
   width: 6px;
   height: 6px;
 }

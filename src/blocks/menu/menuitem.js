@@ -16,9 +16,16 @@ xblocks.create('xb-menuitem', [
                 }
             },
 
+            // FIXME delete this
             opened: {
                 attribute: {
                     boolean: true
+                }
+            },
+
+            submenu: {
+                get: function() {
+                    
                 }
             }
         }
