@@ -10,21 +10,8 @@ xblocks.create('xb-menuitem', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': function() {
-                if (this._submenu) {
-                    this._submenu.close();
-                    this._submenu.parentNode.removeChild(this._submenu);
-                    this._submenu = undefined;
-                }
-            },
-
-            'xb-repaint': function() {
-                if (this._submenu) {
-                    this._submenu.close();
-                    this._submenu.parentNode.removeChild(this._submenu);
-                    this._submenu = undefined;
-                }
-            }
+            'xb-created': _blocksMenuitemSubmenuReset,
+            'xb-repaint': _blocksMenuitemSubmenuReset
         },
 
         accessors: {
@@ -62,3 +49,11 @@ xblocks.create('xb-menuitem', [
         }
     }
 ]);
+
+function _blocksMenuitemSubmenuReset() {
+    if (this._submenu) {
+        this._submenu.close();
+        this._submenu.parentNode.removeChild(this._submenu);
+        this._submenu = undefined;
+    }
+}
