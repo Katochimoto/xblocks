@@ -12,6 +12,7 @@ HTML custom elements
 - [xb-input](tutorial-xb-input.html)
 - [xb-checkbox](tutorial-xb-checkbox.html)
 - [xb-radio](tutorial-xb-radio.html)
+- [xb-select](tutorial-xb-select.html)
 
 ##Dependencies
 

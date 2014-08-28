@@ -25,8 +25,8 @@
     },
     "templates": {
         "applicationName": "xblocks",
-        "cleverLinks": true,
-        "disqus": true,
+        "cleverLinks": false,
+        "disqus": false,
         "googleAnalytics": false,
         "meta": {
             "title": "",
@@ -37,6 +37,7 @@
         "openGraph": false,
         "scripts": [
             "bower_components/es5-shim/es5-shim.js",
+            "bower_components/tether/tether.js",
             "bower_components/react/react-with-addons.js",
             "bower_components/x-tag-core/dist/x-tag-core.js",
             "bower_components/xblocks-core/xblocks-core.js",
