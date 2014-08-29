@@ -1,0 +1,36 @@
+{
+    "name": "xblocks",
+    "version": "0.2.4",
+    "dependencies": {
+        "x-tag-core": "0.9.7",
+        "es5-shim": "3.4.0",
+        "react": "0.10.0",
+        "xblocks-core": "*"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "src",
+        "package.json",
+        "Gruntfile.js",
+        "karma.conf.js"
+    ],
+    "homepage": "https://github.com/Katochimoto/xblocks",
+    "authors": [
+        "rikishi <bufpost@yandex.ru>"
+    ],
+    "description": "HTML custom elements",
+    "moduleType": [
+        "globals"
+    ],
+    "keywords": [
+        "x-tag",
+        "x-tags",
+        "react",
+        "html5",
+        "xblocks"
+    ],
+    "license": "MIT"
+}
