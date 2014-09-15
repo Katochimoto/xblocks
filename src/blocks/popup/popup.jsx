@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React */
 /* jshint strict: false */
 
+/* jshint -W098 */
 var XBPopup = xblocks.view.register('xb-popup', [
     xblocks.mixin.vCommonAttrs,
 
@@ -24,10 +25,13 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         render: function() {
             var children = [
-                <div className="_content"
-                    key="content"
-                    data-xb-content={this.props._uid}
-                    dangerouslySetInnerHTML={{__html: this.props.children}} />
+                React.DOM.div({
+                    'className': '_content',
+                    'data-xb-content': this.props._uid,
+                    'dangerouslySetInnerHTML': {
+                        '__html': this.props.children
+                    }
+                })
             ];
 
             children.unshift(this.template('xb-popup-title', {
@@ -37,7 +41,10 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    <a key="close" className="_close"></a>
+                    React.DOM.a({
+                        'key': 'close',
+                        'className': '_close'
+                    })
                 );
             }
 

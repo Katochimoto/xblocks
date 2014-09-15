@@ -1,8 +1,9 @@
-/* global xblocks */
+/* global xblocks, Tether */
 /* jshint strict: false */
 
 /*! borschik:include:popup.jsx.js */
 
+/* jshint -W098 */
 var XBPopupElement = xblocks.create('xb-popup', [
     {
         prototype: Object.create(HTMLElement.prototype),

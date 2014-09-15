@@ -1,4 +1,4 @@
-/* global xblocks */
+/* global xblocks, XBPopupElement */
 /* jshint strict: false */
 
 /*! borschik:include:menu.jsx.js */

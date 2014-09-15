@@ -1561,14 +1561,15 @@ xblocks.create('xb-radio', [
 /* blocks/radio/radio.js end */
 
     /* blocks/popup/popup.js begin */
-/* global xblocks */
+/* global xblocks, Tether */
 /* jshint strict: false */
 
 /* blocks/popup/popup.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React */
 /* jshint strict: false */
 
+/* jshint -W098 */
 var XBPopup = xblocks.view.register('xb-popup', [
     xblocks.mixin.vCommonAttrs,
 
@@ -1591,10 +1592,13 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         render: function() {
             var children = [
-                React.DOM.div( {className:"_content",
-                    key:"content",
-                    'data-xb-content':this.props._uid,
-                    dangerouslySetInnerHTML:{__html: this.props.children}} )
+                React.DOM.div({
+                    'className': '_content',
+                    'data-xb-content': this.props._uid,
+                    'dangerouslySetInnerHTML': {
+                        '__html': this.props.children
+                    }
+                })
             ];
 
             children.unshift(this.template('xb-popup-title', {
@@ -1604,7 +1608,10 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    React.DOM.a( {key:"close", className:"_close"})
+                    React.DOM.a({
+                        'key': 'close',
+                        'className': '_close'
+                    })
                 );
             }
 
@@ -1633,6 +1640,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
 /* blocks/popup/popup.jsx.js end */
 
 
+/* jshint -W098 */
 var XBPopupElement = xblocks.create('xb-popup', [
     {
         prototype: Object.create(HTMLElement.prototype),
@@ -1796,7 +1804,7 @@ xblocks.create('xb-menuseparator', [
 /* blocks/menu/menuseparator.js end */
 
     /* blocks/menu/menuitem.js begin */
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /* blocks/menu/menuitem.jsx.js begin */
@@ -1937,7 +1945,7 @@ function _blocksMenuitemSubmenuReset() {
 /* blocks/menu/menuitem.js end */
 
     /* blocks/menu/menu.js begin */
-/* global xblocks */
+/* global xblocks, XBPopupElement */
 /* jshint strict: false */
 
 /* blocks/menu/menu.jsx.js begin */
