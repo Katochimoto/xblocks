@@ -17,7 +17,7 @@
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
     /* utils/filterPropsPrefixLink.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 xblocks.utils.filterPropsPrefixLink = function(name) {
@@ -27,7 +27,7 @@ xblocks.utils.filterPropsPrefixLink = function(name) {
 /* utils/filterPropsPrefixLink.js end */
 
     /* utils/mapPropsPrefixLink.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 xblocks.utils.mapPropsPrefixLink = function(name, descr) {
@@ -50,7 +50,7 @@ xblocks.utils.filterPropsPrefixIco = function(name) {
 /* utils/filterPropsPrefixIco.js end */
 
     /* utils/mapPropsPrefixIco.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 xblocks.utils.mapPropsPrefixIco = function(name, descr) {
@@ -63,7 +63,7 @@ xblocks.utils.mapPropsPrefixIco = function(name, descr) {
 /* utils/mapPropsPrefixIco.js end */
 
     /* utils/exportPropTypes.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 xblocks.utils.exportPropTypes = function(tagName) {
@@ -85,7 +85,7 @@ xblocks.utils.exportPropTypes = function(tagName) {
 /* utils/exportPropTypes.js end */
 
     /* utils/resetLastRadioChecked.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 (function() {
@@ -106,7 +106,7 @@ xblocks.utils.exportPropTypes = function(tagName) {
         var lastCheckedRootNodeId = checkedCache[name];
 
         if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
-            var rootNode = React.__internals.Mount.findReactContainerForID(lastCheckedRootNodeId);
+            var rootNode = xblocks.utils.findReactContainerForID(lastCheckedRootNodeId);
 
             if (rootNode) {
                 rootNode.checked = false;
@@ -128,7 +128,7 @@ xblocks.utils.exportPropTypes = function(tagName) {
     xblocks.mixin = {};
 
     /* mixin/eDisabled.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -176,7 +176,7 @@ xblocks.mixin.eDisabled = {
 /* mixin/eDisabled.js end */
 
     /* mixin/eChecked.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -280,7 +280,7 @@ xblocks.mixin.eInputValueProps = {
             },
 
             get: function() {
-                return '' + (this.getAttribute('value') || this.defaultValue || '');
+                return String(this.getAttribute('value') || this.defaultValue || '');
             }
         },
 
@@ -295,7 +295,7 @@ xblocks.mixin.eInputValueProps = {
 /* mixin/eInputValueProps.js end */
 
     /* mixin/eFocus.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -1886,8 +1886,26 @@ xblocks.create('xb-menuitem', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
+<<<<<<< HEAD
             'xb-created': _blocksMenuitemSubmenuReset,
             'xb-repaint': _blocksMenuitemSubmenuReset
+=======
+            'xb-created': function() {
+                if (this._submenu) {
+                    this._submenu.close();
+                    this._submenu.parentNode.removeChild(this._submenu);
+                    this._submenu = undefined;
+                }
+            },
+
+            'xb-repaint': function() {
+                if (this._submenu) {
+                    this._submenu.close();
+                    this._submenu.parentNode.removeChild(this._submenu);
+                    this._submenu = undefined;
+                }
+            }
+>>>>>>> findReactContainerForID
         },
 
         accessors: {

@@ -9,7 +9,7 @@ xblocks.mixin.eInputValueProps = {
             },
 
             get: function() {
-                return '' + (this.getAttribute('value') || this.defaultValue || '');
+                return String(this.getAttribute('value') || this.defaultValue || '');
             }
         },
 
