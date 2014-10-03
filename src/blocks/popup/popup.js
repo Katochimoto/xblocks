@@ -72,11 +72,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
             tether: {
                 get: function() {
-                    if (this._tether) {
-                        return this._tether;
+                    if (!this._tether) {
+                        this._tether = new Tether(this.options);
                     }
 
-                    this._tether = new Tether(this.options);
                     return this._tether;
                 }
             }

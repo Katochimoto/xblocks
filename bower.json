@@ -2,9 +2,8 @@
     "name": "xblocks",
     "version": "0.2.4",
     "dependencies": {
-        "x-tag-core": "0.9.7",
-        "es5-shim": "3.4.0",
-        "react": "0.11.1",
+        "es5-shim": "4.0.3",
+        "react": "0.11.2",
         "tether": "0.6.5",
         "xblocks-core": "*"
     },

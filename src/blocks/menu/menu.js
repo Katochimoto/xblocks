@@ -11,10 +11,13 @@ xblocks.create('xb-menu', [
 
         events: {
             'open-after': function() {
+                this._xbFocus = new xblocks.utils.focus.Table(this, { 'rowLoop': true });
                 this.focus();
             },
 
             'close-before': function() {
+                this._xbFocus.destroy();
+                this._xbFocus = null;
                 Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
                 this._selectedItem = null;
             },
@@ -33,109 +36,6 @@ xblocks.create('xb-menu', [
                     this._selectedItem.selected = false;
                     this._selectedItem = null;
                 }
-            },
-
-            // ArrowDown
-            'keydown:keypass(40)': function() {
-                var nextItem;
-
-                if (this._selectedItem) {
-                    nextItem = this._selectedItem.nextElementSibling;
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.nextElementSibling;
-                    }
-                }
-
-                if (!nextItem) {
-                    nextItem = this.firstChild.firstChild;
-                }
-
-                while (nextItem) {
-                    if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                        break;
-                    }
-
-                    nextItem = nextItem.nextElementSibling;
-                }
-
-                if (this._selectedItem) {
-                    if (nextItem && this._selectedItem !== nextItem) {
-                        this._selectedItem.selected = false;
-                        this._selectedItem = null;
-                    }
-                }
-
-                if (nextItem) {
-                    nextItem.selected = true;
-                    this._selectedItem = nextItem;
-                }
-            },
-
-            // ArrowUp
-            'keydown:keypass(38)': function() {
-                var nextItem;
-
-                if (this._selectedItem) {
-                    nextItem = this._selectedItem.previousElementSibling;
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.previousElementSibling;
-                    }
-
-                    if (!nextItem) {
-                        nextItem = this._selectedItem.parentNode.lastChild;
-                    }
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.previousElementSibling;
-                    }
-
-                } else {
-                    nextItem = this.firstChild.firstChild;
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.nextElementSibling;
-                    }
-                }
-
-                if (this._selectedItem) {
-                    if (nextItem && this._selectedItem !== nextItem) {
-                        this._selectedItem.selected = false;
-                        this._selectedItem = null;
-                    }
-                }
-
-                if (nextItem) {
-                    nextItem.selected = true;
-                    this._selectedItem = nextItem;
-                }
-            },
-
-            // ArrowRight
-            'keydown:keypass(39)': function() {
-
-            },
-
-            // ArrowLeft
-            'keydown:keypass(37)': function() {
-
             },
 
             'mouseover:delegate(xb-menuitem)': function(event) {
@@ -177,7 +77,7 @@ xblocks.create('xb-menu', [
                 });
             },
 
-            'mousemove:delegate(xb-menuitem)': function(event) {
+            'mousemove:delegate(xb-menuitem)': function() {
                 if (this.disabled) {
                     return;
                 }
@@ -194,7 +94,7 @@ xblocks.create('xb-menu', [
                 }
             },
 
-            'click:delegate(xb-menuitem)': function(event) {
+            'click:delegate(xb-menuitem)': function() {
                 if (this.disabled) {
                     return;
                 }

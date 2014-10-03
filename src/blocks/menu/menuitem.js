@@ -11,7 +11,13 @@ xblocks.create('xb-menuitem', [
 
         events: {
             'xb-created': _blocksMenuitemSubmenuReset,
-            'xb-repaint': _blocksMenuitemSubmenuReset
+            'xb-repaint': _blocksMenuitemSubmenuReset,
+            'xb-blur': function() {
+                this.selected = false;
+            },
+            'xb-focus': function() {
+                this.selected = true;
+            }
         },
 
         accessors: {

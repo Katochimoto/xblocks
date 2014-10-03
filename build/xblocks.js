@@ -1,3 +1,5 @@
+/* jshint -W067 */
+/* jshint unused: false */
 (function(global, undefined) {
     'use strict';
 
@@ -15,6 +17,199 @@
 
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
+
+    /* dom/matchesSelector.js begin */
+xblocks.dom.matchesSelector = (function() {
+    var ElementPrototype = Element.prototype;
+    var matches = ElementPrototype.matches ||
+        ElementPrototype.matchesSelector ||
+        ElementPrototype.webkitMatchesSelector ||
+        ElementPrototype.mozMatchesSelector ||
+        ElementPrototype.msMatchesSelector ||
+        ElementPrototype.oMatchesSelector ||
+        function(selector) {
+            var nodes = (this.parentNode || this.document).querySelectorAll(selector);
+            var i = -1;
+    	    while (nodes[++i] && nodes[i] !== this) {
+                continue;
+            }
+            /* jshint: -W035 */
+    	    return Boolean(nodes[i]);
+        };
+
+    return function(element, selector) {
+        return (element.nodeType === 1 ? matches.call(element, selector) : false);
+    };
+
+}());
+
+/* dom/matchesSelector.js end */
+
+    /* dom/eachInnerFollowing.js begin */
+/**
+ * Проход по всем потомкам в прямом порядке (от певой до последней)
+ */
+xblocks.dom.eachInnerFollowing = function(node, callback) {
+    var stack = [ node ];
+    var item;
+    var cbcall;
+    var childsLength;
+
+    while ((item = stack.pop())) {
+        cbcall = callback && callback(item, stack);
+
+        if (typeof(cbcall) !== 'undefined' && !cbcall) {
+            return false;
+
+        } else if (cbcall === 'next') {
+            continue;
+        }
+
+        if (item.nodeType !== 1) {
+            continue;
+        }
+
+        if (!item.hasChildNodes()) {
+            continue;
+        }
+
+        childsLength = item.childNodes.length;
+
+        while (childsLength--) {
+            stack.push(item.childNodes[childsLength]);
+        }
+    }
+
+    return true;
+};
+
+/* dom/eachInnerFollowing.js end */
+
+    /* dom/eachInnerPrevious.js begin */
+/**
+ * Проход по всем потомкам в обратном порядке (от последней до первой)
+ */
+xblocks.dom.eachInnerPrevious = function(node, callback) {
+    var stack = [ node ];
+    var item;
+    var cbcall;
+    var i;
+    var childsLength;
+
+    while ((item = stack.pop())) {
+        cbcall = callback && callback(item, stack);
+
+        if (typeof(cbcall) !== 'undefined' && !cbcall) {
+            return false;
+
+        } else if (cbcall === 'next') {
+            continue;
+        }
+
+        if (item.nodeType !== 1) {
+            continue;
+        }
+
+        if (!item.hasChildNodes()) {
+            continue;
+        }
+
+        childsLength = item.childNodes.length;
+        i = 0;
+
+        for (; i < childsLength; i++) {
+            stack.push(item.childNodes[i]);
+        }
+    }
+
+    return true;
+};
+
+/* dom/eachInnerPrevious.js end */
+
+    /* dom/isParent.js begin */
+/* global global */
+xblocks.dom.isParent = (function() {
+    var root = global.document.documentElement;
+
+    if ('compareDocumentPosition' in root) {
+        return function(container, element) {
+            /*jshint -W016 */
+            return (container.compareDocumentPosition(element) & 16) == 16;
+        };
+
+    } else if ('contains' in root) {
+        return function(container, element) {
+            return container !== element && container.contains(element);
+        };
+
+    } else {
+        return function(container, element) {
+            while ((element = element.parentNode)) {
+                if (element === container) {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+    }
+}());
+
+/* dom/isParent.js end */
+
+    /* dom/eachBefore.js begin */
+xblocks.dom.eachBefore = function(node, callback, context, inner) {
+    inner = (typeof(inner) === 'undefined' ? true : Boolean(inner));
+    var prev;
+    var cbcall;
+
+    do {
+        if (context && !xblocks.dom.isParent(context, node)) {
+            return;
+        }
+
+        prev = node;
+
+        while ((prev = prev.previousSibling)) {
+            cbcall = inner ? xblocks.dom.eachInnerPrevious(prev, callback) : (callback && callback(prev));
+
+            if (typeof(cbcall) !== 'undefined' && !cbcall) {
+                return false;
+            }
+        }
+
+    } while ((node = node.parentNode));
+};
+
+/* dom/eachBefore.js end */
+
+    /* dom/eachAfter.js begin */
+xblocks.dom.eachAfter = function(node, callback, context, inner) {
+    inner = (typeof(inner) === 'undefined' ? true : Boolean(inner));
+    var next;
+    var cbcall;
+
+    do {
+        if (context && !xblocks.dom.isParent(context, node)) {
+            return;
+        }
+
+        next = node;
+
+        while ((next = next.nextSibling)) {
+            cbcall = inner ? xblocks.dom.eachInnerFollowing(next, callback) : (callback && callback(next));
+
+            if (typeof(cbcall) !== 'undefined' && !cbcall) {
+                return false;
+            }
+        }
+
+    } while ((node = node.parentNode));
+};
+
+/* dom/eachAfter.js end */
+
 
     /* utils/filterPropsPrefixLink.js begin */
 /* global xblocks */
@@ -119,6 +314,250 @@ xblocks.utils.exportPropTypes = function(tagName) {
 }());
 
 /* utils/resetLastRadioChecked.js end */
+
+
+    xblocks.utils.focus = {};
+    /* utils/focus/table.js begin */
+
+xblocks.utils.focus.Table = function(node, options) {
+    this._options = xblocks.utils.merge({
+        'col': 'xb-menu:not([disabled])',
+        'row': 'xb-menuitem:not([disabled])',
+        'colLoop': false,
+        'rowLoop': false
+    }, options);
+
+    this._node = node;
+    this._item = undefined;
+    this._onKeydown = this._onKeydown.bind(this);
+    this._node.addEventListener('keydown', this._onKeydown, false);
+};
+
+xblocks.utils.focus.Table.prototype = {
+    destroy: function() {
+        this._node.removeEventListener('keydown', this._onKeydown, false);
+        this._node = undefined;
+
+        if (this._item) {
+            xblocks.utils.dispatchEvent(this._item, 'xb-blur');
+            this._item = undefined;
+        }
+    },
+
+    _col: function(item) {
+        if (!item) {
+            return;
+        }
+
+        var col = item;
+        while ((col = col.parentNode)) {
+            if (xblocks.dom.matchesSelector(col, this._options.col)) {
+                return col;
+            }
+
+            if (col === this._node) {
+                break;
+            }
+        }
+    },
+
+    _colFirst: function() {
+        return this._node.querySelector(this._options.col) || this._node;
+    },
+
+    _colLast: function() {
+        return Array.prototype.pop.call(this._node.querySelectorAll(this._options.col)) || this._node;
+    },
+
+    _colMatchIterate: function(data, element) {
+        if (xblocks.dom.matchesSelector(element, this._options.col)) {
+            data.col = element;
+            return false;
+        }
+    },
+
+    _colNext: function(col) {
+        var data = {};
+        xblocks.dom.eachAfter(col, this._colMatchIterate.bind(this, data), this._node, false);
+        return data.col;
+    },
+
+    _colPrev: function(col) {
+        var data = {};
+        xblocks.dom.eachBefore(col, this._colMatchIterate.bind(this, data), this._node, false);
+        return data.col;
+    },
+
+    _rowFirst: function(col) {
+        return col.querySelector(this._options.row);
+    },
+
+    _rowLast: function(col) {
+        return Array.prototype.pop.call(col.querySelectorAll(this._options.row));
+    },
+
+    _rowMatchIterate: function(data, element) {
+        if (xblocks.dom.matchesSelector(element, this._options.row)) {
+            data.row = element;
+            return false;
+        }
+    },
+
+    _rowNext: function(row) {
+        var data = {};
+        xblocks.dom.eachAfter(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+        return data.row;
+    },
+
+    _rowPrev: function(row) {
+        var data = {};
+        xblocks.dom.eachBefore(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+        return data.row;
+    },
+
+    _rowIndex: function(row) {
+        var rows = this._col(row).querySelectorAll(this._options.row);
+        return Array.prototype.indexOf.call(rows, row);
+    },
+
+    _rowByIndex: function(col, idx) {
+        return col.querySelectorAll(this._options.row)[idx];
+    },
+
+    _focus: function(element) {
+        if (element === this._item) {
+            return;
+        }
+
+        if (this._item) {
+            xblocks.utils.dispatchEvent(this._item, 'xb-blur');
+        }
+
+        this._item = element;
+        xblocks.utils.dispatchEvent(this._item, 'xb-focus');
+    },
+
+    _onKeydown: function(event) {
+        if (event.altKey || event.metaKey || event.shiftKey) {
+            return;
+        }
+
+        switch (event.keyCode) {
+            case 37: // ArrowLeft
+                this._onArrowLeft();
+                break;
+            case 38: // ArrowUp
+                this._onArrowUp();
+                break;
+            case 39: // ArrowRight
+                this._onArrowRight();
+                break;
+            case 40: // ArrowDown
+                this._onArrowDown();
+                break;
+        }
+    },
+
+    _onArrowLeft: function() {
+        if (!this._item) {
+            this._focus(this._rowFirst(this._colFirst()));
+
+        } else {
+            var idx = this._rowIndex(this._item);
+            var col = this._colPrev(this._col(this._item));
+
+            if (!col) {
+                col = this._colLast();
+                if (!this._options.colLoop) {
+                    idx--;
+                }
+            }
+
+            var row = this._rowByIndex(col, idx);
+
+            if (!row) {
+                row = this._rowLast(col);
+            }
+
+            this._focus(row);
+        }
+    },
+
+    _onArrowRight: function() {
+        if (!this._item) {
+            this._focus(this._rowFirst(this._colFirst()));
+
+        } else {
+            var idx = this._rowIndex(this._item);
+            var col = this._colNext(this._col(this._item));
+
+            if (!col) {
+                col = this._colFirst();
+                if (!this._options.colLoop) {
+                    idx++;
+                }
+            }
+
+            var row = this._rowByIndex(col, idx);
+
+            if (!row) {
+                row = this._rowFirst(col);
+            }
+
+            this._focus(row);
+        }
+    },
+
+    _onArrowUp: function() {
+        if (!this._item) {
+            this._focus(this._rowFirst(this._colFirst()));
+
+        } else {
+            var row = this._rowPrev(this._item);
+
+            if (!row) {
+                var col;
+
+                if (this._options.rowLoop) {
+                    col = this._col(this._item);
+
+                } else {
+                    col = this._colPrev(this._col(this._item)) || this._colLast();
+                }
+
+                row = this._rowLast(col);
+            }
+
+            this._focus(row);
+        }
+    },
+
+    _onArrowDown: function() {
+        if (!this._item) {
+            this._focus(this._rowFirst(this._colFirst()));
+
+        } else {
+            var row = this._rowNext(this._item);
+
+            if (!row) {
+                var col;
+
+                if (this._options.rowLoop) {
+                    col = this._col(this._item);
+
+                } else {
+                    col = this._colNext(this._col(this._item)) || this._colFirst();
+                }
+
+                row = this._rowFirst(col);
+            }
+
+            this._focus(row);
+        }
+    }
+};
+
+/* utils/focus/table.js end */
 
 
     /**
@@ -1709,11 +2148,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
             tether: {
                 get: function() {
-                    if (this._tether) {
-                        return this._tether;
+                    if (!this._tether) {
+                        this._tether = new Tether(this.options);
                     }
 
-                    this._tether = new Tether(this.options);
                     return this._tether;
                 }
             }
@@ -1809,9 +2247,9 @@ xblocks.create('xb-menuseparator', [
 
 /* blocks/menu/menuitem.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React */
 /* jshint strict: false */
-
+/* jshint -W098 */
 var XBMenuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,
 
@@ -1875,11 +2313,9 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
             classes = React.addons.classSet(classes);
 
-            return (
-                React.DOM.div( {className:classes}, 
-                    React.DOM.span(null, this.props.label)
-                )
-            );
+            return React.DOM.div({
+                'className': classes
+            }, React.DOM.span({}, this.props.label));
         }
     }
 ]);
@@ -1895,7 +2331,13 @@ xblocks.create('xb-menuitem', [
 
         events: {
             'xb-created': _blocksMenuitemSubmenuReset,
-            'xb-repaint': _blocksMenuitemSubmenuReset
+            'xb-repaint': _blocksMenuitemSubmenuReset,
+            'xb-blur': function() {
+                this.selected = false;
+            },
+            'xb-focus': function() {
+                this.selected = true;
+            }
         },
 
         accessors: {
@@ -1950,9 +2392,9 @@ function _blocksMenuitemSubmenuReset() {
 
 /* blocks/menu/menu.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React */
 /* jshint strict: false */
-
+/* jshint -W098 */
 var XBMenu = xblocks.view.register('xb-menu', [
     xblocks.mixin.vCommonAttrs,
 
@@ -2001,12 +2443,14 @@ var XBMenu = xblocks.view.register('xb-menu', [
             };
             */
 
-            return (
-                React.DOM.div( {className:classes,
-                    tabIndex:"0",
-                    'data-xb-content':this.props._uid,
-                    dangerouslySetInnerHTML:{__html: this.props.children}} )
-            );
+            return React.DOM.div({
+                'className': classes,
+                'tabIndex': '0',
+                'data-xb-content': this.props._uid,
+                'dangerouslySetInnerHTML': {
+                    '__html': this.props.children
+                }
+            });
         }
     }
 ]);
@@ -2022,10 +2466,13 @@ xblocks.create('xb-menu', [
 
         events: {
             'open-after': function() {
+                this._xbFocus = new xblocks.utils.focus.Table(this, { 'rowLoop': true });
                 this.focus();
             },
 
             'close-before': function() {
+                this._xbFocus.destroy();
+                this._xbFocus = null;
                 Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
                 this._selectedItem = null;
             },
@@ -2044,109 +2491,6 @@ xblocks.create('xb-menu', [
                     this._selectedItem.selected = false;
                     this._selectedItem = null;
                 }
-            },
-
-            // ArrowDown
-            'keydown:keypass(40)': function() {
-                var nextItem;
-
-                if (this._selectedItem) {
-                    nextItem = this._selectedItem.nextElementSibling;
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.nextElementSibling;
-                    }
-                }
-
-                if (!nextItem) {
-                    nextItem = this.firstChild.firstChild;
-                }
-
-                while (nextItem) {
-                    if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                        break;
-                    }
-
-                    nextItem = nextItem.nextElementSibling;
-                }
-
-                if (this._selectedItem) {
-                    if (nextItem && this._selectedItem !== nextItem) {
-                        this._selectedItem.selected = false;
-                        this._selectedItem = null;
-                    }
-                }
-
-                if (nextItem) {
-                    nextItem.selected = true;
-                    this._selectedItem = nextItem;
-                }
-            },
-
-            // ArrowUp
-            'keydown:keypass(38)': function() {
-                var nextItem;
-
-                if (this._selectedItem) {
-                    nextItem = this._selectedItem.previousElementSibling;
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.previousElementSibling;
-                    }
-
-                    if (!nextItem) {
-                        nextItem = this._selectedItem.parentNode.lastChild;
-                    }
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.previousElementSibling;
-                    }
-
-                } else {
-                    nextItem = this.firstChild.firstChild;
-
-                    while (nextItem) {
-                        if (nextItem.xtagName && nextItem.xtagName === 'xb-menuitem' && !nextItem.disabled) {
-                            break;
-                        }
-
-                        nextItem = nextItem.nextElementSibling;
-                    }
-                }
-
-                if (this._selectedItem) {
-                    if (nextItem && this._selectedItem !== nextItem) {
-                        this._selectedItem.selected = false;
-                        this._selectedItem = null;
-                    }
-                }
-
-                if (nextItem) {
-                    nextItem.selected = true;
-                    this._selectedItem = nextItem;
-                }
-            },
-
-            // ArrowRight
-            'keydown:keypass(39)': function() {
-
-            },
-
-            // ArrowLeft
-            'keydown:keypass(37)': function() {
-
             },
 
             'mouseover:delegate(xb-menuitem)': function(event) {
@@ -2188,7 +2532,7 @@ xblocks.create('xb-menu', [
                 });
             },
 
-            'mousemove:delegate(xb-menuitem)': function(event) {
+            'mousemove:delegate(xb-menuitem)': function() {
                 if (this.disabled) {
                     return;
                 }
@@ -2205,7 +2549,7 @@ xblocks.create('xb-menu', [
                 }
             },
 
-            'click:delegate(xb-menuitem)': function(event) {
+            'click:delegate(xb-menuitem)': function() {
                 if (this.disabled) {
                     return;
                 }

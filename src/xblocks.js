@@ -1,3 +1,5 @@
+/* jshint -W067 */
+/* jshint unused: false */
 (function(global, undefined) {
     'use strict';
 
@@ -16,12 +18,22 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
+    /*! borschik:include:dom/matchesSelector.js */
+    /*! borschik:include:dom/eachInnerFollowing.js */
+    /*! borschik:include:dom/eachInnerPrevious.js */
+    /*! borschik:include:dom/isParent.js */
+    /*! borschik:include:dom/eachBefore.js */
+    /*! borschik:include:dom/eachAfter.js */
+
     /*! borschik:include:utils/filterPropsPrefixLink.js */
     /*! borschik:include:utils/mapPropsPrefixLink.js */
     /*! borschik:include:utils/filterPropsPrefixIco.js */
     /*! borschik:include:utils/mapPropsPrefixIco.js */
     /*! borschik:include:utils/exportPropTypes.js */
     /*! borschik:include:utils/resetLastRadioChecked.js */
+
+    xblocks.utils.focus = {};
+    /*! borschik:include:utils/focus/table.js */
 
     /**
      * @memberOf xblocks

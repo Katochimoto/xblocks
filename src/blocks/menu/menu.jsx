@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React */
 /* jshint strict: false */
-
+/* jshint -W098 */
 var XBMenu = xblocks.view.register('xb-menu', [
     xblocks.mixin.vCommonAttrs,
 
@@ -50,12 +50,14 @@ var XBMenu = xblocks.view.register('xb-menu', [
             };
             */
 
-            return (
-                <div className={classes}
-                    tabIndex="0"
-                    data-xb-content={this.props._uid}
-                    dangerouslySetInnerHTML={{__html: this.props.children}} />
-            );
+            return React.DOM.div({
+                'className': classes,
+                'tabIndex': '0',
+                'data-xb-content': this.props._uid,
+                'dangerouslySetInnerHTML': {
+                    '__html': this.props.children
+                }
+            });
         }
     }
 ]);

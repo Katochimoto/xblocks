@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React */
 /* jshint strict: false */
-
+/* jshint -W098 */
 var XBMenuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,
 
@@ -65,11 +65,9 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
             classes = React.addons.classSet(classes);
 
-            return (
-                <div className={classes}>
-                    <span>{this.props.label}</span>
-                </div>
-            );
+            return React.DOM.div({
+                'className': classes
+            }, React.DOM.span({}, this.props.label));
         }
     }
 ]);
