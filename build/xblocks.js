@@ -18,41 +18,6 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
-    /* dom/index.js begin */
-/* global global */
-xblocks.dom.index = function(selector, element, context) {
-    return Array.prototype.indexOf.call((context || global.document).querySelectorAll(selector), element);
-};
-
-/* dom/index.js end */
-
-    /* dom/matchesSelector.js begin */
-xblocks.dom.matchesSelector = (function() {
-    var ElementPrototype = Element.prototype;
-    var matches = ElementPrototype.matches ||
-        ElementPrototype.matchesSelector ||
-        ElementPrototype.webkitMatchesSelector ||
-        ElementPrototype.mozMatchesSelector ||
-        ElementPrototype.msMatchesSelector ||
-        ElementPrototype.oMatchesSelector ||
-        function(selector) {
-            var nodes = (this.parentNode || this.document).querySelectorAll(selector);
-            var i = -1;
-    	    while (nodes[++i] && nodes[i] !== this) {
-                continue;
-            }
-            /* jshint: -W035 */
-    	    return Boolean(nodes[i]);
-        };
-
-    return function(element, selector) {
-        return (element.nodeType === 1 ? matches.call(element, selector) : false);
-    };
-
-}());
-
-/* dom/matchesSelector.js end */
-
     /* dom/eachInnerFollowing.js begin */
 /**
  * Проход по всем потомкам в прямом порядке (от певой до последней)
@@ -134,37 +99,6 @@ xblocks.dom.eachInnerPrevious = function(node, callback) {
 };
 
 /* dom/eachInnerPrevious.js end */
-
-    /* dom/isParent.js begin */
-/* global global */
-xblocks.dom.isParent = (function() {
-    var root = global.document.documentElement;
-
-    if ('compareDocumentPosition' in root) {
-        return function(container, element) {
-            /*jshint -W016 */
-            return (container.compareDocumentPosition(element) & 16) == 16;
-        };
-
-    } else if ('contains' in root) {
-        return function(container, element) {
-            return container !== element && container.contains(element);
-        };
-
-    } else {
-        return function(container, element) {
-            while ((element = element.parentNode)) {
-                if (element === container) {
-                    return true;
-                }
-            }
-
-            return false;
-        };
-    }
-}());
-
-/* dom/isParent.js end */
 
     /* dom/eachBefore.js begin */
 xblocks.dom.eachBefore = function(node, callback, context, inner) {
