@@ -11,12 +11,22 @@ xblocks.utils.focus.Table = function(node, options) {
     this._item = undefined;
 
     this._onKeydown = this._onKeydown.bind(this);
+    this._onMouseover = xblocks.utils.event.delegate(this._options.row, this._onMouseover.bind(this));
+    this._onMouseout = xblocks.utils.event.delegate(this._options.row, this._onMouseout.bind(this));
+    
+    this._onMousemove = xblocks.utils.throttle(
+        xblocks.utils.event.delegate(
+            this._options.row,
+            this._onMouseAction.bind(this)
+        )
+    );
 
-    this._onMouseAction = this._onMouseAction.bind(this);
-    this._onMouseover = xblocks.dom.event.delegate(this._options.row, this._onMouseover.bind(this));
-    this._onMouseout = xblocks.dom.event.delegate(this._options.row, this._onMouseout.bind(this));
-    this._onMousemove = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
-    this._onClick = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
+    this._onClick = xblocks.utils.event.click('left',
+        xblocks.utils.event.delegate(
+            this._options.row,
+            this._onMouseAction.bind(this)
+        )
+    );
 
     this._node.addEventListener('keydown', this._onKeydown, false);
     this._node.addEventListener('mouseover', this._onMouseover, false);
@@ -35,6 +45,7 @@ xblocks.utils.focus.Table.prototype = {
         this._node.removeEventListener('mouseout', this._onMouseout, false);
         this._node.removeEventListener('mousemove', this._onMousemove, false);
         this._node.removeEventListener('click', this._onClick, false);
+
         this._node = undefined;
 
         if (this._item) {
@@ -165,11 +176,11 @@ xblocks.utils.focus.Table.prototype = {
     },
 
     _onMouseover: function(event) {
-        xblocks.utils.event.mouseEnterFilter(event.delegateElement, event, this._onMouseAction);
+        xblocks.utils.event.mouseEnterFilter(event.delegateElement, event, this._onMouseAction.bind(this));
     },
 
     _onMouseout: function(event) {
-        xblocks.utils.event.mouseLeaveFilter(event.delegateElement, event, this._onMouseAction);
+        xblocks.utils.event.mouseLeaveFilter(event.delegateElement, event, this._onMouseAction.bind(this));
     },
 
     _onArrowLeft: function() {

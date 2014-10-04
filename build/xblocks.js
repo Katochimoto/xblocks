@@ -18,46 +18,6 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
-    /* dom/event/delegate.js begin */
-xblocks.dom.event = xblocks.dom.event || {};
-
-xblocks.dom.event.delegate = function(selector, callback) {
-
-    return function(event) {
-        var target = event.target || event.relatedTarget || event.srcElement;
-        var match;
-
-        if (!target.tagName) {
-            return null;
-        }
-
-        if (xblocks.dom.matchesSelector(target, selector)) {
-            match = target;
-
-        } else if (xblocks.dom.matchesSelector(target, selector + ' *')) {
-            var parent = target.parentNode;
-
-            while (parent) {
-                if (xblocks.dom.matchesSelector(parent, selector)) {
-                    match = parent;
-                    break;
-                }
-
-                parent = parent.parentNode;
-            }
-        }
-
-        if (!match) {
-            return null;
-        }
-
-        event.delegateElement = match;
-        callback.call(match, event);
-    };
-};
-
-/* dom/event/delegate.js end */
-
     /* dom/index.js begin */
 /* global global */
 xblocks.dom.index = function(selector, element, context) {
@@ -379,12 +339,22 @@ xblocks.utils.focus.Table = function(node, options) {
     this._item = undefined;
 
     this._onKeydown = this._onKeydown.bind(this);
+    this._onMouseover = xblocks.utils.event.delegate(this._options.row, this._onMouseover.bind(this));
+    this._onMouseout = xblocks.utils.event.delegate(this._options.row, this._onMouseout.bind(this));
+    
+    this._onMousemove = xblocks.utils.throttle(
+        xblocks.utils.event.delegate(
+            this._options.row,
+            this._onMouseAction.bind(this)
+        )
+    );
 
-    this._onMouseAction = this._onMouseAction.bind(this);
-    this._onMouseover = xblocks.dom.event.delegate(this._options.row, this._onMouseover.bind(this));
-    this._onMouseout = xblocks.dom.event.delegate(this._options.row, this._onMouseout.bind(this));
-    this._onMousemove = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
-    this._onClick = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
+    this._onClick = xblocks.utils.event.click('left',
+        xblocks.utils.event.delegate(
+            this._options.row,
+            this._onMouseAction.bind(this)
+        )
+    );
 
     this._node.addEventListener('keydown', this._onKeydown, false);
     this._node.addEventListener('mouseover', this._onMouseover, false);
@@ -403,6 +373,7 @@ xblocks.utils.focus.Table.prototype = {
         this._node.removeEventListener('mouseout', this._onMouseout, false);
         this._node.removeEventListener('mousemove', this._onMousemove, false);
         this._node.removeEventListener('click', this._onClick, false);
+
         this._node = undefined;
 
         if (this._item) {
@@ -533,11 +504,11 @@ xblocks.utils.focus.Table.prototype = {
     },
 
     _onMouseover: function(event) {
-        xblocks.utils.event.mouseEnterFilter(event.delegateElement, event, this._onMouseAction);
+        xblocks.utils.event.mouseEnterFilter(event.delegateElement, event, this._onMouseAction.bind(this));
     },
 
     _onMouseout: function(event) {
-        xblocks.utils.event.mouseLeaveFilter(event.delegateElement, event, this._onMouseAction);
+        xblocks.utils.event.mouseLeaveFilter(event.delegateElement, event, this._onMouseAction.bind(this));
     },
 
     _onArrowLeft: function() {

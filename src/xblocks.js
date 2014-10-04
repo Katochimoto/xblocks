@@ -18,7 +18,6 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
-    /*! borschik:include:dom/event/delegate.js */
     /*! borschik:include:dom/index.js */
     /*! borschik:include:dom/matchesSelector.js */
     /*! borschik:include:dom/eachInnerFollowing.js */
