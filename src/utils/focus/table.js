@@ -9,17 +9,36 @@ xblocks.utils.focus.Table = function(node, options) {
 
     this._node = node;
     this._item = undefined;
+
     this._onKeydown = this._onKeydown.bind(this);
+
+    this._onMouseAction = this._onMouseAction.bind(this);
+    this._onMouseover = xblocks.dom.event.delegate(this._options.row, this._onMouseover.bind(this));
+    this._onMouseout = xblocks.dom.event.delegate(this._options.row, this._onMouseout.bind(this));
+    this._onMousemove = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
+    this._onClick = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
+
     this._node.addEventListener('keydown', this._onKeydown, false);
+    this._node.addEventListener('mouseover', this._onMouseover, false);
+    this._node.addEventListener('mouseout', this._onMouseout, false);
+    this._node.addEventListener('mousemove', this._onMousemove, false);
+    this._node.addEventListener('click', this._onClick, false);
 };
 
 xblocks.utils.focus.Table.prototype = {
+    EVENT_BLUR: 'xb-blur',
+    EVENT_FOCUS: 'xb-focus',
+
     destroy: function() {
         this._node.removeEventListener('keydown', this._onKeydown, false);
+        this._node.removeEventListener('mouseover', this._onMouseover, false);
+        this._node.removeEventListener('mouseout', this._onMouseout, false);
+        this._node.removeEventListener('mousemove', this._onMousemove, false);
+        this._node.removeEventListener('click', this._onClick, false);
         this._node = undefined;
 
         if (this._item) {
-            xblocks.utils.dispatchEvent(this._item, 'xb-blur');
+            xblocks.utils.dispatchEvent(this._item, this.EVENT_BLUR);
             this._item = undefined;
         }
     },
@@ -96,8 +115,7 @@ xblocks.utils.focus.Table.prototype = {
     },
 
     _rowIndex: function(row) {
-        var rows = this._col(row).querySelectorAll(this._options.row);
-        return Array.prototype.indexOf.call(rows, row);
+        return xblocks.dom.index(this._options.row, row, this._col(row));
     },
 
     _rowByIndex: function(col, idx) {
@@ -110,11 +128,11 @@ xblocks.utils.focus.Table.prototype = {
         }
 
         if (this._item) {
-            xblocks.utils.dispatchEvent(this._item, 'xb-blur');
+            xblocks.utils.dispatchEvent(this._item, this.EVENT_BLUR);
         }
 
         this._item = element;
-        xblocks.utils.dispatchEvent(this._item, 'xb-focus');
+        xblocks.utils.dispatchEvent(this._item, this.EVENT_FOCUS);
     },
 
     _onKeydown: function(event) {
@@ -136,6 +154,22 @@ xblocks.utils.focus.Table.prototype = {
                 this._onArrowDown();
                 break;
         }
+    },
+
+    _onMouseAction: function(event) {
+        if (!this._item || this._item !== event.delegateElement) {
+            this._focus(event.delegateElement);
+        }
+
+        //this.opened = !this.opened;
+    },
+
+    _onMouseover: function(event) {
+        xblocks.utils.event.mouseEnterFilter(event.delegateElement, event, this._onMouseAction);
+    },
+
+    _onMouseout: function(event) {
+        xblocks.utils.event.mouseLeaveFilter(event.delegateElement, event, this._onMouseAction);
     },
 
     _onArrowLeft: function() {

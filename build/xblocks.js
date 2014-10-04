@@ -18,6 +18,54 @@
     xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
     xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
+    /* dom/event/delegate.js begin */
+xblocks.dom.event = xblocks.dom.event || {};
+
+xblocks.dom.event.delegate = function(selector, callback) {
+
+    return function(event) {
+        var target = event.target || event.relatedTarget || event.srcElement;
+        var match;
+
+        if (!target.tagName) {
+            return null;
+        }
+
+        if (xblocks.dom.matchesSelector(target, selector)) {
+            match = target;
+
+        } else if (xblocks.dom.matchesSelector(target, selector + ' *')) {
+            var parent = target.parentNode;
+
+            while (parent) {
+                if (xblocks.dom.matchesSelector(parent, selector)) {
+                    match = parent;
+                    break;
+                }
+
+                parent = parent.parentNode;
+            }
+        }
+
+        if (!match) {
+            return null;
+        }
+
+        event.delegateElement = match;
+        callback.call(match, event);
+    };
+};
+
+/* dom/event/delegate.js end */
+
+    /* dom/index.js begin */
+/* global global */
+xblocks.dom.index = function(selector, element, context) {
+    return Array.prototype.indexOf.call((context || global.document).querySelectorAll(selector), element);
+};
+
+/* dom/index.js end */
+
     /* dom/matchesSelector.js begin */
 xblocks.dom.matchesSelector = (function() {
     var ElementPrototype = Element.prototype;
@@ -329,17 +377,36 @@ xblocks.utils.focus.Table = function(node, options) {
 
     this._node = node;
     this._item = undefined;
+
     this._onKeydown = this._onKeydown.bind(this);
+
+    this._onMouseAction = this._onMouseAction.bind(this);
+    this._onMouseover = xblocks.dom.event.delegate(this._options.row, this._onMouseover.bind(this));
+    this._onMouseout = xblocks.dom.event.delegate(this._options.row, this._onMouseout.bind(this));
+    this._onMousemove = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
+    this._onClick = xblocks.dom.event.delegate(this._options.row, this._onMouseAction);
+
     this._node.addEventListener('keydown', this._onKeydown, false);
+    this._node.addEventListener('mouseover', this._onMouseover, false);
+    this._node.addEventListener('mouseout', this._onMouseout, false);
+    this._node.addEventListener('mousemove', this._onMousemove, false);
+    this._node.addEventListener('click', this._onClick, false);
 };
 
 xblocks.utils.focus.Table.prototype = {
+    EVENT_BLUR: 'xb-blur',
+    EVENT_FOCUS: 'xb-focus',
+
     destroy: function() {
         this._node.removeEventListener('keydown', this._onKeydown, false);
+        this._node.removeEventListener('mouseover', this._onMouseover, false);
+        this._node.removeEventListener('mouseout', this._onMouseout, false);
+        this._node.removeEventListener('mousemove', this._onMousemove, false);
+        this._node.removeEventListener('click', this._onClick, false);
         this._node = undefined;
 
         if (this._item) {
-            xblocks.utils.dispatchEvent(this._item, 'xb-blur');
+            xblocks.utils.dispatchEvent(this._item, this.EVENT_BLUR);
             this._item = undefined;
         }
     },
@@ -416,8 +483,7 @@ xblocks.utils.focus.Table.prototype = {
     },
 
     _rowIndex: function(row) {
-        var rows = this._col(row).querySelectorAll(this._options.row);
-        return Array.prototype.indexOf.call(rows, row);
+        return xblocks.dom.index(this._options.row, row, this._col(row));
     },
 
     _rowByIndex: function(col, idx) {
@@ -430,11 +496,11 @@ xblocks.utils.focus.Table.prototype = {
         }
 
         if (this._item) {
-            xblocks.utils.dispatchEvent(this._item, 'xb-blur');
+            xblocks.utils.dispatchEvent(this._item, this.EVENT_BLUR);
         }
 
         this._item = element;
-        xblocks.utils.dispatchEvent(this._item, 'xb-focus');
+        xblocks.utils.dispatchEvent(this._item, this.EVENT_FOCUS);
     },
 
     _onKeydown: function(event) {
@@ -456,6 +522,22 @@ xblocks.utils.focus.Table.prototype = {
                 this._onArrowDown();
                 break;
         }
+    },
+
+    _onMouseAction: function(event) {
+        if (!this._item || this._item !== event.delegateElement) {
+            this._focus(event.delegateElement);
+        }
+
+        //this.opened = !this.opened;
+    },
+
+    _onMouseover: function(event) {
+        xblocks.utils.event.mouseEnterFilter(event.delegateElement, event, this._onMouseAction);
+    },
+
+    _onMouseout: function(event) {
+        xblocks.utils.event.mouseLeaveFilter(event.delegateElement, event, this._onMouseAction);
     },
 
     _onArrowLeft: function() {
@@ -2466,7 +2548,10 @@ xblocks.create('xb-menu', [
 
         events: {
             'open-after': function() {
-                this._xbFocus = new xblocks.utils.focus.Table(this, { 'rowLoop': true });
+                this._xbFocus = new xblocks.utils.focus.Table(this, {
+                    'rowLoop': true,
+                    'colLoop': true
+                });
                 this.focus();
             },
 
@@ -2474,7 +2559,6 @@ xblocks.create('xb-menu', [
                 this._xbFocus.destroy();
                 this._xbFocus = null;
                 Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
-                this._selectedItem = null;
             },
 
             // Escape
@@ -2486,86 +2570,6 @@ xblocks.create('xb-menu', [
 
             'blur': function() {
                 //this.close();
-
-                if (this._selectedItem) {
-                    this._selectedItem.selected = false;
-                    this._selectedItem = null;
-                }
-            },
-
-            'mouseover:delegate(xb-menuitem)': function(event) {
-                xblocks.utils.event.mouseEnterFilter(this, event, function() {
-                    if (this.disabled) {
-                        return;
-                    }
-
-                    var menuNode = this.parentNode.parentNode;
-
-                    if (menuNode._selectedItem) {
-                        if (menuNode._selectedItem !== this) {
-                            menuNode._selectedItem.selected = false;
-                            menuNode._selectedItem = null;
-                        }
-
-                    } else {
-                        this.selected = true;
-                        menuNode._selectedItem = this;
-                    }
-                });
-            },
-
-            'mouseout:delegate(xb-menuitem)': function(event) {
-                xblocks.utils.event.mouseLeaveFilter(this, event, function() {
-                    if (this.disabled) {
-                        return;
-                    }
-
-                    var menuNode = this.parentNode.parentNode;
-
-                    if (menuNode._selectedItem && menuNode._selectedItem !== this) {
-                        menuNode._selectedItem.selected = false;
-                        menuNode._selectedItem = null;
-                    }
-
-                    this.selected = false;
-                    menuNode._selectedItem = null;
-                });
-            },
-
-            'mousemove:delegate(xb-menuitem)': function() {
-                if (this.disabled) {
-                    return;
-                }
-
-                var menuNode = this.parentNode.parentNode;
-
-                if (!menuNode._selectedItem || menuNode._selectedItem !== this) {
-                    if (menuNode._selectedItem) {
-                        menuNode._selectedItem.selected = false;
-                    }
-
-                    menuNode._selectedItem = this;
-                    this.selected = true;
-                }
-            },
-
-            'click:delegate(xb-menuitem)': function() {
-                if (this.disabled) {
-                    return;
-                }
-
-                var menuNode = this.parentNode.parentNode;
-
-                if (!menuNode._selectedItem || menuNode._selectedItem !== this) {
-                    if (menuNode._selectedItem) {
-                        menuNode._selectedItem.selected = false;
-                    }
-
-                    menuNode._selectedItem = this;
-                    this.selected = true;
-                }
-
-                this.opened = !this.opened;
             }
         }
     }
