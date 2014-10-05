@@ -11,9 +11,17 @@ xblocks.utils.focus.Table = function(node, options) {
     this._item = undefined;
 
     this._onKeydown = this._onKeydown.bind(this);
-    this._onMouseover = xblocks.utils.event.delegate(this._options.row, this._onMouseover.bind(this));
-    this._onMouseout = xblocks.utils.event.delegate(this._options.row, this._onMouseout.bind(this));
-    
+
+    this._onMouseover = xblocks.utils.event.delegate(
+        this._options.row,
+        this._onMouseover.bind(this)
+    );
+
+    this._onMouseout = xblocks.utils.event.delegate(
+        this._options.row,
+        this._onMouseout.bind(this)
+    );
+
     this._onMousemove = xblocks.utils.throttle(
         xblocks.utils.event.delegate(
             this._options.row,

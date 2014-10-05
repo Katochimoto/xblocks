@@ -273,9 +273,17 @@ xblocks.utils.focus.Table = function(node, options) {
     this._item = undefined;
 
     this._onKeydown = this._onKeydown.bind(this);
-    this._onMouseover = xblocks.utils.event.delegate(this._options.row, this._onMouseover.bind(this));
-    this._onMouseout = xblocks.utils.event.delegate(this._options.row, this._onMouseout.bind(this));
-    
+
+    this._onMouseover = xblocks.utils.event.delegate(
+        this._options.row,
+        this._onMouseover.bind(this)
+    );
+
+    this._onMouseout = xblocks.utils.event.delegate(
+        this._options.row,
+        this._onMouseout.bind(this)
+    );
+
     this._onMousemove = xblocks.utils.throttle(
         xblocks.utils.event.delegate(
             this._options.row,
@@ -2147,8 +2155,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
         methods: {
             setOptions: function(nextOptions) {
                 var tether = this.tether;
-                this._options = xblocks.utils.merge(true, this.options, nextOptions);
-                tether.setOptions(this._options, false);
+
+                xblocks.utils.merge(true, this.options, nextOptions);
+                tether.setOptions(this.options, false);
+
                 if (tether.enabled) {
                     tether.position();
                 }
@@ -2168,7 +2178,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.enable(true);
                 tether.target.xbPopup = this;
 
-                xblocks.utils.dispatchEvent(this, 'open-after');
+                xblocks.utils.dispatchEvent(this, 'xb-open-after');
 
                 return true;
             },
@@ -2180,7 +2190,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                xblocks.utils.dispatchEvent(this, 'close-before');
+                xblocks.utils.dispatchEvent(this, 'xb-close-before');
 
                 tether.target.xbPopup = null;
                 tether.disable();
@@ -2229,7 +2239,7 @@ xblocks.create('xb-menuseparator', [
 /* blocks/menu/menuseparator.js end */
 
     /* blocks/menu/menuitem.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /* blocks/menu/menuitem.jsx.js begin */
@@ -2310,6 +2320,24 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 /* blocks/menu/menuitem.jsx.js end */
 
 
+var XBMenuitemElementStatic = {};
+
+XBMenuitemElementStatic._submenuReset = function() {
+    if (this._submenu) {
+        this._submenu.close();
+        this._submenu.parentNode.removeChild(this._submenu);
+        this._submenu = undefined;
+    }
+};
+
+XBMenuitemElementStatic._selected = function() {
+    this.selected = true;
+};
+
+XBMenuitemElementStatic._unselected = function() {
+    this.selected = false;
+};
+
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
 
@@ -2317,14 +2345,10 @@ xblocks.create('xb-menuitem', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': _blocksMenuitemSubmenuReset,
-            'xb-repaint': _blocksMenuitemSubmenuReset,
-            'xb-blur': function() {
-                this.selected = false;
-            },
-            'xb-focus': function() {
-                this.selected = true;
-            }
+            'xb-created': XBMenuitemElementStatic._submenuReset,
+            'xb-repaint': XBMenuitemElementStatic._submenuReset,
+            'xb-blur': XBMenuitemElementStatic._unselected,
+            'xb-focus': XBMenuitemElementStatic._selected
         },
 
         accessors: {
@@ -2339,7 +2363,7 @@ xblocks.create('xb-menuitem', [
                     if (!this._submenu && this._submenu !== null) {
                         var content = this.content.trim();
                         if (content) {
-                            var menu = global.document.createElement('xb-menu');
+                            var menu = this.ownerDocument.createElement('xb-menu');
                             menu.setAttribute('target-attachment', 'top right');
                             menu.setAttribute('attachment', 'top left');
                             menu.setAttribute('target', '._menuitem-target-' + this.xuid);
@@ -2349,7 +2373,7 @@ xblocks.create('xb-menuitem', [
                             }])));
                             menu.innerHTML = content;
 
-                            this._submenu = global.document.body.appendChild(menu);
+                            this._submenu = this.ownerDocument.body.appendChild(menu);
 
                         } else {
                             this._submenu = null;
@@ -2362,14 +2386,6 @@ xblocks.create('xb-menuitem', [
         }
     }
 ]);
-
-function _blocksMenuitemSubmenuReset() {
-    if (this._submenu) {
-        this._submenu.close();
-        this._submenu.parentNode.removeChild(this._submenu);
-        this._submenu = undefined;
-    }
-}
 
 /* blocks/menu/menuitem.js end */
 
@@ -2445,6 +2461,14 @@ var XBMenu = xblocks.view.register('xb-menu', [
 /* blocks/menu/menu.jsx.js end */
 
 
+var XBMenuElementStatic = {};
+
+XBMenuElementStatic._innerClose = function(target) {
+    if (target.xbPopup) {
+        target.xbPopup.close();
+    }
+};
+
 xblocks.create('xb-menu', [
     xblocks.mixin.eFocus,
 
@@ -2452,18 +2476,20 @@ xblocks.create('xb-menu', [
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         events: {
-            'open-after': function() {
+            'xb-open-after': function() {
                 this._xbFocus = new xblocks.utils.focus.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
+
                 this.focus();
             },
 
-            'close-before': function() {
+            'xb-close-before': function() {
                 this._xbFocus.destroy();
                 this._xbFocus = null;
-                Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
+
+                Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), XBMenuElementStatic._innerClose);
             },
 
             // Escape
@@ -2479,12 +2505,6 @@ xblocks.create('xb-menu', [
         }
     }
 ]);
-
-function _blocksMenuInnerClose(target) {
-    if (target.xbPopup) {
-        target.xbPopup.close();
-    }
-}
 
 /* blocks/menu/menu.js end */
 

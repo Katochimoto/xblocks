@@ -84,8 +84,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
         methods: {
             setOptions: function(nextOptions) {
                 var tether = this.tether;
-                this._options = xblocks.utils.merge(true, this.options, nextOptions);
-                tether.setOptions(this._options, false);
+
+                xblocks.utils.merge(true, this.options, nextOptions);
+                tether.setOptions(this.options, false);
+
                 if (tether.enabled) {
                     tether.position();
                 }
@@ -105,7 +107,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.enable(true);
                 tether.target.xbPopup = this;
 
-                xblocks.utils.dispatchEvent(this, 'open-after');
+                xblocks.utils.dispatchEvent(this, 'xb-open-after');
 
                 return true;
             },
@@ -117,7 +119,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                xblocks.utils.dispatchEvent(this, 'close-before');
+                xblocks.utils.dispatchEvent(this, 'xb-close-before');
 
                 tether.target.xbPopup = null;
                 tether.disable();

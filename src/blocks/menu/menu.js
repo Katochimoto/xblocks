@@ -3,6 +3,14 @@
 
 /*! borschik:include:menu.jsx.js */
 
+var XBMenuElementStatic = {};
+
+XBMenuElementStatic._innerClose = function(target) {
+    if (target.xbPopup) {
+        target.xbPopup.close();
+    }
+};
+
 xblocks.create('xb-menu', [
     xblocks.mixin.eFocus,
 
@@ -10,18 +18,20 @@ xblocks.create('xb-menu', [
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         events: {
-            'open-after': function() {
+            'xb-open-after': function() {
                 this._xbFocus = new xblocks.utils.focus.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
+
                 this.focus();
             },
 
-            'close-before': function() {
+            'xb-close-before': function() {
                 this._xbFocus.destroy();
                 this._xbFocus = null;
-                Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), _blocksMenuInnerClose);
+
+                Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), XBMenuElementStatic._innerClose);
             },
 
             // Escape
@@ -37,9 +47,3 @@ xblocks.create('xb-menu', [
         }
     }
 ]);
-
-function _blocksMenuInnerClose(target) {
-    if (target.xbPopup) {
-        target.xbPopup.close();
-    }
-}

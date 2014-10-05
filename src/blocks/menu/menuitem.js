@@ -1,7 +1,25 @@
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /*! borschik:include:menuitem.jsx.js */
+
+var XBMenuitemElementStatic = {};
+
+XBMenuitemElementStatic._submenuReset = function() {
+    if (this._submenu) {
+        this._submenu.close();
+        this._submenu.parentNode.removeChild(this._submenu);
+        this._submenu = undefined;
+    }
+};
+
+XBMenuitemElementStatic._selected = function() {
+    this.selected = true;
+};
+
+XBMenuitemElementStatic._unselected = function() {
+    this.selected = false;
+};
 
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -10,14 +28,10 @@ xblocks.create('xb-menuitem', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': _blocksMenuitemSubmenuReset,
-            'xb-repaint': _blocksMenuitemSubmenuReset,
-            'xb-blur': function() {
-                this.selected = false;
-            },
-            'xb-focus': function() {
-                this.selected = true;
-            }
+            'xb-created': XBMenuitemElementStatic._submenuReset,
+            'xb-repaint': XBMenuitemElementStatic._submenuReset,
+            'xb-blur': XBMenuitemElementStatic._unselected,
+            'xb-focus': XBMenuitemElementStatic._selected
         },
 
         accessors: {
@@ -32,7 +46,7 @@ xblocks.create('xb-menuitem', [
                     if (!this._submenu && this._submenu !== null) {
                         var content = this.content.trim();
                         if (content) {
-                            var menu = global.document.createElement('xb-menu');
+                            var menu = this.ownerDocument.createElement('xb-menu');
                             menu.setAttribute('target-attachment', 'top right');
                             menu.setAttribute('attachment', 'top left');
                             menu.setAttribute('target', '._menuitem-target-' + this.xuid);
@@ -42,7 +56,7 @@ xblocks.create('xb-menuitem', [
                             }])));
                             menu.innerHTML = content;
 
-                            this._submenu = global.document.body.appendChild(menu);
+                            this._submenu = this.ownerDocument.body.appendChild(menu);
 
                         } else {
                             this._submenu = null;
@@ -55,11 +69,3 @@ xblocks.create('xb-menuitem', [
         }
     }
 ]);
-
-function _blocksMenuitemSubmenuReset() {
-    if (this._submenu) {
-        this._submenu.close();
-        this._submenu.parentNode.removeChild(this._submenu);
-        this._submenu = undefined;
-    }
-}
