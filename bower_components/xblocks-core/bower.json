@@ -1,7 +1,14 @@
 {
     "name": "xblocks-core",
-    "version": "0.1.1",
-    "main": "xblocks-core.js",
+    "version": "0.2.3",
+    "main": [
+        "xblocks-core.js",
+        "xblocks-core.min.js",
+        "xblocks-core-full.js",
+        "xblocks-core-full.min.js",
+        "x-tag-core.js",
+        "x-tag-core.min.js"
+    ],
     "ignore": [
         "**/.*",
         "node_modules",
@@ -13,9 +20,9 @@
         "karma.conf.js"
     ],
     "dependencies": {
-        "x-tag-core": "0.9.7",
-        "es5-shim": "4.0.1",
-        "react": "0.11.1"
+        "es5-shim": "4.0.3",
+        "react": "0.11.2",
+        "vow": "0.4.5"
     },
     "homepage": "https://github.com/Katochimoto/xblocks-core",
     "authors": [

@@ -1,4 +1,3 @@
-/* ../node_modules/setimmediate/setImmediate.js begin */
 (function (global, undefined) {
     "use strict";
 
@@ -174,62 +173,15 @@
     attachTo.setImmediate = setImmediate;
     attachTo.clearImmediate = clearImmediate;
 }(new Function("return this")()));
-
-/* ../node_modules/setimmediate/setImmediate.js end */
-
-
-/*jshint -W067 */
+/* jshint -W067 */
+/* jshint unused: false */
 (function(global, undefined) {
     'use strict';
-
-    /**
-     * MutationObserver provides developers a way to react to changes in a DOM
-     * @typedef {Object} MutationObserver
-     * @property {Function} disconnect
-     * @property {Function} observe
-     */
-
-    /**
-     * MutationRecord is the object that will be passed to the observer's callback
-     * @typedef {Object} MutationRecord
-     * @property {String} attributeName
-     * @property {String} type
-     */
-
-
-    /**
-     * @namespace xtag
-     */
-
-    /**
-     * @namespace React
-     * @property {Function} unmountComponentAtNode
-     * @property {Function} renderComponent
-     * @property {Function} createClass
-     */
-
-    /**
-     * @namespace React.DOM
-     */
-
-    /**
-     * React constructor component
-     * @typedef {Function} Constructor
-     * @property {Function} unmountComponent
-     * @property {Function} replaceProps
-     * @property {Function} setProps
-     * @property {Function} isMounted
-     */
 
     /**
      * @namespace React
      */
     var React = global.React;
-
-    /**
-     * @namespace xtag
-     */
-    var xtag = global.xtag;
 
     /**
      * @namespace xblocks
@@ -275,7 +227,7 @@ xblocks.utils.support.upgradeelements = Boolean(
 /* xblocks/utils/support.js end */
 
 /* xblocks/utils/uid.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -293,8 +245,7 @@ xblocks.utils.uid = function() {
 /* jshint strict: false */
 
 /**
- * @param {*} param
- * @returns {string}
+ * @returns {number}
  */
 xblocks.utils.seq = (function() {
     var i = 0;
@@ -306,7 +257,7 @@ xblocks.utils.seq = (function() {
 /* xblocks/utils/seq.js end */
 
 /* xblocks/utils/type.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -368,7 +319,7 @@ xblocks.utils.isEmptyObject = function(obj) {
 /* xblocks/utils/isEmptyObject.js end */
 
 /* xblocks/utils/isWindow.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -446,7 +397,7 @@ xblocks.utils.pristine = function(methodName) {
 /* xblocks/utils/pristine.js end */
 
 /* xblocks/utils/merge.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -542,7 +493,11 @@ xblocks.utils._lazy = (function() {
  * @returns {function}
  */
 xblocks.utils.lazy = function(callback, args) {
-    callback._args = (callback._args || []).concat(args);
+    if (!callback._args) {
+        callback._args = [];
+    }
+
+    callback._args.push(args);
 
     if (!callback._timer) {
         callback._timer = xblocks.utils._lazy(function() {
@@ -555,6 +510,37 @@ xblocks.utils.lazy = function(callback, args) {
 };
 
 /* xblocks/utils/lazy.js end */
+
+/* xblocks/utils/throttle.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.utils.throttle = function(callback, delay, scope) {
+    delay = delay || 250;
+    var last;
+    var timer;
+
+    return function() {
+        var context = scope || this;
+        var now = Date.now();
+        var args = arguments;
+
+        if (last && now < last + delay) {
+            clearTimeout(timer);
+
+            timer = setTimeout(function() {
+                last = now;
+                callback.apply(context, args);
+            }, delay);
+
+        } else {
+            last = now;
+            callback.apply(context, args);
+        }
+    };
+};
+
+/* xblocks/utils/throttle.js end */
 
 /* xblocks/utils/event.js begin */
 /* global xblocks, global */
@@ -598,7 +584,7 @@ xblocks.utils.dispatchEvent = function(element, name, params) {
  * @param {function} callback
  */
 xblocks.utils.event.mouseEnterFilter = function(element, event, callback) {
-    var toElement = event.relatedTarget || event.srcElement;;
+    var toElement = event.relatedTarget || event.srcElement;
 
     while (toElement && toElement !== element) {
         toElement = toElement.parentNode;
@@ -613,10 +599,80 @@ xblocks.utils.event.mouseEnterFilter = function(element, event, callback) {
 
 xblocks.utils.event.mouseLeaveFilter = xblocks.utils.event.mouseEnterFilter;
 
+xblocks.utils.event.delegate = function(selector, callback) {
+
+    return function(event) {
+        var target = event.target || event.srcElement;
+        var match;
+
+        if (!target.tagName) {
+            return;
+        }
+
+        if (xblocks.dom.matchesSelector(target, selector)) {
+            match = target;
+
+        } else if (xblocks.dom.matchesSelector(target, selector + ' *')) {
+            var parent = target.parentNode;
+
+            while (parent) {
+                if (xblocks.dom.matchesSelector(parent, selector)) {
+                    match = parent;
+                    break;
+                }
+
+                parent = parent.parentNode;
+            }
+        }
+
+        if (!match) {
+            return;
+        }
+
+        event.delegateElement = match;
+        callback.call(match, event);
+    };
+};
+
+xblocks.utils.event._clickWhich = {
+    1: 'left',
+    2: 'center',
+    3: 'right'
+};
+
+xblocks.utils.event.click = function(which, callback) {
+    which = Array.isArray(which) ? which : [ which ];
+
+    return function(event) {
+        if (event.type !== 'click') {
+            return;
+        }
+
+        var whichEvt = event.which;
+
+        if (!whichEvt && event.button) {
+            /* jshint -W016 */
+            if (event.button & 1) {
+                whichEvt = 1;
+            } else if (event.button & 4) {
+                whichEvt = 2;
+            } else if (event.button & 2) {
+                whichEvt = 3;
+            }
+        }
+
+        whichEvt = xblocks.utils.event._clickWhich[ whichEvt ];
+
+        if (which.indexOf(whichEvt) !== -1) {
+            callback.call(this, event);
+        }
+    };
+};
+
 /* xblocks/utils/event.js end */
 
 /* xblocks/utils/equals.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -652,7 +708,9 @@ xblocks.utils._equal = {
 		    return true;
         }
 
-    	for (var i in x) {
+        var i;
+
+        for (i in x) {
     		if (y.hasOwnProperty(i)) {
     			if (!xblocks.utils.equals(x[i], y[i])) {
                     return false;
@@ -663,7 +721,7 @@ xblocks.utils._equal = {
     		}
     	}
 
-    	for (var i in y) {
+        for (i in y) {
     		if (!x.hasOwnProperty(i)) {
     			return false;
     		}
@@ -697,15 +755,17 @@ xblocks.utils.equals = function(x, y) {
         return false;
     }
 
-    return xblocks.utils._equal.hasOwnProperty(xType) ?
-        xblocks.utils._equal[xType](x, y) :
-        x == y;
+    if (xblocks.utils._equal.hasOwnProperty(xType)) {
+        return xblocks.utils._equal[ xType ](x, y);
+    }
+
+    return x == y;
 };
 
 /* xblocks/utils/equals.js end */
 
 /* xblocks/utils/filterObject.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -736,7 +796,7 @@ xblocks.utils.filterObject = function(from, callback) {
 /* xblocks/utils/filterObject.js end */
 
 /* xblocks/utils/mapObject.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -782,7 +842,7 @@ xblocks.utils.upgradeElements = (function() {
 /* xblocks/utils/upgradeElements.js end */
 
 /* xblocks/utils/contentNode.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -815,7 +875,20 @@ xblocks.utils.contentNode = function(node) {
  */
 xblocks.utils.propTypes = function(tagName) {
     var view = xblocks.view.get(tagName);
-    return (view && (view.propTypes || (view.originalSpec && view.originalSpec.propTypes))) || {};
+
+    if (!view) {
+        return {};
+    }
+
+    if (view.propTypes) {
+        return view.propTypes;
+    }
+
+    if (view.originalSpec && view.originalSpec.propTypes) {
+        return view.originalSpec.propTypes;
+    }
+
+    return {};
 };
 
 /* xblocks/utils/propTypes.js end */
@@ -829,11 +902,13 @@ xblocks.utils.propTypes = function(tagName) {
 
     /**
      * @param {string} str
-     * @param {object} param
+     * @param {object} data
      * @returns {string}
+     * @see http://ejohn.org/blog/javascript-micro-templating/
      */
     xblocks.utils.tmpl = function(str, data) {
         if (!cache.hasOwnProperty(str)) {
+            /* jshint -W054 */
             cache[str] = new Function('obj',
                "var p=[],print=function(){p.push.apply(p,arguments);};" +
                "with(obj){p.push('" +
@@ -843,8 +918,8 @@ xblocks.utils.propTypes = function(tagName) {
                    .replace(/\t=(.*?)%>/g, "',$1,'")
                    .split("\t").join("');")
                    .split("%>").join("p.push('")
-                   .split("\r").join("\\'")
-               + "');}return p.join('');");
+                   .split("\r").join("\\'") +
+                   "');}return p.join('');");
         }
 
         return data ? cache[str](data) : cache[str];
@@ -854,11 +929,25 @@ xblocks.utils.propTypes = function(tagName) {
 
 /* xblocks/utils/tmpl.js end */
 
+/* xblocks/utils/findReactContainerForID.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
+
+/**
+ * @param {String} rootNodeID
+ * @returns {HTMLElement}
+ */
+xblocks.utils.findReactContainerForID = function(rootNodeID) {
+    return React.__internals.Mount.findReactContainerForID(rootNodeID);
+};
+
+/* xblocks/utils/findReactContainerForID.js end */
+
 
 /* xblocks/utils.js end */
 
     /* xblocks/dom.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /**
@@ -891,6 +980,10 @@ xblocks.dom = {
         }
     }
 };
+
+/* xblocks/dom/attrs.js begin */
+/* global xblocks, React */
+/* jshint strict: false */
 
 /**
  * @param {HTMLElement} element
@@ -928,10 +1021,18 @@ xblocks.dom.attrs.toObject = function(element) {
     var attrs = {};
 
     if (element.nodeType === 1 && element.hasAttributes()) {
-        Array.prototype.forEach.call(element.attributes, _domAttrsToObject, attrs);
+        Array.prototype.forEach.call(element.attributes, xblocks.dom.attrs._toObjectIterator, attrs);
     }
 
     return attrs;
+};
+
+/**
+ * @param {Attr} attr
+ * @private
+ */
+xblocks.dom.attrs._toObjectIterator = function(attr) {
+    this[attr.nodeName] = attr.value;
 };
 
 /**
@@ -976,11 +1077,94 @@ xblocks.dom.attrs.typeConversion = function(props, propTypes) {
     return props;
 };
 
-function _domAttrsToObject(attr) {
-    this[attr.nodeName] = attr.value;
-}
+/* xblocks/dom/attrs.js end */
+
+/* xblocks/dom/index.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.dom.index = function(selector, element, context) {
+    return Array.prototype.indexOf.call((context || global.document).querySelectorAll(selector), element);
+};
+
+/* xblocks/dom/index.js end */
+
+/* xblocks/dom/isParent.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.dom.isParent = (function() {
+    var root = global.document.documentElement;
+
+    if ('compareDocumentPosition' in root) {
+        return function(container, element) {
+            /*jshint -W016 */
+            return (container.compareDocumentPosition(element) & 16) == 16;
+        };
+
+    } else if ('contains' in root) {
+        return function(container, element) {
+            return container !== element && container.contains(element);
+        };
+
+    } else {
+        return function(container, element) {
+            while ((element = element.parentNode)) {
+                if (element === container) {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+    }
+}());
+
+/* xblocks/dom/isParent.js end */
+
+/* xblocks/dom/matchesSelector.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.dom.matchesSelector = (function() {
+    var ElementPrototype = Element.prototype;
+    var matches = ElementPrototype.matches ||
+        ElementPrototype.matchesSelector ||
+        ElementPrototype.webkitMatchesSelector ||
+        ElementPrototype.mozMatchesSelector ||
+        ElementPrototype.msMatchesSelector ||
+        ElementPrototype.oMatchesSelector ||
+        function(selector) {
+            var nodes = (this.parentNode || this.document).querySelectorAll(selector);
+            var i = -1;
+            while (nodes[++i] && nodes[i] !== this) {
+                continue;
+            }
+            /* jshint: -W035 */
+            return Boolean(nodes[i]);
+        };
+
+    return function(element, selector) {
+        return (element.nodeType === 1 ? matches.call(element, selector) : false);
+    };
+
+}());
+
+/* xblocks/dom/matchesSelector.js end */
+
 
 /* xblocks/dom.js end */
+
+    /* xblocks/tag.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+/**
+ * @namespace
+ */
+xblocks.tag = global.xtag;
+
+/* xblocks/tag.js end */
 
     /* xblocks/view.js begin */
 /* global xblocks, React */
@@ -991,41 +1175,43 @@ function _domAttrsToObject(attr) {
  */
 xblocks.view = {};
 
+var _viewCommon = {
+    propTypes: {
+        '_uid': React.PropTypes.renderable,
+        'children': React.PropTypes.renderable,
+        'xb-static': React.PropTypes.bool
+    },
+
+    template: function(ref, props) {
+        var rootNode = xblocks.utils.findReactContainerForID(this._rootNodeID);
+        var xtmpl = rootNode && rootNode.xtmpl;
+
+        if (typeof(xtmpl) === 'object' && xtmpl.hasOwnProperty(ref)) {
+            props = props || {};
+            props.dangerouslySetInnerHTML = {
+                '__html': this._templatePrepare(xtmpl[ref])
+            };
+
+            return React.DOM.div(props);
+        }
+
+        return null;
+    }
+};
+
+var _viewCommonUser = {
+    _templatePrepare: function(tmplString) {
+        return tmplString;
+    }
+};
+
 /**
  * @param {object} component
  */
 xblocks.view.create = function(component) {
-    component = Array.isArray(component) ? component : [component];
-
-    component.unshift(true, {
-        _templatePrepare: function(tmplString) {
-            return tmplString;
-        }
-    });
-
-    component.push({
-        propTypes: {
-            '_uid': React.PropTypes.renderable,
-            'children': React.PropTypes.renderable,
-            'xb-static': React.PropTypes.bool
-        },
-
-        template: function(ref, props) {
-            var rootNode = React.__internals.Mount.findReactContainerForID(this._rootNodeID);
-            var xtmpl = rootNode && rootNode.xuid && rootNode.xtmpl;
-
-            if (xtmpl && xtmpl.hasOwnProperty(ref)) {
-                props = props || {};
-                props.dangerouslySetInnerHTML = {
-                    __html: this._templatePrepare(xtmpl[ref])
-                };
-
-                return React.DOM.div(props);
-            }
-
-            return null;
-        }
-    });
+    component = Array.isArray(component) ? component : [ component ];
+    component.unshift(true, {}, _viewCommonUser);
+    component.push(_viewCommon);
 
     return React.createClass(xblocks.utils.merge.apply({}, component));
 };
@@ -1040,8 +1226,8 @@ xblocks.view.register = function(blockName, component) {
         throw 'Specified item "' + blockName + '" is already defined';
     }
 
-    React.DOM[blockName] = xblocks.view.create(component);
-    return React.DOM[blockName];
+    React.DOM[ blockName ] = xblocks.view.create(component);
+    return React.DOM[ blockName ];
 };
 
 /**
@@ -1049,13 +1235,13 @@ xblocks.view.register = function(blockName, component) {
  * @returns {*}
  */
 xblocks.view.get = function(blockName) {
-    return React.DOM[blockName];
+    return React.DOM[ blockName ];
 };
 
 /* xblocks/view.js end */
 
     /* xblocks/block.js begin */
-/* global xblocks, global, xtag */
+/* global xblocks */
 /* jshint strict: false */
 
 var _blockCommon = {
@@ -1065,6 +1251,7 @@ var _blockCommon = {
             this.xtmpl = {};
             this.xuid = xblocks.utils.seq();
             this.xprops = xblocks.utils.propTypes(this.xtagName);
+            this._inserted = false;
         },
 
         inserted: function() {
@@ -1094,7 +1281,7 @@ var _blockCommon = {
             if (this.xblock) {
                 var content = this.content;
                 this.xblock.destroy();
-                this.xblock = null;
+                this.xblock = undefined;
                 this.content = content;
             }
         },
@@ -1150,7 +1337,7 @@ var _blockCommon = {
         state: {
             get: function() {
                 var props = {};
-                var elementProps = xtag.tags[this.xtagName].accessors;
+                var elementProps = xblocks.tag.tags[this.xtagName].accessors;
 
                 for (var prop in elementProps) {
                     if (this.xprops.hasOwnProperty(prop) &&
@@ -1189,7 +1376,7 @@ var _blockCommon = {
 };
 
 function _blockTmplCompile(tmplElement) {
-    this.xtmpl[tmplElement.getAttribute('ref')] = tmplElement.innerHTML;
+    this.xtmpl[ tmplElement.getAttribute('ref') ] = tmplElement.innerHTML;
 }
 
 function _blockInstantiation(element) {
@@ -1214,10 +1401,10 @@ function _blockLazyInstantiation(elements) {
  * @returns {HTMLElement}
  */
 xblocks.create = function(blockName, options) {
-    options = Array.isArray(options) ? options : [options];
+    options = Array.isArray(options) ? options : [ options ];
     options.unshift(true, {});
     options.push(_blockCommon);
-    return xtag.register(blockName, xblocks.utils.merge.apply({}, options));
+    return xblocks.tag.register(blockName, xblocks.utils.merge.apply({}, options));
 };
 
 /* xblocks/block.js end */
@@ -1231,6 +1418,7 @@ xblocks.create = function(blockName, options) {
  * @constructor
  */
 xblocks.element = function(node) {
+    node.xblock = this;
     this._node = node;
     this._init(node.state, node.content, this._callbackInit);
 };
@@ -1344,10 +1532,14 @@ xblocks.element.prototype._init = function(props, children, callback) {
         }
 
     } else {
+        var that = this;
         this._component = React.renderComponent(
             proxyConstructor,
             this._node,
-            this._callbackRender.bind(this, callback)
+            function() {
+                that._component = this;
+                that._callbackRender(callback);
+            }
         );
     }
 };
@@ -1367,7 +1559,7 @@ xblocks.element.prototype._repaint = function(callback) {
  * @private
  */
 xblocks.element.prototype._callbackInit = function() {
-    xblocks.utils.dispatchEvent(this._node, 'xb-created', { detail: { xblock: this } });
+    xblocks.utils.dispatchEvent(this._node, 'xb-created');
     xblocks.utils.lazy(_elementGlobalInitEvent, this._node);
 };
 
@@ -1376,7 +1568,7 @@ xblocks.element.prototype._callbackInit = function() {
  * @private
  */
 xblocks.element.prototype._callbackRepaint = function(callback) {
-    xblocks.utils.dispatchEvent(this._node, 'xb-repaint', { detail: { xblock: this } });
+    xblocks.utils.dispatchEvent(this._node, 'xb-repaint');
     xblocks.utils.lazy(_elementGlobalRepaintEvent, this._node);
 
     if (callback) {
@@ -1392,7 +1584,7 @@ xblocks.element.prototype._callbackRender = function(callback) {
     this._node.upgrade();
 
     if (!this._observer) {
-        this._observer = new MutationObserver(this._callbackMutation.bind(this));
+        this._observer = new global.MutationObserver(this._callbackMutation.bind(this));
     }
 
     this._observer.observe(this._node, {
@@ -1439,6 +1631,10 @@ xblocks.element.prototype._callbackMutation = function(records) {
  */
 xblocks.element.prototype._callbackUpdate = function(callback) {
     this._node.upgrade();
+
+    xblocks.utils.dispatchEvent(this._node, 'xb-update');
+    xblocks.utils.lazy(_elementGlobalUpdateEvent, this._node);
+
     if (callback) {
         callback.call(this);
     }
@@ -1450,7 +1646,7 @@ xblocks.element.prototype._callbackUpdate = function(callback) {
  * @private
  */
 xblocks.element.prototype._isMountedComponent = function() {
-    return (this._component && this._component.isMounted());
+    return Boolean(this._component && this._component.isMounted());
 };
 
 /**
@@ -1511,6 +1707,14 @@ function _elementGlobalInitEvent(records) {
  */
 function _elementGlobalRepaintEvent(records) {
     xblocks.utils.dispatchEvent(global, 'xb-repaint', { detail: { records: records } });
+}
+
+/**
+ * @param {array} records
+ * @private
+ */
+function _elementGlobalUpdateEvent(records) {
+    xblocks.utils.dispatchEvent(global, 'xb-update', { detail: { records: records } });
 }
 
 /* xblocks/element.js end */

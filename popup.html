@@ -11,6 +11,12 @@
     <script src="bower_components/x-tag-core/dist/x-tag-core.js"></script>
     <script src="bower_components/xblocks-core/xblocks-core.js"></script>
     <script src="bower_components/xblocks/build/xblocks.js"></script>
+
+    <style>
+        .col {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body contextmenu="menu">
 
@@ -26,10 +32,33 @@
     <xb-menuitem id="i6" label="submenu 3" disabled></xb-menuitem>
 </xb-menu>
 
+
+<div id="qwe" tabindex="0">
+    <div class="col">
+        <div class="row">1</div>
+        <div class="row">2</div>
+        <div class="row">3</div>
+    </div>
+    <div class="col">
+        <div class="row">4</div>
+        <div class="row">5</div>
+        <div class="row">6</div>
+    </div>
+    <div class="col">
+        <div class="row">7</div>
+        <div class="row">8</div>
+        <div class="row">9</div>
+    </div>
+</div>
+
 <script>
     document.querySelector('.open-menu').addEventListener('click', function(evt) {
         evt.preventDefault();
         document.getElementById('menu').open();
+    }, false);
+
+    window.addEventListener('xb-created', function(evt) {
+        console.log(evt);
     }, false);
 </script>
 
