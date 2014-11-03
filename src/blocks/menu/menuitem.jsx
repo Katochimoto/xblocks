@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 /* global xblocks, React */
+
 /* jshint strict: false */
 /* jshint -W098 */
 var XBMenuitem = xblocks.view.register('xb-menuitem', [

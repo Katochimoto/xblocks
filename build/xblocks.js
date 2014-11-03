@@ -2227,16 +2227,17 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
 /* blocks/menu/menuseparator.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React */
-/* jshint strict: false */
+/* global xblocks, React */
 
+/* jshint strict: false */
+/* jshint -W098 */
 var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
     displayName: 'xb-menuseparator',
 
     render: function() {
-        return (
-            React.DOM.div( {className:"xb-menuseparator"} )
-        );
+        return React.DOM.div({
+            'className': 'xb-menuseparator'
+        });
     }
 });
 
@@ -2258,6 +2259,7 @@ xblocks.create('xb-menuseparator', [
 /* blocks/menu/menuitem.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React */
+
 /* jshint strict: false */
 /* jshint -W098 */
 var XBMenuitem = xblocks.view.register('xb-menuitem', [
