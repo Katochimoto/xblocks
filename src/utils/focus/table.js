@@ -84,7 +84,7 @@ xblocks.utils.focus.Table.prototype = {
     },
 
     _colLast: function() {
-        return Array.prototype.pop.call(this._node.querySelectorAll(this._options.col)) || this._node;
+        return Array.prototype.pop.call(Array.prototype.slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
     },
 
     _colMatchIterate: function(data, element) {
@@ -111,7 +111,7 @@ xblocks.utils.focus.Table.prototype = {
     },
 
     _rowLast: function(col) {
-        return Array.prototype.pop.call(col.querySelectorAll(this._options.row));
+        return Array.prototype.pop.call(Array.prototype.slice.call(col.querySelectorAll(this._options.row)));
     },
 
     _rowMatchIterate: function(data, element) {
