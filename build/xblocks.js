@@ -2088,7 +2088,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
         events: {
             'click:delegate(._close)': function(evt) {
-                var reactId = xblocks.utils.react.getRootID(this);
+                var reactId = xblocks.utils.react.getID(this);
                 var popupElement = xblocks.utils.react.findReactContainerForID(reactId);
                 popupElement.close();
             },
