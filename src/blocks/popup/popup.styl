@@ -7,6 +7,10 @@ xb-popup
   & > ._popup
     skin: popup
     overflow: hidden
+    outline: none
+
+    &:focus
+      box-shadow: 0 0 0 1px rgba(#000, 0.15), 0 8px 30px -5px rgba(#000, 0.7)
 
     & > ._content
       skin: popup-content

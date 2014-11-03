@@ -1995,7 +1995,7 @@ xblocks.create('xb-radio', [
 /* blocks/radio/radio.js end */
 
     /* blocks/popup/popup.js begin */
-/* global xblocks, Tether */
+/* global global, xblocks, Tether */
 /* jshint strict: false */
 
 /* blocks/popup/popup.jsx.js begin */
@@ -2063,6 +2063,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
             }
 
             var props = {
+                'tabIndex': '0',
                 'className': React.addons.classSet(classes)
             };
 
@@ -2076,12 +2077,22 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
 /* jshint -W098 */
 var XBPopupElement = xblocks.create('xb-popup', [
+    xblocks.mixin.eFocus,
+
     {
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'click:delegate(._close)': function() {
-                this.parentNode.parentNode.close();
+            'click:delegate(._close)': function(evt) {
+                var reactId = xblocks.utils.react.getRootID(this);
+                var popupElement = xblocks.utils.react.findReactContainerForID(reactId);
+                popupElement.close();
+            },
+
+            // Escape
+            'keydown:keypass(27)': function() {
+                // TODO при закрытии вложенного окна фокус должен переходить на предка
+                this.close();
             }
         },
 
@@ -2094,7 +2105,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
                         'optimizations-gpu': true,
-                        'target': document.body,
+                        'target': global.document.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
                         'target-modifier': 'visible',
@@ -2176,9 +2187,11 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
 
                 tether.enable(true);
-                tether.target.xbPopup = this;
+                tether.target._xbpopup = this;
 
-                xblocks.utils.dispatchEvent(this, 'xb-open-after');
+                this.focus();
+
+                xblocks.utils.dispatchEvent(this, 'xb-open');
 
                 return true;
             },
@@ -2190,9 +2203,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                xblocks.utils.dispatchEvent(this, 'xb-close-before');
+                xblocks.utils.dispatchEvent(this, 'xb-close');
 
-                tether.target.xbPopup = null;
+                tether.target._xbpopup = undefined;
                 tether.disable();
                 tether.clearCache();
                 return true;
@@ -2464,38 +2477,36 @@ var XBMenu = xblocks.view.register('xb-menu', [
 var XBMenuElementStatic = {};
 
 XBMenuElementStatic._innerClose = function(target) {
-    if (target.xbPopup) {
-        target.xbPopup.close();
+    if (target._xbpopup) {
+        target._xbpopup.close();
     }
 };
 
 xblocks.create('xb-menu', [
-    xblocks.mixin.eFocus,
-
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         events: {
-            'xb-open-after': function() {
-                this._xbFocus = new xblocks.utils.focus.Table(this, {
+            'xb-open': function() {
+                this._xbfocus = new xblocks.utils.focus.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
-
-                this.focus();
             },
 
-            'xb-close-before': function() {
-                this._xbFocus.destroy();
-                this._xbFocus = null;
+            'xb-close': function() {
+                this._xbfocus.destroy();
+                this._xbfocus = undefined;
 
-                Array.prototype.forEach.call(this.querySelectorAll('.xb-menu-target'), XBMenuElementStatic._innerClose);
+                Array.prototype.forEach.call(
+                    this.querySelectorAll('.xb-menu-target'),
+                    XBMenuElementStatic._innerClose
+                );
             },
 
             // Escape
             'keydown:keypass(27)': function() {
                 // TODO при закрытии вложенного окна фокус должен переходить на предка
-
                 this.close();
             },
 

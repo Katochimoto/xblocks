@@ -62,6 +62,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
             }
 
             var props = {
+                'tabIndex': '0',
                 'className': React.addons.classSet(classes)
             };
 

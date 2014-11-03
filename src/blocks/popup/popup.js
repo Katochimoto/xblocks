@@ -1,16 +1,26 @@
-/* global xblocks, Tether */
+/* global global, xblocks, Tether */
 /* jshint strict: false */
 
 /*! borschik:include:popup.jsx.js */
 
 /* jshint -W098 */
 var XBPopupElement = xblocks.create('xb-popup', [
+    xblocks.mixin.eFocus,
+
     {
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'click:delegate(._close)': function() {
-                this.parentNode.parentNode.close();
+            'click:delegate(._close)': function(evt) {
+                var reactId = xblocks.utils.react.getRootID(this);
+                var popupElement = xblocks.utils.react.findReactContainerForID(reactId);
+                popupElement.close();
+            },
+
+            // Escape
+            'keydown:keypass(27)': function() {
+                // TODO при закрытии вложенного окна фокус должен переходить на предка
+                this.close();
             }
         },
 
@@ -23,7 +33,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
                         'optimizations-gpu': true,
-                        'target': document.body,
+                        'target': global.document.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
                         'target-modifier': 'visible',
@@ -105,9 +115,11 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
 
                 tether.enable(true);
-                tether.target.xbPopup = this;
+                tether.target._xbpopup = this;
 
-                xblocks.utils.dispatchEvent(this, 'xb-open-after');
+                this.focus();
+
+                xblocks.utils.dispatchEvent(this, 'xb-open');
 
                 return true;
             },
@@ -119,9 +131,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                xblocks.utils.dispatchEvent(this, 'xb-close-before');
+                xblocks.utils.dispatchEvent(this, 'xb-close');
 
-                tether.target.xbPopup = null;
+                tether.target._xbpopup = undefined;
                 tether.disable();
                 tether.clearCache();
                 return true;
