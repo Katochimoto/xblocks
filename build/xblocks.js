@@ -177,7 +177,7 @@ xblocks.utils.mapPropsPrefixLink = function(name, descr) {
 /* utils/mapPropsPrefixLink.js end */
 
     /* utils/filterPropsPrefixIco.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 xblocks.utils.filterPropsPrefixIco = function(name) {
@@ -243,7 +243,7 @@ xblocks.utils.exportPropTypes = function(tagName) {
         var lastCheckedRootNodeId = checkedCache[name];
 
         if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
-            var rootNode = xblocks.utils.findReactContainerForID(lastCheckedRootNodeId);
+            var rootNode = xblocks.utils.react.findReactContainerForID(lastCheckedRootNodeId);
 
             if (rootNode) {
                 rootNode.checked = false;

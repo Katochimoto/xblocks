@@ -19,7 +19,7 @@
         var lastCheckedRootNodeId = checkedCache[name];
 
         if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
-            var rootNode = xblocks.utils.findReactContainerForID(lastCheckedRootNodeId);
+            var rootNode = xblocks.utils.react.findReactContainerForID(lastCheckedRootNodeId);
 
             if (rootNode) {
                 rootNode.checked = false;
