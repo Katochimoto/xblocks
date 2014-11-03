@@ -2277,13 +2277,15 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
         propTypes: {
             'label': React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
-            'selected': React.PropTypes.bool
+            'selected': React.PropTypes.bool,
+            'submenu': React.PropTypes.bool
         },
 
         getDefaultProps: function() {
             return {
                 'disabled': false,
-                'selected': false
+                'selected': false,
+                'submenu': false
             };
         },
 
@@ -2291,13 +2293,9 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             var classes = {
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
-                '_selected': this.props.selected
+                '_selected': this.props.selected,
+                '_submenu': this.props.submenu,
             };
-
-            if (this.props.children.trim()) {
-                classes['_menuitem-target-' + this.props._uid] = true;
-                classes['_submenu'] = true;
-            }
 
             classes = React.addons.classSet(classes);
 
@@ -2336,7 +2334,14 @@ xblocks.create('xb-menuitem', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': XBMenuitemElementStatic._submenuReset,
+            'xb-created': function() {
+                XBMenuitemElementStatic._submenuReset();
+
+                this._targetClassName = '_menuitem-target-' + this.xuid;
+                this.submenu = Boolean(this.content.trim());
+                this.classList[ this.submenu ? 'add' : 'remove' ](this._targetClassName);
+            },
+
             'xb-repaint': XBMenuitemElementStatic._submenuReset,
             'xb-blur': XBMenuitemElementStatic._unselected,
             'xb-focus': XBMenuitemElementStatic._selected
@@ -2350,20 +2355,30 @@ xblocks.create('xb-menuitem', [
             },
 
             submenu: {
+                attribute: {
+                    boolean: true
+                }
+            },
+
+            menu: {
+                get: function() {
+                    return this.parentNode;
+                }
+            },
+
+            submenuInstance: {
                 get: function() {
                     if (!this._submenu && this._submenu !== null) {
-                        var content = this.content.trim();
-
-                        if (content) {
+                        if (this.submenu) {
                             var menu = this.ownerDocument.createElement('xb-menu');
                             menu.setAttribute('target-attachment', 'top right');
                             menu.setAttribute('attachment', 'top left');
-                            menu.setAttribute('target', '._menuitem-target-' + this.xuid);
+                            menu.setAttribute('target', '.' + this._targetClassName);
                             menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
                                 'to': 'scrollParent',
                                 'attachment': 'together'
                             }])));
-                            menu.innerHTML = content;
+                            menu.innerHTML = this.content.trim();
 
                             this._submenu = this.ownerDocument.body.appendChild(menu);
 
@@ -2477,10 +2492,13 @@ xblocks.create('xb-menu', [
                 this._xbfocus.destroy();
                 this._xbfocus = undefined;
 
+                // close all submenus
                 Array.prototype.forEach.call(
                     this.querySelectorAll('.xb-menu-target'),
                     XBMenuElementStatic._innerClose
                 );
+
+                console.log(this.tether.target);
             },
 
             // Escape
@@ -2493,8 +2511,8 @@ xblocks.create('xb-menu', [
             'keydown:keypass(13)': function() {
                 var item = this._xbfocus.getItem();
 
-                if (item && item.submenu) {
-                    item.submenu.open();
+                if (item && item.submenuInstance) {
+                    item.submenuInstance.open();
                 }
             },
 

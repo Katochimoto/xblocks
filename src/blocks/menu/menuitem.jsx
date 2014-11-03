@@ -14,13 +14,15 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
         propTypes: {
             'label': React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
-            'selected': React.PropTypes.bool
+            'selected': React.PropTypes.bool,
+            'submenu': React.PropTypes.bool
         },
 
         getDefaultProps: function() {
             return {
                 'disabled': false,
-                'selected': false
+                'selected': false,
+                'submenu': false
             };
         },
 
@@ -28,13 +30,9 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             var classes = {
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
-                '_selected': this.props.selected
+                '_selected': this.props.selected,
+                '_submenu': this.props.submenu,
             };
-
-            if (this.props.children.trim()) {
-                classes['_menuitem-target-' + this.props._uid] = true;
-                classes['_submenu'] = true;
-            }
 
             classes = React.addons.classSet(classes);
 

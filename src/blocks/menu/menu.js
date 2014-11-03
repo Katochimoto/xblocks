@@ -27,10 +27,13 @@ xblocks.create('xb-menu', [
                 this._xbfocus.destroy();
                 this._xbfocus = undefined;
 
+                // close all submenus
                 Array.prototype.forEach.call(
                     this.querySelectorAll('.xb-menu-target'),
                     XBMenuElementStatic._innerClose
                 );
+
+                console.log(this.tether.target);
             },
 
             // Escape
@@ -43,8 +46,8 @@ xblocks.create('xb-menu', [
             'keydown:keypass(13)': function() {
                 var item = this._xbfocus.getItem();
 
-                if (item && item.submenu) {
-                    item.submenu.open();
+                if (item && item.submenuInstance) {
+                    item.submenuInstance.open();
                 }
             },
 

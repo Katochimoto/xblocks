@@ -28,7 +28,14 @@ xblocks.create('xb-menuitem', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': XBMenuitemElementStatic._submenuReset,
+            'xb-created': function() {
+                XBMenuitemElementStatic._submenuReset();
+
+                this._targetClassName = '_menuitem-target-' + this.xuid;
+                this.submenu = Boolean(this.content.trim());
+                this.classList[ this.submenu ? 'add' : 'remove' ](this._targetClassName);
+            },
+
             'xb-repaint': XBMenuitemElementStatic._submenuReset,
             'xb-blur': XBMenuitemElementStatic._unselected,
             'xb-focus': XBMenuitemElementStatic._selected
@@ -42,20 +49,30 @@ xblocks.create('xb-menuitem', [
             },
 
             submenu: {
+                attribute: {
+                    boolean: true
+                }
+            },
+
+            menu: {
+                get: function() {
+                    return this.parentNode;
+                }
+            },
+
+            submenuInstance: {
                 get: function() {
                     if (!this._submenu && this._submenu !== null) {
-                        var content = this.content.trim();
-
-                        if (content) {
+                        if (this.submenu) {
                             var menu = this.ownerDocument.createElement('xb-menu');
                             menu.setAttribute('target-attachment', 'top right');
                             menu.setAttribute('attachment', 'top left');
-                            menu.setAttribute('target', '._menuitem-target-' + this.xuid);
+                            menu.setAttribute('target', '.' + this._targetClassName);
                             menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
                                 'to': 'scrollParent',
                                 'attachment': 'together'
                             }])));
-                            menu.innerHTML = content;
+                            menu.innerHTML = this.content.trim();
 
                             this._submenu = this.ownerDocument.body.appendChild(menu);
 
