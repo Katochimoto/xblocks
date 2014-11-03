@@ -39,6 +39,15 @@ xblocks.create('xb-menu', [
                 this.close();
             },
 
+            // Enter
+            'keydown:keypass(13)': function() {
+                var item = this._xbfocus.getItem();
+
+                if (item && item.submenu) {
+                    item.submenu.open();
+                }
+            },
+
             'blur': function() {
                 //this.close();
             }

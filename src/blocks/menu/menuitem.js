@@ -45,6 +45,7 @@ xblocks.create('xb-menuitem', [
                 get: function() {
                     if (!this._submenu && this._submenu !== null) {
                         var content = this.content.trim();
+
                         if (content) {
                             var menu = this.ownerDocument.createElement('xb-menu');
                             menu.setAttribute('target-attachment', 'top right');

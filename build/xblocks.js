@@ -324,6 +324,10 @@ xblocks.utils.focus.Table.prototype = {
         }
     },
 
+    getItem: function() {
+        return this._item;
+    },
+
     _col: function(item) {
         if (!item) {
             return;
@@ -2349,6 +2353,7 @@ xblocks.create('xb-menuitem', [
                 get: function() {
                     if (!this._submenu && this._submenu !== null) {
                         var content = this.content.trim();
+
                         if (content) {
                             var menu = this.ownerDocument.createElement('xb-menu');
                             menu.setAttribute('target-attachment', 'top right');
@@ -2482,6 +2487,15 @@ xblocks.create('xb-menu', [
             'keydown:keypass(27)': function() {
                 // TODO при закрытии вложенного окна фокус должен переходить на предка
                 this.close();
+            },
+
+            // Enter
+            'keydown:keypass(13)': function() {
+                var item = this._xbfocus.getItem();
+
+                if (item && item.submenu) {
+                    item.submenu.open();
+                }
             },
 
             'blur': function() {

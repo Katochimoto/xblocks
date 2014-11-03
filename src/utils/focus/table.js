@@ -62,6 +62,10 @@ xblocks.utils.focus.Table.prototype = {
         }
     },
 
+    getItem: function() {
+        return this._item;
+    },
+
     _col: function(item) {
         if (!item) {
             return;
