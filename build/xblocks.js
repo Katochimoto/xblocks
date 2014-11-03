@@ -2283,39 +2283,11 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             };
         },
 
-        getInitialState: function() {
-            return {
-                'selected': this.props.selected
-            };
-        },
-
-        componentWillReceiveProps: function(nextProps) {
-            this.setState({
-                'selected': nextProps.selected
-            });
-        },
-
-        componentDidMount: function() {
-        },
-
-        componentWillUnmount: function() {
-        },
-
-        componentDidUpdate: function(prevProps, prevState) {
-        },
-
-        _removeSubmenu: function() {
-            if (this.submenu && this.submenu.parentNode) {
-                this.submenu.parentNode.removeChild(this.submenu);
-                this.submenu = null;
-            }
-        },
-
         render: function() {
             var classes = {
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
-                '_selected': this.state.selected
+                '_selected': this.props.selected
             };
 
             if (this.props.children.trim()) {
