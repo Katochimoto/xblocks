@@ -677,7 +677,13 @@ xblocks.mixin.eChecked = {
 
     events: {
         change: function(event) {
-            this.checked = event.target.checked;
+            // error in Firefox sequence of events
+            // the "change" event fires only when you set the value
+            if (event.target.type === 'radio') {
+                this.checked = true;
+            } else {
+                this.checked = event.target.checked;
+            }
         }
     }
 };
@@ -1873,7 +1879,7 @@ xblocks.create('xb-checkbox', [
 /* blocks/checkbox/checkbox.js end */
 
     /* blocks/radio/radio.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /* blocks/radio/radio.jsx.js begin */
