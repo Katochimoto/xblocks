@@ -298,11 +298,7 @@ xblocks.utils.focus.Table = function(node, options) {
         )
     );
 
-    this._node.addEventListener('keydown', this._onKeydown, false);
-    this._node.addEventListener('mouseover', this._onMouseover, false);
-    this._node.addEventListener('mouseout', this._onMouseout, false);
-    this._node.addEventListener('mousemove', this._onMousemove, false);
-    this._node.addEventListener('click', this._onClick, false);
+    this._bind();
 };
 
 xblocks.utils.focus.Table.prototype = {
@@ -310,12 +306,7 @@ xblocks.utils.focus.Table.prototype = {
     EVENT_FOCUS: 'xb-focus',
 
     destroy: function() {
-        this._node.removeEventListener('keydown', this._onKeydown, false);
-        this._node.removeEventListener('mouseover', this._onMouseover, false);
-        this._node.removeEventListener('mouseout', this._onMouseout, false);
-        this._node.removeEventListener('mousemove', this._onMousemove, false);
-        this._node.removeEventListener('click', this._onClick, false);
-
+        this._unbind();
         this._node = undefined;
 
         if (this._item) {
@@ -326,6 +317,29 @@ xblocks.utils.focus.Table.prototype = {
 
     getItem: function() {
         return this._item;
+    },
+
+    lock: function(isLock) {
+        this._unbind();
+        if (!isLock) {
+            this._bind();
+        }
+    },
+
+    _bind: function() {
+        this._node.addEventListener('keydown', this._onKeydown, false);
+        this._node.addEventListener('mouseover', this._onMouseover, false);
+        this._node.addEventListener('mouseout', this._onMouseout, false);
+        this._node.addEventListener('mousemove', this._onMousemove, false);
+        this._node.addEventListener('click', this._onClick, false);
+    },
+
+    _unbind: function() {
+        this._node.removeEventListener('keydown', this._onKeydown, false);
+        this._node.removeEventListener('mouseover', this._onMouseover, false);
+        this._node.removeEventListener('mouseout', this._onMouseout, false);
+        this._node.removeEventListener('mousemove', this._onMousemove, false);
+        this._node.removeEventListener('click', this._onClick, false);
     },
 
     _col: function(item) {
@@ -2088,9 +2102,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
         events: {
             'click:delegate(._close)': function(evt) {
-                var reactId = xblocks.utils.react.getID(this);
-                var popupElement = xblocks.utils.react.findReactContainerForID(reactId);
-                popupElement.close();
+                var popupNode = xblocks.utils.react.findReactContainerForNode(this);
+                if (popupNode) {
+                    popupNode.close();
+                }
             },
 
             // Escape
@@ -2207,11 +2222,12 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                xblocks.utils.dispatchEvent(this, 'xb-close');
-
                 tether.target._xbpopup = undefined;
                 tether.disable();
                 tether.clearCache();
+
+                xblocks.utils.dispatchEvent(this, 'xb-close');
+
                 return true;
             },
 
@@ -2312,10 +2328,10 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 var XBMenuitemElementStatic = {};
 
 XBMenuitemElementStatic._submenuReset = function() {
-    if (this._submenu) {
-        this._submenu.close();
-        this._submenu.parentNode.removeChild(this._submenu);
-        this._submenu = undefined;
+    if (this._submenuInstance) {
+        this._submenuInstance.close();
+        this._submenuInstance.parentNode.removeChild(this._submenuInstance);
+        this._submenuInstance = undefined;
     }
 };
 
@@ -2336,10 +2352,7 @@ xblocks.create('xb-menuitem', [
         events: {
             'xb-created': function() {
                 XBMenuitemElementStatic._submenuReset();
-
-                this._targetClassName = '_menuitem-target-' + this.xuid;
                 this.submenu = Boolean(this.content.trim());
-                this.classList[ this.submenu ? 'add' : 'remove' ](this._targetClassName);
             },
 
             'xb-repaint': XBMenuitemElementStatic._submenuReset,
@@ -2360,34 +2373,51 @@ xblocks.create('xb-menuitem', [
                 }
             },
 
-            menu: {
+            menuInstance: {
                 get: function() {
-                    return this.parentNode;
+                    if (this._menuInstance || this._menuInstance === null) {
+                        return this._menuInstance;
+                    }
+
+                    this._menuInstance = null;
+                    var parent = this.parentNode;
+                    var menuNode = parent && xblocks.utils.react.findReactContainerForNode(parent);
+
+                    if (menuNode && menuNode.xtagName === 'xb-menu') {
+                        this._menuInstance = menuNode;
+                    }
+
+                    return this._menuInstance;
                 }
             },
 
             submenuInstance: {
                 get: function() {
-                    if (!this._submenu && this._submenu !== null) {
-                        if (this.submenu) {
-                            var menu = this.ownerDocument.createElement('xb-menu');
-                            menu.setAttribute('target-attachment', 'top right');
-                            menu.setAttribute('attachment', 'top left');
-                            menu.setAttribute('target', '.' + this._targetClassName);
-                            menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
-                                'to': 'scrollParent',
-                                'attachment': 'together'
-                            }])));
-                            menu.innerHTML = this.content.trim();
-
-                            this._submenu = this.ownerDocument.body.appendChild(menu);
-
-                        } else {
-                            this._submenu = null;
-                        }
+                    if (this._submenuInstance || this._submenuInstance === null) {
+                        return this._submenuInstance;
                     }
 
-                    return this._submenu;
+                    var targetClassName = '_menuitem-target-' + this.xuid;
+
+                    this._submenuInstance = null;
+
+                    if (this.submenu) {
+                        this.classList.add(targetClassName);
+
+                        var menu = this.ownerDocument.createElement('xb-menu');
+                        menu.setAttribute('target-attachment', 'top right');
+                        menu.setAttribute('attachment', 'top left');
+                        menu.setAttribute('target', '.' + targetClassName);
+                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
+                            'to': 'scrollParent',
+                            'attachment': 'together'
+                        }])));
+                        menu.innerHTML = this.content.trim();
+
+                        this._submenuInstance = this.ownerDocument.body.appendChild(menu);
+                    }
+
+                    return this._submenuInstance;
                 }
             }
         }
@@ -2397,7 +2427,7 @@ xblocks.create('xb-menuitem', [
 /* blocks/menu/menuitem.js end */
 
     /* blocks/menu/menu.js begin */
-/* global xblocks, XBPopupElement */
+/* global global, xblocks, XBPopupElement */
 /* jshint strict: false */
 
 /* blocks/menu/menu.jsx.js begin */
@@ -2470,7 +2500,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
 var XBMenuElementStatic = {};
 
-XBMenuElementStatic._innerClose = function(target) {
+XBMenuElementStatic._closeSubmenu = function(target) {
     if (target._xbpopup) {
         target._xbpopup.close();
     }
@@ -2489,22 +2519,25 @@ xblocks.create('xb-menu', [
             },
 
             'xb-close': function() {
-                this._xbfocus.destroy();
-                this._xbfocus = undefined;
+                if (this._xbfocus) {
+                    this._xbfocus.destroy();
+                    this._xbfocus = undefined;
+                }
 
                 // close all submenus
-                Array.prototype.forEach.call(
-                    this.querySelectorAll('.xb-menu-target'),
-                    XBMenuElementStatic._innerClose
-                );
-
-                console.log(this.tether.target);
+                this.closeSubmenu();
             },
 
             // Escape
             'keydown:keypass(27)': function() {
-                // TODO при закрытии вложенного окна фокус должен переходить на предка
                 this.close();
+
+                // focus of ancestor
+                var parentMenu = this.parentMenu;
+                if (parentMenu) {
+                    parentMenu.unlock();
+                    parentMenu.focus();
+                }
             },
 
             // Enter
@@ -2512,12 +2545,55 @@ xblocks.create('xb-menu', [
                 var item = this._xbfocus.getItem();
 
                 if (item && item.submenuInstance) {
-                    item.submenuInstance.open();
+                    if (item.submenuInstance.open()) {
+                        this.lock();
+                    }
                 }
             },
 
-            'blur': function() {
-                //this.close();
+            'blur': function(e) {
+                if (!this.hasOpenSubmenu) {
+                    this.close();
+                    global.setImmediate(function() {
+                        console.log('>>1', document.activeElement);
+                        console.log('>>2', e.relatedTarget);
+                    });
+                }
+            }
+        },
+
+        accessors: {
+            hasOpenSubmenu: {
+                get: function() {
+                    return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
+                }
+            },
+
+            parentMenu: {
+                get: function() {
+                    return this.tether.target.menuInstance;
+                }
+            }
+        },
+
+        methods: {
+            lock: function() {
+                if (this._xbfocus) {
+                    this._xbfocus.lock(true);
+                }
+            },
+
+            unlock: function() {
+                if (this._xbfocus) {
+                    this._xbfocus.lock(false);
+                }
+            },
+
+            closeSubmenu: function() {
+                Array.prototype.forEach.call(
+                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
+                    XBMenuElementStatic._closeSubmenu
+                );
             }
         }
     }

@@ -12,9 +12,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
         events: {
             'click:delegate(._close)': function(evt) {
-                var reactId = xblocks.utils.react.getID(this);
-                var popupElement = xblocks.utils.react.findReactContainerForID(reactId);
-                popupElement.close();
+                var popupNode = xblocks.utils.react.findReactContainerForNode(this);
+                if (popupNode) {
+                    popupNode.close();
+                }
             },
 
             // Escape
@@ -131,11 +132,12 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                xblocks.utils.dispatchEvent(this, 'xb-close');
-
                 tether.target._xbpopup = undefined;
                 tether.disable();
                 tether.clearCache();
+
+                xblocks.utils.dispatchEvent(this, 'xb-close');
+
                 return true;
             },
 

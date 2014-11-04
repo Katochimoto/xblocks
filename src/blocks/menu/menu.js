@@ -1,11 +1,11 @@
-/* global xblocks, XBPopupElement */
+/* global global, xblocks, XBPopupElement */
 /* jshint strict: false */
 
 /*! borschik:include:menu.jsx.js */
 
 var XBMenuElementStatic = {};
 
-XBMenuElementStatic._innerClose = function(target) {
+XBMenuElementStatic._closeSubmenu = function(target) {
     if (target._xbpopup) {
         target._xbpopup.close();
     }
@@ -24,22 +24,25 @@ xblocks.create('xb-menu', [
             },
 
             'xb-close': function() {
-                this._xbfocus.destroy();
-                this._xbfocus = undefined;
+                if (this._xbfocus) {
+                    this._xbfocus.destroy();
+                    this._xbfocus = undefined;
+                }
 
                 // close all submenus
-                Array.prototype.forEach.call(
-                    this.querySelectorAll('.xb-menu-target'),
-                    XBMenuElementStatic._innerClose
-                );
-
-                console.log(this.tether.target);
+                this.closeSubmenu();
             },
 
             // Escape
             'keydown:keypass(27)': function() {
-                // TODO при закрытии вложенного окна фокус должен переходить на предка
                 this.close();
+
+                // focus of ancestor
+                var parentMenu = this.parentMenu;
+                if (parentMenu) {
+                    parentMenu.unlock();
+                    parentMenu.focus();
+                }
             },
 
             // Enter
@@ -47,12 +50,55 @@ xblocks.create('xb-menu', [
                 var item = this._xbfocus.getItem();
 
                 if (item && item.submenuInstance) {
-                    item.submenuInstance.open();
+                    if (item.submenuInstance.open()) {
+                        this.lock();
+                    }
                 }
             },
 
-            'blur': function() {
-                //this.close();
+            'blur': function(e) {
+                if (!this.hasOpenSubmenu) {
+                    this.close();
+                    global.setImmediate(function() {
+                        console.log('>>1', document.activeElement);
+                        console.log('>>2', e.relatedTarget);
+                    });
+                }
+            }
+        },
+
+        accessors: {
+            hasOpenSubmenu: {
+                get: function() {
+                    return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
+                }
+            },
+
+            parentMenu: {
+                get: function() {
+                    return this.tether.target.menuInstance;
+                }
+            }
+        },
+
+        methods: {
+            lock: function() {
+                if (this._xbfocus) {
+                    this._xbfocus.lock(true);
+                }
+            },
+
+            unlock: function() {
+                if (this._xbfocus) {
+                    this._xbfocus.lock(false);
+                }
+            },
+
+            closeSubmenu: function() {
+                Array.prototype.forEach.call(
+                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
+                    XBMenuElementStatic._closeSubmenu
+                );
             }
         }
     }

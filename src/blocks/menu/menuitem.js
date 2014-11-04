@@ -6,10 +6,10 @@
 var XBMenuitemElementStatic = {};
 
 XBMenuitemElementStatic._submenuReset = function() {
-    if (this._submenu) {
-        this._submenu.close();
-        this._submenu.parentNode.removeChild(this._submenu);
-        this._submenu = undefined;
+    if (this._submenuInstance) {
+        this._submenuInstance.close();
+        this._submenuInstance.parentNode.removeChild(this._submenuInstance);
+        this._submenuInstance = undefined;
     }
 };
 
@@ -30,10 +30,7 @@ xblocks.create('xb-menuitem', [
         events: {
             'xb-created': function() {
                 XBMenuitemElementStatic._submenuReset();
-
-                this._targetClassName = '_menuitem-target-' + this.xuid;
                 this.submenu = Boolean(this.content.trim());
-                this.classList[ this.submenu ? 'add' : 'remove' ](this._targetClassName);
             },
 
             'xb-repaint': XBMenuitemElementStatic._submenuReset,
@@ -54,34 +51,51 @@ xblocks.create('xb-menuitem', [
                 }
             },
 
-            menu: {
+            menuInstance: {
                 get: function() {
-                    return this.parentNode;
+                    if (this._menuInstance || this._menuInstance === null) {
+                        return this._menuInstance;
+                    }
+
+                    this._menuInstance = null;
+                    var parent = this.parentNode;
+                    var menuNode = parent && xblocks.utils.react.findReactContainerForNode(parent);
+
+                    if (menuNode && menuNode.xtagName === 'xb-menu') {
+                        this._menuInstance = menuNode;
+                    }
+
+                    return this._menuInstance;
                 }
             },
 
             submenuInstance: {
                 get: function() {
-                    if (!this._submenu && this._submenu !== null) {
-                        if (this.submenu) {
-                            var menu = this.ownerDocument.createElement('xb-menu');
-                            menu.setAttribute('target-attachment', 'top right');
-                            menu.setAttribute('attachment', 'top left');
-                            menu.setAttribute('target', '.' + this._targetClassName);
-                            menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
-                                'to': 'scrollParent',
-                                'attachment': 'together'
-                            }])));
-                            menu.innerHTML = this.content.trim();
-
-                            this._submenu = this.ownerDocument.body.appendChild(menu);
-
-                        } else {
-                            this._submenu = null;
-                        }
+                    if (this._submenuInstance || this._submenuInstance === null) {
+                        return this._submenuInstance;
                     }
 
-                    return this._submenu;
+                    var targetClassName = '_menuitem-target-' + this.xuid;
+
+                    this._submenuInstance = null;
+
+                    if (this.submenu) {
+                        this.classList.add(targetClassName);
+
+                        var menu = this.ownerDocument.createElement('xb-menu');
+                        menu.setAttribute('target-attachment', 'top right');
+                        menu.setAttribute('attachment', 'top left');
+                        menu.setAttribute('target', '.' + targetClassName);
+                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
+                            'to': 'scrollParent',
+                            'attachment': 'together'
+                        }])));
+                        menu.innerHTML = this.content.trim();
+
+                        this._submenuInstance = this.ownerDocument.body.appendChild(menu);
+                    }
+
+                    return this._submenuInstance;
                 }
             }
         }

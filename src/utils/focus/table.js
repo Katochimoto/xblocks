@@ -36,11 +36,7 @@ xblocks.utils.focus.Table = function(node, options) {
         )
     );
 
-    this._node.addEventListener('keydown', this._onKeydown, false);
-    this._node.addEventListener('mouseover', this._onMouseover, false);
-    this._node.addEventListener('mouseout', this._onMouseout, false);
-    this._node.addEventListener('mousemove', this._onMousemove, false);
-    this._node.addEventListener('click', this._onClick, false);
+    this._bind();
 };
 
 xblocks.utils.focus.Table.prototype = {
@@ -48,12 +44,7 @@ xblocks.utils.focus.Table.prototype = {
     EVENT_FOCUS: 'xb-focus',
 
     destroy: function() {
-        this._node.removeEventListener('keydown', this._onKeydown, false);
-        this._node.removeEventListener('mouseover', this._onMouseover, false);
-        this._node.removeEventListener('mouseout', this._onMouseout, false);
-        this._node.removeEventListener('mousemove', this._onMousemove, false);
-        this._node.removeEventListener('click', this._onClick, false);
-
+        this._unbind();
         this._node = undefined;
 
         if (this._item) {
@@ -64,6 +55,29 @@ xblocks.utils.focus.Table.prototype = {
 
     getItem: function() {
         return this._item;
+    },
+
+    lock: function(isLock) {
+        this._unbind();
+        if (!isLock) {
+            this._bind();
+        }
+    },
+
+    _bind: function() {
+        this._node.addEventListener('keydown', this._onKeydown, false);
+        this._node.addEventListener('mouseover', this._onMouseover, false);
+        this._node.addEventListener('mouseout', this._onMouseout, false);
+        this._node.addEventListener('mousemove', this._onMousemove, false);
+        this._node.addEventListener('click', this._onClick, false);
+    },
+
+    _unbind: function() {
+        this._node.removeEventListener('keydown', this._onKeydown, false);
+        this._node.removeEventListener('mouseover', this._onMouseover, false);
+        this._node.removeEventListener('mouseout', this._onMouseout, false);
+        this._node.removeEventListener('mousemove', this._onMousemove, false);
+        this._node.removeEventListener('click', this._onClick, false);
     },
 
     _col: function(item) {
