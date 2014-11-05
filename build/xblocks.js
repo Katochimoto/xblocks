@@ -2335,20 +2335,12 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
 var XBMenuitemElementStatic = {};
 
-XBMenuitemElementStatic._submenuReset = function() {
+XBMenuitemElementStatic._submenuRemove = function() {
     if (this._submenuInstance) {
         this._submenuInstance.close();
         this._submenuInstance.parentNode.removeChild(this._submenuInstance);
         this._submenuInstance = undefined;
     }
-};
-
-XBMenuitemElementStatic._selected = function() {
-    this.selected = true;
-};
-
-XBMenuitemElementStatic._unselected = function() {
-    this.selected = false;
 };
 
 xblocks.create('xb-menuitem', [
@@ -2359,13 +2351,19 @@ xblocks.create('xb-menuitem', [
 
         events: {
             'xb-created': function() {
-                XBMenuitemElementStatic._submenuReset();
+                XBMenuitemElementStatic._submenuRemove.call(this);
                 this.submenu = Boolean(this.content.trim());
             },
 
-            'xb-repaint': XBMenuitemElementStatic._submenuReset,
-            'xb-blur': XBMenuitemElementStatic._unselected,
-            'xb-focus': XBMenuitemElementStatic._selected
+            'xb-repaint': XBMenuitemElementStatic._submenuRemove,
+
+            'xb-blur': function() {
+                this.selected = false;
+            },
+
+            'xb-focus': function() {
+                this.selected = true;
+            }
         },
 
         accessors: {
