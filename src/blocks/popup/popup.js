@@ -120,7 +120,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                 this.focus();
 
-                xblocks.utils.dispatchEvent(this, 'xb-open');
+                xblocks.event.dispatch(this, 'xb-open');
 
                 return true;
             },
@@ -136,7 +136,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.disable();
                 tether.clearCache();
 
-                xblocks.utils.dispatchEvent(this, 'xb-close');
+                xblocks.event.dispatch(this, 'xb-close');
 
                 return true;
             },

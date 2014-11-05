@@ -310,7 +310,7 @@ xblocks.utils.focus.Table.prototype = {
         this._node = undefined;
 
         if (this._item) {
-            xblocks.utils.dispatchEvent(this._item, this.EVENT_BLUR);
+            xblocks.event.dispatch(this._item, this.EVENT_BLUR);
             this._item = undefined;
         }
     },
@@ -427,11 +427,11 @@ xblocks.utils.focus.Table.prototype = {
         }
 
         if (this._item) {
-            xblocks.utils.dispatchEvent(this._item, this.EVENT_BLUR);
+            xblocks.event.dispatch(this._item, this.EVENT_BLUR);
         }
 
         this._item = element;
-        xblocks.utils.dispatchEvent(this._item, this.EVENT_FOCUS);
+        xblocks.event.dispatch(this._item, this.EVENT_FOCUS);
     },
 
     _onKeydown: function(event) {
@@ -2216,7 +2216,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                 this.focus();
 
-                xblocks.utils.dispatchEvent(this, 'xb-open');
+                xblocks.event.dispatch(this, 'xb-open');
 
                 return true;
             },
@@ -2232,7 +2232,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.disable();
                 tether.clearCache();
 
-                xblocks.utils.dispatchEvent(this, 'xb-close');
+                xblocks.event.dispatch(this, 'xb-close');
 
                 return true;
             },
