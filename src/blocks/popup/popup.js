@@ -118,10 +118,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.enable(true);
                 tether.target._xbpopup = this;
 
-                this.focus();
-
                 xblocks.event.dispatch(this, 'xb-open');
 
+                // FireFox does not set the focus without delay
+                global.setImmediate(this.focus.bind(this));
                 return true;
             },
 
@@ -138,6 +138,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                 xblocks.event.dispatch(this, 'xb-close');
 
+                // FireFox does not fire a blur event
+                global.setImmediate(this.blur.bind(this));
                 return true;
             },
 
