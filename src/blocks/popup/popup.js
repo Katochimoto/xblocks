@@ -3,6 +3,18 @@
 
 /*! borschik:include:popup.jsx.js */
 
+var XBPopupElementStatic = {};
+
+XBPopupElementStatic._onOpen = function() {
+    this.focus();
+    xblocks.event.dispatch(this, 'xb-open');
+};
+
+XBPopupElementStatic._onClose = function() {
+    this.blur();
+    xblocks.event.dispatch(this, 'xb-close');
+};
+
 /* jshint -W098 */
 var XBPopupElement = xblocks.create('xb-popup', [
     xblocks.mixin.eFocus,
@@ -18,7 +30,6 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
             },
 
-            // Escape
             'keydown:keypass(27)': function() {
                 // TODO при закрытии вложенного окна фокус должен переходить на предка
                 this.close();
@@ -119,9 +130,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.target._xbpopup = this;
 
                 // FireFox does not set the focus without delay
-                global.setImmediate(this.focus.bind(this));
+                global.setImmediate(XBPopupElementStatic._onOpen.bind(this));
 
-                xblocks.event.dispatch(this, 'xb-open');
                 return true;
             },
 
@@ -137,9 +147,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.clearCache();
 
                 // FireFox does not fire a blur event
-                global.setImmediate(this.blur.bind(this));
+                global.setImmediate(XBPopupElementStatic._onClose.bind(this));
 
-                xblocks.event.dispatch(this, 'xb-close');
                 return true;
             },
 

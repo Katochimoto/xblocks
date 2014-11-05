@@ -311,7 +311,8 @@ xblocks.utils.focus.Table.prototype = {
 
         if (this._item) {
             xblocks.event.dispatch(this._item, this.EVENT_BLUR);
-            this._item = undefined;
+            // "_item" must live for the proper event handling
+            //this._item = undefined;
         }
     },
 
@@ -2099,6 +2100,18 @@ var XBPopup = xblocks.view.register('xb-popup', [
 /* blocks/popup/popup.jsx.js end */
 
 
+var XBPopupElementStatic = {};
+
+XBPopupElementStatic._onOpen = function() {
+    this.focus();
+    xblocks.event.dispatch(this, 'xb-open');
+};
+
+XBPopupElementStatic._onClose = function() {
+    this.blur();
+    xblocks.event.dispatch(this, 'xb-close');
+};
+
 /* jshint -W098 */
 var XBPopupElement = xblocks.create('xb-popup', [
     xblocks.mixin.eFocus,
@@ -2114,7 +2127,6 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
             },
 
-            // Escape
             'keydown:keypass(27)': function() {
                 // TODO при закрытии вложенного окна фокус должен переходить на предка
                 this.close();
@@ -2215,9 +2227,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.target._xbpopup = this;
 
                 // FireFox does not set the focus without delay
-                global.setImmediate(this.focus.bind(this));
+                global.setImmediate(XBPopupElementStatic._onOpen.bind(this));
 
-                xblocks.event.dispatch(this, 'xb-open');
                 return true;
             },
 
@@ -2233,9 +2244,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 tether.clearCache();
 
                 // FireFox does not fire a blur event
-                global.setImmediate(this.blur.bind(this));
+                global.setImmediate(XBPopupElementStatic._onClose.bind(this));
 
-                xblocks.event.dispatch(this, 'xb-close');
                 return true;
             },
 
@@ -2512,6 +2522,23 @@ XBMenuElementStatic._closeSubmenu = function(target) {
     }
 };
 
+/**
+ * @this {HTMLElement}
+ */
+XBMenuElementStatic._closeUpFocus = function() {
+    var focusMenu = xblocks.utils.react.findReactContainerForNode(global.document.activeElement);
+    var parent = this.parentMenu;
+
+    while (parent) {
+        if (parent === focusMenu) {
+            break;
+        }
+
+        parent.close();
+        parent = parent.parentMenu;
+    }
+};
+
 xblocks.create('xb-menu', [
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
@@ -2534,36 +2561,35 @@ xblocks.create('xb-menu', [
                 this.closeSubmenu();
             },
 
-            // Escape
             'keydown:keypass(27)': function() {
                 this.close();
 
                 // focus of ancestor
                 var parentMenu = this.parentMenu;
                 if (parentMenu) {
-                    parentMenu.unlock();
                     parentMenu.focus();
                 }
             },
 
-            // Enter
             'keydown:keypass(13)': function() {
                 var item = this._xbfocus.getItem();
 
                 if (item && item.submenuInstance) {
-                    if (item.submenuInstance.open()) {
-                        this.lock();
-                    }
+                    item.submenuInstance.open();
                 }
             },
 
-            'blur': function(e) {
+            'focus': function() {
+                this.unlock();
+            },
+
+            'blur': function() {
+                this.lock();
+
                 if (!this.hasOpenSubmenu) {
                     this.close();
-                    console.log('>>1', e.relatedTarget);
-                    global.setImmediate(function() {
-                        console.log('>>2', document.activeElement);
-                    });
+                    // event.relatedTarget is null in firefox
+                    global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
                 }
             }
         },

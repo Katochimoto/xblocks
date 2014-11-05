@@ -49,7 +49,8 @@ xblocks.utils.focus.Table.prototype = {
 
         if (this._item) {
             xblocks.event.dispatch(this._item, this.EVENT_BLUR);
-            this._item = undefined;
+            // "_item" must live for the proper event handling
+            //this._item = undefined;
         }
     },
 

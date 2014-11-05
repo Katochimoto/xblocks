@@ -11,6 +11,23 @@ XBMenuElementStatic._closeSubmenu = function(target) {
     }
 };
 
+/**
+ * @this {HTMLElement}
+ */
+XBMenuElementStatic._closeUpFocus = function() {
+    var focusMenu = xblocks.utils.react.findReactContainerForNode(global.document.activeElement);
+    var parent = this.parentMenu;
+
+    while (parent) {
+        if (parent === focusMenu) {
+            break;
+        }
+
+        parent.close();
+        parent = parent.parentMenu;
+    }
+};
+
 xblocks.create('xb-menu', [
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
@@ -33,36 +50,35 @@ xblocks.create('xb-menu', [
                 this.closeSubmenu();
             },
 
-            // Escape
             'keydown:keypass(27)': function() {
                 this.close();
 
                 // focus of ancestor
                 var parentMenu = this.parentMenu;
                 if (parentMenu) {
-                    parentMenu.unlock();
                     parentMenu.focus();
                 }
             },
 
-            // Enter
             'keydown:keypass(13)': function() {
                 var item = this._xbfocus.getItem();
 
                 if (item && item.submenuInstance) {
-                    if (item.submenuInstance.open()) {
-                        this.lock();
-                    }
+                    item.submenuInstance.open();
                 }
             },
 
-            'blur': function(e) {
+            'focus': function() {
+                this.unlock();
+            },
+
+            'blur': function() {
+                this.lock();
+
                 if (!this.hasOpenSubmenu) {
                     this.close();
-                    console.log('>>1', e.relatedTarget);
-                    global.setImmediate(function() {
-                        console.log('>>2', document.activeElement);
-                    });
+                    // event.relatedTarget is null in firefox
+                    global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
                 }
             }
         },
