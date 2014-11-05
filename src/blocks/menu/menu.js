@@ -59,9 +59,9 @@ xblocks.create('xb-menu', [
             'blur': function(e) {
                 if (!this.hasOpenSubmenu) {
                     this.close();
+                    console.log('>>1', e.relatedTarget);
                     global.setImmediate(function() {
-                        console.log('>>1', document.activeElement);
-                        console.log('>>2', e.relatedTarget);
+                        console.log('>>2', document.activeElement);
                     });
                 }
             }

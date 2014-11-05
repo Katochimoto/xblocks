@@ -274,25 +274,25 @@ xblocks.utils.focus.Table = function(node, options) {
 
     this._onKeydown = this._onKeydown.bind(this);
 
-    this._onMouseover = xblocks.utils.event.delegate(
+    this._onMouseover = xblocks.event.delegate(
         this._options.row,
         this._onMouseover.bind(this)
     );
 
-    this._onMouseout = xblocks.utils.event.delegate(
+    this._onMouseout = xblocks.event.delegate(
         this._options.row,
         this._onMouseout.bind(this)
     );
 
     this._onMousemove = xblocks.utils.throttle(
-        xblocks.utils.event.delegate(
+        xblocks.event.delegate(
             this._options.row,
             this._onMouseAction.bind(this)
         )
     );
 
-    this._onClick = xblocks.utils.event.click('left',
-        xblocks.utils.event.delegate(
+    this._onClick = xblocks.event.filterClick('left',
+        xblocks.event.delegate(
             this._options.row,
             this._onMouseAction.bind(this)
         )
@@ -464,11 +464,11 @@ xblocks.utils.focus.Table.prototype = {
     },
 
     _onMouseover: function(event) {
-        xblocks.utils.event.mouseEnterFilter(event.delegateElement, event, this._onMouseAction.bind(this));
+        xblocks.event.filterMouseEnter(event.delegateElement, event, this._onMouseAction.bind(this));
     },
 
     _onMouseout: function(event) {
-        xblocks.utils.event.mouseLeaveFilter(event.delegateElement, event, this._onMouseAction.bind(this));
+        xblocks.event.filterMouseLeave(event.delegateElement, event, this._onMouseAction.bind(this));
     },
 
     _onArrowLeft: function() {
@@ -2560,9 +2560,9 @@ xblocks.create('xb-menu', [
             'blur': function(e) {
                 if (!this.hasOpenSubmenu) {
                     this.close();
+                    console.log('>>1', e.relatedTarget);
                     global.setImmediate(function() {
-                        console.log('>>1', document.activeElement);
-                        console.log('>>2', e.relatedTarget);
+                        console.log('>>2', document.activeElement);
                     });
                 }
             }
