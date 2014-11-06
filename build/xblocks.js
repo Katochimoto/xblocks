@@ -2373,6 +2373,12 @@ xblocks.create('xb-menuitem', [
 
             'xb-focus': function() {
                 this.selected = true;
+            },
+
+            'click': function() {
+                if (this.submenuInstance) {
+                    this.submenuInstance.open();
+                }
             }
         },
 
