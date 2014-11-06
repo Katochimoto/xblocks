@@ -30,7 +30,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
         events: {
             'click:delegate(._close)': function(evt) {
-                var popupNode = xblocks.react.findReactContainerForNode(this);
+                var popupNode = xblocks.react.findContainerForNode(this);
                 if (popupNode) {
                     popupNode.close();
                 }

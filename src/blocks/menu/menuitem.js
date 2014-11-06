@@ -88,7 +88,7 @@ xblocks.create('xb-menuitem', [
 
                     this._menuInstance = null;
                     var parent = this.parentNode;
-                    var menuNode = parent && xblocks.react.findReactContainerForNode(parent);
+                    var menuNode = parent && xblocks.react.findContainerForNode(parent);
 
                     if (menuNode && menuNode.xtagName === 'xb-menu') {
                         this._menuInstance = menuNode;

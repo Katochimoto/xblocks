@@ -21,7 +21,7 @@ XBMenuElementStatic._closeSubmenu = function(target) {
  * @this {HTMLElement}
  */
 XBMenuElementStatic._closeUpFocus = function() {
-    var focusMenu = xblocks.react.findReactContainerForNode(global.document.activeElement);
+    var focusMenu = xblocks.react.findContainerForNode(global.document.activeElement);
     var parent = this.parentMenu;
 
     while (parent) {

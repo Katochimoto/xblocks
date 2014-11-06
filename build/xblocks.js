@@ -2127,7 +2127,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
         events: {
             'click:delegate(._close)': function(evt) {
-                var popupNode = xblocks.react.findReactContainerForNode(this);
+                var popupNode = xblocks.react.findContainerForNode(this);
                 if (popupNode) {
                     popupNode.close();
                 }
@@ -2440,7 +2440,7 @@ xblocks.create('xb-menuitem', [
 
                     this._menuInstance = null;
                     var parent = this.parentNode;
-                    var menuNode = parent && xblocks.react.findReactContainerForNode(parent);
+                    var menuNode = parent && xblocks.react.findContainerForNode(parent);
 
                     if (menuNode && menuNode.xtagName === 'xb-menu') {
                         this._menuInstance = menuNode;
@@ -2552,7 +2552,7 @@ XBMenuElementStatic._closeSubmenu = function(target) {
  * @this {HTMLElement}
  */
 XBMenuElementStatic._closeUpFocus = function() {
-    var focusMenu = xblocks.react.findReactContainerForNode(global.document.activeElement);
+    var focusMenu = xblocks.react.findContainerForNode(global.document.activeElement);
     var parent = this.parentMenu;
 
     while (parent) {
