@@ -243,7 +243,7 @@ xblocks.utils.exportPropTypes = function(tagName) {
         var lastCheckedRootNodeId = checkedCache[name];
 
         if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
-            var rootNode = xblocks.utils.react.findReactContainerForID(lastCheckedRootNodeId);
+            var rootNode = xblocks.react.findReactContainerForID(lastCheckedRootNodeId);
 
             if (rootNode) {
                 rootNode.checked = false;
@@ -2127,7 +2127,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
         events: {
             'click:delegate(._close)': function(evt) {
-                var popupNode = xblocks.utils.react.findReactContainerForNode(this);
+                var popupNode = xblocks.react.findReactContainerForNode(this);
                 if (popupNode) {
                     popupNode.close();
                 }
@@ -2440,7 +2440,7 @@ xblocks.create('xb-menuitem', [
 
                     this._menuInstance = null;
                     var parent = this.parentNode;
-                    var menuNode = parent && xblocks.utils.react.findReactContainerForNode(parent);
+                    var menuNode = parent && xblocks.react.findReactContainerForNode(parent);
 
                     if (menuNode && menuNode.xtagName === 'xb-menu') {
                         this._menuInstance = menuNode;
@@ -2552,7 +2552,7 @@ XBMenuElementStatic._closeSubmenu = function(target) {
  * @this {HTMLElement}
  */
 XBMenuElementStatic._closeUpFocus = function() {
-    var focusMenu = xblocks.utils.react.findReactContainerForNode(global.document.activeElement);
+    var focusMenu = xblocks.react.findReactContainerForNode(global.document.activeElement);
     var parent = this.parentMenu;
 
     while (parent) {
