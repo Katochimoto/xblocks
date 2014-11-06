@@ -16,17 +16,17 @@
         }
 
         name = String(name);
-        var lastCheckedRootNodeId = checkedCache[name];
+        var lastCheckedRootNodeId = checkedCache[ name ];
 
         if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
-            var rootNode = xblocks.react.findReactContainerForID(lastCheckedRootNodeId);
+            var rootNode = xblocks.react.findContainerForID(lastCheckedRootNodeId);
 
             if (rootNode) {
                 rootNode.checked = false;
             }
         }
 
-        checkedCache[name] = element._rootNodeID;
+        checkedCache[ name ] = element._rootNodeID;
     };
 
 }());
