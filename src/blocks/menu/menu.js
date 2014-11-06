@@ -1,6 +1,12 @@
 /* global global, xblocks, XBPopupElement */
 /* jshint strict: false */
 
+/**
+ * Checked in:
+ * ChromeCanary 40
+ * FireFox Developer Edition 35
+ */
+
 /*! borschik:include:menu.jsx.js */
 
 var XBMenuElementStatic = {};

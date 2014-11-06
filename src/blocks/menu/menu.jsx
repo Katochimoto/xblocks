@@ -27,29 +27,6 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             classes = React.addons.classSet(classes);
 
-            /*
-            var props = {
-                'onMouseOver': function(event) {
-                    console.log('onMouseOver', event.target);
-                },
-                'onMouseOut': function(event) {
-                    console.log('onMouseOut', event.target);
-                },
-                'onClick': function(event) {
-                    console.log('onClick', event.target);
-                },
-                'onKeyDown': function(event) {
-                    console.log('onKeyDown', event.target);
-                },
-                'onFocus': function(event) {
-                    console.log('onFocus', event.target);
-                },
-                'onBlur': function(event) {
-                    console.log('onBlur', event.target);
-                }
-            };
-            */
-
             return React.DOM.div({
                 'className': classes,
                 'tabIndex': '0',

@@ -1,6 +1,12 @@
 /* global xblocks, global */
 /* jshint strict: false */
 
+/**
+ * Checked in:
+ * ChromeCanary 40
+ * FireFox Developer Edition 35
+ */
+
 /*! borschik:include:menuitem.jsx.js */
 
 var XBMenuitemElementStatic = {};
@@ -14,8 +20,6 @@ XBMenuitemElementStatic._submenuRemove = function() {
         this._submenuInstance = undefined;
     }
 };
-
-
 
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -115,7 +119,7 @@ xblocks.create('xb-menuitem', [
                             'to': 'scrollParent',
                             'attachment': 'together'
                         }])));
-                        menu.innerHTML = this.content.trim();
+                        menu.innerHTML = this.content;
 
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);
                     }

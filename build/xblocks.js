@@ -2023,6 +2023,12 @@ xblocks.create('xb-radio', [
 /* global global, xblocks, Tether */
 /* jshint strict: false */
 
+/**
+ * Checked in:
+ * ChromeCanary 40
+ * FireFox Developer Edition 35
+ */
+
 /* blocks/popup/popup.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React */
@@ -2300,6 +2306,12 @@ xblocks.create('xb-menuseparator', [
 /* global xblocks, global */
 /* jshint strict: false */
 
+/**
+ * Checked in:
+ * ChromeCanary 40
+ * FireFox Developer Edition 35
+ */
+
 /* blocks/menu/menuitem.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React */
@@ -2360,8 +2372,6 @@ XBMenuitemElementStatic._submenuRemove = function() {
         this._submenuInstance = undefined;
     }
 };
-
-
 
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -2461,7 +2471,7 @@ xblocks.create('xb-menuitem', [
                             'to': 'scrollParent',
                             'attachment': 'together'
                         }])));
-                        menu.innerHTML = this.content.trim();
+                        menu.innerHTML = this.content;
 
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);
                     }
@@ -2478,6 +2488,12 @@ xblocks.create('xb-menuitem', [
     /* blocks/menu/menu.js begin */
 /* global global, xblocks, XBPopupElement */
 /* jshint strict: false */
+
+/**
+ * Checked in:
+ * ChromeCanary 40
+ * FireFox Developer Edition 35
+ */
 
 /* blocks/menu/menu.jsx.js begin */
 /** @jsx React.DOM */
@@ -2508,29 +2524,6 @@ var XBMenu = xblocks.view.register('xb-menu', [
             };
 
             classes = React.addons.classSet(classes);
-
-            /*
-            var props = {
-                'onMouseOver': function(event) {
-                    console.log('onMouseOver', event.target);
-                },
-                'onMouseOut': function(event) {
-                    console.log('onMouseOut', event.target);
-                },
-                'onClick': function(event) {
-                    console.log('onClick', event.target);
-                },
-                'onKeyDown': function(event) {
-                    console.log('onKeyDown', event.target);
-                },
-                'onFocus': function(event) {
-                    console.log('onFocus', event.target);
-                },
-                'onBlur': function(event) {
-                    console.log('onBlur', event.target);
-                }
-            };
-            */
 
             return React.DOM.div({
                 'className': classes,

@@ -1,6 +1,12 @@
 /* global global, xblocks, Tether */
 /* jshint strict: false */
 
+/**
+ * Checked in:
+ * ChromeCanary 40
+ * FireFox Developer Edition 35
+ */
+
 /*! borschik:include:popup.jsx.js */
 
 var XBPopupElementStatic = {};
