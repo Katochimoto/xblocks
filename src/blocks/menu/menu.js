@@ -40,7 +40,7 @@ xblocks.create('xb-menu', [
 
         events: {
             'xb-open': function() {
-                this._xbfocus = new xblocks.utils.focus.Table(this, {
+                this._xbfocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });

@@ -25,9 +25,6 @@
     /*! borschik:include:utils/exportPropTypes.js */
     /*! borschik:include:utils/resetLastRadioChecked.js */
 
-    xblocks.utils.focus = {};
-    /*! borschik:include:utils/focus/table.js */
-
     /**
      * @memberOf xblocks
      * @namespace xblocks.mixin
