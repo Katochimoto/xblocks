@@ -1,9 +1,11 @@
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /*! borschik:include:menuitem.jsx.js */
 
 var XBMenuitemElementStatic = {};
+
+XBMenuitemElementStatic._timerOpenSubmenu = 0;
 
 XBMenuitemElementStatic._submenuRemove = function() {
     if (this._submenuInstance) {
@@ -12,6 +14,8 @@ XBMenuitemElementStatic._submenuRemove = function() {
         this._submenuInstance = undefined;
     }
 };
+
+
 
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -29,10 +33,27 @@ xblocks.create('xb-menuitem', [
 
             'xb-blur': function() {
                 this.selected = false;
+
+                global.clearTimeout(XBMenuitemElementStatic._timerOpenSubmenu);
+                XBMenuitemElementStatic._timerOpenSubmenu = 0;
+
+                var submenu = this.submenuInstance;
+                if (submenu && submenu.opened) {
+                    // to close the submenu and return focus
+                    this.menuInstance.focus();
+                }
             },
 
-            'xb-focus': function() {
+            'xb-focus': function(event) {
                 this.selected = true;
+
+                // open the submenu only event-mouse
+                if (event.detail.originalEvent.type !== 'keydown') {
+                    var submenu = this.submenuInstance;
+                    if (submenu && !XBMenuitemElementStatic._timerOpenSubmenu) {
+                        XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
+                    }
+                }
             },
 
             'click': function() {

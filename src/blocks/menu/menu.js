@@ -60,7 +60,7 @@ xblocks.create('xb-menu', [
                 }
             },
 
-            'keydown:keypass(13)': function() {
+            'keydown:keypass(13,39)': function() {
                 var item = this._xbfocus.getItem();
 
                 if (item && item.submenuInstance) {
@@ -68,13 +68,7 @@ xblocks.create('xb-menu', [
                 }
             },
 
-            'focus': function() {
-                this.unlock();
-            },
-
             'blur': function() {
-                this.lock();
-
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
@@ -98,18 +92,6 @@ xblocks.create('xb-menu', [
         },
 
         methods: {
-            lock: function() {
-                if (this._xbfocus) {
-                    this._xbfocus.lock(true);
-                }
-            },
-
-            unlock: function() {
-                if (this._xbfocus) {
-                    this._xbfocus.lock(false);
-                }
-            },
-
             closeSubmenu: function() {
                 Array.prototype.forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),

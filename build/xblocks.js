@@ -271,6 +271,7 @@ xblocks.utils.focus.Table = function(node, options) {
 
     this._node = node;
     this._item = undefined;
+    this._originalEvent = undefined;
 
     this._onKeydown = this._onKeydown.bind(this);
 
@@ -308,6 +309,7 @@ xblocks.utils.focus.Table.prototype = {
     destroy: function() {
         this._unbind();
         this._node = undefined;
+        this._originalEvent = undefined;
 
         if (this._item) {
             xblocks.event.dispatch(this._item, this.EVENT_BLUR);
@@ -320,27 +322,20 @@ xblocks.utils.focus.Table.prototype = {
         return this._item;
     },
 
-    lock: function(isLock) {
-        this._unbind();
-        if (!isLock) {
-            this._bind();
-        }
-    },
-
     _bind: function() {
         this._node.addEventListener('keydown', this._onKeydown, false);
+        this._node.addEventListener('click', this._onClick, false);
         this._node.addEventListener('mouseover', this._onMouseover, false);
         this._node.addEventListener('mouseout', this._onMouseout, false);
         this._node.addEventListener('mousemove', this._onMousemove, false);
-        this._node.addEventListener('click', this._onClick, false);
     },
 
     _unbind: function() {
         this._node.removeEventListener('keydown', this._onKeydown, false);
+        this._node.removeEventListener('click', this._onClick, false);
         this._node.removeEventListener('mouseover', this._onMouseover, false);
         this._node.removeEventListener('mouseout', this._onMouseout, false);
         this._node.removeEventListener('mousemove', this._onMousemove, false);
-        this._node.removeEventListener('click', this._onClick, false);
     },
 
     _col: function(item) {
@@ -428,17 +423,23 @@ xblocks.utils.focus.Table.prototype = {
         }
 
         if (this._item) {
-            xblocks.event.dispatch(this._item, this.EVENT_BLUR);
+            xblocks.event.dispatch(this._item, this.EVENT_BLUR, {
+                'detail': { 'originalEvent': this._originalEvent }
+            });
         }
 
         this._item = element;
-        xblocks.event.dispatch(this._item, this.EVENT_FOCUS);
+        xblocks.event.dispatch(this._item, this.EVENT_FOCUS, {
+            'detail': { 'originalEvent': this._originalEvent }
+        });
     },
 
     _onKeydown: function(event) {
         if (event.altKey || event.metaKey || event.shiftKey) {
             return;
         }
+
+        this._originalEvent = event;
 
         switch (event.keyCode) {
             case 37: // ArrowLeft
@@ -458,10 +459,9 @@ xblocks.utils.focus.Table.prototype = {
 
     _onMouseAction: function(event) {
         if (!this._item || this._item !== event.delegateElement) {
+            this._originalEvent = event;
             this._focus(event.delegateElement);
         }
-
-        //this.opened = !this.opened;
     },
 
     _onMouseover: function(event) {
@@ -2197,6 +2197,12 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     return this._tether;
                 }
+            },
+
+            opened: {
+                get: function() {
+                    return this.tether.enabled;
+                }
             }
         },
 
@@ -2291,7 +2297,7 @@ xblocks.create('xb-menuseparator', [
 /* blocks/menu/menuseparator.js end */
 
     /* blocks/menu/menuitem.js begin */
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /* blocks/menu/menuitem.jsx.js begin */
@@ -2345,6 +2351,8 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
 var XBMenuitemElementStatic = {};
 
+XBMenuitemElementStatic._timerOpenSubmenu = 0;
+
 XBMenuitemElementStatic._submenuRemove = function() {
     if (this._submenuInstance) {
         this._submenuInstance.close();
@@ -2352,6 +2360,8 @@ XBMenuitemElementStatic._submenuRemove = function() {
         this._submenuInstance = undefined;
     }
 };
+
+
 
 xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -2369,10 +2379,27 @@ xblocks.create('xb-menuitem', [
 
             'xb-blur': function() {
                 this.selected = false;
+
+                global.clearTimeout(XBMenuitemElementStatic._timerOpenSubmenu);
+                XBMenuitemElementStatic._timerOpenSubmenu = 0;
+
+                var submenu = this.submenuInstance;
+                if (submenu && submenu.opened) {
+                    // to close the submenu and return focus
+                    this.menuInstance.focus();
+                }
             },
 
-            'xb-focus': function() {
+            'xb-focus': function(event) {
                 this.selected = true;
+
+                // open the submenu only event-mouse
+                if (event.detail.originalEvent.type !== 'keydown') {
+                    var submenu = this.submenuInstance;
+                    if (submenu && !XBMenuitemElementStatic._timerOpenSubmenu) {
+                        XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
+                    }
+                }
             },
 
             'click': function() {
@@ -2577,7 +2604,7 @@ xblocks.create('xb-menu', [
                 }
             },
 
-            'keydown:keypass(13)': function() {
+            'keydown:keypass(13,39)': function() {
                 var item = this._xbfocus.getItem();
 
                 if (item && item.submenuInstance) {
@@ -2585,13 +2612,7 @@ xblocks.create('xb-menu', [
                 }
             },
 
-            'focus': function() {
-                this.unlock();
-            },
-
             'blur': function() {
-                this.lock();
-
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
@@ -2615,18 +2636,6 @@ xblocks.create('xb-menu', [
         },
 
         methods: {
-            lock: function() {
-                if (this._xbfocus) {
-                    this._xbfocus.lock(true);
-                }
-            },
-
-            unlock: function() {
-                if (this._xbfocus) {
-                    this._xbfocus.lock(false);
-                }
-            },
-
             closeSubmenu: function() {
                 Array.prototype.forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),

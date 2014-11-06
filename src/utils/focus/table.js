@@ -9,6 +9,7 @@ xblocks.utils.focus.Table = function(node, options) {
 
     this._node = node;
     this._item = undefined;
+    this._originalEvent = undefined;
 
     this._onKeydown = this._onKeydown.bind(this);
 
@@ -46,6 +47,7 @@ xblocks.utils.focus.Table.prototype = {
     destroy: function() {
         this._unbind();
         this._node = undefined;
+        this._originalEvent = undefined;
 
         if (this._item) {
             xblocks.event.dispatch(this._item, this.EVENT_BLUR);
@@ -58,27 +60,20 @@ xblocks.utils.focus.Table.prototype = {
         return this._item;
     },
 
-    lock: function(isLock) {
-        this._unbind();
-        if (!isLock) {
-            this._bind();
-        }
-    },
-
     _bind: function() {
         this._node.addEventListener('keydown', this._onKeydown, false);
+        this._node.addEventListener('click', this._onClick, false);
         this._node.addEventListener('mouseover', this._onMouseover, false);
         this._node.addEventListener('mouseout', this._onMouseout, false);
         this._node.addEventListener('mousemove', this._onMousemove, false);
-        this._node.addEventListener('click', this._onClick, false);
     },
 
     _unbind: function() {
         this._node.removeEventListener('keydown', this._onKeydown, false);
+        this._node.removeEventListener('click', this._onClick, false);
         this._node.removeEventListener('mouseover', this._onMouseover, false);
         this._node.removeEventListener('mouseout', this._onMouseout, false);
         this._node.removeEventListener('mousemove', this._onMousemove, false);
-        this._node.removeEventListener('click', this._onClick, false);
     },
 
     _col: function(item) {
@@ -166,17 +161,23 @@ xblocks.utils.focus.Table.prototype = {
         }
 
         if (this._item) {
-            xblocks.event.dispatch(this._item, this.EVENT_BLUR);
+            xblocks.event.dispatch(this._item, this.EVENT_BLUR, {
+                'detail': { 'originalEvent': this._originalEvent }
+            });
         }
 
         this._item = element;
-        xblocks.event.dispatch(this._item, this.EVENT_FOCUS);
+        xblocks.event.dispatch(this._item, this.EVENT_FOCUS, {
+            'detail': { 'originalEvent': this._originalEvent }
+        });
     },
 
     _onKeydown: function(event) {
         if (event.altKey || event.metaKey || event.shiftKey) {
             return;
         }
+
+        this._originalEvent = event;
 
         switch (event.keyCode) {
             case 37: // ArrowLeft
@@ -196,10 +197,9 @@ xblocks.utils.focus.Table.prototype = {
 
     _onMouseAction: function(event) {
         if (!this._item || this._item !== event.delegateElement) {
+            this._originalEvent = event;
             this._focus(event.delegateElement);
         }
-
-        //this.opened = !this.opened;
     },
 
     _onMouseover: function(event) {

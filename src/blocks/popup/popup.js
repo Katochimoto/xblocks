@@ -100,6 +100,12 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     return this._tether;
                 }
+            },
+
+            opened: {
+                get: function() {
+                    return this.tether.enabled;
+                }
             }
         },
 
