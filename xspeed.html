@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>XSpeed</title>
+    <link type="text/css" rel="stylesheet" href="bower_components/xblocks/build/xblocks.css">
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/tether/tether.js"></script>
+    <script src="bower_components/react/react-with-addons.js"></script>
+    <script src="bower_components/xblocks-core/x-tag-core.js"></script>
+    <script src="bower_components/xblocks-core/xblocks-core.js"></script>
+    <script src="bower_components/xblocks/build/xblocks.js"></script>
+</head>
+<body>
+
+<xb-button>test1</xb-button>
+<xb-button>test2</xb-button>
+<xb-button>test3</xb-button>
+<xb-button>test4</xb-button>
+<xb-button>test5</xb-button>
+
+
+<script>
+    setTimeout(function() {
+        [].forEach.call([].slice.call(document.querySelectorAll('xb-button')), function(e) {
+            for (var n in e._xtimers) {
+                e._xtimers[n] = e._xtimers[n][e._xtimers[n].length - 1] - e._xtimers[n][0];
+            }
+            console.log(e._xtimers, e);
+        });
+    }, 100);
+</script>
+</body>
+</html>

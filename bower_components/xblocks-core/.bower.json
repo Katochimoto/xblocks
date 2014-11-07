@@ -1,6 +1,6 @@
 {
   "name": "xblocks-core",
-  "version": "0.2.3",
+  "version": "0.4.0",
   "main": [
     "xblocks-core.js",
     "xblocks-core.min.js",
@@ -40,13 +40,13 @@
     "xblocks"
   ],
   "license": "MIT",
-  "_release": "0.2.3",
+  "_release": "0.4.0",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.3",
-    "commit": "b2bc54daba1f29a48980a980d76d79b9ec0637ba"
+    "tag": "v0.4.0",
+    "commit": "bb07a6ecaa9c01b936c0ffe3f1911f75b4154c7f"
   },
   "_source": "git://github.com/Katochimoto/xblocks-core.git",
-  "_target": "*",
+  "_target": "0.4.0",
   "_originalSource": "xblocks-core"
 }

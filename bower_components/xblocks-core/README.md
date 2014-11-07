@@ -1,4 +1,4 @@
-# xblocks-core 
+# xblocks-core
 > HTML core custom elements
 
 [![Build Status][build]][build-link] [![NPM version][version]][version-link] [![Dependency Status][dependency]][dependency-link] [![devDependency Status][dev-dependency]][dev-dependency-link] [![Code Climate][climate]][climate-link]
@@ -25,9 +25,9 @@
 
 ##Dependencies
 
-- [React.js](https://github.com/facebook/react)
-- [X-Tag core](https://github.com/x-tag/core)
-- [es5-shim](https://github.com/es-shims/es5-shim)
+- [React.js](https://github.com/facebook/react) (0.11.2)
+- [X-Tag core](https://github.com/x-tag/core) ([custom build x-tag-core.js](https://github.com/Katochimoto/xblocks-core/blob/master/x-tag-core.js) or 0.9.9)
+- [es5-shim](https://github.com/es-shims/es5-shim) (4.0.3)
 
 ##Example
 ```js

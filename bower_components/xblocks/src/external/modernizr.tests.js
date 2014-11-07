@@ -1,0 +1,1 @@
+Modernizr.addTest('createshadowroot', 'createShadowRoot' in document.createElement('div'));

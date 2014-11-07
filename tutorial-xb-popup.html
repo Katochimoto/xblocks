@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: xb-popup</title>
+    
+    
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+
+    
+    <script>
+    var config = {"monospaceLinks":true,"cleverLinks":false,"applicationName":"xblocks","disqus":false,"googleAnalytics":false,"meta":{"title":"","description":"","keyword":""},"openGraph":false,"scripts":["bower_components/es5-shim/es5-shim.js","bower_components/tether/tether.js","bower_components/react/react-with-addons.js","bower_components/xblocks-core/xblocks-core-full.js","bower_components/xblocks/build/xblocks.js"],"styles":["bower_components/xblocks/build/xblocks.css"],"default":{}};
+    </script>
+    
+
+    
+    
+        <link type="text/css" rel="stylesheet" href="bower_components/xblocks/build/xblocks.css">
+    
+    
+
+    
+    
+        <script src="bower_components/es5-shim/es5-shim.js"></script>
+    
+        <script src="bower_components/tether/tether.js"></script>
+    
+        <script src="bower_components/react/react-with-addons.js"></script>
+    
+        <script src="bower_components/xblocks-core/xblocks-core-full.js"></script>
+    
+        <script src="bower_components/xblocks/build/xblocks.js"></script>
+    
+    
+
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html">xblocks</a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="xblocks">
+            <span class="title">
+                <a href="xblocks.html">xblocks</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks.mixin">
+            <span class="title">
+                <a href="xblocks.mixin.html">xblocks.mixin</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+                
+                    <ul class="members itemMembers">
+                        <span class="subtitle">Static members</span>
+                        
+                        <li data-name="xblocks.mixin.eChecked"><a href="xblocks.mixin.html#eChecked">eChecked</a></li>
+                        
+                        <li data-name="xblocks.mixin.eDisabled"><a href="xblocks.mixin.html#eDisabled">eDisabled</a></li>
+                        
+                        <li data-name="xblocks.mixin.eFocus"><a href="xblocks.mixin.html#eFocus">eFocus</a></li>
+                        
+                        <li data-name="xblocks.mixin.eHidden"><a href="xblocks.mixin.html#eHidden">eHidden</a></li>
+                        
+                    </ul>
+                
+
+                
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks.utils">
+            <span class="title">
+                <a href="xblocks.utils.html">xblocks.utils</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+
+            
+                
+                    <ul class="members itemMembers">
+                        <span class="subtitle">Static members</span>
+                        
+                        <li data-name="xblocks.utils.resetLastRadioChecked"><a href="xblocks.utils.html#resetLastRadioChecked">resetLastRadioChecked</a></li>
+                        
+                    </ul>
+                
+
+                
+            
+
+            
+
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+
+    <div class="main">
+        
+            <h1 class="page-title">Tutorial: xb-popup</h1>
+        
+
+        <section>
+    
+<header>
+    
+
+    <h2>xb-popup</h2>
+</header>  
+
+<article>
+    <p><br/>
+Popup html element.</p>
+<p>For positioning of the window is used <a href="http://github.hubspot.com/tether/">tether</a></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-popup
+    optimizations-gpu=&quot;true|false&quot;
+    target=&quot;.classname&quot;
+    target-parent=&quot;true|false&quot;
+    target-attachment=&quot;middle center&quot;
+    target-modifier=&quot;visible&quot;
+    target-offset=&quot;...&quot;
+    attachment=&quot;middle center&quot;
+    offset=&quot;...&quot;
+    constraints=&quot;...&quot;
+    theme=&quot;normal|modal|island|error|blank&quot;
+    close>
+
+...
+
+&#60;/xb-popup></code></pre><p>JavaScript methods:</p>
+<ul>
+<li>setOptions(nextOptions) - override settings tether</li>
+<li>open([options])</li>
+<li>close()</li>
+<li>position() - recalculate the position of the popup</li>
+</ul>
+<p>&#160;</p>
+
+<p>Attributes:</p>
+<ul>
+<li>options - settings tether [read-only]</li>
+<li>tether - the object tether [read-only]</li>
+<li>opened - the popup is open [read-only]</li>
+</ul>
+<p>&#160;</p>
+
+<p>Events:</p>
+<ul>
+<li>xb-open - the popup is open and has focus</li>
+<li>xb-close - the popup closed and no focus</li>
+</ul>
+<p>&#160;</p>
+
+<p><a href="#" class="popup" ref="popup1">open</a></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-popup close>
+    Body
+&#60;/xb-popup></code></pre><p><a href="#" class="popup" ref="popup2">open</a></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-popup close>
+    &#60;script type=&quot;text/x-template&quot; ref=&quot;xb-popup-title&quot;>
+        Title
+    &#60;/script>
+
+    &#60;script type=&quot;text/x-template&quot;>
+        Body
+    &#60;/script>
+
+    &#60;script type=&quot;text/x-template&quot; ref=&quot;xb-popup-buttons&quot;>
+        &#60;xb-button>button&#60;/xb-button>
+    &#60;/script>
+&#60;/xb-popup></code></pre><p><a href="#" class="popup" ref="popup3">open</a></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-popup theme=&quot;modal&quot; close>
+    Body
+&#60;/xb-popup></code></pre><p><a href="#" class="popup" ref="popup4">open</a></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-popup theme=&quot;island&quot; close>
+    Body
+&#60;/xb-popup></code></pre><p><a href="#" class="popup" ref="popup5">open</a></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-popup theme=&quot;error&quot; close>
+    Body
+&#60;/xb-popup></code></pre><p><a href="#" class="popup" ref="popup6">open</a></p>
+<pre class="prettyprint source lang-html"><code>&#60;xb-popup theme=&quot;blank&quot; close>
+    Body
+&#60;/xb-popup></code></pre><script type="text/x-template" ref="popup1">
+    <xb-popup id="popup1" close>Body</xb-popup>
+</script>
+
+<script type="text/x-template" ref="popup2">
+    <xb-popup close>
+        <template ref="xb-popup-title">
+            Title
+        </template>
+
+        <template>Body</template>
+
+        <template ref="xb-popup-buttons">
+            <xb-button>button</xb-button>
+        </template>
+    </xb-popup>
+</script>
+
+<script type="text/x-template" ref="popup3">
+    <xb-popup id="popup3" theme="modal" close>Body</xb-popup>
+</script>
+
+<script type="text/x-template" ref="popup4">
+    <xb-popup id="popup4" theme="island" close>Body</xb-popup>
+</script>
+
+<script type="text/x-template" ref="popup5">
+    <xb-popup id="popup5" theme="error" close>Body</xb-popup>
+</script>
+
+<script type="text/x-template" ref="popup6">
+    <xb-popup id="popup6" theme="blank" close>Body</xb-popup>
+</script>
+
+<script>
+$('.popup').on('click', function(event) {
+    event.preventDefault();
+    var ref = $(this).attr('ref');
+    var $popup = $('#' + ref);
+
+    if (!$popup.length) {
+        $popup = $($('script[ref="' + ref + '"]').html()).appendTo('body');
+    }
+
+
+
+    setTimeout(function() {
+        $('xb-popup').each(function() {
+            this.close();
+        });
+
+        $popup[0].open();
+    }, 200);
+
+    return false;
+});
+</script>
+</article>
+
+</section>  
+
+
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Fri Nov 07 2014 20:12:37 GMT+0300 (MSK)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+
+
+</body>
+</html>
