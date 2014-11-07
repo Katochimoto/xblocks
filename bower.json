@@ -5,8 +5,7 @@
         "es5-shim": "4.0.3",
         "react": "0.11.2",
         "tether": "0.6.5",
-        "xblocks-core": "*",
-        "xblocks-utils": "*"
+        "xblocks-core": "*"
     },
     "ignore": [
         "**/.*",
