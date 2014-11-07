@@ -6,8 +6,9 @@
 
     /**
      * FIXME don't work cloneNode
+     * @memberOf xblocks.utils
+     * @name resetLastRadioChecked
      * @props {object} element
-     * @props {string} element._rootNodeID
      * @props {string} name
      */
     xblocks.utils.resetLastRadioChecked = function(element, name) {

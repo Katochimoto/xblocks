@@ -37,7 +37,6 @@ var XBPopupElement = xblocks.create('xb-popup', [
             },
 
             'keydown:keypass(27)': function() {
-                // TODO при закрытии вложенного окна фокус должен переходить на предка
                 this.close();
             }
         },

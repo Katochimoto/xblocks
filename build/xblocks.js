@@ -21,7 +21,7 @@
     /* xblocks/utils.js begin */
 // Time
 /* xblocks/utils/debounce.js begin */
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 xblocks.utils.debounce = function(callback, delay, scope) {
@@ -32,9 +32,9 @@ xblocks.utils.debounce = function(callback, delay, scope) {
         var context = scope || this;
         var args = arguments;
 
-        clearTimeout(timer);
+        global.clearTimeout(timer);
 
-        timer = setTimeout(function() {
+        timer = global.setTimeout(function() {
             callback.apply(context, args);
         }, delay);
     };
@@ -43,7 +43,7 @@ xblocks.utils.debounce = function(callback, delay, scope) {
 /* xblocks/utils/debounce.js end */
 
 /* xblocks/utils/throttle.js begin */
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 xblocks.utils.throttle = function(callback, delay, scope) {
@@ -57,9 +57,9 @@ xblocks.utils.throttle = function(callback, delay, scope) {
         var args = arguments;
 
         if (last && now < last + delay) {
-            clearTimeout(timer);
+            global.clearTimeout(timer);
 
-            timer = setTimeout(function() {
+            timer = global.setTimeout(function() {
                 last = now;
                 callback.apply(context, args);
             }, delay);
@@ -207,7 +207,7 @@ xblocks.utils.isWindow = function(obj) {
 
 // Other
 /* xblocks/utils/uid.js begin */
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /**
@@ -215,7 +215,7 @@ xblocks.utils.isWindow = function(obj) {
  * @returns {string}
  */
 xblocks.utils.uid = function() {
-    return Math.floor((1 + Math.random()) * 0x10000000).toString(36);
+    return global.Math.floor((1 + global.Math.random()) * 0x10000000).toString(36);
 };
 
 /* xblocks/utils/uid.js end */
@@ -400,22 +400,32 @@ xblocks.utils.Table.prototype = {
             return;
         }
 
-        this._originalEvent = event;
+        var action;
 
         switch (event.keyCode) {
             case 37: // ArrowLeft
-                this._onArrowLeft();
+                action = '_onArrowLeft';
                 break;
             case 38: // ArrowUp
-                this._onArrowUp();
+                action = '_onArrowUp';
                 break;
             case 39: // ArrowRight
-                this._onArrowRight();
+                action = '_onArrowRight';
                 break;
             case 40: // ArrowDown
-                this._onArrowDown();
+                action = '_onArrowDown';
                 break;
         }
+
+        if (!action) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        this._originalEvent = event;
+
+        this[ action ]();
     },
 
     _onMouseAction: function(event) {
@@ -967,8 +977,9 @@ xblocks.utils.exportPropTypes = function(tagName) {
 
     /**
      * FIXME don't work cloneNode
+     * @memberOf xblocks.utils
+     * @name resetLastRadioChecked
      * @props {object} element
-     * @props {string} element._rootNodeID
      * @props {string} name
      */
     xblocks.utils.resetLastRadioChecked = function(element, name) {
@@ -2488,6 +2499,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
         render: function() {
             var children = [
                 React.DOM.div({
+                    'key': 'content',
                     'className': '_content',
                     'data-xb-content': this.props._uid,
                     'dangerouslySetInnerHTML': {
@@ -2564,7 +2576,6 @@ var XBPopupElement = xblocks.create('xb-popup', [
             },
 
             'keydown:keypass(27)': function() {
-                // TODO при закрытии вложенного окна фокус должен переходить на предка
                 this.close();
             }
         },

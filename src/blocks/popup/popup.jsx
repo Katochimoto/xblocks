@@ -26,6 +26,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
         render: function() {
             var children = [
                 React.DOM.div({
+                    'key': 'content',
                     'className': '_content',
                     'data-xb-content': this.props._uid,
                     'dangerouslySetInnerHTML': {
