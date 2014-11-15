@@ -6,8 +6,8 @@
         "react": "0.11.2",
         "jquery": "2.1.1",
         "tether": "0.6.5",
-        "xblocks-core": "0.4.0",
-        "xblocks": "0.4.0"
+        "xblocks-core": "0.4.1",
+        "xblocks": "0.4.1"
     },
     "directory": "bower_components"
 }

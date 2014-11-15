@@ -1,10 +1,10 @@
 {
     "name": "xblocks-gh-pages",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.4.1",
     "homepage": "http://katochimoto.github.io/xblocks/",
     "dependencies": {
-        "jaguarjs-jsdoc": "git://github.com/doochik/jaguarjs-jsdoc.git",
+        "jaguarjs-jsdoc": "Katochimoto/jaguarjs-jsdoc.git",
         "jsdoc": "3.3.x"
     },
     "engines": {
