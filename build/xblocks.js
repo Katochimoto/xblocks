@@ -2771,6 +2771,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             'label': React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
             'selected': React.PropTypes.bool,
+            'focused': React.PropTypes.bool,
             'submenu': React.PropTypes.bool
         },
 
@@ -2778,6 +2779,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             return {
                 'disabled': false,
                 'selected': false,
+                'focused': false,
                 'submenu': false
             };
         },
@@ -2786,7 +2788,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             var classes = {
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
-                '_selected': this.props.selected,
+                '_focused': this.props.focused,
                 '_submenu': this.props.submenu,
             };
 
@@ -2829,7 +2831,7 @@ xblocks.create('xb-menuitem', [
             'xb-repaint': XBMenuitemElementStatic._submenuRemove,
 
             'xb-blur': function() {
-                this.selected = false;
+                this.focused = false;
 
                 global.clearTimeout(XBMenuitemElementStatic._timerOpenSubmenu);
                 XBMenuitemElementStatic._timerOpenSubmenu = 0;
@@ -2842,7 +2844,7 @@ xblocks.create('xb-menuitem', [
             },
 
             'xb-focus': function(event) {
-                this.selected = true;
+                this.focused = true;
 
                 // open the submenu only event-mouse
                 if (event.detail.originalEvent.type !== 'keydown') {
@@ -2861,6 +2863,12 @@ xblocks.create('xb-menuitem', [
         },
 
         accessors: {
+            focused: {
+                attribute: {
+                    boolean: true
+                }
+            },
+
             selected: {
                 attribute: {
                     boolean: true

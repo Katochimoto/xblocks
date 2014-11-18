@@ -36,7 +36,7 @@ xblocks.create('xb-menuitem', [
             'xb-repaint': XBMenuitemElementStatic._submenuRemove,
 
             'xb-blur': function() {
-                this.selected = false;
+                this.focused = false;
 
                 global.clearTimeout(XBMenuitemElementStatic._timerOpenSubmenu);
                 XBMenuitemElementStatic._timerOpenSubmenu = 0;
@@ -49,7 +49,7 @@ xblocks.create('xb-menuitem', [
             },
 
             'xb-focus': function(event) {
-                this.selected = true;
+                this.focused = true;
 
                 // open the submenu only event-mouse
                 if (event.detail.originalEvent.type !== 'keydown') {
@@ -68,6 +68,12 @@ xblocks.create('xb-menuitem', [
         },
 
         accessors: {
+            focused: {
+                attribute: {
+                    boolean: true
+                }
+            },
+
             selected: {
                 attribute: {
                     boolean: true

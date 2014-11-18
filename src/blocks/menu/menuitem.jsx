@@ -15,6 +15,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             'label': React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
             'selected': React.PropTypes.bool,
+            'focused': React.PropTypes.bool,
             'submenu': React.PropTypes.bool
         },
 
@@ -22,6 +23,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             return {
                 'disabled': false,
                 'selected': false,
+                'focused': false,
                 'submenu': false
             };
         },
@@ -30,7 +32,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             var classes = {
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
-                '_selected': this.props.selected,
+                '_focused': this.props.focused,
                 '_submenu': this.props.submenu,
             };
 
