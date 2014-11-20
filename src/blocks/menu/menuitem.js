@@ -21,8 +21,10 @@ XBMenuitemElementStatic._submenuRemove = function() {
     }
 };
 
-xblocks.create('xb-menuitem', [
+/* jshint -W098 */
+var XBMenuitemElement = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eInputValueProps,
 
     {
         prototype: Object.create(HTMLElement.prototype),
@@ -58,12 +60,6 @@ xblocks.create('xb-menuitem', [
                         XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                     }
                 }
-            },
-
-            'click': function() {
-                if (this.submenuInstance) {
-                    this.submenuInstance.open();
-                }
             }
         },
 
@@ -93,8 +89,8 @@ xblocks.create('xb-menuitem', [
                     }
 
                     this._menuInstance = null;
-                    var parent = this.parentNode;
-                    var menuNode = parent && xblocks.react.findContainerForNode(parent);
+
+                    var menuNode = this.parentNode && xblocks.react.findContainerForNode(this.parentNode);
 
                     if (menuNode && menuNode.xtagName === 'xb-menu') {
                         this._menuInstance = menuNode;

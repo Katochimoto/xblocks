@@ -2789,6 +2789,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
                 '_focused': this.props.focused,
+                '_selected': this.props.selected,
                 '_submenu': this.props.submenu,
             };
 
@@ -2816,8 +2817,10 @@ XBMenuitemElementStatic._submenuRemove = function() {
     }
 };
 
-xblocks.create('xb-menuitem', [
+/* jshint -W098 */
+var XBMenuitemElement = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eInputValueProps,
 
     {
         prototype: Object.create(HTMLElement.prototype),
@@ -2853,12 +2856,6 @@ xblocks.create('xb-menuitem', [
                         XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                     }
                 }
-            },
-
-            'click': function() {
-                if (this.submenuInstance) {
-                    this.submenuInstance.open();
-                }
             }
         },
 
@@ -2888,8 +2885,8 @@ xblocks.create('xb-menuitem', [
                     }
 
                     this._menuInstance = null;
-                    var parent = this.parentNode;
-                    var menuNode = parent && xblocks.react.findContainerForNode(parent);
+
+                    var menuNode = this.parentNode && xblocks.react.findContainerForNode(this.parentNode);
 
                     if (menuNode && menuNode.xtagName === 'xb-menu') {
                         this._menuInstance = menuNode;
@@ -2991,6 +2988,9 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
 var XBMenuElementStatic = {};
 
+/**
+ * @this {global}
+ */
 XBMenuElementStatic._closeSubmenu = function(target) {
     if (target._xbpopup) {
         target._xbpopup.close();
@@ -2998,7 +2998,7 @@ XBMenuElementStatic._closeSubmenu = function(target) {
 };
 
 /**
- * @this {HTMLElement}
+ * @this {XBMenuElement}
  */
 XBMenuElementStatic._closeUpFocus = function() {
     var focusMenu = xblocks.react.findContainerForNode(global.document.activeElement);
@@ -3014,7 +3014,8 @@ XBMenuElementStatic._closeUpFocus = function() {
     }
 };
 
-xblocks.create('xb-menu', [
+/* jshint -W098 */
+var XBMenuElement = xblocks.create('xb-menu', [
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
@@ -3033,7 +3034,10 @@ xblocks.create('xb-menu', [
                 }
 
                 // close all submenus
-                this.closeSubmenu();
+                Array.prototype.forEach.call(
+                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
+                    XBMenuElementStatic._closeSubmenu
+                );
             },
 
             'keydown:keypass(27)': function() {
@@ -3051,6 +3055,15 @@ xblocks.create('xb-menu', [
 
                 if (item && item.submenuInstance) {
                     item.submenuInstance.open();
+                }
+            },
+
+            /**
+             * @this {XBMenuitemElement}
+             */
+            'click:delegate(xb-menuitem:not([disabled]))': function() {
+                if (this.submenuInstance) {
+                    this.submenuInstance.open();
                 }
             },
 
@@ -3074,15 +3087,6 @@ xblocks.create('xb-menu', [
                 get: function() {
                     return this.tether.target.menuInstance;
                 }
-            }
-        },
-
-        methods: {
-            closeSubmenu: function() {
-                Array.prototype.forEach.call(
-                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    XBMenuElementStatic._closeSubmenu
-                );
             }
         }
     }

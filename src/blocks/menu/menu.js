@@ -11,6 +11,9 @@
 
 var XBMenuElementStatic = {};
 
+/**
+ * @this {global}
+ */
 XBMenuElementStatic._closeSubmenu = function(target) {
     if (target._xbpopup) {
         target._xbpopup.close();
@@ -18,7 +21,7 @@ XBMenuElementStatic._closeSubmenu = function(target) {
 };
 
 /**
- * @this {HTMLElement}
+ * @this {XBMenuElement}
  */
 XBMenuElementStatic._closeUpFocus = function() {
     var focusMenu = xblocks.react.findContainerForNode(global.document.activeElement);
@@ -34,7 +37,8 @@ XBMenuElementStatic._closeUpFocus = function() {
     }
 };
 
-xblocks.create('xb-menu', [
+/* jshint -W098 */
+var XBMenuElement = xblocks.create('xb-menu', [
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
@@ -53,7 +57,10 @@ xblocks.create('xb-menu', [
                 }
 
                 // close all submenus
-                this.closeSubmenu();
+                Array.prototype.forEach.call(
+                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
+                    XBMenuElementStatic._closeSubmenu
+                );
             },
 
             'keydown:keypass(27)': function() {
@@ -71,6 +78,15 @@ xblocks.create('xb-menu', [
 
                 if (item && item.submenuInstance) {
                     item.submenuInstance.open();
+                }
+            },
+
+            /**
+             * @this {XBMenuitemElement}
+             */
+            'click:delegate(xb-menuitem:not([disabled]))': function() {
+                if (this.submenuInstance) {
+                    this.submenuInstance.open();
                 }
             },
 
@@ -94,15 +110,6 @@ xblocks.create('xb-menu', [
                 get: function() {
                     return this.tether.target.menuInstance;
                 }
-            }
-        },
-
-        methods: {
-            closeSubmenu: function() {
-                Array.prototype.forEach.call(
-                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    XBMenuElementStatic._closeSubmenu
-                );
             }
         }
     }

@@ -33,6 +33,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
                 '_focused': this.props.focused,
+                '_selected': this.props.selected,
                 '_submenu': this.props.submenu,
             };
 
