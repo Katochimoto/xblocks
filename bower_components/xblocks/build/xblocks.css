@@ -3051,7 +3051,7 @@ xb-menu > ._popup:focus {
 .xb-menuitem:hover {
   background: inherit;
 }
-.xb-menuitem._selected {
+.xb-menuitem._focused {
   background: rgba(255,193,0,0.37);
 }
 .xb-menuitem._submenu:before {

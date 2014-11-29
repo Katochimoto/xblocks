@@ -16,6 +16,8 @@
     xblocks.event = xblocks.event || {};
 
     var indexOf = Array.prototype.indexOf;
+    var pop = Array.prototype.pop;
+    var slice = Array.prototype.slice;
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
     /* xblocks/utils.js begin */
@@ -221,6 +223,7 @@ xblocks.utils.uid = function() {
 /* xblocks/utils/uid.js end */
 
 /* xblocks/utils/table.js begin */
+/* global pop, slice */
 
 xblocks.utils.Table = function(node, options) {
     this._options = xblocks.utils.merge({
@@ -321,7 +324,7 @@ xblocks.utils.Table.prototype = {
     },
 
     _colLast: function() {
-        return Array.prototype.pop.call(Array.prototype.slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
+        return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
     },
 
     _colMatchIterate: function(data, element) {
@@ -348,7 +351,7 @@ xblocks.utils.Table.prototype = {
     },
 
     _rowLast: function(col) {
-        return Array.prototype.pop.call(Array.prototype.slice.call(col.querySelectorAll(this._options.row)));
+        return pop.call(slice.call(col.querySelectorAll(this._options.row)));
     },
 
     _rowMatchIterate: function(data, element) {
@@ -1293,7 +1296,7 @@ xblocks.mixin.vCommonAttrs = {
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-xblocks.view.register('xb-ico', {
+var XBIco = xblocks.view.register('xb-ico', {
     displayName: 'xb-ico',
 
     propTypes: {
@@ -1303,7 +1306,7 @@ xblocks.view.register('xb-ico', {
         'title': React.PropTypes.string,
         'value': React.PropTypes.string,
         'tabindex': React.PropTypes.string,
-        'children': React.PropTypes.renderable,
+        'children': React.PropTypes.node,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'type': React.PropTypes.oneOf([
             'attention',
@@ -1379,6 +1382,8 @@ xblocks.view.register('xb-ico', {
     }
 });
 
+var XBIcoFactory = React.createFactory(XBIco);
+
 /* blocks/ico/ico.jsx.js end */
 
 
@@ -1419,7 +1424,7 @@ xblocks.create('xb-ico', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-xblocks.view.register('xb-link', {
+var XBLink = xblocks.view.register('xb-link', {
     displayName: 'xb-link',
 
     propTypes: {
@@ -1472,6 +1477,8 @@ xblocks.view.register('xb-link', {
     }
 });
 
+var XBLinkFactory = React.createFactory(XBLink);
+
 /* blocks/link/link.jsx.js end */
 
 
@@ -1521,7 +1528,7 @@ var XBButtonContent = xblocks.view.create({
 
         if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
             icoProps.key = 'ico';
-            var icoView = xblocks.view.get('xb-ico')(icoProps);
+            var icoView = XBIcoFactory(icoProps);
 
             if (!icoProps.float || icoProps.float === 'left') {
                 children.unshift(icoView);
@@ -1537,6 +1544,8 @@ var XBButtonContent = xblocks.view.create({
     }
 });
 
+var XBButtonContentFactory = React.createFactory(XBButtonContent);
+
 /* blocks/button/button-content.jsx.js end */
 
 
@@ -1547,7 +1556,7 @@ var XBButton = xblocks.view.register('xb-button', [
         displayName: 'xb-button',
 
         propTypes: {
-            'children': React.PropTypes.renderable,
+            'children': React.PropTypes.node,
             'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'theme': React.PropTypes.oneOf([
                 'normal',
@@ -1664,6 +1673,16 @@ var XBButton = xblocks.view.register('xb-button', [
                 tabIndex = '-1';
             }
 
+            var content = (
+                XBButtonContentFactory(
+                    {key:"content",
+                    _uid:this.props._uid,
+                    ico:icoProps}, 
+
+                    this.props.children
+                )
+            );
+
             if (type === 'link') {
                 return (
                     React.DOM.a( {className:classes,
@@ -1673,7 +1692,7 @@ var XBButton = xblocks.view.register('xb-button', [
                         title:this.props.title,
                         tabIndex:tabIndex}, 
 
-                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
+                        content
                     )
                 );
 
@@ -1694,7 +1713,7 @@ var XBButton = xblocks.view.register('xb-button', [
                                 React.DOM.span( {className:"_xb-file-intruder-focus"} )
                             )
                         ),
-                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
+                        content
                     )
                 );
 
@@ -1718,7 +1737,7 @@ var XBButton = xblocks.view.register('xb-button', [
                             tabIndex:tabIndex})
                     );
 
-                    children.push(XBButton(xblocks.utils.merge({}, this.props, {
+                    children.push(XBButtonFactory(xblocks.utils.merge({}, this.props, {
                         'key': 'content',
                         'type': 'inline',
                         'tabindex': null
@@ -1745,11 +1764,7 @@ var XBButton = xblocks.view.register('xb-button', [
                         )
                     );
 
-                    children.push(
-                        XBButtonContent( {key:"content",
-                            _uid:this.props._uid,
-                            ico:icoProps}, this.props.children)
-                    );
+                    children.push(content);
                 }
 
                 return (
@@ -1761,8 +1776,10 @@ var XBButton = xblocks.view.register('xb-button', [
 
             } else if (type === 'inline') {
                 return (
-                    React.DOM.span( {className:classes, tabIndex:tabIndex}, 
-                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
+                    React.DOM.span( {className:classes,
+                        tabIndex:tabIndex}, 
+
+                        content
                     )
                 );
 
@@ -1778,13 +1795,15 @@ var XBButton = xblocks.view.register('xb-button', [
                         disabled:this.props.disabled,
                         autoFocus:this.props.autofocus}, 
 
-                        XBButtonContent( {_uid:this.props._uid, ico:icoProps}, this.props.children)
+                        content
                     )
                 );
             }
         }
     }
 ]);
+
+var XBButtonFactory = React.createFactory(XBButton);
 
 /* blocks/button/button.jsx.js end */
 
@@ -1821,7 +1840,7 @@ xblocks.create('xb-button', [
 
 /* blocks/input/input.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React, XBInputController */
+/* global xblocks, React, XBInputControllerFactory */
 /* jshint strict: false */
 
 /* blocks/input/input-controller.jsx.js begin */
@@ -1936,6 +1955,8 @@ var XBInputController = xblocks.view.create({
         }
     }
 });
+
+var XBInputControllerFactory = React.createFactory(XBInputController);
 
 /* blocks/input/input-controller.jsx.js end */
 
@@ -2100,7 +2121,7 @@ var XBInput = xblocks.view.register('xb-input', [
                     linkProps['theme'] = 'input';
                     linkProps['key'] = 'label';
 
-                    children.push(xblocks.view.get('xb-link')(linkProps, this.props['xb-link']));
+                    children.push(XBLinkFactory(linkProps, this.props['xb-link']));
                 }
 
                 if (this.props.prefix) {
@@ -2123,7 +2144,7 @@ var XBInput = xblocks.view.register('xb-input', [
 
                 children.push(
                     React.DOM.span( {key:"content", className:"_content"}, 
-                        XBInputController( {key:"controller",
+                        XBInputControllerFactory( {key:"controller",
                             ref:"controller",
                             className:"_controller",
                             value:this.state.value,
@@ -2152,7 +2173,7 @@ var XBInput = xblocks.view.register('xb-input', [
             } else {
 
                return (
-                    XBInputController( {key:"controller",
+                    XBInputControllerFactory( {key:"controller",
                         ref:"controller",
                         className:classes,
                         value:this.state.value,
@@ -2176,6 +2197,8 @@ var XBInput = xblocks.view.register('xb-input', [
         }
     }
 ]);
+
+var XBInputFactory = React.createFactory(XBInput);
 
 /* blocks/input/input.jsx.js end */
 
@@ -2205,7 +2228,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
     displayName: 'xb-checkbox',
 
     propTypes: {
-        'children': React.PropTypes.renderable,
+        'children': React.PropTypes.node,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'value': React.PropTypes.string,
         'name': React.PropTypes.string,
@@ -2296,6 +2319,8 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
     }
 } ]);
 
+var XBCheckboxFactory = React.createFactory(XBCheckbox);
+
 /* blocks/checkbox/checkbox.jsx.js end */
 
 
@@ -2329,11 +2354,11 @@ xblocks.create('xb-checkbox', [
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBradio = xblocks.view.register('xb-radio', [ {
+var XBRadio = xblocks.view.register('xb-radio', [ {
     displayName: 'xb-radio',
 
     propTypes: {
-        'children': React.PropTypes.renderable,
+        'children': React.PropTypes.node,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'value': React.PropTypes.string,
         'name': React.PropTypes.string,
@@ -2436,6 +2461,8 @@ var XBradio = xblocks.view.register('xb-radio', [ {
     }
 } ]);
 
+var XBRadioFactory = React.createFactory(XBRadio);
+
 /* blocks/radio/radio.jsx.js end */
 
 
@@ -2498,14 +2525,10 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         render: function() {
             var children = [
-                React.DOM.div({
-                    'key': 'content',
-                    'className': '_content',
-                    'data-xb-content': this.props._uid,
-                    'dangerouslySetInnerHTML': {
-                        '__html': this.props.children
-                    }
-                })
+                React.DOM.div( {key:"content",
+                    className:"_content",
+                    'data-xb-content':this.props._uid,
+                    dangerouslySetInnerHTML:{ __html: this.props.children }})
             ];
 
             children.unshift(this.template('xb-popup-title', {
@@ -2515,10 +2538,8 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    React.DOM.a({
-                        'key': 'close',
-                        'className': '_close'
-                    })
+                    React.DOM.a( {key:"close",
+                        className:"_close"})
                 );
             }
 
@@ -2535,15 +2556,17 @@ var XBPopup = xblocks.view.register('xb-popup', [
                 classes['_theme-' + this.props.theme] = true;
             }
 
-            var props = {
-                'tabIndex': '0',
-                'className': React.addons.classSet(classes)
-            };
+            classes = React.addons.classSet(classes);
 
-            return React.DOM.div(props, children);
+            return (
+                React.DOM.div( {className:classes,
+                    tabIndex:"0"}, children)
+            );
         }
     }
 ]);
+
+var XBPopupFactory = React.createFactory(XBPopup);
 
 /* blocks/popup/popup.jsx.js end */
 
@@ -2726,11 +2749,13 @@ var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
     displayName: 'xb-menuseparator',
 
     render: function() {
-        return React.DOM.div({
-            'className': 'xb-menuseparator'
-        });
+        return (
+            React.DOM.div( {className:"xb-menuseparator"})
+        );
     }
 });
+
+var XBMenuseparatorFactory = React.createFactory(XBMenuseparator);
 
 /* blocks/menu/menuseparator.jsx.js end */
 
@@ -2771,6 +2796,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             'label': React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
             'selected': React.PropTypes.bool,
+            'focused': React.PropTypes.bool,
             'submenu': React.PropTypes.bool
         },
 
@@ -2778,6 +2804,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             return {
                 'disabled': false,
                 'selected': false,
+                'focused': false,
                 'submenu': false
             };
         },
@@ -2786,18 +2813,23 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             var classes = {
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
+                '_focused': this.props.focused,
                 '_selected': this.props.selected,
                 '_submenu': this.props.submenu,
             };
 
             classes = React.addons.classSet(classes);
 
-            return React.DOM.div({
-                'className': classes
-            }, React.DOM.span({}, this.props.label));
+            return (
+                React.DOM.div( {className:classes}, 
+                    React.DOM.span(null, this.props.label)
+                )
+            );
         }
     }
 ]);
+
+var XBMenuitemFactory = React.createFactory(XBMenuitem);
 
 /* blocks/menu/menuitem.jsx.js end */
 
@@ -2814,8 +2846,10 @@ XBMenuitemElementStatic._submenuRemove = function() {
     }
 };
 
-xblocks.create('xb-menuitem', [
+/* jshint -W098 */
+var XBMenuitemElement = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
+    xblocks.mixin.eInputValueProps,
 
     {
         prototype: Object.create(HTMLElement.prototype),
@@ -2829,7 +2863,7 @@ xblocks.create('xb-menuitem', [
             'xb-repaint': XBMenuitemElementStatic._submenuRemove,
 
             'xb-blur': function() {
-                this.selected = false;
+                this.focused = false;
 
                 global.clearTimeout(XBMenuitemElementStatic._timerOpenSubmenu);
                 XBMenuitemElementStatic._timerOpenSubmenu = 0;
@@ -2842,7 +2876,7 @@ xblocks.create('xb-menuitem', [
             },
 
             'xb-focus': function(event) {
-                this.selected = true;
+                this.focused = true;
 
                 // open the submenu only event-mouse
                 if (event.detail.originalEvent.type !== 'keydown') {
@@ -2851,16 +2885,16 @@ xblocks.create('xb-menuitem', [
                         XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                     }
                 }
-            },
-
-            'click': function() {
-                if (this.submenuInstance) {
-                    this.submenuInstance.open();
-                }
             }
         },
 
         accessors: {
+            focused: {
+                attribute: {
+                    boolean: true
+                }
+            },
+
             selected: {
                 attribute: {
                     boolean: true
@@ -2880,8 +2914,8 @@ xblocks.create('xb-menuitem', [
                     }
 
                     this._menuInstance = null;
-                    var parent = this.parentNode;
-                    var menuNode = parent && xblocks.react.findContainerForNode(parent);
+
+                    var menuNode = this.parentNode && xblocks.react.findContainerForNode(this.parentNode);
 
                     if (menuNode && menuNode.xtagName === 'xb-menu') {
                         this._menuInstance = menuNode;
@@ -2966,23 +3000,26 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             classes = React.addons.classSet(classes);
 
-            return React.DOM.div({
-                'className': classes,
-                'tabIndex': '0',
-                'data-xb-content': this.props._uid,
-                'dangerouslySetInnerHTML': {
-                    '__html': this.props.children
-                }
-            });
+            return (
+                React.DOM.div( {className:classes,
+                    tabIndex:"0",
+                    'data-xb-content':this.props._uid,
+                    dangerouslySetInnerHTML:{ __html: this.props.children }})
+            );
         }
     }
 ]);
+
+var XBMenuFactory = React.createFactory(XBMenu);
 
 /* blocks/menu/menu.jsx.js end */
 
 
 var XBMenuElementStatic = {};
 
+/**
+ * @this {global}
+ */
 XBMenuElementStatic._closeSubmenu = function(target) {
     if (target._xbpopup) {
         target._xbpopup.close();
@@ -2990,10 +3027,10 @@ XBMenuElementStatic._closeSubmenu = function(target) {
 };
 
 /**
- * @this {HTMLElement}
+ * @this {XBMenuElement}
  */
 XBMenuElementStatic._closeUpFocus = function() {
-    var focusMenu = xblocks.react.findContainerForNode(global.document.activeElement);
+    var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
     var parent = this.parentMenu;
 
     while (parent) {
@@ -3006,7 +3043,8 @@ XBMenuElementStatic._closeUpFocus = function() {
     }
 };
 
-xblocks.create('xb-menu', [
+/* jshint -W098 */
+var XBMenuElement = xblocks.create('xb-menu', [
     {
         prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
@@ -3025,7 +3063,10 @@ xblocks.create('xb-menu', [
                 }
 
                 // close all submenus
-                this.closeSubmenu();
+                Array.prototype.forEach.call(
+                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
+                    XBMenuElementStatic._closeSubmenu
+                );
             },
 
             'keydown:keypass(27)': function() {
@@ -3043,6 +3084,15 @@ xblocks.create('xb-menu', [
 
                 if (item && item.submenuInstance) {
                     item.submenuInstance.open();
+                }
+            },
+
+            /**
+             * @this {XBMenuitemElement}
+             */
+            'click:delegate(xb-menuitem:not([disabled]))': function() {
+                if (this.submenuInstance) {
+                    this.submenuInstance.open();
                 }
             },
 
@@ -3066,15 +3116,6 @@ xblocks.create('xb-menu', [
                 get: function() {
                     return this.tether.target.menuInstance;
                 }
-            }
-        },
-
-        methods: {
-            closeSubmenu: function() {
-                Array.prototype.forEach.call(
-                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    XBMenuElementStatic._closeSubmenu
-                );
             }
         }
     }
@@ -3158,7 +3199,7 @@ var XBSelect = xblocks.view.register('xb-select', [
             return (
                 React.DOM.div( {className:classes}, 
                     React.DOM.input( {className:"_controller"} ),
-                    XBButton( {ref:"control",
+                    XBButtonFactory( {ref:"control",
                         type:"inline"}),
                     React.DOM.div( {ref:"dropdown", className:"_xb-select-dropdown"}, 
                         React.DOM.ul( {className:"_group"}, 
@@ -3172,6 +3213,8 @@ var XBSelect = xblocks.view.register('xb-select', [
         }
     }
 ]);
+
+var XBSelectFactory = React.createFactory(XBSelect);
 
 /* blocks/select/select.jsx.js end */
 
