@@ -39,9 +39,13 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
             classes = React.addons.classSet(classes);
 
-            return React.DOM.div({
-                'className': classes
-            }, React.DOM.span({}, this.props.label));
+            return (
+                <div className={classes}>
+                    <span>{this.props.label}</span>
+                </div>
+            );
         }
     }
 ]);
+
+var XBMenuitemFactory = React.createFactory(XBMenuitem);

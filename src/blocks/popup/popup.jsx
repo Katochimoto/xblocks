@@ -25,14 +25,10 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
         render: function() {
             var children = [
-                React.DOM.div({
-                    'key': 'content',
-                    'className': '_content',
-                    'data-xb-content': this.props._uid,
-                    'dangerouslySetInnerHTML': {
-                        '__html': this.props.children
-                    }
-                })
+                <div key="content"
+                    className="_content"
+                    data-xb-content={this.props._uid}
+                    dangerouslySetInnerHTML={{ __html: this.props.children }}></div>
             ];
 
             children.unshift(this.template('xb-popup-title', {
@@ -42,10 +38,8 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    React.DOM.a({
-                        'key': 'close',
-                        'className': '_close'
-                    })
+                    <a key="close"
+                        className="_close"></a>
                 );
             }
 
@@ -62,12 +56,14 @@ var XBPopup = xblocks.view.register('xb-popup', [
                 classes['_theme-' + this.props.theme] = true;
             }
 
-            var props = {
-                'tabIndex': '0',
-                'className': React.addons.classSet(classes)
-            };
+            classes = React.addons.classSet(classes);
 
-            return React.DOM.div(props, children);
+            return (
+                <div className={classes}
+                    tabIndex="0">{children}</div>
+            );
         }
     }
 ]);
+
+var XBPopupFactory = React.createFactory(XBPopup);

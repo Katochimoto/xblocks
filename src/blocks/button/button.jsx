@@ -11,7 +11,7 @@ var XBButton = xblocks.view.register('xb-button', [
         displayName: 'xb-button',
 
         propTypes: {
-            'children': React.PropTypes.renderable,
+            'children': React.PropTypes.node,
             'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'theme': React.PropTypes.oneOf([
                 'normal',
@@ -128,6 +128,16 @@ var XBButton = xblocks.view.register('xb-button', [
                 tabIndex = '-1';
             }
 
+            var content = (
+                <XBButtonContentFactory
+                    key="content"
+                    _uid={this.props._uid}
+                    ico={icoProps}>
+
+                    {this.props.children}
+                </XBButtonContentFactory>
+            );
+
             if (type === 'link') {
                 return (
                     <a className={classes}
@@ -137,7 +147,7 @@ var XBButton = xblocks.view.register('xb-button', [
                         title={this.props.title}
                         tabIndex={tabIndex}>
 
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
+                        {content}
                     </a>
                 );
 
@@ -158,7 +168,7 @@ var XBButton = xblocks.view.register('xb-button', [
                                 <span className="_xb-file-intruder-focus" />
                             </span>
                         </span>
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
+                        {content}
                     </label>
                 );
 
@@ -182,7 +192,7 @@ var XBButton = xblocks.view.register('xb-button', [
                             tabIndex={tabIndex}/>
                     );
 
-                    children.push(XBButton(xblocks.utils.merge({}, this.props, {
+                    children.push(XBButtonFactory(xblocks.utils.merge({}, this.props, {
                         'key': 'content',
                         'type': 'inline',
                         'tabindex': null
@@ -209,11 +219,7 @@ var XBButton = xblocks.view.register('xb-button', [
                         </span>
                     );
 
-                    children.push(
-                        <XBButtonContent key="content"
-                            _uid={this.props._uid}
-                            ico={icoProps}>{this.props.children}</XBButtonContent>
-                    );
+                    children.push(content);
                 }
 
                 return (
@@ -225,8 +231,10 @@ var XBButton = xblocks.view.register('xb-button', [
 
             } else if (type === 'inline') {
                 return (
-                    <span className={classes} tabIndex={tabIndex}>
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
+                    <span className={classes}
+                        tabIndex={tabIndex}>
+
+                        {content}
                     </span>
                 );
 
@@ -242,10 +250,12 @@ var XBButton = xblocks.view.register('xb-button', [
                         disabled={this.props.disabled}
                         autoFocus={this.props.autofocus}>
 
-                        <XBButtonContent _uid={this.props._uid} ico={icoProps}>{this.props.children}</XBButtonContent>
+                        {content}
                     </button>
                 );
             }
         }
     }
 ]);
+
+var XBButtonFactory = React.createFactory(XBButton);

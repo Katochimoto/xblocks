@@ -2,11 +2,11 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-var XBradio = xblocks.view.register('xb-radio', [ {
+var XBRadio = xblocks.view.register('xb-radio', [ {
     displayName: 'xb-radio',
 
     propTypes: {
-        'children': React.PropTypes.renderable,
+        'children': React.PropTypes.node,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'value': React.PropTypes.string,
         'name': React.PropTypes.string,
@@ -108,3 +108,5 @@ var XBradio = xblocks.view.register('xb-radio', [ {
         );
     }
 } ]);
+
+var XBRadioFactory = React.createFactory(XBRadio);

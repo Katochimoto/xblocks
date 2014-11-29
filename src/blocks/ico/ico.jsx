@@ -2,7 +2,7 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-xblocks.view.register('xb-ico', {
+var XBIco = xblocks.view.register('xb-ico', {
     displayName: 'xb-ico',
 
     propTypes: {
@@ -12,7 +12,7 @@ xblocks.view.register('xb-ico', {
         'title': React.PropTypes.string,
         'value': React.PropTypes.string,
         'tabindex': React.PropTypes.string,
-        'children': React.PropTypes.renderable,
+        'children': React.PropTypes.node,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'type': React.PropTypes.oneOf([
             'attention',
@@ -87,3 +87,5 @@ xblocks.view.register('xb-ico', {
         );
     }
 });
+
+var XBIcoFactory = React.createFactory(XBIco);

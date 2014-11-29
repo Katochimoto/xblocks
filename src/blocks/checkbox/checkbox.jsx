@@ -6,7 +6,7 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
     displayName: 'xb-checkbox',
 
     propTypes: {
-        'children': React.PropTypes.renderable,
+        'children': React.PropTypes.node,
         'size': React.PropTypes.oneOf([ 's', 'm' ]),
         'value': React.PropTypes.string,
         'name': React.PropTypes.string,
@@ -96,3 +96,5 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
         );
     }
 } ]);
+
+var XBCheckboxFactory = React.createFactory(XBCheckbox);

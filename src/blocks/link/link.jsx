@@ -2,7 +2,7 @@
 /* global xblocks, global, React */
 /* jshint strict: false */
 
-xblocks.view.register('xb-link', {
+var XBLink = xblocks.view.register('xb-link', {
     displayName: 'xb-link',
 
     propTypes: {
@@ -54,3 +54,5 @@ xblocks.view.register('xb-link', {
         );
     }
 });
+
+var XBLinkFactory = React.createFactory(XBLink);

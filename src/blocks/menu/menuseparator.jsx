@@ -7,8 +7,10 @@ var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
     displayName: 'xb-menuseparator',
 
     render: function() {
-        return React.DOM.div({
-            'className': 'xb-menuseparator'
-        });
+        return (
+            <div className="xb-menuseparator"></div>
+        );
     }
 });
+
+var XBMenuseparatorFactory = React.createFactory(XBMenuseparator);
