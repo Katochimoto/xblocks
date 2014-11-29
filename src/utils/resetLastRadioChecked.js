@@ -2,6 +2,7 @@
 /* jshint strict: false */
 
 (function() {
+
     var checkedCache = {};
 
     /**
@@ -12,22 +13,19 @@
      * @props {string} name
      */
     xblocks.utils.resetLastRadioChecked = function(element, name) {
-        if (!element._rootNodeID) {
+        var container = element.props._container;
+        if (!container) {
             return;
         }
 
         name = String(name);
-        var lastCheckedRootNodeId = checkedCache[ name ];
+        var lastCheckedContainer = checkedCache[ name ];
 
-        if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
-            var rootNode = xblocks.react.findContainerForID(lastCheckedRootNodeId);
-
-            if (rootNode) {
-                rootNode.checked = false;
-            }
+        if (lastCheckedContainer && lastCheckedContainer !== container) {
+            lastCheckedContainer.checked = false;
         }
 
-        checkedCache[ name ] = element._rootNodeID;
+        checkedCache[ name ] = container;
     };
 
 }());
