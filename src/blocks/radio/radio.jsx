@@ -41,26 +41,24 @@ var XBRadio = xblocks.view.register('xb-radio', [ {
 
     componentWillReceiveProps: function(nextProps) {
         this.setState({
-            'checked': nextProps.checked
+            'checked': Boolean(nextProps.checked)
         });
     },
 
     componentWillUpdate: function(nextProps, nextState) {
         if (nextState.checked) {
-            xblocks.utils.resetLastRadioChecked(this, nextProps.name);
+            xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
         }
     },
 
     componentWillMount: function() {
         if (this.state.checked) {
-            xblocks.utils.resetLastRadioChecked(this, this.props.name);
+            xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
         }
     },
 
     _onChange: function(event) {
-        this.setState({
-            'checked': event.target.checked
-        });
+        this.container().checked = event.target.checked;
     },
 
     render: function() {

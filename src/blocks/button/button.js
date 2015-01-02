@@ -1,4 +1,4 @@
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /*! borschik:include:button.jsx.js */
@@ -10,7 +10,7 @@ xblocks.create('xb-button', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLButtonElement.prototype),
+        prototype: Object.create(HTMLInputElement.prototype),
 
         accessors: {
             defaultValue: {

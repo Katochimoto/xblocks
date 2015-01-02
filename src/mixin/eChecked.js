@@ -43,17 +43,5 @@ xblocks.mixin.eChecked = {
                 boolean: true
             }
         }
-    },
-
-    events: {
-        change: function(event) {
-            // error in Firefox sequence of events
-            // the "change" event fires only when you set the value
-            if (event.target.type === 'radio') {
-                this.checked = true;
-            } else {
-                this.checked = event.target.checked;
-            }
-        }
     }
 };

@@ -9,23 +9,18 @@
      * FIXME don't work cloneNode
      * @memberOf xblocks.utils
      * @name resetLastRadioChecked
-     * @props {object} element
+     * @props {HTMLElement} element
      * @props {string} name
      */
     xblocks.utils.resetLastRadioChecked = function(element, name) {
-        var container = element.props._container;
-        if (!container) {
-            return;
-        }
-
         name = String(name);
-        var lastCheckedContainer = checkedCache[ name ];
+        var lastCheckedElement = checkedCache[ name ];
 
-        if (lastCheckedContainer && lastCheckedContainer !== container) {
-            lastCheckedContainer.checked = false;
+        if (lastCheckedElement && lastCheckedElement !== element) {
+            lastCheckedElement.checked = false;
         }
 
-        checkedCache[ name ] = container;
+        checkedCache[ name ] = element;
     };
 
 }());
