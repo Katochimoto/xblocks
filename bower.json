@@ -1,11 +1,11 @@
 {
     "name": "xblocks",
-    "version": "0.5.1",
+    "version": "0.5.4",
     "dependencies": {
         "es5-shim": "4.0.5",
-        "react": "0.12.1",
+        "react": "0.12.2",
         "tether": "0.6.5",
-        "xblocks-core": "0.5.1"
+        "xblocks-core": "0.5.4"
     },
     "ignore": [
         "**/.*",
