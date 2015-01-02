@@ -1,6 +1,6 @@
 {
     "name": "xblocks-core",
-    "version": "0.5.1",
+    "version": "0.5.4",
     "main": [
         "xblocks-core.js",
         "xblocks-core.min.js",
@@ -21,7 +21,8 @@
     ],
     "dependencies": {
         "es5-shim": "4.0.5",
-        "react": "0.12.1"
+        "react": "0.12.2",
+        "vow": "0.4.7"
     },
     "homepage": "https://github.com/Katochimoto/xblocks-core",
     "authors": [

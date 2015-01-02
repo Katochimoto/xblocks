@@ -1,6 +1,6 @@
 {
   "name": "xblocks-core",
-  "version": "0.5.1",
+  "version": "0.5.4",
   "main": [
     "xblocks-core.js",
     "xblocks-core.min.js",
@@ -21,7 +21,8 @@
   ],
   "dependencies": {
     "es5-shim": "4.0.5",
-    "react": "0.12.1"
+    "react": "0.12.2",
+    "vow": "0.4.7"
   },
   "homepage": "https://github.com/Katochimoto/xblocks-core",
   "authors": [
@@ -39,13 +40,13 @@
     "xblocks"
   ],
   "license": "MIT",
-  "_release": "0.5.1",
+  "_release": "0.5.4",
   "_resolution": {
     "type": "version",
-    "tag": "v0.5.1",
-    "commit": "9583a153252397144580ad0826519bda62b762a9"
+    "tag": "v0.5.4",
+    "commit": "1a0dfb71b104ba4d54df68a04e174b114d7258d2"
   },
   "_source": "git://github.com/Katochimoto/xblocks-core.git",
-  "_target": "0.5.1",
+  "_target": "0.5.4",
   "_originalSource": "xblocks-core"
 }

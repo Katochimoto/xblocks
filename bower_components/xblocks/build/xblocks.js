@@ -26,19 +26,115 @@
 /* global xblocks, global */
 /* jshint strict: false */
 
-xblocks.utils.debounce = function(callback, delay, scope) {
+xblocks.utils.debounce = function(callback, delay, context) {
+    var args;
+    var maxTimeoutId;
+    var result;
+    var stamp;
+    var timeoutId;
+    var trailingCall;
+    var lastCalled = 0;
+    var maxWait = false;
+    var trailing = false;
+    var leading = true;
+    var contextCall;
+
     delay = Number(delay || 250);
-    var timer = null;
+
+    function delayed() {
+        var now = Date.now();
+        var remaining = delay - (now - stamp);
+
+        if (remaining <= 0 || remaining > delay) {
+            if (maxTimeoutId) {
+                global.clearTimeout(maxTimeoutId);
+            }
+
+            var isCalled = trailingCall;
+            maxTimeoutId = timeoutId = trailingCall = undefined;
+
+            if (isCalled) {
+                lastCalled = now;
+                result = callback.apply(contextCall, args);
+
+                if (!timeoutId && !maxTimeoutId) {
+                    args = contextCall = null;
+                }
+            }
+
+        } else {
+            timeoutId = global.setTimeout(delayed, remaining);
+        }
+    }
+
+    function maxDelayed() {
+        if (timeoutId) {
+            global.clearTimeout(timeoutId);
+        }
+
+        maxTimeoutId = timeoutId = trailingCall = undefined;
+
+        if (trailing || (maxWait !== delay)) {
+            lastCalled = Date.now();
+            result = callback.apply(contextCall, args);
+
+            if (!timeoutId && !maxTimeoutId) {
+                args = contextCall = null;
+            }
+        }
+    }
 
     return function() {
-        var context = scope || this;
-        var args = arguments;
+        args = arguments;
+        contextCall = (context || this);
+        stamp = Date.now();
+        trailingCall = trailing && (timeoutId || !leading);
 
-        global.clearTimeout(timer);
+        var leadingCall;
+        var isCalled;
+        var remaining;
 
-        timer = global.setTimeout(function() {
-            callback.apply(context, args);
-        }, delay);
+        if (maxWait === false) {
+            leadingCall = leading && !timeoutId;
+
+        } else {
+            if (!maxTimeoutId && !leading) {
+                lastCalled = stamp;
+            }
+
+            remaining = maxWait - (stamp - lastCalled);
+            isCalled = remaining <= 0 || remaining > maxWait;
+
+            if (isCalled) {
+                if (maxTimeoutId) {
+                    maxTimeoutId = global.clearTimeout(maxTimeoutId);
+                }
+
+                lastCalled = stamp;
+                result = callback.apply(contextCall, args);
+
+            } else if (!maxTimeoutId) {
+                maxTimeoutId = global.setTimeout(maxDelayed, remaining);
+            }
+        }
+
+        if (isCalled && timeoutId) {
+            timeoutId = global.clearTimeout(timeoutId);
+
+        } else if (!timeoutId && delay !== maxWait) {
+            timeoutId = global.setTimeout(delayed, delay);
+        }
+
+        if (leadingCall) {
+            isCalled = true;
+            result = callback.apply(contextCall, args);
+        }
+
+        if (isCalled && !timeoutId && !maxTimeoutId) {
+            args = contextCall = null;
+        }
+
+        return result;
     };
 };
 
@@ -48,28 +144,23 @@ xblocks.utils.debounce = function(callback, delay, scope) {
 /* global xblocks, global */
 /* jshint strict: false */
 
-xblocks.utils.throttle = function(callback, delay, scope) {
+/**
+ * Выполнение функции не чаще одного раза в указанный период
+ */
+xblocks.utils.throttle = function(callback, delay, context) {
     delay = Number(delay || 250);
-    var last;
-    var timer;
+    var throttle = 0;
 
     return function() {
-        var context = scope || this;
-        var now = Date.now();
-        var args = arguments;
-
-        if (last && now < last + delay) {
-            global.clearTimeout(timer);
-
-            timer = global.setTimeout(function() {
-                last = now;
-                callback.apply(context, args);
-            }, delay);
-
-        } else {
-            last = now;
-            callback.apply(context, args);
+        if (throttle) {
+            return;
         }
+
+        throttle = global.setTimeout(function() {
+            throttle = 0;
+        }, delay);
+
+        callback.apply(context || this, arguments);
     };
 };
 
@@ -595,17 +686,17 @@ xblocks.dom.isParent = (function() {
 /* xblocks/dom/isParent.js end */
 
 /* xblocks/dom/matchesSelector.js begin */
-/* global xblocks, indexOf */
+/* global xblocks, indexOf, global */
 /* jshint strict: false */
 
 xblocks.dom.matchesSelector = (function() {
-    var ElementPrototype = Element.prototype;
-    var matches = ElementPrototype.matches ||
-        ElementPrototype.matchesSelector ||
-        ElementPrototype.webkitMatchesSelector ||
-        ElementPrototype.mozMatchesSelector ||
-        ElementPrototype.msMatchesSelector ||
-        ElementPrototype.oMatchesSelector ||
+    var proto = global.Element.prototype;
+    var matches = proto.matches ||
+        proto.matchesSelector ||
+        proto.webkitMatchesSelector ||
+        proto.mozMatchesSelector ||
+        proto.msMatchesSelector ||
+        proto.oMatchesSelector ||
         function(selector) {
             return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
         };
@@ -976,32 +1067,25 @@ xblocks.utils.exportPropTypes = function(tagName) {
 /* jshint strict: false */
 
 (function() {
+
     var checkedCache = {};
 
     /**
      * FIXME don't work cloneNode
      * @memberOf xblocks.utils
      * @name resetLastRadioChecked
-     * @props {object} element
+     * @props {HTMLElement} element
      * @props {string} name
      */
     xblocks.utils.resetLastRadioChecked = function(element, name) {
-        if (!element._rootNodeID) {
-            return;
-        }
-
         name = String(name);
-        var lastCheckedRootNodeId = checkedCache[ name ];
+        var lastCheckedElement = checkedCache[ name ];
 
-        if (lastCheckedRootNodeId && lastCheckedRootNodeId !== element._rootNodeID) {
-            var rootNode = xblocks.react.findContainerForID(lastCheckedRootNodeId);
-
-            if (rootNode) {
-                rootNode.checked = false;
-            }
+        if (lastCheckedElement && lastCheckedElement !== element) {
+            lastCheckedElement.checked = false;
         }
 
-        checkedCache[ name ] = element._rootNodeID;
+        checkedCache[ name ] = element;
     };
 
 }());
@@ -1113,18 +1197,6 @@ xblocks.mixin.eChecked = {
         checked: {
             attribute: {
                 boolean: true
-            }
-        }
-    },
-
-    events: {
-        change: function(event) {
-            // error in Firefox sequence of events
-            // the "change" event fires only when you set the value
-            if (event.target.type === 'radio') {
-                this.checked = true;
-            } else {
-                this.checked = event.target.checked;
             }
         }
     }
@@ -1489,7 +1561,7 @@ xblocks.create('xb-link', [
 /* blocks/link/link.js end */
 
     /* blocks/button/button.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /* blocks/button/button.jsx.js begin */
@@ -1627,26 +1699,24 @@ var XBButton = xblocks.view.register('xb-button', [
 
         componentWillReceiveProps: function(nextProps) {
             this.setState({
-                'checked': nextProps.checked
+                'checked': Boolean(nextProps.checked)
             });
         },
 
         componentWillUpdate: function(nextProps, nextState) {
             if (nextProps.type === 'radio' && nextState.checked) {
-                xblocks.utils.resetLastRadioChecked(this, nextProps.name);
+                xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
             }
         },
 
         componentWillMount: function() {
             if (this.props.type === 'radio' && this.state.checked) {
-                xblocks.utils.resetLastRadioChecked(this, this.props.name);
+                xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
             }
         },
 
         _onChange: function(event) {
-            this.setState({
-                'checked': event.target.checked
-            });
+            this.container().checked = event.target.checked;
         },
 
         render: function() {
@@ -1815,7 +1885,7 @@ xblocks.create('xb-button', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLButtonElement.prototype),
+        prototype: Object.create(HTMLInputElement.prototype),
 
         accessors: {
             defaultValue: {
@@ -2393,26 +2463,24 @@ var XBRadio = xblocks.view.register('xb-radio', [ {
 
     componentWillReceiveProps: function(nextProps) {
         this.setState({
-            'checked': nextProps.checked
+            'checked': Boolean(nextProps.checked)
         });
     },
 
     componentWillUpdate: function(nextProps, nextState) {
         if (nextState.checked) {
-            xblocks.utils.resetLastRadioChecked(this, nextProps.name);
+            xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
         }
     },
 
     componentWillMount: function() {
         if (this.state.checked) {
-            xblocks.utils.resetLastRadioChecked(this, this.props.name);
+            xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
         }
     },
 
     _onChange: function(event) {
-        this.setState({
-            'checked': event.target.checked
-        });
+        this.container().checked = event.target.checked;
     },
 
     render: function() {

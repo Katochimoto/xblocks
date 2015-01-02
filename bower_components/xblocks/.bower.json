@@ -1,11 +1,11 @@
 {
   "name": "xblocks",
-  "version": "0.5.1",
+  "version": "0.5.4",
   "dependencies": {
     "es5-shim": "4.0.5",
-    "react": "0.12.1",
+    "react": "0.12.2",
     "tether": "0.6.5",
-    "xblocks-core": "0.5.1"
+    "xblocks-core": "0.5.4"
   },
   "ignore": [
     "**/.*",
@@ -33,13 +33,13 @@
     "xblocks"
   ],
   "license": "MIT",
-  "_release": "0.5.1",
+  "_release": "0.5.4",
   "_resolution": {
     "type": "version",
-    "tag": "v0.5.1",
-    "commit": "2c350b4f73fb025ed3cc5911bc390df1d0386441"
+    "tag": "v0.5.4",
+    "commit": "bafcc86815cbb0b9f51c6eb7784df80c8d619c40"
   },
   "_source": "git://github.com/Katochimoto/xblocks.git",
-  "_target": "0.5.1",
+  "_target": "0.5.4",
   "_originalSource": "xblocks"
 }

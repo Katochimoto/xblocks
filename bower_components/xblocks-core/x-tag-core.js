@@ -6,7 +6,8 @@ var logFlags = {
     //data: true
 };
 
-/* xtag/performance.js begin */
+/* polyfills/performance.js begin */
+/* jshint -W067 */
 (function(global) {
     if (typeof(global.performance) === 'undefined') {
         global.performance = {};
@@ -27,44 +28,118 @@ var logFlags = {
         };
     }
 
-}(window));
+}(function() {
+    return this || (1, eval)('this');
+}()));
 
-/* xtag/performance.js end */
+/* polyfills/performance.js end */
 
-/* xtag/CustomEvent.js begin */
+/* polyfills/matches.js begin */
+/* jshint -W067 */
+(function(global) {
+
+    var indexOf = Array.prototype.indexOf;
+    var proto = global.Element.prototype;
+
+    proto.matches = proto.matches ||
+        proto.matchesSelector ||
+        proto.webkitMatchesSelector ||
+        proto.mozMatchesSelector ||
+        proto.msMatchesSelector ||
+        proto.oMatchesSelector ||
+        function(selector) {
+            return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
+        };
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/matches.js end */
+
+/* polyfills/CustomEvent.js begin */
+/* global CustomEventCommon */
+/* jshint -W067 */
 /**
  * strange commit, checks CustomEvent only in IE
  * https://github.com/webcomponents/webcomponentsjs/commit/8d6a38aa6e3d03ff54a41db9e9725401bbc1446c
  */
 (function(global) {
+    'use strict';
+
     if (typeof(global.CustomEvent) === 'function') {
         return;
     }
 
-    global.CustomEvent = function(event, params) {
+    global.CustomEvent = (function() {
+        /* polyfills/CustomEventCommon.js begin */
+/* global global */
+
+var CustomEventCommon;
+var doc = global.document;
+var issetCustomEvent = false;
+
+try {
+    issetCustomEvent = Boolean(doc.createEvent('CustomEvent'));
+} catch(e) {
+    // do nothing
+}
+
+if (issetCustomEvent) {
+    CustomEventCommon = function(eventName, params) {
         params = params || {};
-        var evt = global.document.createEvent('CustomEvent');
-        evt.initCustomEvent(event, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
+
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('CustomEvent');
+
+        evt.initCustomEvent(eventName, bubbles, cancelable, params.detail);
+
         return evt;
     };
 
-    global.CustomEvent.prototype = global.Event.prototype;
+} else {
+    CustomEventCommon = function(eventName, params) {
+        params = params || {};
 
-}(window));
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('Event');
 
-/* xtag/CustomEvent.js end */
+        evt.initEvent(eventName, bubbles, cancelable);
+        evt.detail = params.detail;
 
-/* xtag/DOMAttrModified.js begin */
+        return evt;
+    };
+}
+
+CustomEventCommon.prototype = global.Event.prototype;
+
+/* polyfills/CustomEventCommon.js end */
+
+        return CustomEventCommon;
+    }());
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/CustomEvent.js end */
+
+/* polyfills/DOMAttrModified.js begin */
+/* jshint -W067 */
 /**
  * @see http://engineering.silk.co/post/31921750832/mutation-events-what-happens
  */
-(function() {
+(function(global) {
+    'use strict';
+
     var attrModifiedWorks = false;
     var listener = function() {
         attrModifiedWorks = true;
     };
 
-    var doc = document.documentElement;
+    var doc = global.document.documentElement;
     doc.addEventListener('DOMAttrModified', listener, false);
     doc.setAttribute('___TEST___', true);
     doc.removeEventListener('DOMAttrModified', listener, false);
@@ -74,7 +149,7 @@ var logFlags = {
         return;
     }
 
-    var proto = Element.prototype;
+    var proto = global.Element.prototype;
 
     proto.__setAttribute = proto.setAttribute;
     proto.setAttribute = function(attrName, newVal) {
@@ -82,7 +157,7 @@ var logFlags = {
         this.__setAttribute(attrName, newVal);
         newVal = this.getAttribute(attrName);
         if (newVal != prevVal) {
-            var evt = document.createEvent('MutationEvent');
+            var evt = global.document.createEvent('MutationEvent');
             evt.initMutationEvent(
                 'DOMAttrModified',
                 true,
@@ -101,7 +176,7 @@ var logFlags = {
     proto.removeAttribute = function(attrName) {
         var prevVal = this.getAttribute(attrName);
         this.__removeAttribute(attrName);
-        var evt = document.createEvent('MutationEvent');
+        var evt = global.document.createEvent('MutationEvent');
         evt.initMutationEvent(
             'DOMAttrModified',
             true,
@@ -115,9 +190,11 @@ var logFlags = {
         this.dispatchEvent(evt);
     };
 
-}());
+}(function() {
+    return this || (1, eval)('this');
+}()));
 
-/* xtag/DOMAttrModified.js end */
+/* polyfills/DOMAttrModified.js end */
 
 
 /* ../node_modules/dom-token-list-polyfill/src/token-list.js begin */
@@ -283,7 +360,7 @@ if (typeof WeakMap === 'undefined') {
   //
   // For a thorough discussion on this, see:
   // http://codeforhire.com/2013/09/21/setimmediate-and-messagechannel-broken-on-internet-explorer-10/
-  if (/Trident/.test(navigator.userAgent)) {
+  if (/Trident|Edge/.test(navigator.userAgent)) {
     // Sadly, this bug also affects postMessage and MessageQueues.
     //
     // We would like to use the onreadystatechange hack for IE <= 10, but it is
@@ -1774,7 +1851,7 @@ document.register = document.registerElement;
 var useNative = scope.useNative;
 var initializeModules = scope.initializeModules;
 
-var isIE = /Trident/.test(navigator.userAgent);
+var isIE11OrOlder = /Trident/.test(navigator.userAgent);
 
 // If native, setup stub api and bail.
 // NOTE: we fire `WebComponentsReady` under native for api compatibility
@@ -1848,9 +1925,9 @@ function bootstrap() {
   });
 }
 
-// CustomEvent shim for IE
-// NOTE: we explicitly test for IE since Safari has an type `object` CustomEvent
-if (isIE && (typeof window.CustomEvent !== 'function')) {
+// CustomEvent shim for IE <= 11
+// NOTE: we explicitly test for IE since Safari has a type `object` CustomEvent
+if (isIE11OrOlder && (typeof window.CustomEvent !== 'function')) {
   window.CustomEvent = function(inType, params) {
     params = params || {};
     var e = document.createEvent('CustomEvent');
@@ -1875,7 +1952,7 @@ if (document.readyState === 'complete' || scope.flags.eager) {
 } else {
   var loadEvent = window.HTMLImports && !HTMLImports.ready ?
       'HTMLImportsLoaded' : 'DOMContentLoaded';
-  window.addEventListener(loadEvent, bootstrap);
+  window.addEventListener(loadEvent, bootstrap, false);
 }
 
 })(window.CustomElements);
@@ -1958,7 +2035,7 @@ Object.defineProperty(rootDocument, '_currentScript', currentScriptDescriptor);
   the polyfill and native implementation.
  */
 
-var isIE = /Trident/.test(navigator.userAgent);
+var isIE = /Trident|Edge/.test(navigator.userAgent);
 
 // call a callback when all HTMLImports in the document at call time
 // (or at least document ready) have loaded.
@@ -1986,11 +2063,11 @@ function whenDocumentReady(callback, doc) {
     var checkReady = function() {
       if (doc.readyState === 'complete' ||
           doc.readyState === requiredReadyState) {
-        doc.removeEventListener(READY_EVENT, checkReady);
+        doc.removeEventListener(READY_EVENT, checkReady, false);
         whenDocumentReady(callback, doc);
       }
     };
-    doc.addEventListener(READY_EVENT, checkReady);
+    doc.addEventListener(READY_EVENT, checkReady, false);
   } else if (callback) {
     callback();
   }
@@ -2019,8 +2096,8 @@ function watchImportsLoad(callback, doc) {
       if (isImportLoaded(imp)) {
         loadedImport.call(imp, {target: imp});
       } else {
-        imp.addEventListener('load', loadedImport);
-        imp.addEventListener('error', loadedImport);
+        imp.addEventListener('load', loadedImport, false);
+        imp.addEventListener('error', loadedImport, false);
       }
     }
   } else {
@@ -2077,8 +2154,8 @@ if (useNative) {
     if (loaded) {
       markTargetLoaded({target: element});
     } else {
-      element.addEventListener('load', markTargetLoaded);
-      element.addEventListener('error', markTargetLoaded);
+      element.addEventListener('load', markTargetLoaded, false);
+      element.addEventListener('error', markTargetLoaded, false);
     }
   }
 
@@ -2216,7 +2293,7 @@ HTMLImports.addModule(function(scope) {
 /*
   xhr processor.
 */
-xhr = {
+var xhr = {
   async: true,
 
   ok: function(request) {
@@ -2350,7 +2427,11 @@ Loader.prototype = {
 
   fetch: function(url, elt) {
     flags.load && console.log('fetch', url, elt);
-    if (url.match(/^data:/)) {
+    if (!url) {
+      setTimeout(function() {
+        this.receive(url, elt, {error: 'href must be specified'}, null);
+      }.bind(this), 0);
+    } else if (url.match(/^data:/)) {
       // Handle Data URI Scheme
       var pieces = url.split(',');
       var header = pieces[0];
@@ -2643,8 +2724,8 @@ var importParser = {
       self.markParsingComplete(elt);
       self.parseNext();
     };
-    elt.addEventListener('load', done);
-    elt.addEventListener('error', done);
+    elt.addEventListener('load', done, false);
+    elt.addEventListener('error', done, false);
 
     // NOTE: IE does not fire "load" event for styles that have already loaded
     // This is in violation of the spec, so we try our hardest to work around it
@@ -2924,7 +3005,8 @@ function makeDocument(resource, url) {
   base.setAttribute('href', url);
   // add baseURI support to browsers (IE) that lack it.
   if (!doc.baseURI) {
-    doc.baseURI = url;
+    // Use defineProperty since Safari throws an exception when using assignment.
+    Object.defineProperty(doc, 'baseURI', {value:url});
   }
   // ensure UTF-8 charset
   var meta = doc.createElement('meta');
@@ -2989,7 +3071,7 @@ var importer = scope.importer;
 var dynamic = {
   // process (load/parse) any nodes added to imported documents.
   added: function(nodes) {
-    var owner, parsed;
+    var owner, parsed, loading;
     for (var i=0, l=nodes.length, n; (i<l) && (n=nodes[i]); i++) {
       if (!owner) {
         owner = n.ownerDocument;
@@ -3097,7 +3179,7 @@ if (document.readyState === 'complete' ||
     (document.readyState === 'interactive' && !window.attachEvent)) {
   bootstrap();
 } else {
-  document.addEventListener('DOMContentLoaded', bootstrap);
+  document.addEventListener('DOMContentLoaded', bootstrap, false);
 }
 
 })(HTMLImports);
@@ -3155,6 +3237,15 @@ if (document.readyState === 'complete' ||
     })(),
     matchSelector = Element.prototype.matchesSelector || Element.prototype[prefix.lowercase + 'MatchesSelector'],
     mutation = win.MutationObserver || win[prefix.js + 'MutationObserver'];
+
+  var issetCustomEvent = false;
+  var customEvent;
+  try {
+    customEvent = doc.createEvent('CustomEvent');
+    issetCustomEvent = true;
+  } catch(e) {
+    customEvent = doc.createEvent('Event');
+  }
 
 /*** Functions ***/
 
@@ -3323,7 +3414,7 @@ if (document.readyState === 'complete' ||
   }
 
   var skipProps = {};
-  for (var z in doc.createEvent('CustomEvent')) skipProps[z] = 1;
+  for (var z in customEvent) skipProps[z] = 1;
   function inheritEvent(event, base){
     var desc = Object.getOwnPropertyDescriptor(event, 'target');
     for (var z in base) {
@@ -3978,7 +4069,7 @@ if (document.readyState === 'complete' ||
       event._attach.forEach(function(obj) {
         xtag.removeEvent(element, obj);
       });
-      element.removeEventListener(event.type, event.stack);
+      element.removeEventListener(event.type, event.stack, false);
     },
 
     removeEvents: function(element, obj){
@@ -3986,14 +4077,24 @@ if (document.readyState === 'complete' ||
     },
 
     fireEvent: function(element, type, options){
-      var event = doc.createEvent('CustomEvent');
       options = options || {};
-      event.initCustomEvent(type,
-        options.bubbles !== false,
-        options.cancelable !== false,
-        options.detail
-      );
+
+      var event;
+      var bubbles = options.bubbles !== false;
+      var cancelable = options.cancelable !== false;
+
+      if (issetCustomEvent) {
+        event = doc.createEvent('CustomEvent');
+        event.initCustomEvent(type, bubbles, cancelable, options.detail);
+
+      } else {
+        event = doc.createEvent('Event');
+        event.initEvent(type, bubbles, cancelable);
+        event.detail = options.detail;
+      }
+
       if (options.baseEvent) inheritEvent(event, options.baseEvent);
+
       element.dispatchEvent(event);
     },
 
@@ -4096,13 +4197,13 @@ for (z in UIEventProto){
   function addTap(el, tap, e){
     if (!el.__tap__) {
       el.__tap__ = { click: e.type == 'mousedown' };
-      if (el.__tap__.click) el.addEventListener('click', tap.observer);
+      if (el.__tap__.click) el.addEventListener('click', tap.observer, false);
       else {
         el.__tap__.scroll = tap.observer.bind(el);
         window.addEventListener('scroll', el.__tap__.scroll, true);
-        el.addEventListener('touchmove', tap.observer);
-        el.addEventListener('touchcancel', tap.observer);
-        el.addEventListener('touchend', tap.observer);
+        el.addEventListener('touchmove', tap.observer, false);
+        el.addEventListener('touchcancel', tap.observer, false);
+        el.addEventListener('touchend', tap.observer, false);
       }
     }
     if (!el.__tap__.click) {
@@ -4113,12 +4214,12 @@ for (z in UIEventProto){
 
   function removeTap(el, tap){
     if (el.__tap__) {
-      if (el.__tap__.click) el.removeEventListener('click', tap.observer);
+      if (el.__tap__.click) el.removeEventListener('click', tap.observer, false);
       else {
         window.removeEventListener('scroll', el.__tap__.scroll, true);
-        el.removeEventListener('touchmove', tap.observer);
-        el.removeEventListener('touchcancel', tap.observer);
-        el.removeEventListener('touchend', tap.observer);
+        el.removeEventListener('touchmove', tap.observer, false);
+        el.removeEventListener('touchcancel', tap.observer, false);
+        el.removeEventListener('touchend', tap.observer, false);
       }
       delete el.__tap__;
     }
@@ -4176,7 +4277,7 @@ for (z in UIEventProto){
 
   doc.addEventListener('WebComponentsReady', function(){
     xtag.fireEvent(doc.body, 'DOMComponentsLoaded');
-  });
+  }, false);
 
 })();
 

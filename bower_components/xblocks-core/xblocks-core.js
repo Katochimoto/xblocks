@@ -234,10 +234,12 @@ Timer.polifill.setTimeout = function() {
      */
     var React = global.React;
 
+    global.xblocks = global.xblocks || {};
+
     /**
      * @namespace xblocks
      */
-    var xblocks = global.xblocks = {};
+    var xblocks = global.xblocks;
 
     /* xblocks/utils.js begin */
 /* global xblocks */
@@ -360,9 +362,13 @@ xblocks.utils.isPlainObject = function(obj) {
  * @returns {boolean}
  */
 xblocks.utils.pristine = function(methodName) {
-    var method = global[methodName];
+    if (!methodName) {
+        return false;
+    }
 
-    if (!methodName || !method) {
+    var method = global[ methodName ];
+
+    if (!method) {
         return false;
     }
 
@@ -498,7 +504,11 @@ xblocks.utils.lazy = function(callback, args) {
     if (!callback._timer) {
         callback._timer = xblocks.utils._lazy(function() {
             callback._timer = 0;
-            callback(callback._args.splice(0, callback._args.length));
+
+            var args = callback._args;
+            callback._args = [];
+
+            callback(args);
         });
     }
 
@@ -668,7 +678,7 @@ xblocks.utils.propTypes = function(tagName) {
 /* xblocks/utils.js end */
 
     /* xblocks/dom.js begin */
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /**
@@ -700,6 +710,8 @@ xblocks.dom.attrs.ARRTS_BOOLEAN = [
 xblocks.dom.attrs.XB_ATTRS = {
     STATIC: 'xb-static'
 };
+
+xblocks.dom.ELEMENT_PROTO = (global.HTMLElement || global.Element).prototype;
 
 /* xblocks/dom/attrs.js begin */
 /* global xblocks, React */
@@ -831,6 +843,21 @@ xblocks.dom.contentNode = function(node) {
 
 /* xblocks/dom/contentNode.js end */
 
+/* xblocks/dom/upgradeElement.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.dom.upgradeElement = (function() {
+    if (global.CustomElements && typeof(global.CustomElements.upgrade) === 'function') {
+        return global.CustomElements.upgrade;
+
+    } else {
+        return function() {};
+    }
+}());
+
+/* xblocks/dom/upgradeElement.js end */
+
 /* xblocks/dom/upgradeElements.js begin */
 /* global xblocks, global */
 /* jshint strict: false */
@@ -846,11 +873,107 @@ xblocks.dom.upgradeElements = (function() {
 
 /* xblocks/dom/upgradeElements.js end */
 
+/* xblocks/dom/cloneNode.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+/**
+* @param {HTMLElement} node
+* @param {Boolean} deep
+* @returns {NodeList}
+*/
+xblocks.dom.cloneNode = function(node, deep) {
+    // FireFox19 cannot use native cloneNode the Node object
+    return xblocks.dom.ELEMENT_PROTO.cloneNode.call(node, deep);
+
+    /*
+    try {
+        // FireFox19 cannot use native cloneNode the Node object
+        return xblocks.dom.ELEMENT_PROTO.cloneNode.call(node, deep);
+    } catch(e) {
+        // FireFox <=13
+        // uncaught exception: [Exception... "Could not convert JavaScript argument"  nsresult: "0x80570009 (NS_ERROR_XPC_BAD_CONVERT_JS)"
+        return node.ownerDocument.importNode(node, deep);
+    }
+    */
+};
+
+/* xblocks/dom/cloneNode.js end */
+
+/* xblocks/dom/outerHTML.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+/**
+* @returns {{ get: function, set: function }}
+*/
+xblocks.dom.outerHTML = (function() {
+
+    var container = global.document.createElementNS('http://www.w3.org/1999/xhtml', '_');
+    var getter;
+    var setter;
+
+    if (container.hasOwnProperty('outerHTML')) {
+        getter = function() {
+            return this.outerHTML;
+        };
+
+        setter = function(html) {
+            this.outerHTML = html;
+        };
+
+    } else {
+        var serializer = global.XMLSerializer && (new global.XMLSerializer());
+        var xmlns = /\sxmlns=\"[^\"]+\"/;
+
+        if (serializer) {
+            getter = function() {
+                return serializer.serializeToString(this).replace(xmlns, '');
+            };
+
+        } else {
+            getter = function() {
+                container.appendChild(this.cloneNode(false));
+                var html = container.innerHTML.replace('><', '>' + this.innerHTML + '<');
+                container.innerHTML = '';
+                return html;
+            };
+        }
+
+        setter = function(html) {
+            var node = this;
+            var parent = node.parentNode;
+            var child;
+
+            if (!parent) {
+                global.DOMException.code = global.DOMException.NOT_FOUND_ERR;
+                throw global.DOMException;
+            }
+
+            container.innerHTML = html;
+
+            while ((child = container.firstChild)) {
+                parent.insertBefore(child, node);
+            }
+
+            parent.removeChild(node);
+        };
+    }
+
+    return {
+        'get': getter,
+        'set': setter
+    };
+
+}());
+
+/* xblocks/dom/outerHTML.js end */
+
 
 /* xblocks/dom.js end */
 
     /* xblocks/event.js begin */
-/* global xblocks, global */
+/* global xblocks, global, CustomEventCommon */
 /* jshint strict: false */
 
 /**
@@ -862,21 +985,58 @@ xblocks.event = xblocks.event || {};
  * @constructor
  */
 xblocks.event.Custom = (function() {
-    if (!xblocks.utils.pristine('CustomEvent')) {
-        var CustomEvent = function(event, params) {
-            params = params || {};
-            var evt = global.document.createEvent('CustomEvent');
-            evt.initCustomEvent(event, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
-            return evt;
-        };
-
-        CustomEvent.prototype = global.Event.prototype;
-
-        return CustomEvent;
-
-    } else {
+    if (xblocks.utils.pristine('CustomEvent')) {
         return global.CustomEvent;
     }
+
+    return (function() {
+        /* polyfills/CustomEventCommon.js begin */
+/* global global */
+
+var CustomEventCommon;
+var doc = global.document;
+var issetCustomEvent = false;
+
+try {
+    issetCustomEvent = Boolean(doc.createEvent('CustomEvent'));
+} catch(e) {
+    // do nothing
+}
+
+if (issetCustomEvent) {
+    CustomEventCommon = function(eventName, params) {
+        params = params || {};
+
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('CustomEvent');
+
+        evt.initCustomEvent(eventName, bubbles, cancelable, params.detail);
+
+        return evt;
+    };
+
+} else {
+    CustomEventCommon = function(eventName, params) {
+        params = params || {};
+
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('Event');
+
+        evt.initEvent(eventName, bubbles, cancelable);
+        evt.detail = params.detail;
+
+        return evt;
+    };
+}
+
+CustomEventCommon.prototype = global.Event.prototype;
+
+/* polyfills/CustomEventCommon.js end */
+
+        return CustomEventCommon;
+    }());
 }());
 
 /**
@@ -885,7 +1045,7 @@ xblocks.event.Custom = (function() {
  * @param {object} params
  */
 xblocks.event.dispatch = function(element, name, params) {
-    element.dispatchEvent(new xblocks.event.Custom(name, params));
+    element.dispatchEvent(new xblocks.event.Custom(name, params || {}));
 };
 
 /* xblocks/event.js end */
@@ -955,20 +1115,12 @@ xblocks.react.findContainerForNode = function(node) {
 };
 
 /**
- * @param {String} rootId
- * @returns {?Object}
- */
-/*xblocks.react.getInstancesByRootID = function(rootId) {
-    return ReactMount._instancesByReactRootID[ rootId ];
-};*/
-
-/**
  * @param {HTMLElement} node
  * @returns {?String}
  */
 xblocks.react.getRootID = function(node) {
     var rootElement = xblocks.react.getRootElementInContainer(node);
-    return rootElement && xblocks.react.getID(rootElement);
+    return (rootElement && xblocks.react.getID(rootElement));
 };
 
 /**
@@ -1029,6 +1181,8 @@ xblocks.tag = global.xtag;
  */
 xblocks.view = {};
 
+var _viewComponentsFactory = {};
+
 var _viewCommon = {
     propTypes: {
         '_uid': React.PropTypes.node,
@@ -1038,7 +1192,7 @@ var _viewCommon = {
     },
 
     template: function(ref, props) {
-        var xtmpl = this.props && this.props._container && this.props._container.xtmpl;
+        var xtmpl = this.props._container && this.props._container.xtmpl;
 
         if (typeof(xtmpl) === 'object' && xtmpl !== null && xtmpl.hasOwnProperty(ref)) {
             props = props || {};
@@ -1050,6 +1204,10 @@ var _viewCommon = {
         }
 
         return null;
+    },
+
+    container: function() {
+        return this.props._container;
     }
 };
 
@@ -1081,15 +1239,24 @@ xblocks.view.register = function(blockName, component) {
     }
 
     React.DOM[ blockName ] = xblocks.view.create(component);
+    _viewComponentsFactory[ blockName ] = React.createFactory( React.DOM[ blockName ] );
     return React.DOM[ blockName ];
 };
 
 /**
  * @param {string} blockName
- * @returns {*}
+ * @returns {Function}
  */
 xblocks.view.get = function(blockName) {
     return React.DOM[ blockName ];
+};
+
+/**
+* @param {string} blockName
+* @returns {Function}
+*/
+xblocks.view.getFactory = function(blockName) {
+    return _viewComponentsFactory[ blockName ];
 };
 
 /* xblocks/view.js end */
@@ -1099,6 +1266,19 @@ xblocks.view.get = function(blockName) {
 /* jshint strict: false */
 
 var _blockStatic = {
+    init: function(element) {
+        if (!element.xtagName) {
+            element.xtagName = element.tagName.toLowerCase();
+            element.xtmpl = {};
+            element.xuid = xblocks.utils.seq();
+            element.xprops = xblocks.utils.propTypes(element.xtagName);
+            element.xinserted = false;
+            return true;
+        }
+
+        return false;
+    },
+
     tmplCompile: function(tmplElement) {
         this.xtmpl[ tmplElement.getAttribute('ref') ] = tmplElement.innerHTML;
     },
@@ -1126,23 +1306,23 @@ var _blockCommon = {
             xblocks.utils.log.time(this, 'xb_init');
             xblocks.utils.log.time(this, 'dom_inserted');
 
-            this.xtagName = this.tagName.toLowerCase();
-            this.xtmpl = {};
-            this.xuid = xblocks.utils.seq();
-            this.xprops = xblocks.utils.propTypes(this.xtagName);
-            this._xinserted = false;
+            _blockStatic.init(this);
         },
 
         inserted: function() {
-            if (this._xinserted) {
+            if (this.xinserted) {
                 return;
             }
 
-            this._xinserted = true;
+            _blockStatic.init(this);
+
+            this.xinserted = true;
+
+            var isScriptContent = Boolean(this.querySelector('script'));
 
             // asynchronous read content
             // <xb-test><script>...</script><div>not found</div></xb-test>
-            if (this.getElementsByTagName('script').length) {
+            if (isScriptContent) {
                 xblocks.utils.lazy(_blockStatic.createLazy, this);
 
             } else {
@@ -1153,7 +1333,7 @@ var _blockCommon = {
         },
 
         removed: function() {
-            this._xinserted = false;
+            this.xinserted = false;
 
             // replace initial content after destroy react component
             // fix:
@@ -1234,7 +1414,9 @@ var _blockCommon = {
                 xblocks.dom.attrs.typeConversion(props, xprops);
                 return props;
             }
-        }
+        },
+
+        outerHTML: xblocks.dom.outerHTML
     },
 
     methods: {
@@ -1244,13 +1426,18 @@ var _blockCommon = {
 
         cloneNode: function(deep) {
             // not to clone the contents
-            var node = Node.prototype.cloneNode.call(this, false);
+            var node = xblocks.dom.cloneNode(this, false);
+            xblocks.dom.upgradeElement(node);
+
             node.xtmpl = this.xtmpl;
-            node._xinserted = false;
+            node.xinserted = false;
 
             if (deep) {
                 node.content = this.content;
             }
+
+            //???
+            //if ('checked' in this) clone.checked = this.checked;
 
             return node;
         }
@@ -1266,7 +1453,32 @@ xblocks.create = function(blockName, options) {
     options = Array.isArray(options) ? options : [ options ];
     options.unshift(true, {});
     options.push(_blockCommon);
-    return xblocks.tag.register(blockName, xblocks.utils.merge.apply({}, options));
+
+    // error when merging prototype in FireFox <=19
+    var proto;
+    var o;
+    var i = 2;
+    var l = options.length;
+
+    for (; i < l; i++) {
+        o = options[ i ];
+
+        if (xblocks.utils.isPlainObject(o)) {
+            if (!proto && o.prototype) {
+                proto = o.prototype;
+            }
+
+            delete o.prototype;
+        }
+    }
+
+    options = xblocks.utils.merge.apply({}, options);
+
+    if (proto) {
+        options.prototype = proto;
+    }
+
+    return xblocks.tag.register(blockName, options);
 };
 
 /* xblocks/block.js end */
@@ -1498,40 +1710,11 @@ xblocks.element.prototype._init = function(props, children, callback) {
         return;
     }
 
-    // UPD (29.11.2014) can't reproduce in FireFox
-    //
-    // FIXME need more tests
-    // only polyfill
-    // internal elements are re-created, while retaining component reference react that you created earlier
-    // possible solutions: to use the tag <template> or <script> for the inner elements
-    // example:
-    // <xb-menu>
-    //   <template>
-    //     <xb-menuitem></xb-menuitem>
-    //     <xb-menuitem></xb-menuitem>
-    //     <xb-menuitem></xb-menuitem>
-    //   </template>
-    // </xb-menu>
-    /*if (!global.CustomElements.useNative) {
-        var reactId = xblocks.react.getRootID(this._node);
-        if (reactId) {
-            var reactNode = xblocks.react.findContainerForID(reactId);
-            if (reactNode !== this._node) {
-                var oldProxyConstructor = xblocks.react.getInstancesByRootID(reactId);
-                if (oldProxyConstructor && oldProxyConstructor.isMounted()) {
-                    children = oldProxyConstructor.props.children || '';
-                    xblocks.react.unmountComponentAtNode(reactNode);
-                    this._node.innerHTML = '';
-                }
-            }
-        }
-    }*/
-
     props._uid = this._node.xuid;
     props._container = this._node;
     xblocks.dom.attrs.typeConversion(props, this._node.xprops);
 
-    var proxyConstructor = React.createFactory(xblocks.view.get(this._node.xtagName))(props, children);
+    var proxyConstructor = xblocks.view.getFactory(this._node.xtagName)(props, children);
 
     if (props.hasOwnProperty(xblocks.dom.attrs.XB_ATTRS.STATIC)) {
         this.unmount();

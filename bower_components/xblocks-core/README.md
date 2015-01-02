@@ -25,9 +25,17 @@
 
 ##Dependencies
 
-- [React.js](https://github.com/facebook/react) (0.12.1)
+- [React.js](https://github.com/facebook/react) (0.12.2)
 - [X-Tag core](https://github.com/x-tag/core) ([custom build x-tag-core.js](https://github.com/Katochimoto/xblocks-core/blob/master/x-tag-core.js) or 1.0.0)
 - [es5-shim](https://github.com/es-shims/es5-shim) (4.0.5)
+
+##Browser support
+
+- Firefox 14+
+- Internet Explorer 9+
+- Chrome 4+
+- Safari 4+
+- Opera 15+
 
 ##Example
 ```js

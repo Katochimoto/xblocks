@@ -232,7 +232,8 @@ var logFlags = {
     //data: true
 };
 
-/* xtag/performance.js begin */
+/* polyfills/performance.js begin */
+/* jshint -W067 */
 (function(global) {
     if (typeof(global.performance) === 'undefined') {
         global.performance = {};
@@ -253,44 +254,118 @@ var logFlags = {
         };
     }
 
-}(window));
+}(function() {
+    return this || (1, eval)('this');
+}()));
 
-/* xtag/performance.js end */
+/* polyfills/performance.js end */
 
-/* xtag/CustomEvent.js begin */
+/* polyfills/matches.js begin */
+/* jshint -W067 */
+(function(global) {
+
+    var indexOf = Array.prototype.indexOf;
+    var proto = global.Element.prototype;
+
+    proto.matches = proto.matches ||
+        proto.matchesSelector ||
+        proto.webkitMatchesSelector ||
+        proto.mozMatchesSelector ||
+        proto.msMatchesSelector ||
+        proto.oMatchesSelector ||
+        function(selector) {
+            return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
+        };
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/matches.js end */
+
+/* polyfills/CustomEvent.js begin */
+/* global CustomEventCommon */
+/* jshint -W067 */
 /**
  * strange commit, checks CustomEvent only in IE
  * https://github.com/webcomponents/webcomponentsjs/commit/8d6a38aa6e3d03ff54a41db9e9725401bbc1446c
  */
 (function(global) {
+    'use strict';
+
     if (typeof(global.CustomEvent) === 'function') {
         return;
     }
 
-    global.CustomEvent = function(event, params) {
+    global.CustomEvent = (function() {
+        /* polyfills/CustomEventCommon.js begin */
+/* global global */
+
+var CustomEventCommon;
+var doc = global.document;
+var issetCustomEvent = false;
+
+try {
+    issetCustomEvent = Boolean(doc.createEvent('CustomEvent'));
+} catch(e) {
+    // do nothing
+}
+
+if (issetCustomEvent) {
+    CustomEventCommon = function(eventName, params) {
         params = params || {};
-        var evt = global.document.createEvent('CustomEvent');
-        evt.initCustomEvent(event, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
+
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('CustomEvent');
+
+        evt.initCustomEvent(eventName, bubbles, cancelable, params.detail);
+
         return evt;
     };
 
-    global.CustomEvent.prototype = global.Event.prototype;
+} else {
+    CustomEventCommon = function(eventName, params) {
+        params = params || {};
 
-}(window));
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('Event');
 
-/* xtag/CustomEvent.js end */
+        evt.initEvent(eventName, bubbles, cancelable);
+        evt.detail = params.detail;
 
-/* xtag/DOMAttrModified.js begin */
+        return evt;
+    };
+}
+
+CustomEventCommon.prototype = global.Event.prototype;
+
+/* polyfills/CustomEventCommon.js end */
+
+        return CustomEventCommon;
+    }());
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/CustomEvent.js end */
+
+/* polyfills/DOMAttrModified.js begin */
+/* jshint -W067 */
 /**
  * @see http://engineering.silk.co/post/31921750832/mutation-events-what-happens
  */
-(function() {
+(function(global) {
+    'use strict';
+
     var attrModifiedWorks = false;
     var listener = function() {
         attrModifiedWorks = true;
     };
 
-    var doc = document.documentElement;
+    var doc = global.document.documentElement;
     doc.addEventListener('DOMAttrModified', listener, false);
     doc.setAttribute('___TEST___', true);
     doc.removeEventListener('DOMAttrModified', listener, false);
@@ -300,7 +375,7 @@ var logFlags = {
         return;
     }
 
-    var proto = Element.prototype;
+    var proto = global.Element.prototype;
 
     proto.__setAttribute = proto.setAttribute;
     proto.setAttribute = function(attrName, newVal) {
@@ -308,7 +383,7 @@ var logFlags = {
         this.__setAttribute(attrName, newVal);
         newVal = this.getAttribute(attrName);
         if (newVal != prevVal) {
-            var evt = document.createEvent('MutationEvent');
+            var evt = global.document.createEvent('MutationEvent');
             evt.initMutationEvent(
                 'DOMAttrModified',
                 true,
@@ -327,7 +402,7 @@ var logFlags = {
     proto.removeAttribute = function(attrName) {
         var prevVal = this.getAttribute(attrName);
         this.__removeAttribute(attrName);
-        var evt = document.createEvent('MutationEvent');
+        var evt = global.document.createEvent('MutationEvent');
         evt.initMutationEvent(
             'DOMAttrModified',
             true,
@@ -341,9 +416,11 @@ var logFlags = {
         this.dispatchEvent(evt);
     };
 
-}());
+}(function() {
+    return this || (1, eval)('this');
+}()));
 
-/* xtag/DOMAttrModified.js end */
+/* polyfills/DOMAttrModified.js end */
 
 
 /* ../node_modules/dom-token-list-polyfill/src/token-list.js begin */
@@ -509,7 +586,7 @@ if (typeof WeakMap === 'undefined') {
   //
   // For a thorough discussion on this, see:
   // http://codeforhire.com/2013/09/21/setimmediate-and-messagechannel-broken-on-internet-explorer-10/
-  if (/Trident/.test(navigator.userAgent)) {
+  if (/Trident|Edge/.test(navigator.userAgent)) {
     // Sadly, this bug also affects postMessage and MessageQueues.
     //
     // We would like to use the onreadystatechange hack for IE <= 10, but it is
@@ -2000,7 +2077,7 @@ document.register = document.registerElement;
 var useNative = scope.useNative;
 var initializeModules = scope.initializeModules;
 
-var isIE = /Trident/.test(navigator.userAgent);
+var isIE11OrOlder = /Trident/.test(navigator.userAgent);
 
 // If native, setup stub api and bail.
 // NOTE: we fire `WebComponentsReady` under native for api compatibility
@@ -2074,9 +2151,9 @@ function bootstrap() {
   });
 }
 
-// CustomEvent shim for IE
-// NOTE: we explicitly test for IE since Safari has an type `object` CustomEvent
-if (isIE && (typeof window.CustomEvent !== 'function')) {
+// CustomEvent shim for IE <= 11
+// NOTE: we explicitly test for IE since Safari has a type `object` CustomEvent
+if (isIE11OrOlder && (typeof window.CustomEvent !== 'function')) {
   window.CustomEvent = function(inType, params) {
     params = params || {};
     var e = document.createEvent('CustomEvent');
@@ -2101,7 +2178,7 @@ if (document.readyState === 'complete' || scope.flags.eager) {
 } else {
   var loadEvent = window.HTMLImports && !HTMLImports.ready ?
       'HTMLImportsLoaded' : 'DOMContentLoaded';
-  window.addEventListener(loadEvent, bootstrap);
+  window.addEventListener(loadEvent, bootstrap, false);
 }
 
 })(window.CustomElements);
@@ -2184,7 +2261,7 @@ Object.defineProperty(rootDocument, '_currentScript', currentScriptDescriptor);
   the polyfill and native implementation.
  */
 
-var isIE = /Trident/.test(navigator.userAgent);
+var isIE = /Trident|Edge/.test(navigator.userAgent);
 
 // call a callback when all HTMLImports in the document at call time
 // (or at least document ready) have loaded.
@@ -2212,11 +2289,11 @@ function whenDocumentReady(callback, doc) {
     var checkReady = function() {
       if (doc.readyState === 'complete' ||
           doc.readyState === requiredReadyState) {
-        doc.removeEventListener(READY_EVENT, checkReady);
+        doc.removeEventListener(READY_EVENT, checkReady, false);
         whenDocumentReady(callback, doc);
       }
     };
-    doc.addEventListener(READY_EVENT, checkReady);
+    doc.addEventListener(READY_EVENT, checkReady, false);
   } else if (callback) {
     callback();
   }
@@ -2245,8 +2322,8 @@ function watchImportsLoad(callback, doc) {
       if (isImportLoaded(imp)) {
         loadedImport.call(imp, {target: imp});
       } else {
-        imp.addEventListener('load', loadedImport);
-        imp.addEventListener('error', loadedImport);
+        imp.addEventListener('load', loadedImport, false);
+        imp.addEventListener('error', loadedImport, false);
       }
     }
   } else {
@@ -2303,8 +2380,8 @@ if (useNative) {
     if (loaded) {
       markTargetLoaded({target: element});
     } else {
-      element.addEventListener('load', markTargetLoaded);
-      element.addEventListener('error', markTargetLoaded);
+      element.addEventListener('load', markTargetLoaded, false);
+      element.addEventListener('error', markTargetLoaded, false);
     }
   }
 
@@ -2442,7 +2519,7 @@ HTMLImports.addModule(function(scope) {
 /*
   xhr processor.
 */
-xhr = {
+var xhr = {
   async: true,
 
   ok: function(request) {
@@ -2576,7 +2653,11 @@ Loader.prototype = {
 
   fetch: function(url, elt) {
     flags.load && console.log('fetch', url, elt);
-    if (url.match(/^data:/)) {
+    if (!url) {
+      setTimeout(function() {
+        this.receive(url, elt, {error: 'href must be specified'}, null);
+      }.bind(this), 0);
+    } else if (url.match(/^data:/)) {
       // Handle Data URI Scheme
       var pieces = url.split(',');
       var header = pieces[0];
@@ -2869,8 +2950,8 @@ var importParser = {
       self.markParsingComplete(elt);
       self.parseNext();
     };
-    elt.addEventListener('load', done);
-    elt.addEventListener('error', done);
+    elt.addEventListener('load', done, false);
+    elt.addEventListener('error', done, false);
 
     // NOTE: IE does not fire "load" event for styles that have already loaded
     // This is in violation of the spec, so we try our hardest to work around it
@@ -3150,7 +3231,8 @@ function makeDocument(resource, url) {
   base.setAttribute('href', url);
   // add baseURI support to browsers (IE) that lack it.
   if (!doc.baseURI) {
-    doc.baseURI = url;
+    // Use defineProperty since Safari throws an exception when using assignment.
+    Object.defineProperty(doc, 'baseURI', {value:url});
   }
   // ensure UTF-8 charset
   var meta = doc.createElement('meta');
@@ -3215,7 +3297,7 @@ var importer = scope.importer;
 var dynamic = {
   // process (load/parse) any nodes added to imported documents.
   added: function(nodes) {
-    var owner, parsed;
+    var owner, parsed, loading;
     for (var i=0, l=nodes.length, n; (i<l) && (n=nodes[i]); i++) {
       if (!owner) {
         owner = n.ownerDocument;
@@ -3323,7 +3405,7 @@ if (document.readyState === 'complete' ||
     (document.readyState === 'interactive' && !window.attachEvent)) {
   bootstrap();
 } else {
-  document.addEventListener('DOMContentLoaded', bootstrap);
+  document.addEventListener('DOMContentLoaded', bootstrap, false);
 }
 
 })(HTMLImports);
@@ -3381,6 +3463,15 @@ if (document.readyState === 'complete' ||
     })(),
     matchSelector = Element.prototype.matchesSelector || Element.prototype[prefix.lowercase + 'MatchesSelector'],
     mutation = win.MutationObserver || win[prefix.js + 'MutationObserver'];
+
+  var issetCustomEvent = false;
+  var customEvent;
+  try {
+    customEvent = doc.createEvent('CustomEvent');
+    issetCustomEvent = true;
+  } catch(e) {
+    customEvent = doc.createEvent('Event');
+  }
 
 /*** Functions ***/
 
@@ -3549,7 +3640,7 @@ if (document.readyState === 'complete' ||
   }
 
   var skipProps = {};
-  for (var z in doc.createEvent('CustomEvent')) skipProps[z] = 1;
+  for (var z in customEvent) skipProps[z] = 1;
   function inheritEvent(event, base){
     var desc = Object.getOwnPropertyDescriptor(event, 'target');
     for (var z in base) {
@@ -4204,7 +4295,7 @@ if (document.readyState === 'complete' ||
       event._attach.forEach(function(obj) {
         xtag.removeEvent(element, obj);
       });
-      element.removeEventListener(event.type, event.stack);
+      element.removeEventListener(event.type, event.stack, false);
     },
 
     removeEvents: function(element, obj){
@@ -4212,14 +4303,24 @@ if (document.readyState === 'complete' ||
     },
 
     fireEvent: function(element, type, options){
-      var event = doc.createEvent('CustomEvent');
       options = options || {};
-      event.initCustomEvent(type,
-        options.bubbles !== false,
-        options.cancelable !== false,
-        options.detail
-      );
+
+      var event;
+      var bubbles = options.bubbles !== false;
+      var cancelable = options.cancelable !== false;
+
+      if (issetCustomEvent) {
+        event = doc.createEvent('CustomEvent');
+        event.initCustomEvent(type, bubbles, cancelable, options.detail);
+
+      } else {
+        event = doc.createEvent('Event');
+        event.initEvent(type, bubbles, cancelable);
+        event.detail = options.detail;
+      }
+
       if (options.baseEvent) inheritEvent(event, options.baseEvent);
+
       element.dispatchEvent(event);
     },
 
@@ -4322,13 +4423,13 @@ for (z in UIEventProto){
   function addTap(el, tap, e){
     if (!el.__tap__) {
       el.__tap__ = { click: e.type == 'mousedown' };
-      if (el.__tap__.click) el.addEventListener('click', tap.observer);
+      if (el.__tap__.click) el.addEventListener('click', tap.observer, false);
       else {
         el.__tap__.scroll = tap.observer.bind(el);
         window.addEventListener('scroll', el.__tap__.scroll, true);
-        el.addEventListener('touchmove', tap.observer);
-        el.addEventListener('touchcancel', tap.observer);
-        el.addEventListener('touchend', tap.observer);
+        el.addEventListener('touchmove', tap.observer, false);
+        el.addEventListener('touchcancel', tap.observer, false);
+        el.addEventListener('touchend', tap.observer, false);
       }
     }
     if (!el.__tap__.click) {
@@ -4339,12 +4440,12 @@ for (z in UIEventProto){
 
   function removeTap(el, tap){
     if (el.__tap__) {
-      if (el.__tap__.click) el.removeEventListener('click', tap.observer);
+      if (el.__tap__.click) el.removeEventListener('click', tap.observer, false);
       else {
         window.removeEventListener('scroll', el.__tap__.scroll, true);
-        el.removeEventListener('touchmove', tap.observer);
-        el.removeEventListener('touchcancel', tap.observer);
-        el.removeEventListener('touchend', tap.observer);
+        el.removeEventListener('touchmove', tap.observer, false);
+        el.removeEventListener('touchcancel', tap.observer, false);
+        el.removeEventListener('touchend', tap.observer, false);
       }
       delete el.__tap__;
     }
@@ -4402,7 +4503,7 @@ for (z in UIEventProto){
 
   doc.addEventListener('WebComponentsReady', function(){
     xtag.fireEvent(doc.body, 'DOMComponentsLoaded');
-  });
+  }, false);
 
 })();
 
@@ -4418,10 +4519,12 @@ for (z in UIEventProto){
      */
     var React = global.React;
 
+    global.xblocks = global.xblocks || {};
+
     /**
      * @namespace xblocks
      */
-    var xblocks = global.xblocks = {};
+    var xblocks = global.xblocks;
 
     /* xblocks/utils.js begin */
 /* global xblocks */
@@ -4544,9 +4647,13 @@ xblocks.utils.isPlainObject = function(obj) {
  * @returns {boolean}
  */
 xblocks.utils.pristine = function(methodName) {
-    var method = global[methodName];
+    if (!methodName) {
+        return false;
+    }
 
-    if (!methodName || !method) {
+    var method = global[ methodName ];
+
+    if (!method) {
         return false;
     }
 
@@ -4682,7 +4789,11 @@ xblocks.utils.lazy = function(callback, args) {
     if (!callback._timer) {
         callback._timer = xblocks.utils._lazy(function() {
             callback._timer = 0;
-            callback(callback._args.splice(0, callback._args.length));
+
+            var args = callback._args;
+            callback._args = [];
+
+            callback(args);
         });
     }
 
@@ -4852,7 +4963,7 @@ xblocks.utils.propTypes = function(tagName) {
 /* xblocks/utils.js end */
 
     /* xblocks/dom.js begin */
-/* global xblocks */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /**
@@ -4884,6 +4995,8 @@ xblocks.dom.attrs.ARRTS_BOOLEAN = [
 xblocks.dom.attrs.XB_ATTRS = {
     STATIC: 'xb-static'
 };
+
+xblocks.dom.ELEMENT_PROTO = (global.HTMLElement || global.Element).prototype;
 
 /* xblocks/dom/attrs.js begin */
 /* global xblocks, React */
@@ -5015,6 +5128,21 @@ xblocks.dom.contentNode = function(node) {
 
 /* xblocks/dom/contentNode.js end */
 
+/* xblocks/dom/upgradeElement.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.dom.upgradeElement = (function() {
+    if (global.CustomElements && typeof(global.CustomElements.upgrade) === 'function') {
+        return global.CustomElements.upgrade;
+
+    } else {
+        return function() {};
+    }
+}());
+
+/* xblocks/dom/upgradeElement.js end */
+
 /* xblocks/dom/upgradeElements.js begin */
 /* global xblocks, global */
 /* jshint strict: false */
@@ -5030,11 +5158,107 @@ xblocks.dom.upgradeElements = (function() {
 
 /* xblocks/dom/upgradeElements.js end */
 
+/* xblocks/dom/cloneNode.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+/**
+* @param {HTMLElement} node
+* @param {Boolean} deep
+* @returns {NodeList}
+*/
+xblocks.dom.cloneNode = function(node, deep) {
+    // FireFox19 cannot use native cloneNode the Node object
+    return xblocks.dom.ELEMENT_PROTO.cloneNode.call(node, deep);
+
+    /*
+    try {
+        // FireFox19 cannot use native cloneNode the Node object
+        return xblocks.dom.ELEMENT_PROTO.cloneNode.call(node, deep);
+    } catch(e) {
+        // FireFox <=13
+        // uncaught exception: [Exception... "Could not convert JavaScript argument"  nsresult: "0x80570009 (NS_ERROR_XPC_BAD_CONVERT_JS)"
+        return node.ownerDocument.importNode(node, deep);
+    }
+    */
+};
+
+/* xblocks/dom/cloneNode.js end */
+
+/* xblocks/dom/outerHTML.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+/**
+* @returns {{ get: function, set: function }}
+*/
+xblocks.dom.outerHTML = (function() {
+
+    var container = global.document.createElementNS('http://www.w3.org/1999/xhtml', '_');
+    var getter;
+    var setter;
+
+    if (container.hasOwnProperty('outerHTML')) {
+        getter = function() {
+            return this.outerHTML;
+        };
+
+        setter = function(html) {
+            this.outerHTML = html;
+        };
+
+    } else {
+        var serializer = global.XMLSerializer && (new global.XMLSerializer());
+        var xmlns = /\sxmlns=\"[^\"]+\"/;
+
+        if (serializer) {
+            getter = function() {
+                return serializer.serializeToString(this).replace(xmlns, '');
+            };
+
+        } else {
+            getter = function() {
+                container.appendChild(this.cloneNode(false));
+                var html = container.innerHTML.replace('><', '>' + this.innerHTML + '<');
+                container.innerHTML = '';
+                return html;
+            };
+        }
+
+        setter = function(html) {
+            var node = this;
+            var parent = node.parentNode;
+            var child;
+
+            if (!parent) {
+                global.DOMException.code = global.DOMException.NOT_FOUND_ERR;
+                throw global.DOMException;
+            }
+
+            container.innerHTML = html;
+
+            while ((child = container.firstChild)) {
+                parent.insertBefore(child, node);
+            }
+
+            parent.removeChild(node);
+        };
+    }
+
+    return {
+        'get': getter,
+        'set': setter
+    };
+
+}());
+
+/* xblocks/dom/outerHTML.js end */
+
 
 /* xblocks/dom.js end */
 
     /* xblocks/event.js begin */
-/* global xblocks, global */
+/* global xblocks, global, CustomEventCommon */
 /* jshint strict: false */
 
 /**
@@ -5046,21 +5270,58 @@ xblocks.event = xblocks.event || {};
  * @constructor
  */
 xblocks.event.Custom = (function() {
-    if (!xblocks.utils.pristine('CustomEvent')) {
-        var CustomEvent = function(event, params) {
-            params = params || {};
-            var evt = global.document.createEvent('CustomEvent');
-            evt.initCustomEvent(event, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
-            return evt;
-        };
-
-        CustomEvent.prototype = global.Event.prototype;
-
-        return CustomEvent;
-
-    } else {
+    if (xblocks.utils.pristine('CustomEvent')) {
         return global.CustomEvent;
     }
+
+    return (function() {
+        /* polyfills/CustomEventCommon.js begin */
+/* global global */
+
+var CustomEventCommon;
+var doc = global.document;
+var issetCustomEvent = false;
+
+try {
+    issetCustomEvent = Boolean(doc.createEvent('CustomEvent'));
+} catch(e) {
+    // do nothing
+}
+
+if (issetCustomEvent) {
+    CustomEventCommon = function(eventName, params) {
+        params = params || {};
+
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('CustomEvent');
+
+        evt.initCustomEvent(eventName, bubbles, cancelable, params.detail);
+
+        return evt;
+    };
+
+} else {
+    CustomEventCommon = function(eventName, params) {
+        params = params || {};
+
+        var bubbles = Boolean(params.bubbles);
+        var cancelable = Boolean(params.cancelable);
+        var evt = doc.createEvent('Event');
+
+        evt.initEvent(eventName, bubbles, cancelable);
+        evt.detail = params.detail;
+
+        return evt;
+    };
+}
+
+CustomEventCommon.prototype = global.Event.prototype;
+
+/* polyfills/CustomEventCommon.js end */
+
+        return CustomEventCommon;
+    }());
 }());
 
 /**
@@ -5069,7 +5330,7 @@ xblocks.event.Custom = (function() {
  * @param {object} params
  */
 xblocks.event.dispatch = function(element, name, params) {
-    element.dispatchEvent(new xblocks.event.Custom(name, params));
+    element.dispatchEvent(new xblocks.event.Custom(name, params || {}));
 };
 
 /* xblocks/event.js end */
@@ -5139,20 +5400,12 @@ xblocks.react.findContainerForNode = function(node) {
 };
 
 /**
- * @param {String} rootId
- * @returns {?Object}
- */
-/*xblocks.react.getInstancesByRootID = function(rootId) {
-    return ReactMount._instancesByReactRootID[ rootId ];
-};*/
-
-/**
  * @param {HTMLElement} node
  * @returns {?String}
  */
 xblocks.react.getRootID = function(node) {
     var rootElement = xblocks.react.getRootElementInContainer(node);
-    return rootElement && xblocks.react.getID(rootElement);
+    return (rootElement && xblocks.react.getID(rootElement));
 };
 
 /**
@@ -5213,6 +5466,8 @@ xblocks.tag = global.xtag;
  */
 xblocks.view = {};
 
+var _viewComponentsFactory = {};
+
 var _viewCommon = {
     propTypes: {
         '_uid': React.PropTypes.node,
@@ -5222,7 +5477,7 @@ var _viewCommon = {
     },
 
     template: function(ref, props) {
-        var xtmpl = this.props && this.props._container && this.props._container.xtmpl;
+        var xtmpl = this.props._container && this.props._container.xtmpl;
 
         if (typeof(xtmpl) === 'object' && xtmpl !== null && xtmpl.hasOwnProperty(ref)) {
             props = props || {};
@@ -5234,6 +5489,10 @@ var _viewCommon = {
         }
 
         return null;
+    },
+
+    container: function() {
+        return this.props._container;
     }
 };
 
@@ -5265,15 +5524,24 @@ xblocks.view.register = function(blockName, component) {
     }
 
     React.DOM[ blockName ] = xblocks.view.create(component);
+    _viewComponentsFactory[ blockName ] = React.createFactory( React.DOM[ blockName ] );
     return React.DOM[ blockName ];
 };
 
 /**
  * @param {string} blockName
- * @returns {*}
+ * @returns {Function}
  */
 xblocks.view.get = function(blockName) {
     return React.DOM[ blockName ];
+};
+
+/**
+* @param {string} blockName
+* @returns {Function}
+*/
+xblocks.view.getFactory = function(blockName) {
+    return _viewComponentsFactory[ blockName ];
 };
 
 /* xblocks/view.js end */
@@ -5283,6 +5551,19 @@ xblocks.view.get = function(blockName) {
 /* jshint strict: false */
 
 var _blockStatic = {
+    init: function(element) {
+        if (!element.xtagName) {
+            element.xtagName = element.tagName.toLowerCase();
+            element.xtmpl = {};
+            element.xuid = xblocks.utils.seq();
+            element.xprops = xblocks.utils.propTypes(element.xtagName);
+            element.xinserted = false;
+            return true;
+        }
+
+        return false;
+    },
+
     tmplCompile: function(tmplElement) {
         this.xtmpl[ tmplElement.getAttribute('ref') ] = tmplElement.innerHTML;
     },
@@ -5310,23 +5591,23 @@ var _blockCommon = {
             xblocks.utils.log.time(this, 'xb_init');
             xblocks.utils.log.time(this, 'dom_inserted');
 
-            this.xtagName = this.tagName.toLowerCase();
-            this.xtmpl = {};
-            this.xuid = xblocks.utils.seq();
-            this.xprops = xblocks.utils.propTypes(this.xtagName);
-            this._xinserted = false;
+            _blockStatic.init(this);
         },
 
         inserted: function() {
-            if (this._xinserted) {
+            if (this.xinserted) {
                 return;
             }
 
-            this._xinserted = true;
+            _blockStatic.init(this);
+
+            this.xinserted = true;
+
+            var isScriptContent = Boolean(this.querySelector('script'));
 
             // asynchronous read content
             // <xb-test><script>...</script><div>not found</div></xb-test>
-            if (this.getElementsByTagName('script').length) {
+            if (isScriptContent) {
                 xblocks.utils.lazy(_blockStatic.createLazy, this);
 
             } else {
@@ -5337,7 +5618,7 @@ var _blockCommon = {
         },
 
         removed: function() {
-            this._xinserted = false;
+            this.xinserted = false;
 
             // replace initial content after destroy react component
             // fix:
@@ -5418,7 +5699,9 @@ var _blockCommon = {
                 xblocks.dom.attrs.typeConversion(props, xprops);
                 return props;
             }
-        }
+        },
+
+        outerHTML: xblocks.dom.outerHTML
     },
 
     methods: {
@@ -5428,13 +5711,18 @@ var _blockCommon = {
 
         cloneNode: function(deep) {
             // not to clone the contents
-            var node = Node.prototype.cloneNode.call(this, false);
+            var node = xblocks.dom.cloneNode(this, false);
+            xblocks.dom.upgradeElement(node);
+
             node.xtmpl = this.xtmpl;
-            node._xinserted = false;
+            node.xinserted = false;
 
             if (deep) {
                 node.content = this.content;
             }
+
+            //???
+            //if ('checked' in this) clone.checked = this.checked;
 
             return node;
         }
@@ -5450,7 +5738,32 @@ xblocks.create = function(blockName, options) {
     options = Array.isArray(options) ? options : [ options ];
     options.unshift(true, {});
     options.push(_blockCommon);
-    return xblocks.tag.register(blockName, xblocks.utils.merge.apply({}, options));
+
+    // error when merging prototype in FireFox <=19
+    var proto;
+    var o;
+    var i = 2;
+    var l = options.length;
+
+    for (; i < l; i++) {
+        o = options[ i ];
+
+        if (xblocks.utils.isPlainObject(o)) {
+            if (!proto && o.prototype) {
+                proto = o.prototype;
+            }
+
+            delete o.prototype;
+        }
+    }
+
+    options = xblocks.utils.merge.apply({}, options);
+
+    if (proto) {
+        options.prototype = proto;
+    }
+
+    return xblocks.tag.register(blockName, options);
 };
 
 /* xblocks/block.js end */
@@ -5682,40 +5995,11 @@ xblocks.element.prototype._init = function(props, children, callback) {
         return;
     }
 
-    // UPD (29.11.2014) can't reproduce in FireFox
-    //
-    // FIXME need more tests
-    // only polyfill
-    // internal elements are re-created, while retaining component reference react that you created earlier
-    // possible solutions: to use the tag <template> or <script> for the inner elements
-    // example:
-    // <xb-menu>
-    //   <template>
-    //     <xb-menuitem></xb-menuitem>
-    //     <xb-menuitem></xb-menuitem>
-    //     <xb-menuitem></xb-menuitem>
-    //   </template>
-    // </xb-menu>
-    /*if (!global.CustomElements.useNative) {
-        var reactId = xblocks.react.getRootID(this._node);
-        if (reactId) {
-            var reactNode = xblocks.react.findContainerForID(reactId);
-            if (reactNode !== this._node) {
-                var oldProxyConstructor = xblocks.react.getInstancesByRootID(reactId);
-                if (oldProxyConstructor && oldProxyConstructor.isMounted()) {
-                    children = oldProxyConstructor.props.children || '';
-                    xblocks.react.unmountComponentAtNode(reactNode);
-                    this._node.innerHTML = '';
-                }
-            }
-        }
-    }*/
-
     props._uid = this._node.xuid;
     props._container = this._node;
     xblocks.dom.attrs.typeConversion(props, this._node.xprops);
 
-    var proxyConstructor = React.createFactory(xblocks.view.get(this._node.xtagName))(props, children);
+    var proxyConstructor = xblocks.view.getFactory(this._node.xtagName)(props, children);
 
     if (props.hasOwnProperty(xblocks.dom.attrs.XB_ATTRS.STATIC)) {
         this.unmount();
