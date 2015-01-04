@@ -25,7 +25,8 @@ bower_components: bower.json
 
 
 build/xblocks.css: src/xblocks.styl $(src_styl) node_modules
-	./node_modules/.bin/stylus --print --resolve-url --inline --use ./node_modules/autoprefixer-stylus $< > $@
+	./node_modules/.bin/stylus --print --resolve-url --inline $< > $@
+	./node_modules/.bin/autoprefixer --browsers "> 1%, Firefox >= 14, Opera >= 12, Chrome >= 4" $@
 
 build/xblocks.min.css: build/xblocks.css
 	./node_modules/.bin/stylus --compress < $< > $@
@@ -34,7 +35,7 @@ build/xblocks.min.css: build/xblocks.css
 $(src_jsx_js): %.jsx.js: %.jsx node_modules
 	./node_modules/.bin/jsx --no-cache-dir --strip-types --harmony $< > $@
 
-build/xblocks.js: src/xblocks.js $(src_js) node_modules
+build/xblocks.js: src/xblocks.js $(src_jsx_js) $(src_js) node_modules
 	./node_modules/.bin/borschik -m no -i $< -o $@
 
 build/xblocks.min.js: build/xblocks.js
