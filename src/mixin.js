@@ -13,5 +13,4 @@ xblocks.mixin = xblocks.mixin || {};
 /*! borschik:include:mixin/eInputValueProps.js */
 /*! borschik:include:mixin/eFocus.js */
 
-/*! borschik:include:mixin/vChecked.js */
 /*! borschik:include:mixin/vCommonAttrs.js */

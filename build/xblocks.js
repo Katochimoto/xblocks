@@ -1310,33 +1310,6 @@ xblocks.mixin.eFocus = {
 /* mixin/eFocus.js end */
 
 
-/* mixin/vChecked.js begin */
-/* global xblocks */
-/* jshint strict: false */
-
-xblocks.mixin.vChecked = {
-
-    /**
-     * @returns {boolean}
-     */
-    isChecked: function() {
-        if (this.refs.checkControl) {
-            return this.refs.checkControl.getDOMNode().checked;
-        }
-    },
-
-    /**
-     * @param {boolean} isChecked
-     */
-    setChecked: function(isChecked) {
-        if (this.refs.checkControl) {
-            this.refs.checkControl.getDOMNode().checked = Boolean(isChecked);
-        }
-    }
-};
-
-/* mixin/vChecked.js end */
-
 /* mixin/vCommonAttrs.js begin */
 /* global xblocks, React */
 /* jshint strict: false */

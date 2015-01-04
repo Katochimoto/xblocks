@@ -1,6 +1,7 @@
 src_styl := $(shell find src -type f -name "*.styl")
 src_jsx := $(shell find src -type f -name "*.jsx")
 src_jsx_js := $(addsuffix .js, $(src_jsx))
+src_js := $(shell find src -type f -name "*.js")
 
 MAKEFLAGS+=-j 4
 
@@ -33,7 +34,7 @@ build/xblocks.min.css: build/xblocks.css
 $(src_jsx_js): %.jsx.js: %.jsx node_modules
 	./node_modules/.bin/jsx --no-cache-dir --strip-types --harmony $< > $@
 
-build/xblocks.js: src/xblocks.js $(src_jsx_js) node_modules
+build/xblocks.js: src/xblocks.js $(src_js) node_modules
 	./node_modules/.bin/borschik -m no -i $< -o $@
 
 build/xblocks.min.js: build/xblocks.js
