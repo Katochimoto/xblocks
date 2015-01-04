@@ -1,4 +1,4 @@
-/* global xblocks, global, React */
+/* global xblocks, React */
 /* jshint strict: false */
 
 /*! borschik:include:ico.jsx.js */

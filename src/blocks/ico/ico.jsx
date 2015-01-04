@@ -87,5 +87,3 @@ var XBIco = xblocks.view.register('xb-ico', {
         );
     }
 });
-
-var XBIcoFactory = React.createFactory(XBIco);

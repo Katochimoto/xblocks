@@ -47,5 +47,3 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
         }
     }
 ]);
-
-var XBMenuitemFactory = React.createFactory(XBMenuitem);

@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, React, XBInputControllerFactory */
+/* global xblocks, React, XBInputController */
 /* jshint strict: false */
 
 /*! borschik:include:input-controller.jsx.js */
@@ -164,7 +164,9 @@ var XBInput = xblocks.view.register('xb-input', [
                     linkProps['theme'] = 'input';
                     linkProps['key'] = 'label';
 
-                    children.push(XBLinkFactory(linkProps, this.props['xb-link']));
+                    children.push(
+                        <XBLink {...linkProps}>{this.props['xb-link']}</XBLink>
+                    );
                 }
 
                 if (this.props.prefix) {
@@ -187,7 +189,7 @@ var XBInput = xblocks.view.register('xb-input', [
 
                 children.push(
                     <span key="content" className="_content">
-                        <XBInputControllerFactory key="controller"
+                        <XBInputController key="controller"
                             ref="controller"
                             className="_controller"
                             value={this.state.value}
@@ -216,7 +218,7 @@ var XBInput = xblocks.view.register('xb-input', [
             } else {
 
                return (
-                    <XBInputControllerFactory key="controller"
+                    <XBInputController key="controller"
                         ref="controller"
                         className={classes}
                         value={this.state.value}
@@ -240,5 +242,3 @@ var XBInput = xblocks.view.register('xb-input', [
         }
     }
 ]);
-
-var XBInputFactory = React.createFactory(XBInput);

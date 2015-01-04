@@ -127,13 +127,13 @@ var XBButton = xblocks.view.register('xb-button', [
             }
 
             var content = (
-                <XBButtonContentFactory
+                <XBButtonContent
                     key="content"
                     _uid={this.props._uid}
                     ico={icoProps}>
 
                     {this.props.children}
-                </XBButtonContentFactory>
+                </XBButtonContent>
             );
 
             if (type === 'link') {
@@ -190,11 +190,15 @@ var XBButton = xblocks.view.register('xb-button', [
                             tabIndex={tabIndex}/>
                     );
 
-                    children.push(XBButtonFactory(xblocks.utils.merge({}, this.props, {
+                    var buttonProps = xblocks.utils.merge({}, this.props, {
                         'key': 'content',
                         'type': 'inline',
                         'tabindex': null
-                    })));
+                    });
+
+                    children.push(
+                        <XBButton {...buttonProps} />
+                    );
 
                     classes = React.addons.classSet({
                         'xb-button': true,
@@ -255,5 +259,3 @@ var XBButton = xblocks.view.register('xb-button', [
         }
     }
 ]);
-
-var XBButtonFactory = React.createFactory(XBButton);

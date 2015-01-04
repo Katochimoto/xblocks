@@ -106,5 +106,3 @@ var XBRadio = xblocks.view.register('xb-radio', [ {
         );
     }
 } ]);
-
-var XBRadioFactory = React.createFactory(XBRadio);

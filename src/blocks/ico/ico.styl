@@ -20,7 +20,7 @@ $svg["sizes"] = {
 
   for $icon in $svg-icons
     &._type-{$icon}
-      background-image: embedurl('img/' + $icon + '.svg')
+      background-image: url('img/' + $icon + '.svg')
 
   &._type-remove
     skin: icon_remove
@@ -35,4 +35,3 @@ $svg["sizes"] = {
 
   &._type-dropdown
     skin: icon_dropdown
-

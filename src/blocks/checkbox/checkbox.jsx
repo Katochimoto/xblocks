@@ -96,5 +96,3 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
         );
     }
 } ]);
-
-var XBCheckboxFactory = React.createFactory(XBCheckbox);

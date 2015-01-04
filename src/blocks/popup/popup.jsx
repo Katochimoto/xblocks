@@ -65,5 +65,3 @@ var XBPopup = xblocks.view.register('xb-popup', [
         }
     }
 ]);
-
-var XBPopupFactory = React.createFactory(XBPopup);

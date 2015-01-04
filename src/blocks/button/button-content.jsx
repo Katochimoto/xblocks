@@ -28,13 +28,12 @@ var XBButtonContent = xblocks.view.create({
 
         if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
             icoProps.key = 'ico';
-            var icoView = XBIcoFactory(icoProps);
 
             if (!icoProps.float || icoProps.float === 'left') {
-                children.unshift(icoView);
+                children.unshift(<XBIco {...icoProps}/>);
 
             } else if (icoProps.float === 'right') {
-                children.push(icoView);
+                children.push(<XBIco {...icoProps}/>);
             }
         }
 
@@ -43,5 +42,3 @@ var XBButtonContent = xblocks.view.create({
         );
     }
 });
-
-var XBButtonContentFactory = React.createFactory(XBButtonContent);

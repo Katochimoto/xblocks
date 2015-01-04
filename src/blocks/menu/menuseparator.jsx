@@ -12,5 +12,3 @@ var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
         );
     }
 });
-
-var XBMenuseparatorFactory = React.createFactory(XBMenuseparator);

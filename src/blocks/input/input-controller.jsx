@@ -109,5 +109,3 @@ var XBInputController = xblocks.view.create({
         }
     }
 });
-
-var XBInputControllerFactory = React.createFactory(XBInputController);

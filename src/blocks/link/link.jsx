@@ -54,5 +54,3 @@ var XBLink = xblocks.view.register('xb-link', {
         );
     }
 });
-
-var XBLinkFactory = React.createFactory(XBLink);

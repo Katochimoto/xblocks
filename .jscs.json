@@ -21,38 +21,22 @@
     "requireSpacesInFunctionExpression": { "beforeOpeningCurlyBrace": true },
     "disallowSpacesInFunctionExpression": { "beforeOpeningRoundBrace": true },
 
+    "disallowSpacesInFunctionDeclaration": {
+        "beforeOpeningRoundBrace": true
+    },
 
     "disallowMultipleVarDecl": true,
-    "disallowLeftStickedOperators": [
-        "?",
-        "=",
-        "==",
-        "===",
-        "!=",
-        "!==",
-        ">",
-        ">=",
-        "<",
-        "<="
-    ],
-    "disallowRightStickedOperators": [
-        "?",
-        ":",
-        "=",
-        "==",
-        "===",
-        "!=",
-        "!==",
-        ">",
-        ">=",
-        "<",
-        "<="
-    ],
+    "requireBlocksOnNewline": true,
+    "disallowEmptyBlocks": true,
+
+    "requireSpacesInConditionalExpression": {
+        "afterTest": true,
+        "beforeConsequent": true,
+        "afterConsequent": true,
+        "beforeAlternate": true
+    },
     "requireSpaceAfterBinaryOperators": [ "+", "-", "/", "*" ],
     "requireSpaceBeforeBinaryOperators": [ "+", "-", "/", "*" ],
-
-    "requireRightStickedOperators": ["!"],
-    "requireLeftStickedOperators": [","],
 
     "disallowImplicitTypeConversion": ["numeric", "binary", "string"],
 
@@ -68,9 +52,10 @@
     "disallowYodaConditions": true,
     "excludeFiles": [
         "node_modules",
-        "test",
         "bower_components",
+        "test",
         "build",
+        "karma.conf.js",
         "**/*.jsx.js"
     ]
 }
