@@ -16,7 +16,11 @@
         "expect": false,
         "it": false,
         "describe": false,
-        "_": false
+        "_": false,
+        "beforeEach": false,
+        "afterEach": false,
+        "sinon": false,
+        "vow": false
     },
 
     "bitwise": true,

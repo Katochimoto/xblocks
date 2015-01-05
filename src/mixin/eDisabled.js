@@ -34,10 +34,10 @@
  * @name eDisabled
  */
 xblocks.mixin.eDisabled = {
-    accessors: {
-        disabled: {
-            attribute: {
-                boolean: true
+    'accessors': {
+        'disabled': {
+            'attribute': {
+                'boolean': true
             }
         }
     }

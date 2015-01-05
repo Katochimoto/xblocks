@@ -32,25 +32,12 @@
  *
  * @memberOf xblocks.mixin
  * @name eHidden
- * @type {{accessors: {disabled: {get: get, set: set}}}}
  */
 xblocks.mixin.eHidden = {
-    accessors: {
-        hidden: {
-            get: function() {
-                return xblocks.dom.attrs.valueConversion(
-                    'hidden',
-                    this.getAttribute('hidden'),
-                    React.PropTypes.bool
-                );
-            },
-
-            set: function(isDisabled) {
-                if (isDisabled) {
-                    this.setAttribute('hidden', '');
-                } else {
-                    this.removeAttribute('hidden');
-                }
+    'accessors': {
+        'hidden': {
+            'attribute': {
+                'boolean': true
             }
         }
     }

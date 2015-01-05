@@ -1,43 +1,48 @@
-describe('Кнопка', function() {
+describe('xb-button ->', function() {
 
     beforeEach(function() {
-        this.el = document.createElement('xb-button');
+        this.xElement = document.createElement('xb-button');
     });
 
     afterEach(function() {
-        delete this.el;
+        if (this.xElement.parentNode) {
+            this.xElement.parentNode.removeChild(this.xElement);
+        }
     });
 
-    it('должна создаваться с помошью createElement', function() {
-        expect(this.el.nodeName).to.eql('XB-BUTTON');
+    it('checked можно указать через атрибут', function() {
+        var that = this;
+
+        this.xElement.setAttribute('type', 'checkbox');
+        this.xElement.setAttribute('checked', 'true');
+
+        return new vow.Promise(function(resolve) {
+            that.xElement.addEventListener('xb-created', function _onXbCreated() {
+                that.xElement.removeEventListener('xb-created', _onXbCreated, false);
+
+                expect(this.checked).to.be.ok();
+                resolve();
+            }, false);
+
+            document.body.appendChild(that.xElement);
+        });
     });
 
-    it('название кнопки можно указать через innerHTML', function() {
-        this.el.innerHTML = 'test';
-        expect(this.el.value).to.eql('test');
-    });
+    it('checked можно указать через свойство', function() {
+        var that = this;
 
-    it('название кнопки можно указать через innerHTML в виде html', function() {
-        this.el.innerHTML = '<p>test</p>';
-        expect(this.el.value).to.eql('<p>test</p>');
-    });
+        this.xElement.setAttribute('type', 'checkbox');
+        this.xElement.checked = true;
 
-    it('название кнопки можно указать через свойство value', function() {
-        this.el.value = 'test';
-        expect(this.el.innerText).to.eql('test');
-    });
+        return new vow.Promise(function(resolve) {
+            that.xElement.addEventListener('xb-created', function _onXbCreated() {
+                that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
-    it('название кнопки можно получить через свойство value', function() {
-        this.el.value = 'test';
-        expect(this.el.value).to.eql('test');
-    });
+                expect(this.hasAttribute('checked')).to.be.ok();
+                resolve();
+            }, false);
 
-    it('через свойство value можно указать html', function() {
-        this.el.value = '<p>test</p>';
-        expect(this.el.value).to.eql('<p>test</p>');
-    });
-
-    it('свойство attrs содержит объект атрибутов по умолчанию', function() {
-        expect(this.el.attrs).to.eql({ theme: 'normal', size: 'm' });
+            document.body.appendChild(that.xElement);
+        });
     });
 });

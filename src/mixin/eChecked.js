@@ -37,10 +37,10 @@
  * @name eChecked
  */
 xblocks.mixin.eChecked = {
-    accessors: {
-        checked: {
-            attribute: {
-                boolean: true
+    'accessors': {
+        'checked': {
+            'attribute': {
+                'boolean': true
             }
         }
     }
