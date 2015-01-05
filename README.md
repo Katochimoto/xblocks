@@ -31,6 +31,14 @@
 - [xblocks-core](https://github.com/Katochimoto/xblocks-core) (0.5.4)
 - [tether](https://github.com/HubSpot/tether) (0.6.5) for xb-popup and xb-menu
 
+##Browser support
+
+- Firefox 14+
+- Internet Explorer 9+
+- Chrome 4+
+- Safari 4+
+- Opera 12+
+
 ##Install
 
 ```
