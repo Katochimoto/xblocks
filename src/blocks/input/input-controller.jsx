@@ -74,6 +74,9 @@ var XBInputController = xblocks.view.create({
             tabIndex = '-1';
         }
 
+        // macos inserts placeholder default
+        this.props.placeholder = this.props.placeholder || '';
+
         if (this.props.multiline) {
             return (
                 <textarea value={this.props.value}
