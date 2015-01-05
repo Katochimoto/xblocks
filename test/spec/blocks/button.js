@@ -10,39 +10,79 @@ describe('xb-button ->', function() {
         }
     });
 
-    it('checked можно указать через атрибут', function() {
-        var that = this;
+    describe('checkbox ->', function() {
 
-        this.xElement.setAttribute('type', 'checkbox');
-        this.xElement.setAttribute('checked', 'true');
-
-        return new vow.Promise(function(resolve) {
-            that.xElement.addEventListener('xb-created', function _onXbCreated() {
-                that.xElement.removeEventListener('xb-created', _onXbCreated, false);
-
-                expect(this.checked).to.be.ok();
-                resolve();
-            }, false);
-
-            document.body.appendChild(that.xElement);
+        beforeEach(function() {
+            this.xElement.setAttribute('type', 'checkbox');
         });
-    });
 
-    it('checked можно указать через свойство', function() {
-        var that = this;
+        it('checked можно указать через атрибут', function() {
+            var that = this;
+            this.xElement.setAttribute('checked', 'true');
 
-        this.xElement.setAttribute('type', 'checkbox');
-        this.xElement.checked = true;
+            return new vow.Promise(function(resolve) {
+                that.xElement.addEventListener('xb-created', function _onXbCreated() {
+                    that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
-        return new vow.Promise(function(resolve) {
-            that.xElement.addEventListener('xb-created', function _onXbCreated() {
-                that.xElement.removeEventListener('xb-created', _onXbCreated, false);
+                    expect(this.checked).to.be.ok();
+                    resolve();
+                }, false);
 
-                expect(this.hasAttribute('checked')).to.be.ok();
-                resolve();
-            }, false);
-
-            document.body.appendChild(that.xElement);
+                document.body.appendChild(that.xElement);
+            });
         });
+
+        it('checked можно указать через свойство', function() {
+            var that = this;
+            this.xElement.checked = true;
+
+            return new vow.Promise(function(resolve) {
+                that.xElement.addEventListener('xb-created', function _onXbCreated() {
+                    that.xElement.removeEventListener('xb-created', _onXbCreated, false);
+
+                    expect(this.hasAttribute('checked')).to.be.ok();
+                    resolve();
+                }, false);
+
+                document.body.appendChild(that.xElement);
+            });
+        });
+
+        it('checked можно изменить через свойство', function() {
+            var that = this;
+            this.xElement.checked = true;
+
+            return new vow.Promise(function(resolve) {
+                that.xElement.addEventListener('xb-created', function _onXbCreated() {
+                    that.xElement.removeEventListener('xb-created', _onXbCreated, false);
+
+                    expect(this.hasAttribute('checked')).to.be.ok();
+                    this.checked = false;
+                    expect(this.hasAttribute('checked')).not.to.be.ok();
+                    resolve();
+                }, false);
+
+                document.body.appendChild(that.xElement);
+            });
+        });
+
+        it('checked можно изменить через атрибут', function() {
+            var that = this;
+            this.xElement.setAttribute('checked', 'true');
+
+            return new vow.Promise(function(resolve) {
+                that.xElement.addEventListener('xb-created', function _onXbCreated() {
+                    that.xElement.removeEventListener('xb-created', _onXbCreated, false);
+
+                    expect(this.checked).to.be.ok();
+                    this.removeAttribute('checked');
+                    expect(this.checked).not.to.be.ok();
+                    resolve();
+                }, false);
+
+                document.body.appendChild(that.xElement);
+            });
+        });
+
     });
 });

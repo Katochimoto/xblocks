@@ -1715,11 +1715,7 @@ var XBButton = xblocks.view.register('xb-button', [
             }
 
             var content = (
-                React.createElement(XBButtonContent, {
-                    key: "content", 
-                    _uid: this.props._uid, 
-                    ico: icoProps}, 
-
+                React.createElement(XBButtonContent, {key: "content", _uid: this.props._uid, ico: icoProps}, 
                     this.props.children
                 )
             );
@@ -1821,9 +1817,7 @@ var XBButton = xblocks.view.register('xb-button', [
 
             } else if (type === 'inline') {
                 return (
-                    React.createElement("span", {className: classes, 
-                        tabIndex: tabIndex}, 
-
+                    React.createElement("span", {className: classes, tabIndex: tabIndex}, 
                         content
                     )
                 );

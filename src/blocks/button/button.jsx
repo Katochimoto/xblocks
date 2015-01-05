@@ -127,11 +127,7 @@ var XBButton = xblocks.view.register('xb-button', [
             }
 
             var content = (
-                <XBButtonContent
-                    key="content"
-                    _uid={this.props._uid}
-                    ico={icoProps}>
-
+                <XBButtonContent key="content" _uid={this.props._uid} ico={icoProps}>
                     {this.props.children}
                 </XBButtonContent>
             );
@@ -233,9 +229,7 @@ var XBButton = xblocks.view.register('xb-button', [
 
             } else if (type === 'inline') {
                 return (
-                    <span className={classes}
-                        tabIndex={tabIndex}>
-
+                    <span className={classes} tabIndex={tabIndex}>
                         {content}
                     </span>
                 );
