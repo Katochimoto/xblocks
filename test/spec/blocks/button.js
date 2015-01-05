@@ -57,9 +57,16 @@ describe('xb-button ->', function() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
                     expect(this.hasAttribute('checked')).to.be.ok();
+
+                    that.xElement.addEventListener('xb-update', function _onXbUpdate() {
+                        that.xElement.removeEventListener('xb-update', _onXbUpdate, false);
+
+                        expect(this.hasAttribute('checked')).not.to.be.ok();
+                        resolve();
+                    }, false);
+
                     this.checked = false;
-                    expect(this.hasAttribute('checked')).not.to.be.ok();
-                    resolve();
+
                 }, false);
 
                 document.body.appendChild(that.xElement);
@@ -75,9 +82,16 @@ describe('xb-button ->', function() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
                     expect(this.checked).to.be.ok();
+
+                    that.xElement.addEventListener('xb-update', function _onXbUpdate() {
+                        that.xElement.removeEventListener('xb-update', _onXbUpdate, false);
+
+                        expect(this.checked).not.to.be.ok();
+                        resolve();
+                    }, false);
+
                     this.removeAttribute('checked');
-                    expect(this.checked).not.to.be.ok();
-                    resolve();
+
                 }, false);
 
                 document.body.appendChild(that.xElement);
