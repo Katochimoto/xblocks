@@ -55,5 +55,9 @@ test: node_modules bower_components
 	./node_modules/.bin/jscs .
 	./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
 
+testall: node_modules bower_components
+	./node_modules/.bin/jshint .
+	./node_modules/.bin/jscs .
+	./node_modules/karma/bin/karma start --single-run
 
-.PHONY: all clean test
+.PHONY: all clean test testall
