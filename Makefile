@@ -1,7 +1,7 @@
 src_styl := $(shell find src -type f -name "*.styl")
 src_jsx := $(shell find src -type f -name "*.jsx")
 src_jsx_js := $(addsuffix .js, $(src_jsx))
-src_js := $(shell find src -type f -name "*.js")
+src_js := $(shell find src -type f -name "*.js" | grep -v ".jsx.js")
 
 MAKEFLAGS+=-j 4
 
