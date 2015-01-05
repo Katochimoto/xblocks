@@ -221,10 +221,9 @@ var XBButton = xblocks.view.register('xb-button', [
                 }
 
                 return (
-                    <label className={classes}
-                        form={this.props.form}
-                        htmlFor={this.props['for']}
-                        title={this.props.title}>{children}</label>
+                    <label className={classes} form={this.props.form} htmlFor={this.props['for']} title={this.props.title}>
+                        {children}
+                    </label>
                 );
 
             } else if (type === 'inline') {

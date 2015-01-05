@@ -1809,10 +1809,9 @@ var XBButton = xblocks.view.register('xb-button', [
                 }
 
                 return (
-                    React.createElement("label", {className: classes, 
-                        form: this.props.form, 
-                        htmlFor: this.props['for'], 
-                        title: this.props.title}, children)
+                    React.createElement("label", {className: classes, form: this.props.form, htmlFor: this.props['for'], title: this.props.title}, 
+                        children
+                    )
                 );
 
             } else if (type === 'inline') {

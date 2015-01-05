@@ -53,7 +53,7 @@ clean:
 test: node_modules bower_components
 	./node_modules/.bin/jshint .
 	./node_modules/.bin/jscs .
-#	./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
+	./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
 
 
 .PHONY: all clean test
