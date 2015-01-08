@@ -1338,7 +1338,7 @@ xblocks.mixin.vCommonAttrs = {
 
 
     /* blocks/ico/ico.js begin */
-/* global xblocks, React */
+/* global xblocks */
 /* jshint strict: false */
 
 /* blocks/ico/ico.jsx.js begin */
@@ -1350,9 +1350,6 @@ var XBIco = xblocks.view.register('xb-ico', {
     displayName: 'xb-ico',
 
     propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
-        'alt': React.PropTypes.string,
         'title': React.PropTypes.string,
         'value': React.PropTypes.string,
         'tabindex': React.PropTypes.string,
@@ -1439,22 +1436,10 @@ xblocks.create('xb-ico', [
     xblocks.mixin.eDisabled,
 
     {
-        accessors: {
-            active: {
-                get: function() {
-                    return xblocks.dom.attrs.valueConversion(
-                        'active',
-                        this.getAttribute('active'),
-                        React.PropTypes.bool
-                    );
-                },
-
-                set: function(isActive) {
-                    if (isActive) {
-                        this.setAttribute('active', '');
-                    } else {
-                        this.removeAttribute('active');
-                    }
+        'accessors': {
+            'active': {
+                'attribute': {
+                    'boolean': true
                 }
             }
         }
@@ -1476,8 +1461,6 @@ var XBLink = xblocks.view.register('xb-link', {
     displayName: 'xb-link',
 
     propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
         'disabled': React.PropTypes.bool,
         'href': React.PropTypes.string,
         'name': React.PropTypes.string,
@@ -2009,8 +1992,6 @@ var XBInput = xblocks.view.register('xb-input', [
         displayName: 'xb-input',
 
         propTypes: {
-            'id': React.PropTypes.string,
-            'class': React.PropTypes.string,
             'name': React.PropTypes.string,
             'disabled': React.PropTypes.bool,
             'autosize': React.PropTypes.bool,
@@ -2246,7 +2227,7 @@ xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLElement.prototype)
+        'prototype': Object.create(HTMLElement.prototype)
     }
 ]);
 
@@ -2366,10 +2347,10 @@ xblocks.create('xb-checkbox', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype),
+        'prototype': Object.create(HTMLInputElement.prototype),
 
-        accessors: {
-            defaultValue: {
+        'accessors': {
+            'defaultValue': {
                 get: function() {
                     return 'on';
                 }
@@ -2504,10 +2485,10 @@ xblocks.create('xb-radio', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype),
+        'prototype': Object.create(HTMLInputElement.prototype),
 
-        accessors: {
-            defaultValue: {
+        'accessors': {
+            'defaultValue': {
                 get: function() {
                     return 'on';
                 }
@@ -2617,9 +2598,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLElement.prototype),
+        'prototype': Object.create(HTMLElement.prototype),
 
-        events: {
+        'events': {
             'click:delegate(._close)': function(evt) {
                 var popupNode = xblocks.react.findContainerForNode(this);
                 if (popupNode) {
@@ -2632,8 +2613,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
             }
         },
 
-        accessors: {
-            options: {
+        'accessors': {
+            'options': {
                 get: function() {
                     if (this._options) {
                         return this._options;
@@ -2688,7 +2669,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
             },
 
-            tether: {
+            'tether': {
                 get: function() {
                     if (!this._tether) {
                         this._tether = new Tether(this.options);
@@ -2698,14 +2679,14 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
             },
 
-            opened: {
+            'opened': {
                 get: function() {
                     return this.tether.enabled;
                 }
             }
         },
 
-        methods: {
+        'methods': {
             setOptions: function(nextOptions) {
                 var tether = this.tether;
 

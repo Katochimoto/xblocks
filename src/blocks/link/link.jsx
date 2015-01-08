@@ -6,8 +6,6 @@ var XBLink = xblocks.view.register('xb-link', {
     displayName: 'xb-link',
 
     propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
         'disabled': React.PropTypes.bool,
         'href': React.PropTypes.string,
         'name': React.PropTypes.string,

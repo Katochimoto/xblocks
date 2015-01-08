@@ -15,8 +15,6 @@ var XBInput = xblocks.view.register('xb-input', [
         displayName: 'xb-input',
 
         propTypes: {
-            'id': React.PropTypes.string,
-            'class': React.PropTypes.string,
             'name': React.PropTypes.string,
             'disabled': React.PropTypes.bool,
             'autosize': React.PropTypes.bool,

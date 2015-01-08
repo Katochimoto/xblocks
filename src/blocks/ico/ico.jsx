@@ -6,9 +6,6 @@ var XBIco = xblocks.view.register('xb-ico', {
     displayName: 'xb-ico',
 
     propTypes: {
-        'id': React.PropTypes.string,
-        'class': React.PropTypes.string,
-        'alt': React.PropTypes.string,
         'title': React.PropTypes.string,
         'value': React.PropTypes.string,
         'tabindex': React.PropTypes.string,

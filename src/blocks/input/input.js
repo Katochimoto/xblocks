@@ -9,6 +9,6 @@ xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLElement.prototype)
+        'prototype': Object.create(HTMLElement.prototype)
     }
 ]);

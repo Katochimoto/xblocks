@@ -10,10 +10,10 @@ xblocks.create('xb-checkbox', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype),
+        'prototype': Object.create(HTMLInputElement.prototype),
 
-        accessors: {
-            defaultValue: {
+        'accessors': {
+            'defaultValue': {
                 get: function() {
                     return 'on';
                 }

@@ -26,9 +26,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLElement.prototype),
+        'prototype': Object.create(HTMLElement.prototype),
 
-        events: {
+        'events': {
             'click:delegate(._close)': function(evt) {
                 var popupNode = xblocks.react.findContainerForNode(this);
                 if (popupNode) {
@@ -41,8 +41,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
             }
         },
 
-        accessors: {
-            options: {
+        'accessors': {
+            'options': {
                 get: function() {
                     if (this._options) {
                         return this._options;
@@ -97,7 +97,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
             },
 
-            tether: {
+            'tether': {
                 get: function() {
                     if (!this._tether) {
                         this._tether = new Tether(this.options);
@@ -107,14 +107,14 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 }
             },
 
-            opened: {
+            'opened': {
                 get: function() {
                     return this.tether.enabled;
                 }
             }
         },
 
-        methods: {
+        'methods': {
             setOptions: function(nextOptions) {
                 var tether = this.tether;
 
