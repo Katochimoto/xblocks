@@ -5,33 +5,9 @@ rem = rem_px;
 @import "../node_modules/stylobate-islands"
 set-skin-namespace('islands');
 
-xb-button,
-xb-input,
-xb-ico,
-xb-select,
-xb-checkbox,
-xb-radio,
-xb-link,
-xb-popup,
-xb-menu
-  display: inline-block
 
-  & *, *:before, *:after
-    box-sizing: initial
-
-  &[hidden]
-    display: none
-
-xb-menuitem,
-xb-menuseparator
-  display: block
-
-  & *, *:before, *:after
-    box-sizing: initial
-
-  &[hidden]
-    display: none
-
+@import "styl/skin/xb-block"
+@import "styl/skin/xb-inline-block"
 
 @import "styl/vars/colors"
 @import "styl/vars/layout"
