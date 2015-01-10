@@ -3282,6 +3282,16 @@ xb-menuitem[hidden] {
   width: 6px;
   height: 6px;
 }
+.xb-menuitem > ._label:not(:empty) + .xb-ico,
+.xb-menuitem > .xb-ico + ._label:not(:empty) {
+  margin-left: 5px;
+}
+.xb-menuitem > .xb-ico:first-child {
+  margin-left: -5px;
+}
+.xb-menuitem > .xb-ico:last-child {
+  margin-right: -5px;
+}
 xb-menuseparator {
   display: block;
 }

@@ -8,6 +8,6 @@ xblocks.create('xb-select', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLSelectElement.prototype)
+        'prototype': Object.create(HTMLSelectElement.prototype)
     }
 ]);

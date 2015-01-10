@@ -19,6 +19,15 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             'submenu': React.PropTypes.bool
         },
 
+        statics: {
+            filterIcoProps: function(props) {
+                return xblocks.utils.mapObject(
+                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
+                    xblocks.utils.mapPropsPrefixIco
+                );
+            }
+        },
+
         getDefaultProps: function() {
             return {
                 'disabled': false,
@@ -39,10 +48,25 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
 
             classes = React.addons.classSet(classes);
 
+            var children = [
+                <span className="_label" key="label">{this.props.label}</span>
+            ];
+
+            var icoProps = XBButton.filterIcoProps(this.props);
+
+            if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
+                icoProps.key = 'ico';
+
+                if (!icoProps.float || icoProps.float === 'left') {
+                    children.unshift(<XBIco {...icoProps}/>);
+
+                } else if (icoProps.float === 'right') {
+                    children.push(<XBIco {...icoProps}/>);
+                }
+            }
+
             return (
-                <div className={classes}>
-                    <span>{this.props.label}</span>
-                </div>
+                <div className={classes}>{children}</div>
             );
         }
     }
