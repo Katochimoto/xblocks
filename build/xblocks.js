@@ -377,6 +377,13 @@ xblocks.utils.Table.prototype = {
         return this._item;
     },
 
+    blurItem: function() {
+        if (this._item) {
+            xblocks.event.dispatch(this._item, this.EVENT_BLUR);
+            this._item = undefined;
+        }
+    },
+
     _bind: function() {
         this._node.addEventListener('keydown', this._onKeydown, false);
         this._node.addEventListener('click', this._onClick, false);
@@ -981,6 +988,7 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
      */
     var xblocks = global.xblocks;
 
+    var __doc = global.document;
     var __noop = function() {};
     var __forEach = Array.prototype.forEach;
 
@@ -2954,6 +2962,9 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
                             'to': 'scrollParent',
                             'attachment': 'together'
+                        }, {
+                            'to': 'window',
+                            'attachment': 'together'
                         }])));
                         menu.innerHTML = this.content;
 
@@ -2970,7 +2981,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
 /* blocks/menu/menuitem.js end */
 
     /* blocks/menu/menu.js begin */
-/* global global, xblocks, XBPopupElement, __forEach */
+/* global global, xblocks, XBPopupElement, __forEach, __doc */
 /* jshint strict: false */
 
 /**
@@ -3023,9 +3034,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
 
 var XBMenuElementStatic = {
+
     /**
-    * @this {global}
-    */
+     * @this {global}
+     */
     _closeSubmenu: function(target) {
         if (target._xbpopup) {
             target._xbpopup.close();
@@ -3033,8 +3045,8 @@ var XBMenuElementStatic = {
     },
 
     /**
-    * @this {XBMenuElement}
-    */
+     * @this {XBMenuElement}
+     */
     _closeUpFocus: function() {
         var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
         var parent = this.parentMenu;
@@ -3140,6 +3152,47 @@ var XBMenuElement = xblocks.create('xb-menu', [
     }
 ]);
 
+__doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
+    var element = event.delegateElement;
+    var doc = element.ownerDocument;
+    var menuId = element.getAttribute('contextmenu');
+    var menuElement = menuId && doc.getElementById(menuId);
+
+    if (menuElement && menuElement.xtagName === 'xb-menu' && menuElement.attrs.type === 'context') {
+        event.preventDefault();
+
+        var targetElement = doc.createElement('div');
+        targetElement.style.position = 'absolute';
+        targetElement.style.visibility = 'hidden';
+        targetElement.style.top = event.y + 'px';
+        targetElement.style.left = event.x + 'px';
+
+        doc.body.appendChild(targetElement);
+
+        menuElement.addEventListener('xb-close', function _onClose() {
+            menuElement.removeEventListener('xb-close', _onClose, false);
+            targetElement.parentNode.removeChild(targetElement);
+        }, false);
+
+        menuElement.open({
+            'target': targetElement,
+            'attachment': 'top left',
+            'targetAttachment': 'bottom left',
+            'constraints': [
+                {
+                    'to': 'scrollParent',
+                    'attachment': 'together'
+                },
+                {
+                    'to': 'window',
+                    'attachment': 'together'
+                }
+            ]
+        });
+    }
+
+}), false);
+
 /* blocks/menu/menu.js end */
 
     /* blocks/menu-inline/menu-inline.js begin */
@@ -3209,12 +3262,23 @@ var XBMenuInlineElement = xblocks.create('xb-menu-inline', [
 
         'events': {
             'xb-created': XBMenuInlineElementStatic._init,
-            'xb-repaint': XBMenuInlineElementStatic._init
+
+            'xb-repaint': XBMenuInlineElementStatic._init,
+
+            'blur': function() {
+                if (!this.hasOpenSubmenu) {
+                    this._xbfocus.blurItem();
+                }
+            }
         },
 
         'methods': {
             'open': __noop,
-            'close': __noop
+
+            'close': function() {
+                // FireFox does not fire a blur event
+                global.setImmediate(this.focus.bind(this));
+            }
         }
     }
 ]);

@@ -14,6 +14,7 @@
      */
     var xblocks = global.xblocks;
 
+    var __doc = global.document;
     var __noop = function() {};
     var __forEach = Array.prototype.forEach;
 

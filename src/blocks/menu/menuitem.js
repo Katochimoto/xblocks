@@ -120,6 +120,9 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
                             'to': 'scrollParent',
                             'attachment': 'together'
+                        }, {
+                            'to': 'window',
+                            'attachment': 'together'
                         }])));
                         menu.innerHTML = this.content;
 

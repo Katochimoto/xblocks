@@ -33,12 +33,23 @@ var XBMenuInlineElement = xblocks.create('xb-menu-inline', [
 
         'events': {
             'xb-created': XBMenuInlineElementStatic._init,
-            'xb-repaint': XBMenuInlineElementStatic._init
+
+            'xb-repaint': XBMenuInlineElementStatic._init,
+
+            'blur': function() {
+                if (!this.hasOpenSubmenu) {
+                    this._xbfocus.blurItem();
+                }
+            }
         },
 
         'methods': {
             'open': __noop,
-            'close': __noop
+
+            'close': function() {
+                // FireFox does not fire a blur event
+                global.setImmediate(this.focus.bind(this));
+            }
         }
     }
 ]);
