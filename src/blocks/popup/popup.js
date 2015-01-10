@@ -9,16 +9,16 @@
 
 /*! borschik:include:popup.jsx.js */
 
-var XBPopupElementStatic = {};
+var XBPopupElementStatic = {
+    _onOpen: function() {
+        this.focus();
+        xblocks.event.dispatch(this, 'xb-open');
+    },
 
-XBPopupElementStatic._onOpen = function() {
-    this.focus();
-    xblocks.event.dispatch(this, 'xb-open');
-};
-
-XBPopupElementStatic._onClose = function() {
-    this.blur();
-    xblocks.event.dispatch(this, 'xb-close');
+    _onClose: function() {
+        this.blur();
+        xblocks.event.dispatch(this, 'xb-close');
+    }
 };
 
 /* jshint -W098 */

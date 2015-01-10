@@ -9,15 +9,15 @@
 
 /*! borschik:include:menuitem.jsx.js */
 
-var XBMenuitemElementStatic = {};
+var XBMenuitemElementStatic = {
+    '_timerOpenSubmenu': 0,
 
-XBMenuitemElementStatic._timerOpenSubmenu = 0;
-
-XBMenuitemElementStatic._submenuRemove = function() {
-    if (this._submenuInstance) {
-        this._submenuInstance.close();
-        this._submenuInstance.parentNode.removeChild(this._submenuInstance);
-        this._submenuInstance = undefined;
+    '_submenuRemove': function() {
+        if (this._submenuInstance) {
+            this._submenuInstance.close();
+            this._submenuInstance.parentNode.removeChild(this._submenuInstance);
+            this._submenuInstance = undefined;
+        }
     }
 };
 
@@ -27,9 +27,9 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
     xblocks.mixin.eInputValueProps,
 
     {
-        prototype: Object.create(HTMLElement.prototype),
+        'prototype': Object.create(HTMLElement.prototype),
 
-        events: {
+        'events': {
             'xb-created': function() {
                 XBMenuitemElementStatic._submenuRemove.call(this);
                 this.submenu = Boolean(this.content.trim());
@@ -63,26 +63,26 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
             }
         },
 
-        accessors: {
-            focused: {
-                attribute: {
-                    boolean: true
+        'accessors': {
+            'focused': {
+                'attribute': {
+                    'boolean': true
                 }
             },
 
-            selected: {
-                attribute: {
-                    boolean: true
+            'selected': {
+                'attribute': {
+                    'boolean': true
                 }
             },
 
-            submenu: {
-                attribute: {
-                    boolean: true
+            'submenu': {
+                'attribute': {
+                    'boolean': true
                 }
             },
 
-            menuInstance: {
+            'menuInstance': {
                 get: function() {
                     if (this._menuInstance || this._menuInstance === null) {
                         return this._menuInstance;
@@ -92,7 +92,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
 
                     var menuNode = this.parentNode && xblocks.react.findContainerForNode(this.parentNode);
 
-                    if (menuNode && menuNode.xtagName === 'xb-menu') {
+                    if (menuNode && (menuNode.xtagName === 'xb-menu' || menuNode.xtagName === 'xb-menu-inline')) {
                         this._menuInstance = menuNode;
                     }
 
@@ -100,7 +100,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 }
             },
 
-            submenuInstance: {
+            'submenuInstance': {
                 get: function() {
                     if (this._submenuInstance || this._submenuInstance === null) {
                         return this._submenuInstance;

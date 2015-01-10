@@ -3303,6 +3303,39 @@ xb-menuseparator[hidden] {
   padding: 0;
   outline: none;
 }
+xb-menu-inline {
+  display: inline-block;
+}
+xb-menu-inline *,
+xb-menu-inline *:before,
+xb-menu-inline *:after {
+  -webkit-box-sizing: initial;
+     -moz-box-sizing: initial;
+          box-sizing: initial;
+}
+xb-menu-inline[hidden] {
+  display: none;
+}
+xb-menu-inline > ._popup {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  background: #fff;
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+          box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  overflow: hidden;
+  padding: 0;
+  outline: none;
+}
+xb-menu-inline > ._popup:before,
+xb-menu-inline > ._popup:after {
+  margin: 0;
+  display: none;
+}
+xb-menu-inline > ._popup:focus {
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+          box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+}
 xb-select {
   display: inline-block;
 }

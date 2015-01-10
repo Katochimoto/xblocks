@@ -1,4 +1,4 @@
-/* global global, xblocks, XBPopupElement */
+/* global global, xblocks, XBPopupElement, __forEach */
 /* jshint strict: false */
 
 /**
@@ -9,40 +9,75 @@
 
 /*! borschik:include:menu.jsx.js */
 
-var XBMenuElementStatic = {};
+var XBMenuElementStatic = {
+    /**
+    * @this {global}
+    */
+    _closeSubmenu: function(target) {
+        if (target._xbpopup) {
+            target._xbpopup.close();
+        }
+    },
 
-/**
- * @this {global}
- */
-XBMenuElementStatic._closeSubmenu = function(target) {
-    if (target._xbpopup) {
-        target._xbpopup.close();
+    /**
+    * @this {XBMenuElement}
+    */
+    _closeUpFocus: function() {
+        var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
+        var parent = this.parentMenu;
+
+        while (parent) {
+            if (parent === focusMenu) {
+                break;
+            }
+
+            parent.close();
+            parent = parent.parentMenu;
+        }
     }
 };
 
-/**
- * @this {XBMenuElement}
- */
-XBMenuElementStatic._closeUpFocus = function() {
-    var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
-    var parent = this.parentMenu;
+var XBMenuElementCommon = {
+    'events': {
 
-    while (parent) {
-        if (parent === focusMenu) {
-            break;
+        /**
+         * @this {XBMenuitemElement}
+         */
+        'click:delegate(xb-menuitem:not([disabled]))': function() {
+            if (this.submenuInstance) {
+                this.submenuInstance.open();
+            }
+        },
+
+        /**
+         * @this {XBMenuitemElement}
+         */
+        'keydown:keypass(13,39)': function() {
+            var item = this._xbfocus.getItem();
+
+            if (item && item.submenuInstance) {
+                item.submenuInstance.open();
+            }
         }
+    },
 
-        parent.close();
-        parent = parent.parentMenu;
+    'accessors': {
+        'hasOpenSubmenu': {
+            get: function() {
+                return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
+            }
+        }
     }
 };
 
 /* jshint -W098 */
 var XBMenuElement = xblocks.create('xb-menu', [
-    {
-        prototype: Object.create(XBPopupElement.prototype || new XBPopupElement()),
+    XBMenuElementCommon,
 
-        events: {
+    {
+        'prototype': Object.create(XBPopupElement.prototype || new XBPopupElement()),
+
+        'events': {
             'xb-open': function() {
                 this._xbfocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
@@ -57,7 +92,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 }
 
                 // close all submenus
-                Array.prototype.forEach.call(
+                __forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
                     XBMenuElementStatic._closeSubmenu
                 );
@@ -73,23 +108,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 }
             },
 
-            'keydown:keypass(13,39)': function() {
-                var item = this._xbfocus.getItem();
-
-                if (item && item.submenuInstance) {
-                    item.submenuInstance.open();
-                }
-            },
-
-            /**
-             * @this {XBMenuitemElement}
-             */
-            'click:delegate(xb-menuitem:not([disabled]))': function() {
-                if (this.submenuInstance) {
-                    this.submenuInstance.open();
-                }
-            },
-
             'blur': function() {
                 if (!this.hasOpenSubmenu) {
                     this.close();
@@ -99,14 +117,8 @@ var XBMenuElement = xblocks.create('xb-menu', [
             }
         },
 
-        accessors: {
-            hasOpenSubmenu: {
-                get: function() {
-                    return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
-                }
-            },
-
-            parentMenu: {
+        'accessors': {
+            'parentMenu': {
                 get: function() {
                     return this.tether.target.menuInstance;
                 }

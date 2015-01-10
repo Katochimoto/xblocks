@@ -14,6 +14,9 @@
      */
     var xblocks = global.xblocks;
 
+    var __noop = function() {};
+    var __forEach = Array.prototype.forEach;
+
     /*! borschik:include:utils.js */
     /*! borschik:include:mixin.js */
 
@@ -27,6 +30,7 @@
     /*! borschik:include:blocks/menu/menuseparator.js */
     /*! borschik:include:blocks/menu/menuitem.js */
     /*! borschik:include:blocks/menu/menu.js */
+    /*! borschik:include:blocks/menu-inline/menu-inline.js */
     /*! borschik:include:blocks/select/select.js */
 
 }(function() {
