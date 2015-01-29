@@ -1,0 +1,20 @@
+xb-menu
+  skin: xb-inline-block
+  display: none
+
+  &.xb-menu-enabled
+    display: inline-block
+
+  & > ._popup
+    skin: popup
+    overflow: hidden
+    padding: 0
+    outline: none
+
+    &:before,
+    &:after
+      margin: 0
+      display: none
+
+    &:focus
+      box-shadow: 0 0 0 1px rgba(#000, 0.15), 0 8px 30px -5px rgba(#000, 0.7)

@@ -1,7 +1,7 @@
 /**
  * @module vow
  * @author Filatov Dmitry <dfilatov@yandex-team.ru>
- * @version 0.4.7
+ * @version 0.4.8
  * @license
  * Dual licensed under the MIT and GPL licenses:
  *   * http://www.opensource.org/licenses/mit-license.php
@@ -1297,7 +1297,7 @@ if(typeof module === 'object' && typeof module.exports === 'object') {
     defineAsGlobal = false;
 }
 
-if(typeof modules === 'object') {
+if(typeof modules === 'object' && isFunction(modules.define)) {
     modules.define('vow', function(provide) {
         provide(vow);
     });

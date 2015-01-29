@@ -1,6 +1,6 @@
 {
   "name": "xblocks-core",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "main": [
     "xblocks-core.js",
     "xblocks-core.min.js",
@@ -20,9 +20,9 @@
     "karma.conf.js"
   ],
   "dependencies": {
-    "es5-shim": "4.0.5",
+    "es5-shim": "4.0.6",
     "react": "0.12.2",
-    "vow": "0.4.7"
+    "vow": "0.4.8"
   },
   "homepage": "https://github.com/Katochimoto/xblocks-core",
   "authors": [
@@ -40,13 +40,13 @@
     "xblocks"
   ],
   "license": "MIT",
-  "_release": "0.5.4",
+  "_release": "0.5.5",
   "_resolution": {
     "type": "version",
-    "tag": "v0.5.4",
-    "commit": "1a0dfb71b104ba4d54df68a04e174b114d7258d2"
+    "tag": "v0.5.5",
+    "commit": "040e52850af8b766757d7e9146baab6a4ca86468"
   },
   "_source": "git://github.com/Katochimoto/xblocks-core.git",
-  "_target": "0.5.4",
+  "_target": "0.5.5",
   "_originalSource": "xblocks-core"
 }

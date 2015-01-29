@@ -15,22 +15,10 @@
 
 <a class="open-menu">меню</a>
 
-<xb-popup close>
-    <script type="text/x-template" ref="xb-popup-title">
-        Title
-    </script>
+<xb-button contextmenu="menu" xb-ico-type="twitter">test</xb-button>
 
-    <script type="text/x-template">
-        Body
-    </script>
-
-    <script type="text/x-template" ref="xb-popup-buttons">
-        <xb-button>button</xb-button>
-    </script>
-</xb-popup>
-
-<!--xb-menu id="menu">
-    <xb-menuitem id="i1" label="submenu 1">
+<xb-menu id="menu" type="context">
+    <xb-menuitem id="i1" label="submenu 1" xb-ico-type="twitter">
         <xb-menuitem id="i1-1" label="submenu 1.1"></xb-menuitem>
         <xb-menuitem id="i1-2" label="submenu 1.2">
             <xb-menuitem id="i1-2-1" label="submenu 1.2.1"></xb-menuitem>
@@ -50,7 +38,7 @@
     <xb-menuitem id="i4" label="submenu 3"></xb-menuitem>
     <xb-menuseparator></xb-menuseparator>
     <xb-menuitem id="i6" label="submenu 4" disabled></xb-menuitem>
-</xb-menu-->
+</xb-menu>
 
 
 <script>

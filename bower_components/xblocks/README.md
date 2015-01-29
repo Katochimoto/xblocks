@@ -1,7 +1,7 @@
 # xblocks
 > HTML custom elements
 
-[![Build Status][build]][build-link] [![NPM version][version]][version-link] [![Dependency Status][dependency]][dependency-link] [![devDependency Status][dev-dependency]][dev-dependency-link] [![Code Climate][climate]][climate-link] [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status][build]][build-link] [![NPM version][version]][version-link] [![Dependency Status][dependency]][dependency-link] [![devDependency Status][dev-dependency]][dev-dependency-link] [![Code Climate][climate]][climate-link]
 
 ## Stats
 
@@ -27,9 +27,17 @@
 
 - [React.js](https://github.com/facebook/react) (0.12.2)
 - [X-Tag core](https://github.com/x-tag/core) ([custom build x-tag-core.js](https://github.com/Katochimoto/xblocks-core/blob/master/x-tag-core.js) or 1.0.0)
-- [es5-shim](https://github.com/es-shims/es5-shim) (4.0.5)
-- [xblocks-core](https://github.com/Katochimoto/xblocks-core) (0.5.4)
+- [es5-shim](https://github.com/es-shims/es5-shim) (4.0.6)
+- [xblocks-core](https://github.com/Katochimoto/xblocks-core) (0.5.5)
 - [tether](https://github.com/HubSpot/tether) (0.6.5) for xb-popup and xb-menu
+
+##Browser support
+
+- Firefox 14+
+- Internet Explorer 9+
+- Chrome 4+
+- Safari 4+
+- Opera 12+
 
 ##Install
 
