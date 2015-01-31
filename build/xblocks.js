@@ -15,10 +15,13 @@
     xblocks.dom = xblocks.dom || {};
     xblocks.event = xblocks.event || {};
 
-    var indexOf = Array.prototype.indexOf;
-    var pop = Array.prototype.pop;
-    var slice = Array.prototype.slice;
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var __doc = global.document;
+    var __html = __doc.documentElement;
+    var __body = __doc.body;
+    var __indexOf = Array.prototype.indexOf;
+    var __pop = Array.prototype.pop;
+    var __slice = Array.prototype.slice;
+    var __hasOwnProperty = Object.prototype.hasOwnProperty;
 
     /* xblocks/utils.js begin */
 // Time
@@ -173,7 +176,7 @@ xblocks.utils.throttle = function(callback, delay, context) {
 xblocks.utils.microtask = (function() {
     var iterations = 0;
     var callbacks = [];
-    var twiddle = global.document.createTextNode('');
+    var twiddle = __doc.createTextNode('');
     var Mutation = global.MutationObserver || global.JsMutationObserver;
 
     (new Mutation(function() {
@@ -262,7 +265,7 @@ xblocks.utils.mapObject = function(from, callback) {
 
 // Checkers
 /* xblocks/utils/isEmptyObject.js begin */
-/* global xblocks, hasOwnProperty */
+/* global xblocks, __hasOwnProperty */
 /* jshint strict: false */
 
 /**
@@ -272,7 +275,7 @@ xblocks.utils.mapObject = function(from, callback) {
 xblocks.utils.isEmptyObject = function(obj) {
     if (xblocks.utils.type(obj) === 'object') {
         for (var key in obj) {
-            if (hasOwnProperty.call(obj, key)) {
+            if (__hasOwnProperty.call(obj, key)) {
                 return false;
             }
         }
@@ -314,7 +317,7 @@ xblocks.utils.uid = function() {
 /* xblocks/utils/uid.js end */
 
 /* xblocks/utils/table.js begin */
-/* global pop, slice */
+/* global __pop, __slice */
 
 xblocks.utils.Table = function(node, options) {
     this._options = xblocks.utils.merge({
@@ -422,7 +425,7 @@ xblocks.utils.Table.prototype = {
     },
 
     _colLast: function() {
-        return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
+        return __pop.call(__slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
     },
 
     _colMatchIterate: function(data, element) {
@@ -449,7 +452,7 @@ xblocks.utils.Table.prototype = {
     },
 
     _rowLast: function(col) {
-        return pop.call(slice.call(col.querySelectorAll(this._options.row)));
+        return __pop.call(__slice.call(col.querySelectorAll(this._options.row)));
     },
 
     _rowMatchIterate: function(data, element) {
@@ -650,29 +653,28 @@ xblocks.utils.Table.prototype = {
 
     /* xblocks/dom.js begin */
 /* xblocks/dom/index.js begin */
-/* global xblocks, global, indexOf */
+/* global xblocks, __indexOf, __doc */
 /* jshint strict: false */
 
 xblocks.dom.index = function(selector, element, context) {
-    return indexOf.call((context || global.document).querySelectorAll(selector), element);
+    return __indexOf.call((context || __doc).querySelectorAll(selector), element);
 };
 
 /* xblocks/dom/index.js end */
 
 /* xblocks/dom/isParent.js begin */
-/* global xblocks, global */
+/* global xblocks, __html */
 /* jshint strict: false */
 
 xblocks.dom.isParent = (function() {
-    var root = global.document.documentElement;
 
-    if ('compareDocumentPosition' in root) {
+    if ('compareDocumentPosition' in __html) {
         return function(container, element) {
             /*jshint -W016 */
             return (container.compareDocumentPosition(element) & 16) == 16;
         };
 
-    } else if ('contains' in root) {
+    } else if ('contains' in __html) {
         return function(container, element) {
             return container !== element && container.contains(element);
         };
@@ -688,12 +690,13 @@ xblocks.dom.isParent = (function() {
             return false;
         };
     }
+
 }());
 
 /* xblocks/dom/isParent.js end */
 
 /* xblocks/dom/matchesSelector.js begin */
-/* global xblocks, indexOf, global */
+/* global xblocks, __indexOf, global */
 /* jshint strict: false */
 
 xblocks.dom.matchesSelector = (function() {
@@ -705,7 +708,7 @@ xblocks.dom.matchesSelector = (function() {
         proto.msMatchesSelector ||
         proto.oMatchesSelector ||
         function(selector) {
-            return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
+            return (__indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
         };
 
     return function(element, selector) {
@@ -850,10 +853,88 @@ xblocks.dom.eachAfter = function(node, callback, context, inner) {
 
 /* xblocks/dom/eachAfter.js end */
 
+/* xblocks/dom/cleanHTML.js begin */
+/* global xblocks, __forEach, __doc */
+/* jshint strict: false */
+
+/**
+* @returns {string}
+*/
+xblocks.dom.cleanHTML = (function() {
+    var _remove = function(element) {
+        element.parentNode.removeChild(element);
+    };
+
+    var _impl = __doc.implementation;
+
+    return function(html) {
+        var root = _impl.createHTMLDocument('').body;
+        root.innerHTML = html;
+        __forEach.call(root.querySelectorAll('script,style,img'), _remove);
+        return root.innerHTML;
+    };
+
+}());
+
+/* xblocks/dom/cleanHTML.js end */
+
 
 /* xblocks/dom.js end */
 
     /* xblocks/event.js begin */
+/* xblocks/event/wrap.js begin */
+/* global xblocks, __body, __html, __hasOwnProperty */
+/* jshint strict: false */
+
+xblocks.event._clickWhich = {
+    1: 'left',
+    2: 'center',
+    3: 'right'
+};
+
+xblocks.event.wrap = function(event) {
+    if (event.xbWrapped) {
+        return event;
+    }
+
+    event.xbWrapped = true;
+
+    if (!__hasOwnProperty.call(event, 'pageX') && __hasOwnProperty.call(event, 'clientX')) {
+        event.pageX = event.clientX;
+        event.pageY = event.clientY;
+
+        if (__html) {
+            event.pageX += __html.scrollLeft - (__html.clientLeft || 0);
+            event.pageY += __html.scrollTop - (__html.clientTop || 0);
+
+        } else if (__body) {
+            event.pageX += __body.scrollLeft;
+            event.pageY += __body.scrollTop;
+        }
+    }
+
+    if (!event.which && event.button) {
+        /* jshint -W016 */
+        if (event.button & 1) {
+            event.which = 1;
+
+        } else if (event.button & 4) {
+            event.which = 2;
+
+        } else if (event.button & 2) {
+            event.which = 3;
+        }
+    }
+
+    if (event.which) {
+        event.whichStr = xblocks.event._clickWhich[ event.which ];
+    }
+
+    return event;
+};
+
+/* xblocks/event/wrap.js end */
+
 /* xblocks/event/delegate.js begin */
 /* global xblocks */
 /* jshint strict: false */
@@ -888,7 +969,9 @@ xblocks.event.delegate = function(selector, callback) {
             return;
         }
 
+        xblocks.event.wrap(event);
         event.delegateElement = match;
+
         callback.call(match, event);
     };
 };
@@ -899,12 +982,6 @@ xblocks.event.delegate = function(selector, callback) {
 /* global xblocks */
 /* jshint strict: false */
 
-xblocks.event._clickWhich = {
-    1: 'left',
-    2: 'center',
-    3: 'right'
-};
-
 xblocks.event.filterClick = function(which, callback) {
     which = Array.isArray(which) ? which : [ which ];
 
@@ -913,22 +990,9 @@ xblocks.event.filterClick = function(which, callback) {
             return;
         }
 
-        var whichEvt = event.which;
+        xblocks.event.wrap(event);
 
-        if (!whichEvt && event.button) {
-            /* jshint -W016 */
-            if (event.button & 1) {
-                whichEvt = 1;
-            } else if (event.button & 4) {
-                whichEvt = 2;
-            } else if (event.button & 2) {
-                whichEvt = 3;
-            }
-        }
-
-        whichEvt = xblocks.event._clickWhich[ whichEvt ];
-
-        if (which.indexOf(whichEvt) !== -1) {
+        if (which.indexOf(event.whichStr) !== -1) {
             callback.call(this, event);
         }
     };
@@ -955,6 +1019,8 @@ xblocks.event.filterMouseEnter = function(element, event, callback) {
     if (toElement === element) {
         return;
     }
+
+    xblocks.event.wrap(event);
 
     return callback.call(element, event);
 };
@@ -3015,7 +3081,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
  */
 
 /* blocks/menu/_contextmenu.js begin */
-/* global __doc */
+/* global xblocks, __doc */
 
 __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
     var element = event.delegateElement;
@@ -3023,35 +3089,39 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     var menuId = element.getAttribute('contextmenu');
     var menuElement = menuId && doc.getElementById(menuId);
 
-    if (menuElement && menuElement.xtagName === 'xb-menu' && menuElement.attrs.type === 'context') {
-        event.preventDefault();
-
-        var targetElement = doc.createElement('div');
-        targetElement.style.position = 'absolute';
-        targetElement.style.visibility = 'hidden';
-        targetElement.style.top = event.y + 'px';
-        targetElement.style.left = event.x + 'px';
-
-        doc.body.appendChild(targetElement);
-
-        menuElement.addEventListener('xb-close', function _onClose() {
-            menuElement.removeEventListener('xb-close', _onClose, false);
-            targetElement.parentNode.removeChild(targetElement);
-        }, false);
-
-        menuElement.open({
-            'target': targetElement,
-            'attachment': 'top left',
-            'targetAttachment': 'bottom left',
-            'constraints': [{
-                'to': 'scrollParent',
-                'attachment': 'together'
-            }, {
-                'to': 'window',
-                'attachment': 'together'
-            }]
-        });
+    if (!menuElement || menuElement.xtagName !== 'xb-menu' || menuElement.attrs.type !== 'context') {
+        return;
     }
+
+    event.preventDefault();
+
+    var targetElement = doc.createElement('div');
+    targetElement.style.position = 'absolute';
+    targetElement.style.visibility = 'hidden';
+    targetElement.style.top = event.pageY + 'px';
+    targetElement.style.left = event.pageX + 'px';
+
+    doc.body.appendChild(targetElement);
+
+    menuElement.addEventListener('xb-close', function _onClose() {
+        menuElement.removeEventListener('xb-close', _onClose, false);
+        targetElement.parentNode.removeChild(targetElement);
+    }, false);
+
+    menuElement.open({
+        'target': targetElement,
+        'attachment': 'top left',
+        'targetAttachment': 'bottom left',
+        'constraints': [{
+            'to': 'scrollParent',
+            'attachment': 'together',
+            'pin': false
+        }, {
+            'to': 'window',
+            'attachment': 'together',
+            'pin': false
+        }]
+    });
 
 }), false);
 

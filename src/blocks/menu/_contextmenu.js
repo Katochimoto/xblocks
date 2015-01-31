@@ -1,4 +1,4 @@
-/* global __doc */
+/* global xblocks, __doc */
 
 __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
     var element = event.delegateElement;
@@ -6,34 +6,38 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     var menuId = element.getAttribute('contextmenu');
     var menuElement = menuId && doc.getElementById(menuId);
 
-    if (menuElement && menuElement.xtagName === 'xb-menu' && menuElement.attrs.type === 'context') {
-        event.preventDefault();
-
-        var targetElement = doc.createElement('div');
-        targetElement.style.position = 'absolute';
-        targetElement.style.visibility = 'hidden';
-        targetElement.style.top = event.y + 'px';
-        targetElement.style.left = event.x + 'px';
-
-        doc.body.appendChild(targetElement);
-
-        menuElement.addEventListener('xb-close', function _onClose() {
-            menuElement.removeEventListener('xb-close', _onClose, false);
-            targetElement.parentNode.removeChild(targetElement);
-        }, false);
-
-        menuElement.open({
-            'target': targetElement,
-            'attachment': 'top left',
-            'targetAttachment': 'bottom left',
-            'constraints': [{
-                'to': 'scrollParent',
-                'attachment': 'together'
-            }, {
-                'to': 'window',
-                'attachment': 'together'
-            }]
-        });
+    if (!menuElement || menuElement.xtagName !== 'xb-menu' || menuElement.attrs.type !== 'context') {
+        return;
     }
+
+    event.preventDefault();
+
+    var targetElement = doc.createElement('div');
+    targetElement.style.position = 'absolute';
+    targetElement.style.visibility = 'hidden';
+    targetElement.style.top = event.pageY + 'px';
+    targetElement.style.left = event.pageX + 'px';
+
+    doc.body.appendChild(targetElement);
+
+    menuElement.addEventListener('xb-close', function _onClose() {
+        menuElement.removeEventListener('xb-close', _onClose, false);
+        targetElement.parentNode.removeChild(targetElement);
+    }, false);
+
+    menuElement.open({
+        'target': targetElement,
+        'attachment': 'top left',
+        'targetAttachment': 'bottom left',
+        'constraints': [{
+            'to': 'scrollParent',
+            'attachment': 'together',
+            'pin': false
+        }, {
+            'to': 'window',
+            'attachment': 'together',
+            'pin': false
+        }]
+    });
 
 }), false);
