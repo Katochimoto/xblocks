@@ -170,7 +170,7 @@ xblocks.utils.throttle = function(callback, delay, context) {
 /* xblocks/utils/throttle.js end */
 
 /* xblocks/utils/microtask.js begin */
-/* global global, xblocks */
+/* global global, xblocks, __doc */
 /* jshint strict: false */
 
 xblocks.utils.microtask = (function() {
@@ -899,6 +899,14 @@ xblocks.event.wrap = function(event) {
 
     event.xbWrapped = true;
 
+    if (event.srcElement && !event.target) {
+        event.target = event.srcElement;
+    }
+
+    if (!event.relatedTarget && event.fromElement) {
+        event.relatedTarget = (event.fromElement === event.target) ? event.toElement : event.fromElement;
+    }
+
     if (!__hasOwnProperty.call(event, 'pageX') && __hasOwnProperty.call(event, 'clientX')) {
         event.pageX = event.clientX;
         event.pageY = event.clientY;
@@ -942,7 +950,9 @@ xblocks.event.wrap = function(event) {
 xblocks.event.delegate = function(selector, callback) {
 
     return function(event) {
-        var target = event.target || event.srcElement;
+        xblocks.event.wrap(event);
+
+        var target = event.target;
         var match;
 
         if (!target.tagName) {
@@ -969,7 +979,6 @@ xblocks.event.delegate = function(selector, callback) {
             return;
         }
 
-        xblocks.event.wrap(event);
         event.delegateElement = match;
 
         callback.call(match, event);
@@ -1010,7 +1019,9 @@ xblocks.event.filterClick = function(which, callback) {
  * @param {function} callback
  */
 xblocks.event.filterMouseEnter = function(element, event, callback) {
-    var toElement = event.relatedTarget || event.srcElement;
+    xblocks.event.wrap(event);
+
+    var toElement = event.relatedTarget;
 
     while (toElement && toElement !== element) {
         toElement = toElement.parentNode;
@@ -1019,8 +1030,6 @@ xblocks.event.filterMouseEnter = function(element, event, callback) {
     if (toElement === element) {
         return;
     }
-
-    xblocks.event.wrap(event);
 
     return callback.call(element, event);
 };
