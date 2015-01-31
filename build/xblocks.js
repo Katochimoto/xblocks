@@ -17,7 +17,6 @@
 
     var __doc = global.document;
     var __html = __doc.documentElement;
-    var __body = __doc.body;
     var __indexOf = Array.prototype.indexOf;
     var __pop = Array.prototype.pop;
     var __slice = Array.prototype.slice;
@@ -883,7 +882,7 @@ xblocks.dom.cleanHTML = (function() {
 
     /* xblocks/event.js begin */
 /* xblocks/event/wrap.js begin */
-/* global xblocks, __body, __html, __hasOwnProperty */
+/* global xblocks, __doc, __html, __hasOwnProperty */
 /* jshint strict: false */
 
 xblocks.event._clickWhich = {
@@ -915,9 +914,9 @@ xblocks.event.wrap = function(event) {
             event.pageX += __html.scrollLeft - (__html.clientLeft || 0);
             event.pageY += __html.scrollTop - (__html.clientTop || 0);
 
-        } else if (__body) {
-            event.pageX += __body.scrollLeft;
-            event.pageY += __body.scrollTop;
+        } else if (__doc.body) {
+            event.pageX += __doc.body.scrollLeft;
+            event.pageY += __doc.body.scrollTop;
         }
     }
 
@@ -2586,7 +2585,7 @@ xblocks.create('xb-radio', [
 /* blocks/radio/radio.js end */
 
     /* blocks/popup/popup.js begin */
-/* global global, xblocks, Tether */
+/* global global, xblocks, Tether, __doc */
 /* jshint strict: false */
 
 /**
@@ -2708,10 +2707,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
                         'optimizations-gpu': true,
-                        'target': global.document.body,
+                        'target': __doc.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
-                        'target-modifier': 'visible',
+                        'target-modifier': undefined,
                         'target-offset': undefined,
                         'attachment': 'middle center',
                         'offset': undefined,
@@ -3055,16 +3054,19 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         this.classList.add(targetClassName);
 
                         var menu = this.ownerDocument.createElement('xb-menu');
-                        menu.setAttribute('target-attachment', 'top right');
                         menu.setAttribute('attachment', 'top left');
+                        menu.setAttribute('target-attachment', 'top right');
                         menu.setAttribute('target', '.' + targetClassName);
-                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
-                            'to': 'scrollParent',
-                            'attachment': 'together'
-                        }, {
-                            'to': 'window',
-                            'attachment': 'together'
-                        }])));
+                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
+                            {
+                                'to': 'scrollParent',
+                                'attachment': 'element together'
+                            },
+                            {
+                                'to': 'window',
+                                'attachment': 'element together'
+                            }
+                        ])));
                         menu.innerHTML = this.content;
 
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);
@@ -3121,15 +3123,19 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
         'target': targetElement,
         'attachment': 'top left',
         'targetAttachment': 'bottom left',
-        'constraints': [{
-            'to': 'scrollParent',
-            'attachment': 'together',
-            'pin': false
-        }, {
-            'to': 'window',
-            'attachment': 'together',
-            'pin': false
-        }]
+        'optimizations': {
+            'moveElement': false
+        },
+        'constraints': [
+            {
+                'to': 'scrollParent',
+                'attachment': 'element'
+            },
+            {
+                'to': 'window',
+                'attachment': 'element'
+            }
+        ]
     });
 
 }), false);

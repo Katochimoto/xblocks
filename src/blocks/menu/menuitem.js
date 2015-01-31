@@ -114,16 +114,19 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         this.classList.add(targetClassName);
 
                         var menu = this.ownerDocument.createElement('xb-menu');
-                        menu.setAttribute('target-attachment', 'top right');
                         menu.setAttribute('attachment', 'top left');
+                        menu.setAttribute('target-attachment', 'top right');
                         menu.setAttribute('target', '.' + targetClassName);
-                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
-                            'to': 'scrollParent',
-                            'attachment': 'together'
-                        }, {
-                            'to': 'window',
-                            'attachment': 'together'
-                        }])));
+                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
+                            {
+                                'to': 'scrollParent',
+                                'attachment': 'element together'
+                            },
+                            {
+                                'to': 'window',
+                                'attachment': 'element together'
+                            }
+                        ])));
                         menu.innerHTML = this.content;
 
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);

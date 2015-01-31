@@ -29,15 +29,19 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
         'target': targetElement,
         'attachment': 'top left',
         'targetAttachment': 'bottom left',
-        'constraints': [{
-            'to': 'scrollParent',
-            'attachment': 'together',
-            'pin': false
-        }, {
-            'to': 'window',
-            'attachment': 'together',
-            'pin': false
-        }]
+        'optimizations': {
+            'moveElement': false
+        },
+        'constraints': [
+            {
+                'to': 'scrollParent',
+                'attachment': 'element'
+            },
+            {
+                'to': 'window',
+                'attachment': 'element'
+            }
+        ]
     });
 
 }), false);

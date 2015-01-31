@@ -1,4 +1,4 @@
-/* global global, xblocks, Tether */
+/* global global, xblocks, Tether, __doc */
 /* jshint strict: false */
 
 /**
@@ -50,10 +50,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
                         'optimizations-gpu': true,
-                        'target': global.document.body,
+                        'target': __doc.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
-                        'target-modifier': 'visible',
+                        'target-modifier': undefined,
                         'target-offset': undefined,
                         'attachment': 'middle center',
                         'offset': undefined,
