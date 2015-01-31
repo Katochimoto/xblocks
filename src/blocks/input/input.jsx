@@ -15,29 +15,30 @@ var XBInput = xblocks.view.register('xb-input', [
         displayName: 'xb-input',
 
         propTypes: {
-            'name': React.PropTypes.string,
-            'disabled': React.PropTypes.bool,
-            'autosize': React.PropTypes.bool,
-            'multiline': React.PropTypes.bool,
-            'required': React.PropTypes.bool,
-            'readonly': React.PropTypes.bool,
-            'reset': React.PropTypes.bool,
-            'autofocus': React.PropTypes.bool,
-            'ghost': React.PropTypes.bool,
-            'type': React.PropTypes.oneOf([
-                'text', 'number', 'date', 'datetime', 'email', 'month',
-                'range', 'search', 'tel', 'time', 'url', 'week', 'color'
-            ]),
-            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'name':         React.PropTypes.string,
+            'disabled':     React.PropTypes.bool,
+            'autosize':     React.PropTypes.bool,
+            'multiline':    React.PropTypes.bool,
+            'required':     React.PropTypes.bool,
+            'readonly':     React.PropTypes.bool,
+            'reset':        React.PropTypes.bool,
+            'autofocus':    React.PropTypes.bool,
+            'ghost':        React.PropTypes.bool,
+            'type':         React.PropTypes.oneOf([
+                                'text', 'number', 'date', 'datetime', 'email', 'month',
+                                'range', 'search', 'tel', 'time', 'url', 'week', 'color',
+                                'wysiwyg'
+                            ]),
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'rows': React.PropTypes.string,
-            'cols': React.PropTypes.string,
-            'placeholder': React.PropTypes.string,
-            'value': React.PropTypes.string,
-            'prefix': React.PropTypes.string,
-            'postfix': React.PropTypes.string,
-            'tabindex': React.PropTypes.string,
-            'xb-link': React.PropTypes.string
+            'rows':         React.PropTypes.string,
+            'cols':         React.PropTypes.string,
+            'placeholder':  React.PropTypes.string,
+            'value':        React.PropTypes.string,
+            'prefix':       React.PropTypes.string,
+            'postfix':      React.PropTypes.string,
+            'tabindex':     React.PropTypes.string,
+            'xb-link':      React.PropTypes.string
         },
 
         statics: {
@@ -50,7 +51,7 @@ var XBInput = xblocks.view.register('xb-input', [
         },
 
         shouldComponentUpdate: function(nextProps, nextState) {
-            return (
+            return Boolean(
                 !xblocks.utils.equals(nextProps, this.props) ||
                 !xblocks.utils.equals(nextState, this.state)
             );
@@ -58,10 +59,18 @@ var XBInput = xblocks.view.register('xb-input', [
 
         getDefaultProps: function() {
             return {
-                'value': '',
+                'value': undefined,
                 'type': 'text',
                 'size': 'm',
-                'rows': '4'
+                'rows': '4',
+                'disabled': false,
+                'autosize': false,
+                'multiline': false,
+                'required': false,
+                'readonly': false,
+                'reset': false,
+                'autofocus': false,
+                'ghost': false
             };
         },
 
@@ -102,7 +111,7 @@ var XBInput = xblocks.view.register('xb-input', [
          * @private
          */
         _isComplex: function() {
-            return (
+            return Boolean(
                 this.props.postfix ||
                 this.props.prefix ||
                 this.props.reset ||
@@ -127,22 +136,37 @@ var XBInput = xblocks.view.register('xb-input', [
                 'xb-input': true,
                 '_disabled': Boolean(this.props.disabled),
                 '_autosize': Boolean(this.props.autosize),
-                '_ghost': Boolean(this.props.ghost)
+                '_ghost': Boolean(this.props.ghost),
+                '_complex': isComplex,
+                '_simple': !isComplex
             };
 
             if (this.props.size) {
-                classes['_size-' + this.props.size] = true;
-            }
-
-            if (isComplex) {
-                classes._complex = true;
-            } else {
-                classes._simple = true;
+                classes[ '_size-' + this.props.size ] = true;
             }
 
             classes = React.addons.classSet(classes);
 
             var isPlaceholderHint = false;
+            var controllerProps = {
+                'key': 'controller',
+                'ref': 'controller',
+                'className': '_controller',
+                'value': this.state.value,
+                'name': this.props.name,
+                'disabled': this.props.disabled,
+                'required': this.props.required,
+                'readOnly': this.props.readonly,
+                'multiline': this.props.multiline,
+                'autoFocus': this.props.autofocus,
+                'rows': this.props.rows,
+                'cols': this.props.cols,
+                'tabIndex': this.props.tabindex,
+                'autocomplete': this.props.autocomplete,
+                'autosize': this.props.autosize,
+                'onChange': this._onChange,
+                'onHintToggle': this._onHintToggle
+            };
 
             if (isComplex) {
                 var children = [];
@@ -187,24 +211,7 @@ var XBInput = xblocks.view.register('xb-input', [
 
                 children.push(
                     <span key="content" className="_content">
-                        <XBInputController key="controller"
-                            ref="controller"
-                            className="_controller"
-                            value={this.state.value}
-                            name={this.props.name}
-                            disabled={this.props.disabled}
-                            required={this.props.required}
-                            readOnly={this.props.readonly}
-                            multiline={this.props.multiline}
-                            autoFocus={this.props.autofocus}
-                            rows={this.props.rows}
-                            cols={this.props.cols}
-                            tabIndex={this.props.tabindex}
-                            autocomplete={this.props.autocomplete}
-                            autosize={this.props.autosize}
-                            onChange={this._onChange}
-                            onHintToggle={this._onHintToggle}
-                            isPlaceholderHint={isPlaceholderHint}/>
+                        <XBInputController {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
                         <span key="view" className="_view"></span>
                     </span>
                 );
@@ -215,26 +222,8 @@ var XBInput = xblocks.view.register('xb-input', [
 
             } else {
 
-               return (
-                    <XBInputController key="controller"
-                        ref="controller"
-                        className={classes}
-                        value={this.state.value}
-                        name={this.props.name}
-                        disabled={this.props.disabled}
-                        required={this.props.required}
-                        readOnly={this.props.readonly}
-                        multiline={this.props.multiline}
-                        autoFocus={this.props.autofocus}
-                        rows={this.props.rows}
-                        cols={this.props.cols}
-                        placeholder={this.props.placeholder}
-                        tabIndex={this.props.tabindex}
-                        autocomplete={this.props.autocomplete}
-                        autosize={this.props.autosize}
-                        onChange={this._onChange}
-                        onHintToggle={this._onHintToggle}
-                        isPlaceholderHint={isPlaceholderHint}/>
+                return (
+                    <XBInputController {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
                 );
             }
         }

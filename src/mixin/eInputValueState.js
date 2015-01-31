@@ -2,30 +2,32 @@
 /* jshint strict: false */
 
 xblocks.mixin.eInputValueState = {
-    accessors: {
-        value: {
-            get: function() {
-                if (this.mounted) {
-                    return this.xblock._component.state.value;
-
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : '');
-                }
+    'accessors': {
+        'value': {
+            'attribute': {
+                'name': 'value'
             },
 
-            set: function(value) {
+            'get': function() {
+                if (this.mounted && typeof(this.xblock._component.state.value) !== 'undefined') {
+                    return this.xblock._component.state.value;
+                }
+
+                return String(this.getAttribute('value') || this.defaultValue || '');
+            },
+
+            'set': function(value) {
                 if (this.mounted) {
                     this.xblock._component.setState({
                         'value': String(value)
                     });
-
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    if (controlNode) {
-                        controlNode.value = String(value);
-                    }
                 }
+            }
+        },
+
+        'defaultValue': {
+            'get': function() {
+                return '';
             }
         }
     }

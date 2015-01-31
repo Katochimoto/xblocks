@@ -1294,30 +1294,32 @@ xblocks.mixin.eChecked = {
 /* jshint strict: false */
 
 xblocks.mixin.eInputValueState = {
-    accessors: {
-        value: {
-            get: function() {
-                if (this.mounted) {
-                    return this.xblock._component.state.value;
-
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : '');
-                }
+    'accessors': {
+        'value': {
+            'attribute': {
+                'name': 'value'
             },
 
-            set: function(value) {
+            'get': function() {
+                if (this.mounted && typeof(this.xblock._component.state.value) !== 'undefined') {
+                    return this.xblock._component.state.value;
+                }
+
+                return String(this.getAttribute('value') || this.defaultValue || '');
+            },
+
+            'set': function(value) {
                 if (this.mounted) {
                     this.xblock._component.setState({
                         'value': String(value)
                     });
-
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    if (controlNode) {
-                        controlNode.value = String(value);
-                    }
                 }
+            }
+        },
+
+        'defaultValue': {
+            'get': function() {
+                return '';
             }
         }
     }
@@ -1330,19 +1332,19 @@ xblocks.mixin.eInputValueState = {
 /* jshint strict: false */
 
 xblocks.mixin.eInputValueProps = {
-    accessors: {
-        value: {
-            attribute: {
-                name: 'value'
+    'accessors': {
+        'value': {
+            'attribute': {
+                'name': 'value'
             },
 
-            get: function() {
+            'get': function() {
                 return String(this.getAttribute('value') || this.defaultValue || '');
             }
         },
 
-        defaultValue: {
-            get: function() {
+        'defaultValue': {
+            'get': function() {
                 return '';
             }
         }
@@ -1956,29 +1958,36 @@ var XBInputController = xblocks.view.create({
     displayName: 'XBInputController',
 
     propTypes: {
-        'className': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'disabled': React.PropTypes.bool,
-        'multiline': React.PropTypes.bool,
-        'required': React.PropTypes.bool,
-        'readOnly': React.PropTypes.bool,
-        'autosize': React.PropTypes.bool,
-        'autoFocus': React.PropTypes.bool,
-        'rows': React.PropTypes.string,
-        'cols': React.PropTypes.string,
-        'placeholder': React.PropTypes.string,
-        'value': React.PropTypes.string,
-        'tabIndex': React.PropTypes.string,
-        'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+        'className':        React.PropTypes.string,
+        'name':             React.PropTypes.string,
+        'disabled':         React.PropTypes.bool,
+        'multiline':        React.PropTypes.bool,
+        'required':         React.PropTypes.bool,
+        'readOnly':         React.PropTypes.bool,
+        'autosize':         React.PropTypes.bool,
+        'autoFocus':        React.PropTypes.bool,
+        'rows':             React.PropTypes.string,
+        'cols':             React.PropTypes.string,
+        'placeholder':      React.PropTypes.string,
+        'value':            React.PropTypes.string,
+        'tabIndex':         React.PropTypes.string,
+        'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
 
-        'onChange': React.PropTypes.func,
-        'onHintToggle': React.PropTypes.func,
+        'onChange':         React.PropTypes.func,
+        'onHintToggle':     React.PropTypes.func,
         'isPlaceholderHint': React.PropTypes.bool
     },
 
     getDefaultProps: function() {
         return {
-            'value': ''
+            'value': undefined,
+            'disabled': false,
+            'multiline': false,
+            'required': false,
+            'readOnly': false,
+            'autosize': false,
+            'autoFocus': false,
+            'isPlaceholderHint': false
         };
     },
 
@@ -2004,17 +2013,19 @@ var XBInputController = xblocks.view.create({
     },
 
     _recalculateSize: function() {
-        if (this.props.autosize) {
-            var node = this.getDOMNode();
+        if (!this.props.autosize) {
+            return;
+        }
 
-            if (this.props.multiline) {
-                node.style.height = '0px';
-                node.style.height = node.scrollHeight + 'px';
+        var node = this.getDOMNode();
 
-            } else {
-                node.style.width = '20px';
-                node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
-            }
+        if (this.props.multiline) {
+            node.style.height = '0px';
+            node.style.height = node.scrollHeight + 'px';
+
+        } else {
+            node.style.width = '20px';
+            node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
         }
     },
 
@@ -2024,40 +2035,29 @@ var XBInputController = xblocks.view.create({
             tabIndex = '-1';
         }
 
-        // macos inserts placeholder default
-        this.props.placeholder = this.props.placeholder || '';
+        var props = {
+            'value': this.props.value,
+            'className': this.props.className,
+            'name': this.props.name,
+            'disabled': this.props.disabled,
+            'required': this.props.required,
+            'readOnly': this.props.readOnly,
+            'autoFocus': this.props.autoFocus,
+            // macos inserts placeholder default
+            'placeholder': this.props.placeholder || '',
+            'tabIndex': tabIndex,
+            'autocomplete': this.props.autocomplete,
+            'onChange': this.props.onChange
+        };
 
         if (this.props.multiline) {
             return (
-                React.createElement("textarea", {value: this.props.value, 
-                    className: this.props.className, 
-                    name: this.props.name, 
-                    disabled: this.props.disabled, 
-                    required: this.props.required, 
-                    readOnly: this.props.readOnly, 
-                    autoFocus: this.props.autoFocus, 
-                    rows: this.props.rows, 
-                    cols: this.props.cols, 
-                    placeholder: this.props.placeholder, 
-                    tabIndex: tabIndex, 
-                    autocomplete: this.props.autocomplete, 
-                    onChange: this.props.onChange})
+                React.createElement("textarea", React.__spread({},  props, {rows: this.props.rows, cols: this.props.cols}))
             );
 
         } else {
             return (
-                React.createElement("input", {value: this.props.value, 
-                    type: "text", 
-                    className: this.props.className, 
-                    name: this.props.name, 
-                    disabled: this.props.disabled, 
-                    required: this.props.required, 
-                    readOnly: this.props.readOnly, 
-                    autoFocus: this.props.autoFocus, 
-                    placeholder: this.props.placeholder, 
-                    tabIndex: tabIndex, 
-                    autocomplete: this.props.autocomplete, 
-                    onChange: this.props.onChange})
+                React.createElement("input", React.__spread({},  props, {type: "text"}))
             );
         }
     }
@@ -2077,29 +2077,30 @@ var XBInput = xblocks.view.register('xb-input', [
         displayName: 'xb-input',
 
         propTypes: {
-            'name': React.PropTypes.string,
-            'disabled': React.PropTypes.bool,
-            'autosize': React.PropTypes.bool,
-            'multiline': React.PropTypes.bool,
-            'required': React.PropTypes.bool,
-            'readonly': React.PropTypes.bool,
-            'reset': React.PropTypes.bool,
-            'autofocus': React.PropTypes.bool,
-            'ghost': React.PropTypes.bool,
-            'type': React.PropTypes.oneOf([
-                'text', 'number', 'date', 'datetime', 'email', 'month',
-                'range', 'search', 'tel', 'time', 'url', 'week', 'color'
-            ]),
-            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'name':         React.PropTypes.string,
+            'disabled':     React.PropTypes.bool,
+            'autosize':     React.PropTypes.bool,
+            'multiline':    React.PropTypes.bool,
+            'required':     React.PropTypes.bool,
+            'readonly':     React.PropTypes.bool,
+            'reset':        React.PropTypes.bool,
+            'autofocus':    React.PropTypes.bool,
+            'ghost':        React.PropTypes.bool,
+            'type':         React.PropTypes.oneOf([
+                                'text', 'number', 'date', 'datetime', 'email', 'month',
+                                'range', 'search', 'tel', 'time', 'url', 'week', 'color',
+                                'wysiwyg'
+                            ]),
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'rows': React.PropTypes.string,
-            'cols': React.PropTypes.string,
-            'placeholder': React.PropTypes.string,
-            'value': React.PropTypes.string,
-            'prefix': React.PropTypes.string,
-            'postfix': React.PropTypes.string,
-            'tabindex': React.PropTypes.string,
-            'xb-link': React.PropTypes.string
+            'rows':         React.PropTypes.string,
+            'cols':         React.PropTypes.string,
+            'placeholder':  React.PropTypes.string,
+            'value':        React.PropTypes.string,
+            'prefix':       React.PropTypes.string,
+            'postfix':      React.PropTypes.string,
+            'tabindex':     React.PropTypes.string,
+            'xb-link':      React.PropTypes.string
         },
 
         statics: {
@@ -2112,7 +2113,7 @@ var XBInput = xblocks.view.register('xb-input', [
         },
 
         shouldComponentUpdate: function(nextProps, nextState) {
-            return (
+            return Boolean(
                 !xblocks.utils.equals(nextProps, this.props) ||
                 !xblocks.utils.equals(nextState, this.state)
             );
@@ -2120,10 +2121,18 @@ var XBInput = xblocks.view.register('xb-input', [
 
         getDefaultProps: function() {
             return {
-                'value': '',
+                'value': undefined,
                 'type': 'text',
                 'size': 'm',
-                'rows': '4'
+                'rows': '4',
+                'disabled': false,
+                'autosize': false,
+                'multiline': false,
+                'required': false,
+                'readonly': false,
+                'reset': false,
+                'autofocus': false,
+                'ghost': false
             };
         },
 
@@ -2164,7 +2173,7 @@ var XBInput = xblocks.view.register('xb-input', [
          * @private
          */
         _isComplex: function() {
-            return (
+            return Boolean(
                 this.props.postfix ||
                 this.props.prefix ||
                 this.props.reset ||
@@ -2189,22 +2198,37 @@ var XBInput = xblocks.view.register('xb-input', [
                 'xb-input': true,
                 '_disabled': Boolean(this.props.disabled),
                 '_autosize': Boolean(this.props.autosize),
-                '_ghost': Boolean(this.props.ghost)
+                '_ghost': Boolean(this.props.ghost),
+                '_complex': isComplex,
+                '_simple': !isComplex
             };
 
             if (this.props.size) {
-                classes['_size-' + this.props.size] = true;
-            }
-
-            if (isComplex) {
-                classes._complex = true;
-            } else {
-                classes._simple = true;
+                classes[ '_size-' + this.props.size ] = true;
             }
 
             classes = React.addons.classSet(classes);
 
             var isPlaceholderHint = false;
+            var controllerProps = {
+                'key': 'controller',
+                'ref': 'controller',
+                'className': '_controller',
+                'value': this.state.value,
+                'name': this.props.name,
+                'disabled': this.props.disabled,
+                'required': this.props.required,
+                'readOnly': this.props.readonly,
+                'multiline': this.props.multiline,
+                'autoFocus': this.props.autofocus,
+                'rows': this.props.rows,
+                'cols': this.props.cols,
+                'tabIndex': this.props.tabindex,
+                'autocomplete': this.props.autocomplete,
+                'autosize': this.props.autosize,
+                'onChange': this._onChange,
+                'onHintToggle': this._onHintToggle
+            };
 
             if (isComplex) {
                 var children = [];
@@ -2249,24 +2273,7 @@ var XBInput = xblocks.view.register('xb-input', [
 
                 children.push(
                     React.createElement("span", {key: "content", className: "_content"}, 
-                        React.createElement(XBInputController, {key: "controller", 
-                            ref: "controller", 
-                            className: "_controller", 
-                            value: this.state.value, 
-                            name: this.props.name, 
-                            disabled: this.props.disabled, 
-                            required: this.props.required, 
-                            readOnly: this.props.readonly, 
-                            multiline: this.props.multiline, 
-                            autoFocus: this.props.autofocus, 
-                            rows: this.props.rows, 
-                            cols: this.props.cols, 
-                            tabIndex: this.props.tabindex, 
-                            autocomplete: this.props.autocomplete, 
-                            autosize: this.props.autosize, 
-                            onChange: this._onChange, 
-                            onHintToggle: this._onHintToggle, 
-                            isPlaceholderHint: isPlaceholderHint}), 
+                        React.createElement(XBInputController, React.__spread({},  controllerProps, {isPlaceholderHint: isPlaceholderHint})), 
                         React.createElement("span", {key: "view", className: "_view"})
                     )
                 );
@@ -2277,26 +2284,8 @@ var XBInput = xblocks.view.register('xb-input', [
 
             } else {
 
-               return (
-                    React.createElement(XBInputController, {key: "controller", 
-                        ref: "controller", 
-                        className: classes, 
-                        value: this.state.value, 
-                        name: this.props.name, 
-                        disabled: this.props.disabled, 
-                        required: this.props.required, 
-                        readOnly: this.props.readonly, 
-                        multiline: this.props.multiline, 
-                        autoFocus: this.props.autofocus, 
-                        rows: this.props.rows, 
-                        cols: this.props.cols, 
-                        placeholder: this.props.placeholder, 
-                        tabIndex: this.props.tabindex, 
-                        autocomplete: this.props.autocomplete, 
-                        autosize: this.props.autosize, 
-                        onChange: this._onChange, 
-                        onHintToggle: this._onHintToggle, 
-                        isPlaceholderHint: isPlaceholderHint})
+                return (
+                    React.createElement(XBInputController, React.__spread({},  controllerProps, {className: classes, isPlaceholderHint: isPlaceholderHint}))
                 );
             }
         }
