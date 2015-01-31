@@ -116,7 +116,8 @@ var XBInput = xblocks.view.register('xb-input', [
                 this.props.prefix ||
                 this.props.reset ||
                 this.props.autosize ||
-                this.props['xb-link']
+                this.props['xb-link'] ||
+                this.props.placeholder
             );
         },
 
