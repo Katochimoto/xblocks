@@ -10,6 +10,11 @@ xb-menu
     overflow: hidden
     padding: 0
     outline: none
+    touch-action: none
+    -webkit-touch-callout: none
+    touch-callout: none
+    user-select: none
+    text-size-adjust: none
 
     &:before,
     &:after
@@ -18,3 +23,19 @@ xb-menu
 
     &:focus
       box-shadow: 0 0 0 1px rgba(#000, 0.15), 0 8px 30px -5px rgba(#000, 0.7)
+
+
+    & > ._popup-content
+      overflow-y: scroll
+      overflow-x: hidden
+      max-height: 200px
+      tap-highlight-color: rgba(#000, 0)
+      transform: translateZ(0)
+      margin-right: -15px
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+  xb-menu > ._popup > ._popup-content
+    margin-right: auto !important
+
+    &::-webkit-scrollbar
+      width: 0 !important

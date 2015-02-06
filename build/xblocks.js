@@ -1,6 +1,107 @@
 /* ../node_modules/xblocks-utils/xblocks-utils.js begin */
 /* jshint -W067 */
 /* jshint unused: false */
+
+/* polyfills.js begin */
+/* polyfills/assign.js begin */
+/* jshint -W067 */
+/* jshint unused: false */
+(function(global, undefined) {
+
+    if (typeof(Object.assign) === 'function') {
+        return;
+    }
+
+    Object.defineProperty(Object, 'assign', {
+        'enumerable': false,
+        'configurable': true,
+        'writable': true,
+        'value': function(target) {
+            'use strict';
+
+            if (target === undefined || target === null) {
+                throw new TypeError('Cannot convert first argument to object');
+            }
+
+            var to = Object(target);
+            var i = 1;
+            var l = arguments.length;
+
+            for (; i < l; i++) {
+                var nextSource = arguments[ i ];
+
+                if (nextSource === undefined || nextSource === null) {
+                    continue;
+                }
+
+                var keysArray = Object.keys(Object(nextSource));
+                var nextIndex = 0;
+                var len = keysArray.length;
+
+                for (; nextIndex < len; nextIndex++) {
+                    var nextKey = keysArray[  nextIndex ];
+                    var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+
+                    if (desc !== undefined && desc.enumerable) {
+                        to[ nextKey ] = nextSource[ nextKey ];
+                    }
+                }
+            }
+
+            return to;
+        }
+    });
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/assign.js end */
+
+/* polyfills/requestAnimationFrame.js begin */
+/* jshint -W067 */
+(function(global) {
+    'use strict';
+
+    var lastTime = 0;
+    var vendors = [ 'ms', 'moz', 'webkit', 'o' ];
+    var vendor;
+
+    for (var x = 0; x < 4 && !global.requestAnimationFrame; ++x) {
+        vendor = vendors[ x ];
+        global.requestAnimationFrame = global[ vendor + 'RequestAnimationFrame' ];
+        global.cancelAnimationFrame = global[ vendor + 'CancelAnimationFrame' ] ||
+            global[ vendor + 'CancelRequestAnimationFrame' ];
+    }
+
+    if (!global.requestAnimationFrame) {
+        global.requestAnimationFrame = function(callback) {
+            var currTime = Date.now();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = global.setTimeout(function() {
+                callback(currTime + timeToCall);
+            }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+    }
+
+    if (!global.cancelAnimationFrame) {
+        global.cancelAnimationFrame = function(id) {
+            global.clearTimeout(id);
+        };
+    }
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/requestAnimationFrame.js end */
+
+
+/* polyfills.js end */
+
+
 (function(global, undefined) {
     'use strict';
 
@@ -152,15 +253,16 @@ xblocks.utils.debounce = function(callback, delay, context) {
 xblocks.utils.throttle = function(callback, delay, context) {
     delay = Number(delay || 250);
     var throttle = 0;
+    var timeoutCallback = function() {
+        throttle = 0;
+    };
 
     return function() {
         if (throttle) {
             return;
         }
 
-        throttle = global.setTimeout(function() {
-            throttle = 0;
-        }, delay);
+        throttle = global.setTimeout(timeoutCallback, delay);
 
         callback.apply(context || this, arguments);
     };
@@ -184,7 +286,7 @@ xblocks.utils.microtask = (function() {
         }
 
     })).observe(twiddle, {
-        characterData: true
+        'characterData': true
     });
 
     return function(callback) {
@@ -195,6 +297,29 @@ xblocks.utils.microtask = (function() {
 }());
 
 /* xblocks/utils/microtask.js end */
+
+/* xblocks/utils/throttleAnimationFrame.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.utils.throttleAnimationFrame = function(callback, context) {
+    var throttle = 0;
+    var animationCallback = function() {
+        throttle = 0;
+    };
+
+    return function() {
+        if (throttle) {
+            return;
+        }
+
+        throttle = global.requestAnimationFrame(animationCallback);
+
+        callback.apply(context || this, arguments);
+    };
+};
+
+/* xblocks/utils/throttleAnimationFrame.js end */
 
 
 // Traverse
@@ -1064,6 +1189,7 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
 
     var __doc = global.document;
     var __noop = function() {};
+    var __false = function() { return false; };
     var __forEach = Array.prototype.forEach;
 
     /* utils.js begin */
@@ -3164,10 +3290,11 @@ var XBMenu = xblocks.view.register('xb-menu', [
             classes = React.addons.classSet(classes);
 
             return (
-                React.createElement("div", {className: classes, 
-                    tabIndex: "0", 
-                    "data-xb-content": this.props._uid, 
-                    dangerouslySetInnerHTML: { __html: this.props.children}})
+                React.createElement("div", {className: classes, tabIndex: "0"}, 
+                    React.createElement("div", {className: "_popup-content", 
+                        "data-xb-content": this.props._uid, 
+                        dangerouslySetInnerHTML: { __html: this.props.children}})
+                )
             );
         }
     }
@@ -3277,11 +3404,13 @@ var XBMenuElement = xblocks.create('xb-menu', [
             },
 
             'blur': function() {
+                /*
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
                     global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
                 }
+                */
             }
         },
 

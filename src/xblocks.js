@@ -16,6 +16,7 @@
 
     var __doc = global.document;
     var __noop = function() {};
+    var __false = function() { return false; };
     var __forEach = Array.prototype.forEach;
 
     /*! borschik:include:utils.js */

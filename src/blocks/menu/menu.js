@@ -112,11 +112,13 @@ var XBMenuElement = xblocks.create('xb-menu', [
             },
 
             'blur': function() {
+                /*
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
                     global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
                 }
+                */
             }
         },
 

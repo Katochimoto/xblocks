@@ -28,10 +28,11 @@ var XBMenu = xblocks.view.register('xb-menu', [
             classes = React.addons.classSet(classes);
 
             return (
-                <div className={classes}
-                    tabIndex="0"
-                    data-xb-content={this.props._uid}
-                    dangerouslySetInnerHTML={{ __html: this.props.children }}></div>
+                <div className={classes} tabIndex="0">
+                    <div className="_popup-content"
+                        data-xb-content={this.props._uid}
+                        dangerouslySetInnerHTML={{ __html: this.props.children }} />
+                </div>
             );
         }
     }

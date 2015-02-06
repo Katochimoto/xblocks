@@ -3202,6 +3202,16 @@ xb-menu > ._popup {
   overflow: hidden;
   padding: 0;
   outline: none;
+  -ms-touch-action: none;
+      touch-action: none;
+  -webkit-touch-callout: none;
+  touch-callout: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-text-size-adjust: none;
+          text-size-adjust: none;
 }
 xb-menu > ._popup:before,
 xb-menu > ._popup:after {
@@ -3211,6 +3221,24 @@ xb-menu > ._popup:after {
 xb-menu > ._popup:focus {
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
+}
+xb-menu > ._popup > ._popup-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 200px;
+  tap-highlight-color: rgba(0,0,0,0);
+  -webkit-transform: translateZ(0);
+     -moz-transform: translateZ(0);
+          transform: translateZ(0);
+  margin-right: -15px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  xb-menu > ._popup > ._popup-content {
+    margin-right: auto !important;
+  }
+  xb-menu > ._popup > ._popup-content::-webkit-scrollbar {
+    width: 0 !important;
+  }
 }
 xb-menuitem {
   display: block;
