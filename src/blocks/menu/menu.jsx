@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, global */
 /* jshint strict: false */
 /* jshint -W098 */
 var XBMenu = xblocks.view.register('xb-menu', [
