@@ -7,6 +7,7 @@ xb-menu
 
   & > ._popup
     skin: popup
+    position: relative
     overflow: hidden
     padding: 0
     outline: none
@@ -37,6 +38,7 @@ xb-menu
       width: 100%
       cursor: pointer
       display: none
+      z-index: 2
 
       &:after
         content: ""
@@ -47,16 +49,16 @@ xb-menu
         left: 50%
 
     & > ._popup-scroll-top
-      top: -($islands_m / 2)
-      box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.15), 1px -1px 0px 0px rgba(0,0,0,0.15)
+      top: 0
+      //box-shadow: 0px 1px 0px 0px rgba(#000,0.15)
 
       &:after
         border-bottom: 4px solid rgba(#000, 0.3)
         top: -2px
 
     & > ._popup-scroll-bottom
-      bottom: -($islands_m / 2)
-      box-shadow: -1px 1px 0px 0px rgba(0,0,0,0.15), 1px 1px 0px 0px rgba(0,0,0,0.15)
+      bottom: 0
+      //box-shadow: 0px -1px 0px 0px rgba(#000,0.15)
 
       &:after
         border-top: 4px solid rgba(#000, 0.3)

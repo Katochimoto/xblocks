@@ -3300,9 +3300,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             this._lockRedrawScrollNavigator = true;
 
+            var safeArea = 10;
             var height = Math.max(target.scrollHeight, target.clientHeight);
-            var isShowScrollTop = (target.scrollTop > 10);
-            var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - 10);
+            var isShowScrollTop = (target.scrollTop > safeArea);
+            var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
 
             this.setState({
                 'isShowScrollTop': isShowScrollTop,
@@ -3461,6 +3462,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     'colLoop': true
                 });
 
+                // check show scroll navigator after open menu
                 var contentNode = xblocks.dom.contentNode(this);
                 xblocks.event.dispatch(contentNode, 'scroll');
             },

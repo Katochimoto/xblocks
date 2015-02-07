@@ -3199,6 +3199,7 @@ xb-menu > ._popup {
   background: #fff;
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.5);
+  position: relative;
   overflow: hidden;
   padding: 0;
   outline: none;
@@ -3236,7 +3237,7 @@ xb-menu > ._popup > ._popup-content {
   background-image: -o-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -o-radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -o-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), -o-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
   background-image: radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
   background-position: 0 0, 0 100%, 0 0, 0 100%;
-  background-size: 100% 5px, 100% 5px, 100% 1px, 100% 1px;
+  background-size: 100% 18px, 100% 18px, 100% 1px, 100% 1px;
   z-index: 1;
   max-height: 200px;
 }
@@ -3283,6 +3284,7 @@ xb-menu > ._popup > ._popup-scroll-bottom {
   width: 100%;
   cursor: pointer;
   display: none;
+  z-index: 2;
 }
 xb-menu > ._popup > ._popup-scroll-top:after,
 xb-menu > ._popup > ._popup-scroll-bottom:after {
@@ -3294,18 +3296,14 @@ xb-menu > ._popup > ._popup-scroll-bottom:after {
   left: 50%;
 }
 xb-menu > ._popup > ._popup-scroll-top {
-  top: -8px;
-  -webkit-box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.15), 1px -1px 0px 0px rgba(0,0,0,0.15);
-          box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.15), 1px -1px 0px 0px rgba(0,0,0,0.15);
+  top: 0;
 }
 xb-menu > ._popup > ._popup-scroll-top:after {
   border-bottom: 4px solid rgba(0,0,0,0.3);
   top: -2px;
 }
 xb-menu > ._popup > ._popup-scroll-bottom {
-  bottom: -8px;
-  -webkit-box-shadow: -1px 1px 0px 0px rgba(0,0,0,0.15), 1px 1px 0px 0px rgba(0,0,0,0.15);
-          box-shadow: -1px 1px 0px 0px rgba(0,0,0,0.15), 1px 1px 0px 0px rgba(0,0,0,0.15);
+  bottom: 0;
 }
 xb-menu > ._popup > ._popup-scroll-bottom:after {
   border-top: 4px solid rgba(0,0,0,0.3);

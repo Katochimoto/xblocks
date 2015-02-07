@@ -87,6 +87,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     'colLoop': true
                 });
 
+                // check show scroll navigator after open menu
                 var contentNode = xblocks.dom.contentNode(this);
                 xblocks.event.dispatch(contentNode, 'scroll');
             },
