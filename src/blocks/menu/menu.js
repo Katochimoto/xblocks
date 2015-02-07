@@ -86,6 +86,9 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     'rowLoop': true,
                     'colLoop': true
                 });
+
+                var contentNode = xblocks.dom.contentNode(this);
+                xblocks.event.dispatch(contentNode, 'scroll');
             },
 
             'xb-close': function() {
