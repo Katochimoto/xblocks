@@ -3289,8 +3289,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
         },
 
         componentWillMount: function() {
+            this._enterTopFrame = 0;
+            this._enterBottomFrame = 0;
             this._lockRedrawScrollNavigator = false;
-            this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll, this);
+            this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
         },
 
         _redrawScrollNavigator: function(target) {
@@ -3300,7 +3302,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             this._lockRedrawScrollNavigator = true;
 
-            var safeArea = 10;
+            var safeArea = 0;
             var height = Math.max(target.scrollHeight, target.clientHeight);
             var isShowScrollTop = (target.scrollTop > safeArea);
             var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
@@ -3313,34 +3315,52 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
         _redrawScrollNavigatorSuccess: function() {
             this._lockRedrawScrollNavigator = false;
+
+            if (!this.state.isShowScrollTop) {
+                this._onMouseLeaveTop();
+            }
+
+            if (!this.state.isShowScrollBottom) {
+                this._onMouseLeaveBottom();
+            }
         },
 
         _onScroll: function(event) {
             this._redrawScrollNavigator(event.target);
         },
 
-        _onClickTop: function() {
-
+        _animationScrollTop: function() {
+            this.refs.content.getDOMNode().scrollTop--;
+            this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
         },
 
         _onMouseEnterTop: function() {
-
+            this._onMouseLeaveTop();
+            this._animationScrollTop();
         },
 
         _onMouseLeaveTop: function() {
-
+            if (this._enterTopFrame) {
+                global.cancelAnimationFrame(this._enterTopFrame);
+                this._enterTopFrame = 0;
+            }
         },
 
-        _onClickBottom: function() {
-
+        _animationScrollBottom: function() {
+            this.refs.content.getDOMNode().scrollTop++;
+            this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
         },
 
         _onMouseEnterBottom: function() {
-
+            this._onMouseLeaveBottom();
+            this._animationScrollBottom();
         },
 
         _onMouseLeaveBottom: function() {
-
+            if (this._enterBottomFrame) {
+                global.cancelAnimationFrame(this._enterBottomFrame);
+                this._enterBottomFrame = 0;
+            }
         },
 
         render: function() {
@@ -3363,7 +3383,6 @@ var XBMenu = xblocks.view.register('xb-menu', [
                     React.createElement("div", {ref: "scrollTop", 
                         style: scrollTopStyle, 
                         className: "_popup-scroll-top", 
-                        onClick: this._onClickTop, 
                         onMouseEnter: this._onMouseEnterTop, 
                         onMouseLeave: this._onMouseLeaveTop}), 
                     React.createElement("div", {ref: "content", 
@@ -3374,7 +3393,6 @@ var XBMenu = xblocks.view.register('xb-menu', [
                     React.createElement("div", {ref: "scrollBottom", 
                         style: scrollBottomStyle, 
                         className: "_popup-scroll-bottom", 
-                        onClick: this._onClickBottom, 
                         onMouseEnter: this._onMouseEnterBottom, 
                         onMouseLeave: this._onMouseLeaveBottom})
                 )
