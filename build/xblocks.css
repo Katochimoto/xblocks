@@ -3282,7 +3282,6 @@ xb-menu > ._popup > ._popup-scroll-bottom {
   background-color: #fff;
   left: 0;
   width: 100%;
-  cursor: pointer;
   display: none;
   z-index: 2;
 }
@@ -3297,6 +3296,7 @@ xb-menu > ._popup > ._popup-scroll-bottom:after {
 }
 xb-menu > ._popup > ._popup-scroll-top {
   top: 0;
+  cursor: n-resize;
 }
 xb-menu > ._popup > ._popup-scroll-top:after {
   border-bottom: 4px solid rgba(0,0,0,0.3);
@@ -3304,6 +3304,7 @@ xb-menu > ._popup > ._popup-scroll-top:after {
 }
 xb-menu > ._popup > ._popup-scroll-bottom {
   bottom: 0;
+  cursor: s-resize;
 }
 xb-menu > ._popup > ._popup-scroll-bottom:after {
   border-top: 4px solid rgba(0,0,0,0.3);

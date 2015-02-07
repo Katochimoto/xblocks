@@ -3380,8 +3380,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             return (
                 React.createElement("div", {className: classes, tabIndex: "0"}, 
-                    React.createElement("div", {ref: "scrollTop", 
-                        style: scrollTopStyle, 
+                    React.createElement("div", {style: scrollTopStyle, 
                         className: "_popup-scroll-top", 
                         onMouseEnter: this._onMouseEnterTop, 
                         onMouseLeave: this._onMouseLeaveTop}), 
@@ -3390,8 +3389,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
                         onScroll: this._onScroll, 
                         "data-xb-content": this.props._uid, 
                         dangerouslySetInnerHTML: { __html: this.props.children}}), 
-                    React.createElement("div", {ref: "scrollBottom", 
-                        style: scrollBottomStyle, 
+                    React.createElement("div", {style: scrollBottomStyle, 
                         className: "_popup-scroll-bottom", 
                         onMouseEnter: this._onMouseEnterBottom, 
                         onMouseLeave: this._onMouseLeaveBottom})

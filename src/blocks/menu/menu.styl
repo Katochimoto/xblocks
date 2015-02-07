@@ -36,7 +36,6 @@ xb-menu
       background-color: #fff
       left: 0
       width: 100%
-      cursor: pointer
       display: none
       z-index: 2
 
@@ -50,6 +49,7 @@ xb-menu
 
     & > ._popup-scroll-top
       top: 0
+      cursor: n-resize
 
       &:after
         border-bottom: 4px solid rgba(#000, 0.3)
@@ -57,6 +57,7 @@ xb-menu
 
     & > ._popup-scroll-bottom
       bottom: 0
+      cursor: s-resize
 
       &:after
         border-top: 4px solid rgba(#000, 0.3)
