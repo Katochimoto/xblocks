@@ -3243,7 +3243,6 @@ xb-menu > ._popup > ._popup-content {
 xb-menu > ._popup > ._popup-content:after,
 xb-menu > ._popup > ._popup-content:before {
   content: "";
-  position: relative;
   top: auto;
   left: auto;
   z-index: -1;
@@ -3274,6 +3273,43 @@ xb-menu > ._popup > ._popup-content:after {
   xb-menu > ._popup > ._popup-content::-webkit-scrollbar {
     width: 0 !important;
   }
+}
+xb-menu > ._popup > ._popup-scroll-top,
+xb-menu > ._popup > ._popup-scroll-bottom {
+  height: 8px;
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  width: 100%;
+  cursor: pointer;
+  display: none;
+}
+xb-menu > ._popup > ._popup-scroll-top:after,
+xb-menu > ._popup > ._popup-scroll-bottom:after {
+  content: "";
+  position: absolute;
+  border: 4px solid transparent;
+  clear: both;
+  margin-left: -4px;
+  left: 50%;
+}
+xb-menu > ._popup > ._popup-scroll-top {
+  top: -8px;
+  -webkit-box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.15), 1px -1px 0px 0px rgba(0,0,0,0.15);
+          box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.15), 1px -1px 0px 0px rgba(0,0,0,0.15);
+}
+xb-menu > ._popup > ._popup-scroll-top:after {
+  border-bottom: 4px solid rgba(0,0,0,0.3);
+  top: -2px;
+}
+xb-menu > ._popup > ._popup-scroll-bottom {
+  bottom: -8px;
+  -webkit-box-shadow: -1px 1px 0px 0px rgba(0,0,0,0.15), 1px 1px 0px 0px rgba(0,0,0,0.15);
+          box-shadow: -1px 1px 0px 0px rgba(0,0,0,0.15), 1px 1px 0px 0px rgba(0,0,0,0.15);
+}
+xb-menu > ._popup > ._popup-scroll-bottom:after {
+  border-top: 4px solid rgba(0,0,0,0.3);
+  top: 2px;
 }
 xb-menuitem {
   display: block;

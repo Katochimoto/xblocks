@@ -3290,9 +3290,11 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             return (
                 React.createElement("div", {className: classes, tabIndex: "0"}, 
+                    React.createElement("div", {className: "_popup-scroll-top"}), 
                     React.createElement("div", {className: "_popup-content", 
                         "data-xb-content": this.props._uid, 
-                        dangerouslySetInnerHTML: { __html: this.props.children}})
+                        dangerouslySetInnerHTML: { __html: this.props.children}}), 
+                    React.createElement("div", {className: "_popup-scroll-bottom"})
                 )
             );
         }

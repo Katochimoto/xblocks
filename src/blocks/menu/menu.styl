@@ -24,7 +24,40 @@ xb-menu
     &:focus
       box-shadow: 0 0 0 1px rgba(#000, 0.15), 0 8px 30px -5px rgba(#000, 0.7)
 
-
     & > ._popup-content
       skin: xb-scroll-x
       max-height: 200px
+
+    & > ._popup-scroll-top,
+    & > ._popup-scroll-bottom
+      height: ($islands_m / 2)
+      position: absolute
+      background-color: #fff
+      left: 0
+      width: 100%
+      cursor: pointer
+      display: none
+
+      &:after
+        content: ""
+        position: absolute
+        border: 4px solid transparent
+        clear: both
+        margin-left: -4px
+        left: 50%
+
+    & > ._popup-scroll-top
+      top: -($islands_m / 2)
+      box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.15), 1px -1px 0px 0px rgba(0,0,0,0.15)
+
+      &:after
+        border-bottom: 4px solid rgba(#000, 0.3)
+        top: -2px
+
+    & > ._popup-scroll-bottom
+      bottom: -($islands_m / 2)
+      box-shadow: -1px 1px 0px 0px rgba(0,0,0,0.15), 1px 1px 0px 0px rgba(0,0,0,0.15)
+
+      &:after
+        border-top: 4px solid rgba(#000, 0.3)
+        top: 2px

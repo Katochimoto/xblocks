@@ -29,9 +29,11 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
             return (
                 <div className={classes} tabIndex="0">
+                    <div className="_popup-scroll-top" />
                     <div className="_popup-content"
                         data-xb-content={this.props._uid}
                         dangerouslySetInnerHTML={{ __html: this.props.children }} />
+                    <div className="_popup-scroll-bottom" />
                 </div>
             );
         }
