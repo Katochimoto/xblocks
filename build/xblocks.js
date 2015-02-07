@@ -1189,7 +1189,6 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
 
     var __doc = global.document;
     var __noop = function() {};
-    var __false = function() { return false; };
     var __forEach = Array.prototype.forEach;
 
     /* utils.js begin */

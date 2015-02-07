@@ -26,16 +26,5 @@ xb-menu
 
 
     & > ._popup-content
-      overflow-y: scroll
-      overflow-x: hidden
+      skin: xb-scroll-x
       max-height: 200px
-      tap-highlight-color: rgba(#000, 0)
-      transform: translateZ(0)
-      margin-right: -15px
-
-@media screen and (-webkit-min-device-pixel-ratio:0)
-  xb-menu > ._popup > ._popup-content
-    margin-right: auto !important
-
-    &::-webkit-scrollbar
-      width: 0 !important

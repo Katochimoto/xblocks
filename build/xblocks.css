@@ -3225,12 +3225,47 @@ xb-menu > ._popup:focus {
 xb-menu > ._popup > ._popup-content {
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 200px;
   tap-highlight-color: rgba(0,0,0,0);
   -webkit-transform: translateZ(0);
      -moz-transform: translateZ(0);
           transform: translateZ(0);
   margin-right: -15px;
+  background: no-repeat;
+  background-image: -webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -webkit-radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -webkit-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), -webkit-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-image: -moz-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -moz-radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -moz-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), -moz-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-image: -o-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -o-radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -o-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), -o-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-image: radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-position: 0 0, 0 100%, 0 0, 0 100%;
+  background-size: 100% 5px, 100% 5px, 100% 1px, 100% 1px;
+  z-index: 1;
+  max-height: 200px;
+}
+xb-menu > ._popup > ._popup-content:after,
+xb-menu > ._popup > ._popup-content:before {
+  content: "";
+  position: relative;
+  top: auto;
+  left: auto;
+  z-index: -1;
+  display: block;
+  height: 45px;
+  width: auto;
+  border: 0;
+  margin: 0 0 -45px;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  background: -webkit-linear-gradient(top, #fff 10%, rgba(255,255,255,0) 100%);
+  background: -moz-linear-gradient(top, #fff 10%, rgba(255,255,255,0) 100%);
+  background: -o-linear-gradient(top, #fff 10%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to bottom, #fff 10%, rgba(255,255,255,0) 100%);
+}
+xb-menu > ._popup > ._popup-content:after {
+  top: 1px;
+  margin: -45px 0 0;
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 10%, #fff 100%);
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 10%, #fff 100%);
+  background: -o-linear-gradient(top, rgba(255,255,255,0) 10%, #fff 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 10%, #fff 100%);
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   xb-menu > ._popup > ._popup-content {
