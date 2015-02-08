@@ -3118,6 +3118,19 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                     if (submenu && !XBMenuitemElementStatic._timerOpenSubmenu) {
                         XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                     }
+
+                // scroll menu only keyboard events
+                } else {
+                    var keyCode = event.detail.originalEvent.keyCode;
+
+                    switch (keyCode) {
+                        case 38: // ArrowUp
+                            this.scrollIntoView(true);
+                            break;
+                        case 40: // ArrowDown
+                            this.scrollIntoView(false);
+                            break;
+                    }
                 }
             }
         },
@@ -3330,7 +3343,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
         _redrawScrollNavigator: function(callback) {
             var target = this.refs.content.getDOMNode();
-            var safeArea = 0;
+            var safeArea = 5;
             var height = Math.max(target.scrollHeight, target.clientHeight);
             var isShowScrollTop = (target.scrollTop > safeArea);
             var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);

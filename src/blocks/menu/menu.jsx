@@ -65,7 +65,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 
         _redrawScrollNavigator: function(callback) {
             var target = this.refs.content.getDOMNode();
-            var safeArea = 0;
+            var safeArea = 5;
             var height = Math.max(target.scrollHeight, target.clientHeight);
             var isShowScrollTop = (target.scrollTop > safeArea);
             var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
