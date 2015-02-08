@@ -129,26 +129,51 @@
 /* global xblocks, global */
 /* jshint strict: false */
 
-xblocks.utils.debounce = function(callback, delay, context) {
+xblocks.utils.debounce = function(func, wait, options) {
     var args;
     var maxTimeoutId;
     var result;
     var stamp;
+    var thisArg;
     var timeoutId;
     var trailingCall;
     var lastCalled = 0;
     var maxWait = false;
     var trailing = false;
     var leading = true;
-    var contextCall;
 
-    delay = Number(delay || 250);
+    if (typeof(func) !== 'function') {
+        throw new TypeError('Expected a function');
+    }
+
+    wait = wait < 0 ? 0 : Number(wait || 250);
+
+    if (options === true) {
+        leading = true;
+        trailing = false;
+
+    } else if (xblocks.utils.isPlainObject(options)) {
+        leading = options.leading;
+        maxWait = options.hasOwnProperty('maxWait') && Math.max(Number(options.maxWait || 0), wait);
+        trailing = options.hasOwnProperty('trailing') ? Boolean(options.trailing) : trailing;
+    }
+
+    function cancel() {
+        if (timeoutId) {
+            global.clearTimeout(timeoutId);
+        }
+
+        if (maxTimeoutId) {
+            global.clearTimeout(maxTimeoutId);
+        }
+
+        maxTimeoutId = timeoutId = trailingCall = undefined;
+    }
 
     function delayed() {
-        var now = Date.now();
-        var remaining = delay - (now - stamp);
+        var remaining = wait - (Date.now() - stamp);
 
-        if (remaining <= 0 || remaining > delay) {
+        if (remaining <= 0 || remaining > wait) {
             if (maxTimeoutId) {
                 global.clearTimeout(maxTimeoutId);
             }
@@ -157,11 +182,11 @@ xblocks.utils.debounce = function(callback, delay, context) {
             maxTimeoutId = timeoutId = trailingCall = undefined;
 
             if (isCalled) {
-                lastCalled = now;
-                result = callback.apply(contextCall, args);
+                lastCalled = Date.now();
+                result = func.apply(thisArg, args);
 
                 if (!timeoutId && !maxTimeoutId) {
-                    args = contextCall = null;
+                    args = thisArg = null;
                 }
             }
 
@@ -177,25 +202,24 @@ xblocks.utils.debounce = function(callback, delay, context) {
 
         maxTimeoutId = timeoutId = trailingCall = undefined;
 
-        if (trailing || (maxWait !== delay)) {
+        if (trailing || (maxWait !== wait)) {
             lastCalled = Date.now();
-            result = callback.apply(contextCall, args);
+            result = func.apply(thisArg, args);
 
             if (!timeoutId && !maxTimeoutId) {
-                args = contextCall = null;
+                args = thisArg = null;
             }
         }
     }
 
-    return function() {
+    function debounced() {
         args = arguments;
-        contextCall = (context || this);
         stamp = Date.now();
+        thisArg = this;
         trailingCall = trailing && (timeoutId || !leading);
 
         var leadingCall;
         var isCalled;
-        var remaining;
 
         if (maxWait === false) {
             leadingCall = leading && !timeoutId;
@@ -205,7 +229,7 @@ xblocks.utils.debounce = function(callback, delay, context) {
                 lastCalled = stamp;
             }
 
-            remaining = maxWait - (stamp - lastCalled);
+            var remaining = maxWait - (stamp - lastCalled);
             isCalled = remaining <= 0 || remaining > maxWait;
 
             if (isCalled) {
@@ -214,7 +238,7 @@ xblocks.utils.debounce = function(callback, delay, context) {
                 }
 
                 lastCalled = stamp;
-                result = callback.apply(contextCall, args);
+                result = func.apply(thisArg, args);
 
             } else if (!maxTimeoutId) {
                 maxTimeoutId = global.setTimeout(maxDelayed, remaining);
@@ -224,48 +248,102 @@ xblocks.utils.debounce = function(callback, delay, context) {
         if (isCalled && timeoutId) {
             timeoutId = global.clearTimeout(timeoutId);
 
-        } else if (!timeoutId && delay !== maxWait) {
-            timeoutId = global.setTimeout(delayed, delay);
+        } else if (!timeoutId && wait !== maxWait) {
+            timeoutId = global.setTimeout(delayed, wait);
         }
 
         if (leadingCall) {
             isCalled = true;
-            result = callback.apply(contextCall, args);
+            result = func.apply(thisArg, args);
         }
 
         if (isCalled && !timeoutId && !maxTimeoutId) {
-            args = contextCall = null;
+            args = thisArg = null;
         }
 
         return result;
-    };
+    }
+
+    debounced.cancel = cancel;
+    return debounced;
+};
+
+xblocks.tag.pseudos.debounce = {
+    onCompiled: function(listener, pseudo) {
+        var len = pseudo.arguments.length;
+        var wait = Number(pseudo.arguments[0]);
+        var leading = true;
+        var trailing = false;
+
+        if (len === 2) {
+            leading = Boolean(pseudo.arguments[1] === 'true');
+        }
+
+        if (len === 3) {
+            leading = Boolean(pseudo.arguments[1] === 'true');
+            trailing = Boolean(pseudo.arguments[2] === 'true');
+        }
+
+        return xblocks.utils.debounce(listener, wait, {
+            'leading': leading,
+            'trailing': trailing
+        });
+    }
 };
 
 /* xblocks/utils/debounce.js end */
 
 /* xblocks/utils/throttle.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
-/**
- * Выполнение функции не чаще одного раза в указанный период
- */
-xblocks.utils.throttle = function(callback, delay, context) {
-    delay = Number(delay || 250);
-    var throttle = 0;
-    var timeoutCallback = function() {
-        throttle = 0;
+xblocks.utils.throttle = function(callback, wait, options) {
+    wait = Number(wait || 250);
+    var leading = false;
+    var trailing = true;
+
+    if (typeof(callback) !== 'function') {
+        throw new TypeError('Expected a function');
+    }
+
+    if (options === false) {
+        leading = false;
+
+    } else if (xblocks.utils.isPlainObject(options)) {
+        leading = options.hasOwnProperty('leading') ? Boolean(options.leading) : leading;
+        trailing = options.hasOwnProperty('trailing') ? Boolean(options.trailing) : trailing;
+    }
+
+    var debounceOptions = {
+        'leading': leading,
+        'maxWait': Number(wait),
+        'trailing': trailing
     };
 
-    return function() {
-        if (throttle) {
-            return;
+    return xblocks.utils.debounce(callback, wait, debounceOptions);
+};
+
+xblocks.tag.pseudos.throttle = {
+    onCompiled: function(listener, pseudo) {
+        var len = pseudo.arguments.length;
+        var wait = Number(pseudo.arguments[0]);
+        var leading = false;
+        var trailing = true;
+
+        if (len === 2) {
+            leading = Boolean(pseudo.arguments[1] === 'true');
         }
 
-        throttle = global.setTimeout(timeoutCallback, delay);
+        if (len === 3) {
+            leading = Boolean(pseudo.arguments[1] === 'true');
+            trailing = Boolean(pseudo.arguments[2] === 'true');
+        }
 
-        callback.apply(context || this, arguments);
-    };
+        return xblocks.utils.throttle(listener, wait, {
+            'leading': leading,
+            'trailing': trailing
+        });
+    }
 };
 
 /* xblocks/utils/throttle.js end */
@@ -3493,10 +3571,16 @@ var XBMenuElementStatic = {
         }
     },
 
+    /**
+     * @this {XBMenuElement}
+     */
     _beforeOpen: function() {
         this.style.visibility = 'hidden';
     },
 
+    /**
+     * @this {XBMenuElement}
+     */
     _afterOpen: function() {
         this.style.visibility = 'visible';
         // the focus is not put on the invisible element

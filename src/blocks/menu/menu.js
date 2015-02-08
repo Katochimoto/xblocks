@@ -39,10 +39,16 @@ var XBMenuElementStatic = {
         }
     },
 
+    /**
+     * @this {XBMenuElement}
+     */
     _beforeOpen: function() {
         this.style.visibility = 'hidden';
     },
 
+    /**
+     * @this {XBMenuElement}
+     */
     _afterOpen: function() {
         this.style.visibility = 'visible';
         // the focus is not put on the invisible element
