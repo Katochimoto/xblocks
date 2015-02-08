@@ -20,40 +20,6 @@ var XBMenuElementStatic = {
         if (target._xbpopup) {
             target._xbpopup.close();
         }
-    },
-
-    /**
-     * @this {XBMenuElement}
-     */
-    _closeUpFocus: function() {
-        var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
-        var parent = this.parentMenu;
-
-        while (parent) {
-            if (parent === focusMenu) {
-                break;
-            }
-
-            parent.close();
-            parent = parent.parentMenu;
-        }
-    },
-
-    /**
-     * @this {XBMenuElement}
-     */
-    _beforeOpen: function() {
-        this.style.visibility = 'hidden';
-    },
-
-    /**
-     * @this {XBMenuElement}
-     */
-    _afterOpen: function() {
-        this.style.visibility = 'visible';
-        // the focus is not put on the invisible element
-        // put again
-        this.focus();
     }
 };
 
@@ -98,7 +64,9 @@ var XBMenuElement = xblocks.create('xb-menu', [
         'prototype': Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         'events': {
-            'xb-before-open': XBMenuElementStatic._beforeOpen,
+            'xb-before-open': function() {
+                this.style.visibility = 'hidden';
+            },
 
             'xb-open': function() {
                 this._xbfocus = new xblocks.utils.Table(this, {
@@ -106,15 +74,22 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     'colLoop': true
                 });
 
-                var afterOpenCallback = XBMenuElementStatic._afterOpen.bind(this);
-                var component = this.xblock.getMountedComponent();
+                // скролл возможен только для списка, поэтому delegate не надо
+                this._onScrollThrottle = xblocks.utils.throttle(this._onScroll.bind(this), 500, {
+                    'leading': true,
+                    'trailing': false
+                });
 
+                this.addEventListener('scroll', this._onScrollThrottle, true);
+
+
+                var component = this.xblock.getMountedComponent();
                 if (component) {
                     // check show scroll navigator after open menu
-                    component.afterOpen(afterOpenCallback);
+                    component.afterOpen(this._afterOpen.bind(this));
 
                 } else {
-                    afterOpenCallback();
+                    this._afterOpen();
                 }
             },
 
@@ -124,11 +99,11 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     this._xbfocus = undefined;
                 }
 
-                // close all submenus
-                __forEach.call(
-                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    XBMenuElementStatic._closeSubmenu
-                );
+                this._closeAllSubmenu();
+
+                if (this._onScrollThrottle) {
+                    this.removeEventListener('scroll', this._onScrollThrottle, true);
+                }
             },
 
             'keydown:keypass(27)': function() {
@@ -145,7 +120,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
-                    global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
+                    global.setImmediate(this._closeUpFocus.bind(this));
                 }
             }
         },
@@ -155,6 +130,40 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 get: function() {
                     return this.tether.target.menuInstance;
                 }
+            }
+        },
+
+        'methods': {
+            _closeAllSubmenu: function() {
+                __forEach.call(
+                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
+                    XBMenuElementStatic._closeSubmenu
+                );
+            },
+
+            _afterOpen: function() {
+                this.style.visibility = 'visible';
+                // the focus is not put on the invisible element
+                // put again
+                this.focus();
+            },
+
+            _closeUpFocus: function() {
+                var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
+                var parent = this.parentMenu;
+
+                while (parent) {
+                    if (parent === focusMenu) {
+                        break;
+                    }
+
+                    parent.close();
+                    parent = parent.parentMenu;
+                }
+            },
+
+            _onScroll: function() {
+                this._closeAllSubmenu();
             }
         }
     }
