@@ -3072,6 +3072,7 @@ input:not(:checked) + ._xb-radio_flag > ._xb-radio_flag-icon {
 xb-popup {
   display: inline-block;
   display: none;
+  z-index: 10;
 }
 xb-popup *,
 xb-popup *:before,
@@ -3181,6 +3182,7 @@ xb-popup > ._popup._theme-blank > ._content:after {
 xb-menu {
   display: inline-block;
   display: none;
+  z-index: 10;
 }
 xb-menu *,
 xb-menu *:before,
@@ -3239,7 +3241,6 @@ xb-menu > ._popup > ._popup-content {
   background-position: 0 0, 0 100%, 0 0, 0 100%;
   background-size: 100% 18px, 100% 18px, 100% 1px, 100% 1px;
   z-index: 1;
-  max-height: 200px;
 }
 xb-menu > ._popup > ._popup-content:after,
 xb-menu > ._popup > ._popup-content:before {

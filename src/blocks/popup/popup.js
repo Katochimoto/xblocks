@@ -137,6 +137,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     this.setOptions(options);
                 }
 
+                xblocks.event.dispatch(this, 'xb-before-open');
+
                 tether.enable(true);
                 tether.target._xbpopup = this;
 
@@ -152,6 +154,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 if (!tether.enabled) {
                     return false;
                 }
+
+                xblocks.event.dispatch(this, 'xb-before-close');
 
                 tether.target._xbpopup = undefined;
                 tether.disable();

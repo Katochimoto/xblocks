@@ -2909,6 +2909,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     this.setOptions(options);
                 }
 
+                xblocks.event.dispatch(this, 'xb-before-open');
+
                 tether.enable(true);
                 tether.target._xbpopup = this;
 
@@ -2924,6 +2926,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 if (!tether.enabled) {
                     return false;
                 }
+
+                xblocks.event.dispatch(this, 'xb-before-close');
 
                 tether.target._xbpopup = undefined;
                 tether.disable();
@@ -3260,7 +3264,7 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
 
 /* blocks/menu/menu.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, global */
 /* jshint strict: false */
 /* jshint -W098 */
 var XBMenu = xblocks.view.register('xb-menu', [
@@ -3272,17 +3276,20 @@ var XBMenu = xblocks.view.register('xb-menu', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'type': React.PropTypes.oneOf([ 'context', 'toolbar', 'list' ])
+            'type': React.PropTypes.oneOf([ 'context', 'toolbar', 'list' ]),
+            'size': React.PropTypes.string
         },
 
         getDefaultProps: function() {
             return {
-                'type': 'list'
+                'type': 'list',
+                'size': ''
             };
         },
 
         getInitialState: function() {
             return {
+                'maxHeight': 0,
                 'isShowScrollTop': false,
                 'isShowScrollBottom': false
             };
@@ -3291,17 +3298,38 @@ var XBMenu = xblocks.view.register('xb-menu', [
         componentWillMount: function() {
             this._enterTopFrame = 0;
             this._enterBottomFrame = 0;
-            this._lockRedrawScrollNavigator = false;
+            this._lockScroll = false;
             this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
         },
 
-        _redrawScrollNavigator: function(target) {
-            if (this._lockRedrawScrollNavigator) {
-                return;
+        componentWillReceiveProps: function(nextProps) {
+            if (nextProps.size !== this.props.size) {
+                this._updateMaxHeight(nextProps.size);
+            }
+        },
+
+        _updateMaxHeight: function(size, callback) {
+            size = Number(size);
+            var maxHeight = 0;
+
+            if (size > 0) {
+                var contentNode = this.refs.content.getDOMNode();
+                var element = contentNode.children[ size - 1 ];
+
+                if (element) {
+                    var rectContent = contentNode.getBoundingClientRect();
+                    var rectElement = element.getBoundingClientRect();
+                    maxHeight = rectElement.top + rectElement.height - rectContent.top;
+                }
             }
 
-            this._lockRedrawScrollNavigator = true;
+            this.setState({
+                'maxHeight': maxHeight
+            }, this._redrawScrollNavigator.bind(this, callback));
+        },
 
+        _redrawScrollNavigator: function(callback) {
+            var target = this.refs.content.getDOMNode();
             var safeArea = 0;
             var height = Math.max(target.scrollHeight, target.clientHeight);
             var isShowScrollTop = (target.scrollTop > safeArea);
@@ -3310,12 +3338,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
             this.setState({
                 'isShowScrollTop': isShowScrollTop,
                 'isShowScrollBottom': isShowScrollBottom
-            }, this._redrawScrollNavigatorSuccess);
+            }, this._redrawScrollNavigatorSuccess.bind(this, callback));
         },
 
-        _redrawScrollNavigatorSuccess: function() {
-            this._lockRedrawScrollNavigator = false;
-
+        _redrawScrollNavigatorSuccess: function(callback) {
             if (!this.state.isShowScrollTop) {
                 this._onMouseLeaveTop();
             }
@@ -3323,10 +3349,29 @@ var XBMenu = xblocks.view.register('xb-menu', [
             if (!this.state.isShowScrollBottom) {
                 this._onMouseLeaveBottom();
             }
+
+            if (callback) {
+                callback.call(this);
+            }
         },
 
+        afterOpen: function(callback) {
+            this._updateMaxHeight(this.props.size, callback);
+        },
+
+
+
         _onScroll: function(event) {
-            this._redrawScrollNavigator(event.target);
+            if (this._lockScroll) {
+                return;
+            }
+
+            this._lockScroll = true;
+            this._redrawScrollNavigator(this.__onScroll);
+        },
+
+        __onScroll: function() {
+            this._lockScroll = false;
         },
 
         _animationScrollTop: function() {
@@ -3378,6 +3423,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
                 'display': (this.state.isShowScrollBottom ? 'block' : 'none')
             };
 
+            var contentStyle = {
+                'maxHeight': (this.state.maxHeight ? this.state.maxHeight + 'px' : 'none')
+            };
+
             return (
                 React.createElement("div", {className: classes, tabIndex: "0"}, 
                     React.createElement("div", {style: scrollTopStyle, 
@@ -3385,10 +3434,11 @@ var XBMenu = xblocks.view.register('xb-menu', [
                         onMouseEnter: this._onMouseEnterTop, 
                         onMouseLeave: this._onMouseLeaveTop}), 
                     React.createElement("div", {ref: "content", 
+                        style: contentStyle, 
                         className: "_popup-content", 
                         onScroll: this._onScroll, 
                         "data-xb-content": this.props._uid, 
-                        dangerouslySetInnerHTML: { __html: this.props.children}}), 
+                        dangerouslySetInnerHTML: { __html: this.props.children.trim()}}), 
                     React.createElement("div", {style: scrollBottomStyle, 
                         className: "_popup-scroll-bottom", 
                         onMouseEnter: this._onMouseEnterBottom, 
@@ -3428,6 +3478,17 @@ var XBMenuElementStatic = {
             parent.close();
             parent = parent.parentMenu;
         }
+    },
+
+    _beforeOpen: function() {
+        this.style.visibility = 'hidden';
+    },
+
+    _afterOpen: function() {
+        this.style.visibility = 'visible';
+        // the focus is not put on the invisible element
+        // put again
+        this.focus();
     }
 };
 
@@ -3472,15 +3533,24 @@ var XBMenuElement = xblocks.create('xb-menu', [
         'prototype': Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         'events': {
+            'xb-before-open': XBMenuElementStatic._beforeOpen,
+
             'xb-open': function() {
                 this._xbfocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
 
-                // check show scroll navigator after open menu
-                var contentNode = xblocks.dom.contentNode(this);
-                xblocks.event.dispatch(contentNode, 'scroll');
+                var afterOpenCallback = XBMenuElementStatic._afterOpen.bind(this);
+                var component = this.xblock.getMountedComponent();
+
+                if (component) {
+                    // check show scroll navigator after open menu
+                    component.afterOpen(afterOpenCallback);
+
+                } else {
+                    afterOpenCallback();
+                }
             },
 
             'xb-close': function() {
@@ -3507,13 +3577,11 @@ var XBMenuElement = xblocks.create('xb-menu', [
             },
 
             'blur': function() {
-                /*
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
                     global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
                 }
-                */
             }
         },
 

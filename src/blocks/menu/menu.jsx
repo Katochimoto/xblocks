@@ -11,17 +11,20 @@ var XBMenu = xblocks.view.register('xb-menu', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'type': React.PropTypes.oneOf([ 'context', 'toolbar', 'list' ])
+            'type': React.PropTypes.oneOf([ 'context', 'toolbar', 'list' ]),
+            'size': React.PropTypes.string
         },
 
         getDefaultProps: function() {
             return {
-                'type': 'list'
+                'type': 'list',
+                'size': ''
             };
         },
 
         getInitialState: function() {
             return {
+                'maxHeight': 0,
                 'isShowScrollTop': false,
                 'isShowScrollBottom': false
             };
@@ -30,17 +33,38 @@ var XBMenu = xblocks.view.register('xb-menu', [
         componentWillMount: function() {
             this._enterTopFrame = 0;
             this._enterBottomFrame = 0;
-            this._lockRedrawScrollNavigator = false;
+            this._lockScroll = false;
             this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
         },
 
-        _redrawScrollNavigator: function(target) {
-            if (this._lockRedrawScrollNavigator) {
-                return;
+        componentWillReceiveProps: function(nextProps) {
+            if (nextProps.size !== this.props.size) {
+                this._updateMaxHeight(nextProps.size);
+            }
+        },
+
+        _updateMaxHeight: function(size, callback) {
+            size = Number(size);
+            var maxHeight = 0;
+
+            if (size > 0) {
+                var contentNode = this.refs.content.getDOMNode();
+                var element = contentNode.children[ size - 1 ];
+
+                if (element) {
+                    var rectContent = contentNode.getBoundingClientRect();
+                    var rectElement = element.getBoundingClientRect();
+                    maxHeight = rectElement.top + rectElement.height - rectContent.top;
+                }
             }
 
-            this._lockRedrawScrollNavigator = true;
+            this.setState({
+                'maxHeight': maxHeight
+            }, this._redrawScrollNavigator.bind(this, callback));
+        },
 
+        _redrawScrollNavigator: function(callback) {
+            var target = this.refs.content.getDOMNode();
             var safeArea = 0;
             var height = Math.max(target.scrollHeight, target.clientHeight);
             var isShowScrollTop = (target.scrollTop > safeArea);
@@ -49,12 +73,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
             this.setState({
                 'isShowScrollTop': isShowScrollTop,
                 'isShowScrollBottom': isShowScrollBottom
-            }, this._redrawScrollNavigatorSuccess);
+            }, this._redrawScrollNavigatorSuccess.bind(this, callback));
         },
 
-        _redrawScrollNavigatorSuccess: function() {
-            this._lockRedrawScrollNavigator = false;
-
+        _redrawScrollNavigatorSuccess: function(callback) {
             if (!this.state.isShowScrollTop) {
                 this._onMouseLeaveTop();
             }
@@ -62,10 +84,29 @@ var XBMenu = xblocks.view.register('xb-menu', [
             if (!this.state.isShowScrollBottom) {
                 this._onMouseLeaveBottom();
             }
+
+            if (callback) {
+                callback.call(this);
+            }
         },
 
+        afterOpen: function(callback) {
+            this._updateMaxHeight(this.props.size, callback);
+        },
+
+
+
         _onScroll: function(event) {
-            this._redrawScrollNavigator(event.target);
+            if (this._lockScroll) {
+                return;
+            }
+
+            this._lockScroll = true;
+            this._redrawScrollNavigator(this.__onScroll);
+        },
+
+        __onScroll: function() {
+            this._lockScroll = false;
         },
 
         _animationScrollTop: function() {
@@ -117,6 +158,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
                 'display': (this.state.isShowScrollBottom ? 'block' : 'none')
             };
 
+            var contentStyle = {
+                'maxHeight': (this.state.maxHeight ? this.state.maxHeight + 'px' : 'none')
+            };
+
             return (
                 <div className={classes} tabIndex="0">
                     <div style={scrollTopStyle}
@@ -124,10 +169,11 @@ var XBMenu = xblocks.view.register('xb-menu', [
                         onMouseEnter={this._onMouseEnterTop}
                         onMouseLeave={this._onMouseLeaveTop} />
                     <div ref="content"
+                        style={contentStyle}
                         className="_popup-content"
                         onScroll={this._onScroll}
                         data-xb-content={this.props._uid}
-                        dangerouslySetInnerHTML={{ __html: this.props.children }} />
+                        dangerouslySetInnerHTML={{ __html: this.props.children.trim() }} />
                     <div style={scrollBottomStyle}
                         className="_popup-scroll-bottom"
                         onMouseEnter={this._onMouseEnterBottom}

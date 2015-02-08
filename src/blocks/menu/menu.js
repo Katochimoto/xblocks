@@ -37,6 +37,17 @@ var XBMenuElementStatic = {
             parent.close();
             parent = parent.parentMenu;
         }
+    },
+
+    _beforeOpen: function() {
+        this.style.visibility = 'hidden';
+    },
+
+    _afterOpen: function() {
+        this.style.visibility = 'visible';
+        // the focus is not put on the invisible element
+        // put again
+        this.focus();
     }
 };
 
@@ -81,15 +92,24 @@ var XBMenuElement = xblocks.create('xb-menu', [
         'prototype': Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         'events': {
+            'xb-before-open': XBMenuElementStatic._beforeOpen,
+
             'xb-open': function() {
                 this._xbfocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
 
-                // check show scroll navigator after open menu
-                var contentNode = xblocks.dom.contentNode(this);
-                xblocks.event.dispatch(contentNode, 'scroll');
+                var afterOpenCallback = XBMenuElementStatic._afterOpen.bind(this);
+                var component = this.xblock.getMountedComponent();
+
+                if (component) {
+                    // check show scroll navigator after open menu
+                    component.afterOpen(afterOpenCallback);
+
+                } else {
+                    afterOpenCallback();
+                }
             },
 
             'xb-close': function() {
@@ -116,13 +136,11 @@ var XBMenuElement = xblocks.create('xb-menu', [
             },
 
             'blur': function() {
-                /*
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
                     global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
                 }
-                */
             }
         },
 

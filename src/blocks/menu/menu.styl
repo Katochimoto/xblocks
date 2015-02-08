@@ -1,6 +1,7 @@
 xb-menu
   skin: xb-inline-block
   display: none
+  z-index: $popupZ
 
   &.xb-menu-enabled
     display: inline-block
@@ -27,7 +28,6 @@ xb-menu
 
     & > ._popup-content
       skin: xb-scroll-x 18px
-      max-height: 200px
 
     & > ._popup-scroll-top,
     & > ._popup-scroll-bottom
