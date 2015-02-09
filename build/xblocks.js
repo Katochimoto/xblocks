@@ -3401,6 +3401,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
             this._enterBottomFrame = 0;
             this._lockScroll = false;
             this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
+            this._onScrollThrottle = xblocks.utils.throttle(this._onScrollThrottle, 500, {
+                'leading': true,
+                'trailing': false
+            });
         },
 
         componentWillReceiveProps: function(nextProps) {
@@ -3468,11 +3472,20 @@ var XBMenu = xblocks.view.register('xb-menu', [
             }
 
             this._lockScroll = true;
-            this._redrawScrollNavigator(this.__onScroll);
+            this._onScrollThrottle();
+            this._redrawScrollNavigator(this._onScrollSuccess);
         },
 
-        __onScroll: function() {
+        _onScrollSuccess: function() {
             this._lockScroll = false;
+        },
+
+        _onScrollThrottle: function() {
+            xblocks.event.dispatch(
+                this.refs.content.getDOMNode(),
+                'jsx-scroll-throttle',
+                { 'bubbles': true, 'cancelable': true }
+            );
         },
 
         _animationScrollTop: function() {
@@ -3616,15 +3629,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     'colLoop': true
                 });
 
-                // скролл возможен только для списка, поэтому delegate не надо
-                this._onScrollThrottle = xblocks.utils.throttle(this._onScroll.bind(this), 500, {
-                    'leading': true,
-                    'trailing': false
-                });
-
-                this.addEventListener('scroll', this._onScrollThrottle, true);
-
-
                 var component = this.xblock.getMountedComponent();
                 if (component) {
                     // check show scroll navigator after open menu
@@ -3642,10 +3646,11 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 }
 
                 this._closeAllSubmenu();
+            },
 
-                if (this._onScrollThrottle) {
-                    this.removeEventListener('scroll', this._onScrollThrottle, true);
-                }
+            'jsx-scroll-throttle': function(event) {
+                event.stopImmediatePropagation();
+                this.focus();
             },
 
             'keydown:keypass(27)': function() {
@@ -3702,10 +3707,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     parent.close();
                     parent = parent.parentMenu;
                 }
-            },
-
-            _onScroll: function() {
-                this._closeAllSubmenu();
             }
         }
     }

@@ -74,15 +74,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     'colLoop': true
                 });
 
-                // скролл возможен только для списка, поэтому delegate не надо
-                this._onScrollThrottle = xblocks.utils.throttle(this._onScroll.bind(this), 500, {
-                    'leading': true,
-                    'trailing': false
-                });
-
-                this.addEventListener('scroll', this._onScrollThrottle, true);
-
-
                 var component = this.xblock.getMountedComponent();
                 if (component) {
                     // check show scroll navigator after open menu
@@ -100,10 +91,11 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 }
 
                 this._closeAllSubmenu();
+            },
 
-                if (this._onScrollThrottle) {
-                    this.removeEventListener('scroll', this._onScrollThrottle, true);
-                }
+            'jsx-scroll-throttle': function(event) {
+                event.stopImmediatePropagation();
+                this.focus();
             },
 
             'keydown:keypass(27)': function() {
@@ -160,10 +152,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     parent.close();
                     parent = parent.parentMenu;
                 }
-            },
-
-            _onScroll: function() {
-                this._closeAllSubmenu();
             }
         }
     }

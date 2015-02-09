@@ -35,6 +35,10 @@ var XBMenu = xblocks.view.register('xb-menu', [
             this._enterBottomFrame = 0;
             this._lockScroll = false;
             this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
+            this._onScrollThrottle = xblocks.utils.throttle(this._onScrollThrottle, 500, {
+                'leading': true,
+                'trailing': false
+            });
         },
 
         componentWillReceiveProps: function(nextProps) {
@@ -102,11 +106,20 @@ var XBMenu = xblocks.view.register('xb-menu', [
             }
 
             this._lockScroll = true;
-            this._redrawScrollNavigator(this.__onScroll);
+            this._onScrollThrottle();
+            this._redrawScrollNavigator(this._onScrollSuccess);
         },
 
-        __onScroll: function() {
+        _onScrollSuccess: function() {
             this._lockScroll = false;
+        },
+
+        _onScrollThrottle: function() {
+            xblocks.event.dispatch(
+                this.refs.content.getDOMNode(),
+                'jsx-scroll-throttle',
+                { 'bubbles': true, 'cancelable': true }
+            );
         },
 
         _animationScrollTop: function() {
