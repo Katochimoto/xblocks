@@ -129,7 +129,7 @@
 /* global xblocks, global */
 /* jshint strict: false */
 
-xblocks.utils.debounce = function(func, wait, options) {
+xblocks.utils.debounce = function(callback, wait, options) {
     var args;
     var maxTimeoutId;
     var result;
@@ -142,7 +142,7 @@ xblocks.utils.debounce = function(func, wait, options) {
     var trailing = false;
     var leading = true;
 
-    if (typeof(func) !== 'function') {
+    if (typeof(callback) !== 'function') {
         throw new TypeError('Expected a function');
     }
 
@@ -183,7 +183,7 @@ xblocks.utils.debounce = function(func, wait, options) {
 
             if (isCalled) {
                 lastCalled = Date.now();
-                result = func.apply(thisArg, args);
+                result = callback.apply(thisArg, args);
 
                 if (!timeoutId && !maxTimeoutId) {
                     args = thisArg = null;
@@ -204,7 +204,7 @@ xblocks.utils.debounce = function(func, wait, options) {
 
         if (trailing || (maxWait !== wait)) {
             lastCalled = Date.now();
-            result = func.apply(thisArg, args);
+            result = callback.apply(thisArg, args);
 
             if (!timeoutId && !maxTimeoutId) {
                 args = thisArg = null;
@@ -238,7 +238,7 @@ xblocks.utils.debounce = function(func, wait, options) {
                 }
 
                 lastCalled = stamp;
-                result = func.apply(thisArg, args);
+                result = callback.apply(thisArg, args);
 
             } else if (!maxTimeoutId) {
                 maxTimeoutId = global.setTimeout(maxDelayed, remaining);
@@ -254,7 +254,7 @@ xblocks.utils.debounce = function(func, wait, options) {
 
         if (leadingCall) {
             isCalled = true;
-            result = func.apply(thisArg, args);
+            result = callback.apply(thisArg, args);
         }
 
         if (isCalled && !timeoutId && !maxTimeoutId) {
@@ -268,6 +268,12 @@ xblocks.utils.debounce = function(func, wait, options) {
     return debounced;
 };
 
+/**
+ * @example
+ * "scroll:debounce(100,true,false)": function() {}
+ *
+ * @type {Object}
+ */
 xblocks.tag.pseudos.debounce = {
     onCompiled: function(listener, pseudo) {
         var len = pseudo.arguments.length;
@@ -275,13 +281,12 @@ xblocks.tag.pseudos.debounce = {
         var leading = true;
         var trailing = false;
 
-        if (len === 2) {
-            leading = Boolean(pseudo.arguments[1] === 'true');
+        if (len > 1) {
+            leading = (pseudo.arguments[1] === 'true');
         }
 
-        if (len === 3) {
-            leading = Boolean(pseudo.arguments[1] === 'true');
-            trailing = Boolean(pseudo.arguments[2] === 'true');
+        if (len > 2) {
+            trailing = (pseudo.arguments[2] === 'true');
         }
 
         return xblocks.utils.debounce(listener, wait, {
@@ -323,6 +328,12 @@ xblocks.utils.throttle = function(callback, wait, options) {
     return xblocks.utils.debounce(callback, wait, debounceOptions);
 };
 
+/**
+ * @example
+ * "scroll:throttle(100,true,false)": function() {}
+ *
+ * @type {Object}
+ */
 xblocks.tag.pseudos.throttle = {
     onCompiled: function(listener, pseudo) {
         var len = pseudo.arguments.length;
@@ -330,13 +341,12 @@ xblocks.tag.pseudos.throttle = {
         var leading = true;
         var trailing = false;
 
-        if (len === 2) {
-            leading = Boolean(pseudo.arguments[1] === 'true');
+        if (len > 1) {
+            leading = (pseudo.arguments[1] === 'true');
         }
 
-        if (len === 3) {
-            leading = Boolean(pseudo.arguments[1] === 'true');
-            trailing = Boolean(pseudo.arguments[2] === 'true');
+        if (len > 2) {
+            trailing = (pseudo.arguments[2] === 'true');
         }
 
         return xblocks.utils.throttle(listener, wait, {
@@ -3410,7 +3420,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
                 if (element) {
                     var rectContent = contentNode.getBoundingClientRect();
                     var rectElement = element.getBoundingClientRect();
-                    maxHeight = rectElement.top + rectElement.height - rectContent.top;
+                    maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;
                 }
             }
 

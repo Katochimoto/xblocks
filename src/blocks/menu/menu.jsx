@@ -54,7 +54,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
                 if (element) {
                     var rectContent = contentNode.getBoundingClientRect();
                     var rectElement = element.getBoundingClientRect();
-                    maxHeight = rectElement.top + rectElement.height - rectContent.top;
+                    maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;
                 }
             }
 
