@@ -1403,7 +1403,7 @@ xblocks.utils.exportPropTypes = function(tagName) {
  */
 xblocks.mixin = xblocks.mixin || {};
 
-/* mixin/eDisabled.js begin */
+/* mixin/element/eDisabled.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1449,9 +1449,9 @@ xblocks.mixin.eDisabled = {
     }
 };
 
-/* mixin/eDisabled.js end */
+/* mixin/element/eDisabled.js end */
 
-/* mixin/eChecked.js begin */
+/* mixin/element/eChecked.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1500,9 +1500,9 @@ xblocks.mixin.eChecked = {
     }
 };
 
-/* mixin/eChecked.js end */
+/* mixin/element/eChecked.js end */
 
-/* mixin/eInputValueState.js begin */
+/* mixin/element/eInputValueState.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1514,18 +1514,20 @@ xblocks.mixin.eInputValueState = {
             },
 
             'get': function() {
-                if (this.mounted && typeof(this.xblock._component.state.value) !== 'undefined') {
-                    return this.xblock._component.state.value;
+                var component = this.xblock.getMountedComponent();
+
+                if (component && typeof(component.state.value) !== 'undefined') {
+                    return component.state.value;
                 }
 
                 return String(this.getAttribute('value') || this.defaultValue || '');
             },
 
             'set': function(value) {
-                if (this.mounted) {
-                    this.xblock._component.setState({
-                        'value': String(value)
-                    });
+                var component = this.xblock.getMountedComponent();
+
+                if (component) {
+                    component.setState({ 'value': String(value) });
                 }
             }
         },
@@ -1538,9 +1540,9 @@ xblocks.mixin.eInputValueState = {
     }
 };
 
-/* mixin/eInputValueState.js end */
+/* mixin/element/eInputValueState.js end */
 
-/* mixin/eInputValueProps.js begin */
+/* mixin/element/eInputValueProps.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1564,9 +1566,9 @@ xblocks.mixin.eInputValueProps = {
     }
 };
 
-/* mixin/eInputValueProps.js end */
+/* mixin/element/eInputValueProps.js end */
 
-/* mixin/eFocus.js begin */
+/* mixin/element/eFocus.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1596,21 +1598,21 @@ xblocks.mixin.eInputValueProps = {
  * @type {{methods: {focus: focus, blur: blur}}}
  */
 xblocks.mixin.eFocus = {
-    methods: {
-        focus: function() {
+    'methods': {
+        'focus': function() {
             this.firstChild.focus();
         },
 
-        blur: function() {
+        'blur': function() {
             this.firstChild.blur();
         }
     }
 };
 
-/* mixin/eFocus.js end */
+/* mixin/element/eFocus.js end */
 
 
-/* mixin/vCommonAttrs.js begin */
+/* mixin/view/vCommonAttrs.js begin */
 /* global xblocks, React */
 /* jshint strict: false */
 
@@ -1631,7 +1633,7 @@ xblocks.mixin.vCommonAttrs = {
     }
 };
 
-/* mixin/vCommonAttrs.js end */
+/* mixin/view/vCommonAttrs.js end */
 
 
 /* mixin.js end */

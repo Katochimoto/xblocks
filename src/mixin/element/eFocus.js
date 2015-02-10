@@ -27,12 +27,12 @@
  * @type {{methods: {focus: focus, blur: blur}}}
  */
 xblocks.mixin.eFocus = {
-    methods: {
-        focus: function() {
+    'methods': {
+        'focus': function() {
             this.firstChild.focus();
         },
 
-        blur: function() {
+        'blur': function() {
             this.firstChild.blur();
         }
     }

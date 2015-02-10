@@ -7,10 +7,10 @@
  */
 xblocks.mixin = xblocks.mixin || {};
 
-/*! borschik:include:mixin/eDisabled.js */
-/*! borschik:include:mixin/eChecked.js */
-/*! borschik:include:mixin/eInputValueState.js */
-/*! borschik:include:mixin/eInputValueProps.js */
-/*! borschik:include:mixin/eFocus.js */
+/*! borschik:include:mixin/element/eDisabled.js */
+/*! borschik:include:mixin/element/eChecked.js */
+/*! borschik:include:mixin/element/eInputValueState.js */
+/*! borschik:include:mixin/element/eInputValueProps.js */
+/*! borschik:include:mixin/element/eFocus.js */
 
-/*! borschik:include:mixin/vCommonAttrs.js */
+/*! borschik:include:mixin/view/vCommonAttrs.js */

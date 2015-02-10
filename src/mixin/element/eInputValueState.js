@@ -9,18 +9,20 @@ xblocks.mixin.eInputValueState = {
             },
 
             'get': function() {
-                if (this.mounted && typeof(this.xblock._component.state.value) !== 'undefined') {
-                    return this.xblock._component.state.value;
+                var component = this.xblock.getMountedComponent();
+
+                if (component && typeof(component.state.value) !== 'undefined') {
+                    return component.state.value;
                 }
 
                 return String(this.getAttribute('value') || this.defaultValue || '');
             },
 
             'set': function(value) {
-                if (this.mounted) {
-                    this.xblock._component.setState({
-                        'value': String(value)
-                    });
+                var component = this.xblock.getMountedComponent();
+
+                if (component) {
+                    component.setState({ 'value': String(value) });
                 }
             }
         },
