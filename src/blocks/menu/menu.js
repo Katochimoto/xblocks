@@ -1,19 +1,13 @@
 /* global global, xblocks, XBPopupElement, __forEach, __doc */
 /* jshint strict: false */
 
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
-
 /*! borschik:include:_contextmenu.js */
-
 /*! borschik:include:menu.jsx.js */
 
 var XBMenuElementStatic = {
 
     /**
+     * @param {XBMenuitemElement} target
      * @this {global}
      */
     _closeSubmenu: function(target) {
@@ -44,6 +38,11 @@ var XBMenuElementCommon = {
             if (item && item.submenuInstance) {
                 item.submenuInstance.open();
             }
+        },
+
+        'jsx-scroll-throttle': function(event) {
+            event.stopImmediatePropagation();
+            this.focus();
         }
     },
 
@@ -91,11 +90,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 }
 
                 this._closeAllSubmenu();
-            },
-
-            'jsx-scroll-throttle': function(event) {
-                event.stopImmediatePropagation();
-                this.focus();
             },
 
             'keydown:keypass(27)': function() {

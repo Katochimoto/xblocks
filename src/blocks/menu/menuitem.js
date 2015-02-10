@@ -1,12 +1,6 @@
 /* global xblocks, global */
 /* jshint strict: false */
 
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
-
 /*! borschik:include:menuitem.jsx.js */
 
 var XBMenuitemElementStatic = {
@@ -127,8 +121,8 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         this.classList.add(targetClassName);
 
                         var menu = this.ownerDocument.createElement('xb-menu');
-                        menu.setAttribute('attachment', 'top left');
-                        menu.setAttribute('target-attachment', 'top right');
+                        menu.setAttribute('attachment', 'top right');
+                        menu.setAttribute('target-attachment', 'top left');
                         menu.setAttribute('target', '.' + targetClassName);
                         menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
                             {

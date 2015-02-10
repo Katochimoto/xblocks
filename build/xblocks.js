@@ -3072,12 +3072,6 @@ xblocks.create('xb-menuseparator', [
 /* global xblocks, global */
 /* jshint strict: false */
 
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
-
 /* blocks/menu/menuitem.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React */
@@ -3274,8 +3268,8 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         this.classList.add(targetClassName);
 
                         var menu = this.ownerDocument.createElement('xb-menu');
-                        menu.setAttribute('attachment', 'top left');
-                        menu.setAttribute('target-attachment', 'top right');
+                        menu.setAttribute('attachment', 'top right');
+                        menu.setAttribute('target-attachment', 'top left');
                         menu.setAttribute('target', '.' + targetClassName);
                         menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
                             {
@@ -3304,12 +3298,6 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
     /* blocks/menu/menu.js begin */
 /* global global, xblocks, XBPopupElement, __forEach, __doc */
 /* jshint strict: false */
-
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
 
 /* blocks/menu/_contextmenu.js begin */
 /* global xblocks, __doc */
@@ -3362,14 +3350,184 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
 
 /* blocks/menu/_contextmenu.js end */
 
-
 /* blocks/menu/menu.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React, global */
 /* jshint strict: false */
 /* jshint -W098 */
+
+var XBMenuViewCommon = {
+    getInitialState: function() {
+        return {
+            'maxHeight': 0,
+            'isShowScrollTop': false,
+            'isShowScrollBottom': false
+        };
+    },
+
+    componentWillMount: function() {
+        this._enterTopFrame = 0;
+        this._enterBottomFrame = 0;
+        this._lockScroll = false;
+        this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
+        this._onScrollThrottle = xblocks.utils.throttle(this._onScrollThrottle, 500, {
+            'leading': true,
+            'trailing': false
+        });
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        if (nextProps.size !== this.props.size) {
+            this._updateMaxHeight(nextProps.size);
+        }
+    },
+
+    _updateMaxHeight: function(size, callback) {
+        size = Number(size);
+        var maxHeight = 0;
+
+        if (size > 0) {
+            var contentNode = this.refs.content.getDOMNode();
+            var element = contentNode.children[ size - 1 ];
+
+            if (element) {
+                var rectContent = contentNode.getBoundingClientRect();
+                var rectElement = element.getBoundingClientRect();
+                maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;
+            }
+        }
+
+        this.setState({
+            'maxHeight': maxHeight
+        }, this._redrawScrollNavigator.bind(this, callback));
+    },
+
+    _redrawScrollNavigator: function(callback) {
+        var target = this.refs.content.getDOMNode();
+        var safeArea = 5;
+        var height = Math.max(target.scrollHeight, target.clientHeight);
+        var isShowScrollTop = (target.scrollTop > safeArea);
+        var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
+
+        this.setState({
+            'isShowScrollTop': isShowScrollTop,
+            'isShowScrollBottom': isShowScrollBottom
+        }, this._redrawScrollNavigatorSuccess.bind(this, callback));
+    },
+
+    _redrawScrollNavigatorSuccess: function(callback) {
+        if (!this.state.isShowScrollTop) {
+            this._onMouseLeaveTop();
+        }
+
+        if (!this.state.isShowScrollBottom) {
+            this._onMouseLeaveBottom();
+        }
+
+        if (callback) {
+            callback.call(this);
+        }
+    },
+
+    _onScroll: function(event) {
+        if (this._lockScroll) {
+            return;
+        }
+
+        this._lockScroll = true;
+        this._onScrollThrottle();
+        this._redrawScrollNavigator(this._onScrollSuccess);
+    },
+
+    _onScrollSuccess: function() {
+        this._lockScroll = false;
+    },
+
+    _onScrollThrottle: function() {
+        xblocks.event.dispatch(
+            this.refs.content.getDOMNode(),
+            'jsx-scroll-throttle',
+            { 'bubbles': true, 'cancelable': true }
+        );
+    },
+
+    _animationScrollTop: function() {
+        this.refs.content.getDOMNode().scrollTop--;
+        this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
+    },
+
+    _onMouseEnterTop: function() {
+        this._onMouseLeaveTop();
+        this._animationScrollTop();
+    },
+
+    _onMouseLeaveTop: function() {
+        if (this._enterTopFrame) {
+            global.cancelAnimationFrame(this._enterTopFrame);
+            this._enterTopFrame = 0;
+        }
+    },
+
+    _animationScrollBottom: function() {
+        this.refs.content.getDOMNode().scrollTop++;
+        this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
+    },
+
+    _onMouseEnterBottom: function() {
+        this._onMouseLeaveBottom();
+        this._animationScrollBottom();
+    },
+
+    _onMouseLeaveBottom: function() {
+        if (this._enterBottomFrame) {
+            global.cancelAnimationFrame(this._enterBottomFrame);
+            this._enterBottomFrame = 0;
+        }
+    },
+
+    render: function() {
+        var classes = {
+            '_popup': true
+        };
+
+        classes = React.addons.classSet(classes);
+
+        var scrollTopStyle = {
+            'display': (this.state.isShowScrollTop ? 'block' : 'none')
+        };
+
+        var scrollBottomStyle = {
+            'display': (this.state.isShowScrollBottom ? 'block' : 'none')
+        };
+
+        var contentStyle = {
+            'maxHeight': (this.state.maxHeight ? this.state.maxHeight + 'px' : 'none')
+        };
+
+        return (
+            React.createElement("div", {className: classes, tabIndex: "0"}, 
+                React.createElement("div", {style: scrollTopStyle, 
+                    className: "_popup-scroll-top", 
+                    onMouseEnter: this._onMouseEnterTop, 
+                    onMouseLeave: this._onMouseLeaveTop}), 
+                React.createElement("div", {ref: "content", 
+                    style: contentStyle, 
+                    className: "_popup-content", 
+                    onScroll: this._onScroll, 
+                    "data-xb-content": this.props._uid, 
+                    dangerouslySetInnerHTML: { __html: this.props.children.trim()}}), 
+                React.createElement("div", {style: scrollBottomStyle, 
+                    className: "_popup-scroll-bottom", 
+                    onMouseEnter: this._onMouseEnterBottom, 
+                    onMouseLeave: this._onMouseLeaveBottom})
+            )
+        );
+    }
+};
+
 var XBMenu = xblocks.view.register('xb-menu', [
     xblocks.mixin.vCommonAttrs,
+    XBMenuViewCommon,
 
     {
         'displayName': 'xb-menu',
@@ -3388,177 +3546,8 @@ var XBMenu = xblocks.view.register('xb-menu', [
             };
         },
 
-        getInitialState: function() {
-            return {
-                'maxHeight': 0,
-                'isShowScrollTop': false,
-                'isShowScrollBottom': false
-            };
-        },
-
-        componentWillMount: function() {
-            this._enterTopFrame = 0;
-            this._enterBottomFrame = 0;
-            this._lockScroll = false;
-            this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
-            this._onScrollThrottle = xblocks.utils.throttle(this._onScrollThrottle, 500, {
-                'leading': true,
-                'trailing': false
-            });
-        },
-
-        componentWillReceiveProps: function(nextProps) {
-            if (nextProps.size !== this.props.size) {
-                this._updateMaxHeight(nextProps.size);
-            }
-        },
-
-        _updateMaxHeight: function(size, callback) {
-            size = Number(size);
-            var maxHeight = 0;
-
-            if (size > 0) {
-                var contentNode = this.refs.content.getDOMNode();
-                var element = contentNode.children[ size - 1 ];
-
-                if (element) {
-                    var rectContent = contentNode.getBoundingClientRect();
-                    var rectElement = element.getBoundingClientRect();
-                    maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;
-                }
-            }
-
-            this.setState({
-                'maxHeight': maxHeight
-            }, this._redrawScrollNavigator.bind(this, callback));
-        },
-
-        _redrawScrollNavigator: function(callback) {
-            var target = this.refs.content.getDOMNode();
-            var safeArea = 5;
-            var height = Math.max(target.scrollHeight, target.clientHeight);
-            var isShowScrollTop = (target.scrollTop > safeArea);
-            var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
-
-            this.setState({
-                'isShowScrollTop': isShowScrollTop,
-                'isShowScrollBottom': isShowScrollBottom
-            }, this._redrawScrollNavigatorSuccess.bind(this, callback));
-        },
-
-        _redrawScrollNavigatorSuccess: function(callback) {
-            if (!this.state.isShowScrollTop) {
-                this._onMouseLeaveTop();
-            }
-
-            if (!this.state.isShowScrollBottom) {
-                this._onMouseLeaveBottom();
-            }
-
-            if (callback) {
-                callback.call(this);
-            }
-        },
-
         afterOpen: function(callback) {
             this._updateMaxHeight(this.props.size, callback);
-        },
-
-
-
-        _onScroll: function(event) {
-            if (this._lockScroll) {
-                return;
-            }
-
-            this._lockScroll = true;
-            this._onScrollThrottle();
-            this._redrawScrollNavigator(this._onScrollSuccess);
-        },
-
-        _onScrollSuccess: function() {
-            this._lockScroll = false;
-        },
-
-        _onScrollThrottle: function() {
-            xblocks.event.dispatch(
-                this.refs.content.getDOMNode(),
-                'jsx-scroll-throttle',
-                { 'bubbles': true, 'cancelable': true }
-            );
-        },
-
-        _animationScrollTop: function() {
-            this.refs.content.getDOMNode().scrollTop--;
-            this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
-        },
-
-        _onMouseEnterTop: function() {
-            this._onMouseLeaveTop();
-            this._animationScrollTop();
-        },
-
-        _onMouseLeaveTop: function() {
-            if (this._enterTopFrame) {
-                global.cancelAnimationFrame(this._enterTopFrame);
-                this._enterTopFrame = 0;
-            }
-        },
-
-        _animationScrollBottom: function() {
-            this.refs.content.getDOMNode().scrollTop++;
-            this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
-        },
-
-        _onMouseEnterBottom: function() {
-            this._onMouseLeaveBottom();
-            this._animationScrollBottom();
-        },
-
-        _onMouseLeaveBottom: function() {
-            if (this._enterBottomFrame) {
-                global.cancelAnimationFrame(this._enterBottomFrame);
-                this._enterBottomFrame = 0;
-            }
-        },
-
-        render: function() {
-            var classes = {
-                '_popup': true
-            };
-
-            classes = React.addons.classSet(classes);
-
-            var scrollTopStyle = {
-                'display': (this.state.isShowScrollTop ? 'block' : 'none')
-            };
-
-            var scrollBottomStyle = {
-                'display': (this.state.isShowScrollBottom ? 'block' : 'none')
-            };
-
-            var contentStyle = {
-                'maxHeight': (this.state.maxHeight ? this.state.maxHeight + 'px' : 'none')
-            };
-
-            return (
-                React.createElement("div", {className: classes, tabIndex: "0"}, 
-                    React.createElement("div", {style: scrollTopStyle, 
-                        className: "_popup-scroll-top", 
-                        onMouseEnter: this._onMouseEnterTop, 
-                        onMouseLeave: this._onMouseLeaveTop}), 
-                    React.createElement("div", {ref: "content", 
-                        style: contentStyle, 
-                        className: "_popup-content", 
-                        onScroll: this._onScroll, 
-                        "data-xb-content": this.props._uid, 
-                        dangerouslySetInnerHTML: { __html: this.props.children.trim()}}), 
-                    React.createElement("div", {style: scrollBottomStyle, 
-                        className: "_popup-scroll-bottom", 
-                        onMouseEnter: this._onMouseEnterBottom, 
-                        onMouseLeave: this._onMouseLeaveBottom})
-                )
-            );
         }
     }
 ]);
@@ -3569,6 +3558,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 var XBMenuElementStatic = {
 
     /**
+     * @param {XBMenuitemElement} target
      * @this {global}
      */
     _closeSubmenu: function(target) {
@@ -3599,6 +3589,11 @@ var XBMenuElementCommon = {
             if (item && item.submenuInstance) {
                 item.submenuInstance.open();
             }
+        },
+
+        'jsx-scroll-throttle': function(event) {
+            event.stopImmediatePropagation();
+            this.focus();
         }
     },
 
@@ -3646,11 +3641,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 }
 
                 this._closeAllSubmenu();
-            },
-
-            'jsx-scroll-throttle': function(event) {
-                event.stopImmediatePropagation();
-                this.focus();
             },
 
             'keydown:keypass(27)': function() {
@@ -3726,30 +3716,30 @@ var XBMenuElement = xblocks.create('xb-menu', [
 
 /* blocks/menu-inline/menu-inline.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, XBMenuViewCommon */
 /* jshint strict: false */
 /* jshint -W098 */
 var XBMenuInline = xblocks.view.register('xb-menu-inline', [
     xblocks.mixin.vCommonAttrs,
+    XBMenuViewCommon,
 
     {
-        displayName: 'xb-menu-inline',
+        'displayName': 'xb-menu-inline',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        'mixins': [ React.addons.PureRenderMixin ],
 
-        render: function() {
-            var classes = {
-                '_popup': true
+        'propTypes': {
+            'size': React.PropTypes.string
+        },
+
+        getDefaultProps: function() {
+            return {
+                'size': ''
             };
+        },
 
-            classes = React.addons.classSet(classes);
-
-            return (
-                React.createElement("div", {className: classes, 
-                    tabIndex: "0", 
-                    "data-xb-content": this.props._uid, 
-                    dangerouslySetInnerHTML: { __html: this.props.children}})
-            );
+        componentDidMount: function() {
+            this._updateMaxHeight(this.props.size);
         }
     }
 ]);

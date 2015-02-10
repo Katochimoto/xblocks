@@ -12,6 +12,7 @@ xb-menu
     overflow: hidden
     padding: 0
     outline: none
+
     touch-action: none
     -webkit-touch-callout: none
     touch-callout: none
@@ -29,36 +30,8 @@ xb-menu
     & > ._popup-content
       skin: xb-scroll-x 18px
 
-    & > ._popup-scroll-top,
-    & > ._popup-scroll-bottom
-      height: ($islands_m / 2)
-      position: absolute
-      background-color: #fff
-      left: 0
-      width: 100%
-      display: none
-      z-index: 2
-
-      &:after
-        content: ""
-        position: absolute
-        border: 4px solid transparent
-        clear: both
-        margin-left: -4px
-        left: 50%
-
     & > ._popup-scroll-top
-      top: 0
-      cursor: n-resize
-
-      &:after
-        border-bottom: 4px solid rgba(#000, 0.3)
-        top: -2px
+      skin: xb-scroll-control-top
 
     & > ._popup-scroll-bottom
-      bottom: 0
-      cursor: s-resize
-
-      &:after
-        border-top: 4px solid rgba(#000, 0.3)
-        top: 2px
+      skin: xb-scroll-control-bottom

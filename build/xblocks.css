@@ -3276,40 +3276,47 @@ xb-menu > ._popup > ._popup-content:after {
     width: 0 !important;
   }
 }
-xb-menu > ._popup > ._popup-scroll-top,
+xb-menu > ._popup > ._popup-scroll-top {
+  height: 8px;
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: none;
+  z-index: 2;
+  cursor: n-resize;
+}
+xb-menu > ._popup > ._popup-scroll-top:after {
+  content: "";
+  position: absolute;
+  border: 4px solid transparent;
+  border-bottom: 4px solid rgba(0,0,0,0.3);
+  clear: both;
+  margin-left: -4px;
+  left: 50%;
+  top: -2px;
+}
 xb-menu > ._popup > ._popup-scroll-bottom {
   height: 8px;
   position: absolute;
   background-color: #fff;
   left: 0;
+  bottom: 0;
+  cursor: s-resize;
   width: 100%;
   display: none;
   z-index: 2;
 }
-xb-menu > ._popup > ._popup-scroll-top:after,
 xb-menu > ._popup > ._popup-scroll-bottom:after {
   content: "";
   position: absolute;
   border: 4px solid transparent;
+  border-top: 4px solid rgba(0,0,0,0.3);
+  top: 2px;
   clear: both;
   margin-left: -4px;
   left: 50%;
-}
-xb-menu > ._popup > ._popup-scroll-top {
-  top: 0;
-  cursor: n-resize;
-}
-xb-menu > ._popup > ._popup-scroll-top:after {
-  border-bottom: 4px solid rgba(0,0,0,0.3);
-  top: -2px;
-}
-xb-menu > ._popup > ._popup-scroll-bottom {
-  bottom: 0;
-  cursor: s-resize;
-}
-xb-menu > ._popup > ._popup-scroll-bottom:after {
-  border-top: 4px solid rgba(0,0,0,0.3);
-  top: 2px;
 }
 xb-menuitem {
   display: block;
@@ -3427,14 +3434,23 @@ xb-menu-inline[hidden] {
 }
 xb-menu-inline > ._popup {
   position: relative;
-  display: inline-block;
-  vertical-align: top;
+  display: block;
   background: #fff;
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
   overflow: hidden;
   padding: 0;
   outline: none;
+  -ms-touch-action: none;
+      touch-action: none;
+  -webkit-touch-callout: none;
+  touch-callout: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-text-size-adjust: none;
+          text-size-adjust: none;
 }
 xb-menu-inline > ._popup:before,
 xb-menu-inline > ._popup:after {
@@ -3444,6 +3460,99 @@ xb-menu-inline > ._popup:after {
 xb-menu-inline > ._popup:focus {
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+}
+xb-menu-inline > ._popup > ._popup-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  tap-highlight-color: rgba(0,0,0,0);
+  -webkit-transform: translateZ(0);
+     -moz-transform: translateZ(0);
+          transform: translateZ(0);
+  margin-right: -15px;
+  background: no-repeat;
+  background-image: -webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -webkit-radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -webkit-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), -webkit-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-image: -moz-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -moz-radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -moz-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), -moz-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-image: -o-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -o-radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), -o-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), -o-linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-image: radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), radial-gradient(50% 100%, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-position: 0 0, 0 100%, 0 0, 0 100%;
+  background-size: 100% 18px, 100% 18px, 100% 1px, 100% 1px;
+  z-index: 1;
+}
+xb-menu-inline > ._popup > ._popup-content:after,
+xb-menu-inline > ._popup > ._popup-content:before {
+  content: "";
+  top: auto;
+  left: auto;
+  z-index: -1;
+  display: block;
+  height: 45px;
+  width: auto;
+  border: 0;
+  margin: 0 0 -45px;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  background: -webkit-linear-gradient(top, #fff 10%, rgba(255,255,255,0) 100%);
+  background: -moz-linear-gradient(top, #fff 10%, rgba(255,255,255,0) 100%);
+  background: -o-linear-gradient(top, #fff 10%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to bottom, #fff 10%, rgba(255,255,255,0) 100%);
+}
+xb-menu-inline > ._popup > ._popup-content:after {
+  top: 1px;
+  margin: -45px 0 0;
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 10%, #fff 100%);
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 10%, #fff 100%);
+  background: -o-linear-gradient(top, rgba(255,255,255,0) 10%, #fff 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 10%, #fff 100%);
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  xb-menu-inline > ._popup > ._popup-content {
+    margin-right: auto !important;
+  }
+  xb-menu-inline > ._popup > ._popup-content::-webkit-scrollbar {
+    width: 0 !important;
+  }
+}
+xb-menu-inline > ._popup > ._popup-scroll-top {
+  height: 8px;
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: none;
+  z-index: 2;
+  cursor: n-resize;
+}
+xb-menu-inline > ._popup > ._popup-scroll-top:after {
+  content: "";
+  position: absolute;
+  border: 4px solid transparent;
+  border-bottom: 4px solid rgba(0,0,0,0.3);
+  clear: both;
+  margin-left: -4px;
+  left: 50%;
+  top: -2px;
+}
+xb-menu-inline > ._popup > ._popup-scroll-bottom {
+  height: 8px;
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  bottom: 0;
+  cursor: s-resize;
+  width: 100%;
+  display: none;
+  z-index: 2;
+}
+xb-menu-inline > ._popup > ._popup-scroll-bottom:after {
+  content: "";
+  position: absolute;
+  border: 4px solid transparent;
+  border-top: 4px solid rgba(0,0,0,0.3);
+  top: 2px;
+  clear: both;
+  margin-left: -4px;
+  left: 50%;
 }
 xb-select {
   display: inline-block;
