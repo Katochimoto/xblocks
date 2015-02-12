@@ -3317,18 +3317,24 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
 
     event.preventDefault();
 
-    var targetElement = doc.createElement('div');
-    targetElement.style.position = 'absolute';
-    targetElement.style.visibility = 'hidden';
+    var targetElementId = 'xb-contextmenu-target';
+    var targetElement = doc.getElementById(targetElementId);
+
+    if (targetElement) {
+        if (targetElement._xbpopup) {
+            targetElement._xbpopup.close();
+        }
+
+    } else {
+        targetElement = doc.createElement('div');
+        targetElement.id = targetElementId;
+        targetElement.style.position = 'absolute';
+        targetElement.style.visibility = 'hidden';
+        doc.body.appendChild(targetElement);
+    }
+
     targetElement.style.top = event.pageY + 'px';
     targetElement.style.left = event.pageX + 'px';
-
-    doc.body.appendChild(targetElement);
-
-    menuElement.addEventListener('xb-close', function _onClose() {
-        menuElement.removeEventListener('xb-close', _onClose, false);
-        targetElement.parentNode.removeChild(targetElement);
-    }, false);
 
     menuElement.open({
         'target': targetElement,
@@ -3595,6 +3601,7 @@ var XBMenuElementCommon = {
         },
 
         'jsx-scroll-throttle': function(event) {
+            // close all submenu
             event.stopImmediatePropagation();
             this.focus();
         }
@@ -3635,6 +3642,34 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 } else {
                     this._afterOpen();
                 }
+
+                /*var that = this;
+                global.addEventListener('mousewheel', function(event) {
+                    xblocks.event.wrap(event);
+                    console.log(event);
+
+                    if (event.target === that || xblocks.dom.isParent(that, event.target)) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                }, true);
+
+                global.addEventListener('scroll', function(event) {
+                    global.scrollTop = 0;
+                    //event.preventDefault();
+                    //event.stopImmediatePropagation();
+                    console.log(event);
+                }, false);
+
+                window.onmousewheel = document.onmousewheel = function(e) {
+                    console.log(e.srcElement);
+                    e = e || window.event;
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                    e.returnValue = false;
+                };*/
             },
 
             'xb-close': function() {
@@ -3682,6 +3717,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
             },
 
             _afterOpen: function() {
+                this.position();
                 this.style.visibility = 'visible';
                 // the focus is not put on the invisible element
                 // put again

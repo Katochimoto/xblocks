@@ -12,18 +12,24 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
 
     event.preventDefault();
 
-    var targetElement = doc.createElement('div');
-    targetElement.style.position = 'absolute';
-    targetElement.style.visibility = 'hidden';
+    var targetElementId = 'xb-contextmenu-target';
+    var targetElement = doc.getElementById(targetElementId);
+
+    if (targetElement) {
+        if (targetElement._xbpopup) {
+            targetElement._xbpopup.close();
+        }
+
+    } else {
+        targetElement = doc.createElement('div');
+        targetElement.id = targetElementId;
+        targetElement.style.position = 'absolute';
+        targetElement.style.visibility = 'hidden';
+        doc.body.appendChild(targetElement);
+    }
+
     targetElement.style.top = event.pageY + 'px';
     targetElement.style.left = event.pageX + 'px';
-
-    doc.body.appendChild(targetElement);
-
-    menuElement.addEventListener('xb-close', function _onClose() {
-        menuElement.removeEventListener('xb-close', _onClose, false);
-        targetElement.parentNode.removeChild(targetElement);
-    }, false);
 
     menuElement.open({
         'target': targetElement,
