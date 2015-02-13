@@ -3684,9 +3684,12 @@ var XBMenuElement = xblocks.create('xb-menu', [
             'scrollwheel:delegate(._popup-content)': function(event) {
                 var delta = event.delta;
                 var scrollTop = this.scrollTop;
+                var offsetHeight = this.offsetHeight;
+                var scrollHeight = this.scrollHeight;
 
                 if (delta > 0 && scrollTop === 0 ||
-                    delta < 0 && scrollTop + this.offsetHeight >= this.scrollHeight) {
+                    delta < 0 && scrollTop + offsetHeight >= scrollHeight ||
+                    offsetHeight === scrollHeight) {
 
                     event.preventDefault();
                     event.stopImmediatePropagation();
