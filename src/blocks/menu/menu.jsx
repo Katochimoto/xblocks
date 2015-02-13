@@ -72,7 +72,7 @@ var XBMenuViewCommon = {
         }
 
         if (callback) {
-            callback.call(this);
+            callback();
         }
     },
 

@@ -1391,6 +1391,16 @@ xblocks.utils.exportPropTypes = function(tagName) {
 
 /* utils/resetLastRadioChecked.js end */
 
+/* utils/lazyFocus.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.utils.lazyFocus = function(node) {
+    global.setImmediate(node.focus.bind(node));
+};
+
+/* utils/lazyFocus.js end */
+
 
 /* utils.js end */
 
@@ -3434,7 +3444,7 @@ var XBMenuViewCommon = {
         }
 
         if (callback) {
-            callback.call(this);
+            callback();
         }
     },
 
@@ -3603,7 +3613,7 @@ var XBMenuElementCommon = {
         'jsx-scroll-throttle': function(event) {
             // close all submenu
             event.stopImmediatePropagation();
-            this.focus();
+            xblocks.utils.lazyFocus(this);
         }
     },
 
@@ -3642,34 +3652,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 } else {
                     this._afterOpen();
                 }
-
-                /*var that = this;
-                global.addEventListener('mousewheel', function(event) {
-                    xblocks.event.wrap(event);
-                    console.log(event);
-
-                    if (event.target === that || xblocks.dom.isParent(that, event.target)) {
-                        return;
-                    }
-
-                    event.preventDefault();
-                }, true);
-
-                global.addEventListener('scroll', function(event) {
-                    global.scrollTop = 0;
-                    //event.preventDefault();
-                    //event.stopImmediatePropagation();
-                    console.log(event);
-                }, false);
-
-                window.onmousewheel = document.onmousewheel = function(e) {
-                    console.log(e.srcElement);
-                    e = e || window.event;
-                    if (e.preventDefault) {
-                        e.preventDefault();
-                    }
-                    e.returnValue = false;
-                };*/
             },
 
             'xb-close': function() {
@@ -3687,7 +3669,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 // focus of ancestor
                 var parentMenu = this.parentMenu;
                 if (parentMenu) {
-                    parentMenu.focus();
+                    xblocks.utils.lazyFocus(parentMenu);
                 }
             },
 
@@ -3696,6 +3678,18 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     this.close();
                     // event.relatedTarget is null in firefox
                     global.setImmediate(this._closeUpFocus.bind(this));
+                }
+            },
+
+            'scrollwheel:delegate(._popup-content)': function(event) {
+                var delta = event.delta;
+                var scrollTop = this.scrollTop;
+
+                if (delta > 0 && scrollTop === 0 ||
+                    delta < 0 && scrollTop + this.offsetHeight >= this.scrollHeight) {
+
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
                 }
             }
         },
@@ -3721,7 +3715,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 this.style.visibility = 'visible';
                 // the focus is not put on the invisible element
                 // put again
-                this.focus();
+                xblocks.utils.lazyFocus(this);
             },
 
             _closeUpFocus: function() {
@@ -3825,7 +3819,7 @@ var XBMenuInlineElement = xblocks.create('xb-menu-inline', [
 
             'close': function() {
                 // FireFox does not fire a blur event
-                global.setImmediate(this.focus.bind(this));
+                xblocks.utils.lazyFocus(this);
             }
         }
     }

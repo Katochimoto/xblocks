@@ -48,7 +48,7 @@ var XBMenuInlineElement = xblocks.create('xb-menu-inline', [
 
             'close': function() {
                 // FireFox does not fire a blur event
-                global.setImmediate(this.focus.bind(this));
+                xblocks.utils.lazyFocus(this);
             }
         }
     }
