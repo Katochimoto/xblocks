@@ -1,9 +1,16 @@
-/* global xblocks */
+/* global xblocks, xb */
 /* jshint strict: false */
 
 /*! borschik:include:input.jsx.js */
 
-xblocks.create('xb-input', [
+/**
+ * @class xb.Input
+ * @memberof xb
+ * @mixes xblocks.mixin.eDisabled
+ * @mixes xblocks.mixin.eInputValueState
+ * @mixes xblocks.mixin.eFocus
+ */
+xb.Input = xblocks.create('xb-input', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eInputValueState,
     xblocks.mixin.eFocus,

@@ -5,6 +5,8 @@
 (function(global, undefined) {
     'use strict';
 
+    global.xb = global.xb || {};
+
     var Tether = global.Tether;
 
     var React = global.React;
@@ -13,6 +15,11 @@
      * @namespace xblocks
      */
     var xblocks = global.xblocks;
+
+    /**
+     * @namespace xb
+     */
+    var xb = global.xb;
 
     var __doc = global.document;
     var __noop = function() {};

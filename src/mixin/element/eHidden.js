@@ -31,7 +31,6 @@
  * // false
  *
  * @memberOf xblocks.mixin
- * @name eHidden
  */
 xblocks.mixin.eHidden = {
     'accessors': {

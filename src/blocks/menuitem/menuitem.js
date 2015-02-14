@@ -1,25 +1,75 @@
-/* global xblocks, global */
+/* global xblocks, global, xb */
 /* jshint strict: false */
 
 /*! borschik:include:menuitem.jsx.js */
 
-var XBMenuitemElementStatic = {
-    '_timerOpenSubmenu': 0,
+var _xbMenuitemElementStatic = {
+    'submenuAttrs': {
+        'attachment': 'top right',
+        'target-attachment': 'top left',
+        // TODO
+        // переписать тетхер и сделать для targetModifier значение по умолчанию
+        // вместо undefined
+        'target-modifier': 'initial',
+        'constraints': encodeURIComponent(JSON.stringify([
+            {
+                'to': 'scrollParent',
+                'attachment': 'element together'
+            },
+            {
+                'to': 'window',
+                'attachment': 'element together'
+            }
+        ]))
+    },
 
-    '_submenuRemove': function() {
-        if (this._submenuInstance) {
-            this._submenuInstance.close();
-            this._submenuInstance.parentNode.removeChild(this._submenuInstance);
-            this._submenuInstance = undefined;
-        }
-    }
+    'submenu': (function() {
+        var timerOpenSubmenu = 0;
+
+        return {
+            'open': function(submenu) {
+                if (submenu && !timerOpenSubmenu) {
+                    timerOpenSubmenu = global.setTimeout(
+                        submenu.open.bind(submenu),
+                        200
+                    );
+                }
+            },
+
+            'cancel': function() {
+                if (timerOpenSubmenu) {
+                    global.clearTimeout(timerOpenSubmenu);
+                    timerOpenSubmenu = 0;
+                }
+            },
+
+            /**
+             * @this {XBMenuitemElement}
+             */
+            'remove': function() {
+                if (this._submenuInstance) {
+                    _xbMenuitemElementStatic.submenu.cancel();
+
+                    this._submenuInstance.close();
+                    xblocks.dom.removeChild(this._submenuInstance);
+                    this._submenuInstance = undefined;
+                }
+            }
+        };
+    }())
 };
 
 /**
- * @class XBMenuitemElement
+ * @class xb.Menuitem
+ * @memberof xb
+ * @mixes xblocks.mixin.eDisabled
+ * @mixes xblocks.mixin.eInputValueProps
+ * @listens xblocks:utils:Table~event:xb-focus
+ * @listens xblocks:utils:Table~event:xb-blur
+ * @listens xblocks:element~event:xb-repaint
+ * @listens xblocks:element~event:xb-created
  */
-/* jshint -W098 */
-var XBMenuitemElement = xblocks.create('xb-menuitem', [
+xb.Menuitem = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eInputValueProps,
 
@@ -27,18 +77,26 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
         'prototype': Object.create(HTMLElement.prototype),
 
         'events': {
+            /**
+             * @callback
+             */
             'xb-created': function() {
-                XBMenuitemElementStatic._submenuRemove.call(this);
+                _xbMenuitemElementStatic.submenu.remove.call(this);
                 this.submenu = Boolean(this.content.trim());
             },
 
-            'xb-repaint': XBMenuitemElementStatic._submenuRemove,
+            /**
+             * @callback
+             */
+            'xb-repaint': _xbMenuitemElementStatic.submenu.remove,
 
+            /**
+             * @callback
+             */
             'xb-blur': function() {
                 this.focused = false;
 
-                global.clearTimeout(XBMenuitemElementStatic._timerOpenSubmenu);
-                XBMenuitemElementStatic._timerOpenSubmenu = 0;
+                _xbMenuitemElementStatic.submenu.cancel();
 
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
@@ -47,15 +105,16 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 }
             },
 
+            /**
+             * @callback
+             * @param {xblocks:utils:Table~event:xb-focus}
+             */
             'xb-focus': function(event) {
                 this.focused = true;
 
                 // open the submenu only event-mouse
                 if (event.detail.originalEvent.type !== 'keydown') {
-                    var submenu = this.submenuInstance;
-                    if (submenu && !XBMenuitemElementStatic._timerOpenSubmenu) {
-                        XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
-                    }
+                    _xbMenuitemElementStatic.submenu.open(this.submenuInstance);
 
                 // scroll menu only keyboard events
                 } else {
@@ -65,12 +124,11 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
         },
 
         /**
-         * @lends XBMenuitemElement.prototype
+         * @lends xb.Menuitem.prototype
          */
         'accessors': {
             /**
-             * Item in focus
-             * @member {boolean} focused
+             * @property {boolean} focused Item in focus
              */
             'focused': {
                 'attribute': {
@@ -79,8 +137,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * Item is selected
-             * @member {boolean} selected
+             * @property {boolean} selected Item is selected
              */
             'selected': {
                 'attribute': {
@@ -89,8 +146,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * Item has a submenu
-             * @member {boolean} selected
+             * @property {boolean} submenu Item has a submenu
              */
             'submenu': {
                 'attribute': {
@@ -99,10 +155,10 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @member {XBMenuElement|XBMenuInlineElement|null}
+             * @property {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
              */
             'menuInstance': {
-                get: function() {
+                'get': function() {
                     if (this._menuInstance || this._menuInstance === null) {
                         return this._menuInstance;
                     }
@@ -120,41 +176,32 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @member {XBMenuElement|null}
+             * @property {xb.Menu|null} submenuInstance Submenu instance
              */
             'submenuInstance': {
-                get: function() {
+                'get': function() {
                     if (this._submenuInstance || this._submenuInstance === null) {
                         return this._submenuInstance;
                     }
 
-                    var targetClassName = '_menuitem-target-' + this.xuid;
-
                     this._submenuInstance = null;
 
                     if (this.submenu) {
-                        this.classList.add(targetClassName);
-
+                        var targetClassName = '_menuitem-target-' + this.xuid;
                         var menu = this.ownerDocument.createElement('xb-menu');
-                        menu.setAttribute('attachment', 'top right');
-                        menu.setAttribute('target-attachment', 'top left');
-                        // TODO
-                        // переписать тетхер и сделать для targetModifier значение по умолчанию
-                        // вместо undefined
-                        menu.setAttribute('target-modifier', 'undefined');
+
                         menu.setAttribute('target', '.' + targetClassName);
-                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
-                            {
-                                'to': 'scrollParent',
-                                'attachment': 'element together'
-                            },
-                            {
-                                'to': 'window',
-                                'attachment': 'element together'
-                            }
-                        ])));
+
+                        for (var attrName in _xbMenuitemElementStatic.submenuAttrs) {
+                            menu.setAttribute(
+                                attrName,
+                                _xbMenuitemElementStatic.submenuAttrs[ attrName ]
+                            );
+                        }
+
                         menu.innerHTML = this.content;
 
+                        this.classList.add(targetClassName);
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);
                     }
 

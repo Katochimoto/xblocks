@@ -1,4 +1,4 @@
-/* global global, xblocks, Tether, __doc */
+/* global global, xblocks, Tether, __doc, xb */
 /* jshint strict: false */
 
 /**
@@ -21,15 +21,19 @@ var XBPopupElementStatic = {
     }
 };
 
-/* jshint -W098 */
-var XBPopupElement = xblocks.create('xb-popup', [
+/**
+ * @class xb.Popup
+ * @mixes xblocks.mixin.eFocus
+ * @memberof xb
+ */
+xb.Popup = xblocks.create('xb-popup', [
     xblocks.mixin.eFocus,
 
     {
         'prototype': Object.create(HTMLElement.prototype),
 
         'events': {
-            'click:delegate(._close)': function(evt) {
+            'click:delegate(._close)': function() {
                 var popupNode = xblocks.react.findContainerForNode(this);
                 if (popupNode) {
                     popupNode.close();

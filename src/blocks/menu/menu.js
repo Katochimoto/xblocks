@@ -1,4 +1,4 @@
-/* global global, xblocks, XBPopupElement, __forEach, __doc */
+/* global global, xblocks, __forEach, xb */
 /* jshint strict: false */
 
 /*! borschik:include:_contextmenu.js */
@@ -71,12 +71,16 @@ var XBMenuElementCommon = {
     }
 };
 
-/* jshint -W098 */
-var XBMenuElement = xblocks.create('xb-menu', [
+/**
+ * @class xb.Menu
+ * @augments xb.Popup
+ * @memberof xb
+ */
+xb.Menu = xblocks.create('xb-menu', [
     XBMenuElementCommon,
 
     {
-        'prototype': Object.create(XBPopupElement.prototype || new XBPopupElement()),
+        'prototype': Object.create(xb.Popup.prototype || new xb.Popup()),
 
         'events': {
             'xb-before-open': function() {

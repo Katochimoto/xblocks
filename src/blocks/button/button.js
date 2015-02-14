@@ -1,9 +1,17 @@
-/* global xblocks */
+/* global xblocks, xb */
 /* jshint strict: false */
 
 /*! borschik:include:button.jsx.js */
 
-xblocks.create('xb-button', [
+/**
+ * @class xb.Button
+ * @memberof xb
+ * @mixes xblocks.mixin.eDisabled
+ * @mixes xblocks.mixin.eChecked
+ * @mixes xblocks.mixin.eInputValueProps
+ * @mixes xblocks.mixin.eFocus
+ */
+xb.Button = xblocks.create('xb-button', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,

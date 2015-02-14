@@ -1,4 +1,4 @@
-/* global global, xblocks, __noop, XBMenuElementCommon */
+/* global xblocks, __noop, XBMenuElementCommon, xb */
 /* jshint strict: false */
 
 /**
@@ -23,8 +23,12 @@ var XBMenuInlineElementStatic = {
     }
 };
 
-/* jshint -W098 */
-var XBMenuInlineElement = xblocks.create('xb-menu-inline', [
+/**
+ * @class xb.MenuInline
+ * @memberof xb
+ * @mixes xblocks.mixin.eFocus
+ */
+xb.MenuInline = xblocks.create('xb-menu-inline', [
     xblocks.mixin.eFocus,
     XBMenuElementCommon,
 

@@ -1,6 +1,9 @@
 /* global xblocks */
 /* jshint strict: false */
 
+/**
+ * @memberOf xblocks.mixin
+ */
 xblocks.mixin.eInputValueProps = {
     'accessors': {
         'value': {

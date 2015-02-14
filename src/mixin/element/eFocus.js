@@ -23,8 +23,6 @@
  * e.blur();
  *
  * @memberOf xblocks.mixin
- * @name eFocus
- * @type {{methods: {focus: focus, blur: blur}}}
  */
 xblocks.mixin.eFocus = {
     'methods': {

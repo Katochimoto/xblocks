@@ -31,7 +31,6 @@
  * // false
  *
  * @memberOf xblocks.mixin
- * @name eDisabled
  */
 xblocks.mixin.eDisabled = {
     'accessors': {

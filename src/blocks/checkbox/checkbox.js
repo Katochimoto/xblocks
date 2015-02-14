@@ -1,9 +1,17 @@
-/* global xblocks */
+/* global xblocks, xb */
 /* jshint strict: false */
 
 /*! borschik:include:checkbox.jsx.js */
 
-xblocks.create('xb-checkbox', [
+/**
+ * @class xb.Checkbox
+ * @memberof xb
+ * @mixes xblocks.mixin.eDisabled
+ * @mixes xblocks.mixin.eChecked
+ * @mixes xblocks.mixin.eInputValueProps
+ * @mixes xblocks.mixin.eFocus
+ */
+xb.Checkbox = xblocks.create('xb-checkbox', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eChecked,
     xblocks.mixin.eInputValueProps,

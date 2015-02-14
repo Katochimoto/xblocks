@@ -1,10 +1,14 @@
-/* global xblocks */
+/* global xblocks, xb */
 /* jshint strict: false */
 
 /*! borschik:include:menuseparator.jsx.js */
 
-xblocks.create('xb-menuseparator', [
+/**
+ * @class xb.Menuseparator
+ * @memberof xb
+ */
+xb.Menuseparator = xblocks.create('xb-menuseparator', [
     {
-        prototype: Object.create(HTMLElement.prototype)
+        'prototype': Object.create(HTMLElement.prototype)
     }
 ]);

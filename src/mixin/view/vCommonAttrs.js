@@ -3,7 +3,6 @@
 
 /**
  * @memberOf xblocks.mixin
- * @name vCommonAttrs
  * @type {Object}
  */
 xblocks.mixin.vCommonAttrs = {
