@@ -1,6 +1,107 @@
 /* ../node_modules/xblocks-utils/xblocks-utils.js begin */
 /* jshint -W067 */
 /* jshint unused: false */
+
+/* polyfills.js begin */
+/* polyfills/assign.js begin */
+/* jshint -W067 */
+/* jshint unused: false */
+(function(global, undefined) {
+
+    if (typeof(Object.assign) === 'function') {
+        return;
+    }
+
+    Object.defineProperty(Object, 'assign', {
+        'enumerable': false,
+        'configurable': true,
+        'writable': true,
+        'value': function(target) {
+            'use strict';
+
+            if (target === undefined || target === null) {
+                throw new TypeError('Cannot convert first argument to object');
+            }
+
+            var to = Object(target);
+            var i = 1;
+            var l = arguments.length;
+
+            for (; i < l; i++) {
+                var nextSource = arguments[ i ];
+
+                if (nextSource === undefined || nextSource === null) {
+                    continue;
+                }
+
+                var keysArray = Object.keys(Object(nextSource));
+                var nextIndex = 0;
+                var len = keysArray.length;
+
+                for (; nextIndex < len; nextIndex++) {
+                    var nextKey = keysArray[  nextIndex ];
+                    var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+
+                    if (desc !== undefined && desc.enumerable) {
+                        to[ nextKey ] = nextSource[ nextKey ];
+                    }
+                }
+            }
+
+            return to;
+        }
+    });
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/assign.js end */
+
+/* polyfills/requestAnimationFrame.js begin */
+/* jshint -W067 */
+(function(global) {
+    'use strict';
+
+    var lastTime = 0;
+    var vendors = [ 'ms', 'moz', 'webkit', 'o' ];
+    var vendor;
+
+    for (var x = 0; x < 4 && !global.requestAnimationFrame; ++x) {
+        vendor = vendors[ x ];
+        global.requestAnimationFrame = global[ vendor + 'RequestAnimationFrame' ];
+        global.cancelAnimationFrame = global[ vendor + 'CancelAnimationFrame' ] ||
+            global[ vendor + 'CancelRequestAnimationFrame' ];
+    }
+
+    if (!global.requestAnimationFrame) {
+        global.requestAnimationFrame = function(callback) {
+            var currTime = Date.now();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = global.setTimeout(function() {
+                callback(currTime + timeToCall);
+            }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+    }
+
+    if (!global.cancelAnimationFrame) {
+        global.cancelAnimationFrame = function(id) {
+            global.clearTimeout(id);
+        };
+    }
+
+}(function() {
+    return this || (1, eval)('this');
+}()));
+
+/* polyfills/requestAnimationFrame.js end */
+
+
+/* polyfills.js end */
+
+
 (function(global, undefined) {
     'use strict';
 
@@ -15,10 +116,12 @@
     xblocks.dom = xblocks.dom || {};
     xblocks.event = xblocks.event || {};
 
-    var indexOf = Array.prototype.indexOf;
-    var pop = Array.prototype.pop;
-    var slice = Array.prototype.slice;
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var __doc = global.document;
+    var __html = __doc.documentElement;
+    var __indexOf = Array.prototype.indexOf;
+    var __pop = Array.prototype.pop;
+    var __slice = Array.prototype.slice;
+    var __hasOwnProperty = Object.prototype.hasOwnProperty;
 
     /* xblocks/utils.js begin */
 // Time
@@ -26,26 +129,51 @@
 /* global xblocks, global */
 /* jshint strict: false */
 
-xblocks.utils.debounce = function(callback, delay, context) {
+xblocks.utils.debounce = function(callback, wait, options) {
     var args;
     var maxTimeoutId;
     var result;
     var stamp;
+    var thisArg;
     var timeoutId;
     var trailingCall;
     var lastCalled = 0;
     var maxWait = false;
     var trailing = false;
     var leading = true;
-    var contextCall;
 
-    delay = Number(delay || 250);
+    if (typeof(callback) !== 'function') {
+        throw new TypeError('Expected a function');
+    }
+
+    wait = wait < 0 ? 0 : Number(wait || 250);
+
+    if (options === true) {
+        leading = true;
+        trailing = false;
+
+    } else if (xblocks.utils.isPlainObject(options)) {
+        leading = options.leading;
+        maxWait = options.hasOwnProperty('maxWait') && Math.max(Number(options.maxWait || 0), wait);
+        trailing = options.hasOwnProperty('trailing') ? Boolean(options.trailing) : trailing;
+    }
+
+    function cancel() {
+        if (timeoutId) {
+            global.clearTimeout(timeoutId);
+        }
+
+        if (maxTimeoutId) {
+            global.clearTimeout(maxTimeoutId);
+        }
+
+        maxTimeoutId = timeoutId = trailingCall = undefined;
+    }
 
     function delayed() {
-        var now = Date.now();
-        var remaining = delay - (now - stamp);
+        var remaining = wait - (Date.now() - stamp);
 
-        if (remaining <= 0 || remaining > delay) {
+        if (remaining <= 0 || remaining > wait) {
             if (maxTimeoutId) {
                 global.clearTimeout(maxTimeoutId);
             }
@@ -54,11 +182,11 @@ xblocks.utils.debounce = function(callback, delay, context) {
             maxTimeoutId = timeoutId = trailingCall = undefined;
 
             if (isCalled) {
-                lastCalled = now;
-                result = callback.apply(contextCall, args);
+                lastCalled = Date.now();
+                result = callback.apply(thisArg, args);
 
                 if (!timeoutId && !maxTimeoutId) {
-                    args = contextCall = null;
+                    args = thisArg = null;
                 }
             }
 
@@ -74,25 +202,24 @@ xblocks.utils.debounce = function(callback, delay, context) {
 
         maxTimeoutId = timeoutId = trailingCall = undefined;
 
-        if (trailing || (maxWait !== delay)) {
+        if (trailing || (maxWait !== wait)) {
             lastCalled = Date.now();
-            result = callback.apply(contextCall, args);
+            result = callback.apply(thisArg, args);
 
             if (!timeoutId && !maxTimeoutId) {
-                args = contextCall = null;
+                args = thisArg = null;
             }
         }
     }
 
-    return function() {
+    function debounced() {
         args = arguments;
-        contextCall = (context || this);
         stamp = Date.now();
+        thisArg = this;
         trailingCall = trailing && (timeoutId || !leading);
 
         var leadingCall;
         var isCalled;
-        var remaining;
 
         if (maxWait === false) {
             leadingCall = leading && !timeoutId;
@@ -102,7 +229,7 @@ xblocks.utils.debounce = function(callback, delay, context) {
                 lastCalled = stamp;
             }
 
-            remaining = maxWait - (stamp - lastCalled);
+            var remaining = maxWait - (stamp - lastCalled);
             isCalled = remaining <= 0 || remaining > maxWait;
 
             if (isCalled) {
@@ -111,7 +238,7 @@ xblocks.utils.debounce = function(callback, delay, context) {
                 }
 
                 lastCalled = stamp;
-                result = callback.apply(contextCall, args);
+                result = callback.apply(thisArg, args);
 
             } else if (!maxTimeoutId) {
                 maxTimeoutId = global.setTimeout(maxDelayed, remaining);
@@ -121,59 +248,124 @@ xblocks.utils.debounce = function(callback, delay, context) {
         if (isCalled && timeoutId) {
             timeoutId = global.clearTimeout(timeoutId);
 
-        } else if (!timeoutId && delay !== maxWait) {
-            timeoutId = global.setTimeout(delayed, delay);
+        } else if (!timeoutId && wait !== maxWait) {
+            timeoutId = global.setTimeout(delayed, wait);
         }
 
         if (leadingCall) {
             isCalled = true;
-            result = callback.apply(contextCall, args);
+            result = callback.apply(thisArg, args);
         }
 
         if (isCalled && !timeoutId && !maxTimeoutId) {
-            args = contextCall = null;
+            args = thisArg = null;
         }
 
         return result;
-    };
+    }
+
+    debounced.cancel = cancel;
+    return debounced;
+};
+
+/**
+ * @example
+ * "scroll:debounce(100,true,false)": function() {}
+ *
+ * @type {Object}
+ */
+xblocks.tag.pseudos.debounce = {
+    onCompiled: function(listener, pseudo) {
+        var len = pseudo.arguments.length;
+        var wait = Number(pseudo.arguments[0]);
+        var leading = true;
+        var trailing = false;
+
+        if (len > 1) {
+            leading = (pseudo.arguments[1] === 'true');
+        }
+
+        if (len > 2) {
+            trailing = (pseudo.arguments[2] === 'true');
+        }
+
+        return xblocks.utils.debounce(listener, wait, {
+            'leading': leading,
+            'trailing': trailing
+        });
+    }
 };
 
 /* xblocks/utils/debounce.js end */
 
 /* xblocks/utils/throttle.js begin */
-/* global xblocks, global */
+/* global xblocks */
 /* jshint strict: false */
 
-/**
- * Выполнение функции не чаще одного раза в указанный период
- */
-xblocks.utils.throttle = function(callback, delay, context) {
-    delay = Number(delay || 250);
-    var throttle = 0;
+xblocks.utils.throttle = function(callback, wait, options) {
+    wait = Number(wait || 250);
+    var leading = true;
+    var trailing = false;
 
-    return function() {
-        if (throttle) {
-            return;
+    if (typeof(callback) !== 'function') {
+        throw new TypeError('Expected a function');
+    }
+
+    if (options === false) {
+        leading = false;
+
+    } else if (xblocks.utils.isPlainObject(options)) {
+        leading = options.hasOwnProperty('leading') ? Boolean(options.leading) : leading;
+        trailing = options.hasOwnProperty('trailing') ? Boolean(options.trailing) : trailing;
+    }
+
+    var debounceOptions = {
+        'leading': leading,
+        'maxWait': Number(wait),
+        'trailing': trailing
+    };
+
+    return xblocks.utils.debounce(callback, wait, debounceOptions);
+};
+
+/**
+ * @example
+ * "scroll:throttle(100,true,false)": function() {}
+ *
+ * @type {Object}
+ */
+xblocks.tag.pseudos.throttle = {
+    onCompiled: function(listener, pseudo) {
+        var len = pseudo.arguments.length;
+        var wait = Number(pseudo.arguments[0]);
+        var leading = true;
+        var trailing = false;
+
+        if (len > 1) {
+            leading = (pseudo.arguments[1] === 'true');
         }
 
-        throttle = global.setTimeout(function() {
-            throttle = 0;
-        }, delay);
+        if (len > 2) {
+            trailing = (pseudo.arguments[2] === 'true');
+        }
 
-        callback.apply(context || this, arguments);
-    };
+        return xblocks.utils.throttle(listener, wait, {
+            'leading': leading,
+            'trailing': trailing
+        });
+    }
 };
 
 /* xblocks/utils/throttle.js end */
 
 /* xblocks/utils/microtask.js begin */
-/* global global, xblocks */
+/* global global, xblocks, __doc */
 /* jshint strict: false */
 
 xblocks.utils.microtask = (function() {
     var iterations = 0;
     var callbacks = [];
-    var twiddle = global.document.createTextNode('');
+    var twiddle = __doc.createTextNode('');
     var Mutation = global.MutationObserver || global.JsMutationObserver;
 
     (new Mutation(function() {
@@ -182,7 +374,7 @@ xblocks.utils.microtask = (function() {
         }
 
     })).observe(twiddle, {
-        characterData: true
+        'characterData': true
     });
 
     return function(callback) {
@@ -193,6 +385,29 @@ xblocks.utils.microtask = (function() {
 }());
 
 /* xblocks/utils/microtask.js end */
+
+/* xblocks/utils/throttleAnimationFrame.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.utils.throttleAnimationFrame = function(callback, context) {
+    var throttle = 0;
+    var animationCallback = function() {
+        throttle = 0;
+    };
+
+    return function() {
+        if (throttle) {
+            return;
+        }
+
+        throttle = global.requestAnimationFrame(animationCallback);
+
+        callback.apply(context || this, arguments);
+    };
+};
+
+/* xblocks/utils/throttleAnimationFrame.js end */
 
 
 // Traverse
@@ -262,7 +477,7 @@ xblocks.utils.mapObject = function(from, callback) {
 
 // Checkers
 /* xblocks/utils/isEmptyObject.js begin */
-/* global xblocks, hasOwnProperty */
+/* global xblocks, __hasOwnProperty */
 /* jshint strict: false */
 
 /**
@@ -272,7 +487,7 @@ xblocks.utils.mapObject = function(from, callback) {
 xblocks.utils.isEmptyObject = function(obj) {
     if (xblocks.utils.type(obj) === 'object') {
         for (var key in obj) {
-            if (hasOwnProperty.call(obj, key)) {
+            if (__hasOwnProperty.call(obj, key)) {
                 return false;
             }
         }
@@ -314,7 +529,7 @@ xblocks.utils.uid = function() {
 /* xblocks/utils/uid.js end */
 
 /* xblocks/utils/table.js begin */
-/* global pop, slice */
+/* global __pop, __slice */
 
 xblocks.utils.Table = function(node, options) {
     this._options = xblocks.utils.merge({
@@ -422,7 +637,7 @@ xblocks.utils.Table.prototype = {
     },
 
     _colLast: function() {
-        return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
+        return __pop.call(__slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
     },
 
     _colMatchIterate: function(data, element) {
@@ -449,7 +664,7 @@ xblocks.utils.Table.prototype = {
     },
 
     _rowLast: function(col) {
-        return pop.call(slice.call(col.querySelectorAll(this._options.row)));
+        return __pop.call(__slice.call(col.querySelectorAll(this._options.row)));
     },
 
     _rowMatchIterate: function(data, element) {
@@ -645,34 +860,43 @@ xblocks.utils.Table.prototype = {
 
 /* xblocks/utils/table.js end */
 
+/* xblocks/utils/lazyFocus.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.utils.lazyFocus = function(node) {
+    global.setImmediate(node.focus.bind(node));
+};
+
+/* xblocks/utils/lazyFocus.js end */
+
 
 /* xblocks/utils.js end */
 
     /* xblocks/dom.js begin */
 /* xblocks/dom/index.js begin */
-/* global xblocks, global, indexOf */
+/* global xblocks, __indexOf, __doc */
 /* jshint strict: false */
 
 xblocks.dom.index = function(selector, element, context) {
-    return indexOf.call((context || global.document).querySelectorAll(selector), element);
+    return __indexOf.call((context || __doc).querySelectorAll(selector), element);
 };
 
 /* xblocks/dom/index.js end */
 
 /* xblocks/dom/isParent.js begin */
-/* global xblocks, global */
+/* global xblocks, __html */
 /* jshint strict: false */
 
 xblocks.dom.isParent = (function() {
-    var root = global.document.documentElement;
 
-    if ('compareDocumentPosition' in root) {
+    if ('compareDocumentPosition' in __html) {
         return function(container, element) {
             /*jshint -W016 */
             return (container.compareDocumentPosition(element) & 16) == 16;
         };
 
-    } else if ('contains' in root) {
+    } else if ('contains' in __html) {
         return function(container, element) {
             return container !== element && container.contains(element);
         };
@@ -688,12 +912,13 @@ xblocks.dom.isParent = (function() {
             return false;
         };
     }
+
 }());
 
 /* xblocks/dom/isParent.js end */
 
 /* xblocks/dom/matchesSelector.js begin */
-/* global xblocks, indexOf, global */
+/* global xblocks, __indexOf, global */
 /* jshint strict: false */
 
 xblocks.dom.matchesSelector = (function() {
@@ -705,7 +930,7 @@ xblocks.dom.matchesSelector = (function() {
         proto.msMatchesSelector ||
         proto.oMatchesSelector ||
         function(selector) {
-            return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
+            return (__indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
         };
 
     return function(element, selector) {
@@ -850,10 +1075,128 @@ xblocks.dom.eachAfter = function(node, callback, context, inner) {
 
 /* xblocks/dom/eachAfter.js end */
 
+/* xblocks/dom/cleanHTML.js begin */
+/* global xblocks, __forEach, __doc */
+/* jshint strict: false */
+
+/**
+* @returns {string}
+*/
+xblocks.dom.cleanHTML = (function() {
+    var _remove = function(element) {
+        element.parentNode.removeChild(element);
+    };
+
+    var _impl = __doc.implementation;
+
+    return function(html) {
+        var root = _impl.createHTMLDocument('').body;
+        root.innerHTML = html;
+        __forEach.call(root.querySelectorAll('script,style,img'), _remove);
+        return root.innerHTML;
+    };
+
+}());
+
+/* xblocks/dom/cleanHTML.js end */
+
 
 /* xblocks/dom.js end */
 
     /* xblocks/event.js begin */
+/* xblocks/event/wrap.js begin */
+/* global xblocks, __doc, __html, __hasOwnProperty */
+/* jshint strict: false */
+
+xblocks.event._clickWhich = {
+    1: 'left',
+    2: 'center',
+    3: 'right'
+};
+
+xblocks.event.wrap = function(event) {
+    if (event.xbWrapped) {
+        return event;
+    }
+
+    event.xbWrapped = true;
+
+    if (event.srcElement && !event.target) {
+        event.target = event.srcElement;
+    }
+
+    if (!event.relatedTarget && event.fromElement) {
+        event.relatedTarget = (event.fromElement === event.target) ? event.toElement : event.fromElement;
+    }
+
+    if (!__hasOwnProperty.call(event, 'pageX') && __hasOwnProperty.call(event, 'clientX')) {
+        event.pageX = event.clientX;
+        event.pageY = event.clientY;
+
+        if (__html) {
+            event.pageX += __html.scrollLeft - (__html.clientLeft || 0);
+            event.pageY += __html.scrollTop - (__html.clientTop || 0);
+
+        } else if (__doc.body) {
+            event.pageX += __doc.body.scrollLeft;
+            event.pageY += __doc.body.scrollTop;
+        }
+    }
+
+    if (!event.which && event.button) {
+        /* jshint -W016 */
+        if (event.button & 1) {
+            event.which = 1;
+
+        } else if (event.button & 4) {
+            event.which = 2;
+
+        } else if (event.button & 2) {
+            event.which = 3;
+        }
+    }
+
+    if (event.which) {
+        event.whichStr = xblocks.event._clickWhich[ event.which ];
+    }
+
+    return event;
+};
+
+/* xblocks/event/wrap.js end */
+
+/* xblocks/event/delegateMatch.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.event.delegateMatch = function(selector, target) {
+    if (!target || !target.tagName) {
+        return;
+    }
+
+    var match;
+
+    if (xblocks.dom.matchesSelector(target, selector)) {
+        match = target;
+
+    } else if (xblocks.dom.matchesSelector(target, selector + ' *')) {
+        var parent = target.parentNode;
+
+        while (parent) {
+            if (xblocks.dom.matchesSelector(parent, selector)) {
+                match = parent;
+                break;
+            }
+
+            parent = parent.parentNode;
+        }
+    }
+
+    return match;
+};
+
+/* xblocks/event/delegateMatch.js end */
+
 /* xblocks/event/delegate.js begin */
 /* global xblocks */
 /* jshint strict: false */
@@ -861,34 +1204,16 @@ xblocks.dom.eachAfter = function(node, callback, context, inner) {
 xblocks.event.delegate = function(selector, callback) {
 
     return function(event) {
-        var target = event.target || event.srcElement;
-        var match;
+        xblocks.event.wrap(event);
 
-        if (!target.tagName) {
-            return;
-        }
-
-        if (xblocks.dom.matchesSelector(target, selector)) {
-            match = target;
-
-        } else if (xblocks.dom.matchesSelector(target, selector + ' *')) {
-            var parent = target.parentNode;
-
-            while (parent) {
-                if (xblocks.dom.matchesSelector(parent, selector)) {
-                    match = parent;
-                    break;
-                }
-
-                parent = parent.parentNode;
-            }
-        }
+        var match = xblocks.event.delegateMatch(selector, event.target);
 
         if (!match) {
             return;
         }
 
         event.delegateElement = match;
+
         callback.call(match, event);
     };
 };
@@ -899,12 +1224,6 @@ xblocks.event.delegate = function(selector, callback) {
 /* global xblocks */
 /* jshint strict: false */
 
-xblocks.event._clickWhich = {
-    1: 'left',
-    2: 'center',
-    3: 'right'
-};
-
 xblocks.event.filterClick = function(which, callback) {
     which = Array.isArray(which) ? which : [ which ];
 
@@ -913,22 +1232,9 @@ xblocks.event.filterClick = function(which, callback) {
             return;
         }
 
-        var whichEvt = event.which;
+        xblocks.event.wrap(event);
 
-        if (!whichEvt && event.button) {
-            /* jshint -W016 */
-            if (event.button & 1) {
-                whichEvt = 1;
-            } else if (event.button & 4) {
-                whichEvt = 2;
-            } else if (event.button & 2) {
-                whichEvt = 3;
-            }
-        }
-
-        whichEvt = xblocks.event._clickWhich[ whichEvt ];
-
-        if (which.indexOf(whichEvt) !== -1) {
+        if (which.indexOf(event.whichStr) !== -1) {
             callback.call(this, event);
         }
     };
@@ -946,7 +1252,9 @@ xblocks.event.filterClick = function(which, callback) {
  * @param {function} callback
  */
 xblocks.event.filterMouseEnter = function(element, event, callback) {
-    var toElement = event.relatedTarget || event.srcElement;
+    xblocks.event.wrap(event);
+
+    var toElement = event.relatedTarget;
 
     while (toElement && toElement !== element) {
         toElement = toElement.parentNode;
@@ -1059,10 +1367,11 @@ xblocks.utils.exportPropTypes = function(tagName) {
     var props = xblocks.utils.propTypes(tagName);
     var exportProps = {};
     var prefix = tagName + '-';
+    var p;
 
-    for (var p in props) {
-        if (props.hasOwnProperty(p) && p[0] !== '_') {
-            exportProps[prefix + p] = props[p];
+    for (p in props) {
+        if (props.hasOwnProperty(p) && p[ 0 ] !== '_') {
+            exportProps[ prefix + p ] = props[ p ];
         }
     }
 
@@ -1116,7 +1425,7 @@ xblocks.utils.exportPropTypes = function(tagName) {
  */
 xblocks.mixin = xblocks.mixin || {};
 
-/* mixin/eDisabled.js begin */
+/* mixin/element/eDisabled.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1162,9 +1471,9 @@ xblocks.mixin.eDisabled = {
     }
 };
 
-/* mixin/eDisabled.js end */
+/* mixin/element/eDisabled.js end */
 
-/* mixin/eChecked.js begin */
+/* mixin/element/eChecked.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1213,71 +1522,75 @@ xblocks.mixin.eChecked = {
     }
 };
 
-/* mixin/eChecked.js end */
+/* mixin/element/eChecked.js end */
 
-/* mixin/eInputValueState.js begin */
+/* mixin/element/eInputValueState.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
 xblocks.mixin.eInputValueState = {
-    accessors: {
-        value: {
-            get: function() {
-                if (this.mounted) {
-                    return this.xblock._component.state.value;
-
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    return (controlNode ? controlNode.value : '');
-                }
+    'accessors': {
+        'value': {
+            'attribute': {
+                'name': 'value'
             },
 
-            set: function(value) {
-                if (this.mounted) {
-                    this.xblock._component.setState({
-                        'value': String(value)
-                    });
+            'get': function() {
+                var component = this.xblock.getMountedComponent();
 
-                } else {
-                    var controlNode = this.querySelector('input,textarea');
-                    if (controlNode) {
-                        controlNode.value = String(value);
-                    }
+                if (component && typeof(component.state.value) !== 'undefined') {
+                    return component.state.value;
                 }
-            }
-        }
-    }
-};
 
-/* mixin/eInputValueState.js end */
-
-/* mixin/eInputValueProps.js begin */
-/* global xblocks */
-/* jshint strict: false */
-
-xblocks.mixin.eInputValueProps = {
-    accessors: {
-        value: {
-            attribute: {
-                name: 'value'
-            },
-
-            get: function() {
                 return String(this.getAttribute('value') || this.defaultValue || '');
+            },
+
+            'set': function(value) {
+                var component = this.xblock.getMountedComponent();
+
+                if (component) {
+                    component.setState({ 'value': String(value) });
+                }
             }
         },
 
-        defaultValue: {
-            get: function() {
+        'defaultValue': {
+            'get': function() {
                 return '';
             }
         }
     }
 };
 
-/* mixin/eInputValueProps.js end */
+/* mixin/element/eInputValueState.js end */
 
-/* mixin/eFocus.js begin */
+/* mixin/element/eInputValueProps.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.mixin.eInputValueProps = {
+    'accessors': {
+        'value': {
+            'attribute': {
+                'name': 'value'
+            },
+
+            'get': function() {
+                return String(this.getAttribute('value') || this.defaultValue || '');
+            }
+        },
+
+        'defaultValue': {
+            'get': function() {
+                return '';
+            }
+        }
+    }
+};
+
+/* mixin/element/eInputValueProps.js end */
+
+/* mixin/element/eFocus.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
@@ -1307,21 +1620,21 @@ xblocks.mixin.eInputValueProps = {
  * @type {{methods: {focus: focus, blur: blur}}}
  */
 xblocks.mixin.eFocus = {
-    methods: {
-        focus: function() {
+    'methods': {
+        'focus': function() {
             this.firstChild.focus();
         },
 
-        blur: function() {
+        'blur': function() {
             this.firstChild.blur();
         }
     }
 };
 
-/* mixin/eFocus.js end */
+/* mixin/element/eFocus.js end */
 
 
-/* mixin/vCommonAttrs.js begin */
+/* mixin/view/vCommonAttrs.js begin */
 /* global xblocks, React */
 /* jshint strict: false */
 
@@ -1342,7 +1655,7 @@ xblocks.mixin.vCommonAttrs = {
     }
 };
 
-/* mixin/vCommonAttrs.js end */
+/* mixin/view/vCommonAttrs.js end */
 
 
 /* mixin.js end */
@@ -1882,29 +2195,36 @@ var XBInputController = xblocks.view.create({
     displayName: 'XBInputController',
 
     propTypes: {
-        'className': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'disabled': React.PropTypes.bool,
-        'multiline': React.PropTypes.bool,
-        'required': React.PropTypes.bool,
-        'readOnly': React.PropTypes.bool,
-        'autosize': React.PropTypes.bool,
-        'autoFocus': React.PropTypes.bool,
-        'rows': React.PropTypes.string,
-        'cols': React.PropTypes.string,
-        'placeholder': React.PropTypes.string,
-        'value': React.PropTypes.string,
-        'tabIndex': React.PropTypes.string,
-        'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+        'className':        React.PropTypes.string,
+        'name':             React.PropTypes.string,
+        'disabled':         React.PropTypes.bool,
+        'multiline':        React.PropTypes.bool,
+        'required':         React.PropTypes.bool,
+        'readOnly':         React.PropTypes.bool,
+        'autosize':         React.PropTypes.bool,
+        'autoFocus':        React.PropTypes.bool,
+        'rows':             React.PropTypes.string,
+        'cols':             React.PropTypes.string,
+        'placeholder':      React.PropTypes.string,
+        'value':            React.PropTypes.string,
+        'tabIndex':         React.PropTypes.string,
+        'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
 
-        'onChange': React.PropTypes.func,
-        'onHintToggle': React.PropTypes.func,
+        'onChange':         React.PropTypes.func,
+        'onHintToggle':     React.PropTypes.func,
         'isPlaceholderHint': React.PropTypes.bool
     },
 
     getDefaultProps: function() {
         return {
-            'value': ''
+            'value': undefined,
+            'disabled': false,
+            'multiline': false,
+            'required': false,
+            'readOnly': false,
+            'autosize': false,
+            'autoFocus': false,
+            'isPlaceholderHint': false
         };
     },
 
@@ -1930,17 +2250,19 @@ var XBInputController = xblocks.view.create({
     },
 
     _recalculateSize: function() {
-        if (this.props.autosize) {
-            var node = this.getDOMNode();
+        if (!this.props.autosize) {
+            return;
+        }
 
-            if (this.props.multiline) {
-                node.style.height = '0px';
-                node.style.height = node.scrollHeight + 'px';
+        var node = this.getDOMNode();
 
-            } else {
-                node.style.width = '20px';
-                node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
-            }
+        if (this.props.multiline) {
+            node.style.height = '0px';
+            node.style.height = node.scrollHeight + 'px';
+
+        } else {
+            node.style.width = '20px';
+            node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
         }
     },
 
@@ -1950,40 +2272,29 @@ var XBInputController = xblocks.view.create({
             tabIndex = '-1';
         }
 
-        // macos inserts placeholder default
-        this.props.placeholder = this.props.placeholder || '';
+        var props = {
+            'value': this.props.value,
+            'className': this.props.className,
+            'name': this.props.name,
+            'disabled': this.props.disabled,
+            'required': this.props.required,
+            'readOnly': this.props.readOnly,
+            'autoFocus': this.props.autoFocus,
+            // macos inserts placeholder default
+            'placeholder': this.props.placeholder || '',
+            'tabIndex': tabIndex,
+            'autocomplete': this.props.autocomplete,
+            'onChange': this.props.onChange
+        };
 
         if (this.props.multiline) {
             return (
-                React.createElement("textarea", {value: this.props.value, 
-                    className: this.props.className, 
-                    name: this.props.name, 
-                    disabled: this.props.disabled, 
-                    required: this.props.required, 
-                    readOnly: this.props.readOnly, 
-                    autoFocus: this.props.autoFocus, 
-                    rows: this.props.rows, 
-                    cols: this.props.cols, 
-                    placeholder: this.props.placeholder, 
-                    tabIndex: tabIndex, 
-                    autocomplete: this.props.autocomplete, 
-                    onChange: this.props.onChange})
+                React.createElement("textarea", React.__spread({},  props, {rows: this.props.rows, cols: this.props.cols}))
             );
 
         } else {
             return (
-                React.createElement("input", {value: this.props.value, 
-                    type: "text", 
-                    className: this.props.className, 
-                    name: this.props.name, 
-                    disabled: this.props.disabled, 
-                    required: this.props.required, 
-                    readOnly: this.props.readOnly, 
-                    autoFocus: this.props.autoFocus, 
-                    placeholder: this.props.placeholder, 
-                    tabIndex: tabIndex, 
-                    autocomplete: this.props.autocomplete, 
-                    onChange: this.props.onChange})
+                React.createElement("input", React.__spread({},  props, {type: "text"}))
             );
         }
     }
@@ -2003,29 +2314,30 @@ var XBInput = xblocks.view.register('xb-input', [
         displayName: 'xb-input',
 
         propTypes: {
-            'name': React.PropTypes.string,
-            'disabled': React.PropTypes.bool,
-            'autosize': React.PropTypes.bool,
-            'multiline': React.PropTypes.bool,
-            'required': React.PropTypes.bool,
-            'readonly': React.PropTypes.bool,
-            'reset': React.PropTypes.bool,
-            'autofocus': React.PropTypes.bool,
-            'ghost': React.PropTypes.bool,
-            'type': React.PropTypes.oneOf([
-                'text', 'number', 'date', 'datetime', 'email', 'month',
-                'range', 'search', 'tel', 'time', 'url', 'week', 'color'
-            ]),
-            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'name':         React.PropTypes.string,
+            'disabled':     React.PropTypes.bool,
+            'autosize':     React.PropTypes.bool,
+            'multiline':    React.PropTypes.bool,
+            'required':     React.PropTypes.bool,
+            'readonly':     React.PropTypes.bool,
+            'reset':        React.PropTypes.bool,
+            'autofocus':    React.PropTypes.bool,
+            'ghost':        React.PropTypes.bool,
+            'type':         React.PropTypes.oneOf([
+                                'text', 'number', 'date', 'datetime', 'email', 'month',
+                                'range', 'search', 'tel', 'time', 'url', 'week', 'color',
+                                'wysiwyg'
+                            ]),
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'rows': React.PropTypes.string,
-            'cols': React.PropTypes.string,
-            'placeholder': React.PropTypes.string,
-            'value': React.PropTypes.string,
-            'prefix': React.PropTypes.string,
-            'postfix': React.PropTypes.string,
-            'tabindex': React.PropTypes.string,
-            'xb-link': React.PropTypes.string
+            'rows':         React.PropTypes.string,
+            'cols':         React.PropTypes.string,
+            'placeholder':  React.PropTypes.string,
+            'value':        React.PropTypes.string,
+            'prefix':       React.PropTypes.string,
+            'postfix':      React.PropTypes.string,
+            'tabindex':     React.PropTypes.string,
+            'xb-link':      React.PropTypes.string
         },
 
         statics: {
@@ -2038,7 +2350,7 @@ var XBInput = xblocks.view.register('xb-input', [
         },
 
         shouldComponentUpdate: function(nextProps, nextState) {
-            return (
+            return Boolean(
                 !xblocks.utils.equals(nextProps, this.props) ||
                 !xblocks.utils.equals(nextState, this.state)
             );
@@ -2046,10 +2358,18 @@ var XBInput = xblocks.view.register('xb-input', [
 
         getDefaultProps: function() {
             return {
-                'value': '',
+                'value': undefined,
                 'type': 'text',
                 'size': 'm',
-                'rows': '4'
+                'rows': '4',
+                'disabled': false,
+                'autosize': false,
+                'multiline': false,
+                'required': false,
+                'readonly': false,
+                'reset': false,
+                'autofocus': false,
+                'ghost': false
             };
         },
 
@@ -2090,12 +2410,13 @@ var XBInput = xblocks.view.register('xb-input', [
          * @private
          */
         _isComplex: function() {
-            return (
+            return Boolean(
                 this.props.postfix ||
                 this.props.prefix ||
                 this.props.reset ||
                 this.props.autosize ||
-                this.props['xb-link']
+                this.props['xb-link'] ||
+                this.props.placeholder
             );
         },
 
@@ -2115,22 +2436,37 @@ var XBInput = xblocks.view.register('xb-input', [
                 'xb-input': true,
                 '_disabled': Boolean(this.props.disabled),
                 '_autosize': Boolean(this.props.autosize),
-                '_ghost': Boolean(this.props.ghost)
+                '_ghost': Boolean(this.props.ghost),
+                '_complex': isComplex,
+                '_simple': !isComplex
             };
 
             if (this.props.size) {
-                classes['_size-' + this.props.size] = true;
-            }
-
-            if (isComplex) {
-                classes._complex = true;
-            } else {
-                classes._simple = true;
+                classes[ '_size-' + this.props.size ] = true;
             }
 
             classes = React.addons.classSet(classes);
 
             var isPlaceholderHint = false;
+            var controllerProps = {
+                'key': 'controller',
+                'ref': 'controller',
+                'className': '_controller',
+                'value': this.state.value,
+                'name': this.props.name,
+                'disabled': this.props.disabled,
+                'required': this.props.required,
+                'readOnly': this.props.readonly,
+                'multiline': this.props.multiline,
+                'autoFocus': this.props.autofocus,
+                'rows': this.props.rows,
+                'cols': this.props.cols,
+                'tabIndex': this.props.tabindex,
+                'autocomplete': this.props.autocomplete,
+                'autosize': this.props.autosize,
+                'onChange': this._onChange,
+                'onHintToggle': this._onHintToggle
+            };
 
             if (isComplex) {
                 var children = [];
@@ -2175,24 +2511,7 @@ var XBInput = xblocks.view.register('xb-input', [
 
                 children.push(
                     React.createElement("span", {key: "content", className: "_content"}, 
-                        React.createElement(XBInputController, {key: "controller", 
-                            ref: "controller", 
-                            className: "_controller", 
-                            value: this.state.value, 
-                            name: this.props.name, 
-                            disabled: this.props.disabled, 
-                            required: this.props.required, 
-                            readOnly: this.props.readonly, 
-                            multiline: this.props.multiline, 
-                            autoFocus: this.props.autofocus, 
-                            rows: this.props.rows, 
-                            cols: this.props.cols, 
-                            tabIndex: this.props.tabindex, 
-                            autocomplete: this.props.autocomplete, 
-                            autosize: this.props.autosize, 
-                            onChange: this._onChange, 
-                            onHintToggle: this._onHintToggle, 
-                            isPlaceholderHint: isPlaceholderHint}), 
+                        React.createElement(XBInputController, React.__spread({},  controllerProps, {isPlaceholderHint: isPlaceholderHint})), 
                         React.createElement("span", {key: "view", className: "_view"})
                     )
                 );
@@ -2203,26 +2522,8 @@ var XBInput = xblocks.view.register('xb-input', [
 
             } else {
 
-               return (
-                    React.createElement(XBInputController, {key: "controller", 
-                        ref: "controller", 
-                        className: classes, 
-                        value: this.state.value, 
-                        name: this.props.name, 
-                        disabled: this.props.disabled, 
-                        required: this.props.required, 
-                        readOnly: this.props.readonly, 
-                        multiline: this.props.multiline, 
-                        autoFocus: this.props.autofocus, 
-                        rows: this.props.rows, 
-                        cols: this.props.cols, 
-                        placeholder: this.props.placeholder, 
-                        tabIndex: this.props.tabindex, 
-                        autocomplete: this.props.autocomplete, 
-                        autosize: this.props.autosize, 
-                        onChange: this._onChange, 
-                        onHintToggle: this._onHintToggle, 
-                        isPlaceholderHint: isPlaceholderHint})
+                return (
+                    React.createElement(XBInputController, React.__spread({},  controllerProps, {className: classes, isPlaceholderHint: isPlaceholderHint}))
                 );
             }
         }
@@ -2511,7 +2812,7 @@ xblocks.create('xb-radio', [
 /* blocks/radio/radio.js end */
 
     /* blocks/popup/popup.js begin */
-/* global global, xblocks, Tether */
+/* global global, xblocks, Tether, __doc */
 /* jshint strict: false */
 
 /**
@@ -2633,10 +2934,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
                         'optimizations-gpu': true,
-                        'target': global.document.body,
+                        'target': __doc.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
-                        'target-modifier': 'visible',
+                        'target-modifier': undefined,
                         'target-offset': undefined,
                         'attachment': 'middle center',
                         'offset': undefined,
@@ -2720,6 +3021,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     this.setOptions(options);
                 }
 
+                xblocks.event.dispatch(this, 'xb-before-open');
+
                 tether.enable(true);
                 tether.target._xbpopup = this;
 
@@ -2735,6 +3038,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 if (!tether.enabled) {
                     return false;
                 }
+
+                xblocks.event.dispatch(this, 'xb-before-close');
 
                 tether.target._xbpopup = undefined;
                 tether.disable();
@@ -2790,12 +3095,6 @@ xblocks.create('xb-menuseparator', [
     /* blocks/menu/menuitem.js begin */
 /* global xblocks, global */
 /* jshint strict: false */
-
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
 
 /* blocks/menu/menuitem.jsx.js begin */
 /** @jsx React.DOM */
@@ -2912,7 +3211,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
                     // to close the submenu and return focus
-                    this.menuInstance.focus();
+                    xblocks.utils.lazyFocus(this.menuInstance);
                 }
             },
 
@@ -2925,6 +3224,10 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                     if (submenu && !XBMenuitemElementStatic._timerOpenSubmenu) {
                         XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                     }
+
+                // scroll menu only keyboard events
+                } else {
+                    this.scrollIntoView(false);
                 }
             }
         },
@@ -2980,16 +3283,19 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         this.classList.add(targetClassName);
 
                         var menu = this.ownerDocument.createElement('xb-menu');
-                        menu.setAttribute('target-attachment', 'top right');
-                        menu.setAttribute('attachment', 'top left');
+                        menu.setAttribute('attachment', 'top right');
+                        menu.setAttribute('target-attachment', 'top left');
                         menu.setAttribute('target', '.' + targetClassName);
-                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
-                            'to': 'scrollParent',
-                            'attachment': 'together'
-                        }, {
-                            'to': 'window',
-                            'attachment': 'together'
-                        }])));
+                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
+                            {
+                                'to': 'scrollParent',
+                                'attachment': 'element together'
+                            },
+                            {
+                                'to': 'window',
+                                'attachment': 'element together'
+                            }
+                        ])));
                         menu.innerHTML = this.content;
 
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);
@@ -3008,14 +3314,8 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
 /* global global, xblocks, XBPopupElement, __forEach, __doc */
 /* jshint strict: false */
 
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
-
 /* blocks/menu/_contextmenu.js begin */
-/* global __doc */
+/* global xblocks, __doc */
 
 __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
     var element = event.delegateElement;
@@ -3023,77 +3323,253 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     var menuId = element.getAttribute('contextmenu');
     var menuElement = menuId && doc.getElementById(menuId);
 
-    if (menuElement && menuElement.xtagName === 'xb-menu' && menuElement.attrs.type === 'context') {
-        event.preventDefault();
+    if (!menuElement || menuElement.xtagName !== 'xb-menu' || menuElement.attrs.type !== 'context') {
+        return;
+    }
 
-        var targetElement = doc.createElement('div');
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    var targetElementId = 'xb-contextmenu-target';
+    var targetElement = doc.getElementById(targetElementId);
+
+    if (targetElement) {
+        if (targetElement._xbpopup) {
+            targetElement._xbpopup.close();
+        }
+
+    } else {
+        targetElement = doc.createElement('div');
+        targetElement.id = targetElementId;
         targetElement.style.position = 'absolute';
         targetElement.style.visibility = 'hidden';
-        targetElement.style.top = event.y + 'px';
-        targetElement.style.left = event.x + 'px';
-
         doc.body.appendChild(targetElement);
-
-        menuElement.addEventListener('xb-close', function _onClose() {
-            menuElement.removeEventListener('xb-close', _onClose, false);
-            targetElement.parentNode.removeChild(targetElement);
-        }, false);
-
-        menuElement.open({
-            'target': targetElement,
-            'attachment': 'top left',
-            'targetAttachment': 'bottom left',
-            'constraints': [{
-                'to': 'scrollParent',
-                'attachment': 'together'
-            }, {
-                'to': 'window',
-                'attachment': 'together'
-            }]
-        });
     }
+
+    targetElement.style.top = event.pageY + 'px';
+    targetElement.style.left = event.pageX + 'px';
+
+    menuElement.open({
+        'target': targetElement,
+        'attachment': 'top left',
+        'targetAttachment': 'bottom left',
+        'optimizations': {
+            'moveElement': false
+        },
+        'constraints': [
+            {
+                'to': 'scrollParent',
+                'attachment': 'element'
+            },
+            {
+                'to': 'window',
+                'attachment': 'element'
+            }
+        ]
+    });
 
 }), false);
 
 /* blocks/menu/_contextmenu.js end */
 
-
 /* blocks/menu/menu.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, global */
 /* jshint strict: false */
 /* jshint -W098 */
+
+var XBMenuViewCommon = {
+    getInitialState: function() {
+        return {
+            'maxHeight': 0,
+            'isShowScrollTop': false,
+            'isShowScrollBottom': false
+        };
+    },
+
+    componentWillMount: function() {
+        this._enterTopFrame = 0;
+        this._enterBottomFrame = 0;
+        this._lockScroll = false;
+        this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
+        this._onScrollThrottle = xblocks.utils.throttle(this._onScrollThrottle, 500, {
+            'leading': true,
+            'trailing': false
+        });
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        if (nextProps.size !== this.props.size) {
+            this._updateMaxHeight(nextProps.size);
+        }
+    },
+
+    _updateMaxHeight: function(size, callback) {
+        size = Number(size);
+        var maxHeight = 0;
+
+        if (size > 0) {
+            var contentNode = this.refs.content.getDOMNode();
+            var element = contentNode.children[ size - 1 ];
+
+            if (element) {
+                var rectContent = contentNode.getBoundingClientRect();
+                var rectElement = element.getBoundingClientRect();
+                maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;
+            }
+        }
+
+        this.setState({
+            'maxHeight': maxHeight
+        }, this._redrawScrollNavigator.bind(this, callback));
+    },
+
+    _redrawScrollNavigator: function(callback) {
+        var target = this.refs.content.getDOMNode();
+        var safeArea = 5;
+        var height = Math.max(target.scrollHeight, target.clientHeight);
+        var isShowScrollTop = (target.scrollTop > safeArea);
+        var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
+
+        this.setState({
+            'isShowScrollTop': isShowScrollTop,
+            'isShowScrollBottom': isShowScrollBottom
+        }, this._redrawScrollNavigatorSuccess.bind(this, callback));
+    },
+
+    _redrawScrollNavigatorSuccess: function(callback) {
+        if (!this.state.isShowScrollTop) {
+            this._onMouseLeaveTop();
+        }
+
+        if (!this.state.isShowScrollBottom) {
+            this._onMouseLeaveBottom();
+        }
+
+        if (callback) {
+            callback();
+        }
+    },
+
+    _onScroll: function(event) {
+        if (this._lockScroll) {
+            return;
+        }
+
+        this._lockScroll = true;
+        this._onScrollThrottle();
+        this._redrawScrollNavigator(this._onScrollSuccess);
+    },
+
+    _onScrollSuccess: function() {
+        this._lockScroll = false;
+    },
+
+    _onScrollThrottle: function() {
+        xblocks.event.dispatch(
+            this.refs.content.getDOMNode(),
+            'jsx-scroll-throttle',
+            { 'bubbles': true, 'cancelable': true }
+        );
+    },
+
+    _animationScrollTop: function() {
+        this.refs.content.getDOMNode().scrollTop--;
+        this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
+    },
+
+    _onMouseEnterTop: function() {
+        this._onMouseLeaveTop();
+        this._animationScrollTop();
+    },
+
+    _onMouseLeaveTop: function() {
+        if (this._enterTopFrame) {
+            global.cancelAnimationFrame(this._enterTopFrame);
+            this._enterTopFrame = 0;
+        }
+    },
+
+    _animationScrollBottom: function() {
+        this.refs.content.getDOMNode().scrollTop++;
+        this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
+    },
+
+    _onMouseEnterBottom: function() {
+        this._onMouseLeaveBottom();
+        this._animationScrollBottom();
+    },
+
+    _onMouseLeaveBottom: function() {
+        if (this._enterBottomFrame) {
+            global.cancelAnimationFrame(this._enterBottomFrame);
+            this._enterBottomFrame = 0;
+        }
+    },
+
+    render: function() {
+        var classes = {
+            '_popup': true
+        };
+
+        classes = React.addons.classSet(classes);
+
+        var scrollTopStyle = {
+            'display': (this.state.isShowScrollTop ? 'block' : 'none')
+        };
+
+        var scrollBottomStyle = {
+            'display': (this.state.isShowScrollBottom ? 'block' : 'none')
+        };
+
+        var contentStyle = {
+            'maxHeight': (this.state.maxHeight ? this.state.maxHeight + 'px' : 'none')
+        };
+
+        return (
+            React.createElement("div", {className: classes, tabIndex: "0"}, 
+                React.createElement("div", {style: scrollTopStyle, 
+                    className: "_popup-scroll-top", 
+                    onMouseEnter: this._onMouseEnterTop, 
+                    onMouseLeave: this._onMouseLeaveTop}), 
+                React.createElement("div", {ref: "content", 
+                    style: contentStyle, 
+                    className: "_popup-content", 
+                    onScroll: this._onScroll, 
+                    "data-xb-content": this.props._uid, 
+                    dangerouslySetInnerHTML: { __html: this.props.children.trim()}}), 
+                React.createElement("div", {style: scrollBottomStyle, 
+                    className: "_popup-scroll-bottom", 
+                    onMouseEnter: this._onMouseEnterBottom, 
+                    onMouseLeave: this._onMouseLeaveBottom})
+            )
+        );
+    }
+};
+
 var XBMenu = xblocks.view.register('xb-menu', [
     xblocks.mixin.vCommonAttrs,
+    XBMenuViewCommon,
 
     {
-        displayName: 'xb-menu',
+        'displayName': 'xb-menu',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        'mixins': [ React.addons.PureRenderMixin ],
 
-        propTypes: {
-            'type': React.PropTypes.oneOf([ 'context', 'toolbar', 'list' ])
+        'propTypes': {
+            'type': React.PropTypes.oneOf([ 'context', 'toolbar', 'list' ]),
+            'size': React.PropTypes.string
         },
 
         getDefaultProps: function() {
             return {
-                'type': 'list'
+                'type': 'list',
+                'size': ''
             };
         },
 
-        render: function() {
-            var classes = {
-                '_popup': true
-            };
-
-            classes = React.addons.classSet(classes);
-
-            return (
-                React.createElement("div", {className: classes, 
-                    tabIndex: "0", 
-                    "data-xb-content": this.props._uid, 
-                    dangerouslySetInnerHTML: { __html: this.props.children}})
-            );
+        afterOpen: function(callback) {
+            this._updateMaxHeight(this.props.size, callback);
         }
     }
 ]);
@@ -3104,28 +3580,12 @@ var XBMenu = xblocks.view.register('xb-menu', [
 var XBMenuElementStatic = {
 
     /**
+     * @param {XBMenuitemElement} target
      * @this {global}
      */
     _closeSubmenu: function(target) {
         if (target._xbpopup) {
             target._xbpopup.close();
-        }
-    },
-
-    /**
-     * @this {XBMenuElement}
-     */
-    _closeUpFocus: function() {
-        var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
-        var parent = this.parentMenu;
-
-        while (parent) {
-            if (parent === focusMenu) {
-                break;
-            }
-
-            parent.close();
-            parent = parent.parentMenu;
         }
     }
 };
@@ -3151,6 +3611,27 @@ var XBMenuElementCommon = {
             if (item && item.submenuInstance) {
                 item.submenuInstance.open();
             }
+        },
+
+        'jsx-scroll-throttle': function(event) {
+            // close all submenu
+            event.stopImmediatePropagation();
+            xblocks.utils.lazyFocus(this);
+        },
+
+        'scrollwheel:delegate(._popup-content)': function(event) {
+            var delta = event.delta;
+            var scrollTop = this.scrollTop;
+            var offsetHeight = this.offsetHeight;
+            var scrollHeight = this.scrollHeight;
+
+            if (delta > 0 && scrollTop === 0 ||
+                delta < 0 && scrollTop + offsetHeight >= scrollHeight ||
+                offsetHeight === scrollHeight) {
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
         }
     },
 
@@ -3171,11 +3652,24 @@ var XBMenuElement = xblocks.create('xb-menu', [
         'prototype': Object.create(XBPopupElement.prototype || new XBPopupElement()),
 
         'events': {
+            'xb-before-open': function() {
+                this.style.visibility = 'hidden';
+            },
+
             'xb-open': function() {
                 this._xbfocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
+
+                var component = this.xblock.getMountedComponent();
+                if (component) {
+                    // check show scroll navigator after open menu
+                    component.afterOpen(this._afterOpen.bind(this));
+
+                } else {
+                    this._afterOpen();
+                }
             },
 
             'xb-close': function() {
@@ -3184,11 +3678,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     this._xbfocus = undefined;
                 }
 
-                // close all submenus
-                __forEach.call(
-                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    XBMenuElementStatic._closeSubmenu
-                );
+                this._closeAllSubmenu();
             },
 
             'keydown:keypass(27)': function() {
@@ -3197,7 +3687,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 // focus of ancestor
                 var parentMenu = this.parentMenu;
                 if (parentMenu) {
-                    parentMenu.focus();
+                    xblocks.utils.lazyFocus(parentMenu);
                 }
             },
 
@@ -3205,7 +3695,7 @@ var XBMenuElement = xblocks.create('xb-menu', [
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
-                    global.setImmediate(XBMenuElementStatic._closeUpFocus.bind(this));
+                    global.setImmediate(this._closeUpFocus.bind(this));
                 }
             }
         },
@@ -3214,6 +3704,49 @@ var XBMenuElement = xblocks.create('xb-menu', [
             'parentMenu': {
                 get: function() {
                     return this.tether.target.menuInstance;
+                }
+            },
+
+            'firstParentMenu': {
+                get: function() {
+                    var parentMenu = this.parentMenu;
+
+                    if (parentMenu) {
+                        return parentMenu.firstParentMenu || parentMenu;
+                    }
+
+                    return this;
+                }
+            }
+        },
+
+        'methods': {
+            _closeAllSubmenu: function() {
+                __forEach.call(
+                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
+                    XBMenuElementStatic._closeSubmenu
+                );
+            },
+
+            _afterOpen: function() {
+                this.position();
+                this.style.visibility = 'visible';
+                // the focus is not put on the invisible element
+                // put again
+                xblocks.utils.lazyFocus(this);
+            },
+
+            _closeUpFocus: function() {
+                var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
+                var parent = this.parentMenu;
+
+                while (parent) {
+                    if (parent === focusMenu) {
+                        break;
+                    }
+
+                    parent.close();
+                    parent = parent.parentMenu;
                 }
             }
         }
@@ -3234,30 +3767,30 @@ var XBMenuElement = xblocks.create('xb-menu', [
 
 /* blocks/menu-inline/menu-inline.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, XBMenuViewCommon */
 /* jshint strict: false */
 /* jshint -W098 */
 var XBMenuInline = xblocks.view.register('xb-menu-inline', [
     xblocks.mixin.vCommonAttrs,
+    XBMenuViewCommon,
 
     {
-        displayName: 'xb-menu-inline',
+        'displayName': 'xb-menu-inline',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        'mixins': [ React.addons.PureRenderMixin ],
 
-        render: function() {
-            var classes = {
-                '_popup': true
+        'propTypes': {
+            'size': React.PropTypes.string
+        },
+
+        getDefaultProps: function() {
+            return {
+                'size': ''
             };
+        },
 
-            classes = React.addons.classSet(classes);
-
-            return (
-                React.createElement("div", {className: classes, 
-                    tabIndex: "0", 
-                    "data-xb-content": this.props._uid, 
-                    dangerouslySetInnerHTML: { __html: this.props.children}})
-            );
+        componentDidMount: function() {
+            this._updateMaxHeight(this.props.size);
         }
     }
 ]);
@@ -3304,7 +3837,7 @@ var XBMenuInlineElement = xblocks.create('xb-menu-inline', [
 
             'close': function() {
                 // FireFox does not fire a blur event
-                global.setImmediate(this.focus.bind(this));
+                xblocks.utils.lazyFocus(this);
             }
         }
     }

@@ -1,4 +1,4 @@
-/* global global, xblocks, Tether */
+/* global global, xblocks, Tether, __doc */
 /* jshint strict: false */
 
 /**
@@ -50,10 +50,10 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
                         'optimizations-gpu': true,
-                        'target': global.document.body,
+                        'target': __doc.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
-                        'target-modifier': 'visible',
+                        'target-modifier': undefined,
                         'target-offset': undefined,
                         'attachment': 'middle center',
                         'offset': undefined,
@@ -137,6 +137,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                     this.setOptions(options);
                 }
 
+                xblocks.event.dispatch(this, 'xb-before-open');
+
                 tether.enable(true);
                 tether.target._xbpopup = this;
 
@@ -152,6 +154,8 @@ var XBPopupElement = xblocks.create('xb-popup', [
                 if (!tether.enabled) {
                     return false;
                 }
+
+                xblocks.event.dispatch(this, 'xb-before-close');
 
                 tether.target._xbpopup = undefined;
                 tether.disable();

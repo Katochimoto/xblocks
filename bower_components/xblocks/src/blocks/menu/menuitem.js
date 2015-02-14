@@ -1,12 +1,6 @@
 /* global xblocks, global */
 /* jshint strict: false */
 
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
-
 /*! borschik:include:menuitem.jsx.js */
 
 var XBMenuitemElementStatic = {
@@ -46,7 +40,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
                     // to close the submenu and return focus
-                    this.menuInstance.focus();
+                    xblocks.utils.lazyFocus(this.menuInstance);
                 }
             },
 
@@ -59,6 +53,10 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                     if (submenu && !XBMenuitemElementStatic._timerOpenSubmenu) {
                         XBMenuitemElementStatic._timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                     }
+
+                // scroll menu only keyboard events
+                } else {
+                    this.scrollIntoView(false);
                 }
             }
         },
@@ -114,16 +112,19 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         this.classList.add(targetClassName);
 
                         var menu = this.ownerDocument.createElement('xb-menu');
-                        menu.setAttribute('target-attachment', 'top right');
-                        menu.setAttribute('attachment', 'top left');
+                        menu.setAttribute('attachment', 'top right');
+                        menu.setAttribute('target-attachment', 'top left');
                         menu.setAttribute('target', '.' + targetClassName);
-                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([{
-                            'to': 'scrollParent',
-                            'attachment': 'together'
-                        }, {
-                            'to': 'window',
-                            'attachment': 'together'
-                        }])));
+                        menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
+                            {
+                                'to': 'scrollParent',
+                                'attachment': 'element together'
+                            },
+                            {
+                                'to': 'window',
+                                'attachment': 'element together'
+                            }
+                        ])));
                         menu.innerHTML = this.content;
 
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);

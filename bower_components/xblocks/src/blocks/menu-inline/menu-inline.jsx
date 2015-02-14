@@ -1,28 +1,28 @@
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, XBMenuViewCommon */
 /* jshint strict: false */
 /* jshint -W098 */
 var XBMenuInline = xblocks.view.register('xb-menu-inline', [
     xblocks.mixin.vCommonAttrs,
+    XBMenuViewCommon,
 
     {
-        displayName: 'xb-menu-inline',
+        'displayName': 'xb-menu-inline',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        'mixins': [ React.addons.PureRenderMixin ],
 
-        render: function() {
-            var classes = {
-                '_popup': true
+        'propTypes': {
+            'size': React.PropTypes.string
+        },
+
+        getDefaultProps: function() {
+            return {
+                'size': ''
             };
+        },
 
-            classes = React.addons.classSet(classes);
-
-            return (
-                <div className={classes}
-                    tabIndex="0"
-                    data-xb-content={this.props._uid}
-                    dangerouslySetInnerHTML={{ __html: this.props.children }}></div>
-            );
+        componentDidMount: function() {
+            this._updateMaxHeight(this.props.size);
         }
     }
 ]);

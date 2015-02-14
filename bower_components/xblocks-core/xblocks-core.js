@@ -425,37 +425,44 @@ xblocks.utils.merge = function() {
     var i = 1;
     var length = arguments.length;
     var deep = false;
-    var type = xblocks.utils.type(target);
 
-    if (type === 'boolean') {
+    // Handle a deep copy situation
+    if (typeof(target) === 'boolean') {
         deep = target;
-        target = arguments[i] || {};
+
+        // Skip the boolean and the target
+        target = arguments[ i ] || {};
         i++;
     }
 
-    type = xblocks.utils.type(target);
-
-    if (type !== 'object' && type !== 'function') {
+    // Handle case when target is a string or something (possible in deep copy)
+    if (typeof(target) !== 'object' && typeof(target) !== 'function') {
         target = {};
     }
 
+    // Extend jQuery itself if only one argument is passed
     if (i === length) {
         target = this;
         i--;
     }
 
     for (; i < length; i++) {
-        if ((options = arguments[i]) !== null) {
+        // Only deal with non-null/undefined values
+        if ((options = arguments[ i ]) != null) {
             // Extend the base object
             for (name in options) {
-                src = target[name];
-                copy = options[name];
+                src = target[ name ];
+                copy = options[ name ];
 
+                // Prevent never-ending loop
                 if (target === copy) {
                     continue;
                 }
 
-                if (deep && copy && (xblocks.utils.isPlainObject(copy) || (copyIsArray = Array.isArray(copy)))) {
+                // Recurse if we're merging plain objects or arrays
+                if (deep && copy && (xblocks.utils.isPlainObject(copy) ||
+                    (copyIsArray = Array.isArray(copy)))) {
+
                     if (copyIsArray) {
                         copyIsArray = false;
                         clone = src && Array.isArray(src) ? src : [];
@@ -464,15 +471,18 @@ xblocks.utils.merge = function() {
                         clone = src && xblocks.utils.isPlainObject(src) ? src : {};
                     }
 
-                    target[name] = xblocks.utils.merge( deep, clone, copy );
+                    // Never move original objects, clone them
+                    target[ name ] = xblocks.utils.merge( deep, clone, copy );
 
+                // Don't bring in undefined values
                 } else if (copy !== undefined) {
-                    target[name] = copy;
+                    target[ name ] = copy;
                 }
             }
         }
     }
 
+    // Return the modified object
     return target;
 };
 
@@ -1689,15 +1699,30 @@ xblocks.element.prototype.isMounted = function() {
     return Boolean(this._component && this._component.isMounted());
 };
 
+/**
+ * @param {string} content
+ */
 xblocks.element.prototype.setMountedContent = function(content) {
     if (this.isMounted()) {
         this.update({ 'children': content });
     }
 };
 
+/**
+ * @returns {?string}
+ */
 xblocks.element.prototype.getMountedContent = function() {
     if (this.isMounted()) {
         return this._component.props.children;
+    }
+};
+
+/**
+ * @returns {?ReactCompositeComponent.createClass.Constructor}
+ */
+xblocks.element.prototype.getMountedComponent = function() {
+    if (this.isMounted()) {
+        return this._component;
     }
 };
 

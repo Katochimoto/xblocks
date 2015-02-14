@@ -6,29 +6,36 @@ var XBInputController = xblocks.view.create({
     displayName: 'XBInputController',
 
     propTypes: {
-        'className': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'disabled': React.PropTypes.bool,
-        'multiline': React.PropTypes.bool,
-        'required': React.PropTypes.bool,
-        'readOnly': React.PropTypes.bool,
-        'autosize': React.PropTypes.bool,
-        'autoFocus': React.PropTypes.bool,
-        'rows': React.PropTypes.string,
-        'cols': React.PropTypes.string,
-        'placeholder': React.PropTypes.string,
-        'value': React.PropTypes.string,
-        'tabIndex': React.PropTypes.string,
-        'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
+        'className':        React.PropTypes.string,
+        'name':             React.PropTypes.string,
+        'disabled':         React.PropTypes.bool,
+        'multiline':        React.PropTypes.bool,
+        'required':         React.PropTypes.bool,
+        'readOnly':         React.PropTypes.bool,
+        'autosize':         React.PropTypes.bool,
+        'autoFocus':        React.PropTypes.bool,
+        'rows':             React.PropTypes.string,
+        'cols':             React.PropTypes.string,
+        'placeholder':      React.PropTypes.string,
+        'value':            React.PropTypes.string,
+        'tabIndex':         React.PropTypes.string,
+        'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
 
-        'onChange': React.PropTypes.func,
-        'onHintToggle': React.PropTypes.func,
+        'onChange':         React.PropTypes.func,
+        'onHintToggle':     React.PropTypes.func,
         'isPlaceholderHint': React.PropTypes.bool
     },
 
     getDefaultProps: function() {
         return {
-            'value': ''
+            'value': undefined,
+            'disabled': false,
+            'multiline': false,
+            'required': false,
+            'readOnly': false,
+            'autosize': false,
+            'autoFocus': false,
+            'isPlaceholderHint': false
         };
     },
 
@@ -54,17 +61,19 @@ var XBInputController = xblocks.view.create({
     },
 
     _recalculateSize: function() {
-        if (this.props.autosize) {
-            var node = this.getDOMNode();
+        if (!this.props.autosize) {
+            return;
+        }
 
-            if (this.props.multiline) {
-                node.style.height = '0px';
-                node.style.height = node.scrollHeight + 'px';
+        var node = this.getDOMNode();
 
-            } else {
-                node.style.width = '20px';
-                node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
-            }
+        if (this.props.multiline) {
+            node.style.height = '0px';
+            node.style.height = node.scrollHeight + 'px';
+
+        } else {
+            node.style.width = '20px';
+            node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
         }
     },
 
@@ -74,40 +83,29 @@ var XBInputController = xblocks.view.create({
             tabIndex = '-1';
         }
 
-        // macos inserts placeholder default
-        this.props.placeholder = this.props.placeholder || '';
+        var props = {
+            'value': this.props.value,
+            'className': this.props.className,
+            'name': this.props.name,
+            'disabled': this.props.disabled,
+            'required': this.props.required,
+            'readOnly': this.props.readOnly,
+            'autoFocus': this.props.autoFocus,
+            // macos inserts placeholder default
+            'placeholder': this.props.placeholder || '',
+            'tabIndex': tabIndex,
+            'autocomplete': this.props.autocomplete,
+            'onChange': this.props.onChange
+        };
 
         if (this.props.multiline) {
             return (
-                <textarea value={this.props.value}
-                    className={this.props.className}
-                    name={this.props.name}
-                    disabled={this.props.disabled}
-                    required={this.props.required}
-                    readOnly={this.props.readOnly}
-                    autoFocus={this.props.autoFocus}
-                    rows={this.props.rows}
-                    cols={this.props.cols}
-                    placeholder={this.props.placeholder}
-                    tabIndex={tabIndex}
-                    autocomplete={this.props.autocomplete}
-                    onChange={this.props.onChange}></textarea>
+                <textarea {...props} rows={this.props.rows} cols={this.props.cols} />
             );
 
         } else {
             return (
-                <input value={this.props.value}
-                    type="text"
-                    className={this.props.className}
-                    name={this.props.name}
-                    disabled={this.props.disabled}
-                    required={this.props.required}
-                    readOnly={this.props.readOnly}
-                    autoFocus={this.props.autoFocus}
-                    placeholder={this.props.placeholder}
-                    tabIndex={tabIndex}
-                    autocomplete={this.props.autocomplete}
-                    onChange={this.props.onChange}/>
+                <input {...props} type="text" />
             );
         }
     }

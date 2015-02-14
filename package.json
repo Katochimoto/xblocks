@@ -1,8 +1,8 @@
 {
     "name": "xblocks-gh-pages",
     "description": "",
-    "version": "0.5.5",
-    "homepage": "http://katochimoto.github.io/xblocks/",
+    "version": "0.5.8",
+    "homepage": "http://xblocks.ru",
     "dependencies": {
         "jaguarjs-jsdoc": "Katochimoto/jaguarjs-jsdoc.git",
         "jsdoc": "3.3.x"

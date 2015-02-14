@@ -11,28 +11,31 @@
     <script src="bower_components/xblocks-core/xblocks-core.js"></script>
     <script src="bower_components/xblocks/build/xblocks.js"></script>
 
+    <script src="bower_components/ckeditor/ckeditor.js"></script>
+
     <style type="text/css">
     body {
         height: 3000px;
     }
-    /*
     xb-button {
         position: absolute;
         top: 1000px;
         left: 1150px;
     }
-    */
     </style>
 </head>
 <body contextmenu="menu">
 
+    <textarea class="ckeditor" cols="80" id="editor1" name="editor1" rows="10">
 
+    </textarea>
+
+<!--
 <a class="open-menu">меню</a>
 
 <xb-button contextmenu="menu" xb-ico-type="twitter">test</xb-button>
 
-
-<xb-menu id="menu" type="context" size="5">
+<xb-menu id="menu" type="context">
     <xb-menuitem id="i1" label="submenu 1" xb-ico-type="twitter">
         <xb-menuitem id="i1-1" label="submenu 1.1"></xb-menuitem>
         <xb-menuitem id="i1-2" label="submenu 1.2">
@@ -51,14 +54,10 @@
     </xb-menuitem>
     <xb-menuitem id="i3" label="submenu 2"></xb-menuitem>
     <xb-menuitem id="i4" label="submenu 3"></xb-menuitem>
-    <xb-menuitem id="i5" label="submenu 4"></xb-menuitem>
-    <xb-menuitem id="i6" label="submenu 5"></xb-menuitem>
-    <xb-menuitem id="i7" label="submenu 6"></xb-menuitem>
-    <xb-menuitem id="i8" label="submenu 7"></xb-menuitem>
     <xb-menuseparator></xb-menuseparator>
-    <xb-menuitem id="i9" label="submenu 8" disabled></xb-menuitem>
+    <xb-menuitem id="i6" label="submenu 4" disabled></xb-menuitem>
 </xb-menu>
-
+-->
 
 <script>
 /*

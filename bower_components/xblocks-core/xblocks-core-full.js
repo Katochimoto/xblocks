@@ -235,6 +235,8 @@ var logFlags = {
 /* polyfills/performance.js begin */
 /* jshint -W067 */
 (function(global) {
+    'use strict';
+
     if (typeof(global.performance) === 'undefined') {
         global.performance = {};
     }
@@ -263,6 +265,7 @@ var logFlags = {
 /* polyfills/matches.js begin */
 /* jshint -W067 */
 (function(global) {
+    'use strict';
 
     var indexOf = Array.prototype.indexOf;
     var proto = global.Element.prototype;
@@ -1091,7 +1094,6 @@ if (typeof WeakMap === 'undefined') {
           // Fall through.
         case 'DOMNodeInserted':
           // http://dom.spec.whatwg.org/#concept-mo-queue-childlist
-          var target = e.relatedNode;
           var changedNode = e.target;
           var addedNodes, removedNodes;
           if (e.type === 'DOMNodeInserted') {
@@ -1106,13 +1108,13 @@ if (typeof WeakMap === 'undefined') {
           var nextSibling = changedNode.nextSibling;
 
           // 1.
-          var record = getRecord('childList', target);
+          var record = getRecord('childList', e.target.parentNode);
           record.addedNodes = addedNodes;
           record.removedNodes = removedNodes;
           record.previousSibling = previousSibling;
           record.nextSibling = nextSibling;
 
-          forEachAncestorAndObserverEnqueueRecord(target, function(options) {
+          forEachAncestorAndObserverEnqueueRecord(e.relatedNode, function(options) {
             // 2.1, 3.2
             if (!options.childList)
               return;
@@ -3226,6 +3228,10 @@ function isLinkRel(elt, rel) {
   return elt.localName === 'link' && elt.getAttribute('rel') === rel;
 }
 
+function hasBaseURIAccessor(doc) {
+  return !! Object.getOwnPropertyDescriptor(doc, 'baseURI');
+}
+
 function makeDocument(resource, url) {
   // create a new HTML document
   var doc = document.implementation.createHTMLDocument(IMPORT_LINK_TYPE);
@@ -3235,7 +3241,7 @@ function makeDocument(resource, url) {
   var base = doc.createElement('base');
   base.setAttribute('href', url);
   // add baseURI support to browsers (IE) that lack it.
-  if (!doc.baseURI) {
+  if (!doc.baseURI && !hasBaseURIAccessor(doc)) {
     // Use defineProperty since Safari throws an exception when using assignment.
     Object.defineProperty(doc, 'baseURI', {value:url});
   }
@@ -4715,37 +4721,44 @@ xblocks.utils.merge = function() {
     var i = 1;
     var length = arguments.length;
     var deep = false;
-    var type = xblocks.utils.type(target);
 
-    if (type === 'boolean') {
+    // Handle a deep copy situation
+    if (typeof(target) === 'boolean') {
         deep = target;
-        target = arguments[i] || {};
+
+        // Skip the boolean and the target
+        target = arguments[ i ] || {};
         i++;
     }
 
-    type = xblocks.utils.type(target);
-
-    if (type !== 'object' && type !== 'function') {
+    // Handle case when target is a string or something (possible in deep copy)
+    if (typeof(target) !== 'object' && typeof(target) !== 'function') {
         target = {};
     }
 
+    // Extend jQuery itself if only one argument is passed
     if (i === length) {
         target = this;
         i--;
     }
 
     for (; i < length; i++) {
-        if ((options = arguments[i]) !== null) {
+        // Only deal with non-null/undefined values
+        if ((options = arguments[ i ]) != null) {
             // Extend the base object
             for (name in options) {
-                src = target[name];
-                copy = options[name];
+                src = target[ name ];
+                copy = options[ name ];
 
+                // Prevent never-ending loop
                 if (target === copy) {
                     continue;
                 }
 
-                if (deep && copy && (xblocks.utils.isPlainObject(copy) || (copyIsArray = Array.isArray(copy)))) {
+                // Recurse if we're merging plain objects or arrays
+                if (deep && copy && (xblocks.utils.isPlainObject(copy) ||
+                    (copyIsArray = Array.isArray(copy)))) {
+
                     if (copyIsArray) {
                         copyIsArray = false;
                         clone = src && Array.isArray(src) ? src : [];
@@ -4754,15 +4767,18 @@ xblocks.utils.merge = function() {
                         clone = src && xblocks.utils.isPlainObject(src) ? src : {};
                     }
 
-                    target[name] = xblocks.utils.merge( deep, clone, copy );
+                    // Never move original objects, clone them
+                    target[ name ] = xblocks.utils.merge( deep, clone, copy );
 
+                // Don't bring in undefined values
                 } else if (copy !== undefined) {
-                    target[name] = copy;
+                    target[ name ] = copy;
                 }
             }
         }
     }
 
+    // Return the modified object
     return target;
 };
 
@@ -5979,15 +5995,30 @@ xblocks.element.prototype.isMounted = function() {
     return Boolean(this._component && this._component.isMounted());
 };
 
+/**
+ * @param {string} content
+ */
 xblocks.element.prototype.setMountedContent = function(content) {
     if (this.isMounted()) {
         this.update({ 'children': content });
     }
 };
 
+/**
+ * @returns {?string}
+ */
 xblocks.element.prototype.getMountedContent = function() {
     if (this.isMounted()) {
         return this._component.props.children;
+    }
+};
+
+/**
+ * @returns {?ReactCompositeComponent.createClass.Constructor}
+ */
+xblocks.element.prototype.getMountedComponent = function() {
+    if (this.isMounted()) {
+        return this._component;
     }
 };
 

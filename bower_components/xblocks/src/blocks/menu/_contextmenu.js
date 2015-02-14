@@ -1,4 +1,4 @@
-/* global __doc */
+/* global xblocks, __doc */
 
 __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
     var element = event.delegateElement;
@@ -6,34 +6,49 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     var menuId = element.getAttribute('contextmenu');
     var menuElement = menuId && doc.getElementById(menuId);
 
-    if (menuElement && menuElement.xtagName === 'xb-menu' && menuElement.attrs.type === 'context') {
-        event.preventDefault();
+    if (!menuElement || menuElement.xtagName !== 'xb-menu' || menuElement.attrs.type !== 'context') {
+        return;
+    }
 
-        var targetElement = doc.createElement('div');
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    var targetElementId = 'xb-contextmenu-target';
+    var targetElement = doc.getElementById(targetElementId);
+
+    if (targetElement) {
+        if (targetElement._xbpopup) {
+            targetElement._xbpopup.close();
+        }
+
+    } else {
+        targetElement = doc.createElement('div');
+        targetElement.id = targetElementId;
         targetElement.style.position = 'absolute';
         targetElement.style.visibility = 'hidden';
-        targetElement.style.top = event.y + 'px';
-        targetElement.style.left = event.x + 'px';
-
         doc.body.appendChild(targetElement);
-
-        menuElement.addEventListener('xb-close', function _onClose() {
-            menuElement.removeEventListener('xb-close', _onClose, false);
-            targetElement.parentNode.removeChild(targetElement);
-        }, false);
-
-        menuElement.open({
-            'target': targetElement,
-            'attachment': 'top left',
-            'targetAttachment': 'bottom left',
-            'constraints': [{
-                'to': 'scrollParent',
-                'attachment': 'together'
-            }, {
-                'to': 'window',
-                'attachment': 'together'
-            }]
-        });
     }
+
+    targetElement.style.top = event.pageY + 'px';
+    targetElement.style.left = event.pageX + 'px';
+
+    menuElement.open({
+        'target': targetElement,
+        'attachment': 'top left',
+        'targetAttachment': 'bottom left',
+        'optimizations': {
+            'moveElement': false
+        },
+        'constraints': [
+            {
+                'to': 'scrollParent',
+                'attachment': 'element'
+            },
+            {
+                'to': 'window',
+                'attachment': 'element'
+            }
+        ]
+    });
 
 }), false);
