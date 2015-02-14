@@ -40,7 +40,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
                     // to close the submenu and return focus
-                    this.menuInstance.focus();
+                    xblocks.utils.lazyFocus(this.menuInstance);
                 }
             },
 
@@ -56,16 +56,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
 
                 // scroll menu only keyboard events
                 } else {
-                    var keyCode = event.detail.originalEvent.keyCode;
-
-                    switch (keyCode) {
-                        case 38: // ArrowUp
-                            this.scrollIntoView(true);
-                            break;
-                        case 40: // ArrowDown
-                            this.scrollIntoView(false);
-                            break;
-                    }
+                    this.scrollIntoView(false);
                 }
             }
         },

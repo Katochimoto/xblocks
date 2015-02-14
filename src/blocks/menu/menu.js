@@ -44,6 +44,21 @@ var XBMenuElementCommon = {
             // close all submenu
             event.stopImmediatePropagation();
             xblocks.utils.lazyFocus(this);
+        },
+
+        'scrollwheel:delegate(._popup-content)': function(event) {
+            var delta = event.delta;
+            var scrollTop = this.scrollTop;
+            var offsetHeight = this.offsetHeight;
+            var scrollHeight = this.scrollHeight;
+
+            if (delta > 0 && scrollTop === 0 ||
+                delta < 0 && scrollTop + offsetHeight >= scrollHeight ||
+                offsetHeight === scrollHeight) {
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
         }
     },
 
@@ -109,21 +124,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     // event.relatedTarget is null in firefox
                     global.setImmediate(this._closeUpFocus.bind(this));
                 }
-            },
-
-            'scrollwheel:delegate(._popup-content)': function(event) {
-                var delta = event.delta;
-                var scrollTop = this.scrollTop;
-                var offsetHeight = this.offsetHeight;
-                var scrollHeight = this.scrollHeight;
-
-                if (delta > 0 && scrollTop === 0 ||
-                    delta < 0 && scrollTop + offsetHeight >= scrollHeight ||
-                    offsetHeight === scrollHeight) {
-
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-                }
             }
         },
 
@@ -131,6 +131,18 @@ var XBMenuElement = xblocks.create('xb-menu', [
             'parentMenu': {
                 get: function() {
                     return this.tether.target.menuInstance;
+                }
+            },
+
+            'firstParentMenu': {
+                get: function() {
+                    var parentMenu = this.parentMenu;
+
+                    if (parentMenu) {
+                        return parentMenu.firstParentMenu || parentMenu;
+                    }
+
+                    return this;
                 }
             }
         },

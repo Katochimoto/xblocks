@@ -11,6 +11,7 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     }
 
     event.preventDefault();
+    event.stopImmediatePropagation();
 
     var targetElementId = 'xb-contextmenu-target';
     var targetElement = doc.getElementById(targetElementId);

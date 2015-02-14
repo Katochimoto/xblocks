@@ -860,6 +860,16 @@ xblocks.utils.Table.prototype = {
 
 /* xblocks/utils/table.js end */
 
+/* xblocks/utils/lazyFocus.js begin */
+/* global xblocks, global */
+/* jshint strict: false */
+
+xblocks.utils.lazyFocus = function(node) {
+    global.setImmediate(node.focus.bind(node));
+};
+
+/* xblocks/utils/lazyFocus.js end */
+
 
 /* xblocks/utils.js end */
 
@@ -1155,6 +1165,38 @@ xblocks.event.wrap = function(event) {
 
 /* xblocks/event/wrap.js end */
 
+/* xblocks/event/delegateMatch.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.event.delegateMatch = function(selector, target) {
+    if (!target || !target.tagName) {
+        return;
+    }
+
+    var match;
+
+    if (xblocks.dom.matchesSelector(target, selector)) {
+        match = target;
+
+    } else if (xblocks.dom.matchesSelector(target, selector + ' *')) {
+        var parent = target.parentNode;
+
+        while (parent) {
+            if (xblocks.dom.matchesSelector(parent, selector)) {
+                match = parent;
+                break;
+            }
+
+            parent = parent.parentNode;
+        }
+    }
+
+    return match;
+};
+
+/* xblocks/event/delegateMatch.js end */
+
 /* xblocks/event/delegate.js begin */
 /* global xblocks */
 /* jshint strict: false */
@@ -1164,28 +1206,7 @@ xblocks.event.delegate = function(selector, callback) {
     return function(event) {
         xblocks.event.wrap(event);
 
-        var target = event.target;
-        var match;
-
-        if (!target.tagName) {
-            return;
-        }
-
-        if (xblocks.dom.matchesSelector(target, selector)) {
-            match = target;
-
-        } else if (xblocks.dom.matchesSelector(target, selector + ' *')) {
-            var parent = target.parentNode;
-
-            while (parent) {
-                if (xblocks.dom.matchesSelector(parent, selector)) {
-                    match = parent;
-                    break;
-                }
-
-                parent = parent.parentNode;
-            }
-        }
+        var match = xblocks.event.delegateMatch(selector, event.target);
 
         if (!match) {
             return;
@@ -1390,16 +1411,6 @@ xblocks.utils.exportPropTypes = function(tagName) {
 }());
 
 /* utils/resetLastRadioChecked.js end */
-
-/* utils/lazyFocus.js begin */
-/* global xblocks, global */
-/* jshint strict: false */
-
-xblocks.utils.lazyFocus = function(node) {
-    global.setImmediate(node.focus.bind(node));
-};
-
-/* utils/lazyFocus.js end */
 
 
 /* utils.js end */
@@ -3200,7 +3211,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
                     // to close the submenu and return focus
-                    this.menuInstance.focus();
+                    xblocks.utils.lazyFocus(this.menuInstance);
                 }
             },
 
@@ -3216,16 +3227,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
 
                 // scroll menu only keyboard events
                 } else {
-                    var keyCode = event.detail.originalEvent.keyCode;
-
-                    switch (keyCode) {
-                        case 38: // ArrowUp
-                            this.scrollIntoView(true);
-                            break;
-                        case 40: // ArrowDown
-                            this.scrollIntoView(false);
-                            break;
-                    }
+                    this.scrollIntoView(false);
                 }
             }
         },
@@ -3326,6 +3328,7 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     }
 
     event.preventDefault();
+    event.stopImmediatePropagation();
 
     var targetElementId = 'xb-contextmenu-target';
     var targetElement = doc.getElementById(targetElementId);
@@ -3614,6 +3617,21 @@ var XBMenuElementCommon = {
             // close all submenu
             event.stopImmediatePropagation();
             xblocks.utils.lazyFocus(this);
+        },
+
+        'scrollwheel:delegate(._popup-content)': function(event) {
+            var delta = event.delta;
+            var scrollTop = this.scrollTop;
+            var offsetHeight = this.offsetHeight;
+            var scrollHeight = this.scrollHeight;
+
+            if (delta > 0 && scrollTop === 0 ||
+                delta < 0 && scrollTop + offsetHeight >= scrollHeight ||
+                offsetHeight === scrollHeight) {
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
         }
     },
 
@@ -3679,21 +3697,6 @@ var XBMenuElement = xblocks.create('xb-menu', [
                     // event.relatedTarget is null in firefox
                     global.setImmediate(this._closeUpFocus.bind(this));
                 }
-            },
-
-            'scrollwheel:delegate(._popup-content)': function(event) {
-                var delta = event.delta;
-                var scrollTop = this.scrollTop;
-                var offsetHeight = this.offsetHeight;
-                var scrollHeight = this.scrollHeight;
-
-                if (delta > 0 && scrollTop === 0 ||
-                    delta < 0 && scrollTop + offsetHeight >= scrollHeight ||
-                    offsetHeight === scrollHeight) {
-
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-                }
             }
         },
 
@@ -3701,6 +3704,18 @@ var XBMenuElement = xblocks.create('xb-menu', [
             'parentMenu': {
                 get: function() {
                     return this.tether.target.menuInstance;
+                }
+            },
+
+            'firstParentMenu': {
+                get: function() {
+                    var parentMenu = this.parentMenu;
+
+                    if (parentMenu) {
+                        return parentMenu.firstParentMenu || parentMenu;
+                    }
+
+                    return this;
                 }
             }
         },

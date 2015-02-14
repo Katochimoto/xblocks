@@ -16,4 +16,3 @@ xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 /*! borschik:include:utils/mapPropsPrefixIco.js */
 /*! borschik:include:utils/exportPropTypes.js */
 /*! borschik:include:utils/resetLastRadioChecked.js */
-/*! borschik:include:utils/lazyFocus.js */
