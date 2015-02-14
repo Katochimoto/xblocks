@@ -15,6 +15,9 @@ var XBMenuitemElementStatic = {
     }
 };
 
+/**
+ * @class XBMenuitemElement
+ */
 /* jshint -W098 */
 var XBMenuitemElement = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -61,25 +64,43 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
             }
         },
 
+        /**
+         * @lends XBMenuitemElement.prototype
+         */
         'accessors': {
+            /**
+             * Item in focus
+             * @member {boolean} focused
+             */
             'focused': {
                 'attribute': {
                     'boolean': true
                 }
             },
 
+            /**
+             * Item is selected
+             * @member {boolean} selected
+             */
             'selected': {
                 'attribute': {
                     'boolean': true
                 }
             },
 
+            /**
+             * Item has a submenu
+             * @member {boolean} selected
+             */
             'submenu': {
                 'attribute': {
                     'boolean': true
                 }
             },
 
+            /**
+             * @member {XBMenuElement|XBMenuInlineElement|null}
+             */
             'menuInstance': {
                 get: function() {
                     if (this._menuInstance || this._menuInstance === null) {
@@ -98,6 +119,9 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 }
             },
 
+            /**
+             * @member {XBMenuElement|null}
+             */
             'submenuInstance': {
                 get: function() {
                     if (this._submenuInstance || this._submenuInstance === null) {

@@ -3069,11 +3069,11 @@ var XBPopupElement = xblocks.create('xb-popup', [
 
 /* blocks/popup/popup.js end */
 
-    /* blocks/menu/menuseparator.js begin */
+    /* blocks/menuseparator/menuseparator.js begin */
 /* global xblocks */
 /* jshint strict: false */
 
-/* blocks/menu/menuseparator.jsx.js begin */
+/* blocks/menuseparator/menuseparator.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React */
 
@@ -3089,7 +3089,7 @@ var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
     }
 });
 
-/* blocks/menu/menuseparator.jsx.js end */
+/* blocks/menuseparator/menuseparator.jsx.js end */
 
 
 xblocks.create('xb-menuseparator', [
@@ -3098,13 +3098,13 @@ xblocks.create('xb-menuseparator', [
     }
 ]);
 
-/* blocks/menu/menuseparator.js end */
+/* blocks/menuseparator/menuseparator.js end */
 
-    /* blocks/menu/menuitem.js begin */
+    /* blocks/menuitem/menuitem.js begin */
 /* global xblocks, global */
 /* jshint strict: false */
 
-/* blocks/menu/menuitem.jsx.js begin */
+/* blocks/menuitem/menuitem.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React */
 
@@ -3179,7 +3179,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
     }
 ]);
 
-/* blocks/menu/menuitem.jsx.js end */
+/* blocks/menuitem/menuitem.jsx.js end */
 
 
 var XBMenuitemElementStatic = {
@@ -3194,6 +3194,9 @@ var XBMenuitemElementStatic = {
     }
 };
 
+/**
+ * @class XBMenuitemElement
+ */
 /* jshint -W098 */
 var XBMenuitemElement = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -3240,25 +3243,43 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
             }
         },
 
+        /**
+         * @lends XBMenuitemElement.prototype
+         */
         'accessors': {
+            /**
+             * Item in focus
+             * @member {boolean} focused
+             */
             'focused': {
                 'attribute': {
                     'boolean': true
                 }
             },
 
+            /**
+             * Item is selected
+             * @member {boolean} selected
+             */
             'selected': {
                 'attribute': {
                     'boolean': true
                 }
             },
 
+            /**
+             * Item has a submenu
+             * @member {boolean} selected
+             */
             'submenu': {
                 'attribute': {
                     'boolean': true
                 }
             },
 
+            /**
+             * @member {XBMenuElement|XBMenuInlineElement|null}
+             */
             'menuInstance': {
                 get: function() {
                     if (this._menuInstance || this._menuInstance === null) {
@@ -3277,6 +3298,9 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                 }
             },
 
+            /**
+             * @member {XBMenuElement|null}
+             */
             'submenuInstance': {
                 get: function() {
                     if (this._submenuInstance || this._submenuInstance === null) {
@@ -3320,7 +3344,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
     }
 ]);
 
-/* blocks/menu/menuitem.js end */
+/* blocks/menuitem/menuitem.js end */
 
     /* blocks/menu/menu.js begin */
 /* global global, xblocks, XBPopupElement, __forEach, __doc */

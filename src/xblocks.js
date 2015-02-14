@@ -28,8 +28,8 @@
     /*! borschik:include:blocks/checkbox/checkbox.js */
     /*! borschik:include:blocks/radio/radio.js */
     /*! borschik:include:blocks/popup/popup.js */
-    /*! borschik:include:blocks/menu/menuseparator.js */
-    /*! borschik:include:blocks/menu/menuitem.js */
+    /*! borschik:include:blocks/menuseparator/menuseparator.js */
+    /*! borschik:include:blocks/menuitem/menuitem.js */
     /*! borschik:include:blocks/menu/menu.js */
     /*! borschik:include:blocks/menu-inline/menu-inline.js */
     /*! borschik:include:blocks/select/select.js */
