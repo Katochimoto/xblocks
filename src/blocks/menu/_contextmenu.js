@@ -36,6 +36,7 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
         'target': targetElement,
         'attachment': 'top left',
         'targetAttachment': 'bottom left',
+        'targetModifier': undefined,
         'optimizations': {
             'moveElement': false
         },

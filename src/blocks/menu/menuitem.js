@@ -114,6 +114,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         var menu = this.ownerDocument.createElement('xb-menu');
                         menu.setAttribute('attachment', 'top right');
                         menu.setAttribute('target-attachment', 'top left');
+                        menu.setAttribute('target-modifier', 'undefined');
                         menu.setAttribute('target', '.' + targetClassName);
                         menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
                             {

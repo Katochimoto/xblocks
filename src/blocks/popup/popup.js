@@ -60,6 +60,11 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'constraints': undefined
                     });
 
+                    var targetModifier = tetherAttrs['target-modifier'];
+                    if (!(targetModifier === 'visible' || targetModifier === 'scroll-handle')) {
+                        targetModifier = undefined;
+                    }
+
                     this._options = {
                         'enabled': false,
                         'element': this,
@@ -67,7 +72,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'targetParent': tetherAttrs['target-parent'],
                         'attachment': tetherAttrs['attachment'],
                         'targetAttachment': tetherAttrs['target-attachment'],
-                        'targetModifier': tetherAttrs['target-modifier'],
+                        'targetModifier': targetModifier,
                         'classPrefix': this.xtagName,
                         'optimizations': {
                             'gpu': tetherAttrs['optimizations-gpu']

@@ -2944,6 +2944,11 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'constraints': undefined
                     });
 
+                    var targetModifier = tetherAttrs['target-modifier'];
+                    if (!(targetModifier === 'visible' || targetModifier === 'scroll-handle')) {
+                        targetModifier = undefined;
+                    }
+
                     this._options = {
                         'enabled': false,
                         'element': this,
@@ -2951,7 +2956,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'targetParent': tetherAttrs['target-parent'],
                         'attachment': tetherAttrs['attachment'],
                         'targetAttachment': tetherAttrs['target-attachment'],
-                        'targetModifier': tetherAttrs['target-modifier'],
+                        'targetModifier': targetModifier,
                         'classPrefix': this.xtagName,
                         'optimizations': {
                             'gpu': tetherAttrs['optimizations-gpu']
@@ -3285,6 +3290,7 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         var menu = this.ownerDocument.createElement('xb-menu');
                         menu.setAttribute('attachment', 'top right');
                         menu.setAttribute('target-attachment', 'top left');
+                        menu.setAttribute('target-modifier', 'undefined');
                         menu.setAttribute('target', '.' + targetClassName);
                         menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
                             {
@@ -3353,6 +3359,7 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
         'target': targetElement,
         'attachment': 'top left',
         'targetAttachment': 'bottom left',
+        'targetModifier': undefined,
         'optimizations': {
             'moveElement': false
         },
