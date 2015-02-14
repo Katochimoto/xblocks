@@ -2864,12 +2864,6 @@ xb.Radio = xblocks.create('xb-radio', [
 /* global global, xblocks, Tether, __doc, xb */
 /* jshint strict: false */
 
-/**
- * Checked in:
- * ChromeCanary 40
- * FireFox Developer Edition 35
- */
-
 /* blocks/popup/popup.jsx.js begin */
 /** @jsx React.DOM */
 /* global xblocks, React */
@@ -2955,9 +2949,8 @@ var XBPopupElementStatic = {
 };
 
 /**
- * @class xb.Popup
+ * @constructor
  * @mixes xblocks.mixin.eFocus
- * @memberof xb
  */
 xb.Popup = xblocks.create('xb-popup', [
     xblocks.mixin.eFocus,
@@ -2978,7 +2971,13 @@ xb.Popup = xblocks.create('xb-popup', [
             }
         },
 
+        /**
+         * @lends xb.Popup.prototype
+         */
         'accessors': {
+            /**
+             * @property {object}
+             */
             'options': {
                 get: function() {
                     if (this._options) {
@@ -3042,6 +3041,9 @@ xb.Popup = xblocks.create('xb-popup', [
                 }
             },
 
+            /**
+             * @property {Tether}
+             */
             'tether': {
                 get: function() {
                     if (!this._tether) {
@@ -3052,6 +3054,9 @@ xb.Popup = xblocks.create('xb-popup', [
                 }
             },
 
+            /**
+             * @property {boolean}
+             */
             'opened': {
                 get: function() {
                     return this.tether.enabled;
@@ -3060,6 +3065,11 @@ xb.Popup = xblocks.create('xb-popup', [
         },
 
         'methods': {
+            /**
+             * @method
+             * @memberOf xb.Popup.prototype
+             * @param {object} nextOptions
+             */
             setOptions: function(nextOptions) {
                 var tether = this.tether;
 
@@ -3071,6 +3081,11 @@ xb.Popup = xblocks.create('xb-popup', [
                 }
             },
 
+            /**
+             * @memberOf xb.Popup.prototype
+             * @param {object} options
+             * @returns {boolean}
+             */
             open: function(options) {
                 var tether = this.tether;
 
@@ -3093,6 +3108,10 @@ xb.Popup = xblocks.create('xb-popup', [
                 return true;
             },
 
+            /**
+             * @memberOf xb.Popup.prototype
+             * @returns {boolean}
+             */
             close: function() {
                 var tether = this.tether;
 
@@ -3112,6 +3131,10 @@ xb.Popup = xblocks.create('xb-popup', [
                 return true;
             },
 
+            /**
+             * @memberOf xb.Popup.prototype
+             * @returns {boolean}
+             */
             position: function() {
                 this.tether.position();
                 return true;
