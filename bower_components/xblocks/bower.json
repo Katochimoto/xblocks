@@ -1,6 +1,6 @@
 {
     "name": "xblocks",
-    "version": "0.5.8",
+    "version": "0.5.9",
     "dependencies": {
         "xblocks-core": "0.5.8",
         "es5-shim": "4.1.0",
