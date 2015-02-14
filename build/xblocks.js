@@ -2944,6 +2944,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'constraints': undefined
                     });
 
+                    // TODO
+                    // переписать тетхер и сделать для targetModifier значение по умолчанию
+                    // вместо undefined
                     var targetModifier = tetherAttrs['target-modifier'];
                     if (!(targetModifier === 'visible' || targetModifier === 'scroll-handle')) {
                         targetModifier = undefined;
@@ -3290,6 +3293,9 @@ var XBMenuitemElement = xblocks.create('xb-menuitem', [
                         var menu = this.ownerDocument.createElement('xb-menu');
                         menu.setAttribute('attachment', 'top right');
                         menu.setAttribute('target-attachment', 'top left');
+                        // TODO
+                        // переписать тетхер и сделать для targetModifier значение по умолчанию
+                        // вместо undefined
                         menu.setAttribute('target-modifier', 'undefined');
                         menu.setAttribute('target', '.' + targetClassName);
                         menu.setAttribute('constraints', encodeURIComponent(JSON.stringify([
@@ -3359,7 +3365,10 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
         'target': targetElement,
         'attachment': 'top left',
         'targetAttachment': 'bottom left',
-        'targetModifier': undefined,
+        // TODO
+        // переписать тетхер и сделать для targetModifier значение по умолчанию
+        // вместо undefined
+        'targetModifier': null,
         'optimizations': {
             'moveElement': false
         },

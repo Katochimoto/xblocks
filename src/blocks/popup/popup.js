@@ -60,6 +60,9 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'constraints': undefined
                     });
 
+                    // TODO
+                    // переписать тетхер и сделать для targetModifier значение по умолчанию
+                    // вместо undefined
                     var targetModifier = tetherAttrs['target-modifier'];
                     if (!(targetModifier === 'visible' || targetModifier === 'scroll-handle')) {
                         targetModifier = undefined;
