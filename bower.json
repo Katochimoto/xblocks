@@ -1,8 +1,8 @@
 {
     "name": "xblocks",
-    "version": "0.5.7",
+    "version": "0.5.8",
     "dependencies": {
-        "xblocks-core": "0.5.6",
+        "xblocks-core": "0.5.8",
         "es5-shim": "4.1.0",
         "react": "0.12.2",
         "vow": "0.4.8",
