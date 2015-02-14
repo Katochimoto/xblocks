@@ -53,7 +53,7 @@ var XBPopupElement = xblocks.create('xb-popup', [
                         'target': __doc.body,
                         'target-parent': false,
                         'target-attachment': 'middle center',
-                        'target-modifier': undefined,
+                        'target-modifier': 'visible',
                         'target-offset': undefined,
                         'attachment': 'middle center',
                         'offset': undefined,
