@@ -2,6 +2,10 @@
 /* global React, xv */
 /* jshint strict: false */
 
+/**
+ * @class xv.ButtonContent
+ * @memberof xv
+ */
 xv.ButtonContent = xblocks.view.create({
     'displayName': 'xb-button_content',
 

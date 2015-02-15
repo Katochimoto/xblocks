@@ -2133,6 +2133,10 @@ xb.Link = xblocks.create('xb-link', [
 /* global React, xv */
 /* jshint strict: false */
 
+/**
+ * @class xv.ButtonContent
+ * @memberof xv
+ */
 xv.ButtonContent = xblocks.view.create({
     'displayName': 'xb-button_content',
 
@@ -2486,6 +2490,10 @@ xb.Button = xblocks.create('xb-button', [
 /* global xblocks, React, xv */
 /* jshint strict: false */
 
+/**
+ * @class xv.InputController
+ * @memberof xv
+ */
 xv.InputController = xblocks.view.create({
     'displayName': 'xb-input_controller',
 
@@ -4138,6 +4146,11 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
 /* global xblocks, React, Tether, xv */
 /* jshint strict: false */
 
+/**
+ * @class xv.Select
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ */
 xv.Select = xblocks.view.register('xb-select', [
     xblocks.mixin.vCommonAttrs,
 

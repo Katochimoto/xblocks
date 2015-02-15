@@ -2,6 +2,10 @@
 /* global xblocks, React, xv */
 /* jshint strict: false */
 
+/**
+ * @class xv.InputController
+ * @memberof xv
+ */
 xv.InputController = xblocks.view.create({
     'displayName': 'xb-input_controller',
 

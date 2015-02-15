@@ -2,6 +2,11 @@
 /* global xblocks, React, Tether, xv */
 /* jshint strict: false */
 
+/**
+ * @class xv.Select
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ */
 xv.Select = xblocks.view.register('xb-select', [
     xblocks.mixin.vCommonAttrs,
 
