@@ -1288,6 +1288,7 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
     'use strict';
 
     global.xb = global.xb || {};
+    global.xv = global.xv || {};
 
     var Tether = global.Tether;
 
@@ -1299,6 +1300,11 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
      * @namespace xb
      */
     var xb = global.xb;
+
+    /**
+     * @namespace xv
+     */
+    var xv = global.xv;
 
     var __doc = global.document;
     var __noop = function() {};
@@ -3183,28 +3189,33 @@ xb.Menuseparator = xblocks.create('xb-menuseparator', [
 
 /* blocks/menuitem/menuitem.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
-
+/* global xblocks, React, xv */
 /* jshint strict: false */
-/* jshint -W098 */
-var XBMenuitem = xblocks.view.register('xb-menuitem', [
+
+/**
+ * @class xv.Menuitem
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
+ */
+xv.Menuitem = xblocks.view.register('xb-menuitem', [
     xblocks.mixin.vCommonAttrs,
 
     {
-        displayName: 'xb-menuitem',
+        'displayName': 'xb-menuitem',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        'mixins': [ React.addons.PureRenderMixin ],
 
-        propTypes: {
-            'label': React.PropTypes.string.isRequired,
+        'propTypes': {
+            'label':    React.PropTypes.string.isRequired,
             'disabled': React.PropTypes.bool,
             'selected': React.PropTypes.bool,
-            'focused': React.PropTypes.bool,
-            'submenu': React.PropTypes.bool
+            'focused':  React.PropTypes.bool,
+            'submenu':  React.PropTypes.bool
         },
 
-        statics: {
-            filterIcoProps: function(props) {
+        'statics': {
+            'filterIcoProps': function(props) {
                 return xblocks.utils.mapObject(
                     xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
                     xblocks.utils.mapPropsPrefixIco
@@ -3212,7 +3223,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             }
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'disabled': false,
                 'selected': false,
@@ -3221,7 +3232,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
             };
         },
 
-        render: function() {
+        'render': function() {
             var classes = {
                 'xb-menuitem': true,
                 '_disabled': this.props.disabled,
@@ -3236,7 +3247,7 @@ var XBMenuitem = xblocks.view.register('xb-menuitem', [
                 React.createElement("span", {className: "_label", key: "label"}, this.props.label)
             ];
 
-            var icoProps = XBButton.filterIcoProps(this.props);
+            var icoProps = xv.Menuitem.filterIcoProps(this.props);
 
             if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';
@@ -3283,6 +3294,11 @@ var _xbMenuitemElementStatic = {
         var timerOpenSubmenu = 0;
 
         return {
+
+            /**
+             * @param {xb.Menu} [submenu]
+             * @this {global}
+             */
             'open': function(submenu) {
                 if (submenu && !timerOpenSubmenu) {
                     timerOpenSubmenu = global.setTimeout(
@@ -3292,6 +3308,9 @@ var _xbMenuitemElementStatic = {
                 }
             },
 
+            /**
+             * @this {global}
+             */
             'cancel': function() {
                 if (timerOpenSubmenu) {
                     global.clearTimeout(timerOpenSubmenu);
@@ -3300,7 +3319,7 @@ var _xbMenuitemElementStatic = {
             },
 
             /**
-             * @this {XBMenuitemElement}
+             * @this {xb.Menuitem}
              */
             'remove': function() {
                 if (this._submenuInstance) {
@@ -3324,6 +3343,7 @@ var _xbMenuitemElementStatic = {
  * @listens xblocks.utils:Table~event:xb-blur
  * @listens xblocks.element~event:xb-repaint
  * @listens xblocks.element~event:xb-created
+ * @listens xblocks.element~event:xb-destroy
  */
 xb.Menuitem = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -3345,6 +3365,11 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
              * @callback
              */
             'xb-repaint': _xbMenuitemElementStatic.submenu.remove,
+
+            /**
+             * @callback
+             */
+            'xb-destroy': _xbMenuitemElementStatic.submenu.remove,
 
             /**
              * @callback
@@ -3449,10 +3474,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
                         menu.setAttribute('target', '.' + targetClassName);
 
                         for (var attrName in _xbMenuitemElementStatic.submenuAttrs) {
-                            menu.setAttribute(
-                                attrName,
-                                _xbMenuitemElementStatic.submenuAttrs[ attrName ]
-                            );
+                            menu.setAttribute(attrName, _xbMenuitemElementStatic.submenuAttrs[ attrName ]);
                         }
 
                         menu.innerHTML = this.content;
@@ -3744,7 +3766,7 @@ var XBMenu = xblocks.view.register('xb-menu', [
 var XBMenuElementStatic = {
 
     /**
-     * @param {XBMenuitemElement} target
+     * @param {xb.Menuitem} target
      * @this {global}
      */
     _closeSubmenu: function(target) {
@@ -3758,7 +3780,7 @@ var XBMenuElementCommon = {
     'events': {
 
         /**
-         * @this {XBMenuitemElement}
+         * @this {xb.Menuitem}
          */
         'click:delegate(xb-menuitem:not([disabled]))': function() {
             if (this.submenuInstance) {
@@ -3767,7 +3789,7 @@ var XBMenuElementCommon = {
         },
 
         /**
-         * @this {XBMenuitemElement}
+         * @this {xb.Menuitem}
          */
         'keydown:keypass(13,39)': function() {
             var item = this._xbfocus.getItem();

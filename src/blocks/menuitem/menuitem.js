@@ -27,6 +27,11 @@ var _xbMenuitemElementStatic = {
         var timerOpenSubmenu = 0;
 
         return {
+
+            /**
+             * @param {xb.Menu} [submenu]
+             * @this {global}
+             */
             'open': function(submenu) {
                 if (submenu && !timerOpenSubmenu) {
                     timerOpenSubmenu = global.setTimeout(
@@ -36,6 +41,9 @@ var _xbMenuitemElementStatic = {
                 }
             },
 
+            /**
+             * @this {global}
+             */
             'cancel': function() {
                 if (timerOpenSubmenu) {
                     global.clearTimeout(timerOpenSubmenu);
@@ -44,7 +52,7 @@ var _xbMenuitemElementStatic = {
             },
 
             /**
-             * @this {XBMenuitemElement}
+             * @this {xb.Menuitem}
              */
             'remove': function() {
                 if (this._submenuInstance) {
@@ -68,6 +76,7 @@ var _xbMenuitemElementStatic = {
  * @listens xblocks.utils:Table~event:xb-blur
  * @listens xblocks.element~event:xb-repaint
  * @listens xblocks.element~event:xb-created
+ * @listens xblocks.element~event:xb-destroy
  */
 xb.Menuitem = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -89,6 +98,11 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
              * @callback
              */
             'xb-repaint': _xbMenuitemElementStatic.submenu.remove,
+
+            /**
+             * @callback
+             */
+            'xb-destroy': _xbMenuitemElementStatic.submenu.remove,
 
             /**
              * @callback
@@ -193,10 +207,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
                         menu.setAttribute('target', '.' + targetClassName);
 
                         for (var attrName in _xbMenuitemElementStatic.submenuAttrs) {
-                            menu.setAttribute(
-                                attrName,
-                                _xbMenuitemElementStatic.submenuAttrs[ attrName ]
-                            );
+                            menu.setAttribute(attrName, _xbMenuitemElementStatic.submenuAttrs[ attrName ]);
                         }
 
                         menu.innerHTML = this.content;

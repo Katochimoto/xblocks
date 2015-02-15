@@ -6,6 +6,7 @@
     'use strict';
 
     global.xb = global.xb || {};
+    global.xv = global.xv || {};
 
     var Tether = global.Tether;
 
@@ -17,6 +18,11 @@
      * @namespace xb
      */
     var xb = global.xb;
+
+    /**
+     * @namespace xv
+     */
+    var xv = global.xv;
 
     var __doc = global.document;
     var __noop = function() {};

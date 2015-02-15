@@ -7,7 +7,7 @@
 var XBMenuElementStatic = {
 
     /**
-     * @param {XBMenuitemElement} target
+     * @param {xb.Menuitem} target
      * @this {global}
      */
     _closeSubmenu: function(target) {
@@ -21,7 +21,7 @@ var XBMenuElementCommon = {
     'events': {
 
         /**
-         * @this {XBMenuitemElement}
+         * @this {xb.Menuitem}
          */
         'click:delegate(xb-menuitem:not([disabled]))': function() {
             if (this.submenuInstance) {
@@ -30,7 +30,7 @@ var XBMenuElementCommon = {
         },
 
         /**
-         * @this {XBMenuitemElement}
+         * @this {xb.Menuitem}
          */
         'keydown:keypass(13,39)': function() {
             var item = this._xbfocus.getItem();
