@@ -22,7 +22,7 @@ xb.Checkbox = xblocks.create('xb-checkbox', [
 
         'accessors': {
             'defaultValue': {
-                get: function() {
+                'get': function() {
                     return 'on';
                 }
             }

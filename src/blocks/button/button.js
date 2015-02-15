@@ -18,11 +18,11 @@ xb.Button = xblocks.create('xb-button', [
     xblocks.mixin.eFocus,
 
     {
-        prototype: Object.create(HTMLInputElement.prototype),
+        'prototype': Object.create(HTMLInputElement.prototype),
 
-        accessors: {
-            defaultValue: {
-                get: function() {
+        'accessors': {
+            'defaultValue': {
+                'get': function() {
                     var type = this.attrs.type;
                     if (type === 'checkbox' || type === 'radio') {
                         return 'on';

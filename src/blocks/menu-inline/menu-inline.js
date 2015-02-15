@@ -1,4 +1,4 @@
-/* global xblocks, __noop, XBMenuElementCommon, xb */
+/* global xblocks, __noop, xb */
 /* jshint strict: false */
 
 /**
@@ -9,8 +9,8 @@
 
 /*! borschik:include:menu-inline.jsx.js */
 
-var XBMenuInlineElementStatic = {
-    _init: function() {
+var _xbMenuInline = {
+    'init': function() {
         if (this._xbfocus) {
             this._xbfocus.destroy();
         }
@@ -27,18 +27,19 @@ var XBMenuInlineElementStatic = {
  * @class xb.MenuInline
  * @memberof xb
  * @mixes xblocks.mixin.eFocus
+ * @mixes xblocks.mixin.eMenu
  */
 xb.MenuInline = xblocks.create('xb-menu-inline', [
     xblocks.mixin.eFocus,
-    XBMenuElementCommon,
+    xblocks.mixin.eMenu,
 
     {
         'prototype': Object.create(HTMLElement.prototype),
 
         'events': {
-            'xb-created': XBMenuInlineElementStatic._init,
+            'xb-created': _xbMenuInline.init,
 
-            'xb-repaint': XBMenuInlineElementStatic._init,
+            'xb-repaint': _xbMenuInline.init,
 
             'blur': function() {
                 if (!this.hasOpenSubmenu) {

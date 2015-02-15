@@ -1,29 +1,34 @@
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
-/* jshint -W098 */
-var XBPopup = xblocks.view.register('xb-popup', [
+/**
+ * @class xv.Popup
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
+ */
+xv.Popup = xblocks.view.register('xb-popup', [
     xblocks.mixin.vCommonAttrs,
 
     {
-        displayName: 'xb-popup',
+        'displayName': 'xb-popup',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        'mixins': [ React.addons.PureRenderMixin ],
 
-        propTypes: {
+        'propTypes': {
             'close': React.PropTypes.bool,
             'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'close': false,
                 'theme': 'normal'
             };
         },
 
-        render: function() {
+        'render': function() {
             var children = [
                 <div key="content"
                     className="_content"
@@ -38,8 +43,7 @@ var XBPopup = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    <a key="close"
-                        className="_close"></a>
+                    <a key="close" className="_close" />
                 );
             }
 
@@ -53,14 +57,13 @@ var XBPopup = xblocks.view.register('xb-popup', [
             };
 
             if (this.props.theme) {
-                classes['_theme-' + this.props.theme] = true;
+                classes[ '_theme-' + this.props.theme ] = true;
             }
 
             classes = React.addons.classSet(classes);
 
             return (
-                <div className={classes}
-                    tabIndex="0">{children}</div>
+                <div className={classes} tabIndex="0">{children}</div>
             );
         }
     }

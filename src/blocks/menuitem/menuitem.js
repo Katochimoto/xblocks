@@ -3,7 +3,7 @@
 
 /*! borschik:include:menuitem.jsx.js */
 
-var _xbMenuitemElementStatic = {
+var _xbMenuitem = {
     'submenuAttrs': {
         'attachment': 'top right',
         'target-attachment': 'top left',
@@ -56,7 +56,7 @@ var _xbMenuitemElementStatic = {
              */
             'remove': function() {
                 if (this._submenuInstance) {
-                    _xbMenuitemElementStatic.submenu.cancel();
+                    _xbMenuitem.submenu.cancel();
 
                     this._submenuInstance.close();
                     xblocks.dom.removeChild(this._submenuInstance);
@@ -90,19 +90,19 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
              * @callback
              */
             'xb-created': function() {
-                _xbMenuitemElementStatic.submenu.remove.call(this);
+                _xbMenuitem.submenu.remove.call(this);
                 this.submenu = Boolean(this.content.trim());
             },
 
             /**
              * @callback
              */
-            'xb-repaint': _xbMenuitemElementStatic.submenu.remove,
+            'xb-repaint': _xbMenuitem.submenu.remove,
 
             /**
              * @callback
              */
-            'xb-destroy': _xbMenuitemElementStatic.submenu.remove,
+            'xb-destroy': _xbMenuitem.submenu.remove,
 
             /**
              * @callback
@@ -110,7 +110,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             'xb-blur': function() {
                 this.focused = false;
 
-                _xbMenuitemElementStatic.submenu.cancel();
+                _xbMenuitem.submenu.cancel();
 
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
@@ -128,7 +128,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 
                 // open the submenu only event-mouse
                 if (event.detail.originalEvent.type !== 'keydown') {
-                    _xbMenuitemElementStatic.submenu.open(this.submenuInstance);
+                    _xbMenuitem.submenu.open(this.submenuInstance);
 
                 // scroll menu only keyboard events
                 } else {
@@ -206,8 +206,8 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 
                         menu.setAttribute('target', '.' + targetClassName);
 
-                        for (var attrName in _xbMenuitemElementStatic.submenuAttrs) {
-                            menu.setAttribute(attrName, _xbMenuitemElementStatic.submenuAttrs[ attrName ]);
+                        for (var attrName in _xbMenuitem.submenuAttrs) {
+                            menu.setAttribute(attrName, _xbMenuitem.submenuAttrs[ attrName ]);
                         }
 
                         menu.innerHTML = this.content;

@@ -30,10 +30,10 @@ var XBButtonContent = xblocks.view.create({
             icoProps.key = 'ico';
 
             if (!icoProps.float || icoProps.float === 'left') {
-                children.unshift(<XBIco {...icoProps}/>);
+                children.unshift(<xv.Ico {...icoProps}/>);
 
             } else if (icoProps.float === 'right') {
-                children.push(<XBIco {...icoProps}/>);
+                children.push(<xv.Ico {...icoProps}/>);
             }
         }
 

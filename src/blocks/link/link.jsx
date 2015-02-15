@@ -1,34 +1,38 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, global, React, xv */
 /* jshint strict: false */
 
-var XBLink = xblocks.view.register('xb-link', {
-    displayName: 'xb-link',
+/**
+ * @class xv.Link
+ * @memberof xv
+ */
+xv.Link = xblocks.view.register('xb-link', {
+    'displayName': 'xb-link',
 
-    propTypes: {
+    'propTypes': {
         'disabled': React.PropTypes.bool,
-        'href': React.PropTypes.string,
-        'name': React.PropTypes.string,
+        'href':     React.PropTypes.string,
+        'name':     React.PropTypes.string,
         'tabindex': React.PropTypes.string,
-        'target': React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
-        'theme': React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
+        'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
+        'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'theme': 'normal',
             'tabindex': '1'
         };
     },
 
-    render: function() {
+    'render': function() {
         var classes = {
             'xb-link': true,
             '_disabled': this.props.disabled
         };
 
         if (this.props.theme) {
-            classes['_theme-' + this.props.theme] = true;
+            classes[ '_theme-' + this.props.theme ] = true;
         }
 
         var tabIndex = this.props.tabindex;

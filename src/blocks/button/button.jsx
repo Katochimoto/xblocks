@@ -4,7 +4,11 @@
 
 /*! borschik:include:button-content.jsx.js */
 
-var XBButton = xblocks.view.register('xb-button', [
+/**
+ * @class xv.Button
+ * @memberof xv
+ */
+xv.Button = xblocks.view.register('xb-button', [
     xblocks.utils.exportPropTypes('xb-ico'),
 
     {
@@ -118,7 +122,7 @@ var XBButton = xblocks.view.register('xb-button', [
 
             classes = React.addons.classSet(classes);
 
-            var icoProps = XBButton.filterIcoProps(this.props);
+            var icoProps = xv.Button.filterIcoProps(this.props);
             var tabIndex = this.props.tabindex;
             var type = this.props.type;
 
@@ -193,7 +197,7 @@ var XBButton = xblocks.view.register('xb-button', [
                     });
 
                     children.push(
-                        <XBButton {...buttonProps} />
+                        <xv.Button {...buttonProps} />
                     );
 
                     classes = React.addons.classSet({

@@ -1,26 +1,30 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, global, React, xv */
 /* jshint strict: false */
 
-var XBRadio = xblocks.view.register('xb-radio', [ {
-    displayName: 'xb-radio',
+/**
+ * @class xv.Radio
+ * @memberof xv
+ */
+xv.Radio = xblocks.view.register('xb-radio', [ {
+    'displayName': 'xb-radio',
 
-    propTypes: {
-        'children': React.PropTypes.node,
-        'size': React.PropTypes.oneOf([ 's', 'm' ]),
-        'value': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'title': React.PropTypes.string,
-        'form': React.PropTypes.string,
-        'for': React.PropTypes.string,
-        'tabindex': React.PropTypes.string,
-        'autofocus': React.PropTypes.bool,
-        'checked': React.PropTypes.bool,
-        'disabled': React.PropTypes.bool,
-        'required': React.PropTypes.bool
+    'propTypes': {
+        'children':     React.PropTypes.node,
+        'size':         React.PropTypes.oneOf([ 's', 'm' ]),
+        'value':        React.PropTypes.string,
+        'name':         React.PropTypes.string,
+        'title':        React.PropTypes.string,
+        'form':         React.PropTypes.string,
+        'for':          React.PropTypes.string,
+        'tabindex':     React.PropTypes.string,
+        'autofocus':    React.PropTypes.bool,
+        'checked':      React.PropTypes.bool,
+        'disabled':     React.PropTypes.bool,
+        'required':     React.PropTypes.bool
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'size': 'm',
             'children': '',
@@ -33,35 +37,35 @@ var XBRadio = xblocks.view.register('xb-radio', [ {
         };
     },
 
-    getInitialState: function() {
+    'getInitialState': function() {
         return {
             'checked': this.props.checked
         };
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    'componentWillReceiveProps': function(nextProps) {
         this.setState({
             'checked': Boolean(nextProps.checked)
         });
     },
 
-    componentWillUpdate: function(nextProps, nextState) {
+    'componentWillUpdate': function(nextProps, nextState) {
         if (nextState.checked) {
             xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
         }
     },
 
-    componentWillMount: function() {
+    'componentWillMount': function() {
         if (this.state.checked) {
             xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
         }
     },
 
-    _onChange: function(event) {
+    '_onChange': function(event) {
         this.container().checked = event.target.checked;
     },
 
-    render: function() {
+    'render': function() {
         var classes = {
             'xb-radio': true,
             '_disabled': this.props.disabled

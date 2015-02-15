@@ -8,13 +8,17 @@
 // TODO "pattern" attribute
 // TODO "title" attribute
 
-var XBInput = xblocks.view.register('xb-input', [
+/**
+ * @class xv.Input
+ * @memberof xv
+ */
+xv.Input = xblocks.view.register('xb-input', [
     xblocks.utils.exportPropTypes('xb-link'),
 
     {
-        displayName: 'xb-input',
+        'displayName': 'xb-input',
 
-        propTypes: {
+        'propTypes': {
             'name':         React.PropTypes.string,
             'disabled':     React.PropTypes.bool,
             'autosize':     React.PropTypes.bool,
@@ -41,8 +45,8 @@ var XBInput = xblocks.view.register('xb-input', [
             'xb-link':      React.PropTypes.string
         },
 
-        statics: {
-            filterLinkProps: function(props) {
+        'statics': {
+            'filterLinkProps': function(props) {
                 return xblocks.utils.mapObject(
                     xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
                     xblocks.utils.mapPropsPrefixLink
@@ -50,14 +54,14 @@ var XBInput = xblocks.view.register('xb-input', [
             }
         },
 
-        shouldComponentUpdate: function(nextProps, nextState) {
+        'shouldComponentUpdate': function(nextProps, nextState) {
             return Boolean(
                 !xblocks.utils.equals(nextProps, this.props) ||
                 !xblocks.utils.equals(nextState, this.state)
             );
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'value': undefined,
                 'type': 'text',
@@ -74,13 +78,13 @@ var XBInput = xblocks.view.register('xb-input', [
             };
         },
 
-        getInitialState: function() {
+        'getInitialState': function() {
             return {
                 'value': this.props.value
             };
         },
 
-        componentDidMount: function() {
+        'componentDidMount': function() {
             // check show or hide placeholder after mount element
             this.refs.controller._dispatchEventToggleHint('', this.props.value);
         },
@@ -90,7 +94,7 @@ var XBInput = xblocks.view.register('xb-input', [
          * @param {Event} event
          * @private
          */
-        _onChange: function(event) {
+        '_onChange': function(event) {
             this.setState({
                 'value': event.target.value
             });
@@ -101,7 +105,7 @@ var XBInput = xblocks.view.register('xb-input', [
          * @param {boolean} toggle
          * @private
          */
-        _onHintToggle: function(toggle) {
+        '_onHintToggle': function(toggle) {
             this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
         },
 
@@ -110,7 +114,7 @@ var XBInput = xblocks.view.register('xb-input', [
          * @returns {boolean}
          * @private
          */
-        _isComplex: function() {
+        '_isComplex': function() {
             return Boolean(
                 this.props.postfix ||
                 this.props.prefix ||
@@ -125,13 +129,13 @@ var XBInput = xblocks.view.register('xb-input', [
          * Click reset button
          * @private
          */
-        _onClickReset: function() {
+        '_onClickReset': function() {
             this.setState({
                 'value': ''
             });
         },
 
-        render: function() {
+        'render': function() {
             var isComplex = this._isComplex();
             var classes = {
                 'xb-input': true,
@@ -183,12 +187,12 @@ var XBInput = xblocks.view.register('xb-input', [
                 }
 
                 if (this.props['xb-link']) {
-                    var linkProps = XBInput.filterLinkProps(this.props);
+                    var linkProps = xv.Input.filterLinkProps(this.props);
                     linkProps['theme'] = 'input';
                     linkProps['key'] = 'label';
 
                     children.push(
-                        <XBLink {...linkProps}>{this.props['xb-link']}</XBLink>
+                        <xv.Link {...linkProps}>{this.props['xb-link']}</xv.Link>
                     );
                 }
 

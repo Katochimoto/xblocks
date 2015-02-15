@@ -69,7 +69,7 @@ var XBSelect = xblocks.view.register('xb-select', [
             return (
                 <div className={classes}>
                     <input className="_controller" />
-                    <XBButton ref="control" type="inline"></XBButton>
+                    <xv.Button ref="control" type="inline" />
                     <div ref="dropdown" className="_xb-select-dropdown">
                         <ul className="_group">
                             <li className="_item"><a className="_item-control">1</a></li>

@@ -3,13 +3,13 @@
 
 /*! borschik:include:popup.jsx.js */
 
-var XBPopupElementStatic = {
-    _onOpen: function() {
+var _xbPopup = {
+    'onOpen': function() {
         this.focus();
         xblocks.event.dispatch(this, 'xb-open');
     },
 
-    _onClose: function() {
+    'onClose': function() {
         this.blur();
         xblocks.event.dispatch(this, 'xb-close');
     }
@@ -46,7 +46,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @property {object}
              */
             'options': {
-                get: function() {
+                'get': function() {
                     if (this._options) {
                         return this._options;
                     }
@@ -112,7 +112,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @property {Tether}
              */
             'tether': {
-                get: function() {
+                'get': function() {
                     if (!this._tether) {
                         this._tether = new Tether(this.options);
                     }
@@ -125,7 +125,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @property {boolean}
              */
             'opened': {
-                get: function() {
+                'get': function() {
                     return this.tether.enabled;
                 }
             }
@@ -137,7 +137,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @param {object} nextOptions
              */
-            setOptions: function(nextOptions) {
+            'setOptions': function(nextOptions) {
                 var tether = this.tether;
 
                 xblocks.utils.merge(true, this.options, nextOptions);
@@ -153,7 +153,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @param {object} options
              * @returns {boolean}
              */
-            open: function(options) {
+            'open': function(options) {
                 var tether = this.tether;
 
                 if (tether.enabled) {
@@ -170,7 +170,7 @@ xb.Popup = xblocks.create('xb-popup', [
                 tether.target._xbpopup = this;
 
                 // FireFox does not set the focus without delay
-                global.setImmediate(XBPopupElementStatic._onOpen.bind(this));
+                global.setImmediate(_xbPopup.onOpen.bind(this));
 
                 return true;
             },
@@ -179,7 +179,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
-            close: function() {
+            'close': function() {
                 var tether = this.tether;
 
                 if (!tether.enabled) {
@@ -193,7 +193,7 @@ xb.Popup = xblocks.create('xb-popup', [
                 tether.clearCache();
 
                 // FireFox does not fire a blur event
-                global.setImmediate(XBPopupElementStatic._onClose.bind(this));
+                global.setImmediate(_xbPopup.onClose.bind(this));
 
                 return true;
             },
@@ -202,7 +202,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
-            position: function() {
+            'position': function() {
                 this.tether.position();
                 return true;
             }

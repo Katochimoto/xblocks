@@ -22,7 +22,7 @@ xb.Radio = xblocks.create('xb-radio', [
 
         'accessors': {
             'defaultValue': {
-                get: function() {
+                'get': function() {
                     return 'on';
                 }
             }

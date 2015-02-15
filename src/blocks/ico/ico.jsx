@@ -1,17 +1,21 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, global, React, xv */
 /* jshint strict: false */
 
-var XBIco = xblocks.view.register('xb-ico', {
-    displayName: 'xb-ico',
+/**
+ * @class xv.Ico
+ * @memberof xv
+ */
+xv.Ico = xblocks.view.register('xb-ico', {
+    'displayName': 'xb-ico',
 
-    propTypes: {
-        'title': React.PropTypes.string,
-        'value': React.PropTypes.string,
+    'propTypes': {
+        'title':    React.PropTypes.string,
+        'value':    React.PropTypes.string,
         'tabindex': React.PropTypes.string,
         'children': React.PropTypes.node,
-        'size': React.PropTypes.oneOf([ 's', 'm' ]),
-        'type': React.PropTypes.oneOf([
+        'size':     React.PropTypes.oneOf([ 's', 'm' ]),
+        'type':     React.PropTypes.oneOf([
             'attention',
             'close',
             'check',
@@ -40,18 +44,18 @@ var XBIco = xblocks.view.register('xb-ico', {
             'upload-white',
             'vk'
         ]),
-        'active': React.PropTypes.bool,
+        'active':   React.PropTypes.bool,
         'disabled': React.PropTypes.bool
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'size': 's',
             'children': String.fromCharCode(160)
         };
     },
 
-    render: function() {
+    'render': function() {
         var classes = {
             'xb-ico': true,
             '_active': this.props.active,
@@ -59,11 +63,11 @@ var XBIco = xblocks.view.register('xb-ico', {
         };
 
         if (this.props.type) {
-            classes['_type-' + this.props.type] = true;
+            classes[ '_type-' + this.props.type ] = true;
         }
 
         if (this.props.size) {
-            classes['_size-' + this.props.size] = true;
+            classes[ '_size-' + this.props.size ] = true;
         }
 
         classes = React.addons.classSet(classes);

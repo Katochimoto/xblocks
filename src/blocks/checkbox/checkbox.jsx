@@ -1,26 +1,30 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, global, React, xv */
 /* jshint strict: false */
 
-var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
-    displayName: 'xb-checkbox',
+/**
+ * @class xv.Checkbox
+ * @memberof xv
+ */
+xv.Checkbox = xblocks.view.register('xb-checkbox', [ {
+    'displayName': 'xb-checkbox',
 
-    propTypes: {
-        'children': React.PropTypes.node,
-        'size': React.PropTypes.oneOf([ 's', 'm' ]),
-        'value': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'title': React.PropTypes.string,
-        'form': React.PropTypes.string,
-        'for': React.PropTypes.string,
-        'tabindex': React.PropTypes.string,
-        'autofocus': React.PropTypes.bool,
-        'checked': React.PropTypes.bool,
-        'disabled': React.PropTypes.bool,
-        'required': React.PropTypes.bool
+    'propTypes': {
+        'children':     React.PropTypes.node,
+        'size':         React.PropTypes.oneOf([ 's', 'm' ]),
+        'value':        React.PropTypes.string,
+        'name':         React.PropTypes.string,
+        'title':        React.PropTypes.string,
+        'form':         React.PropTypes.string,
+        'for':          React.PropTypes.string,
+        'tabindex':     React.PropTypes.string,
+        'autofocus':    React.PropTypes.bool,
+        'checked':      React.PropTypes.bool,
+        'disabled':     React.PropTypes.bool,
+        'required':     React.PropTypes.bool
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'size': 'm',
             'children': '',
@@ -33,32 +37,32 @@ var XBCheckbox = xblocks.view.register('xb-checkbox', [ {
         };
     },
 
-    getInitialState: function() {
+    'getInitialState': function() {
         return {
             'checked': this.props.checked
         };
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    'componentWillReceiveProps': function(nextProps) {
         this.setState({
             'checked': nextProps.checked
         });
     },
 
-    _onChange: function(event) {
+    '_onChange': function(event) {
         this.setState({
             'checked': event.target.checked
         });
     },
 
-    render: function() {
+    'render': function() {
         var classes = {
             'xb-checkbox': true,
             '_disabled': this.props.disabled
         };
 
         if (this.props.size) {
-            classes['_size-' + this.props.size] = true;
+            classes[ '_size-' + this.props.size ] = true;
         }
 
         classes = React.addons.classSet(classes);
