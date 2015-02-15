@@ -11,9 +11,6 @@
 
     var React = global.React;
 
-    /**
-     * @namespace xblocks
-     */
     var xblocks = global.xblocks;
 
     /**

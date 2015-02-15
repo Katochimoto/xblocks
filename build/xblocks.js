@@ -1293,9 +1293,6 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
 
     var React = global.React;
 
-    /**
-     * @namespace xblocks
-     */
     var xblocks = global.xblocks;
 
     /**
@@ -3323,10 +3320,10 @@ var _xbMenuitemElementStatic = {
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eInputValueProps
- * @listens xblocks:utils:Table~event:xb-focus
- * @listens xblocks:utils:Table~event:xb-blur
- * @listens xblocks:element~event:xb-repaint
- * @listens xblocks:element~event:xb-created
+ * @listens xblocks.utils:Table~event:xb-focus
+ * @listens xblocks.utils:Table~event:xb-blur
+ * @listens xblocks.element~event:xb-repaint
+ * @listens xblocks.element~event:xb-created
  */
 xb.Menuitem = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
@@ -3366,7 +3363,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 
             /**
              * @callback
-             * @param {xblocks:utils:Table~event:xb-focus}
+             * @param {xblocks:utils:Table~event:xb-focus} event
              */
             'xb-focus': function(event) {
                 this.focused = true;
