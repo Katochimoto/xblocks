@@ -3154,14 +3154,17 @@ xb.Popup = xblocks.create('xb-popup', [
 
 /* blocks/menuseparator/menuseparator.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
-
+/* global xblocks, React, xv */
 /* jshint strict: false */
-/* jshint -W098 */
-var XBMenuseparator = xblocks.view.register('xb-menuseparator', {
-    displayName: 'xb-menuseparator',
 
-    render: function() {
+/**
+ * @class xv.Menuseparator
+ * @memberof xv
+ */
+xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
+    'displayName': 'xb-menuseparator',
+
+    'render': function() {
         return (
             React.createElement("div", {className: "xb-menuseparator"})
         );
@@ -3957,10 +3960,16 @@ xb.Menu = xblocks.create('xb-menu', [
 
 /* blocks/menu-inline/menu-inline.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React, XBMenuViewCommon */
+/* global xblocks, React, XBMenuViewCommon, xv */
 /* jshint strict: false */
-/* jshint -W098 */
-var XBMenuInline = xblocks.view.register('xb-menu-inline', [
+
+/**
+ * @class xv.MenuInline
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
+ */
+xv.MenuInline = xblocks.view.register('xb-menu-inline', [
     xblocks.mixin.vCommonAttrs,
     XBMenuViewCommon,
 
@@ -3973,13 +3982,13 @@ var XBMenuInline = xblocks.view.register('xb-menu-inline', [
             'size': React.PropTypes.string
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'size': ''
             };
         },
 
-        componentDidMount: function() {
+        'componentDidMount': function() {
             this._updateMaxHeight(this.props.size);
         }
     }

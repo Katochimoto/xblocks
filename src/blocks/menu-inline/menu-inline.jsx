@@ -1,8 +1,14 @@
 /** @jsx React.DOM */
-/* global xblocks, React, XBMenuViewCommon */
+/* global xblocks, React, XBMenuViewCommon, xv */
 /* jshint strict: false */
-/* jshint -W098 */
-var XBMenuInline = xblocks.view.register('xb-menu-inline', [
+
+/**
+ * @class xv.MenuInline
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
+ */
+xv.MenuInline = xblocks.view.register('xb-menu-inline', [
     xblocks.mixin.vCommonAttrs,
     XBMenuViewCommon,
 
@@ -15,13 +21,13 @@ var XBMenuInline = xblocks.view.register('xb-menu-inline', [
             'size': React.PropTypes.string
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'size': ''
             };
         },
 
-        componentDidMount: function() {
+        'componentDidMount': function() {
             this._updateMaxHeight(this.props.size);
         }
     }
