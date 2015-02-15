@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -65,6 +65,7 @@ xv.Radio = xblocks.view.register('xb-radio', [ {
         this.container().checked = event.target.checked;
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-radio': true,
@@ -109,4 +110,5 @@ xv.Radio = xblocks.view.register('xb-radio', [ {
             </label>
         );
     }
+    /* jshint ignore:end */
 } ]);

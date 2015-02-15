@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /*! borschik:include:button-content.jsx.js */
@@ -106,6 +106,7 @@ xv.Button = xblocks.view.register('xb-button', [
             this.container().checked = event.target.checked;
         },
 
+        /* jshint ignore:start */
         render: function() {
             var classes = {
                 'xb-button': true,
@@ -131,9 +132,9 @@ xv.Button = xblocks.view.register('xb-button', [
             }
 
             var content = (
-                <XBButtonContent key="content" _uid={this.props._uid} ico={icoProps}>
+                <xv.ButtonContent key="content" _uid={this.props._uid} ico={icoProps}>
                     {this.props.children}
-                </XBButtonContent>
+                </xv.ButtonContent>
             );
 
             if (type === 'link') {
@@ -254,5 +255,6 @@ xv.Button = xblocks.view.register('xb-button', [
                 );
             }
         }
+        /* jshint ignore:end */
     }
 ]);

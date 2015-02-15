@@ -28,6 +28,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
             };
         },
 
+        /* jshint ignore:start */
         'render': function() {
             var children = [
                 <div key="content"
@@ -66,5 +67,6 @@ xv.Popup = xblocks.view.register('xb-popup', [
                 <div className={classes} tabIndex="0">{children}</div>
             );
         }
+        /* jshint ignore:end */
     }
 ]);

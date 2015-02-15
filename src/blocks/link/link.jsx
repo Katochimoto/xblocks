@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -25,6 +25,7 @@ xv.Link = xblocks.view.register('xb-link', {
         };
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-link': true,
@@ -55,4 +56,5 @@ xv.Link = xblocks.view.register('xb-link', {
                 data-xb-content={this.props._uid}>{content}</a>
         );
     }
+    /* jshint ignore:end */
 });

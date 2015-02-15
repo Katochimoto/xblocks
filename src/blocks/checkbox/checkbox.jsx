@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -55,6 +55,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [ {
         });
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-checkbox': true,
@@ -99,4 +100,5 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [ {
             </label>
         );
     }
+    /* jshint ignore:end */
 } ]);

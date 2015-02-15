@@ -1733,7 +1733,7 @@ xblocks.mixin.vCommonAttrs = {
 
 /* mixin/view/vMenu.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /**
@@ -1741,7 +1741,7 @@ xblocks.mixin.vCommonAttrs = {
  * @type {Object}
  */
 xblocks.mixin.vMenu = {
-    getInitialState: function() {
+    'getInitialState': function() {
         return {
             'maxHeight': 0,
             'isShowScrollTop': false,
@@ -1749,7 +1749,7 @@ xblocks.mixin.vMenu = {
         };
     },
 
-    componentWillMount: function() {
+    'componentWillMount': function() {
         this._enterTopFrame = 0;
         this._enterBottomFrame = 0;
         this._lockScroll = false;
@@ -1760,13 +1760,13 @@ xblocks.mixin.vMenu = {
         });
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    'componentWillReceiveProps': function(nextProps) {
         if (nextProps.size !== this.props.size) {
             this._updateMaxHeight(nextProps.size);
         }
     },
 
-    _updateMaxHeight: function(size, callback) {
+    '_updateMaxHeight': function(size, callback) {
         size = Number(size);
         var maxHeight = 0;
 
@@ -1786,7 +1786,7 @@ xblocks.mixin.vMenu = {
         }, this._redrawScrollNavigator.bind(this, callback));
     },
 
-    _redrawScrollNavigator: function(callback) {
+    '_redrawScrollNavigator': function(callback) {
         var target = this.refs.content.getDOMNode();
         var safeArea = 5;
         var height = Math.max(target.scrollHeight, target.clientHeight);
@@ -1799,7 +1799,7 @@ xblocks.mixin.vMenu = {
         }, this._redrawScrollNavigatorSuccess.bind(this, callback));
     },
 
-    _redrawScrollNavigatorSuccess: function(callback) {
+    '_redrawScrollNavigatorSuccess': function(callback) {
         if (!this.state.isShowScrollTop) {
             this._onMouseLeaveTop();
         }
@@ -1813,7 +1813,7 @@ xblocks.mixin.vMenu = {
         }
     },
 
-    _onScroll: function(event) {
+    '_onScroll': function() {
         if (this._lockScroll) {
             return;
         }
@@ -1823,11 +1823,11 @@ xblocks.mixin.vMenu = {
         this._redrawScrollNavigator(this._onScrollSuccess);
     },
 
-    _onScrollSuccess: function() {
+    '_onScrollSuccess': function() {
         this._lockScroll = false;
     },
 
-    _onScrollThrottle: function() {
+    '_onScrollThrottle': function() {
         xblocks.event.dispatch(
             this.refs.content.getDOMNode(),
             'jsx-scroll-throttle',
@@ -1835,41 +1835,42 @@ xblocks.mixin.vMenu = {
         );
     },
 
-    _animationScrollTop: function() {
+    '_animationScrollTop': function() {
         this.refs.content.getDOMNode().scrollTop--;
         this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
     },
 
-    _onMouseEnterTop: function() {
+    '_onMouseEnterTop': function() {
         this._onMouseLeaveTop();
         this._animationScrollTop();
     },
 
-    _onMouseLeaveTop: function() {
+    '_onMouseLeaveTop': function() {
         if (this._enterTopFrame) {
             global.cancelAnimationFrame(this._enterTopFrame);
             this._enterTopFrame = 0;
         }
     },
 
-    _animationScrollBottom: function() {
+    '_animationScrollBottom': function() {
         this.refs.content.getDOMNode().scrollTop++;
         this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
     },
 
-    _onMouseEnterBottom: function() {
+    '_onMouseEnterBottom': function() {
         this._onMouseLeaveBottom();
         this._animationScrollBottom();
     },
 
-    _onMouseLeaveBottom: function() {
+    '_onMouseLeaveBottom': function() {
         if (this._enterBottomFrame) {
             global.cancelAnimationFrame(this._enterBottomFrame);
             this._enterBottomFrame = 0;
         }
     },
 
-    render: function() {
+    /* jshint ignore:start */
+    'render': function() {
         var classes = {
             '_popup': true
         };
@@ -1907,6 +1908,7 @@ xblocks.mixin.vMenu = {
             )
         );
     }
+    /* jshint ignore:end */
 };
 
 /* mixin/view/vMenu.jsx.js end */
@@ -1921,7 +1923,7 @@ xblocks.mixin.vMenu = {
 
 /* blocks/ico/ico.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -1977,6 +1979,7 @@ xv.Ico = xblocks.view.register('xb-ico', {
         };
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-ico': true,
@@ -2009,6 +2012,7 @@ xv.Ico = xblocks.view.register('xb-ico', {
                 "data-xb-content": this.props._uid}, content)
         );
     }
+    /* jshint ignore:end */
 });
 
 /* blocks/ico/ico.jsx.js end */
@@ -2041,7 +2045,7 @@ xb.Ico = xblocks.create('xb-ico', [
 
 /* blocks/link/link.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -2067,6 +2071,7 @@ xv.Link = xblocks.view.register('xb-link', {
         };
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-link': true,
@@ -2097,6 +2102,7 @@ xv.Link = xblocks.view.register('xb-link', {
                 "data-xb-content": this.props._uid}, content)
         );
     }
+    /* jshint ignore:end */
 });
 
 /* blocks/link/link.jsx.js end */
@@ -2119,31 +2125,33 @@ xb.Link = xblocks.create('xb-link', [
 
 /* blocks/button/button.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /* blocks/button/button-content.jsx.js begin */
 /** @jsx React.DOM */
+/* global React, xv */
 /* jshint strict: false */
 
-var XBButtonContent = xblocks.view.create({
-    displayName: 'XBButtonContent',
+xv.ButtonContent = xblocks.view.create({
+    'displayName': 'xb-button_content',
 
-    propTypes: {
+    'propTypes': {
         'ico': React.PropTypes.object
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'ico': {}
         };
     },
 
-    shouldComponentUpdate: function(nextProps) {
+    'shouldComponentUpdate': function(nextProps) {
         return !xblocks.utils.equals(nextProps, this.props);
     },
 
-    render: function() {
+    /* jshint ignore:start */
+    'render': function() {
         var icoProps = xblocks.utils.merge({}, this.props.ico);
         var children = [
             React.createElement("span", {className: "_content-content", 
@@ -2166,6 +2174,7 @@ var XBButtonContent = xblocks.view.create({
             React.createElement("span", {className: "_content"}, children)
         );
     }
+    /* jshint ignore:end */
 });
 
 /* blocks/button/button-content.jsx.js end */
@@ -2273,6 +2282,7 @@ xv.Button = xblocks.view.register('xb-button', [
             this.container().checked = event.target.checked;
         },
 
+        /* jshint ignore:start */
         render: function() {
             var classes = {
                 'xb-button': true,
@@ -2298,7 +2308,7 @@ xv.Button = xblocks.view.register('xb-button', [
             }
 
             var content = (
-                React.createElement(XBButtonContent, {key: "content", _uid: this.props._uid, ico: icoProps}, 
+                React.createElement(xv.ButtonContent, {key: "content", _uid: this.props._uid, ico: icoProps}, 
                     this.props.children
                 )
             );
@@ -2421,6 +2431,7 @@ xv.Button = xblocks.view.register('xb-button', [
                 );
             }
         }
+        /* jshint ignore:end */
     }
 ]);
 
@@ -2467,18 +2478,18 @@ xb.Button = xblocks.create('xb-button', [
 
 /* blocks/input/input.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React, XBInputController */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /* blocks/input/input-controller.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
-var XBInputController = xblocks.view.create({
-    displayName: 'XBInputController',
+xv.InputController = xblocks.view.create({
+    'displayName': 'xb-input_controller',
 
-    propTypes: {
+    'propTypes': {
         'className':        React.PropTypes.string,
         'name':             React.PropTypes.string,
         'disabled':         React.PropTypes.bool,
@@ -2499,7 +2510,7 @@ var XBInputController = xblocks.view.create({
         'isPlaceholderHint': React.PropTypes.bool
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'value': undefined,
             'disabled': false,
@@ -2512,16 +2523,16 @@ var XBInputController = xblocks.view.create({
         };
     },
 
-    componentDidUpdate: function(prevProps) {
+    'componentDidUpdate': function(prevProps) {
         this._recalculateSize();
         this._dispatchEventToggleHint(prevProps.value, this.props.value);
     },
 
-    componentDidMount: function() {
+    'componentDidMount': function() {
         this._recalculateSize();
     },
 
-    _dispatchEventToggleHint: function(prevValue, nextValue) {
+    '_dispatchEventToggleHint': function(prevValue, nextValue) {
         if (this.props.isPlaceholderHint) {
             var hasPrevValue = Boolean(prevValue);
             var hasNestValue = Boolean(nextValue);
@@ -2533,7 +2544,7 @@ var XBInputController = xblocks.view.create({
         }
     },
 
-    _recalculateSize: function() {
+    '_recalculateSize': function() {
         if (!this.props.autosize) {
             return;
         }
@@ -2550,7 +2561,8 @@ var XBInputController = xblocks.view.create({
         }
     },
 
-    render: function() {
+    /* jshint ignore:start */
+    'render': function() {
         var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';
@@ -2582,6 +2594,7 @@ var XBInputController = xblocks.view.create({
             );
         }
     }
+    /* jshint ignore:end */
 });
 
 /* blocks/input/input-controller.jsx.js end */
@@ -2718,6 +2731,7 @@ xv.Input = xblocks.view.register('xb-input', [
             });
         },
 
+        /* jshint ignore:start */
         'render': function() {
             var isComplex = this._isComplex();
             var classes = {
@@ -2799,7 +2813,7 @@ xv.Input = xblocks.view.register('xb-input', [
 
                 children.push(
                     React.createElement("span", {key: "content", className: "_content"}, 
-                        React.createElement(XBInputController, React.__spread({},  controllerProps, {isPlaceholderHint: isPlaceholderHint})), 
+                        React.createElement(xv.InputController, React.__spread({},  controllerProps, {isPlaceholderHint: isPlaceholderHint})), 
                         React.createElement("span", {key: "view", className: "_view"})
                     )
                 );
@@ -2811,10 +2825,11 @@ xv.Input = xblocks.view.register('xb-input', [
             } else {
 
                 return (
-                    React.createElement(XBInputController, React.__spread({},  controllerProps, {className: classes, isPlaceholderHint: isPlaceholderHint}))
+                    React.createElement(xv.InputController, React.__spread({},  controllerProps, {className: classes, isPlaceholderHint: isPlaceholderHint}))
                 );
             }
         }
+        /* jshint ignore:end */
     }
 ]);
 
@@ -2846,7 +2861,7 @@ xb.Input = xblocks.create('xb-input', [
 
 /* blocks/checkbox/checkbox.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -2902,6 +2917,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [ {
         });
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-checkbox': true,
@@ -2946,6 +2962,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [ {
             )
         );
     }
+    /* jshint ignore:end */
 } ]);
 
 /* blocks/checkbox/checkbox.jsx.js end */
@@ -2986,7 +3003,7 @@ xb.Checkbox = xblocks.create('xb-checkbox', [
 
 /* blocks/radio/radio.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -3052,6 +3069,7 @@ xv.Radio = xblocks.view.register('xb-radio', [ {
         this.container().checked = event.target.checked;
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-radio': true,
@@ -3096,6 +3114,7 @@ xv.Radio = xblocks.view.register('xb-radio', [ {
             )
         );
     }
+    /* jshint ignore:end */
 } ]);
 
 /* blocks/radio/radio.jsx.js end */
@@ -3165,6 +3184,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
             };
         },
 
+        /* jshint ignore:start */
         'render': function() {
             var children = [
                 React.createElement("div", {key: "content", 
@@ -3203,6 +3223,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
                 React.createElement("div", {className: classes, tabIndex: "0"}, children)
             );
         }
+        /* jshint ignore:end */
     }
 ]);
 
@@ -3424,7 +3445,7 @@ xb.Popup = xblocks.create('xb-popup', [
 
 /* blocks/menuseparator/menuseparator.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, React, xv */
+/* global xblocks, xv */
 /* jshint strict: false */
 
 /**
@@ -3434,11 +3455,13 @@ xb.Popup = xblocks.create('xb-popup', [
 xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
     'displayName': 'xb-menuseparator',
 
+    /* jshint ignore:start */
     'render': function() {
         return (
             React.createElement("div", {className: "xb-menuseparator"})
         );
     }
+    /* jshint ignore:end */
 });
 
 /* blocks/menuseparator/menuseparator.jsx.js end */
@@ -3505,6 +3528,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             };
         },
 
+        /* jshint ignore:start */
         'render': function() {
             var classes = {
                 'xb-menuitem': true,
@@ -3537,6 +3561,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 React.createElement("div", {className: classes}, children)
             );
         }
+        /* jshint ignore:end */
     }
 ]);
 
@@ -4110,16 +4135,16 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
 
 /* blocks/select/select.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React, Tether, xv */
 /* jshint strict: false */
 
-var XBSelect = xblocks.view.register('xb-select', [
+xv.Select = xblocks.view.register('xb-select', [
     xblocks.mixin.vCommonAttrs,
 
     {
-        displayName: 'xb-select',
+        'displayName': 'xb-select',
 
-        propTypes: {
+        'propTypes': {
             'disabled': React.PropTypes.bool,
 
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
@@ -4134,14 +4159,14 @@ var XBSelect = xblocks.view.register('xb-select', [
             'required': React.PropTypes.bool
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'disabled': false,
                 'tabindex': '1'
             };
         },
 
-        componentDidMount: function() {
+        'componentDidMount': function() {
             new Tether({
                 element: this.refs.dropdown.getDOMNode(),
                 target: this.refs.control.getDOMNode(),
@@ -4163,7 +4188,8 @@ var XBSelect = xblocks.view.register('xb-select', [
             });
         },
 
-        render: function() {
+        /* jshint ignore:start */
+        'render': function() {
             var classes = {
                 'xb-select': true,
                 '_disabled': this.props.disabled
@@ -4191,6 +4217,7 @@ var XBSelect = xblocks.view.register('xb-select', [
                 )
             );
         }
+        /* jshint ignore:end */
     }
 ]);
 

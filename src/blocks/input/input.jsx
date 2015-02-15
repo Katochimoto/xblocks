@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, React, XBInputController */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /*! borschik:include:input-controller.jsx.js */
@@ -135,6 +135,7 @@ xv.Input = xblocks.view.register('xb-input', [
             });
         },
 
+        /* jshint ignore:start */
         'render': function() {
             var isComplex = this._isComplex();
             var classes = {
@@ -216,7 +217,7 @@ xv.Input = xblocks.view.register('xb-input', [
 
                 children.push(
                     <span key="content" className="_content">
-                        <XBInputController {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
+                        <xv.InputController {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
                         <span key="view" className="_view"></span>
                     </span>
                 );
@@ -228,9 +229,10 @@ xv.Input = xblocks.view.register('xb-input', [
             } else {
 
                 return (
-                    <XBInputController {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
+                    <xv.InputController {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
                 );
             }
         }
+        /* jshint ignore:end */
     }
 ]);

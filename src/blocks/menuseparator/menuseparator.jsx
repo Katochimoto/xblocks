@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, React, xv */
+/* global xblocks, xv */
 /* jshint strict: false */
 
 /**
@@ -9,9 +9,11 @@
 xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
     'displayName': 'xb-menuseparator',
 
+    /* jshint ignore:start */
     'render': function() {
         return (
             <div className="xb-menuseparator"></div>
         );
     }
+    /* jshint ignore:end */
 });

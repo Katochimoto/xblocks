@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
-var XBInputController = xblocks.view.create({
-    displayName: 'XBInputController',
+xv.InputController = xblocks.view.create({
+    'displayName': 'xb-input_controller',
 
-    propTypes: {
+    'propTypes': {
         'className':        React.PropTypes.string,
         'name':             React.PropTypes.string,
         'disabled':         React.PropTypes.bool,
@@ -26,7 +26,7 @@ var XBInputController = xblocks.view.create({
         'isPlaceholderHint': React.PropTypes.bool
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'value': undefined,
             'disabled': false,
@@ -39,16 +39,16 @@ var XBInputController = xblocks.view.create({
         };
     },
 
-    componentDidUpdate: function(prevProps) {
+    'componentDidUpdate': function(prevProps) {
         this._recalculateSize();
         this._dispatchEventToggleHint(prevProps.value, this.props.value);
     },
 
-    componentDidMount: function() {
+    'componentDidMount': function() {
         this._recalculateSize();
     },
 
-    _dispatchEventToggleHint: function(prevValue, nextValue) {
+    '_dispatchEventToggleHint': function(prevValue, nextValue) {
         if (this.props.isPlaceholderHint) {
             var hasPrevValue = Boolean(prevValue);
             var hasNestValue = Boolean(nextValue);
@@ -60,7 +60,7 @@ var XBInputController = xblocks.view.create({
         }
     },
 
-    _recalculateSize: function() {
+    '_recalculateSize': function() {
         if (!this.props.autosize) {
             return;
         }
@@ -77,7 +77,8 @@ var XBInputController = xblocks.view.create({
         }
     },
 
-    render: function() {
+    /* jshint ignore:start */
+    'render': function() {
         var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';
@@ -109,4 +110,5 @@ var XBInputController = xblocks.view.create({
             );
         }
     }
+    /* jshint ignore:end */
 });

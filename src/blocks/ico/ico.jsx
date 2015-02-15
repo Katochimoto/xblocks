@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React, xv */
+/* global xblocks, React, xv */
 /* jshint strict: false */
 
 /**
@@ -55,6 +55,7 @@ xv.Ico = xblocks.view.register('xb-ico', {
         };
     },
 
+    /* jshint ignore:start */
     'render': function() {
         var classes = {
             'xb-ico': true,
@@ -87,4 +88,5 @@ xv.Ico = xblocks.view.register('xb-ico', {
                 data-xb-content={this.props._uid}>{content}</span>
         );
     }
+    /* jshint ignore:end */
 });

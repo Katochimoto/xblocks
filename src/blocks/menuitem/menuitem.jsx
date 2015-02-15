@@ -42,6 +42,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             };
         },
 
+        /* jshint ignore:start */
         'render': function() {
             var classes = {
                 'xb-menuitem': true,
@@ -74,5 +75,6 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 <div className={classes}>{children}</div>
             );
         }
+        /* jshint ignore:end */
     }
 ]);

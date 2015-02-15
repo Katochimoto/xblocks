@@ -1,24 +1,26 @@
 /** @jsx React.DOM */
+/* global React, xv */
 /* jshint strict: false */
 
-var XBButtonContent = xblocks.view.create({
-    displayName: 'XBButtonContent',
+xv.ButtonContent = xblocks.view.create({
+    'displayName': 'xb-button_content',
 
-    propTypes: {
+    'propTypes': {
         'ico': React.PropTypes.object
     },
 
-    getDefaultProps: function() {
+    'getDefaultProps': function() {
         return {
             'ico': {}
         };
     },
 
-    shouldComponentUpdate: function(nextProps) {
+    'shouldComponentUpdate': function(nextProps) {
         return !xblocks.utils.equals(nextProps, this.props);
     },
 
-    render: function() {
+    /* jshint ignore:start */
+    'render': function() {
         var icoProps = xblocks.utils.merge({}, this.props.ico);
         var children = [
             <span className="_content-content"
@@ -41,4 +43,5 @@ var XBButtonContent = xblocks.view.create({
             <span className="_content">{children}</span>
         );
     }
+    /* jshint ignore:end */
 });

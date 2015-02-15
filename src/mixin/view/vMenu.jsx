@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, React */
+/* global xblocks, global */
 /* jshint strict: false */
 
 /**
@@ -7,7 +7,7 @@
  * @type {Object}
  */
 xblocks.mixin.vMenu = {
-    getInitialState: function() {
+    'getInitialState': function() {
         return {
             'maxHeight': 0,
             'isShowScrollTop': false,
@@ -15,7 +15,7 @@ xblocks.mixin.vMenu = {
         };
     },
 
-    componentWillMount: function() {
+    'componentWillMount': function() {
         this._enterTopFrame = 0;
         this._enterBottomFrame = 0;
         this._lockScroll = false;
@@ -26,13 +26,13 @@ xblocks.mixin.vMenu = {
         });
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    'componentWillReceiveProps': function(nextProps) {
         if (nextProps.size !== this.props.size) {
             this._updateMaxHeight(nextProps.size);
         }
     },
 
-    _updateMaxHeight: function(size, callback) {
+    '_updateMaxHeight': function(size, callback) {
         size = Number(size);
         var maxHeight = 0;
 
@@ -52,7 +52,7 @@ xblocks.mixin.vMenu = {
         }, this._redrawScrollNavigator.bind(this, callback));
     },
 
-    _redrawScrollNavigator: function(callback) {
+    '_redrawScrollNavigator': function(callback) {
         var target = this.refs.content.getDOMNode();
         var safeArea = 5;
         var height = Math.max(target.scrollHeight, target.clientHeight);
@@ -65,7 +65,7 @@ xblocks.mixin.vMenu = {
         }, this._redrawScrollNavigatorSuccess.bind(this, callback));
     },
 
-    _redrawScrollNavigatorSuccess: function(callback) {
+    '_redrawScrollNavigatorSuccess': function(callback) {
         if (!this.state.isShowScrollTop) {
             this._onMouseLeaveTop();
         }
@@ -79,7 +79,7 @@ xblocks.mixin.vMenu = {
         }
     },
 
-    _onScroll: function(event) {
+    '_onScroll': function() {
         if (this._lockScroll) {
             return;
         }
@@ -89,11 +89,11 @@ xblocks.mixin.vMenu = {
         this._redrawScrollNavigator(this._onScrollSuccess);
     },
 
-    _onScrollSuccess: function() {
+    '_onScrollSuccess': function() {
         this._lockScroll = false;
     },
 
-    _onScrollThrottle: function() {
+    '_onScrollThrottle': function() {
         xblocks.event.dispatch(
             this.refs.content.getDOMNode(),
             'jsx-scroll-throttle',
@@ -101,41 +101,42 @@ xblocks.mixin.vMenu = {
         );
     },
 
-    _animationScrollTop: function() {
+    '_animationScrollTop': function() {
         this.refs.content.getDOMNode().scrollTop--;
         this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
     },
 
-    _onMouseEnterTop: function() {
+    '_onMouseEnterTop': function() {
         this._onMouseLeaveTop();
         this._animationScrollTop();
     },
 
-    _onMouseLeaveTop: function() {
+    '_onMouseLeaveTop': function() {
         if (this._enterTopFrame) {
             global.cancelAnimationFrame(this._enterTopFrame);
             this._enterTopFrame = 0;
         }
     },
 
-    _animationScrollBottom: function() {
+    '_animationScrollBottom': function() {
         this.refs.content.getDOMNode().scrollTop++;
         this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
     },
 
-    _onMouseEnterBottom: function() {
+    '_onMouseEnterBottom': function() {
         this._onMouseLeaveBottom();
         this._animationScrollBottom();
     },
 
-    _onMouseLeaveBottom: function() {
+    '_onMouseLeaveBottom': function() {
         if (this._enterBottomFrame) {
             global.cancelAnimationFrame(this._enterBottomFrame);
             this._enterBottomFrame = 0;
         }
     },
 
-    render: function() {
+    /* jshint ignore:start */
+    'render': function() {
         var classes = {
             '_popup': true
         };
@@ -173,4 +174,5 @@ xblocks.mixin.vMenu = {
             </div>
         );
     }
+    /* jshint ignore:end */
 };

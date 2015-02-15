@@ -1,14 +1,14 @@
 /** @jsx React.DOM */
-/* global xblocks, global, React */
+/* global xblocks, React, Tether, xv */
 /* jshint strict: false */
 
-var XBSelect = xblocks.view.register('xb-select', [
+xv.Select = xblocks.view.register('xb-select', [
     xblocks.mixin.vCommonAttrs,
 
     {
-        displayName: 'xb-select',
+        'displayName': 'xb-select',
 
-        propTypes: {
+        'propTypes': {
             'disabled': React.PropTypes.bool,
 
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
@@ -23,14 +23,14 @@ var XBSelect = xblocks.view.register('xb-select', [
             'required': React.PropTypes.bool
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'disabled': false,
                 'tabindex': '1'
             };
         },
 
-        componentDidMount: function() {
+        'componentDidMount': function() {
             new Tether({
                 element: this.refs.dropdown.getDOMNode(),
                 target: this.refs.control.getDOMNode(),
@@ -52,7 +52,8 @@ var XBSelect = xblocks.view.register('xb-select', [
             });
         },
 
-        render: function() {
+        /* jshint ignore:start */
+        'render': function() {
             var classes = {
                 'xb-select': true,
                 '_disabled': this.props.disabled
@@ -80,5 +81,6 @@ var XBSelect = xblocks.view.register('xb-select', [
                 </div>
             );
         }
+        /* jshint ignore:end */
     }
 ]);
