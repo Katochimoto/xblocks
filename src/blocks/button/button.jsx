@@ -12,9 +12,9 @@ xv.Button = xblocks.view.register('xb-button', [
     xblocks.utils.exportPropTypes('xb-ico'),
 
     {
-        displayName: 'xb-button',
+        'displayName': 'xb-button',
 
-        propTypes: {
+        'propTypes': {
             'children': React.PropTypes.node,
             'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'theme': React.PropTypes.oneOf([
@@ -54,8 +54,8 @@ xv.Button = xblocks.view.register('xb-button', [
             'required': React.PropTypes.bool
         },
 
-        statics: {
-            filterIcoProps: function(props) {
+        'statics': {
+            'filterIcoProps': function(props) {
                 return xblocks.utils.mapObject(
                     xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
                     xblocks.utils.mapPropsPrefixIco
@@ -63,7 +63,7 @@ xv.Button = xblocks.view.register('xb-button', [
             }
         },
 
-        getDefaultProps: function() {
+        'getDefaultProps': function() {
             return {
                 'size': 'm',
                 'theme': 'normal',
@@ -78,36 +78,36 @@ xv.Button = xblocks.view.register('xb-button', [
             };
         },
 
-        getInitialState: function() {
+        'getInitialState': function() {
             return {
                 'checked': this.props.checked
             };
         },
 
-        componentWillReceiveProps: function(nextProps) {
+        'componentWillReceiveProps': function(nextProps) {
             this.setState({
                 'checked': Boolean(nextProps.checked)
             });
         },
 
-        componentWillUpdate: function(nextProps, nextState) {
+        'componentWillUpdate': function(nextProps, nextState) {
             if (nextProps.type === 'radio' && nextState.checked) {
                 xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
             }
         },
 
-        componentWillMount: function() {
+        'componentWillMount': function() {
             if (this.props.type === 'radio' && this.state.checked) {
                 xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
             }
         },
 
-        _onChange: function(event) {
+        '_onChange': function(event) {
             this.container().checked = event.target.checked;
         },
 
         /* jshint ignore:start */
-        render: function() {
+        'render': function() {
             var classes = {
                 'xb-button': true,
                 '_disabled': this.props.disabled
