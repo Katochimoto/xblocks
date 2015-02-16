@@ -1929,91 +1929,98 @@ xblocks.mixin.vMenu = {
 /**
  * @class xv.Ico
  * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
  */
-xv.Ico = xblocks.view.register('xb-ico', {
-    'displayName': 'xb-ico',
+xv.Ico = xblocks.view.register('xb-ico', [
+    xblocks.mixin.vCommonAttrs,
 
-    'propTypes': {
-        'title':    React.PropTypes.string,
-        'value':    React.PropTypes.string,
-        'tabindex': React.PropTypes.string,
-        'children': React.PropTypes.node,
-        'size':     React.PropTypes.oneOf([ 's', 'm' ]),
-        'type':     React.PropTypes.oneOf([
-            'attention',
-            'close',
-            'check',
-            'download',
-            'download-white',
-            'dropdown',
-            'eye',
-            'link',
-            'link-white',
-            'mail',
-            'notification',
-            'odnoklassniki',
-            'pause',
-            'people',
-            'play',
-            'print',
-            'remove',
-            'services',
-            'settings',
-            'three-dots',
-            'trash',
-            'trash-white',
-            'twitter',
-            'help',
-            'upload',
-            'upload-white',
-            'vk'
-        ]),
-        'active':   React.PropTypes.bool,
-        'disabled': React.PropTypes.bool
-    },
+    {
+        'displayName': 'xb-ico',
 
-    'getDefaultProps': function() {
-        return {
-            'size': 's',
-            'children': String.fromCharCode(160)
-        };
-    },
+        'mixins': [ React.addons.PureRenderMixin ],
 
-    /* jshint ignore:start */
-    'render': function() {
-        var classes = {
-            'xb-ico': true,
-            '_active': this.props.active,
-            '_disabled': this.props.disabled
-        };
+        'propTypes': {
+            'value':    React.PropTypes.string,
+            'active':   React.PropTypes.bool,
+            'disabled': React.PropTypes.bool,
+            'size':     React.PropTypes.oneOf([ 's', 'm' ]),
+            'type':     React.PropTypes.oneOf([
+                'attention',
+                'close',
+                'check',
+                'download',
+                'download-white',
+                'dropdown',
+                'eye',
+                'link',
+                'link-white',
+                'mail',
+                'notification',
+                'odnoklassniki',
+                'pause',
+                'people',
+                'play',
+                'print',
+                'remove',
+                'services',
+                'settings',
+                'three-dots',
+                'trash',
+                'trash-white',
+                'twitter',
+                'help',
+                'upload',
+                'upload-white',
+                'vk'
+            ])
+        },
 
-        if (this.props.type) {
-            classes[ '_type-' + this.props.type ] = true;
+        'getDefaultProps': function() {
+            return {
+                'size':     's',
+                'children': String.fromCharCode(160),
+                'active':   false,
+                'disabled': false
+            };
+        },
+
+        /* jshint ignore:start */
+        'render': function() {
+            var classes = {
+                'xb-ico':    true,
+                '_active':   this.props.active,
+                '_disabled': this.props.disabled
+            };
+
+            if (this.props.type) {
+                classes[ '_type-' + this.props.type ] = true;
+            }
+
+            if (this.props.size) {
+                classes[ '_size-' + this.props.size ] = true;
+            }
+
+            classes = React.addons.classSet(classes);
+
+            var tabIndex = this.props.tabindex;
+
+            if (this.props.disabled) {
+                tabIndex = '-1';
+            }
+
+            var content = this.props.value || this.props.children;
+
+            return (
+                React.createElement("span", {className: classes, 
+                    title: this.props.title, 
+                    tabIndex: tabIndex, 
+                    "data-xb-content": this.props._uid}, content)
+            );
         }
-
-        if (this.props.size) {
-            classes[ '_size-' + this.props.size ] = true;
-        }
-
-        classes = React.addons.classSet(classes);
-
-        var tabIndex = this.props.tabindex;
-
-        if (this.props.disabled) {
-            tabIndex = '-1';
-        }
-
-        var content = this.props.value || this.props.children;
-
-        return (
-            React.createElement("span", {className: classes, 
-                title: this.props.title, 
-                tabIndex: tabIndex, 
-                "data-xb-content": this.props._uid}, content)
-        );
+        /* jshint ignore:end */
     }
-    /* jshint ignore:end */
-});
+]);
 
 /* blocks/ico/ico.jsx.js end */
 
@@ -2051,59 +2058,66 @@ xb.Ico = xblocks.create('xb-ico', [
 /**
  * @class xv.Link
  * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
  */
-xv.Link = xblocks.view.register('xb-link', {
-    'displayName': 'xb-link',
+xv.Link = xblocks.view.register('xb-link', [
+    xblocks.mixin.vCommonAttrs,
 
-    'propTypes': {
-        'disabled': React.PropTypes.bool,
-        'href':     React.PropTypes.string,
-        'name':     React.PropTypes.string,
-        'tabindex': React.PropTypes.string,
-        'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
-        'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
-    },
+    {
+        'displayName': 'xb-link',
 
-    'getDefaultProps': function() {
-        return {
-            'theme': 'normal',
-            'tabindex': '1'
-        };
-    },
+        'mixins': [ React.addons.PureRenderMixin ],
 
-    /* jshint ignore:start */
-    'render': function() {
-        var classes = {
-            'xb-link': true,
-            '_disabled': this.props.disabled
-        };
+        'propTypes': {
+            'disabled': React.PropTypes.bool,
+            'href':     React.PropTypes.string,
+            'name':     React.PropTypes.string,
+            'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
+            'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
+        },
 
-        if (this.props.theme) {
-            classes[ '_theme-' + this.props.theme ] = true;
+        'getDefaultProps': function() {
+            return {
+                'disabled': false,
+                'theme':    'normal',
+                'tabindex': '1'
+            };
+        },
+
+        /* jshint ignore:start */
+        'render': function() {
+            var classes = {
+                'xb-link':   true,
+                '_disabled': this.props.disabled
+            };
+
+            if (this.props.theme) {
+                classes[ '_theme-' + this.props.theme ] = true;
+            }
+
+            var tabIndex = this.props.tabindex;
+
+            if (this.props.disabled) {
+                tabIndex = '-1';
+            }
+
+            classes = React.addons.classSet(classes);
+
+            var content = this.props.value || this.props.children;
+
+            return (
+                React.createElement("a", {name: this.props.name, 
+                    href: this.props.href, 
+                    target: this.props.target, 
+                    tabIndex: tabIndex, 
+                    className: classes, 
+                    "data-xb-content": this.props._uid}, content)
+            );
         }
-
-        var tabIndex = this.props.tabindex;
-
-        if (this.props.disabled) {
-            tabIndex = '-1';
-        }
-
-        classes = React.addons.classSet(classes);
-
-        var content = this.props.value || this.props.children;
-
-        return (
-            React.createElement("a", {id: this.props.id, 
-                name: this.props.name, 
-                href: this.props.href, 
-                target: this.props.target, 
-                tabIndex: tabIndex, 
-                className: classes, 
-                "data-xb-content": this.props._uid}, content)
-        );
+        /* jshint ignore:end */
     }
-    /* jshint ignore:end */
-});
+]);
 
 /* blocks/link/link.jsx.js end */
 
@@ -2187,17 +2201,21 @@ xv.ButtonContent = xblocks.view.create({
 /**
  * @class xv.Button
  * @memberof xv
+ * @mixes React.addons.PureRenderMixin
+ * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Button = xblocks.view.register('xb-button', [
     xblocks.utils.exportPropTypes('xb-ico'),
+    xblocks.mixin.vCommonAttrs,
 
     {
         'displayName': 'xb-button',
 
+        'mixins': [ React.addons.PureRenderMixin ],
+
         'propTypes': {
-            'children': React.PropTypes.node,
-            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'theme': React.PropTypes.oneOf([
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'theme':        React.PropTypes.oneOf([
                 'normal',
                 'action',
                 'dark',
@@ -2206,32 +2224,27 @@ xv.Button = xblocks.view.register('xb-button', [
                 'pseudo',
                 'promo'
             ]),
-            'type': React.PropTypes.oneOf([
+            'type':         React.PropTypes.oneOf([
                 'label',
                 'inline',
                 'link',
                 'file',
-
                 'button',
                 'submit',
-
                 'checkbox',
                 'radio'
             ]),
-            'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-            'value': React.PropTypes.string,
-            'href': React.PropTypes.string,
-            'name': React.PropTypes.string,
-            'title': React.PropTypes.string,
-            'form': React.PropTypes.string,
-            'for': React.PropTypes.string,
-            'tabindex': React.PropTypes.string,
-
-            'multiple': React.PropTypes.bool,
-            'autofocus': React.PropTypes.bool,
-            'disabled': React.PropTypes.bool,
-            'checked': React.PropTypes.bool,
-            'required': React.PropTypes.bool
+            'target':       React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
+            'value':        React.PropTypes.string,
+            'href':         React.PropTypes.string,
+            'name':         React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'for':          React.PropTypes.string,
+            'multiple':     React.PropTypes.bool,
+            'autofocus':    React.PropTypes.bool,
+            'disabled':     React.PropTypes.bool,
+            'checked':      React.PropTypes.bool,
+            'required':     React.PropTypes.bool
         },
 
         'statics': {
@@ -2245,16 +2258,16 @@ xv.Button = xblocks.view.register('xb-button', [
 
         'getDefaultProps': function() {
             return {
-                'size': 'm',
-                'theme': 'normal',
-                'type': 'button',
-                'tabindex': '0',
-                'children': String.fromCharCode(160),
-                'checked': false,
-                'multiple': false,
-                'autofocus': false,
-                'disabled': false,
-                'required': false
+                'size':         'm',
+                'theme':        'normal',
+                'type':         'button',
+                'tabindex':     '0',
+                'children':     String.fromCharCode(160),
+                'checked':      false,
+                'multiple':     false,
+                'autofocus':    false,
+                'disabled':     false,
+                'required':     false
             };
         },
 
@@ -2294,11 +2307,11 @@ xv.Button = xblocks.view.register('xb-button', [
             };
 
             if (this.props.theme) {
-                classes['_theme-' + this.props.theme] = true;
+                classes[ '_theme-' + this.props.theme ] = true;
             }
 
             if (this.props.size) {
-                classes['_size-' + this.props.size] = true;
+                classes[ '_size-' + this.props.size ] = true;
             }
 
             classes = React.addons.classSet(classes);
@@ -2497,6 +2510,8 @@ xb.Button = xblocks.create('xb-button', [
 xv.InputController = xblocks.view.create({
     'displayName': 'xb-input_controller',
 
+    'mixins': [ React.addons.PureRenderMixin ],
+
     'propTypes': {
         'className':        React.PropTypes.string,
         'name':             React.PropTypes.string,
@@ -2520,14 +2535,14 @@ xv.InputController = xblocks.view.create({
 
     'getDefaultProps': function() {
         return {
-            'value': undefined,
-            'disabled': false,
-            'multiline': false,
-            'required': false,
-            'readOnly': false,
-            'autosize': false,
-            'autoFocus': false,
-            'isPlaceholderHint': false
+            'value':                undefined,
+            'disabled':             false,
+            'multiline':            false,
+            'required':             false,
+            'readOnly':             false,
+            'autosize':             false,
+            'autoFocus':            false,
+            'isPlaceholderHint':    false
         };
     },
 
@@ -2577,18 +2592,18 @@ xv.InputController = xblocks.view.create({
         }
 
         var props = {
-            'value': this.props.value,
-            'className': this.props.className,
-            'name': this.props.name,
-            'disabled': this.props.disabled,
-            'required': this.props.required,
-            'readOnly': this.props.readOnly,
-            'autoFocus': this.props.autoFocus,
+            'value':        this.props.value,
+            'className':    this.props.className,
+            'name':         this.props.name,
+            'disabled':     this.props.disabled,
+            'required':     this.props.required,
+            'readOnly':     this.props.readOnly,
+            'autoFocus':    this.props.autoFocus,
             // macos inserts placeholder default
-            'placeholder': this.props.placeholder || '',
-            'tabIndex': tabIndex,
+            'placeholder':  this.props.placeholder || '',
+            'tabIndex':     tabIndex,
             'autocomplete': this.props.autocomplete,
-            'onChange': this.props.onChange
+            'onChange':     this.props.onChange
         };
 
         if (this.props.multiline) {
@@ -2615,12 +2630,15 @@ xv.InputController = xblocks.view.create({
 /**
  * @class xv.Input
  * @memberof xv
+ * @mixes React.addons.PureRenderMixin
  */
 xv.Input = xblocks.view.register('xb-input', [
     xblocks.utils.exportPropTypes('xb-link'),
 
     {
         'displayName': 'xb-input',
+
+        'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
             'name':         React.PropTypes.string,
@@ -2658,27 +2676,20 @@ xv.Input = xblocks.view.register('xb-input', [
             }
         },
 
-        'shouldComponentUpdate': function(nextProps, nextState) {
-            return Boolean(
-                !xblocks.utils.equals(nextProps, this.props) ||
-                !xblocks.utils.equals(nextState, this.state)
-            );
-        },
-
         'getDefaultProps': function() {
             return {
-                'value': undefined,
-                'type': 'text',
-                'size': 'm',
-                'rows': '4',
-                'disabled': false,
-                'autosize': false,
-                'multiline': false,
-                'required': false,
-                'readonly': false,
-                'reset': false,
-                'autofocus': false,
-                'ghost': false
+                'value':        undefined,
+                'type':         'text',
+                'size':         'm',
+                'rows':         '4',
+                'disabled':     false,
+                'autosize':     false,
+                'multiline':    false,
+                'required':     false,
+                'readonly':     false,
+                'reset':        false,
+                'autofocus':    false,
+                'ghost':        false
             };
         },
 
@@ -2743,12 +2754,12 @@ xv.Input = xblocks.view.register('xb-input', [
         'render': function() {
             var isComplex = this._isComplex();
             var classes = {
-                'xb-input': true,
-                '_disabled': Boolean(this.props.disabled),
-                '_autosize': Boolean(this.props.autosize),
-                '_ghost': Boolean(this.props.ghost),
-                '_complex': isComplex,
-                '_simple': !isComplex
+                'xb-input':     true,
+                '_disabled':    this.props.disabled,
+                '_autosize':    this.props.autosize,
+                '_ghost':       this.props.ghost,
+                '_complex':     isComplex,
+                '_simple':      !isComplex
             };
 
             if (this.props.size) {
@@ -2759,22 +2770,22 @@ xv.Input = xblocks.view.register('xb-input', [
 
             var isPlaceholderHint = false;
             var controllerProps = {
-                'key': 'controller',
-                'ref': 'controller',
-                'className': '_controller',
-                'value': this.state.value,
-                'name': this.props.name,
-                'disabled': this.props.disabled,
-                'required': this.props.required,
-                'readOnly': this.props.readonly,
-                'multiline': this.props.multiline,
-                'autoFocus': this.props.autofocus,
-                'rows': this.props.rows,
-                'cols': this.props.cols,
-                'tabIndex': this.props.tabindex,
+                'key':          'controller',
+                'ref':          'controller',
+                'className':    '_controller',
+                'value':        this.state.value,
+                'name':         this.props.name,
+                'disabled':     this.props.disabled,
+                'required':     this.props.required,
+                'readOnly':     this.props.readonly,
+                'multiline':    this.props.multiline,
+                'autoFocus':    this.props.autofocus,
+                'rows':         this.props.rows,
+                'cols':         this.props.cols,
+                'tabIndex':     this.props.tabindex,
                 'autocomplete': this.props.autocomplete,
-                'autosize': this.props.autosize,
-                'onChange': this._onChange,
+                'autosize':     this.props.autosize,
+                'onChange':     this._onChange,
                 'onHintToggle': this._onHintToggle
             };
 
@@ -2875,103 +2886,108 @@ xb.Input = xblocks.create('xb-input', [
 /**
  * @class xv.Checkbox
  * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
  */
-xv.Checkbox = xblocks.view.register('xb-checkbox', [ {
-    'displayName': 'xb-checkbox',
+xv.Checkbox = xblocks.view.register('xb-checkbox', [
+    xblocks.mixin.vCommonAttrs,
 
-    'propTypes': {
-        'children':     React.PropTypes.node,
-        'size':         React.PropTypes.oneOf([ 's', 'm' ]),
-        'value':        React.PropTypes.string,
-        'name':         React.PropTypes.string,
-        'title':        React.PropTypes.string,
-        'form':         React.PropTypes.string,
-        'for':          React.PropTypes.string,
-        'tabindex':     React.PropTypes.string,
-        'autofocus':    React.PropTypes.bool,
-        'checked':      React.PropTypes.bool,
-        'disabled':     React.PropTypes.bool,
-        'required':     React.PropTypes.bool
-    },
+    {
+        'displayName': 'xb-checkbox',
 
-    'getDefaultProps': function() {
-        return {
-            'size': 'm',
-            'children': '',
-            'value': 'on',
-            'tabindex': '0',
-            'checked': false,
-            'disabled': false,
-            'autofocus': false,
-            'required': false
-        };
-    },
+        'mixins': [ React.addons.PureRenderMixin ],
 
-    'getInitialState': function() {
-        return {
-            'checked': this.props.checked
-        };
-    },
+        'propTypes': {
+            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
+            'value':        React.PropTypes.string,
+            'name':         React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'for':          React.PropTypes.string,
+            'autofocus':    React.PropTypes.bool,
+            'checked':      React.PropTypes.bool,
+            'disabled':     React.PropTypes.bool,
+            'required':     React.PropTypes.bool
+        },
 
-    'componentWillReceiveProps': function(nextProps) {
-        this.setState({
-            'checked': nextProps.checked
-        });
-    },
+        'getDefaultProps': function() {
+            return {
+                'size':         'm',
+                'children':     '',
+                'value':        'on',
+                'tabindex':     '0',
+                'autofocus':    false,
+                'checked':      false,
+                'disabled':     false,
+                'required':     false
+            };
+        },
 
-    '_onChange': function(event) {
-        this.setState({
-            'checked': event.target.checked
-        });
-    },
+        'getInitialState': function() {
+            return {
+                'checked': this.props.checked
+            };
+        },
 
-    /* jshint ignore:start */
-    'render': function() {
-        var classes = {
-            'xb-checkbox': true,
-            '_disabled': this.props.disabled
-        };
+        'componentWillReceiveProps': function(nextProps) {
+            this.setState({
+                'checked': nextProps.checked
+            });
+        },
 
-        if (this.props.size) {
-            classes[ '_size-' + this.props.size ] = true;
+        '_onChange': function(event) {
+            this.setState({
+                'checked': event.target.checked
+            });
+        },
+
+        /* jshint ignore:start */
+        'render': function() {
+            var classes = {
+                'xb-checkbox': true,
+                '_disabled':   this.props.disabled
+            };
+
+            if (this.props.size) {
+                classes[ '_size-' + this.props.size ] = true;
+            }
+
+            classes = React.addons.classSet(classes);
+
+            var tabIndex = this.props.tabindex;
+
+            if (this.props.disabled) {
+                tabIndex = '-1';
+            }
+
+            return (
+                React.createElement("label", {className: classes, 
+                    title: this.props.title, 
+                    form: this.props.form, 
+                    htmlFor: this.props['for']}, 
+
+                    React.createElement("input", {type: "checkbox", 
+                        className: "_xb-check_controller", 
+                        name: this.props.name, 
+                        value: this.props.value, 
+                        disabled: this.props.disabled, 
+                        defaultChecked: this.props.checked, 
+                        checked: this.state.checked, 
+                        autoFocus: this.props.autofocus, 
+                        readOnly: true, 
+                        onChange: this._onChange, 
+                        required: this.props.required, 
+                        tabIndex: tabIndex}), 
+
+                    React.createElement("span", {className: "_xb-checkbox_flag _xb-check_flag"}, 
+                        React.createElement("span", {className: "_xb-checkbox_flag-icon"})
+                    ), 
+                    React.createElement("span", {"data-xb-content": this.props._uid}, this.props.children)
+                )
+            );
         }
-
-        classes = React.addons.classSet(classes);
-
-        var tabIndex = this.props.tabindex;
-
-        if (this.props.disabled) {
-            tabIndex = '-1';
-        }
-
-        return (
-            React.createElement("label", {className: classes, 
-                title: this.props.title, 
-                form: this.props.form, 
-                htmlFor: this.props['for']}, 
-
-                React.createElement("input", {type: "checkbox", 
-                    className: "_xb-check_controller", 
-                    name: this.props.name, 
-                    value: this.props.value, 
-                    disabled: this.props.disabled, 
-                    defaultChecked: this.props.checked, 
-                    checked: this.state.checked, 
-                    autoFocus: this.props.autofocus, 
-                    readOnly: true, 
-                    onChange: this._onChange, 
-                    required: this.props.required, 
-                    tabIndex: tabIndex}), 
-
-                React.createElement("span", {className: "_xb-checkbox_flag _xb-check_flag"}, 
-                    React.createElement("span", {className: "_xb-checkbox_flag-icon"})
-                ), 
-                React.createElement("span", {"data-xb-content": this.props._uid}, this.props.children)
-            )
-        );
+        /* jshint ignore:end */
     }
-    /* jshint ignore:end */
-} ]);
+]);
 
 /* blocks/checkbox/checkbox.jsx.js end */
 
@@ -3017,113 +3033,118 @@ xb.Checkbox = xblocks.create('xb-checkbox', [
 /**
  * @class xv.Radio
  * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
  */
-xv.Radio = xblocks.view.register('xb-radio', [ {
-    'displayName': 'xb-radio',
+xv.Radio = xblocks.view.register('xb-radio', [
+    xblocks.mixin.vCommonAttrs,
 
-    'propTypes': {
-        'children':     React.PropTypes.node,
-        'size':         React.PropTypes.oneOf([ 's', 'm' ]),
-        'value':        React.PropTypes.string,
-        'name':         React.PropTypes.string,
-        'title':        React.PropTypes.string,
-        'form':         React.PropTypes.string,
-        'for':          React.PropTypes.string,
-        'tabindex':     React.PropTypes.string,
-        'autofocus':    React.PropTypes.bool,
-        'checked':      React.PropTypes.bool,
-        'disabled':     React.PropTypes.bool,
-        'required':     React.PropTypes.bool
-    },
+    {
+        'displayName': 'xb-radio',
 
-    'getDefaultProps': function() {
-        return {
-            'size': 'm',
-            'children': '',
-            'value': 'on',
-            'tabindex': '0',
-            'checked': false,
-            'disabled': false,
-            'autofocus': false,
-            'required': false
-        };
-    },
+        'mixins': [ React.addons.PureRenderMixin ],
 
-    'getInitialState': function() {
-        return {
-            'checked': this.props.checked
-        };
-    },
+        'propTypes': {
+            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
+            'value':        React.PropTypes.string,
+            'name':         React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'for':          React.PropTypes.string,
+            'autofocus':    React.PropTypes.bool,
+            'checked':      React.PropTypes.bool,
+            'disabled':     React.PropTypes.bool,
+            'required':     React.PropTypes.bool
+        },
 
-    'componentWillReceiveProps': function(nextProps) {
-        this.setState({
-            'checked': Boolean(nextProps.checked)
-        });
-    },
+        'getDefaultProps': function() {
+            return {
+                'size':         'm',
+                'children':     '',
+                'value':        'on',
+                'tabindex':     '0',
+                'autofocus':    false,
+                'checked':      false,
+                'disabled':     false,
+                'required':     false
+            };
+        },
 
-    'componentWillUpdate': function(nextProps, nextState) {
-        if (nextState.checked) {
-            xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
+        'getInitialState': function() {
+            return {
+                'checked': this.props.checked
+            };
+        },
+
+        'componentWillReceiveProps': function(nextProps) {
+            this.setState({
+                'checked': Boolean(nextProps.checked)
+            });
+        },
+
+        'componentWillUpdate': function(nextProps, nextState) {
+            if (nextState.checked) {
+                xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
+            }
+        },
+
+        'componentWillMount': function() {
+            if (this.state.checked) {
+                xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
+            }
+        },
+
+        '_onChange': function(event) {
+            this.container().checked = event.target.checked;
+        },
+
+        /* jshint ignore:start */
+        'render': function() {
+            var classes = {
+                'xb-radio':  true,
+                '_disabled': this.props.disabled
+            };
+
+            if (this.props.size) {
+                classes[ '_size-' + this.props.size ] = true;
+            }
+
+            classes = React.addons.classSet(classes);
+
+            var tabIndex = this.props.tabindex;
+
+            if (this.props.disabled) {
+                tabIndex = '-1';
+            }
+
+            return (
+                React.createElement("label", {className: classes, 
+                    title: this.props.title, 
+                    form: this.props.form, 
+                    htmlFor: this.props['for']}, 
+
+                    React.createElement("input", {type: "radio", 
+                        className: "_xb-check_controller", 
+                        name: this.props.name, 
+                        value: this.props.value, 
+                        disabled: this.props.disabled, 
+                        defaultChecked: this.props.checked, 
+                        checked: this.state.checked, 
+                        autoFocus: this.props.autofocus, 
+                        readOnly: true, 
+                        onChange: this._onChange, 
+                        required: this.props.required, 
+                        tabIndex: tabIndex}), 
+
+                    React.createElement("span", {className: "_xb-radio_flag _xb-check_flag"}, 
+                        React.createElement("span", {className: "_xb-radio_flag-icon"})
+                    ), 
+                    React.createElement("span", {"data-xb-content": this.props._uid}, this.props.children)
+                )
+            );
         }
-    },
-
-    'componentWillMount': function() {
-        if (this.state.checked) {
-            xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
-        }
-    },
-
-    '_onChange': function(event) {
-        this.container().checked = event.target.checked;
-    },
-
-    /* jshint ignore:start */
-    'render': function() {
-        var classes = {
-            'xb-radio': true,
-            '_disabled': this.props.disabled
-        };
-
-        if (this.props.size) {
-            classes['_size-' + this.props.size] = true;
-        }
-
-        classes = React.addons.classSet(classes);
-
-        var tabIndex = this.props.tabindex;
-
-        if (this.props.disabled) {
-            tabIndex = '-1';
-        }
-
-        return (
-            React.createElement("label", {className: classes, 
-                title: this.props.title, 
-                form: this.props.form, 
-                htmlFor: this.props['for']}, 
-
-                React.createElement("input", {type: "radio", 
-                    className: "_xb-check_controller", 
-                    name: this.props.name, 
-                    value: this.props.value, 
-                    disabled: this.props.disabled, 
-                    defaultChecked: this.props.checked, 
-                    checked: this.state.checked, 
-                    autoFocus: this.props.autofocus, 
-                    readOnly: true, 
-                    onChange: this._onChange, 
-                    required: this.props.required, 
-                    tabIndex: tabIndex}), 
-
-                React.createElement("span", {className: "_xb-radio_flag _xb-check_flag"}, 
-                    React.createElement("span", {className: "_xb-radio_flag-icon"})
-                ), 
-                React.createElement("span", {"data-xb-content": this.props._uid}, this.props.children)
-            )
-        );
+        /* jshint ignore:end */
     }
-    /* jshint ignore:end */
-} ]);
+]);
 
 /* blocks/radio/radio.jsx.js end */
 
@@ -3503,6 +3524,7 @@ xb.Menuseparator = xblocks.create('xb-menuseparator', [
  * @mixes React.addons.PureRenderMixin
  */
 xv.Menuitem = xblocks.view.register('xb-menuitem', [
+    xblocks.utils.exportPropTypes('xb-ico'),
     xblocks.mixin.vCommonAttrs,
 
     {
@@ -3531,8 +3553,8 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             return {
                 'disabled': false,
                 'selected': false,
-                'focused': false,
-                'submenu': false
+                'focused':  false,
+                'submenu':  false
             };
         },
 
@@ -3540,10 +3562,10 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
         'render': function() {
             var classes = {
                 'xb-menuitem': true,
-                '_disabled': this.props.disabled,
-                '_focused': this.props.focused,
-                '_selected': this.props.selected,
-                '_submenu': this.props.submenu,
+                '_disabled':   this.props.disabled,
+                '_focused':    this.props.focused,
+                '_selected':   this.props.selected,
+                '_submenu':    this.props.submenu,
             };
 
             classes = React.addons.classSet(classes);
@@ -3607,10 +3629,7 @@ var _xbMenuitem = {
              */
             'open': function(submenu) {
                 if (submenu && !timerOpenSubmenu) {
-                    timerOpenSubmenu = global.setTimeout(
-                        submenu.open.bind(submenu),
-                        200
-                    );
+                    timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                 }
             },
 

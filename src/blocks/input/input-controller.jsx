@@ -9,6 +9,8 @@
 xv.InputController = xblocks.view.create({
     'displayName': 'xb-input_controller',
 
+    'mixins': [ React.addons.PureRenderMixin ],
+
     'propTypes': {
         'className':        React.PropTypes.string,
         'name':             React.PropTypes.string,
@@ -32,14 +34,14 @@ xv.InputController = xblocks.view.create({
 
     'getDefaultProps': function() {
         return {
-            'value': undefined,
-            'disabled': false,
-            'multiline': false,
-            'required': false,
-            'readOnly': false,
-            'autosize': false,
-            'autoFocus': false,
-            'isPlaceholderHint': false
+            'value':                undefined,
+            'disabled':             false,
+            'multiline':            false,
+            'required':             false,
+            'readOnly':             false,
+            'autosize':             false,
+            'autoFocus':            false,
+            'isPlaceholderHint':    false
         };
     },
 
@@ -89,18 +91,18 @@ xv.InputController = xblocks.view.create({
         }
 
         var props = {
-            'value': this.props.value,
-            'className': this.props.className,
-            'name': this.props.name,
-            'disabled': this.props.disabled,
-            'required': this.props.required,
-            'readOnly': this.props.readOnly,
-            'autoFocus': this.props.autoFocus,
+            'value':        this.props.value,
+            'className':    this.props.className,
+            'name':         this.props.name,
+            'disabled':     this.props.disabled,
+            'required':     this.props.required,
+            'readOnly':     this.props.readOnly,
+            'autoFocus':    this.props.autoFocus,
             // macos inserts placeholder default
-            'placeholder': this.props.placeholder || '',
-            'tabIndex': tabIndex,
+            'placeholder':  this.props.placeholder || '',
+            'tabIndex':     tabIndex,
             'autocomplete': this.props.autocomplete,
-            'onChange': this.props.onChange
+            'onChange':     this.props.onChange
         };
 
         if (this.props.multiline) {

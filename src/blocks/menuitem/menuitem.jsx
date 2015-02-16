@@ -9,6 +9,7 @@
  * @mixes React.addons.PureRenderMixin
  */
 xv.Menuitem = xblocks.view.register('xb-menuitem', [
+    xblocks.utils.exportPropTypes('xb-ico'),
     xblocks.mixin.vCommonAttrs,
 
     {
@@ -37,8 +38,8 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             return {
                 'disabled': false,
                 'selected': false,
-                'focused': false,
-                'submenu': false
+                'focused':  false,
+                'submenu':  false
             };
         },
 
@@ -46,10 +47,10 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
         'render': function() {
             var classes = {
                 'xb-menuitem': true,
-                '_disabled': this.props.disabled,
-                '_focused': this.props.focused,
-                '_selected': this.props.selected,
-                '_submenu': this.props.submenu,
+                '_disabled':   this.props.disabled,
+                '_focused':    this.props.focused,
+                '_selected':   this.props.selected,
+                '_submenu':    this.props.submenu,
             };
 
             classes = React.addons.classSet(classes);

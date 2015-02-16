@@ -7,17 +7,21 @@
 /**
  * @class xv.Button
  * @memberof xv
+ * @mixes React.addons.PureRenderMixin
+ * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Button = xblocks.view.register('xb-button', [
     xblocks.utils.exportPropTypes('xb-ico'),
+    xblocks.mixin.vCommonAttrs,
 
     {
         'displayName': 'xb-button',
 
+        'mixins': [ React.addons.PureRenderMixin ],
+
         'propTypes': {
-            'children': React.PropTypes.node,
-            'size': React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'theme': React.PropTypes.oneOf([
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'theme':        React.PropTypes.oneOf([
                 'normal',
                 'action',
                 'dark',
@@ -26,32 +30,27 @@ xv.Button = xblocks.view.register('xb-button', [
                 'pseudo',
                 'promo'
             ]),
-            'type': React.PropTypes.oneOf([
+            'type':         React.PropTypes.oneOf([
                 'label',
                 'inline',
                 'link',
                 'file',
-
                 'button',
                 'submit',
-
                 'checkbox',
                 'radio'
             ]),
-            'target': React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-            'value': React.PropTypes.string,
-            'href': React.PropTypes.string,
-            'name': React.PropTypes.string,
-            'title': React.PropTypes.string,
-            'form': React.PropTypes.string,
-            'for': React.PropTypes.string,
-            'tabindex': React.PropTypes.string,
-
-            'multiple': React.PropTypes.bool,
-            'autofocus': React.PropTypes.bool,
-            'disabled': React.PropTypes.bool,
-            'checked': React.PropTypes.bool,
-            'required': React.PropTypes.bool
+            'target':       React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
+            'value':        React.PropTypes.string,
+            'href':         React.PropTypes.string,
+            'name':         React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'for':          React.PropTypes.string,
+            'multiple':     React.PropTypes.bool,
+            'autofocus':    React.PropTypes.bool,
+            'disabled':     React.PropTypes.bool,
+            'checked':      React.PropTypes.bool,
+            'required':     React.PropTypes.bool
         },
 
         'statics': {
@@ -65,16 +64,16 @@ xv.Button = xblocks.view.register('xb-button', [
 
         'getDefaultProps': function() {
             return {
-                'size': 'm',
-                'theme': 'normal',
-                'type': 'button',
-                'tabindex': '0',
-                'children': String.fromCharCode(160),
-                'checked': false,
-                'multiple': false,
-                'autofocus': false,
-                'disabled': false,
-                'required': false
+                'size':         'm',
+                'theme':        'normal',
+                'type':         'button',
+                'tabindex':     '0',
+                'children':     String.fromCharCode(160),
+                'checked':      false,
+                'multiple':     false,
+                'autofocus':    false,
+                'disabled':     false,
+                'required':     false
             };
         },
 
@@ -114,11 +113,11 @@ xv.Button = xblocks.view.register('xb-button', [
             };
 
             if (this.props.theme) {
-                classes['_theme-' + this.props.theme] = true;
+                classes[ '_theme-' + this.props.theme ] = true;
             }
 
             if (this.props.size) {
-                classes['_size-' + this.props.size] = true;
+                classes[ '_size-' + this.props.size ] = true;
             }
 
             classes = React.addons.classSet(classes);

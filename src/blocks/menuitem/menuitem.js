@@ -34,10 +34,7 @@ var _xbMenuitem = {
              */
             'open': function(submenu) {
                 if (submenu && !timerOpenSubmenu) {
-                    timerOpenSubmenu = global.setTimeout(
-                        submenu.open.bind(submenu),
-                        200
-                    );
+                    timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
                 }
             },
 

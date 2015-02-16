@@ -11,12 +11,15 @@
 /**
  * @class xv.Input
  * @memberof xv
+ * @mixes React.addons.PureRenderMixin
  */
 xv.Input = xblocks.view.register('xb-input', [
     xblocks.utils.exportPropTypes('xb-link'),
 
     {
         'displayName': 'xb-input',
+
+        'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
             'name':         React.PropTypes.string,
@@ -54,27 +57,20 @@ xv.Input = xblocks.view.register('xb-input', [
             }
         },
 
-        'shouldComponentUpdate': function(nextProps, nextState) {
-            return Boolean(
-                !xblocks.utils.equals(nextProps, this.props) ||
-                !xblocks.utils.equals(nextState, this.state)
-            );
-        },
-
         'getDefaultProps': function() {
             return {
-                'value': undefined,
-                'type': 'text',
-                'size': 'm',
-                'rows': '4',
-                'disabled': false,
-                'autosize': false,
-                'multiline': false,
-                'required': false,
-                'readonly': false,
-                'reset': false,
-                'autofocus': false,
-                'ghost': false
+                'value':        undefined,
+                'type':         'text',
+                'size':         'm',
+                'rows':         '4',
+                'disabled':     false,
+                'autosize':     false,
+                'multiline':    false,
+                'required':     false,
+                'readonly':     false,
+                'reset':        false,
+                'autofocus':    false,
+                'ghost':        false
             };
         },
 
@@ -139,12 +135,12 @@ xv.Input = xblocks.view.register('xb-input', [
         'render': function() {
             var isComplex = this._isComplex();
             var classes = {
-                'xb-input': true,
-                '_disabled': Boolean(this.props.disabled),
-                '_autosize': Boolean(this.props.autosize),
-                '_ghost': Boolean(this.props.ghost),
-                '_complex': isComplex,
-                '_simple': !isComplex
+                'xb-input':     true,
+                '_disabled':    this.props.disabled,
+                '_autosize':    this.props.autosize,
+                '_ghost':       this.props.ghost,
+                '_complex':     isComplex,
+                '_simple':      !isComplex
             };
 
             if (this.props.size) {
@@ -155,22 +151,22 @@ xv.Input = xblocks.view.register('xb-input', [
 
             var isPlaceholderHint = false;
             var controllerProps = {
-                'key': 'controller',
-                'ref': 'controller',
-                'className': '_controller',
-                'value': this.state.value,
-                'name': this.props.name,
-                'disabled': this.props.disabled,
-                'required': this.props.required,
-                'readOnly': this.props.readonly,
-                'multiline': this.props.multiline,
-                'autoFocus': this.props.autofocus,
-                'rows': this.props.rows,
-                'cols': this.props.cols,
-                'tabIndex': this.props.tabindex,
+                'key':          'controller',
+                'ref':          'controller',
+                'className':    '_controller',
+                'value':        this.state.value,
+                'name':         this.props.name,
+                'disabled':     this.props.disabled,
+                'required':     this.props.required,
+                'readOnly':     this.props.readonly,
+                'multiline':    this.props.multiline,
+                'autoFocus':    this.props.autofocus,
+                'rows':         this.props.rows,
+                'cols':         this.props.cols,
+                'tabIndex':     this.props.tabindex,
                 'autocomplete': this.props.autocomplete,
-                'autosize': this.props.autosize,
-                'onChange': this._onChange,
+                'autosize':     this.props.autosize,
+                'onChange':     this._onChange,
                 'onHintToggle': this._onHintToggle
             };
 
