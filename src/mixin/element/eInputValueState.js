@@ -12,7 +12,7 @@ xblocks.mixin.eInputValueState = {
             },
 
             'get': function() {
-                var component = this.xblock.getMountedComponent();
+                var component = this.xblock && this.xblock.getMountedComponent();
 
                 if (component && typeof(component.state.value) !== 'undefined') {
                     return component.state.value;
@@ -22,7 +22,7 @@ xblocks.mixin.eInputValueState = {
             },
 
             'set': function(value) {
-                var component = this.xblock.getMountedComponent();
+                var component = this.xblock && this.xblock.getMountedComponent();
 
                 if (component) {
                     component.setState({ 'value': String(value) });
