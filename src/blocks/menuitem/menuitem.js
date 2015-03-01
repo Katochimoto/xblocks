@@ -174,13 +174,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
                         return this._menuInstance;
                     }
 
-                    this._menuInstance = null;
-
-                    var menuNode = this.parentNode && xblocks.react.findContainerForNode(this.parentNode);
-
-                    if (menuNode && (menuNode.xtagName === 'xb-menu' || menuNode.xtagName === 'xb-menu-inline')) {
-                        this._menuInstance = menuNode;
-                    }
+                    this._menuInstance = xblocks.utils.getParentMenu(this);
 
                     return this._menuInstance;
                 }

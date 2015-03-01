@@ -10,7 +10,7 @@ var _xbMenu = {
      * @param {xb.Menuitem} target
      * @this {global}
      */
-    closeSubmenu: function(target) {
+    'closeSubmenu': function(target) {
         if (target._xbpopup) {
             target._xbpopup.close();
         }
@@ -80,13 +80,13 @@ xb.Menu = xblocks.create('xb-menu', [
 
         'accessors': {
             'parentMenu': {
-                get: function() {
+                'get': function() {
                     return this.tether.target.menuInstance;
                 }
             },
 
             'firstParentMenu': {
-                get: function() {
+                'get': function() {
                     var parentMenu = this.parentMenu;
 
                     if (parentMenu) {
@@ -99,14 +99,14 @@ xb.Menu = xblocks.create('xb-menu', [
         },
 
         'methods': {
-            _closeAllSubmenu: function() {
+            '_closeAllSubmenu': function() {
                 __forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
                     _xbMenu.closeSubmenu
                 );
             },
 
-            _afterOpen: function() {
+            '_afterOpen': function() {
                 this.position();
                 this.style.visibility = 'visible';
                 // the focus is not put on the invisible element
@@ -114,8 +114,8 @@ xb.Menu = xblocks.create('xb-menu', [
                 xblocks.utils.lazyFocus(this);
             },
 
-            _closeUpFocus: function() {
-                var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
+            '_closeUpFocus': function() {
+                var focusMenu = xblocks.utils.getParentMenu(this.ownerDocument.activeElement);
                 var parent = this.parentMenu;
 
                 while (parent) {

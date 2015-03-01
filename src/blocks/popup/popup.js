@@ -26,11 +26,9 @@ xb.Popup = xblocks.create('xb-popup', [
         'prototype': Object.create(HTMLElement.prototype),
 
         'events': {
-            'click:delegate(._close)': function() {
-                var popupNode = xblocks.react.findContainerForNode(this);
-                if (popupNode) {
-                    popupNode.close();
-                }
+            'jsx-click-close': function(event) {
+                event.stopImmediatePropagation();
+                this.close();
             },
 
             'keydown:keypass(27)': function() {

@@ -28,6 +28,14 @@ xv.Popup = xblocks.view.register('xb-popup', [
             };
         },
 
+        '_onClickClose': function() {
+            xblocks.event.dispatch(
+                React.findDOMNode(this),
+                'jsx-click-close',
+                { 'bubbles': true, 'cancelable': true }
+            );
+        },
+
         /* jshint ignore:start */
         'render': function() {
             var children = [
@@ -44,7 +52,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    <a key="close" className="_close" />
+                    <a key="close" className="_close" onClick={this._onClickClose} />
                 );
             }
 

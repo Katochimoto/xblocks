@@ -1481,6 +1481,30 @@ xblocks.utils.exportPropTypes = function(tagName) {
 
 /* utils/resetLastRadioChecked.js end */
 
+/* utils/getParentMenu.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+/**
+ * @param {HTMLElement} node
+ * @returns {HTMLElement|null}
+ */
+xblocks.utils.getParentMenu = function(node) {
+    var parent = node;
+
+    while (parent) {
+        if (parent.xtagName === 'xb-menu' || parent.xtagName === 'xb-menu-inline') {
+            return parent;
+        }
+
+        parent = parent.parentNode;
+    }
+
+    return null;
+};
+
+/* utils/getParentMenu.js end */
+
 
 /* utils.js end */
 
@@ -3254,6 +3278,14 @@ xv.Popup = xblocks.view.register('xb-popup', [
             };
         },
 
+        '_onClickClose': function() {
+            xblocks.event.dispatch(
+                React.findDOMNode(this),
+                'jsx-click-close',
+                { 'bubbles': true, 'cancelable': true }
+            );
+        },
+
         /* jshint ignore:start */
         'render': function() {
             var children = [
@@ -3270,7 +3302,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    React.createElement("a", {key: "close", className: "_close"})
+                    React.createElement("a", {key: "close", className: "_close", onClick: this._onClickClose})
                 );
             }
 
@@ -3323,11 +3355,9 @@ xb.Popup = xblocks.create('xb-popup', [
         'prototype': Object.create(HTMLElement.prototype),
 
         'events': {
-            'click:delegate(._close)': function() {
-                var popupNode = xblocks.react.findContainerForNode(this);
-                if (popupNode) {
-                    popupNode.close();
-                }
+            'jsx-click-close': function(event) {
+                event.stopImmediatePropagation();
+                this.close();
             },
 
             'keydown:keypass(27)': function() {
@@ -3801,13 +3831,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
                         return this._menuInstance;
                     }
 
-                    this._menuInstance = null;
-
-                    var menuNode = this.parentNode && xblocks.react.findContainerForNode(this.parentNode);
-
-                    if (menuNode && (menuNode.xtagName === 'xb-menu' || menuNode.xtagName === 'xb-menu-inline')) {
-                        this._menuInstance = menuNode;
-                    }
+                    this._menuInstance = xblocks.utils.getParentMenu(this);
 
                     return this._menuInstance;
                 }
@@ -3963,7 +3987,7 @@ var _xbMenu = {
      * @param {xb.Menuitem} target
      * @this {global}
      */
-    closeSubmenu: function(target) {
+    'closeSubmenu': function(target) {
         if (target._xbpopup) {
             target._xbpopup.close();
         }
@@ -4033,13 +4057,13 @@ xb.Menu = xblocks.create('xb-menu', [
 
         'accessors': {
             'parentMenu': {
-                get: function() {
+                'get': function() {
                     return this.tether.target.menuInstance;
                 }
             },
 
             'firstParentMenu': {
-                get: function() {
+                'get': function() {
                     var parentMenu = this.parentMenu;
 
                     if (parentMenu) {
@@ -4052,14 +4076,14 @@ xb.Menu = xblocks.create('xb-menu', [
         },
 
         'methods': {
-            _closeAllSubmenu: function() {
+            '_closeAllSubmenu': function() {
                 __forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
                     _xbMenu.closeSubmenu
                 );
             },
 
-            _afterOpen: function() {
+            '_afterOpen': function() {
                 this.position();
                 this.style.visibility = 'visible';
                 // the focus is not put on the invisible element
@@ -4067,8 +4091,8 @@ xb.Menu = xblocks.create('xb-menu', [
                 xblocks.utils.lazyFocus(this);
             },
 
-            _closeUpFocus: function() {
-                var focusMenu = xblocks.react.findContainerForNode(this.ownerDocument.activeElement);
+            '_closeUpFocus': function() {
+                var focusMenu = xblocks.utils.getParentMenu(this.ownerDocument.activeElement);
                 var parent = this.parentMenu;
 
                 while (parent) {
