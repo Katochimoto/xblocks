@@ -38,8 +38,8 @@ xv.Select = xblocks.view.register('xb-select', [
 
         'componentDidMount': function() {
             new Tether({
-                element: this.refs.dropdown.getDOMNode(),
-                target: this.refs.control.getDOMNode(),
+                element: React.findDOMNode(this.refs.dropdown),
+                target: React.findDOMNode(this.refs.control),
                 attachment: 'top left',
                 targetAttachment: 'bottom left',
                 classPrefix: 'xb-dialog',

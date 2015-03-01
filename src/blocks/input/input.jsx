@@ -93,7 +93,7 @@ xv.Input = xblocks.view.register('xb-input', [
          * @private
          */
         '_onHintToggle': function(toggle) {
-            this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
+            React.findDOMNode(this.refs.placeholder).style.visibility = (toggle ? 'inherit' : 'hidden');
         },
 
         /**

@@ -1854,7 +1854,7 @@ xblocks.mixin.vMenu = {
         var maxHeight = 0;
 
         if (size > 0) {
-            var contentNode = this.refs.content.getDOMNode();
+            var contentNode = React.findDOMNode(this.refs.content);
             var element = contentNode.children[ size - 1 ];
 
             if (element) {
@@ -1870,7 +1870,7 @@ xblocks.mixin.vMenu = {
     },
 
     '_redrawScrollNavigator': function(callback) {
-        var target = this.refs.content.getDOMNode();
+        var target = React.findDOMNode(this.refs.content);
         var safeArea = 5;
         var height = Math.max(target.scrollHeight, target.clientHeight);
         var isShowScrollTop = (target.scrollTop > safeArea);
@@ -1912,14 +1912,14 @@ xblocks.mixin.vMenu = {
 
     '_onScrollThrottle': function() {
         xblocks.event.dispatch(
-            this.refs.content.getDOMNode(),
+            React.findDOMNode(this.refs.content),
             'jsx-scroll-throttle',
             { 'bubbles': true, 'cancelable': true }
         );
     },
 
     '_animationScrollTop': function() {
-        this.refs.content.getDOMNode().scrollTop--;
+        React.findDOMNode(this.refs.content).scrollTop--;
         this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
     },
 
@@ -1936,7 +1936,7 @@ xblocks.mixin.vMenu = {
     },
 
     '_animationScrollBottom': function() {
-        this.refs.content.getDOMNode().scrollTop++;
+        React.findDOMNode(this.refs.content).scrollTop++;
         this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
     },
 
@@ -2646,7 +2646,7 @@ xv.InputController = xblocks.view.create({
             return;
         }
 
-        var node = this.getDOMNode();
+        var node = React.findDOMNode(this);
 
         if (this.props.multiline) {
             node.style.height = '0px';
@@ -2786,7 +2786,7 @@ xv.Input = xblocks.view.register('xb-input', [
          * @private
          */
         '_onHintToggle': function(toggle) {
-            this.refs.placeholder.getDOMNode().style.visibility = (toggle ? 'inherit' : 'hidden');
+            React.findDOMNode(this.refs.placeholder).style.visibility = (toggle ? 'inherit' : 'hidden');
         },
 
         /**
@@ -4257,8 +4257,8 @@ xv.Select = xblocks.view.register('xb-select', [
 
         'componentDidMount': function() {
             new Tether({
-                element: this.refs.dropdown.getDOMNode(),
-                target: this.refs.control.getDOMNode(),
+                element: React.findDOMNode(this.refs.dropdown),
+                target: React.findDOMNode(this.refs.control),
                 attachment: 'top left',
                 targetAttachment: 'bottom left',
                 classPrefix: 'xb-dialog',

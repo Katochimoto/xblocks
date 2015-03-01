@@ -37,7 +37,7 @@ xblocks.mixin.vMenu = {
         var maxHeight = 0;
 
         if (size > 0) {
-            var contentNode = this.refs.content.getDOMNode();
+            var contentNode = React.findDOMNode(this.refs.content);
             var element = contentNode.children[ size - 1 ];
 
             if (element) {
@@ -53,7 +53,7 @@ xblocks.mixin.vMenu = {
     },
 
     '_redrawScrollNavigator': function(callback) {
-        var target = this.refs.content.getDOMNode();
+        var target = React.findDOMNode(this.refs.content);
         var safeArea = 5;
         var height = Math.max(target.scrollHeight, target.clientHeight);
         var isShowScrollTop = (target.scrollTop > safeArea);
@@ -95,14 +95,14 @@ xblocks.mixin.vMenu = {
 
     '_onScrollThrottle': function() {
         xblocks.event.dispatch(
-            this.refs.content.getDOMNode(),
+            React.findDOMNode(this.refs.content),
             'jsx-scroll-throttle',
             { 'bubbles': true, 'cancelable': true }
         );
     },
 
     '_animationScrollTop': function() {
-        this.refs.content.getDOMNode().scrollTop--;
+        React.findDOMNode(this.refs.content).scrollTop--;
         this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
     },
 
@@ -119,7 +119,7 @@ xblocks.mixin.vMenu = {
     },
 
     '_animationScrollBottom': function() {
-        this.refs.content.getDOMNode().scrollTop++;
+        React.findDOMNode(this.refs.content).scrollTop++;
         this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
     },
 

@@ -71,7 +71,7 @@ xv.InputController = xblocks.view.create({
             return;
         }
 
-        var node = this.getDOMNode();
+        var node = React.findDOMNode(this);
 
         if (this.props.multiline) {
             node.style.height = '0px';
