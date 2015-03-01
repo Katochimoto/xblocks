@@ -48,15 +48,6 @@ xv.Input = xblocks.view.register('xb-input', [
             'xb-link':      React.PropTypes.string
         },
 
-        'statics': {
-            'filterLinkProps': function(props) {
-                return xblocks.utils.mapObject(
-                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
-                    xblocks.utils.mapPropsPrefixLink
-                );
-            }
-        },
-
         'getDefaultProps': function() {
             return {
                 'value':        undefined,
@@ -184,7 +175,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 }
 
                 if (this.props['xb-link']) {
-                    var linkProps = xv.Input.filterLinkProps(this.props);
+                    var linkProps = xblocks.utils.filterLinkProps(this.props);
                     linkProps['theme'] = 'input';
                     linkProps['key'] = 'label';
 

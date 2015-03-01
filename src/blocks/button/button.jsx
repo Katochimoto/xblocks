@@ -53,15 +53,6 @@ xv.Button = xblocks.view.register('xb-button', [
             'required':     React.PropTypes.bool
         },
 
-        'statics': {
-            'filterIcoProps': function(props) {
-                return xblocks.utils.mapObject(
-                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
-                    xblocks.utils.mapPropsPrefixIco
-                );
-            }
-        },
-
         'getDefaultProps': function() {
             return {
                 'size':         'm',
@@ -122,7 +113,7 @@ xv.Button = xblocks.view.register('xb-button', [
 
             classes = classNames(classes);
 
-            var icoProps = xv.Button.filterIcoProps(this.props);
+            var icoProps = xblocks.utils.filterIcoProps(this.props);
             var tabIndex = this.props.tabindex;
             var type = this.props.type;
 

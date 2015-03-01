@@ -1366,6 +1366,19 @@ xblocks.utils.filterPropsPrefixLink = function(name) {
 
 /* utils/filterPropsPrefixLink.js end */
 
+/* utils/filterLinkProps.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.utils.filterLinkProps = function(props) {
+    return xblocks.utils.mapObject(
+        xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
+        xblocks.utils.mapPropsPrefixLink
+    );
+};
+
+/* utils/filterLinkProps.js end */
+
 /* utils/mapPropsPrefixLink.js begin */
 /* global xblocks */
 /* jshint strict: false */
@@ -1388,6 +1401,19 @@ xblocks.utils.filterPropsPrefixIco = function(name) {
 };
 
 /* utils/filterPropsPrefixIco.js end */
+
+/* utils/filterIcoProps.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.utils.filterIcoProps = function(props) {
+    return xblocks.utils.mapObject(
+        xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
+        xblocks.utils.mapPropsPrefixIco
+    );
+};
+
+/* utils/filterIcoProps.js end */
 
 /* utils/mapPropsPrefixIco.js begin */
 /* global xblocks */
@@ -2280,15 +2306,6 @@ xv.Button = xblocks.view.register('xb-button', [
             'required':     React.PropTypes.bool
         },
 
-        'statics': {
-            'filterIcoProps': function(props) {
-                return xblocks.utils.mapObject(
-                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
-                    xblocks.utils.mapPropsPrefixIco
-                );
-            }
-        },
-
         'getDefaultProps': function() {
             return {
                 'size':         'm',
@@ -2349,7 +2366,7 @@ xv.Button = xblocks.view.register('xb-button', [
 
             classes = classNames(classes);
 
-            var icoProps = xv.Button.filterIcoProps(this.props);
+            var icoProps = xblocks.utils.filterIcoProps(this.props);
             var tabIndex = this.props.tabindex;
             var type = this.props.type;
 
@@ -2700,15 +2717,6 @@ xv.Input = xblocks.view.register('xb-input', [
             'xb-link':      React.PropTypes.string
         },
 
-        'statics': {
-            'filterLinkProps': function(props) {
-                return xblocks.utils.mapObject(
-                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
-                    xblocks.utils.mapPropsPrefixLink
-                );
-            }
-        },
-
         'getDefaultProps': function() {
             return {
                 'value':        undefined,
@@ -2836,7 +2844,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 }
 
                 if (this.props['xb-link']) {
-                    var linkProps = xv.Input.filterLinkProps(this.props);
+                    var linkProps = xblocks.utils.filterLinkProps(this.props);
                     linkProps['theme'] = 'input';
                     linkProps['key'] = 'label';
 
@@ -3573,15 +3581,6 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             'submenu':  React.PropTypes.bool
         },
 
-        'statics': {
-            'filterIcoProps': function(props) {
-                return xblocks.utils.mapObject(
-                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
-                    xblocks.utils.mapPropsPrefixIco
-                );
-            }
-        },
-
         'getDefaultProps': function() {
             return {
                 'disabled': false,
@@ -3607,7 +3606,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 React.createElement("span", {className: "_label", key: "label"}, this.props.label)
             ];
 
-            var icoProps = xv.Menuitem.filterIcoProps(this.props);
+            var icoProps = xblocks.utils.filterIcoProps(this.props);
 
             if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';

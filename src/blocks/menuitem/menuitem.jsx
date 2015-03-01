@@ -25,15 +25,6 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             'submenu':  React.PropTypes.bool
         },
 
-        'statics': {
-            'filterIcoProps': function(props) {
-                return xblocks.utils.mapObject(
-                    xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixIco),
-                    xblocks.utils.mapPropsPrefixIco
-                );
-            }
-        },
-
         'getDefaultProps': function() {
             return {
                 'disabled': false,
@@ -59,7 +50,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 <span className="_label" key="label">{this.props.label}</span>
             ];
 
-            var icoProps = xv.Menuitem.filterIcoProps(this.props);
+            var icoProps = xblocks.utils.filterIcoProps(this.props);
 
             if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';
