@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/* global xblocks, global */
+/* global xblocks, global, React */
 /* jshint strict: false */
 
 /**
@@ -76,6 +76,22 @@ xblocks.mixin.vMenu = {
 
         if (callback) {
             callback();
+        }
+    },
+
+    '_onWheel': function(event) {
+        var content = React.findDOMNode(this.refs.content);
+        var delta = event.deltaY;
+        var scrollTop = content.scrollTop;
+        var offsetHeight = content.offsetHeight;
+        var scrollHeight = content.scrollHeight;
+
+        if (delta < 0 && scrollTop === 0 ||
+            delta > 0 && scrollTop + offsetHeight >= scrollHeight ||
+            offsetHeight === scrollHeight) {
+
+            event.preventDefault();
+            event.nativeEvent.stopImmediatePropagation();
         }
     },
 
@@ -165,6 +181,7 @@ xblocks.mixin.vMenu = {
                     style={contentStyle}
                     className="_popup-content"
                     onScroll={this._onScroll}
+                    onWheel={this._onWheel}
                     data-xb-content={this.props._uid}
                     dangerouslySetInnerHTML={{ __html: this.props.children.trim() }} />
                 <div style={scrollBottomStyle}

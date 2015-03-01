@@ -1748,7 +1748,7 @@ xblocks.mixin.eMenu = {
         },
 
         /**
-         * @this {xb.Menuitem}
+         * @this {xb.Menu}
          */
         'keydown:keypass(13,39)': function() {
             var item = this._xbfocus.getItem();
@@ -1758,31 +1758,19 @@ xblocks.mixin.eMenu = {
             }
         },
 
+        /**
+         * @this {xb.Menu}
+         */
         'jsx-scroll-throttle': function(event) {
             // close all submenu
             event.stopImmediatePropagation();
             xblocks.utils.lazyFocus(this);
-        },
-
-        'scrollwheel:delegate(._popup-content)': function(event) {
-            var delta = event.delta;
-            var scrollTop = this.scrollTop;
-            var offsetHeight = this.offsetHeight;
-            var scrollHeight = this.scrollHeight;
-
-            if (delta > 0 && scrollTop === 0 ||
-                delta < 0 && scrollTop + offsetHeight >= scrollHeight ||
-                offsetHeight === scrollHeight) {
-
-                event.preventDefault();
-                event.stopImmediatePropagation();
-            }
         }
     },
 
     'accessors': {
         'hasOpenSubmenu': {
-            get: function() {
+            'get': function() {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
             }
         }
@@ -1816,7 +1804,7 @@ xblocks.mixin.vCommonAttrs = {
 
 /* mixin/view/vMenu.jsx.js begin */
 /** @jsx React.DOM */
-/* global xblocks, global */
+/* global xblocks, global, React */
 /* jshint strict: false */
 
 /**
@@ -1893,6 +1881,22 @@ xblocks.mixin.vMenu = {
 
         if (callback) {
             callback();
+        }
+    },
+
+    '_onWheel': function(event) {
+        var content = React.findDOMNode(this.refs.content);
+        var delta = event.deltaY;
+        var scrollTop = content.scrollTop;
+        var offsetHeight = content.offsetHeight;
+        var scrollHeight = content.scrollHeight;
+
+        if (delta < 0 && scrollTop === 0 ||
+            delta > 0 && scrollTop + offsetHeight >= scrollHeight ||
+            offsetHeight === scrollHeight) {
+
+            event.preventDefault();
+            event.nativeEvent.stopImmediatePropagation();
         }
     },
 
@@ -1982,6 +1986,7 @@ xblocks.mixin.vMenu = {
                     style: contentStyle, 
                     className: "_popup-content", 
                     onScroll: this._onScroll, 
+                    onWheel: this._onWheel, 
                     "data-xb-content": this.props._uid, 
                     dangerouslySetInnerHTML: { __html: this.props.children.trim()}}), 
                 React.createElement("div", {style: scrollBottomStyle, 
