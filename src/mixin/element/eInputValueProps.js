@@ -2,10 +2,50 @@
 /* jshint strict: false */
 
 /**
+ * Value element interface.
+ * The value can be changed only through the attribute.
+ *
+ * @example
+ * xblocks.create('xb-checkbox', [
+ *     xblocks.mixin.eInputValueProps,
+ *     {
+ *         accessors: {
+ *             ...
+ *             // override the default values
+ *             'defaultValue': {
+ *                 'get': function() {
+ *                     return 'on';
+ *                  }
+ *              }
+ *         },
+ *         events: { ... },
+ *         methods: { ... }
+ *         ...
+ *     }
+ * ]);
+ *
+ * var e = document.createElement('xb-checkbox');
+ * // read
+ * console.log(e.value)
+ * // 1
+ *
+ * // write
+ * e.value = "123";
+ * // 123
+ *
+ * // jquery write
+ * $(e).attr('value', '321')
+ * // 321
+ *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eInputValueProps = {
     'accessors': {
+
+        /**
+         * @prop {string} value
+         */
         'value': {
             'attribute': {
                 'name': 'value'
@@ -16,6 +56,9 @@ xblocks.mixin.eInputValueProps = {
             }
         },
 
+        /**
+         * @prop {string} defaultValue
+         */
         'defaultValue': {
             'get': function() {
                 return '';

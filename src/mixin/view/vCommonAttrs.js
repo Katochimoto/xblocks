@@ -2,8 +2,18 @@
 /* jshint strict: false */
 
 /**
+ * Common attributes
+ *
  * @memberOf xblocks.mixin
- * @type {Object}
+ * @type {object}
+ * @prop {object} propTypes
+ * @prop {string} propTypes.accesskey
+ * @prop {string} propTypes.contextmenu
+ * @prop {enum} propTypes.dir
+ * @prop {boolean} propTypes.hidden
+ * @prop {boolean} propTypes.spellcheck
+ * @prop {string} propTypes.tabindex
+ * @prop {string} propTypes.title
  */
 xblocks.mixin.vCommonAttrs = {
     'propTypes': {

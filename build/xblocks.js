@@ -1552,6 +1552,7 @@ xblocks.mixin = xblocks.mixin || {};
  * // false
  *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eDisabled = {
     'accessors': {
@@ -1602,6 +1603,7 @@ xblocks.mixin.eDisabled = {
  * // false
  *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eChecked = {
     'accessors': {
@@ -1620,10 +1622,50 @@ xblocks.mixin.eChecked = {
 /* jshint strict: false */
 
 /**
+ * Value element interface.
+ * Уou can edit the value, for example in the input or textarea.
+ *
+ * @example
+ * xblocks.create('xb-input', [
+ *     xblocks.mixin.eInputValueState,
+ *     {
+ *         accessors: {
+ *             ...
+ *             // override the default values
+ *             'defaultValue': {
+ *                 'get': function() {
+ *                     return 'on';
+ *                  }
+ *              }
+ *         },
+ *         events: { ... },
+ *         methods: { ... }
+ *         ...
+ *     }
+ * ]);
+ *
+ * var e = document.createElement('xb-input');
+ * // read
+ * console.log(e.value)
+ * // 1
+ *
+ * // write
+ * e.value = "123";
+ * // 123
+ *
+ * // jquery write
+ * $(e).attr('value', '321')
+ * // 321
+ *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eInputValueState = {
     'accessors': {
+
+        /**
+         * @prop {string} value
+         */
         'value': {
             'attribute': {
                 'name': 'value'
@@ -1648,6 +1690,9 @@ xblocks.mixin.eInputValueState = {
             }
         },
 
+        /**
+         * @prop {string} defaultValue
+         */
         'defaultValue': {
             'get': function() {
                 return '';
@@ -1663,10 +1708,50 @@ xblocks.mixin.eInputValueState = {
 /* jshint strict: false */
 
 /**
+ * Value element interface.
+ * The value can be changed only through the attribute.
+ *
+ * @example
+ * xblocks.create('xb-checkbox', [
+ *     xblocks.mixin.eInputValueProps,
+ *     {
+ *         accessors: {
+ *             ...
+ *             // override the default values
+ *             'defaultValue': {
+ *                 'get': function() {
+ *                     return 'on';
+ *                  }
+ *              }
+ *         },
+ *         events: { ... },
+ *         methods: { ... }
+ *         ...
+ *     }
+ * ]);
+ *
+ * var e = document.createElement('xb-checkbox');
+ * // read
+ * console.log(e.value)
+ * // 1
+ *
+ * // write
+ * e.value = "123";
+ * // 123
+ *
+ * // jquery write
+ * $(e).attr('value', '321')
+ * // 321
+ *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eInputValueProps = {
     'accessors': {
+
+        /**
+         * @prop {string} value
+         */
         'value': {
             'attribute': {
                 'name': 'value'
@@ -1677,6 +1762,9 @@ xblocks.mixin.eInputValueProps = {
             }
         },
 
+        /**
+         * @prop {string} defaultValue
+         */
         'defaultValue': {
             'get': function() {
                 return '';
@@ -1713,6 +1801,7 @@ xblocks.mixin.eInputValueProps = {
  * e.blur();
  *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eFocus = {
     'methods': {
@@ -1733,12 +1822,16 @@ xblocks.mixin.eFocus = {
 /* jshint strict: false */
 
 /**
+ * Common interface for elements xb-menu and xb-menu-inline.
+ *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eMenu = {
     'events': {
 
         /**
+         * Оpen the submenu
          * @this {xb.Menuitem}
          */
         'click:delegate(xb-menuitem:not([disabled]))': function() {
@@ -1748,6 +1841,7 @@ xblocks.mixin.eMenu = {
         },
 
         /**
+         * Оpen the submenu
          * @this {xb.Menu}
          */
         'keydown:keypass(13,39)': function() {
@@ -1759,6 +1853,8 @@ xblocks.mixin.eMenu = {
         },
 
         /**
+         * Restore focus
+         * @param {Event} event
          * @this {xb.Menu}
          */
         'jsx-scroll-throttle': function(event) {
@@ -1769,6 +1865,11 @@ xblocks.mixin.eMenu = {
     },
 
     'accessors': {
+
+        /**
+         * The menu contains the open submenu
+         * @prop {boolean} hasOpenSubmenu
+         */
         'hasOpenSubmenu': {
             'get': function() {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
@@ -1785,8 +1886,18 @@ xblocks.mixin.eMenu = {
 /* jshint strict: false */
 
 /**
+ * Common attributes
+ *
  * @memberOf xblocks.mixin
- * @type {Object}
+ * @type {object}
+ * @prop {object} propTypes
+ * @prop {string} propTypes.accesskey
+ * @prop {string} propTypes.contextmenu
+ * @prop {enum} propTypes.dir
+ * @prop {boolean} propTypes.hidden
+ * @prop {boolean} propTypes.spellcheck
+ * @prop {string} propTypes.tabindex
+ * @prop {string} propTypes.title
  */
 xblocks.mixin.vCommonAttrs = {
     'propTypes': {
@@ -1808,8 +1919,10 @@ xblocks.mixin.vCommonAttrs = {
 /* jshint strict: false */
 
 /**
+ * Common interface for views xb-menu and xb-menu-inline
+ *
  * @memberOf xblocks.mixin
- * @type {Object}
+ * @type {object}
  */
 xblocks.mixin.vMenu = {
     'getInitialState': function() {

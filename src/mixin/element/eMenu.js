@@ -2,12 +2,16 @@
 /* jshint strict: false */
 
 /**
+ * Common interface for elements xb-menu and xb-menu-inline.
+ *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eMenu = {
     'events': {
 
         /**
+         * Оpen the submenu
          * @this {xb.Menuitem}
          */
         'click:delegate(xb-menuitem:not([disabled]))': function() {
@@ -17,6 +21,7 @@ xblocks.mixin.eMenu = {
         },
 
         /**
+         * Оpen the submenu
          * @this {xb.Menu}
          */
         'keydown:keypass(13,39)': function() {
@@ -28,6 +33,8 @@ xblocks.mixin.eMenu = {
         },
 
         /**
+         * Restore focus
+         * @param {Event} event
          * @this {xb.Menu}
          */
         'jsx-scroll-throttle': function(event) {
@@ -38,6 +45,11 @@ xblocks.mixin.eMenu = {
     },
 
     'accessors': {
+
+        /**
+         * The menu contains the open submenu
+         * @prop {boolean} hasOpenSubmenu
+         */
         'hasOpenSubmenu': {
             'get': function() {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));

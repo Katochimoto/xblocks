@@ -34,6 +34,7 @@
  * // false
  *
  * @memberOf xblocks.mixin
+ * @type {object}
  */
 xblocks.mixin.eChecked = {
     'accessors': {

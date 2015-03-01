@@ -3,8 +3,10 @@
 /* jshint strict: false */
 
 /**
+ * Common interface for views xb-menu and xb-menu-inline
+ *
  * @memberOf xblocks.mixin
- * @type {Object}
+ * @type {object}
  */
 xblocks.mixin.vMenu = {
     'getInitialState': function() {
