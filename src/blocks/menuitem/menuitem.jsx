@@ -53,7 +53,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 '_submenu':    this.props.submenu,
             };
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var children = [
                 <span className="_label" key="label">{this.props.label}</span>

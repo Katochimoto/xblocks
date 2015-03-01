@@ -28,6 +28,8 @@
     var __noop = function() {};
     var __forEach = Array.prototype.forEach;
 
+    /*! borschik:include:../node_modules/classnames/index.js */
+
     /*! borschik:include:utils.js */
     /*! borschik:include:mixin.js */
 

@@ -1310,6 +1310,39 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
     var __noop = function() {};
     var __forEach = Array.prototype.forEach;
 
+    /* ../node_modules/classnames/index.js begin */
+function classNames() {
+	var args = arguments;
+	var classes = [];
+
+	for (var i = 0; i < args.length; i++) {
+		var arg = args[i];
+		if (!arg) {
+			continue;
+		}
+
+		if ('string' === typeof arg || 'number' === typeof arg) {
+			classes.push(arg);
+		} else if ('object' === typeof arg) {
+			for (var key in arg) {
+				if (!arg.hasOwnProperty(key) || !arg[key]) {
+					continue;
+				}
+				classes.push(key);
+			}
+		}
+	}
+	return classes.join(' ');
+}
+
+// safely export classNames in case the script is included directly on a page
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = classNames;
+}
+
+/* ../node_modules/classnames/index.js end */
+
+
     /* utils.js begin */
 /* global xblocks */
 /* jshint strict: false */
@@ -1875,7 +1908,7 @@ xblocks.mixin.vMenu = {
             '_popup': true
         };
 
-        classes = React.addons.classSet(classes);
+        classes = classNames(classes);
 
         var scrollTopStyle = {
             'display': (this.state.isShowScrollTop ? 'block' : 'none')
@@ -2001,7 +2034,7 @@ xv.Ico = xblocks.view.register('xb-ico', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var tabIndex = this.props.tabindex;
 
@@ -2102,7 +2135,7 @@ xv.Link = xblocks.view.register('xb-link', [
                 tabIndex = '-1';
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var content = this.props.value || this.props.children;
 
@@ -2314,7 +2347,7 @@ xv.Button = xblocks.view.register('xb-button', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var icoProps = xv.Button.filterIcoProps(this.props);
             var tabIndex = this.props.tabindex;
@@ -2394,7 +2427,7 @@ xv.Button = xblocks.view.register('xb-button', [
                         React.createElement(xv.Button, React.__spread({},  buttonProps))
                     );
 
-                    classes = React.addons.classSet({
+                    classes = classNames({
                         'xb-button': true,
                         '_theme-check': true,
                         '_disabled': this.props.disabled
@@ -2766,7 +2799,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var isPlaceholderHint = false;
             var controllerProps = {
@@ -2951,7 +2984,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var tabIndex = this.props.tabindex;
 
@@ -3108,7 +3141,7 @@ xv.Radio = xblocks.view.register('xb-radio', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var tabIndex = this.props.tabindex;
 
@@ -3246,7 +3279,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
                 classes[ '_theme-' + this.props.theme ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             return (
                 React.createElement("div", {className: classes, tabIndex: "0"}, children)
@@ -3568,7 +3601,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 '_submenu':    this.props.submenu,
             };
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var children = [
                 React.createElement("span", {className: "_label", key: "label"}, this.props.label)
@@ -4177,24 +4210,25 @@ xv.Select = xblocks.view.register('xb-select', [
         'displayName': 'xb-select',
 
         'propTypes': {
-            'disabled': React.PropTypes.bool,
-
-            'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocorrect':  React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocapitalize':  React.PropTypes.oneOf([ 'on', 'off' ]),
-
-            'size': React.PropTypes.string,
-            'autofocus': React.PropTypes.bool,
-            'form': React.PropTypes.string,
-            'multiple': React.PropTypes.bool,
-            'name': React.PropTypes.string,
-            'required': React.PropTypes.bool
+            'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
+            'autocorrect':      React.PropTypes.oneOf([ 'on', 'off' ]),
+            'autocapitalize':   React.PropTypes.oneOf([ 'on', 'off' ]),
+            'size':             React.PropTypes.string,
+            'form':             React.PropTypes.string,
+            'name':             React.PropTypes.string,
+            'autofocus':        React.PropTypes.bool,
+            'multiple':         React.PropTypes.bool,
+            'required':         React.PropTypes.bool,
+            'disabled':         React.PropTypes.bool
         },
 
         'getDefaultProps': function() {
             return {
-                'disabled': false,
-                'tabindex': '1'
+                'required':  false,
+                'multiple':  false,
+                'autofocus': false,
+                'disabled':  false,
+                'tabindex':  '1'
             };
         },
 
@@ -4227,7 +4261,7 @@ xv.Select = xblocks.view.register('xb-select', [
                 '_disabled': this.props.disabled
             };
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var tabIndex = this.props.tabindex;
 

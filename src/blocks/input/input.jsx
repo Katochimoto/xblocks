@@ -147,7 +147,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var isPlaceholderHint = false;
             var controllerProps = {

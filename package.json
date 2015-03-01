@@ -31,6 +31,7 @@
         "autoprefixer": "5.0.0",
         "stylus": "0.49.3",
         "react-tools": "0.12.2",
+        "classnames": "1.1.4",
 
         "stylobate": "0.25.x",
         "stylobate-islands": "0.28.x",

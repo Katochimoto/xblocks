@@ -49,7 +49,7 @@ xv.Link = xblocks.view.register('xb-link', [
                 tabIndex = '-1';
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var content = this.props.value || this.props.children;
 

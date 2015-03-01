@@ -14,24 +14,25 @@ xv.Select = xblocks.view.register('xb-select', [
         'displayName': 'xb-select',
 
         'propTypes': {
-            'disabled': React.PropTypes.bool,
-
-            'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocorrect':  React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocapitalize':  React.PropTypes.oneOf([ 'on', 'off' ]),
-
-            'size': React.PropTypes.string,
-            'autofocus': React.PropTypes.bool,
-            'form': React.PropTypes.string,
-            'multiple': React.PropTypes.bool,
-            'name': React.PropTypes.string,
-            'required': React.PropTypes.bool
+            'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
+            'autocorrect':      React.PropTypes.oneOf([ 'on', 'off' ]),
+            'autocapitalize':   React.PropTypes.oneOf([ 'on', 'off' ]),
+            'size':             React.PropTypes.string,
+            'form':             React.PropTypes.string,
+            'name':             React.PropTypes.string,
+            'autofocus':        React.PropTypes.bool,
+            'multiple':         React.PropTypes.bool,
+            'required':         React.PropTypes.bool,
+            'disabled':         React.PropTypes.bool
         },
 
         'getDefaultProps': function() {
             return {
-                'disabled': false,
-                'tabindex': '1'
+                'required':  false,
+                'multiple':  false,
+                'autofocus': false,
+                'disabled':  false,
+                'tabindex':  '1'
             };
         },
 
@@ -64,7 +65,7 @@ xv.Select = xblocks.view.register('xb-select', [
                 '_disabled': this.props.disabled
             };
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var tabIndex = this.props.tabindex;
 

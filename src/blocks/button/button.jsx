@@ -120,7 +120,7 @@ xv.Button = xblocks.view.register('xb-button', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var icoProps = xv.Button.filterIcoProps(this.props);
             var tabIndex = this.props.tabindex;
@@ -200,7 +200,7 @@ xv.Button = xblocks.view.register('xb-button', [
                         <xv.Button {...buttonProps} />
                     );
 
-                    classes = React.addons.classSet({
+                    classes = classNames({
                         'xb-button': true,
                         '_theme-check': true,
                         '_disabled': this.props.disabled

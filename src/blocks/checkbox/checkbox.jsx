@@ -70,7 +70,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var tabIndex = this.props.tabindex;
 

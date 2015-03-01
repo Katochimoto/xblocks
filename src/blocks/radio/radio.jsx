@@ -80,7 +80,7 @@ xv.Radio = xblocks.view.register('xb-radio', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             var tabIndex = this.props.tabindex;
 

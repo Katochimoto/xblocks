@@ -61,7 +61,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
                 classes[ '_theme-' + this.props.theme ] = true;
             }
 
-            classes = React.addons.classSet(classes);
+            classes = classNames(classes);
 
             return (
                 <div className={classes} tabIndex="0">{children}</div>

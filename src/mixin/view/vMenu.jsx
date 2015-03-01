@@ -141,7 +141,7 @@ xblocks.mixin.vMenu = {
             '_popup': true
         };
 
-        classes = React.addons.classSet(classes);
+        classes = classNames(classes);
 
         var scrollTopStyle = {
             'display': (this.state.isShowScrollTop ? 'block' : 'none')
