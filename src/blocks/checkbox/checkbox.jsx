@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-checkbox
+ *
  * @class xv.Checkbox
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

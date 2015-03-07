@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-link
+ *
  * @class xv.Link
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

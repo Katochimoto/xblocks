@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-menuseparator
+ *
  * @class xv.Menuseparator
  * @memberof xv
  */

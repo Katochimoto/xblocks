@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-popup
+ *
  * @class xv.Popup
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

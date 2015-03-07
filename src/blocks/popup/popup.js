@@ -16,6 +16,8 @@ var _xbPopup = {
 };
 
 /**
+ * xb-popup html element
+ *
  * @constructor
  * @mixes xblocks.mixin.eFocus
  */

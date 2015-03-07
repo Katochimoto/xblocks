@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-radio
+ *
  * @class xv.Radio
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

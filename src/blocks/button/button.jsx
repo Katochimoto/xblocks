@@ -5,6 +5,8 @@
 /*! borschik:include:button-content.jsx.js */
 
 /**
+ * The template node xb-button
+ *
  * @class xv.Button
  * @memberof xv
  * @mixes React.addons.PureRenderMixin

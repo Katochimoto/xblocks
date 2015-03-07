@@ -9,6 +9,8 @@
 // TODO "title" attribute
 
 /**
+ * The template node xb-input
+ *
  * @class xv.Input
  * @memberof xv
  * @mixes React.addons.PureRenderMixin

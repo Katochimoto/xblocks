@@ -5,8 +5,8 @@
 (function(global, undefined) {
     'use strict';
 
-    global.xb = global.xb || {};
-    global.xv = global.xv || {};
+    global.xb = {};
+    global.xv = {};
 
     var Tether = global.Tether;
 

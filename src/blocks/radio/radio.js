@@ -4,6 +4,8 @@
 /*! borschik:include:radio.jsx.js */
 
 /**
+ * xb-radio html element
+ *
  * @class xb.Radio
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled

@@ -4,6 +4,8 @@
 /*! borschik:include:input.jsx.js */
 
 /**
+ * xb-input html element
+ *
  * @class xb.Input
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled

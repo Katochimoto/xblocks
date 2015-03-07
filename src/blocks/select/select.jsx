@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-select
+ *
  * @class xv.Select
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

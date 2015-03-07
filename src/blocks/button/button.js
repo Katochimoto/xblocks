@@ -4,6 +4,8 @@
 /*! borschik:include:button.jsx.js */
 
 /**
+ * xb-button html element
+ *
  * @class xb.Button
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled

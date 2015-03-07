@@ -4,6 +4,8 @@
 /*! borschik:include:link.jsx.js */
 
 /**
+ * xb-link html element
+ *
  * @class xb.Link
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled

@@ -4,6 +4,8 @@
 /*! borschik:include:menuseparator.jsx.js */
 
 /**
+ * xb-menuseparator html element
+ *
  * @class xb.Menuseparator
  * @memberof xb
  */

@@ -65,6 +65,8 @@ var _xbMenuitem = {
 };
 
 /**
+ * xb-menuitem html element
+ *
  * @class xb.Menuitem
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled

@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-ico
+ *
  * @class xv.Ico
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

@@ -18,6 +18,8 @@ var _xbMenu = {
 };
 
 /**
+ * xb-menu html element
+ *
  * @class xb.Menu
  * @augments xb.Popup
  * @memberof xb

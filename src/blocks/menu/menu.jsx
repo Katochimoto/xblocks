@@ -3,6 +3,8 @@
 /* jshint strict: false */
 
 /**
+ * The template node xb-menu
+ *
  * @class xv.Menu
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

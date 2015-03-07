@@ -1287,8 +1287,8 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
 (function(global, undefined) {
     'use strict';
 
-    global.xb = global.xb || {};
-    global.xv = global.xv || {};
+    global.xb = {};
+    global.xv = {};
 
     var Tether = global.Tether;
 
@@ -2128,6 +2128,8 @@ xblocks.mixin.vMenu = {
 /* jshint strict: false */
 
 /**
+ * The template node xb-ico
+ *
  * @class xv.Ico
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -2227,6 +2229,27 @@ xv.Ico = xblocks.view.register('xb-ico', [
 
 
 /**
+ * xb-ico html element
+ *
+ * @prop {string} [value=&160;] the text inside the tag
+ * @prop {boolean} [active=false]
+ * @prop {boolean} [disabled=false]
+ * @prop {string} [size=s] icon size, possible values: s|m
+ * @prop {string} type icon type, possible values: attention|close|check|download|download-white|dropdown|eye|link|link-white|mail|notification|odnoklassniki|pause|people|play|print|remove|services|settings|three-dots|trash|trash-white|twitter|help|upload|upload-white|vk
+ *
+ * @example
+ * &#60;xb-ico type="notification" value="attribute value">&#60;/xb-ico>
+ * <xb-ico value="attribute value" type="notification"></xb-ico>
+ *
+ * &#60;xb-ico disabled type="attention">&#60;/xb-ico>
+ * <xb-ico disabled type="attention"></xb-ico>
+ *
+ * &#60;xb-ico active type="attention">&#60;/xb-ico>
+ * <xb-ico active type="attention"></xb-ico>
+ *
+ * &#60;xb-ico size="m" type="attention">&#60;/xb-ico>
+ * <xb-ico size="m" type="attention"></xb-ico>
+ *
  * @class xb.Ico
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
@@ -2257,6 +2280,8 @@ xb.Ico = xblocks.create('xb-ico', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-link
+ *
  * @class xv.Link
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -2324,6 +2349,8 @@ xv.Link = xblocks.view.register('xb-link', [
 
 
 /**
+ * xb-link html element
+ *
  * @class xb.Link
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
@@ -2400,6 +2427,8 @@ xv.ButtonContent = xblocks.view.create({
 
 
 /**
+ * The template node xb-button
+ *
  * @class xv.Button
  * @memberof xv
  * @mixes React.addons.PureRenderMixin
@@ -2648,6 +2677,8 @@ xv.Button = xblocks.view.register('xb-button', [
 
 
 /**
+ * xb-button html element
+ *
  * @class xb.Button
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
@@ -2820,6 +2851,8 @@ xv.InputController = xblocks.view.create({
 // TODO "title" attribute
 
 /**
+ * The template node xb-input
+ *
  * @class xv.Input
  * @memberof xv
  * @mixes React.addons.PureRenderMixin
@@ -3039,6 +3072,8 @@ xv.Input = xblocks.view.register('xb-input', [
 
 
 /**
+ * xb-input html element
+ *
  * @class xb.Input
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
@@ -3067,6 +3102,8 @@ xb.Input = xblocks.create('xb-input', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-checkbox
+ *
  * @class xv.Checkbox
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -3176,6 +3213,8 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
 
 
 /**
+ * xb-checkbox html element
+ *
  * @class xb.Checkbox
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
@@ -3214,6 +3253,8 @@ xb.Checkbox = xblocks.create('xb-checkbox', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-radio
+ *
  * @class xv.Radio
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -3333,6 +3374,8 @@ xv.Radio = xblocks.view.register('xb-radio', [
 
 
 /**
+ * xb-radio html element
+ *
  * @class xb.Radio
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
@@ -3371,6 +3414,8 @@ xb.Radio = xblocks.create('xb-radio', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-popup
+ *
  * @class xv.Popup
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -3463,6 +3508,8 @@ var _xbPopup = {
 };
 
 /**
+ * xb-popup html element
+ *
  * @constructor
  * @mixes xblocks.mixin.eFocus
  */
@@ -3667,6 +3714,8 @@ xb.Popup = xblocks.create('xb-popup', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-menuseparator
+ *
  * @class xv.Menuseparator
  * @memberof xv
  */
@@ -3686,6 +3735,8 @@ xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
 
 
 /**
+ * xb-menuseparator html element
+ *
  * @class xb.Menuseparator
  * @memberof xb
  */
@@ -3707,6 +3758,8 @@ xb.Menuseparator = xblocks.create('xb-menuseparator', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-menuitem
+ *
  * @class xv.Menuitem
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -3840,6 +3893,8 @@ var _xbMenuitem = {
 };
 
 /**
+ * xb-menuitem html element
+ *
  * @class xb.Menuitem
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled
@@ -4063,6 +4118,8 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
 /* jshint strict: false */
 
 /**
+ * The template node xb-menu
+ *
  * @class xv.Menu
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -4113,6 +4170,8 @@ var _xbMenu = {
 };
 
 /**
+ * xb-menu html element
+ *
  * @class xb.Menu
  * @augments xb.Popup
  * @memberof xb
@@ -4244,6 +4303,8 @@ xb.Menu = xblocks.create('xb-menu', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-menu-inline
+ *
  * @class xv.MenuInline
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
@@ -4293,6 +4354,8 @@ var _xbMenuInline = {
 };
 
 /**
+ * xb-menu-inline html element
+ *
  * @class xb.MenuInline
  * @memberof xb
  * @mixes xblocks.mixin.eFocus
@@ -4340,6 +4403,8 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
 /* jshint strict: false */
 
 /**
+ * The template node xb-select
+ *
  * @class xv.Select
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs

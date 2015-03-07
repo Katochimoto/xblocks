@@ -4,6 +4,8 @@
 /*! borschik:include:checkbox.jsx.js */
 
 /**
+ * xb-checkbox html element
+ *
  * @class xb.Checkbox
  * @memberof xb
  * @mixes xblocks.mixin.eDisabled

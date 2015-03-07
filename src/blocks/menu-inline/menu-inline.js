@@ -24,6 +24,8 @@ var _xbMenuInline = {
 };
 
 /**
+ * xb-menu-inline html element
+ *
  * @class xb.MenuInline
  * @memberof xb
  * @mixes xblocks.mixin.eFocus
