@@ -8,6 +8,7 @@
  *
  * @class xb.Link
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Link = xblocks.create('xb-link', [

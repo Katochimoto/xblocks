@@ -69,6 +69,7 @@ var _xbMenuitem = {
  *
  * @class xb.Menuitem
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eInputValueProps
  * @listens xblocks.utils:Table~event:xb-focus
@@ -141,7 +142,15 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
          */
         'accessors': {
             /**
-             * @property {boolean} focused Item in focus
+             * @prop {string} label
+             */
+
+             /**
+              * @prop {boolean} [disabled=false]
+              */
+
+            /**
+             * @prop {boolean} [focused=false] Item in focus
              */
             'focused': {
                 'attribute': {
@@ -150,7 +159,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {boolean} selected Item is selected
+             * @prop {boolean} [selected=false] Item is selected
              */
             'selected': {
                 'attribute': {
@@ -159,7 +168,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {boolean} submenu Item has a submenu
+             * @prop {boolean} [submenu=false] Item has a submenu
              */
             'submenu': {
                 'attribute': {
@@ -168,7 +177,8 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
+             * @readonly
+             * @prop {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
              */
             'menuInstance': {
                 'get': function() {
@@ -183,7 +193,8 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {xb.Menu|null} submenuInstance Submenu instance
+             * @readonly
+             * @prop {xb.Menu|null} submenuInstance Submenu instance
              */
             'submenuInstance': {
                 'get': function() {

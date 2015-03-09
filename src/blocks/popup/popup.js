@@ -19,6 +19,7 @@ var _xbPopup = {
  * xb-popup html element
  *
  * @constructor
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eFocus
  */
 xb.Popup = xblocks.create('xb-popup', [
@@ -42,8 +43,10 @@ xb.Popup = xblocks.create('xb-popup', [
          * @lends xb.Popup.prototype
          */
         'accessors': {
+
             /**
-             * @property {object}
+             * @readonly
+             * @prop {object} options the display options window
              */
             'options': {
                 'get': function() {
@@ -109,7 +112,8 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
-             * @property {Tether}
+             * @readonly
+             * @prop {Tether} tether Tether the window object
              */
             'tether': {
                 'get': function() {
@@ -122,7 +126,8 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
-             * @property {boolean}
+             * @readonly
+             * @prop {boolean} opened window is open
              */
             'opened': {
                 'get': function() {
@@ -133,9 +138,9 @@ xb.Popup = xblocks.create('xb-popup', [
 
         'methods': {
             /**
-             * @method
+             * Change the settings window
              * @memberOf xb.Popup.prototype
-             * @param {object} nextOptions
+             * @param {object} nextOptions new settings
              */
             'setOptions': function(nextOptions) {
                 var tether = this.tether;
@@ -149,8 +154,9 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
+             * Open the window
              * @memberOf xb.Popup.prototype
-             * @param {object} options
+             * @param {object} options new settings
              * @returns {boolean}
              */
             'open': function(options) {
@@ -176,6 +182,7 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
+             * Close the window
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
@@ -199,6 +206,7 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
+             * Recalculate the location
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */

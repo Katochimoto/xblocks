@@ -154,6 +154,7 @@ xv.Button = xblocks.view.register('xb-button', [
                                     disabled={this.props.disabled}
                                     multiple={this.props.multiple}
                                     autoFocus={this.props.autofocus}
+                                    form={this.props.form}
                                     tabIndex={tabIndex}/>
 
                                 <span className="_xb-file-intruder-focus" />
@@ -173,6 +174,7 @@ xv.Button = xblocks.view.register('xb-button', [
                             className="_xb-check_controller"
                             name={this.props.name}
                             value={this.props.value}
+                            form={this.props.form}
                             disabled={this.props.disabled}
                             defaultChecked={this.props.checked}
                             checked={this.state.checked}
@@ -205,6 +207,7 @@ xv.Button = xblocks.view.register('xb-button', [
                             <span className="_xb-file-intruder-inner">
                                 <input className="_xb-file-intruder-input"
                                     type="button"
+                                    form={this.props.form}
                                     disabled={this.props.disabled}
                                     autoFocus={this.props.autofocus}
                                     tabIndex={tabIndex}/>
@@ -218,7 +221,7 @@ xv.Button = xblocks.view.register('xb-button', [
                 }
 
                 return (
-                    <label className={classes} form={this.props.form} htmlFor={this.props['for']} title={this.props.title}>
+                    <label className={classes} htmlFor={this.props['for']} title={this.props.title}>
                         {children}
                     </label>
                 );

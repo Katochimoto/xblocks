@@ -16,17 +16,21 @@
  * &#60;xb-ico type="notification" value="attribute value">&#60;/xb-ico>
  * <xb-ico value="attribute value" type="notification"></xb-ico>
  *
+ * @example
  * &#60;xb-ico disabled type="attention">&#60;/xb-ico>
  * <xb-ico disabled type="attention"></xb-ico>
  *
+ * @example
  * &#60;xb-ico active type="attention">&#60;/xb-ico>
  * <xb-ico active type="attention"></xb-ico>
  *
+ * @example
  * &#60;xb-ico size="m" type="attention">&#60;/xb-ico>
  * <xb-ico size="m" type="attention"></xb-ico>
  *
  * @class xb.Ico
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Ico = xblocks.create('xb-ico', [

@@ -30,6 +30,8 @@
  * $(e).prop('disabled', false)
  * // false
  *
+ * @prop {boolean} disabled
+ *
  * @memberOf xblocks.mixin
  * @type {object}
  */

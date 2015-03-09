@@ -93,7 +93,6 @@ xv.Radio = xblocks.view.register('xb-radio', [
             return (
                 <label className={classes}
                     title={this.props.title}
-                    form={this.props.form}
                     htmlFor={this.props['for']}>
 
                     <input type="radio"
@@ -107,7 +106,8 @@ xv.Radio = xblocks.view.register('xb-radio', [
                         readOnly={true}
                         onChange={this._onChange}
                         required={this.props.required}
-                        tabIndex={tabIndex} />
+                        tabIndex={tabIndex}
+                        form={this.props.form} />
 
                     <span className="_xb-radio_flag _xb-check_flag">
                         <span className="_xb-radio_flag-icon"></span>

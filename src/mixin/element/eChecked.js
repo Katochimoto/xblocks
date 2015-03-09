@@ -33,6 +33,8 @@
  * $(e).prop('checked', false)
  * // false
  *
+ * @prop {boolean} checked
+ *
  * @memberOf xblocks.mixin
  * @type {object}
  */

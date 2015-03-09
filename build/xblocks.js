@@ -1551,6 +1551,8 @@ xblocks.mixin = xblocks.mixin || {};
  * $(e).prop('disabled', false)
  * // false
  *
+ * @prop {boolean} disabled
+ *
  * @memberOf xblocks.mixin
  * @type {object}
  */
@@ -1601,6 +1603,8 @@ xblocks.mixin.eDisabled = {
  * // jquery write
  * $(e).prop('checked', false)
  * // false
+ *
+ * @prop {boolean} checked
  *
  * @memberOf xblocks.mixin
  * @type {object}
@@ -1823,6 +1827,8 @@ xblocks.mixin.eFocus = {
 
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
+ *
+ * @prop {boolean} hasOpenSubmenu The menu contains the open submenu
  *
  * @memberOf xblocks.mixin
  * @type {object}
@@ -2241,17 +2247,21 @@ xv.Ico = xblocks.view.register('xb-ico', [
  * &#60;xb-ico type="notification" value="attribute value">&#60;/xb-ico>
  * <xb-ico value="attribute value" type="notification"></xb-ico>
  *
+ * @example
  * &#60;xb-ico disabled type="attention">&#60;/xb-ico>
  * <xb-ico disabled type="attention"></xb-ico>
  *
+ * @example
  * &#60;xb-ico active type="attention">&#60;/xb-ico>
  * <xb-ico active type="attention"></xb-ico>
  *
+ * @example
  * &#60;xb-ico size="m" type="attention">&#60;/xb-ico>
  * <xb-ico size="m" type="attention"></xb-ico>
  *
  * @class xb.Ico
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Ico = xblocks.create('xb-ico', [
@@ -2353,6 +2363,7 @@ xv.Link = xblocks.view.register('xb-link', [
  *
  * @class xb.Link
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Link = xblocks.create('xb-link', [
@@ -2576,6 +2587,7 @@ xv.Button = xblocks.view.register('xb-button', [
                                     disabled: this.props.disabled, 
                                     multiple: this.props.multiple, 
                                     autoFocus: this.props.autofocus, 
+                                    form: this.props.form, 
                                     tabIndex: tabIndex}), 
 
                                 React.createElement("span", {className: "_xb-file-intruder-focus"})
@@ -2595,6 +2607,7 @@ xv.Button = xblocks.view.register('xb-button', [
                             className: "_xb-check_controller", 
                             name: this.props.name, 
                             value: this.props.value, 
+                            form: this.props.form, 
                             disabled: this.props.disabled, 
                             defaultChecked: this.props.checked, 
                             checked: this.state.checked, 
@@ -2627,6 +2640,7 @@ xv.Button = xblocks.view.register('xb-button', [
                             React.createElement("span", {className: "_xb-file-intruder-inner"}, 
                                 React.createElement("input", {className: "_xb-file-intruder-input", 
                                     type: "button", 
+                                    form: this.props.form, 
                                     disabled: this.props.disabled, 
                                     autoFocus: this.props.autofocus, 
                                     tabIndex: tabIndex}), 
@@ -2640,7 +2654,7 @@ xv.Button = xblocks.view.register('xb-button', [
                 }
 
                 return (
-                    React.createElement("label", {className: classes, form: this.props.form, htmlFor: this.props['for'], title: this.props.title}, 
+                    React.createElement("label", {className: classes, htmlFor: this.props['for'], title: this.props.title}, 
                         children
                     )
                 );
@@ -2679,8 +2693,32 @@ xv.Button = xblocks.view.register('xb-button', [
 /**
  * xb-button html element
  *
+ * @prop {string} [size=m] size, possible values: s|m|l|xl
+ * @prop {string} [theme=normal] normal|action|dark|flying|pseudo-inverted|pseudo|promo
+ * @prop {string} [type=button] label|inline|link|file|button|submit|checkbox|radio
+ * @prop {string} [target] _blank|_self|_parent|_top
+ * @prop {string} [value]
+ * @prop {string} [href]
+ * @prop {string} [name]
+ * @prop {string} [form]
+ * @prop {string} [for]
+ * @prop {boolean} [multiple=false]
+ * @prop {boolean} [autofocus=false]
+ * @prop {boolean} [disabled=false]
+ * @prop {boolean} [checked=false]
+ * @prop {boolean} [required=false]
+ *
+ * @example
+ * &#60;xb-button type="checkbox" name="checkbox" value="1">checkbox&#60;/xb-button>
+ * <xb-button type="checkbox" name="checkbox" value="1">checkbox</xb-button>
+ *
+ * @example
+ * &#60;xb-button type="radio" name="radio" value="1">radio 1&#60;/xb-button>
+ * <xb-button type="radio" name="radio" value="1">radio 1</xb-button> <xb-button type="radio" name="radio" value="2">radio 2</xb-button>
+ *
  * @class xb.Button
  * @memberof xb
+ * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eChecked
  * @mixes xblocks.mixin.eInputValueProps
@@ -3074,8 +3112,29 @@ xv.Input = xblocks.view.register('xb-input', [
 /**
  * xb-input html element
  *
+ * @prop {string} [name]
+ * @prop {string} [type=text] text|number|date|datetime|email|month|range|search|tel|time|url|week|color
+ * @prop {string} [size=m] s|m|l|xl
+ * @prop {string} [autocomplete] on|off
+ * @prop {string} [rows=4]
+ * @prop {string} [cols]
+ * @prop {string} [placeholder]
+ * @prop {string} [value]
+ * @prop {string} [prefix]
+ * @prop {string} [postfix]
+ * @prop {string} [tabindex]
+ * @prop {boolean} [disabled=false]
+ * @prop {boolean} [autosize=false]
+ * @prop {boolean} [multiline=false]
+ * @prop {boolean} [required=false]
+ * @prop {boolean} [readonly=false]
+ * @prop {boolean} [reset=false]
+ * @prop {boolean} [autofocus=false]
+ * @prop {boolean} [ghost=false]
+ *
  * @class xb.Input
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
@@ -3182,7 +3241,6 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
             return (
                 React.createElement("label", {className: classes, 
                     title: this.props.title, 
-                    form: this.props.form, 
                     htmlFor: this.props['for']}, 
 
                     React.createElement("input", {type: "checkbox", 
@@ -3196,7 +3254,8 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                         readOnly: true, 
                         onChange: this._onChange, 
                         required: this.props.required, 
-                        tabIndex: tabIndex}), 
+                        tabIndex: tabIndex, 
+                        form: this.props.form}), 
 
                     React.createElement("span", {className: "_xb-checkbox_flag _xb-check_flag"}, 
                         React.createElement("span", {className: "_xb-checkbox_flag-icon"})
@@ -3215,8 +3274,19 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
 /**
  * xb-checkbox html element
  *
+ * @prop {string} [size=m] size, possible values: s|m
+ * @prop {string} [value=on]
+ * @prop {string} [name]
+ * @prop {string} [form]
+ * @prop {string} [for]
+ * @prop {boolean} [autofocus=false]
+ * @prop {boolean} [disabled=false]
+ * @prop {boolean} [checked=false]
+ * @prop {boolean} [required=false]
+ *
  * @class xb.Checkbox
  * @memberof xb
+ * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eChecked
  * @mixes xblocks.mixin.eInputValueProps
@@ -3343,7 +3413,6 @@ xv.Radio = xblocks.view.register('xb-radio', [
             return (
                 React.createElement("label", {className: classes, 
                     title: this.props.title, 
-                    form: this.props.form, 
                     htmlFor: this.props['for']}, 
 
                     React.createElement("input", {type: "radio", 
@@ -3357,7 +3426,8 @@ xv.Radio = xblocks.view.register('xb-radio', [
                         readOnly: true, 
                         onChange: this._onChange, 
                         required: this.props.required, 
-                        tabIndex: tabIndex}), 
+                        tabIndex: tabIndex, 
+                        form: this.props.form}), 
 
                     React.createElement("span", {className: "_xb-radio_flag _xb-check_flag"}, 
                         React.createElement("span", {className: "_xb-radio_flag-icon"})
@@ -3376,8 +3446,19 @@ xv.Radio = xblocks.view.register('xb-radio', [
 /**
  * xb-radio html element
  *
+ * @prop {string} [size=m] size, possible values: s|m
+ * @prop {string} [value=on]
+ * @prop {string} [name]
+ * @prop {string} [form]
+ * @prop {string} [for]
+ * @prop {boolean} [autofocus=false]
+ * @prop {boolean} [disabled=false]
+ * @prop {boolean} [checked=false]
+ * @prop {boolean} [required=false]
+ *
  * @class xb.Radio
  * @memberof xb
+ * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eChecked
  * @mixes xblocks.mixin.eInputValueProps
@@ -3511,6 +3592,7 @@ var _xbPopup = {
  * xb-popup html element
  *
  * @constructor
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eFocus
  */
 xb.Popup = xblocks.create('xb-popup', [
@@ -3534,8 +3616,10 @@ xb.Popup = xblocks.create('xb-popup', [
          * @lends xb.Popup.prototype
          */
         'accessors': {
+
             /**
-             * @property {object}
+             * @readonly
+             * @prop {object} options the display options window
              */
             'options': {
                 'get': function() {
@@ -3601,7 +3685,8 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
-             * @property {Tether}
+             * @readonly
+             * @prop {Tether} tether Tether the window object
              */
             'tether': {
                 'get': function() {
@@ -3614,7 +3699,8 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
-             * @property {boolean}
+             * @readonly
+             * @prop {boolean} opened window is open
              */
             'opened': {
                 'get': function() {
@@ -3625,9 +3711,9 @@ xb.Popup = xblocks.create('xb-popup', [
 
         'methods': {
             /**
-             * @method
+             * Change the settings window
              * @memberOf xb.Popup.prototype
-             * @param {object} nextOptions
+             * @param {object} nextOptions new settings
              */
             'setOptions': function(nextOptions) {
                 var tether = this.tether;
@@ -3641,8 +3727,9 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
+             * Open the window
              * @memberOf xb.Popup.prototype
-             * @param {object} options
+             * @param {object} options new settings
              * @returns {boolean}
              */
             'open': function(options) {
@@ -3668,6 +3755,7 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
+             * Close the window
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
@@ -3691,6 +3779,7 @@ xb.Popup = xblocks.create('xb-popup', [
             },
 
             /**
+             * Recalculate the location
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
@@ -3739,6 +3828,7 @@ xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
  *
  * @class xb.Menuseparator
  * @memberof xb
+ * @augments HTMLElement
  */
 xb.Menuseparator = xblocks.create('xb-menuseparator', [
     {
@@ -3897,6 +3987,7 @@ var _xbMenuitem = {
  *
  * @class xb.Menuitem
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eInputValueProps
  * @listens xblocks.utils:Table~event:xb-focus
@@ -3969,7 +4060,15 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
          */
         'accessors': {
             /**
-             * @property {boolean} focused Item in focus
+             * @prop {string} label
+             */
+
+             /**
+              * @prop {boolean} [disabled=false]
+              */
+
+            /**
+             * @prop {boolean} [focused=false] Item in focus
              */
             'focused': {
                 'attribute': {
@@ -3978,7 +4077,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {boolean} selected Item is selected
+             * @prop {boolean} [selected=false] Item is selected
              */
             'selected': {
                 'attribute': {
@@ -3987,7 +4086,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {boolean} submenu Item has a submenu
+             * @prop {boolean} [submenu=false] Item has a submenu
              */
             'submenu': {
                 'attribute': {
@@ -3996,7 +4095,8 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
+             * @readonly
+             * @prop {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
              */
             'menuInstance': {
                 'get': function() {
@@ -4011,7 +4111,8 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             },
 
             /**
-             * @property {xb.Menu|null} submenuInstance Submenu instance
+             * @readonly
+             * @prop {xb.Menu|null} submenuInstance Submenu instance
              */
             'submenuInstance': {
                 'get': function() {
@@ -4232,13 +4333,25 @@ xb.Menu = xblocks.create('xb-menu', [
             }
         },
 
+        /**
+         * @lends xb.Menu.prototype
+         */
         'accessors': {
+
+            /**
+             * @readonly
+             * @prop {xb.Menu} [parentMenu] menu-ancestor
+             */
             'parentMenu': {
                 'get': function() {
                     return this.tether.target.menuInstance;
                 }
             },
 
+            /**
+             * @readonly
+             * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
+             */
             'firstParentMenu': {
                 'get': function() {
                     var parentMenu = this.parentMenu;
@@ -4358,6 +4471,7 @@ var _xbMenuInline = {
  *
  * @class xb.MenuInline
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eFocus
  * @mixes xblocks.mixin.eMenu
  */
@@ -4394,7 +4508,7 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
 /* blocks/menu-inline/menu-inline.js end */
 
     /* blocks/select/select.js begin */
-/* global xblocks */
+/* global xblocks, xb */
 /* jshint strict: false */
 
 /* blocks/select/select.jsx.js begin */
@@ -4496,7 +4610,16 @@ xv.Select = xblocks.view.register('xb-select', [
 /* blocks/select/select.jsx.js end */
 
 
-xblocks.create('xb-select', [
+/**
+ * xb-select html element
+ *
+ * in the development
+ *
+ * @class xb.Select
+ * @augments HTMLSelectElement
+ * @memberof xb
+ */
+xb.Select = xblocks.create('xb-select', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eFocus,
 
@@ -4506,6 +4629,89 @@ xblocks.create('xb-select', [
 ]);
 
 /* blocks/select/select.js end */
+
+    /* blocks/calendar/calendar.js begin */
+/** @jsx React.DOM */
+/* global xblocks, xb */
+/* jshint strict: false */
+
+/* blocks/calendar/calendar.jsx.js begin */
+/** @jsx React.DOM */
+/* global xblocks, React, xv */
+/* jshint strict: false */
+
+/**
+ * The template node xb-calendar
+ *
+ * @class xv.Calendar
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ * @mixes React.addons.PureRenderMixin
+ */
+xv.Calendar = xblocks.view.register('xb-calendar', [
+    xblocks.mixin.vCommonAttrs,
+
+    {
+        'displayName': 'xb-calendar',
+
+        'mixins': [ React.addons.PureRenderMixin ],
+
+        'propTypes': {
+            'startWeekDay': React.PropTypes.string
+        },
+
+        'getDefaultProps': function() {
+            return {
+                'startWeekDay': '1'
+            };
+        },
+
+        /* jshint ignore:start */
+        'render': function() {
+            this.datetime = moment();
+
+            var startWeekDay = Number(this.props.startWeekDay);
+            var daysInMonth = this.datetime.daysInMonth();
+
+            var firstDay = this.datetime.date(1).day();
+            var prefixDays = firstDay - startWeekDay;
+            if (prefixDays < 0) {
+                prefixDays = 7 + prefixDays;
+            }
+
+            var lastDay = this.datetime.date(daysInMonth).day();
+            var postfixDays = 6 - lastDay + startWeekDay;
+            if (postfixDays > 6) {
+                postfixDays = 0;
+            }
+
+            var days = daysInMonth + prefixDays + postfixDays;
+
+            return (
+                React.createElement("div", null
+
+                )
+            );
+        }
+        /* jshint ignore:end */
+    }
+]);
+
+/* blocks/calendar/calendar.jsx.js end */
+
+
+/**
+ * xb-calendar html element
+ *
+ * in the development
+ *
+ * @class xb.Calendar
+ * @augments HTMLElement
+ * @memberof xb
+ */
+xb.Calendar = xblocks.create('xb-calendar');
+
+/* blocks/calendar/calendar.js end */
 
 
 }(function() {

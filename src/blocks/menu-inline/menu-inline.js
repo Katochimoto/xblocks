@@ -28,6 +28,7 @@ var _xbMenuInline = {
  *
  * @class xb.MenuInline
  * @memberof xb
+ * @augments HTMLElement
  * @mixes xblocks.mixin.eFocus
  * @mixes xblocks.mixin.eMenu
  */

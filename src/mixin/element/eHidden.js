@@ -30,6 +30,8 @@
  * $(e).prop('hidden', false)
  * // false
  *
+ * @prop {boolean} hidden
+ *
  * @memberOf xblocks.mixin
  * @type {object}
  */

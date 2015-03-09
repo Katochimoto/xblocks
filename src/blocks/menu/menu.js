@@ -80,13 +80,25 @@ xb.Menu = xblocks.create('xb-menu', [
             }
         },
 
+        /**
+         * @lends xb.Menu.prototype
+         */
         'accessors': {
+
+            /**
+             * @readonly
+             * @prop {xb.Menu} [parentMenu] menu-ancestor
+             */
             'parentMenu': {
                 'get': function() {
                     return this.tether.target.menuInstance;
                 }
             },
 
+            /**
+             * @readonly
+             * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
+             */
             'firstParentMenu': {
                 'get': function() {
                     var parentMenu = this.parentMenu;

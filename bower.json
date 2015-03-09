@@ -1,37 +1,38 @@
 {
-    "name": "xblocks",
-    "version": "0.5.11",
-    "dependencies": {
-        "xblocks-core": "0.5.8",
-        "es5-shim": "4.1.0",
-        "react": "0.13.0-rc1",
-        "vow": "0.4.8",
-        "tether": "0.6.5"
-    },
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "src",
-        "package.json",
-        "Makefile",
-        "karma.conf.js"
-    ],
-    "homepage": "http://xblocks.ru",
-    "authors": [
-        "rikishi <bufpost@yandex.ru>"
-    ],
-    "description": "HTML custom elements",
-    "moduleType": [
-        "globals"
-    ],
-    "keywords": [
-        "x-tag",
-        "x-tags",
-        "react",
-        "html5",
-        "xblocks"
-    ],
-    "license": "MIT"
+  "name": "xblocks",
+  "version": "0.5.11",
+  "dependencies": {
+    "xblocks-core": "0.5.8",
+    "es5-shim": "4.1.0",
+    "react": "0.13.0-rc1",
+    "vow": "0.4.8",
+    "tether": "0.6.5",
+    "moment": "~2.9.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "src",
+    "package.json",
+    "Makefile",
+    "karma.conf.js"
+  ],
+  "homepage": "http://xblocks.ru",
+  "authors": [
+    "rikishi <bufpost@yandex.ru>"
+  ],
+  "description": "HTML custom elements",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "x-tag",
+    "x-tags",
+    "react",
+    "html5",
+    "xblocks"
+  ],
+  "license": "MIT"
 }

@@ -83,7 +83,6 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
             return (
                 <label className={classes}
                     title={this.props.title}
-                    form={this.props.form}
                     htmlFor={this.props['for']}>
 
                     <input type="checkbox"
@@ -97,7 +96,8 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                         readOnly={true}
                         onChange={this._onChange}
                         required={this.props.required}
-                        tabIndex={tabIndex} />
+                        tabIndex={tabIndex}
+                        form={this.props.form} />
 
                     <span className="_xb-checkbox_flag _xb-check_flag">
                         <span className="_xb-checkbox_flag-icon"></span>

@@ -8,6 +8,7 @@
  *
  * @class xb.Menuseparator
  * @memberof xb
+ * @augments HTMLElement
  */
 xb.Menuseparator = xblocks.create('xb-menuseparator', [
     {
