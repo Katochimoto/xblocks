@@ -1,0 +1,86 @@
+xb-popup
+  skin: xb-inline-block
+  display: none
+  z-index: $popupZ
+
+  &.xb-popup-enabled
+    display: inline-block
+
+  & > ._popup
+    skin: popup
+    overflow: hidden
+    outline: none
+
+    &:focus
+      box-shadow: 0 0 0 1px rgba(#000, 0.15), 0 8px 30px -5px rgba(#000, 0.7)
+
+    & > ._content
+      skin: popup-content
+
+    & > ._close
+      skin: popup-close
+      width: 24px
+      height: 24px
+      top: 2px
+      right: 2px
+
+      & + ._title,
+      & + ._content
+        padding-right: 2*$gapM !important
+
+    & > ._title
+      font: $font-h3
+      padding: $islands_s
+      display: block
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    & > ._buttons
+      padding: $islands_s
+      padding-top: $islands_s
+
+
+    &._theme-modal
+      & > ._content
+        font: $font-p1
+        padding: 0 $islands_s
+
+
+    &._theme-island
+      & > ._title
+        padding: 0 $gapM
+        height: 50px
+        line-height: @height
+        font-size: 1em
+        background: $backgroundPrimary
+        border-bottom: 1px solid darken($background, 16%)
+
+      & > ._content
+        padding: 0 $gapM
+
+      & > ._buttons
+        margin-top: -1px
+        padding: ($gapS + 1px) $gapS $gapS
+        box-shadow: inset 0 1px rgba($foreground, 0.15), 0 -2px rgba($foreground, 0.04)
+
+
+    &._theme-error
+      & > ._content
+        line-height: 0
+
+
+    &._theme-blank
+      background-color: transparent
+      border: 0
+      box-shadow: none
+
+      & > ._content,
+      & > ._title,
+      & > ._buttons
+        padding: 0
+
+      & > ._content:before,
+      & > ._content:after
+        margin: 0
+        display: none

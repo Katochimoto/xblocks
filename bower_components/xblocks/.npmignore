@@ -1,0 +1,16 @@
+.npmignore
+.idea
+.git
+.npm-debug.log
+.gitignore
+.jscs.json
+.jshintignore
+.jshintrc
+.travis.yml
+.bowerrc
+node_modules
+bower_components
+test
+Makefile
+bower.json
+karma.conf.js

@@ -1,0 +1,10 @@
+node_modules
+bower_components
+test
+coverage
+xblocks-core.js
+xblocks-core.min.js
+xblocks-core-full.js
+xblocks-core-full.min.js
+x-tag-core.js
+x-tag-core.min.js

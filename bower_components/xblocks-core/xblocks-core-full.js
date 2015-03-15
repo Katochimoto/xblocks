@@ -1447,7 +1447,7 @@ function inDocument(element) {
     if (p == doc) {
       return true;
     }
-    p = p.parentNode || p.host;
+    p = p.parentNode || ((p.nodeType === Node.DOCUMENT_FRAGMENT_NODE) && p.host);
   }
 }
 
@@ -1577,7 +1577,6 @@ function upgradeDocumentTree(doc) {
 // undefined to aid feature detection of Shadow DOM.
 var originalCreateShadowRoot = Element.prototype.createShadowRoot;
 if (originalCreateShadowRoot) {
-  // ensure that all ShadowRoots watch for CustomElements.
   Element.prototype.createShadowRoot = function() {
     var root = originalCreateShadowRoot.call(this);
     CustomElements.watchShadow(this);
@@ -2086,6 +2085,27 @@ var initializeModules = scope.initializeModules;
 
 var isIE11OrOlder = /Trident/.test(navigator.userAgent);
 
+// Patch document.importNode to work around IE11 bug that
+// casues children of a document fragment imported while
+// there is a mutation observer to not have a parentNode (!?!)
+if (isIE11OrOlder) {
+  (function() {
+    var importNode = document.importNode;
+    document.importNode = function() {
+      var n = importNode.apply(document, arguments);
+      // Copy all children to a new document fragment since
+      // this one may be broken
+      if (n.nodeType == n.DOCUMENT_FRAGMENT_NODE) {
+        var f = document.createDocumentFragment();
+        f.appendChild(n);
+        return f;
+      } else {
+        return n;
+      }
+    };
+  })();  
+}
+
 // If native, setup stub api and bail.
 // NOTE: we fire `WebComponentsReady` under native for api compatibility
 if (useNative) {
@@ -2127,6 +2147,7 @@ if (!window.wrap) {
     };
   }
 }
+
 
 // bootstrap parsing
 function bootstrap() {
@@ -2313,24 +2334,35 @@ function markTargetLoaded(event) {
 // call <callback> when we ensure all imports have loaded
 function watchImportsLoad(callback, doc) {
   var imports = doc.querySelectorAll('link[rel=import]');
-  var loaded = 0, l = imports.length;
-  function checkDone(d) {
-    if ((loaded == l) && callback) {
-       callback();
+  var parsedCount = 0, importCount = imports.length, newImports = [], errorImports = [];
+  function checkDone() {
+    if (parsedCount == importCount && callback) {
+      callback({
+        allImports: imports,
+        loadedImports: newImports,
+        errorImports: errorImports
+      });
     }
   }
   function loadedImport(e) {
     markTargetLoaded(e);
-    loaded++;
+    newImports.push(this);
+    parsedCount++;
     checkDone();
   }
-  if (l) {
-    for (var i=0, imp; (i<l) && (imp=imports[i]); i++) {
+  function errorLoadingImport(e) {
+    errorImports.push(this);
+    parsedCount++;
+    checkDone();
+  }
+  if (importCount) {
+    for (var i=0, imp; i<importCount && (imp=imports[i]); i++) {
       if (isImportLoaded(imp)) {
-        loadedImport.call(imp, {target: imp});
+        parsedCount++;
+        checkDone();
       } else {
         imp.addEventListener('load', loadedImport);
-        imp.addEventListener('error', loadedImport);
+        imp.addEventListener('error', errorLoadingImport);
       }
     }
   } else {
@@ -2409,11 +2441,11 @@ if (useNative) {
 // have loaded. This event is required to simulate the script blocking
 // behavior of native imports. A main document script that needs to be sure
 // imports have loaded should wait for this event.
-whenReady(function() {
+whenReady(function(detail) {
   HTMLImports.ready = true;
   HTMLImports.readyTime = new Date().getTime();
   var evt = rootDocument.createEvent("CustomEvent");
-  evt.initCustomEvent("HTMLImportsLoaded", true, true, {});
+  evt.initCustomEvent("HTMLImportsLoaded", true, true, detail);
   rootDocument.dispatchEvent(evt);
 });
 
@@ -2480,22 +2512,25 @@ var CSS_IMPORT_REGEXP = /(@import[\s]+(?!url\())([^;]*)(;)/g;
 // document. We fixup url's in url() and @import.
 var path = {
 
-  resolveUrlsInStyle: function(style) {
+  resolveUrlsInStyle: function(style, linkUrl) {
     var doc = style.ownerDocument;
     var resolver = doc.createElement('a');
-    style.textContent = this.resolveUrlsInCssText(style.textContent, resolver);
+    style.textContent = this.resolveUrlsInCssText(style.textContent, linkUrl, resolver);
     return style;
   },
 
-  resolveUrlsInCssText: function(cssText, urlObj) {
-    var r = this.replaceUrls(cssText, urlObj, CSS_URL_REGEXP);
-    r = this.replaceUrls(r, urlObj, CSS_IMPORT_REGEXP);
+  resolveUrlsInCssText: function(cssText, linkUrl, urlObj) {
+    var r = this.replaceUrls(cssText, urlObj, linkUrl, CSS_URL_REGEXP);
+    r = this.replaceUrls(r, urlObj, linkUrl, CSS_IMPORT_REGEXP);
     return r;
   },
 
-  replaceUrls: function(text, urlObj, regexp) {
+  replaceUrls: function(text, urlObj, linkUrl, regexp) {
     return text.replace(regexp, function(m, pre, url, post) {
       var urlPath = url.replace(/["']/g, '');
+      if (linkUrl) {
+        urlPath = (new URL(urlPath, linkUrl)).href;
+      }
       urlObj.href = urlPath;
       urlPath = urlObj.href;
       return pre + '\'' + urlPath + '\'' + post;
@@ -2925,6 +2960,7 @@ var importParser = {
     // TODO(sorvell): style element load event can just not fire so clone styles
     var src = elt;
     elt = cloneStyle(elt);
+    src.__appliedElement = elt;
     elt.__importElement = src;
     this.parseGeneric(elt);
   },
@@ -3472,7 +3508,7 @@ if (document.readyState === 'complete' ||
         js: pre == 'ms' ? pre : pre[0].toUpperCase() + pre.substr(1)
       };
     })(),
-    matchSelector = Element.prototype.matchesSelector || Element.prototype[prefix.lowercase + 'MatchesSelector'],
+    matchSelector = Element.prototype.matches || Element.prototype.matchesSelector || Element.prototype[prefix.lowercase + 'MatchesSelector'],
     mutation = win.MutationObserver || win[prefix.js + 'MutationObserver'];
 
   var issetCustomEvent = false;
@@ -3617,16 +3653,14 @@ if (document.readyState === 'complete' ||
 // Events
 
   function delegateAction(pseudo, event) {
-    var match, target = event.target;
-    if (!target.tagName) return null;
-    if (xtag.matchSelector(target, pseudo.value)) match = target;
-    else if (xtag.matchSelector(target, pseudo.value + ' *')) {
-      var parent = target.parentNode;
-      while (!match) {
-        if (xtag.matchSelector(parent, pseudo.value)) match = parent;
-        parent = parent.parentNode;
-      }
+    var match,
+        target = event.target,
+        root = event.currentTarget;
+    while (!match && target && target != root) {
+      if (target.tagName && matchSelector.call(target, pseudo.value)) match = target;
+      target = target.parentNode;
     }
+    if (!match && root.tagName && matchSelector.call(root, pseudo.value)) match = root;
     return match ? pseudo.listener = pseudo.listener.bind(match) : null;
   }
 
@@ -3673,13 +3707,7 @@ if (document.readyState === 'complete' ||
       while (index--) nodes[index][method](name, value);
     }
   }
-
-  function updateView(element, name, value){
-    if (element.__view__){
-      element.__view__.updateBindingValue(element, name, value);
-    }
-  }
-
+  
   function attachProperties(tag, prop, z, accessor, attr, name){
     var key = z.split(':'), type = key[0];
     if (type == 'get') {
@@ -3689,15 +3717,21 @@ if (document.readyState === 'complete' ||
     else if (type == 'set') {
       key[0] = prop;
       var setter = tag.prototype[prop].set = xtag.applyPseudos(key.join(':'), attr ? function(value){
-          value = attr.boolean ? !!value : attr.validate ? attr.validate.call(this, value) : value;
-          var method = attr.boolean ? (value ? 'setAttribute' : 'removeAttribute') : 'setAttribute';
+        var old, method = 'setAttribute';
+        if (attr.boolean){
+          value = !!value;
+          old = this.hasAttribute(name);
+          if (!value) method = 'removeAttribute';
+        }
+        else {
+          value = attr.validate ? attr.validate.call(this, value) : value;
+          old = this.getAttribute(name);
+        }
         modAttr(this, attr, name, value, method);
-        accessor[z].call(this, value);
+        accessor[z].call(this, value, old);
         syncAttr(this, attr, name, value, method);
-        updateView(this, prop, value);
       } : accessor[z] ? function(value){
         accessor[z].call(this, value);
-        updateView(this, prop, value);
       } : null, tag.pseudos, accessor[z]);
 
       if (attr) attr.setter = accessor[z];
@@ -3731,7 +3765,6 @@ if (document.readyState === 'complete' ||
         var method = attr.boolean ? (value ? 'setAttribute' : 'removeAttribute') : 'setAttribute';
         modAttr(this, attr, name, value, method);
         syncAttr(this, attr, name, value, method);
-        updateView(this, name, value);
       };
     }
   }
@@ -3825,16 +3858,18 @@ if (document.readyState === 'complete' ||
 
       tag.prototype.setAttribute = {
         writable: true,
-        enumberable: true,
+        enumerable: true,
         value: function (name, value){
+          var old;
           var _name = name.toLowerCase();
           var attr = tag.attributes[_name];
           if (attr) {
+            old = this.getAttribute(_name);
             value = attr.boolean ? '' : attr.validate ? attr.validate.call(this, value) : value;
           }
           modAttr(this, attr, _name, value, 'setAttribute');
           if (attr) {
-            if (attr.setter) attr.setter.call(this, attr.boolean ? true : value);
+            if (attr.setter) attr.setter.call(this, attr.boolean ? true : value, old);
             syncAttr(this, attr, _name, value, 'setAttribute');
           }
         }
@@ -3842,13 +3877,14 @@ if (document.readyState === 'complete' ||
 
       tag.prototype.removeAttribute = {
         writable: true,
-        enumberable: true,
+        enumerable: true,
         value: function (name){
           var _name = name.toLowerCase();
           var attr = tag.attributes[_name];
+          var old = this.hasAttribute(_name);
           modAttr(this, attr, _name, '', 'removeAttribute');
           if (attr) {
-            if (attr.setter) attr.setter.call(this, attr.boolean ? false : undefined);
+            if (attr.setter) attr.setter.call(this, attr.boolean ? false : undefined, old);
             syncAttr(this, attr, _name, '', 'removeAttribute');
           }
         }
@@ -3952,10 +3988,6 @@ if (document.readyState === 'complete' ||
     },
     pseudos: {
       __mixin__: {},
-      /*
-
-
-      */
       mixins: {
         onCompiled: function(fn, pseudo){
           var mixins = pseudo.source.__mixins__;
@@ -3982,7 +4014,9 @@ if (document.readyState === 'complete' ||
       },
       keypass: keypseudo,
       keyfail: keypseudo,
-      delegate: { action: delegateAction },
+      delegate: {
+        action: delegateAction
+      },
       within: {
         action: delegateAction,
         onAdd: function(pseudo){
@@ -4525,9 +4559,6 @@ for (z in UIEventProto){
 (function(global, undefined) {
     'use strict';
 
-    /**
-     * @namespace React
-     */
     var React = global.React;
 
     global.xblocks = global.xblocks || {};
@@ -4584,7 +4615,16 @@ xblocks.utils.log.time = function(/*element, name*/) {
 /* jshint strict: false */
 
 /**
- * @returns {number}
+ * The generator is a unique sequence of positive numbers
+ *
+ * @example
+ * xblocks.utils.seq()
+ * // 1
+ * xblocks.utils.seq()
+ * // 2
+ *
+ * @function xblocks.utils.seq
+ * @returns {number} a unique, incremental positive number
  */
 xblocks.utils.seq = (function() {
     var i = 0;
@@ -4600,6 +4640,7 @@ xblocks.utils.seq = (function() {
 /* jshint strict: false */
 
 /**
+ * The definition of the data type
  * @param {*} param
  * @returns {string}
  */
@@ -4640,15 +4681,23 @@ xblocks.utils.type = function(param) {
 /* jshint strict: false */
 
 /**
- * @param {*} obj
+ * Check to see if an object is a plain object (created using "{}" or "new Object")
+ *
+ * @example
+ * xblocks.utils.isPlainObject({})
+ * // true
+ * xblocks.utils.isPlainObject(test)
+ * // false
+ *
+ * @param {*} value the value to test
  * @returns {boolean}
  */
-xblocks.utils.isPlainObject = function(obj) {
-    if (xblocks.utils.type(obj) !== 'object') {
+xblocks.utils.isPlainObject = function(value) {
+    if (xblocks.utils.type(value) !== 'object') {
         return false;
     }
 
-    if (obj.constructor && !obj.constructor.prototype.hasOwnProperty('isPrototypeOf')) {
+    if (value.constructor && !value.constructor.prototype.hasOwnProperty('isPrototypeOf')) {
         return false;
     }
 
@@ -4662,8 +4711,9 @@ xblocks.utils.isPlainObject = function(obj) {
 /* jshint strict: false */
 
 /**
- * @param {string} methodName
- * @returns {boolean}
+ * Check the override method
+ * @param {string} methodName method name
+ * @returns {boolean} true if the method is not overridden
  */
 xblocks.utils.pristine = function(methodName) {
     if (!methodName) {
@@ -4708,6 +4758,19 @@ xblocks.utils.pristine = function(methodName) {
 /* jshint strict: false */
 
 /**
+ * Combining objects
+ *
+ * @example
+ * var target = { a: 1 };
+ * xblocks.utils.merge(target, { b: 2 })
+ * // { a: 1, b: 2 }
+ *
+ * xblocks.utils.merge({ a: 1 }, { b: 2 }, { c: 3 })
+ * // { a: 1, b: 2, c: 3 }
+ *
+ * xblocks.utils.merge(true, { a: 1 }, { b: { c: 2 } }, { b: { d: 3 } })
+ * // { a: 1, b: { c: 2, d: 3 } }
+ *
  * @returns {object}
  */
 xblocks.utils.merge = function() {
@@ -4789,21 +4852,18 @@ xblocks.utils.merge = function() {
 /* jshint strict: false */
 
 /**
- * @function
- * @private
- */
-xblocks.utils._lazy = (function() {
-    if (typeof(global.setImmediate) === 'function') {
-        return global.setImmediate;
-
-    } else {
-        return function(callback) {
-            return global.setTimeout(callback, 0);
-        };
-    }
-}());
-
-/**
+ * Deferred execution
+ *
+ * @example
+ * var lazyCallback = function() {
+ *     console.log(arguments);
+ * };
+ * xblocks.utils.lazy(lazyCallback, 'a');
+ * xblocks.utils.lazy(lazyCallback, 'b');
+ * xblocks.utils.lazy(lazyCallback, 'c');
+ * // ....
+ * [ Array[ 'a', 'b', 'c' ] ]
+ *
  * @param {function} callback
  * @param {*} args
  * @returns {function}
@@ -4816,7 +4876,7 @@ xblocks.utils.lazy = function(callback, args) {
     callback._args.push(args);
 
     if (!callback._timer) {
-        callback._timer = xblocks.utils._lazy(function() {
+        callback._timer = global.setImmediate(function() {
             callback._timer = 0;
 
             var args = callback._args;
@@ -4839,14 +4899,10 @@ xblocks.utils.lazy = function(callback, args) {
  * @param {*} x
  * @param {*} y
  * @returns {boolean}
+ * @private
  */
-
 xblocks.utils._equal = {
     'array': function(x, y) {
-        if (x === y) {
-            return true;
-        }
-
         var i = 0;
         var l = x.length;
 
@@ -4864,10 +4920,6 @@ xblocks.utils._equal = {
     },
 
     'object': function(x, y) {
-        if (x === y) {
-            return true;
-        }
-
         var i;
 
         for (i in x) {
@@ -4903,6 +4955,21 @@ xblocks.utils._equal = {
     }
 };
 
+/**
+ * Comparison
+ *
+ * @example
+ * xblocks.utils.equals(1, 1)
+ * // true
+ * xblocks.utils.equals({ a: 1 }, { a: 1 })
+ * // true
+ * xblocks.utils.equals({ a: 1 }, { a: 2 })
+ * // false
+ *
+ * @param {*} x that compared
+ * @param {*} y compared to
+ * @returns {boolean}
+ */
 xblocks.utils.equals = function(x, y) {
     if (x === y) {
         return true;
@@ -4961,8 +5028,9 @@ xblocks.utils.propTypes = function(tagName) {
     var cache = {};
 
     /**
-     * @param {string} str
-     * @param {object} data
+     * Template engine
+     * @param {string} str template
+     * @param {object} data the template data
      * @returns {string}
      * @see http://ejohn.org/blog/javascript-micro-templating/
      */
@@ -5000,9 +5068,14 @@ xblocks.utils.propTypes = function(tagName) {
  * @namespace
  */
 xblocks.dom = xblocks.dom || {};
+
+/**
+ * @namespace
+ */
 xblocks.dom.attrs = xblocks.dom.attrs || {};
 
 /**
+ * A set of boolean attributes
  * @type {string[]}
  */
 xblocks.dom.attrs.ARRTS_BOOLEAN = [
@@ -5020,10 +5093,11 @@ xblocks.dom.attrs.ARRTS_BOOLEAN = [
 ];
 
 /**
+ * A set of special attributes
  * @type {object}
  */
 xblocks.dom.attrs.XB_ATTRS = {
-    STATIC: 'xb-static'
+    'STATIC': 'xb-static'
 };
 
 xblocks.dom.ELEMENT_PROTO = (global.HTMLElement || global.Element).prototype;
@@ -5033,8 +5107,21 @@ xblocks.dom.ELEMENT_PROTO = (global.HTMLElement || global.Element).prototype;
 /* jshint strict: false */
 
 /**
+ * To obtain the specified attributes
+ *
+ * @example
+ * node = document.createElement('div');
+ * node.setAttribute('attr1', '');
+ * node.setAttribute('attr2', 'test1');
+ * node.setAttribute('attr3', 'test2');
+ * xblocks.dom.attrs.get(node, {
+ *     'attr1': false,
+ *     'attr2': undefined
+ * });
+ * // { 'attr1': true, 'attr2': 'test1' }
+ *
  * @param {HTMLElement} element
- * @param {object} attrs
+ * @param {object} attrs the set of derived attributes (+default values)
  * @return {object}
  */
 xblocks.dom.attrs.get = function(element, attrs) {
@@ -5042,7 +5129,8 @@ xblocks.dom.attrs.get = function(element, attrs) {
         return attrs;
     }
 
-    for (var attrName in attrs) {
+    var attrName;
+    for (attrName in attrs) {
         if (attrs.hasOwnProperty(attrName) && element.hasAttribute(attrName)) {
             if (typeof(attrs[ attrName ]) === 'boolean') {
                 attrs[ attrName ] = xblocks.dom.attrs.valueConversion(
@@ -5061,6 +5149,15 @@ xblocks.dom.attrs.get = function(element, attrs) {
 };
 
 /**
+ * Retrieve object attributes
+ *
+ * @example
+ * node = document.createElement('div');
+ * node.setAttribute('attr1', '');
+ * node.setAttribute('attr2', 'test');
+ * xblocks.dom.attrs.toObject(node);
+ * // { 'attr1': '', 'attr2': 'test' }
+ *
  * @param {HTMLElement} element
  * @return {object}
  */
@@ -5083,9 +5180,19 @@ xblocks.dom.attrs._toObjectIterator = function(attr) {
 };
 
 /**
- * @param {string} prop
- * @param {*} value
- * @param {function} [type]
+ * Convert the attribute value to the specified type
+ *
+ * @example
+ * xblocks.dom.attrs.valueConversion('attr1', 'true');
+ * // true
+ * xblocks.dom.attrs.valueConversion('attr1', 'true', React.PropTypes.string);
+ * // 'true'
+ * xblocks.dom.attrs.valueConversion('attr1', '123', React.PropTypes.number);
+ * // 123
+ *
+ * @param {string} prop attribute name
+ * @param {*} value attribute value
+ * @param {function} [type] attribute type
  * @returns {*}
  */
 xblocks.dom.attrs.valueConversion = function(prop, value, type) {
@@ -5111,8 +5218,20 @@ xblocks.dom.attrs.valueConversion = function(prop, value, type) {
 };
 
 /**
- * @param {object} props
- * @param {object} [propTypes]
+ * Collective conversion of attribute types
+ *
+ * @example
+ * xblocks.dom.attrs.typeConversion({
+ *     'attr1': '123',
+ *     'attr2': ''
+ * }, {
+ *     'attr1': React.PropTypes.number,
+ *     'attr2': React.PropTypes.bool
+ * });
+ * // { 'attr1': 123, 'attr2': true }
+ *
+ * @param {object} props the set of attributes
+ * @param {object} [propTypes] the set of attribute types
  * @returns {object}
  */
 xblocks.dom.attrs.typeConversion = function(props, propTypes) {
@@ -5162,6 +5281,9 @@ xblocks.dom.contentNode = function(node) {
 /* global xblocks, global, __noop */
 /* jshint strict: false */
 
+/**
+ * @function xblocks.dom.upgrade
+ */
 xblocks.dom.upgrade = (function() {
     if (global.CustomElements && typeof(global.CustomElements.upgrade) === 'function') {
         return global.CustomElements.upgrade;
@@ -5177,6 +5299,9 @@ xblocks.dom.upgrade = (function() {
 /* global xblocks, global, __noop */
 /* jshint strict: false */
 
+/**
+ * @function xblocks.dom.upgradeAll
+ */
 xblocks.dom.upgradeAll = (function() {
     if (global.CustomElements && typeof(global.CustomElements.upgradeAll) === 'function') {
         return global.CustomElements.upgradeAll;
@@ -5193,10 +5318,12 @@ xblocks.dom.upgradeAll = (function() {
 /* jshint strict: false */
 
 /**
-* @param {HTMLElement} node
-* @param {Boolean} deep
-* @returns {NodeList}
-*/
+ * Cloning node
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Node.cloneNode
+ * @param {HTMLElement} node the node to be cloned
+ * @param {boolean} deep true if the children of the node should also be cloned, or false to clone only the specified node.
+ * @returns {HTMLElement} The new node that will be a clone of node
+ */
 xblocks.dom.cloneNode = function(node, deep) {
     // FireFox19 cannot use native cloneNode the Node object
     return xblocks.dom.ELEMENT_PROTO.cloneNode.call(node, deep);
@@ -5220,8 +5347,10 @@ xblocks.dom.cloneNode = function(node, deep) {
 /* jshint strict: false */
 
 /**
-* @returns {{ get: function, set: function }}
-*/
+ * @prop {object} xblocks.dom.outerHTML
+ * @prop {function} xblocks.dom.outerHTML.get
+ * @prop {function} xblocks.dom.outerHTML.set
+ */
 xblocks.dom.outerHTML = (function() {
 
     var container = __doc.createElementNS('http://www.w3.org/1999/xhtml', '_');
@@ -5297,7 +5426,17 @@ xblocks.dom.outerHTML = (function() {
 xblocks.event = xblocks.event || {};
 
 /**
+ * Designer events
+ *
+ * @example
+ * new xblocks.event.Custom('custom-event', {
+ *     bubbles: true,
+ *     cancelable: true,
+ *     detail: { data: '123' }
+ * })
+ *
  * @constructor
+ * @memberOf xblocks.event
  */
 xblocks.event.Custom = (function() {
     if (xblocks.utils.pristine('CustomEvent')) {
@@ -5355,9 +5494,18 @@ CustomEventCommon.prototype = global.Event.prototype;
 }());
 
 /**
- * @param {HTMLElement} element
- * @param {string} name
- * @param {object} params
+ * Dispatch event
+ *
+ * @example
+ * xblocks.event.dispatch(node, 'custom-event', {
+ *     bubbles: true,
+ *     cancelable: true,
+ *     detail: { data: '123' }
+ * })
+ *
+ * @param {HTMLElement} element node events
+ * @param {string} name event name
+ * @param {object} params the event parameters
  */
 xblocks.event.dispatch = function(element, name, params) {
     element.dispatchEvent(new xblocks.event.Custom(name, params || {}));
@@ -5378,21 +5526,12 @@ xblocks.event.dispatch = function(element, name, params) {
  */
 xblocks.react = xblocks.react || {};
 
-xblocks.react._idAttributeName = 'data-reactid';
-
-xblocks.react._separator = '.';
-
-var _containersByReactRootID = {};
-
 /**
  * @param {HTMLElement} node
- * @returns {Boolean}
+ * @returns {boolean}
  */
 xblocks.react.unmountComponentAtNode = function(node) {
-    var rootId = xblocks.react.getRootID(node);
-
     if (React.unmountComponentAtNode(node)) {
-        delete _containersByReactRootID[ rootId ];
         return true;
     }
 
@@ -5400,78 +5539,13 @@ xblocks.react.unmountComponentAtNode = function(node) {
 };
 
 /**
- * @param {Object} nextElement
+ * @param {object} nextElement
  * @param {HTMLElement} container
- * @param {Function} [callback]
- * @returns {Object}
+ * @param {function} [callback]
+ * @returns {function}
  */
 xblocks.react.render = function(nextElement, container, callback) {
-    var component = React.render(nextElement, container, callback);
-    _containersByReactRootID[ component._rootNodeID ] = container;
-    return component;
-};
-
-/**
- * @param {String} id
- * @returns {HTMLElement}
- */
-xblocks.react.findContainerForID = function(id) {
-    var rootId = xblocks.react.getReactRootIDFromNodeID(id);
-    return _containersByReactRootID[ rootId ];
-};
-
-/**
- * @param {HTMLElement} node
- * @returns {HTMLElement}
- */
-xblocks.react.findContainerForNode = function(node) {
-    var id = xblocks.react.getID(node);
-    return (id && xblocks.react.findContainerForID(id));
-};
-
-/**
- * @param {HTMLElement} node
- * @returns {?String}
- */
-xblocks.react.getRootID = function(node) {
-    var rootElement = xblocks.react.getRootElementInContainer(node);
-    return (rootElement && xblocks.react.getID(rootElement));
-};
-
-/**
- * @param {HTMLElement} node
- * @returns {?HTMLElement}
- */
-xblocks.react.getRootElementInContainer = function(node) {
-    if (!node) {
-        return null;
-    }
-
-    if (node.nodeType === 9) {
-        return node.documentElement;
-    } else {
-        return node.firstChild;
-    }
-};
-
-/**
- * @param {HTMLElement} node
- * @returns {?String}
- */
-xblocks.react.getID = function(node) {
-    return (node && node.getAttribute && node.getAttribute(xblocks.react._idAttributeName) || '');
-};
-
-/**
- * @param {String} id
- * @returns {?String}
- */
-xblocks.react.getReactRootIDFromNodeID = function(id) {
-    if (id && id.charAt(0) === xblocks.react._separator && id.length > 1) {
-        var index = id.indexOf(xblocks.react._separator, 1);
-        return index > -1 ? id.substr(0, index) : id;
-    }
-    return null;
+    return React.render(nextElement, container, callback);
 };
 
 /* xblocks/react.js end */
@@ -5482,6 +5556,7 @@ xblocks.react.getReactRootIDFromNodeID = function(id) {
 
 /**
  * @namespace
+ * @see http://x-tags.org/docs
  */
 xblocks.tag = global.xtag;
 
@@ -5492,48 +5567,92 @@ xblocks.tag = global.xtag;
 /* jshint strict: false */
 
 /**
- * @module xblocks.view
+ * @namespace
  */
 xblocks.view = {};
 
 var _viewComponentsFactory = {};
 
 var _viewCommon = {
-    propTypes: {
-        '_uid': React.PropTypes.node,
-        '_container': React.PropTypes.any,  // Bad way ;(
-        'children': React.PropTypes.node,
-        'xb-static': React.PropTypes.bool
+
+    /**
+     * Required attributes
+     *
+     * @memberOf ReactElement.prototype
+     * @type {object}
+     */
+    'propTypes': {
+        '_uid':         React.PropTypes.node,
+        '_container':   React.PropTypes.any,  // Bad way ;(
+        'children':     React.PropTypes.node,
+        'xb-static':    React.PropTypes.bool
     },
 
-    template: function(ref, props) {
+    /**
+     * Create node by template
+     *
+     * @memberOf ReactElement.prototype
+     * @param {string} ref template name
+     * @param {object} [props] the attributes of a node
+     * @returns {?ReactElement}
+     */
+    'template': function(ref, props) {
         var xtmpl = this.props._container && this.props._container.xtmpl;
 
         if (typeof(xtmpl) === 'object' && xtmpl !== null && xtmpl.hasOwnProperty(ref)) {
             props = props || {};
             props.dangerouslySetInnerHTML = {
-                '__html': this._templatePrepare(xtmpl[ref])
+                '__html': this._templatePrepare(xtmpl[ ref ])
             };
 
-            return React.DOM.div(props);
+            return React.createElement('div', props);
         }
 
         return null;
     },
 
-    container: function() {
+    /**
+     * Get the node associated with the view
+     * @returns {HTMLElement}
+     */
+    'container': function() {
         return this.props._container;
     }
 };
 
 var _viewCommonUser = {
-    _templatePrepare: function(tmplString) {
+    '_templatePrepare': function(tmplString) {
         return tmplString;
     }
 };
 
 /**
- * @param {object} component
+ * Create class view node
+ *
+ * @example
+ * var XBButtonContent = xblocks.view.create({
+ *     'displayName': 'XBButtonContent',
+ *     'render': function() {
+ *         return (
+ *             &lt;span {...this.props}&gt;{this.props.children}&lt;/span&gt;
+ *         );
+ *     }
+ * });
+ *
+ * xblocks.view.register('xb-button', {
+ *     'displayName': 'xb-button',
+ *     'render': function() {
+ *         return (
+ *             &lt;button&gt;
+ *                 &lt;XBButtonContent {...this.props} /&gt;
+ *             &lt;/button&gt;
+ *         );
+ *     }
+ * });
+ *
+ * @see http://facebook.github.io/react/docs/component-specs.html
+ * @param {object|array} component settings view creation
+ * @returns {function}
  */
 xblocks.view.create = function(component) {
     component = Array.isArray(component) ? component : [ component ];
@@ -5544,9 +5663,22 @@ xblocks.view.create = function(component) {
 };
 
 /**
- * @param {string} blockName
- * @param {object} component
- * @throws
+ * Registration of a new node
+ *
+ * @example
+ * xblocks.view.register('xb-button', {
+ *     'displayName': 'xb-button',
+ *     'render': function() {
+ *         return (
+ *             &lt;button {...this.props}&gt;{this.props.children}&lt;/button&gt;
+ *         );
+ *     }
+ * });
+ *
+ * @see http://facebook.github.io/react/docs/component-specs.html
+ * @param {string} blockName the name of the new node
+ * @param {object|array} component settings view creation
+ * @returns {function}
  */
 xblocks.view.register = function(blockName, component) {
     if (React.DOM.hasOwnProperty(blockName)) {
@@ -5559,17 +5691,21 @@ xblocks.view.register = function(blockName, component) {
 };
 
 /**
- * @param {string} blockName
- * @returns {Function}
+ * Get class view node
+ *
+ * @param {string} blockName the name of the new node
+ * @returns {function}
  */
 xblocks.view.get = function(blockName) {
     return React.DOM[ blockName ];
 };
 
 /**
-* @param {string} blockName
-* @returns {Function}
-*/
+ * Get factory view node
+ *
+ * @param {string} blockName the name of the new node
+ * @returns {function}
+ */
 xblocks.view.getFactory = function(blockName) {
     return _viewComponentsFactory[ blockName ];
 };
@@ -5581,7 +5717,7 @@ xblocks.view.getFactory = function(blockName) {
 /* jshint strict: false */
 
 var _blockStatic = {
-    init: function(element) {
+    'init': function(element) {
         if (!element.xtagName) {
             element.xtagName = element.tagName.toLowerCase();
             element.xtmpl = {};
@@ -5594,11 +5730,11 @@ var _blockStatic = {
         return false;
     },
 
-    tmplCompile: function(tmplElement) {
+    'tmplCompile': function(tmplElement) {
         this.xtmpl[ tmplElement.getAttribute('ref') ] = tmplElement.innerHTML;
     },
 
-    create: function(element) {
+    'create': function(element) {
         if (element.hasChildNodes()) {
             __forEach.call(
                 element.querySelectorAll(xblocks.utils.SELECTOR_TMPL),
@@ -5610,21 +5746,21 @@ var _blockStatic = {
         element.xblock = xblocks.element.create(element);
     },
 
-    createLazy: function(elements) {
+    'createLazy': function(elements) {
         elements.forEach(_blockStatic.create);
     }
 };
 
 var _blockCommon = {
-    lifecycle: {
-        created: function() {
+    'lifecycle': {
+        'created': function() {
             xblocks.utils.log.time(this, 'xb_init');
             xblocks.utils.log.time(this, 'dom_inserted');
 
             _blockStatic.init(this);
         },
 
-        inserted: function() {
+        'inserted': function() {
             if (this.xinserted) {
                 return;
             }
@@ -5647,7 +5783,7 @@ var _blockCommon = {
             xblocks.utils.log.time(this, 'dom_inserted');
         },
 
-        removed: function() {
+        'removed': function() {
             this.xinserted = false;
 
             // replace initial content after destroy react component
@@ -5662,7 +5798,7 @@ var _blockCommon = {
             }
         },
 
-        attributeChanged: function(attrName, oldValue, newValue) {
+        'attributeChanged': function(attrName, oldValue, newValue) {
             // removeAttribute('xb-static')
             if (attrName === xblocks.dom.attrs.XB_ATTRS.STATIC &&
                 newValue === null &&
@@ -5674,16 +5810,16 @@ var _blockCommon = {
         }
     },
 
-    accessors: {
+    'accessors': {
         // check mounted react
-        mounted: {
-            get: function() {
+        'mounted': {
+            'get': function() {
                 return Boolean(this.xblock && this.xblock.isMounted());
             }
         },
 
-        content: {
-            get: function() {
+        'content': {
+            'get': function() {
                 if (this.mounted) {
                     return this.xblock.getMountedContent();
                 }
@@ -5691,7 +5827,7 @@ var _blockCommon = {
                 return xblocks.dom.contentNode(this).innerHTML;
             },
 
-            set: function(content) {
+            'set': function(content) {
                 if (this.mounted) {
                     this.xblock.setMountedContent(content);
 
@@ -5703,14 +5839,14 @@ var _blockCommon = {
         },
 
         // getting object attributes
-        attrs: {
-            get: function() {
+        'attrs': {
+            'get': function() {
                 return xblocks.dom.attrs.toObject(this);
             }
         },
 
-        state: {
-            get: function() {
+        'state': {
+            'get': function() {
                 var prop;
                 var props = xblocks.dom.attrs.toObject(this);
                 var xprops = this.xprops;
@@ -5731,15 +5867,15 @@ var _blockCommon = {
             }
         },
 
-        outerHTML: xblocks.dom.outerHTML
+        'outerHTML': xblocks.dom.outerHTML
     },
 
-    methods: {
-        upgrade: function() {
+    'methods': {
+        'upgrade': function() {
             xblocks.dom.upgradeAll(this);
         },
 
-        cloneNode: function(deep) {
+        'cloneNode': function(deep) {
             // not to clone the contents
             var node = xblocks.dom.cloneNode(this, false);
             xblocks.dom.upgrade(node);
@@ -5760,8 +5896,11 @@ var _blockCommon = {
 };
 
 /**
- * @param {string} blockName
- * @param {?object} options
+ * Creating a new tag
+ *
+ * @see http://x-tags.org/docs
+ * @param {string} blockName the name of the new node
+ * @param {?object|array} options settings tag creation
  * @returns {HTMLElement}
  */
 xblocks.create = function(blockName, options) {
@@ -5806,7 +5945,7 @@ var _elementStatic = {
     /**
      * @param {MutationRecord} record
      * @returns {boolean}
-     * @private
+     * @protected
      */
     checkNodeChange: function(record) {
         return (record.type === 'childList');
@@ -5815,7 +5954,7 @@ var _elementStatic = {
     /**
      * @param {MutationRecord} record
      * @returns {boolean}
-     * @private
+     * @protected
      */
     checkAttributesChange: function(record) {
         return (record.type === 'attributes');
@@ -5824,7 +5963,7 @@ var _elementStatic = {
     /**
      * @param {MutationRecord} record
      * @returns {boolean}
-     * @private
+     * @protected
      */
     filterAttributesRemove: function(record) {
         return (record.type === 'attributes' && !this._node.hasAttribute(record.attributeName));
@@ -5833,7 +5972,7 @@ var _elementStatic = {
     /**
      * @param {MutationRecord} record
      * @returns {string}
-     * @private
+     * @protected
      */
     mapAttributesName: function(record) {
         return record.attributeName;
@@ -5841,7 +5980,7 @@ var _elementStatic = {
 
     /**
      * @param {array} records
-     * @private
+     * @protected
      */
     globalInitEvent: function(records) {
         xblocks.event.dispatch(global, 'xb-created', { detail: { records: records } });
@@ -5849,7 +5988,7 @@ var _elementStatic = {
 
     /**
      * @param {array} records
-     * @private
+     * @protected
      */
     globalRepaintEvent: function(records) {
         xblocks.event.dispatch(global, 'xb-repaint', { detail: { records: records } });
@@ -5857,7 +5996,7 @@ var _elementStatic = {
 
     /**
      * @param {array} records
-     * @private
+     * @protected
      */
     //globalUpdateEvent: function(records) {
     //    xblocks.event.dispatch(global, 'xb-update', { detail: { records: records } });
@@ -5865,7 +6004,8 @@ var _elementStatic = {
 };
 
 /**
- * @param {HTMLElement} node
+ * Xblock element constructor
+ * @param {HTMLElement} node the node of a custom element
  * @constructor
  */
 xblocks.element = function(node) {
@@ -5875,7 +6015,9 @@ xblocks.element = function(node) {
 };
 
 /**
- * @param {HTMLElement} node
+ * Xblock element factory
+ *
+ * @param {HTMLElement} node the node of a custom element
  * @returns {xblocks.element}
  */
 xblocks.element.create = function(node) {
@@ -5883,29 +6025,37 @@ xblocks.element.create = function(node) {
 };
 
 /**
+ * The node of a custom element
+ *
  * @type {HTMLElement}
- * @private
+ * @protected
  */
 xblocks.element.prototype._node = null;
 
 /**
+ * React component
+ *
  * @type {Constructor}
- * @private
+ * @protected
  */
 xblocks.element.prototype._component = null;
 
 /**
+ * Instance MutationObserver
+ *
  * @type {MutationObserver}
- * @private
+ * @protected
  */
 xblocks.element.prototype._observer = null;
 
 /**
  * Unmounts a component and removes it from the DOM
+ * @fires xblocks.element~event:xb-destroy
  */
 xblocks.element.prototype.destroy = function() {
     xblocks.react.unmountComponentAtNode(this._node);
     this.unmount();
+    xblocks.event.dispatch(this._node, 'xb-destroy', { 'bubbles': false, 'cancelable': false });
 };
 
 /**
@@ -5924,9 +6074,10 @@ xblocks.element.prototype.unmount = function() {
 };
 
 /**
- * @param {object} [props]
- * @param {Array} [removeProps]
- * @param {function} [callback]
+ * Update react view
+ * @param {object} [props] added attributes
+ * @param {array} [removeProps] remote attributes
+ * @param {function} [callback] the callback function
  */
 xblocks.element.prototype.update = function(props, removeProps, callback) {
     if (!this.isMounted()) {
@@ -5953,8 +6104,8 @@ xblocks.element.prototype.update = function(props, removeProps, callback) {
 
         var l = removeProps.length;
         while (l--) {
-            if (nextProps.hasOwnProperty(removeProps[l])) {
-                delete nextProps[ removeProps[l] ];
+            if (nextProps.hasOwnProperty(removeProps[ l ])) {
+                delete nextProps[ removeProps[ l ] ];
             }
         }
     }
@@ -5969,7 +6120,8 @@ xblocks.element.prototype.update = function(props, removeProps, callback) {
 };
 
 /**
- * @param {function} [callback]
+ * Redrawing react view
+ * @param {function} [callback] the callback function
  */
 xblocks.element.prototype.repaint = function(callback) {
     var children = this._node.content;
@@ -5988,7 +6140,8 @@ xblocks.element.prototype.repaint = function(callback) {
 };
 
 /**
- *
+ * Returns true if the component is rendered into the DOM, false otherwise
+ * @see http://facebook.github.io/react/docs/component-api.html#ismounted
  * @returns {boolean}
  */
 xblocks.element.prototype.isMounted = function() {
@@ -5996,6 +6149,7 @@ xblocks.element.prototype.isMounted = function() {
 };
 
 /**
+ * Installing a new content react component
  * @param {string} content
  */
 xblocks.element.prototype.setMountedContent = function(content) {
@@ -6005,6 +6159,7 @@ xblocks.element.prototype.setMountedContent = function(content) {
 };
 
 /**
+ * Receiving the content components react
  * @returns {?string}
  */
 xblocks.element.prototype.getMountedContent = function() {
@@ -6014,6 +6169,7 @@ xblocks.element.prototype.getMountedContent = function() {
 };
 
 /**
+ * Get components react
  * @returns {?ReactCompositeComponent.createClass.Constructor}
  */
 xblocks.element.prototype.getMountedComponent = function() {
@@ -6023,6 +6179,7 @@ xblocks.element.prototype.getMountedComponent = function() {
 };
 
 /**
+ * Gets the attributes of the components
  * @returns {?object}
  */
 xblocks.element.prototype.getMountedProps = function() {
@@ -6032,8 +6189,8 @@ xblocks.element.prototype.getMountedProps = function() {
 /**
  * @param {object} [props]
  * @param {string} [children]
- * @param {function} [callback]
- * @private
+ * @param {function} [callback] the callback function
+ * @protected
  */
 xblocks.element.prototype._init = function(props, children, callback) {
     if (this.isMounted()) {
@@ -6073,7 +6230,8 @@ xblocks.element.prototype._init = function(props, children, callback) {
 };
 
 /**
- * @private
+ * @protected
+ * @fires xblocks.element~event:xb-created
  */
 xblocks.element.prototype._callbackInit = function() {
     xblocks.event.dispatch(this._node, 'xb-created');
@@ -6082,8 +6240,9 @@ xblocks.element.prototype._callbackInit = function() {
 };
 
 /**
- * @param {function} [callback]
- * @private
+ * @param {function} [callback] the callback function
+ * @protected
+ * @fires xblocks.element~event:xb-repaint
  */
 xblocks.element.prototype._callbackRepaint = function(callback) {
     xblocks.event.dispatch(this._node, 'xb-repaint');
@@ -6095,8 +6254,8 @@ xblocks.element.prototype._callbackRepaint = function(callback) {
 };
 
 /**
- * @param {function} [callback]
- * @private
+ * @param {function} [callback] the callback function
+ * @protected
  */
 xblocks.element.prototype._callbackRender = function(callback) {
     this._node.upgrade();
@@ -6106,13 +6265,13 @@ xblocks.element.prototype._callbackRender = function(callback) {
     }
 
     this._observer.observe(this._node, {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: false,
-        attributeOldValue: false,
-        characterDataOldValue: false,
-        attributeFilter: Object.keys(this._node.xprops)
+        'attributes': true,
+        'childList': true,
+        'characterData': true,
+        'subtree': false,
+        'attributeOldValue': false,
+        'characterDataOldValue': false,
+        'attributeFilter': Object.keys(this._node.xprops)
     });
 
     if (callback) {
@@ -6122,7 +6281,7 @@ xblocks.element.prototype._callbackRender = function(callback) {
 
 /**
  * @param {MutationRecord[]} records
- * @private
+ * @protected
  */
 xblocks.element.prototype._callbackMutation = function(records) {
     if (!this.isMounted()) {
@@ -6144,8 +6303,9 @@ xblocks.element.prototype._callbackMutation = function(records) {
 };
 
 /**
- * @param {function} [callback]
- * @private
+ * @param {function} [callback] the callback function
+ * @protected
+ * @fires xblocks.element~event:xb-update
  */
 xblocks.element.prototype._callbackUpdate = function(callback) {
     this._node.upgrade();
@@ -6157,6 +6317,31 @@ xblocks.element.prototype._callbackUpdate = function(callback) {
         callback.call(this);
     }
 };
+
+
+/**
+ * Created event
+ * @event xblocks.element~event:xb-created
+ * @type {xblocks.event.Custom}
+ */
+
+/**
+ * Destroy event
+ * @event xblocks.element~event:xb-destroy
+ * @type {xblocks.event.Custom}
+ */
+
+/**
+ * Updated event
+ * @event xblocks.element~event:xb-update
+ * @type {xblocks.event.Custom}
+ */
+
+/**
+ * Repaint event
+ * @event xblocks.element~event:xb-repaint
+ * @type {xblocks.event.Custom}
+ */
 
 /* xblocks/element.js end */
 

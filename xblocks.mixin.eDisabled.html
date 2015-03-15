@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mixin: eDisabled</title>
+    
+    
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="bower_components/xblocks/build/xblocks.css">
+        
+    
+
+    
+        
+            <script src="bower_components/es5-shim/es5-shim.js"></script>
+        
+            <script src="bower_components/tether/tether.js"></script>
+        
+            <script src="bower_components/react/react-with-addons.js"></script>
+        
+            <script src="bower_components/xblocks-core/xblocks-core-full.js"></script>
+        
+            <script src="bower_components/xblocks/build/xblocks.js"></script>
+        
+    
+
+    
+    <script>
+    var config = {"monospaceLinks":true,"cleverLinks":false,"applicationName":"xblocks","disqus":false,"googleAnalytics":false,"meta":{"title":"","description":"","keyword":""},"openGraph":false,"scripts":["bower_components/es5-shim/es5-shim.js","bower_components/tether/tether.js","bower_components/react/react-with-addons.js","bower_components/xblocks-core/xblocks-core-full.js","bower_components/xblocks/build/xblocks.js"],"styles":["bower_components/xblocks/build/xblocks.css"],"default":{}};
+    </script>
+    
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html">xblocks</a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="xb">
+            <span class="title">
+                <a href="xb.html">xb</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks">
+            <span class="title">
+                <a href="xblocks.html">xblocks</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks.mixin">
+            <span class="title">
+                <a href="xblocks.mixin.html">xblocks.mixin</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="xblocks.mixin.vCommonAttrs"><a href="xblocks.mixin.html#.vCommonAttrs">vCommonAttrs</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xblocks.utils">
+            <span class="title">
+                <a href="xblocks.utils.html">xblocks.utils</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="xblocks.utils.resetLastRadioChecked"><a href="xblocks.utils.html#.resetLastRadioChecked">resetLastRadioChecked</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xb.Menu">
+            <span class="title">
+                <a href="xb.Menu.html">xb.Menu</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xb.MenuInline">
+            <span class="title">
+                <a href="xb.MenuInline.html">xb.MenuInline</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xb.Menuitem">
+            <span class="title">
+                <a href="xb.Menuitem.html">xb.Menuitem</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="xb.Menuitem#focused"><a href="xb.Menuitem.html#focused">focused</a></li>
+            
+                <li data-name="xb.Menuitem#menuInstance"><a href="xb.Menuitem.html#menuInstance">menuInstance</a></li>
+            
+                <li data-name="xb.Menuitem#selected"><a href="xb.Menuitem.html#selected">selected</a></li>
+            
+                <li data-name="xb.Menuitem#submenu"><a href="xb.Menuitem.html#submenu">submenu</a></li>
+            
+                <li data-name="xb.Menuitem#submenuInstance"><a href="xb.Menuitem.html#submenuInstance">submenuInstance</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="xb.Popup">
+            <span class="title">
+                <a href="xb.Popup.html">xb.Popup</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        
+            <h1 class="page-title" data-filename="xblocks.mixin.eDisabled.html">Mixin: eDisabled</h1>
+        
+
+        
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="xblocks.html">xblocks</a><a href="xblocks.mixin.html">.mixin</a>.</span>
+    
+    eDisabled
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+            <div class="description"><p>Disabled element interface</p>
+<p><xb-button disabled>button</xb-button></p></div>
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+            <h3>Example</h3>
+            
+
+    
+    <pre class="prettyprint"><code><p>xblocks.create('xb-button', [
+    xblocks.mixin.eDisabled,
+    {
+        accessors: { ... },
+        events: { ... },
+        methods: { ... }
+        ...
+    }
+]);</p>
+<p>var e = document.createElement('xb-button');
+// read
+console.log(e.disabled)
+// false</p>
+<p>// write
+e.disabled = true;
+// true</p>
+<p>// jquery write
+$(e).prop('disabled', false)
+// false</p></code></pre>
+    
+
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Sat Feb 14 2015 23:32:51 GMT+0300 (MSK)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

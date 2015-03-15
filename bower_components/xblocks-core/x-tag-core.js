@@ -1221,7 +1221,7 @@ function inDocument(element) {
     if (p == doc) {
       return true;
     }
-    p = p.parentNode || p.host;
+    p = p.parentNode || ((p.nodeType === Node.DOCUMENT_FRAGMENT_NODE) && p.host);
   }
 }
 
@@ -1351,7 +1351,6 @@ function upgradeDocumentTree(doc) {
 // undefined to aid feature detection of Shadow DOM.
 var originalCreateShadowRoot = Element.prototype.createShadowRoot;
 if (originalCreateShadowRoot) {
-  // ensure that all ShadowRoots watch for CustomElements.
   Element.prototype.createShadowRoot = function() {
     var root = originalCreateShadowRoot.call(this);
     CustomElements.watchShadow(this);
@@ -1860,6 +1859,27 @@ var initializeModules = scope.initializeModules;
 
 var isIE11OrOlder = /Trident/.test(navigator.userAgent);
 
+// Patch document.importNode to work around IE11 bug that
+// casues children of a document fragment imported while
+// there is a mutation observer to not have a parentNode (!?!)
+if (isIE11OrOlder) {
+  (function() {
+    var importNode = document.importNode;
+    document.importNode = function() {
+      var n = importNode.apply(document, arguments);
+      // Copy all children to a new document fragment since
+      // this one may be broken
+      if (n.nodeType == n.DOCUMENT_FRAGMENT_NODE) {
+        var f = document.createDocumentFragment();
+        f.appendChild(n);
+        return f;
+      } else {
+        return n;
+      }
+    };
+  })();  
+}
+
 // If native, setup stub api and bail.
 // NOTE: we fire `WebComponentsReady` under native for api compatibility
 if (useNative) {
@@ -1901,6 +1921,7 @@ if (!window.wrap) {
     };
   }
 }
+
 
 // bootstrap parsing
 function bootstrap() {
@@ -2087,24 +2108,35 @@ function markTargetLoaded(event) {
 // call <callback> when we ensure all imports have loaded
 function watchImportsLoad(callback, doc) {
   var imports = doc.querySelectorAll('link[rel=import]');
-  var loaded = 0, l = imports.length;
-  function checkDone(d) {
-    if ((loaded == l) && callback) {
-       callback();
+  var parsedCount = 0, importCount = imports.length, newImports = [], errorImports = [];
+  function checkDone() {
+    if (parsedCount == importCount && callback) {
+      callback({
+        allImports: imports,
+        loadedImports: newImports,
+        errorImports: errorImports
+      });
     }
   }
   function loadedImport(e) {
     markTargetLoaded(e);
-    loaded++;
+    newImports.push(this);
+    parsedCount++;
     checkDone();
   }
-  if (l) {
-    for (var i=0, imp; (i<l) && (imp=imports[i]); i++) {
+  function errorLoadingImport(e) {
+    errorImports.push(this);
+    parsedCount++;
+    checkDone();
+  }
+  if (importCount) {
+    for (var i=0, imp; i<importCount && (imp=imports[i]); i++) {
       if (isImportLoaded(imp)) {
-        loadedImport.call(imp, {target: imp});
+        parsedCount++;
+        checkDone();
       } else {
         imp.addEventListener('load', loadedImport);
-        imp.addEventListener('error', loadedImport);
+        imp.addEventListener('error', errorLoadingImport);
       }
     }
   } else {
@@ -2183,11 +2215,11 @@ if (useNative) {
 // have loaded. This event is required to simulate the script blocking
 // behavior of native imports. A main document script that needs to be sure
 // imports have loaded should wait for this event.
-whenReady(function() {
+whenReady(function(detail) {
   HTMLImports.ready = true;
   HTMLImports.readyTime = new Date().getTime();
   var evt = rootDocument.createEvent("CustomEvent");
-  evt.initCustomEvent("HTMLImportsLoaded", true, true, {});
+  evt.initCustomEvent("HTMLImportsLoaded", true, true, detail);
   rootDocument.dispatchEvent(evt);
 });
 
@@ -2254,22 +2286,25 @@ var CSS_IMPORT_REGEXP = /(@import[\s]+(?!url\())([^;]*)(;)/g;
 // document. We fixup url's in url() and @import.
 var path = {
 
-  resolveUrlsInStyle: function(style) {
+  resolveUrlsInStyle: function(style, linkUrl) {
     var doc = style.ownerDocument;
     var resolver = doc.createElement('a');
-    style.textContent = this.resolveUrlsInCssText(style.textContent, resolver);
+    style.textContent = this.resolveUrlsInCssText(style.textContent, linkUrl, resolver);
     return style;
   },
 
-  resolveUrlsInCssText: function(cssText, urlObj) {
-    var r = this.replaceUrls(cssText, urlObj, CSS_URL_REGEXP);
-    r = this.replaceUrls(r, urlObj, CSS_IMPORT_REGEXP);
+  resolveUrlsInCssText: function(cssText, linkUrl, urlObj) {
+    var r = this.replaceUrls(cssText, urlObj, linkUrl, CSS_URL_REGEXP);
+    r = this.replaceUrls(r, urlObj, linkUrl, CSS_IMPORT_REGEXP);
     return r;
   },
 
-  replaceUrls: function(text, urlObj, regexp) {
+  replaceUrls: function(text, urlObj, linkUrl, regexp) {
     return text.replace(regexp, function(m, pre, url, post) {
       var urlPath = url.replace(/["']/g, '');
+      if (linkUrl) {
+        urlPath = (new URL(urlPath, linkUrl)).href;
+      }
       urlObj.href = urlPath;
       urlPath = urlObj.href;
       return pre + '\'' + urlPath + '\'' + post;
@@ -2699,6 +2734,7 @@ var importParser = {
     // TODO(sorvell): style element load event can just not fire so clone styles
     var src = elt;
     elt = cloneStyle(elt);
+    src.__appliedElement = elt;
     elt.__importElement = src;
     this.parseGeneric(elt);
   },
@@ -3246,7 +3282,7 @@ if (document.readyState === 'complete' ||
         js: pre == 'ms' ? pre : pre[0].toUpperCase() + pre.substr(1)
       };
     })(),
-    matchSelector = Element.prototype.matchesSelector || Element.prototype[prefix.lowercase + 'MatchesSelector'],
+    matchSelector = Element.prototype.matches || Element.prototype.matchesSelector || Element.prototype[prefix.lowercase + 'MatchesSelector'],
     mutation = win.MutationObserver || win[prefix.js + 'MutationObserver'];
 
   var issetCustomEvent = false;
@@ -3391,16 +3427,14 @@ if (document.readyState === 'complete' ||
 // Events
 
   function delegateAction(pseudo, event) {
-    var match, target = event.target;
-    if (!target.tagName) return null;
-    if (xtag.matchSelector(target, pseudo.value)) match = target;
-    else if (xtag.matchSelector(target, pseudo.value + ' *')) {
-      var parent = target.parentNode;
-      while (!match) {
-        if (xtag.matchSelector(parent, pseudo.value)) match = parent;
-        parent = parent.parentNode;
-      }
+    var match,
+        target = event.target,
+        root = event.currentTarget;
+    while (!match && target && target != root) {
+      if (target.tagName && matchSelector.call(target, pseudo.value)) match = target;
+      target = target.parentNode;
     }
+    if (!match && root.tagName && matchSelector.call(root, pseudo.value)) match = root;
     return match ? pseudo.listener = pseudo.listener.bind(match) : null;
   }
 
@@ -3447,13 +3481,7 @@ if (document.readyState === 'complete' ||
       while (index--) nodes[index][method](name, value);
     }
   }
-
-  function updateView(element, name, value){
-    if (element.__view__){
-      element.__view__.updateBindingValue(element, name, value);
-    }
-  }
-
+  
   function attachProperties(tag, prop, z, accessor, attr, name){
     var key = z.split(':'), type = key[0];
     if (type == 'get') {
@@ -3463,15 +3491,21 @@ if (document.readyState === 'complete' ||
     else if (type == 'set') {
       key[0] = prop;
       var setter = tag.prototype[prop].set = xtag.applyPseudos(key.join(':'), attr ? function(value){
-          value = attr.boolean ? !!value : attr.validate ? attr.validate.call(this, value) : value;
-          var method = attr.boolean ? (value ? 'setAttribute' : 'removeAttribute') : 'setAttribute';
+        var old, method = 'setAttribute';
+        if (attr.boolean){
+          value = !!value;
+          old = this.hasAttribute(name);
+          if (!value) method = 'removeAttribute';
+        }
+        else {
+          value = attr.validate ? attr.validate.call(this, value) : value;
+          old = this.getAttribute(name);
+        }
         modAttr(this, attr, name, value, method);
-        accessor[z].call(this, value);
+        accessor[z].call(this, value, old);
         syncAttr(this, attr, name, value, method);
-        updateView(this, prop, value);
       } : accessor[z] ? function(value){
         accessor[z].call(this, value);
-        updateView(this, prop, value);
       } : null, tag.pseudos, accessor[z]);
 
       if (attr) attr.setter = accessor[z];
@@ -3505,7 +3539,6 @@ if (document.readyState === 'complete' ||
         var method = attr.boolean ? (value ? 'setAttribute' : 'removeAttribute') : 'setAttribute';
         modAttr(this, attr, name, value, method);
         syncAttr(this, attr, name, value, method);
-        updateView(this, name, value);
       };
     }
   }
@@ -3599,16 +3632,18 @@ if (document.readyState === 'complete' ||
 
       tag.prototype.setAttribute = {
         writable: true,
-        enumberable: true,
+        enumerable: true,
         value: function (name, value){
+          var old;
           var _name = name.toLowerCase();
           var attr = tag.attributes[_name];
           if (attr) {
+            old = this.getAttribute(_name);
             value = attr.boolean ? '' : attr.validate ? attr.validate.call(this, value) : value;
           }
           modAttr(this, attr, _name, value, 'setAttribute');
           if (attr) {
-            if (attr.setter) attr.setter.call(this, attr.boolean ? true : value);
+            if (attr.setter) attr.setter.call(this, attr.boolean ? true : value, old);
             syncAttr(this, attr, _name, value, 'setAttribute');
           }
         }
@@ -3616,13 +3651,14 @@ if (document.readyState === 'complete' ||
 
       tag.prototype.removeAttribute = {
         writable: true,
-        enumberable: true,
+        enumerable: true,
         value: function (name){
           var _name = name.toLowerCase();
           var attr = tag.attributes[_name];
+          var old = this.hasAttribute(_name);
           modAttr(this, attr, _name, '', 'removeAttribute');
           if (attr) {
-            if (attr.setter) attr.setter.call(this, attr.boolean ? false : undefined);
+            if (attr.setter) attr.setter.call(this, attr.boolean ? false : undefined, old);
             syncAttr(this, attr, _name, '', 'removeAttribute');
           }
         }
@@ -3726,10 +3762,6 @@ if (document.readyState === 'complete' ||
     },
     pseudos: {
       __mixin__: {},
-      /*
-
-
-      */
       mixins: {
         onCompiled: function(fn, pseudo){
           var mixins = pseudo.source.__mixins__;
@@ -3756,7 +3788,9 @@ if (document.readyState === 'complete' ||
       },
       keypass: keypseudo,
       keyfail: keypseudo,
-      delegate: { action: delegateAction },
+      delegate: {
+        action: delegateAction
+      },
       within: {
         action: delegateAction,
         onAdd: function(pseudo){

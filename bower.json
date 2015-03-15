@@ -1,13 +1,13 @@
 {
-    "name": "xblocks-web",
-    "version": "0.5.9",
-    "dependencies": {
-        "es5-shim": "4.1.0",
-        "react": "0.12.2",
-        "jquery": "2.1.3",
-        "tether": "0.6.5",
-        "xblocks-core": "0.5.8",
-        "xblocks": "0.5.9"
-    },
-    "directory": "bower_components"
+  "name": "xblocks-web",
+  "version": "0.6.0",
+  "dependencies": {
+    "es5-shim": "4.1.0",
+    "react": "0.13.0",
+    "jquery": "2.1.3",
+    "tether": "0.6.5",
+    "xblocks-core": "0.6.0",
+    "xblocks": "0.6.0"
+  },
+  "directory": "bower_components"
 }
