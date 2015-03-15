@@ -1100,6 +1100,18 @@ xblocks.dom.cleanHTML = (function() {
 
 /* xblocks/dom/cleanHTML.js end */
 
+/* xblocks/dom/removeChild.js begin */
+/* global xblocks */
+/* jshint strict: false */
+
+xblocks.dom.removeChild = function(element) {
+    if (element.parentNode) {
+        return element.parentNode.removeChild(element);
+    }
+};
+
+/* xblocks/dom/removeChild.js end */
+
 
 /* xblocks/dom.js end */
 
