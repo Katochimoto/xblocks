@@ -1323,33 +1323,52 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
     var __forEach = Array.prototype.forEach;
 
     /* ../node_modules/classnames/index.js begin */
-function classNames() {
-	var args = arguments;
-	var classes = [];
+/*!
+  Copyright (c) 2015 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
 
-	for (var i = 0; i < args.length; i++) {
-		var arg = args[i];
-		if (!arg) {
-			continue;
-		}
+function classNames () {
+	'use strict';
 
-		if ('string' === typeof arg || 'number' === typeof arg) {
-			classes.push(arg);
-		} else if ('object' === typeof arg) {
+	var classes = '';
+
+	for (var i = 0; i < arguments.length; i++) {
+		var arg = arguments[i];
+		if (!arg) continue;
+
+		var argType = typeof arg;
+
+		if ('string' === argType || 'number' === argType) {
+			classes += ' ' + arg;
+
+		} else if (Array.isArray(arg)) {
+			classes += ' ' + classNames.apply(null, arg);
+
+		} else if ('object' === argType) {
 			for (var key in arg) {
-				if (!arg.hasOwnProperty(key) || !arg[key]) {
-					continue;
+				if (arg.hasOwnProperty(key) && arg[key]) {
+					classes += ' ' + key;
 				}
-				classes.push(key);
 			}
 		}
 	}
-	return classes.join(' ');
+
+	return classes.substr(1);
 }
 
-// safely export classNames in case the script is included directly on a page
+// safely export classNames for node / browserify
 if (typeof module !== 'undefined' && module.exports) {
 	module.exports = classNames;
+}
+
+/* global define */
+// safely export classNames for RequireJS
+if (typeof define !== 'undefined' && define.amd) {
+	define('classnames', [], function() {
+		return classNames;
+	});
 }
 
 /* ../node_modules/classnames/index.js end */
