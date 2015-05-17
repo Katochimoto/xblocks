@@ -20,7 +20,7 @@ module.exports = function(config) {
             'bower_components/vow/vow.min.js',
             'bower_components/es5-shim/es5-shim.js',
             'bower_components/react/react-with-addons.js',
-            'bower_components/xblocks-core/xblocks-core-full.js',
+            'bower_components/xblocks-core/dist/xblocks-core-full.js',
 
             'src/xblocks.js',
             'test/spec/**/*.js'
