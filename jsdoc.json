@@ -20,7 +20,7 @@
         "include": [
             "./bower_components/xblocks-core/src",
             "./bower_components/xblocks/src",
-            "README.md"
+            "./jsdoc/README.md"
         ],
         "includePattern": ".+\\.js(doc)?$"
     },
