@@ -1,7 +1,7 @@
 /**
  * @module vow
  * @author Filatov Dmitry <dfilatov@yandex-team.ru>
- * @version 0.4.8
+ * @version 0.4.9
  * @license
  * Dual licensed under the MIT and GPL licenses:
  *   * http://www.opensource.org/licenses/mit-license.php
@@ -387,7 +387,7 @@ Promise.prototype = /** @lends Promise.prototype */ {
     /**
      * Adds resolving reaction (to fulfillment and rejection both).
      *
-     * @param {Function} onResolved Callback that to be called with the value after promise has been rejected
+     * @param {Function} onResolved Callback that to be called with the value after promise has been resolved
      * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
@@ -901,7 +901,7 @@ var vow = /** @exports vow */ {
      * @returns {vow:Promise}
      */
     cast : function(value) {
-        return vow.isPromise(value)?
+        return value && !!value._vow?
             value :
             vow.resolve(value);
     },

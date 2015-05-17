@@ -1,6 +1,6 @@
 {
   "name": "vow",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "main": "lib/vow.js",
   "ignore": [
     "**/.*",
@@ -12,13 +12,13 @@
     "package.json"
   ],
   "homepage": "https://github.com/dfilatov/jspromise",
-  "_release": "0.4.8",
+  "_release": "0.4.9",
   "_resolution": {
     "type": "version",
-    "tag": "0.4.8",
-    "commit": "c04320a1c3ce24a435ba128bcbd42510784e42aa"
+    "tag": "0.4.9",
+    "commit": "d849c8afde015da5019f8eff93f521dbf2367f97"
   },
   "_source": "git://github.com/dfilatov/jspromise.git",
-  "_target": "0.4.8",
+  "_target": "0.4.9",
   "_originalSource": "vow"
 }

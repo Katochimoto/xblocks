@@ -1,6 +1,6 @@
 /*!
  * https://github.com/es-shims/es5-shim
- * @license es5-shim Copyright 2009-2014 by contributors, MIT License
+ * @license es5-shim Copyright 2009-2015 by contributors, MIT License
  * see https://github.com/es-shims/es5-shim/blob/master/LICENSE
  */
 
@@ -79,7 +79,7 @@ function doesGetOwnPropertyDescriptorWork(object) {
         object.sentinel = 0;
         return Object.getOwnPropertyDescriptor(object, 'sentinel').value === 0;
     } catch (exception) {
-        // returns falsy
+        return false;
     }
 }
 
@@ -235,7 +235,7 @@ if (!Object.create) {
     Object.create = function create(prototype, properties) {
 
         var object;
-        function Type() {}  // An empty constructor.
+        function Type() {} // An empty constructor.
 
         if (prototype === null) {
             object = createEmpty();
@@ -284,7 +284,7 @@ function doesDefinePropertyWork(object) {
         Object.defineProperty(object, 'sentinel', {});
         return 'sentinel' in object;
     } catch (exception) {
-        // returns falsy
+        return false;
     }
 }
 
