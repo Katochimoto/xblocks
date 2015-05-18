@@ -11,8 +11,10 @@
 
     <title>Xblocks</title>
 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/cover.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/cover.css" rel="stylesheet">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="site-wrapper">
@@ -24,8 +26,9 @@
                         <h3 class="masthead-brand">Xblocks</h3>
                         <nav>
                             <ul class="nav masthead-nav">
-                                <li class="active"><a href="http://xblocks.ru">Home</a></li>
-                                <li><a href="#">Examples</a></li>
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="/docs/examples.html">Examples</a></li>
+                                <li><a href="/jsdoc">JSDoc</a></li>
                                 <li><a href="https://github.com/Katochimoto/xblocks">GitHub</a></li>
                             </ul>
                         </nav>
@@ -42,7 +45,10 @@
                         <a href="https://facebook.github.io/react" target="_blank">React</a>.
                     </p>
                     <p class="lead">
-                        <a href="#" class="btn btn-lg btn-default">Getting started</a>
+                        <a href="/docs/getting-started.html"
+                            class="btn btn-lg btn-default">
+                            Getting started
+                        </a>
                     </p>
                 </div>
 
@@ -71,8 +77,5 @@
             </div>
         </div>
     </div>
-
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
