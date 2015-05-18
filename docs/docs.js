@@ -1,0 +1,147 @@
+var yr = yr || require('yate/lib/runtime.js');
+
+(function() {
+
+    var cmpNN = yr.cmpNN;
+    var cmpSN = yr.cmpSN;
+    var nodeset2xml = yr.nodeset2xml;
+    var nodeset2boolean = yr.nodeset2boolean;
+    var nodeset2attrvalue = yr.nodeset2attrvalue;
+    var nodeset2scalar = yr.nodeset2scalar;
+    var scalar2attrvalue = yr.scalar2attrvalue;
+    var xml2attrvalue = yr.xml2attrvalue;
+    var scalar2xml = yr.scalar2xml;
+    var xml2scalar = yr.xml2scalar;
+    var simpleScalar = yr.simpleScalar;
+    var simpleBoolean = yr.simpleBoolean;
+    var selectNametest = yr.selectNametest;
+    var closeAttrs = yr.closeAttrs;
+
+    var M = new yr.Module();
+
+    var j0 = [ 0, 'navbar' ];
+
+    var j1 = [ 0, 'menu' ];
+
+    var j2 = [ 0, 'items' ];
+
+    var j3 = [ 0, 'current' ];
+
+    var j4 = [ 0, 'hash' ];
+
+    var j5 = [ 0, 'title' ];
+
+    // match .navbar : _navbar
+    M.t0 = function t0(m, c0, i0, l0, a0) {
+        var r0 = '';
+        var current = [ c0 ];
+
+        r0 += closeAttrs(a0);
+        r0 += "<nav class=\"" + "navbar navbar-inverse navbar-fixed-top" + "\">";
+        r0 += "<div class=\"" + "container-fluid" + "\">";
+        r0 += "<div class=\"" + "navbar-header" + "\">";
+        r0 += "<button type=\"" + "button" + "\" class=\"" + "navbar-toggle collapsed" + "\" data-toggle=\"" + "collapse" + "\" data-target=\"" + "#navbar" + "\" aria-expanded=\"" + "false" + "\" aria-controls=\"" + "navbar" + "\">";
+        r0 += "<span class=\"" + "sr-only" + "\">" + "Toggle navigation" + "</span>";
+        r0 += "<span class=\"" + "icon-bar" + "\"></span>";
+        r0 += "<span class=\"" + "icon-bar" + "\"></span>";
+        r0 += "<span class=\"" + "icon-bar" + "\"></span>";
+        r0 += "</button>";
+        r0 += "<a class=\"" + "navbar-brand" + "\" href=\"" + "/" + "\">" + "Xblocks" + "</a>";
+        r0 += "</div>";
+        r0 += "<div id=\"" + "navbar" + "\" class=\"" + "navbar-collapse collapse" + "\">";
+        r0 += "<ul class=\"" + "nav navbar-nav navbar-right" + "\">";
+        r0 += "<li><a href=\"" + "/jsdoc" + "\">" + "JSDoc" + "</a></li>";
+        r0 += "<li><a href=\"" + "https://github.com/Katochimoto/xblocks" + "\">" + "GitHub" + "</a></li>";
+        r0 += "</ul>";
+        r0 += "<form class=\"" + "navbar-form navbar-right" + "\">";
+        r0 += "<input type=\"" + "text" + "\" class=\"" + "form-control" + "\" placeholder=\"" + "Search..." + "\"/>";
+        r0 += "</form>";
+        r0 += "</div>";
+        r0 += "</div>";
+        r0 += "</nav>";
+
+        return r0;
+    };
+    M.t0.j = j0;
+    M.t0.a = 0;
+
+    // match .menu : _menu
+    M.t1 = function t1(m, c0, i0, l0, a0) {
+        var r0 = '';
+        var current = [ c0 ];
+
+        r0 += closeAttrs(a0);
+        r0 += "<div class=\"" + "col-sm-3 col-md-2 sidebar" + "\">";
+        r0 += "<ul";
+        a0.a = {
+            'class': new yr.scalarAttr("nav nav-sidebar")
+        };
+        a0.s = 'ul';
+        r0 += m.a(m, 0, selectNametest('items', c0, []), '_menu-items', a0, selectNametest('current', c0, []))
+        r0 += closeAttrs(a0);
+        r0 += "</ul>";
+        r0 += "</div>";
+
+        return r0;
+    };
+    M.t1.j = j1;
+    M.t1.a = 0;
+
+    // match .items : _menu-items
+    M.t2 = function t2(m, c0, i0, l0, a0, v0) {
+        v0 = (v0 === undefined) ? [] : v0;
+        var r0 = '';
+        var current = [ c0 ];
+
+        //  var isCurrent : boolean
+        var v1 = cmpNN(v0, selectNametest('hash', c0, []));
+
+        r0 += closeAttrs(a0);
+        r0 += "<li";
+        a0.a = {
+        };
+        a0.s = 'li';
+        if ((v1)) {
+            var tmp0 = a0.a[ "class" ];
+            if (tmp0) {
+                a0.a[ "class" ] = tmp0.addscalar(" active");
+            } else {
+                a0.a[ "class" ] = new yr.scalarAttr(" active");
+            }
+        }
+        r0 += closeAttrs(a0);
+        r0 += "<a href=\"" + "#/" + nodeset2attrvalue( ( selectNametest('hash', c0, []) ) ) + "\">";
+        r0 += nodeset2xml( selectNametest('title', c0, []) );
+        if ((v1)) {
+            r0 += "<span class=\"" + "sr-only" + "\">" + "(current)" + "</span>";
+        }
+        r0 += "</a>";
+        r0 += "</li>";
+
+        return r0;
+    };
+    M.t2.j = j2;
+    M.t2.a = 0;
+
+    M.matcher = {
+        "_navbar": {
+            "navbar": [
+                "t0"
+            ]
+        },
+        "_menu": {
+            "menu": [
+                "t1"
+            ]
+        },
+        "_menu-items": {
+            "items": [
+                "t2"
+            ]
+        }
+    };
+    M.imports = [];
+
+    yr.register('docs', M);
+
+})();

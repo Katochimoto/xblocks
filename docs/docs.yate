@@ -1,3 +1,7 @@
+module "docs"
+
+match .navbar _navbar {
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -21,8 +25,36 @@
                 <li><a href="https://github.com/Katochimoto/xblocks">GitHub</a></li>
             </ul>
             <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
+                <input type="text" class="form-control" placeholder="Search..." />
             </form>
         </div>
     </div>
 </nav>
+
+}
+
+
+match .menu _menu {
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            apply .items _menu-items (.current)
+        </ul>
+    </div>
+}
+
+match .items _menu-items (nodeset current) {
+    isCurrent = current == .hash
+
+    <li>
+        if (isCurrent) {
+            @class += " active"
+        }
+        <a href="#/{.hash}">
+            .title
+
+            if (isCurrent) {
+                <span class="sr-only">(current)</span>
+            }
+        </a>
+    </li>
+}

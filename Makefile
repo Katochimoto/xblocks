@@ -1,18 +1,22 @@
 NPM_BIN=$(CURDIR)/node_modules/.bin
 export NPM_BIN
 
-src_tmpl := $(shell find docs -type f -name "*.tmpl")
-src_html := $(patsubst %.tmpl, %.html, $(src_tmpl))
+src_yate := $(shell find docs -type f -name "*.yate")
+src_js := $(patsubst %.yate, %.js, $(src_yate))
 
 all: node_modules \
 	bower_components \
-	jsdoc
+	docs/docs.yate.js \
+	jsdoc \
+	$(src_js)
 
 jsdoc: node_modules bower_components
 	$(NPM_BIN)/jsdoc --debug -r -c jsdoc.json -d jsdoc
 
 clean:
 	find jsdoc -type f -name "*.html" -exec rm -f {} \;
+	find docs -type f -name "*.js" -exec rm -f {} \;
+	find docs -type f -name "*.yate.obj" -exec rm -f {} \;
 
 node_modules: package.json
 	npm install
@@ -22,8 +26,11 @@ bower_components: bower.json
 	bower install
 	touch bower_components
 
-$(src_html): %.html: %.tmpl node_modules
-	$(NPM_BIN)/borschik -m no -i $< -o $@
+docs/docs.yate.js: docs/docs.yate node_modules
+	$(NPM_BIN)/yate $< > $@
+
+$(src_js): %.js: %.yate node_modules docs/docs.yate.js
+	$(NPM_BIN)/yate $< --import docs/docs.yate.obj > $@
 
 
 .PHONY: all clean

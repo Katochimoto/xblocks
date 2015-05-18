@@ -8,7 +8,8 @@
     "tether": "0.7.2",
     "xblocks-core": "0.6.0",
     "xblocks": "0.6.0",
-    "bootstrap": "3.3.4"
+    "bootstrap": "3.3.4",
+    "director": "1.2.8"
   },
   "directory": "bower_components"
 }
