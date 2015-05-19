@@ -23,13 +23,15 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j1 = [ 0, 'menu' ];
 
-    var j2 = [ 0, 'items' ];
+    var j2 = [ 1, 0 ];
 
-    var j3 = [ 0, 'current' ];
+    var j3 = [ 0, 'items' ];
 
-    var j4 = [ 0, 'hash' ];
+    var j4 = [ 0, 'current' ];
 
-    var j5 = [ 0, 'title' ];
+    var j5 = [ 0, 'hash' ];
+
+    var j6 = [ 0, 'title' ];
 
     // match .navbar : _navbar
     M.t0 = function t0(m, c0, i0, l0, a0) {
@@ -71,15 +73,13 @@ var yr = yr || require('yate/lib/runtime.js');
         var current = [ c0 ];
 
         r0 += closeAttrs(a0);
-        r0 += "<div class=\"" + "col-sm-3 col-md-2 sidebar" + "\">";
-        r0 += "<ul";
+        r0 += "<div";
         a0.a = {
-            'class': new yr.scalarAttr("nav nav-sidebar")
+            'class': new yr.scalarAttr("col-sm-3 col-md-2 sidebar bs-docs-sidebar")
         };
-        a0.s = 'ul';
-        r0 += m.a(m, 0, selectNametest('items', c0, []), '_menu-items', a0, selectNametest('current', c0, []))
+        a0.s = 'div';
+        r0 += m.a(m, 0, m.s(j2, c0), '_menu-nav', a0)
         r0 += closeAttrs(a0);
-        r0 += "</ul>";
         r0 += "</div>";
 
         return r0;
@@ -87,8 +87,28 @@ var yr = yr || require('yate/lib/runtime.js');
     M.t1.j = j1;
     M.t1.a = 0;
 
-    // match .items : _menu-items
-    M.t2 = function t2(m, c0, i0, l0, a0, v0) {
+    // match .menu : _menu-nav
+    M.t2 = function t2(m, c0, i0, l0, a0) {
+        var r0 = '';
+        var current = [ c0 ];
+
+        r0 += closeAttrs(a0);
+        r0 += "<ul";
+        a0.a = {
+            'class': new yr.scalarAttr("nav nav-stacked")
+        };
+        a0.s = 'ul';
+        r0 += m.a(m, 0, selectNametest('items', c0, []), '_menu-nav-items', a0, selectNametest('current', c0, []))
+        r0 += closeAttrs(a0);
+        r0 += "</ul>";
+
+        return r0;
+    };
+    M.t2.j = j1;
+    M.t2.a = 0;
+
+    // match .items : _menu-nav-items
+    M.t3 = function t3(m, c0, i0, l0, a0, v0) {
         v0 = (v0 === undefined) ? [] : v0;
         var r0 = '';
         var current = [ c0 ];
@@ -116,12 +136,13 @@ var yr = yr || require('yate/lib/runtime.js');
             r0 += "<span class=\"" + "sr-only" + "\">" + "(current)" + "</span>";
         }
         r0 += "</a>";
+        r0 += m.a(m, 0, selectNametest('menu', c0, []), '_menu-nav', a0)
         r0 += "</li>";
 
         return r0;
     };
-    M.t2.j = j2;
-    M.t2.a = 0;
+    M.t3.j = j3;
+    M.t3.a = 0;
 
     M.matcher = {
         "_navbar": {
@@ -134,9 +155,14 @@ var yr = yr || require('yate/lib/runtime.js');
                 "t1"
             ]
         },
-        "_menu-items": {
-            "items": [
+        "_menu-nav": {
+            "menu": [
                 "t2"
+            ]
+        },
+        "_menu-nav-items": {
+            "items": [
+                "t3"
             ]
         }
     };

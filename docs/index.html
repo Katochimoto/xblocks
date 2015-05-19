@@ -13,6 +13,8 @@
 
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/styles/dashboard.css" rel="stylesheet" />
+    <link href="/styles/bs-docs-sidebar.css" rel="stylesheet" />
+
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/node_modules/yate/lib/runtime.js"></script>
@@ -27,8 +29,33 @@ var data = {
     'navbar': {},
     'menu': {
         'items': [
-            { 'hash': 'getting-started', 'title': 'Getting Started' },
-            { 'hash': 'examples',        'title': 'Examples' }
+            {
+                'hash': 'getting-started',
+                'title': 'Getting Started',
+                'menu': {
+                    'items': [
+                        {
+                            'hash': 'getting-started/quickstart',
+                            'title': 'Quick Start'
+                        }
+                    ]
+                }
+            },
+
+            {
+                'hash': 'examples',
+                'title': 'Examples'
+            },
+
+            {
+                'hash': 'components',
+                'title': 'Components'
+            },
+
+            {
+                'hash': 'downloads',
+                'title': 'Downloads'
+            }
         ]
     }
 };
@@ -41,12 +68,21 @@ var loadModule = (function() {
         var dfd = $.Deferred();
 
         if (_loadModules.hasOwnProperty(module)) {
-            dfd.resolve();
+            if (_loadModules[ module ]) {
+                dfd.resolve();
+
+            } else {
+                dfd.reject();
+            }
 
         } else {
-            $.getScript('/docs/' + module + '.js', function() {
+            $.getScript('/docs/' + module + '.js').then(function() {
                 _loadModules[ module ] = true;
                 dfd.resolve();
+
+            }, function() {
+                _loadModules[ module ] = false;
+                dfd.reject();
             });
         }
 
@@ -56,17 +92,22 @@ var loadModule = (function() {
 </script>
 <script>
 $(function() {
+    var currentModule;
     var app = document.getElementById('app');
     var router = Router({
-        '/([a-z\\-]+)': {
-            'on': run
+        '/:module': {
+            'on': run,
+
+            '/:section': {
+                'on': run
+            }
         }
     });
 
     router.configure({
         'async': true,
         'notfound': function() {
-            run('getting-started');
+            runDefault();
         },
         'after': function(next) {
             next();
@@ -76,10 +117,25 @@ $(function() {
     router.init();
 
     function run(module) {
+        var next = arguments[ arguments.length - 1 ];
+
+        if (currentModule === module) {
+            next();
+            return;
+        }
+
+        currentModule = module;
+
         loadModule(module).done(function() {
             data.menu.current = module;
             app.innerHTML = yr.run(module, data);
-        });
+        })
+        .fail(runDefault)
+        .always(next);
+    }
+
+    function runDefault() {
+        run('getting-started');
     }
 });
 </script>

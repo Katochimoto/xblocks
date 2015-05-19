@@ -35,14 +35,18 @@ match .navbar _navbar {
 
 
 match .menu _menu {
-    <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-            apply .items _menu-items (.current)
-        </ul>
+    <div class="col-sm-3 col-md-2 sidebar bs-docs-sidebar">
+        apply . _menu-nav
     </div>
 }
 
-match .items _menu-items (nodeset current) {
+match .menu _menu-nav {
+    <ul class="nav nav-stacked">
+        apply .items _menu-nav-items (.current)
+    </ul>
+}
+
+match .items _menu-nav-items (nodeset current) {
     isCurrent = current == .hash
 
     <li>
@@ -56,5 +60,7 @@ match .items _menu-items (nodeset current) {
                 <span class="sr-only">(current)</span>
             }
         </a>
+
+        apply .menu _menu-nav
     </li>
 }
