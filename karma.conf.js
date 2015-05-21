@@ -17,7 +17,7 @@ module.exports = function(config) {
         files: [
             'test/helpers/setup.js',
 
-            'bower_components/vow/vow.min.js',
+            'node_modules/vow/lib/vow.js',
             'bower_components/es5-shim/es5-shim.js',
             'bower_components/react/react-with-addons.js',
             'bower_components/xblocks-core/dist/xblocks-core-full.js',

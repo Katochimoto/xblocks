@@ -1,3 +1,6 @@
+NPM_BIN=$(CURDIR)/node_modules/.bin
+export NPM_BIN
+
 src_styl := $(shell find src -type f -name "*.styl")
 src_jsx := $(shell find src -type f -name "*.jsx")
 src_jsx_js := $(addsuffix .js, $(src_jsx))
@@ -25,21 +28,21 @@ bower_components: bower.json
 
 
 build/xblocks.css: src/xblocks.styl $(src_styl) node_modules
-	./node_modules/.bin/stylus --print --resolve-url --inline $< > $@
-	./node_modules/.bin/autoprefixer --browsers "> 1%, Firefox >= 14, Opera >= 12, Chrome >= 4" $@
+	$(NPM_BIN)/stylus --print --resolve-url --inline $< > $@
+	$(NPM_BIN)/autoprefixer --browsers "> 1%, Firefox >= 14, Opera >= 12, Chrome >= 4" $@
 
 build/xblocks.min.css: build/xblocks.css
-	./node_modules/.bin/stylus --compress < $< > $@
+	$(NPM_BIN)/stylus --compress < $< > $@
 
 
 $(src_jsx_js): %.jsx.js: %.jsx node_modules
-	./node_modules/.bin/jsx --no-cache-dir --strip-types --harmony $< > $@
+	$(NPM_BIN)/jsx --no-cache-dir --strip-types --harmony $< > $@
 
 build/xblocks.js: src/xblocks.js $(src_jsx_js) $(src_js) node_modules
-	./node_modules/.bin/borschik -m no -i $< -o $@
+	$(NPM_BIN)/borschik -m no -i $< -o $@
 
 build/xblocks.min.js: build/xblocks.js
-	./node_modules/.bin/borschik -i $< -o $@
+	$(NPM_BIN)/borschik -i $< -o $@
 
 
 clean:
@@ -51,13 +54,13 @@ clean:
 
 
 test: node_modules bower_components
-	./node_modules/.bin/jshint .
-	./node_modules/.bin/jscs .
+	$(NPM_BIN)/jshint .
+	$(NPM_BIN)/jscs .
 	./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
 
 testall: node_modules bower_components
-	./node_modules/.bin/jshint .
-	./node_modules/.bin/jscs .
+	$(NPM_BIN)/jshint .
+	$(NPM_BIN)/jscs .
 	./node_modules/karma/bin/karma start --single-run
 
 .PHONY: all clean test testall
