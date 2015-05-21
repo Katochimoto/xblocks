@@ -11,6 +11,7 @@
 
     <title>Xblocks</title>
 
+    <link href="/bower_components/xblocks/build/xblocks.min.css" rel="stylesheet" />
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/styles/dashboard.css" rel="stylesheet" />
     <link href="/styles/bs-docs-sidebar.css" rel="stylesheet" />
@@ -21,7 +22,58 @@
             padding: 0;
             background: transparent;
         }
+
+.bs-docs-example
+{
+    position: relative;
+    margin: 15px 0;
+    padding: 39px 19px 14px;
+    background-color: white;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+}
+
+.bs-docs-example.is-code {
+    border-radius: 4px 4px 0 0;
+}
+
+.bs-docs-example::after
+{
+    content: "Example";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: whiteSmoke;
+    border: 1px solid #DDD;
+    color: #9DA0A4;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
+}
+
+.bs-docs-example+.highlight {
+    margin-top: -16px;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 15px;
+    border-width: 1px;
+}
+
+.bs-docs-example+.highlight > pre {
+    border-radius: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
     </style>
+
+    <script src="/bower_components/es5-shim/es5-shim.min.js"></script>
+    <script src="/bower_components/react/react-with-addons.min.js"></script>
+    <script src="/bower_components/tether/tether.min.js"></script>
+    <script src="/bower_components/xblocks-core/dist/xblocks-core-full.min.js"></script>
+    <script src="/bower_components/xblocks/build/xblocks.min.js"></script>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -30,13 +82,6 @@
     <script src="/scripts/highlight.pack.js"></script>
 
     <script src="/docs/docs.js"></script>
-    <script>
-        hljs.configure({
-            tabReplace: '    '
-        });
-
-        hljs.initHighlighting();
-    </script>
 </head>
 <body>
     <div id="app"></div>
@@ -65,7 +110,19 @@ var data = {
 
             {
                 'hash': 'examples',
-                'title': 'Examples'
+                'title': 'Examples',
+                'menu': {
+                    'items': [
+                        {
+                            'hash': 'examples/icons',
+                            'title': 'Icons'
+                        },
+                        {
+                            'hash': 'examples/buttons',
+                            'title': 'Buttons'
+                        }
+                    ]
+                }
             },
 
             {
@@ -84,6 +141,11 @@ var data = {
                         }
                     ]
                 }
+            },
+
+            {
+                'hash': 'core',
+                'title': 'Core'
             }
         ]
     }
@@ -121,6 +183,8 @@ var loadModule = (function() {
 </script>
 <script>
 $(function() {
+    hljs.configure({ 'tabReplace': '    ' });
+
     var currentModule;
     var app = document.getElementById('app');
     var router = Router({
