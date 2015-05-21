@@ -144,6 +144,15 @@ match .* _content {
         "See more info about icons."
     </a>
 
+    <h2 class="sub-header anchor" data-hash="examples/link">
+        "Link"
+    </h2>
+
+    "To display link, use the tag "
+    <code>
+        "<xb-link>"
+    </code>
+    "."
 
     <h2 class="sub-header anchor" data-hash="examples/buttons">
         "Buttons"
@@ -229,16 +238,16 @@ match .* _content {
     "Button checkbox:"
 
     <div class="bs-docs-example is-code">
-        <xb-button type="checkbox" name="bt1">checkbox 1</xb-button>
+        <xb-button type="checkbox" name="bt1" value="1">checkbox 1</xb-button>
         " "
-        <xb-button type="checkbox" name="bt2">checkbox 2</xb-button>
+        <xb-button type="checkbox" name="bt2" value="2">checkbox 2</xb-button>
     </div>
     <div class="highlight">
         <pre>
             <code class="html">
-                "<xb-button type=\"checkbox\" name=\"bt1\">checkbox 1</xb-button>"
+                "<xb-button type=\"checkbox\" name=\"bt1\" value=\"1\">checkbox 1</xb-button>"
                 <br/>
-                "<xb-button type=\"checkbox\" name=\"bt2\">checkbox 2</xb-button>"
+                "<xb-button type=\"checkbox\" name=\"bt2\" value=\"2\">checkbox 2</xb-button>"
             </code>
         </pre>
     </div>
@@ -246,16 +255,16 @@ match .* _content {
     "Button radio:"
 
     <div class="bs-docs-example is-code">
-        <xb-button type="radio" name="bt3">radio 1</xb-button>
+        <xb-button type="radio" name="bt3" value="1">radio 1</xb-button>
         " "
-        <xb-button type="radio" name="bt3">radio 2</xb-button>
+        <xb-button type="radio" name="bt3" value="2">radio 2</xb-button>
     </div>
     <div class="highlight">
         <pre>
             <code class="html">
-                "<xb-button type=\"radio\" name=\"bt3\">radio 1</xb-button>"
+                "<xb-button type=\"radio\" name=\"bt3\" value=\"1\">radio 1</xb-button>"
                 <br/>
-                "<xb-button type=\"radio\" name=\"bt3\">radio 2</xb-button>"
+                "<xb-button type=\"radio\" name=\"bt3\" value=\"2\">radio 2</xb-button>"
             </code>
         </pre>
     </div>
@@ -263,4 +272,54 @@ match .* _content {
     <a href="#/controls/buttons">
         "See more info about buttons."
     </a>
+
+    <h2 class="sub-header anchor" data-hash="examples/checkbox">
+        "Checkbox"
+    </h2>
+
+    "To display checkbox, use the tag "
+    <code>
+        "<xb-checkbox>"
+    </code>
+    "."
+
+    <h2 class="sub-header anchor" data-hash="examples/radio">
+        "Radio"
+    </h2>
+
+    "To display radio, use the tag "
+    <code>
+        "<xb-radio>"
+    </code>
+    "."
+
+    <h2 class="sub-header anchor" data-hash="examples/input">
+        "Input"
+    </h2>
+
+    "To display input, use the tag "
+    <code>
+        "<xb-input>"
+    </code>
+    "."
+
+    <h2 class="sub-header anchor" data-hash="examples/popup">
+        "Popup"
+    </h2>
+
+    "To display popup, use the tag "
+    <code>
+        "<xb-popup>"
+    </code>
+    "."
+
+    <h2 class="sub-header anchor" data-hash="examples/menu">
+        "Menu"
+    </h2>
+
+    "To display menu, use the tag "
+    <code>
+        "<xb-menu>"
+    </code>
+    "."
 }

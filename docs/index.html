@@ -118,8 +118,32 @@ var data = {
                             'title': 'Icons'
                         },
                         {
+                            'hash': 'examples/link',
+                            'title': 'Link'
+                        },
+                        {
                             'hash': 'examples/buttons',
                             'title': 'Buttons'
+                        },
+                        {
+                            'hash': 'examples/checkbox',
+                            'title': 'Checkbox'
+                        },
+                        {
+                            'hash': 'examples/radio',
+                            'title': 'Radio'
+                        },
+                        {
+                            'hash': 'examples/input',
+                            'title': 'Input'
+                        },
+                        {
+                            'hash': 'examples/popup',
+                            'title': 'Popup'
+                        },
+                        {
+                            'hash': 'examples/menu',
+                            'title': 'Menu'
                         }
                     ]
                 }
@@ -255,8 +279,7 @@ $(function() {
 
         var scrollNode = $('.anchor[data-hash="' + hash + '"]');
         if (scrollNode.length) {
-            var scrollTop = scrollNode.offset().top - 70;
-            $('body').animate({ 'scrollTop': scrollTop });
+            $('body').animate({ 'scrollTop': scrollNode.offset().top - 70 });
         }
 
         $('.sidebar')
