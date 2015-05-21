@@ -154,4 +154,113 @@ match .* _content {
         "<xb-button>"
     </code>
     "."
+
+    <div class="bs-docs-example is-code">
+        <xb-button theme="normal">normal</xb-button>
+        " "
+        <div style="background-color:#000;display: inline-block;padding: 5px;">
+            <xb-button theme="pseudo-inverted">pseudo-inverted</xb-button>
+        </div>
+        " "
+        <xb-button theme="action">action</xb-button>
+        " "
+        <xb-button theme="pseudo">pseudo</xb-button>
+        " "
+        <xb-button theme="dark">dark</xb-button>
+        " "
+        <xb-button theme="promo">promo</xb-button>
+        " "
+        <xb-button theme="flying">flying</xb-button>
+    </div>
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<xb-button theme=\"normal\">normal</xb-button>"
+                <br/>
+                "<xb-button theme=\"flying\">flying</xb-button>"
+            </code>
+        </pre>
+    </div>
+
+    "Buttons can be of the following types:"
+
+    <div class="bs-docs-example is-code">
+        <xb-button type="label">label</xb-button>
+        " "
+        <xb-button type="inline">inline</xb-button>
+        " "
+        <xb-button type="link">link</xb-button>
+        " "
+        <xb-button type="file">file</xb-button>
+        " "
+        <xb-button type="button">button</xb-button>
+        " "
+        <xb-button type="submit">submit</xb-button>
+        " "
+        <xb-button type="checkbox">checkbox</xb-button>
+        " "
+        <xb-button type="radio">radio</xb-button>
+    </div>
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<xb-button type=\"label\">label</xb-button>"
+            </code>
+        </pre>
+    </div>
+
+    "For the button you can specify the icon:"
+
+    <div class="bs-docs-example is-code">
+        <xb-button xb-ico-float="left" xb-ico-type="help">button</xb-button>
+        " "
+        <xb-button xb-ico-float="right" xb-ico-type="download">button</xb-button>
+    </div>
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<xb-button xb-ico-float=\"left\" xb-ico-type=\"help\">button</xb-button>"
+                <br/>
+                "<xb-button xb-ico-float=\"right\" xb-ico-type=\"download\">button</xb-button>"
+            </code>
+        </pre>
+    </div>
+
+    "Button checkbox:"
+
+    <div class="bs-docs-example is-code">
+        <xb-button type="checkbox" name="bt1">checkbox 1</xb-button>
+        " "
+        <xb-button type="checkbox" name="bt2">checkbox 2</xb-button>
+    </div>
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<xb-button type=\"checkbox\" name=\"bt1\">checkbox 1</xb-button>"
+                <br/>
+                "<xb-button type=\"checkbox\" name=\"bt2\">checkbox 2</xb-button>"
+            </code>
+        </pre>
+    </div>
+
+    "Button radio:"
+
+    <div class="bs-docs-example is-code">
+        <xb-button type="radio" name="bt3">radio 1</xb-button>
+        " "
+        <xb-button type="radio" name="bt3">radio 2</xb-button>
+    </div>
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<xb-button type=\"radio\" name=\"bt3\">radio 1</xb-button>"
+                <br/>
+                "<xb-button type=\"radio\" name=\"bt3\">radio 2</xb-button>"
+            </code>
+        </pre>
+    </div>
+
+    <a href="#/controls/buttons">
+        "See more info about buttons."
+    </a>
 }
