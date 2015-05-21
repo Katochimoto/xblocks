@@ -19,22 +19,57 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var M = new yr.Module();
 
-    var j0 = [ 0, '*' ];
+    var j0 = [ ];
 
-    var j1 = [ 0, 'version' ];
+    var j1 = [ 1, 0 ];
 
     var j2 = [ 0, 'menu' ];
 
-    var j3 = [ 1, 0 ];
+    var j3 = [ 0, '*' ];
 
-    var j4 = [ 0, 'items' ];
+    var j4 = [ 0, 'version' ];
 
-    var j5 = [ 0, 'hash' ];
+    var j5 = [ 0, 'items' ];
 
-    var j6 = [ 0, 'title' ];
+    var j6 = [ 0, 'hash' ];
+
+    var j7 = [ 0, 'title' ];
+
+    // match /
+    M.t0 = function t0(m, c0, i0, l0, a0) {
+        var r0 = '';
+        var current = [ c0 ];
+
+        r0 += m.a(m, 0, m.s(j1, c0), '_navbar', a0)
+        r0 += closeAttrs(a0);
+        r0 += "<div class=\"" + "container-fluid" + "\">";
+        r0 += "<div class=\"" + "row" + "\">";
+        r0 += "<div";
+        a0.a = {
+            'class': new yr.scalarAttr("col-sm-3 col-md-2 sidebar bs-docs-sidebar")
+        };
+        a0.s = 'div';
+        r0 += m.a(m, 0, selectNametest('menu', c0, []), '_menu', a0)
+        r0 += closeAttrs(a0);
+        r0 += "</div>";
+        r0 += "<div";
+        a0.a = {
+            'class': new yr.scalarAttr("col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+        };
+        a0.s = 'div';
+        r0 += m.a(m, 0, m.s(j1, c0), '_content', a0)
+        r0 += closeAttrs(a0);
+        r0 += "</div>";
+        r0 += "</div>";
+        r0 += "</div>";
+
+        return r0;
+    };
+    M.t0.j = 1;
+    M.t0.a = 1;
 
     // match .* : _navbar
-    M.t0 = function t0(m, c0, i0, l0, a0) {
+    M.t1 = function t1(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
@@ -67,30 +102,10 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t0.j = j0;
-    M.t0.a = 0;
-
-    // match .menu : _menu
-    M.t1 = function t1(m, c0, i0, l0, a0) {
-        var r0 = '';
-        var current = [ c0 ];
-
-        r0 += closeAttrs(a0);
-        r0 += "<div";
-        a0.a = {
-            'class': new yr.scalarAttr("col-sm-3 col-md-2 sidebar bs-docs-sidebar")
-        };
-        a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j3, c0), '_menu-nav', a0)
-        r0 += closeAttrs(a0);
-        r0 += "</div>";
-
-        return r0;
-    };
-    M.t1.j = j2;
+    M.t1.j = j3;
     M.t1.a = 0;
 
-    // match .menu : _menu-nav
+    // match .menu : _menu
     M.t2 = function t2(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
@@ -101,7 +116,7 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("nav nav-stacked")
         };
         a0.s = 'ul';
-        r0 += m.a(m, 0, selectNametest('items', c0, []), '_menu-nav-items', a0)
+        r0 += m.a(m, 0, selectNametest('items', c0, []), '_menu-items', a0)
         r0 += closeAttrs(a0);
         r0 += "</ul>";
 
@@ -110,7 +125,7 @@ var yr = yr || require('yate/lib/runtime.js');
     M.t2.j = j2;
     M.t2.a = 0;
 
-    // match .items : _menu-nav-items
+    // match .items : _menu-items
     M.t3 = function t3(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
@@ -120,31 +135,31 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<a href=\"" + "#/" + nodeset2attrvalue( ( selectNametest('hash', c0, []) ) ) + "\">";
         r0 += nodeset2xml( selectNametest('title', c0, []) );
         r0 += "</a>";
-        r0 += m.a(m, 0, selectNametest('menu', c0, []), '_menu-nav', a0)
+        r0 += m.a(m, 0, selectNametest('menu', c0, []), '_menu', a0)
         r0 += "</li>";
 
         return r0;
     };
-    M.t3.j = j4;
+    M.t3.j = j5;
     M.t3.a = 0;
 
     M.matcher = {
+        "": {
+            "": [
+                "t0"
+            ]
+        },
         "_navbar": {
             "*": [
-                "t0"
+                "t1"
             ]
         },
         "_menu": {
             "menu": [
-                "t1"
-            ]
-        },
-        "_menu-nav": {
-            "menu": [
                 "t2"
             ]
         },
-        "_menu-nav-items": {
+        "_menu-items": {
             "items": [
                 "t3"
             ]

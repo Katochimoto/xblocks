@@ -19,30 +19,16 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var M = new yr.Module();
 
-    var j0 = [ ];
+    var j0 = [ 0, '*' ];
 
-    var j1 = [ 1, 0 ];
+    var j1 = [ 0, 'version' ];
 
-    var j2 = [ 0, 'menu' ];
-
-    var j3 = [ 0, 'version' ];
-
-    // match /
+    // match .* : _content
     M.t0 = function t0(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.s(j1, c0), '_navbar', a0)
         r0 += closeAttrs(a0);
-        r0 += "<div class=\"" + "container-fluid" + "\">";
-        r0 += "<div";
-        a0.a = {
-            'class': new yr.scalarAttr("row")
-        };
-        a0.s = 'div';
-        r0 += m.a(m, 0, selectNametest('menu', c0, []), '_menu', a0)
-        r0 += closeAttrs(a0);
-        r0 += "<div class=\"" + "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" + "\">";
         r0 += "<h1 class=\"" + "page-header anchor" + "\" data-hash=\"" + "getting-started" + "\">";
         r0 += "Getting started";
         r0 += "</h1>";
@@ -166,18 +152,15 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "</code>";
         r0 += "</pre>";
         r0 += "</div>";
-        r0 += "</div>";
-        r0 += "</div>";
-        r0 += "</div>";
 
         return r0;
     };
-    M.t0.j = 1;
-    M.t0.a = 1;
+    M.t0.j = j0;
+    M.t0.a = 0;
 
     M.matcher = {
-        "": {
-            "": [
+        "_content": {
+            "*": [
                 "t0"
             ]
         }
