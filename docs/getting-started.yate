@@ -11,12 +11,87 @@ match / {
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">
-                    "Getting Started"
+                    "Getting started"
                 </h1>
 
+                <p class="lead">
+                    "An overview of Xblocks, how to download and use, basic templates, and more."
+                </p>
+
                 <h2 class="sub-header">
-                    "Section title"
+                    <a name="/getting-started/quickstart"></a>
+                    "Quick Start"
                 </h2>
+
+                <p>
+                    <ol>
+                        <li>
+                            <a href="#/getting-started/download">Download library</a>
+                        </li>
+                        <li>
+                            "Include the CSS on your head page:"
+                            <div class="highlight">
+                                <pre>
+                                    <code class="html">
+                                        "<link href=\"bower_components/xblocks/build/xblocks.min.css\" rel=\"stylesheet\" />"
+                                    </code>
+                                </pre>
+                            </div>
+                        </li>
+                        <li>
+                            "Include the JS on your head page:"
+                            <div class="highlight">
+                                <pre>
+                                    <code class="html">
+                                        "<!-- Included xblocks-core, X-Tag and polyfill custom elements -->"
+                                        <br/>
+                                        "<script src=\"bower_components/xblocks-core/dist/xblocks-core-full.min.js\"></script>"
+                                        <br/>
+                                        "<!-- Includes a set of custom elements -->"
+                                        <br/>
+                                        "<script src=\"bower_components/xblocks/build/xblocks.min.js\"></script>"
+                                    </code>
+                                </pre>
+                            </div>
+                        </li>
+                        <li>
+                            "Test connection required dependencies:"
+                            <div class="highlight">
+                                <pre>
+                                    <code class="html">
+                                        "<!-- es5-shim -->"
+                                        <br/>
+                                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.1/es5-shim.min.js\"></script>"
+                                        <br/>
+                                        "<!-- React -->"
+                                        <br/>
+                                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js\"></script>"
+                                        <br/>
+                                        "<!-- Tether -->"
+                                        <br/>
+                                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/tether/0.7.0/tether.min.js\"></script>"
+                                    </code>
+                                </pre>
+                            </div>
+                        </li>
+                        <li>
+                            "Further work requires no initialization."
+                        </li>
+                    </ol>
+                </p>
+
+
+                <h2 class="sub-header">
+                    <a name="/getting-started/download"></a>
+                    "Download"
+                </h2>
+
+                <p>
+                    <small>
+                        "Currently v0.6.0"
+                    </small>
+                </p>
+
             </div>
         </div>
     </div>

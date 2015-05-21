@@ -14,13 +14,29 @@
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/styles/dashboard.css" rel="stylesheet" />
     <link href="/styles/bs-docs-sidebar.css" rel="stylesheet" />
+    <link href="/styles/github.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .hljs {
+            padding: 0;
+            background: transparent;
+        }
+    </style>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/node_modules/yate/lib/runtime.js"></script>
     <script src="/bower_components/director/build/director.min.js"></script>
+    <script src="/scripts/highlight.pack.js"></script>
 
     <script src="/docs/docs.js"></script>
+    <script>
+        hljs.configure({
+            tabReplace: '    '
+        });
+
+        hljs.initHighlighting();
+    </script>
 </head>
 <body>
     <div id="app"></div>
@@ -37,6 +53,10 @@ var data = {
                         {
                             'hash': 'getting-started/quickstart',
                             'title': 'Quick Start'
+                        },
+                        {
+                            'hash': 'getting-started/download',
+                            'title': 'Download'
                         }
                     ]
                 }
@@ -48,13 +68,8 @@ var data = {
             },
 
             {
-                'hash': 'components',
-                'title': 'Components'
-            },
-
-            {
-                'hash': 'downloads',
-                'title': 'Downloads'
+                'hash': 'controls',
+                'title': 'Controls'
             }
         ]
     }
@@ -129,6 +144,10 @@ $(function() {
         loadModule(module).done(function() {
             data.menu.current = module;
             app.innerHTML = yr.run(module, data);
+
+            $('.highlight code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
         })
         .fail(runDefault)
         .always(next);
