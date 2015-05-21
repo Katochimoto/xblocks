@@ -145,10 +145,11 @@ $(function() {
 
     router.init();
 
-    function run(module) {
+    function run(module, section) {
         var next = arguments[ arguments.length - 1 ];
 
         if (currentModule === module) {
+            setActiveMenu(module, section);
             next();
             return;
         }
@@ -156,12 +157,10 @@ $(function() {
         currentModule = module;
 
         loadModule(module).done(function() {
-            data.menu.current = module;
             app.innerHTML = yr.run(module, data);
 
-            $('.highlight code').each(function(i, block) {
-                hljs.highlightBlock(block);
-            });
+            setActiveMenu(module, section);
+            $('.highlight code').each(highlightIterate);
         })
         .fail(runDefault)
         .always(next);
@@ -169,6 +168,34 @@ $(function() {
 
     function runDefault() {
         run('getting-started');
+    }
+
+    function setActiveMenu(module, section) {
+        var hash = module;
+
+        if (typeof(section) === 'string') {
+            hash += '/' + section;
+        }
+
+        var scrollNode = $('.anchor[data-hash="' + hash + '"]');
+        if (scrollNode.length) {
+            var scrollTop = scrollNode.offset().top - 70;
+            $('body').animate({ 'scrollTop': scrollTop });
+        }
+
+        $('.sidebar')
+            .find('li')
+            .removeClass('active')
+            .end()
+            .find('li[data-hash="' + module + '"]')
+            .addClass('active')
+            .end()
+            .find('li[data-hash="' + hash + '"]')
+            .addClass('active');
+    }
+
+    function highlightIterate(i, block) {
+        hljs.highlightBlock(block);
     }
 });
 </script>

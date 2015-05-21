@@ -45,23 +45,14 @@ match .menu _menu {
 
 match .menu _menu-nav {
     <ul class="nav nav-stacked">
-        apply .items _menu-nav-items (.current)
+        apply .items _menu-nav-items
     </ul>
 }
 
-match .items _menu-nav-items (nodeset current) {
-    isCurrent = current == .hash
-
-    <li>
-        if (isCurrent) {
-            @class += " active"
-        }
+match .items _menu-nav-items {
+    <li data-hash="{.hash}">
         <a href="#/{.hash}">
             .title
-
-            if (isCurrent) {
-                <span class="sr-only">(current)</span>
-            }
         </a>
 
         apply .menu _menu-nav

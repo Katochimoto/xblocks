@@ -10,8 +10,7 @@ match / {
             apply .menu _menu
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">
-                    <a name="/getting-started"></a>
+                <h1 class="page-header anchor" data-hash="getting-started">
                     "Getting started"
                 </h1>
 
@@ -19,8 +18,7 @@ match / {
                     "An overview of Xblocks, how to download and use, basic templates, and more."
                 </p>
 
-                <h2 class="sub-header">
-                    <a name="/getting-started/quickstart"></a>
+                <h2 class="sub-header anchor" data-hash="getting-started/quickstart">
                     "Quick Start"
                 </h2>
 
@@ -81,8 +79,7 @@ match / {
                     </ol>
                 </p>
 
-                <h2 class="sub-header">
-                    <a name="/getting-started/download"></a>
+                <h2 class="sub-header anchor" data-hash="getting-started/download">
                     "Download"
                 </h2>
 

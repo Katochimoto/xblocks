@@ -29,11 +29,9 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j4 = [ 0, 'items' ];
 
-    var j5 = [ 0, 'current' ];
+    var j5 = [ 0, 'hash' ];
 
-    var j6 = [ 0, 'hash' ];
-
-    var j7 = [ 0, 'title' ];
+    var j6 = [ 0, 'title' ];
 
     // match .* : _navbar
     M.t0 = function t0(m, c0, i0, l0, a0) {
@@ -103,7 +101,7 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("nav nav-stacked")
         };
         a0.s = 'ul';
-        r0 += m.a(m, 0, selectNametest('items', c0, []), '_menu-nav-items', a0, selectNametest('current', c0, []))
+        r0 += m.a(m, 0, selectNametest('items', c0, []), '_menu-nav-items', a0)
         r0 += closeAttrs(a0);
         r0 += "</ul>";
 
@@ -113,33 +111,14 @@ var yr = yr || require('yate/lib/runtime.js');
     M.t2.a = 0;
 
     // match .items : _menu-nav-items
-    M.t3 = function t3(m, c0, i0, l0, a0, v0) {
-        v0 = (v0 === undefined) ? [] : v0;
+    M.t3 = function t3(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
-        //  var isCurrent : boolean
-        var v1 = cmpNN(v0, selectNametest('hash', c0, []));
-
         r0 += closeAttrs(a0);
-        r0 += "<li";
-        a0.a = {
-        };
-        a0.s = 'li';
-        if ((v1)) {
-            var tmp0 = a0.a[ "class" ];
-            if (tmp0) {
-                a0.a[ "class" ] = tmp0.addscalar(" active");
-            } else {
-                a0.a[ "class" ] = new yr.scalarAttr(" active");
-            }
-        }
-        r0 += closeAttrs(a0);
+        r0 += "<li data-hash=\"" + nodeset2attrvalue( ( selectNametest('hash', c0, []) ) ) + "\">";
         r0 += "<a href=\"" + "#/" + nodeset2attrvalue( ( selectNametest('hash', c0, []) ) ) + "\">";
         r0 += nodeset2xml( selectNametest('title', c0, []) );
-        if ((v1)) {
-            r0 += "<span class=\"" + "sr-only" + "\">" + "(current)" + "</span>";
-        }
         r0 += "</a>";
         r0 += m.a(m, 0, selectNametest('menu', c0, []), '_menu-nav', a0)
         r0 += "</li>";
