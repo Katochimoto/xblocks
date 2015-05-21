@@ -21,16 +21,18 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j0 = [ ];
 
-    var j1 = [ 0, 'navbar' ];
+    var j1 = [ 1, 0 ];
 
     var j2 = [ 0, 'menu' ];
+
+    var j3 = [ 0, 'version' ];
 
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, selectNametest('navbar', c0, []), '_navbar', a0)
+        r0 += m.a(m, 0, m.s(j1, c0), '_navbar', a0)
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "container-fluid" + "\">";
         r0 += "<div";
@@ -42,6 +44,7 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" + "\">";
         r0 += "<h1 class=\"" + "page-header" + "\">";
+        r0 += "<a name=\"" + "/getting-started" + "\"></a>";
         r0 += "Getting started";
         r0 += "</h1>";
         r0 += "<p class=\"" + "lead" + "\">";
@@ -111,11 +114,61 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<a name=\"" + "/getting-started/download" + "\"></a>";
         r0 += "Download";
         r0 += "</h2>";
-        r0 += "<p>";
         r0 += "<small>";
-        r0 += "Currently v0.6.0";
+        r0 += "Currently ";
+        r0 += nodeset2xml( selectNametest('version', c0, []) );
         r0 += "</small>";
+        r0 += "<h3>";
+        r0 += "Install with CDN";
+        r0 += "</h3>";
+        r0 += "<p>";
+        r0 += "You can install Xblocks using ";
+        r0 += "<a href=\"" + "https://cdnjs.com/" + "\" target=\"" + "_blank" + "\">";
+        r0 += "CDN";
+        r0 += "</a>";
+        r0 += ":";
         r0 += "</p>";
+        r0 += "<div class=\"" + "highlight" + "\">";
+        r0 += "<pre>";
+        r0 += "<code class=\"" + "html" + "\">";
+        r0 += "$ bower install xblocks";
+        r0 += "</code>";
+        r0 += "</pre>";
+        r0 += "</div>";
+        r0 += "<h3>";
+        r0 += "Install with Bower";
+        r0 += "</h3>";
+        r0 += "<p>";
+        r0 += "You can also install Xblocks using ";
+        r0 += "<a href=\"" + "http://bower.io/" + "\" target=\"" + "_blank" + "\">";
+        r0 += "Bower";
+        r0 += "</a>";
+        r0 += ":";
+        r0 += "</p>";
+        r0 += "<div class=\"" + "highlight" + "\">";
+        r0 += "<pre>";
+        r0 += "<code class=\"" + "bash" + "\">";
+        r0 += "$ bower install xblocks";
+        r0 += "</code>";
+        r0 += "</pre>";
+        r0 += "</div>";
+        r0 += "<h3>";
+        r0 += "Install with npm";
+        r0 += "</h3>";
+        r0 += "<p>";
+        r0 += "You can also install Bootstrap using ";
+        r0 += "<a href=\"" + "https://www.npmjs.com/" + "\" target=\"" + "_blank" + "\">";
+        r0 += "npm";
+        r0 += "</a>";
+        r0 += ":";
+        r0 += "</p>";
+        r0 += "<div class=\"" + "highlight" + "\">";
+        r0 += "<pre>";
+        r0 += "<code class=\"" + "bash" + "\">";
+        r0 += "$ npm install xblocks";
+        r0 += "</code>";
+        r0 += "</pre>";
+        r0 += "</div>";
         r0 += "</div>";
         r0 += "</div>";
         r0 += "</div>";

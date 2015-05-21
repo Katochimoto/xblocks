@@ -3,7 +3,7 @@ import "docs"
 
 match / {
 
-    apply .navbar _navbar
+    apply . _navbar
 
     <div class="container-fluid">
         <div class="row">
@@ -11,6 +11,7 @@ match / {
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">
+                    <a name="/getting-started"></a>
                     "Getting started"
                 </h1>
 
@@ -80,20 +81,77 @@ match / {
                     </ol>
                 </p>
 
-
                 <h2 class="sub-header">
                     <a name="/getting-started/download"></a>
                     "Download"
                 </h2>
 
+                <small>
+                    "Currently "
+                    .version
+                </small>
+
+                <h3>
+                    "Install with CDN"
+                </h3>
+
                 <p>
-                    <small>
-                        "Currently v0.6.0"
-                    </small>
+                    "You can install Xblocks using "
+                    <a href="https://cdnjs.com/" target="_blank">
+                        "CDN"
+                    </a>
+                    ":"
                 </p>
+
+                <div class="highlight">
+                    <pre>
+                        <code class="html">
+                            "$ bower install xblocks"
+                        </code>
+                    </pre>
+                </div>
+
+                <h3>
+                    "Install with Bower"
+                </h3>
+
+                <p>
+                    "You can also install Xblocks using "
+                    <a href="http://bower.io/" target="_blank">
+                        "Bower"
+                    </a>
+                    ":"
+                </p>
+
+                <div class="highlight">
+                    <pre>
+                        <code class="bash">
+                            "$ bower install xblocks"
+                        </code>
+                    </pre>
+                </div>
+
+                <h3>
+                    "Install with npm"
+                </h3>
+
+                <p>
+                    "You can also install Bootstrap using "
+                    <a href="https://www.npmjs.com/" target="_blank">
+                        "npm"
+                    </a>
+                    ":"
+                </p>
+
+                <div class="highlight">
+                    <pre>
+                        <code class="bash">
+                            "$ npm install xblocks"
+                        </code>
+                    </pre>
+                </div>
 
             </div>
         </div>
     </div>
-
 }

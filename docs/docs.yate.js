@@ -19,21 +19,23 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var M = new yr.Module();
 
-    var j0 = [ 0, 'navbar' ];
+    var j0 = [ 0, '*' ];
 
-    var j1 = [ 0, 'menu' ];
+    var j1 = [ 0, 'version' ];
 
-    var j2 = [ 1, 0 ];
+    var j2 = [ 0, 'menu' ];
 
-    var j3 = [ 0, 'items' ];
+    var j3 = [ 1, 0 ];
 
-    var j4 = [ 0, 'current' ];
+    var j4 = [ 0, 'items' ];
 
-    var j5 = [ 0, 'hash' ];
+    var j5 = [ 0, 'current' ];
 
-    var j6 = [ 0, 'title' ];
+    var j6 = [ 0, 'hash' ];
 
-    // match .navbar : _navbar
+    var j7 = [ 0, 'title' ];
+
+    // match .* : _navbar
     M.t0 = function t0(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
@@ -48,7 +50,10 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<span class=\"" + "icon-bar" + "\"></span>";
         r0 += "<span class=\"" + "icon-bar" + "\"></span>";
         r0 += "</button>";
-        r0 += "<a class=\"" + "navbar-brand" + "\" href=\"" + "/" + "\">" + "Xblocks" + "</a>";
+        r0 += "<a class=\"" + "navbar-brand" + "\" href=\"" + "/" + "\">";
+        r0 += "Xblocks ";
+        r0 += "<em class=\"" + "small" + "\">" + nodeset2xml( ( selectNametest('version', c0, []) ) ) + "</em>";
+        r0 += "</a>";
         r0 += "</div>";
         r0 += "<div id=\"" + "navbar" + "\" class=\"" + "navbar-collapse collapse" + "\">";
         r0 += "<ul class=\"" + "nav navbar-nav navbar-right" + "\">";
@@ -78,13 +83,13 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("col-sm-3 col-md-2 sidebar bs-docs-sidebar")
         };
         a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j2, c0), '_menu-nav', a0)
+        r0 += m.a(m, 0, m.s(j3, c0), '_menu-nav', a0)
         r0 += closeAttrs(a0);
         r0 += "</div>";
 
         return r0;
     };
-    M.t1.j = j1;
+    M.t1.j = j2;
     M.t1.a = 0;
 
     // match .menu : _menu-nav
@@ -104,7 +109,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t2.j = j1;
+    M.t2.j = j2;
     M.t2.a = 0;
 
     // match .items : _menu-nav-items
@@ -141,12 +146,12 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t3.j = j3;
+    M.t3.j = j4;
     M.t3.a = 0;
 
     M.matcher = {
         "_navbar": {
-            "navbar": [
+            "*": [
                 "t0"
             ]
         },

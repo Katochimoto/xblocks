@@ -42,6 +42,7 @@
     <div id="app"></div>
 <script>
 var data = {
+    'version': '0.6.0',
     'navbar': {},
     'menu': {
         'items': [
@@ -70,6 +71,19 @@ var data = {
             {
                 'hash': 'controls',
                 'title': 'Controls'
+            },
+
+            {
+                'hash': 'extensions',
+                'title': 'Extensions',
+                'menu': {
+                    'items': [
+                        {
+                            'hash': 'extensions/writing-extensions',
+                            'title': 'Writing an Extension'
+                        }
+                    ]
+                }
             }
         ]
     }
