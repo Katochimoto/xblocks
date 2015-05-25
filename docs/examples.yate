@@ -2,7 +2,6 @@ module "examples"
 import "docs"
 
 match .* _content {
-
     <h1 class="page-header anchor" data-hash="examples">
         "Examples"
     </h1>
@@ -380,6 +379,10 @@ match .* _content {
         </div>
     </div>
 
+    <a href="#/controls/checkbox">
+        "See more info about checkbox."
+    </a>
+
     <h2 class="sub-header anchor" data-hash="examples/radio">
         "Radio"
     </h2>
@@ -410,6 +413,10 @@ match .* _content {
             </pre>
         </div>
     </div>
+
+    <a href="#/controls/radio">
+        "See more info about radio."
+    </a>
 
     <h2 class="sub-header anchor" data-hash="examples/input">
         "Input"
@@ -572,6 +579,10 @@ match .* _content {
         </div>
     </div>
 
+    <a href="#/controls/input">
+        "See more info about input."
+    </a>
+
     <h2 class="sub-header anchor" data-hash="examples/popup">
         "Popup"
     </h2>
@@ -687,6 +698,10 @@ match .* _content {
             </pre>
         </div>
     </div>
+
+    <a href="#/controls/popup">
+        "See more info about popup."
+    </a>
 
     <h2 class="sub-header anchor" data-hash="examples/menu">
         "Menu"
@@ -945,4 +960,8 @@ match .* _content {
             </pre>
         </div>
     </div>
+
+    <a href="#/controls/menu">
+        "See more info about menu."
+    </a>
 }

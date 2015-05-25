@@ -1,0 +1,40 @@
+module "controls"
+import "docs"
+
+match .* _content {
+    <h1 class="page-header anchor" data-hash="controls">
+        "Controls"
+    </h1>
+
+    <h2 class="sub-header anchor" data-hash="controls/icons">
+        "Icons"
+    </h2>
+
+    <h2 class="sub-header anchor" data-hash="controls/link">
+        "Link"
+    </h2>
+
+    <h2 class="sub-header anchor" data-hash="controls/buttons">
+        "Buttons"
+    </h2>
+
+    <h2 class="sub-header anchor" data-hash="controls/checkbox">
+        "Checkbox"
+    </h2>
+
+    <h2 class="sub-header anchor" data-hash="controls/radio">
+        "Radio"
+    </h2>
+
+    <h2 class="sub-header anchor" data-hash="controls/input">
+        "Input"
+    </h2>
+
+    <h2 class="sub-header anchor" data-hash="controls/popup">
+        "Popup"
+    </h2>
+
+    <h2 class="sub-header anchor" data-hash="controls/menu">
+        "Menu"
+    </h2>
+}
