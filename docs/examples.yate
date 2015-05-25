@@ -164,6 +164,51 @@ match .* _content {
     </code>
     "."
 
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-link theme="normal">normal</xb-link><br/>
+            <xb-link theme="outer">outer</xb-link><br/>
+            <xb-link theme="pseudo">pseudo</xb-link>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-link theme=\"normal\">normal</xb-link>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-link href="https://ya.ru" target="_blank">ya.ru</xb-link>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-link href=\"https://ya.ru\" target=\"_blank\">ya.ru</xb-link>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-link disabled="disabled">disabled</xb-link>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-link disabled>disabled</xb-link>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <a href="#/controls/link">
+        "See more info about links."
+    </a>
+
     <h2 class="sub-header anchor" data-hash="examples/buttons">
         "Buttons"
     </h2>
@@ -196,8 +241,6 @@ match .* _content {
             <pre>
                 <code class="html">
                     "<xb-button theme=\"normal\">normal</xb-button>"
-                    <br/>
-                    "<xb-button theme=\"flying\">flying</xb-button>"
                 </code>
             </pre>
         </div>
@@ -607,6 +650,8 @@ match .* _content {
         </div>
     </div>
 
+    "Themes:"
+
     <div class="panel panel-example">
         <div class="panel-heading">
             <xb-popup close="close" theme="modal" id="popup3">
@@ -622,7 +667,6 @@ match .* _content {
                 "Popup body"
             </xb-popup>
 
-            "Themes: "
             <a href="#" class="popup-open label label-primary" data-popup-id="popup3">modal</a>
             " "
             <a href="#" class="popup-open label label-primary" data-popup-id="popup4">island</a>
@@ -840,6 +884,63 @@ match .* _content {
                     "    right click to display the context menu"
                     <br/>
                     "</span>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    "Inline menu:"
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-menu-inline>
+                <xb-menuitem label="label 1">
+                    <xb-menuitem label="label 1.1"></xb-menuitem>
+                    <xb-menuitem label="label 1.2"></xb-menuitem>
+                    <xb-menuitem label="label 1.3">
+                        <xb-menuitem label="label 1.3.1"></xb-menuitem>
+                        <xb-menuitem label="label 1.3.2"></xb-menuitem>
+                        <xb-menuitem label="label 1.3.3"></xb-menuitem>
+                    </xb-menuitem>
+                </xb-menuitem>
+                <xb-menuitem label="label 2"></xb-menuitem>
+                <xb-menuitem label="label 3"></xb-menuitem>
+                <xb-menuseparator></xb-menuseparator>
+                <xb-menuitem label="label 4" disabled="disabled"></xb-menuitem>
+            </xb-menu-inline>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-menu-inline>"
+                    <br/>
+                    "    <xb-menuitem label=\"label 1\">"
+                    <br/>
+                    "        <xb-menuitem label=\"label 1.1\"></xb-menuitem>"
+                    <br/>
+                    "        <xb-menuitem label=\"label 1.2\"></xb-menuitem>"
+                    <br/>
+                    "        <xb-menuitem label=\"label 1.3\">"
+                    <br/>
+                    "            <xb-menuitem label=\"label 1.3.1\"></xb-menuitem>"
+                    <br/>
+                    "            <xb-menuitem label=\"label 1.3.2\"></xb-menuitem>"
+                    <br/>
+                    "            <xb-menuitem label=\"label 1.3.3\"></xb-menuitem>"
+                    <br/>
+                    "        </xb-menuitem>"
+                    <br/>
+                    "    </xb-menuitem>"
+                    <br/>
+                    "    <xb-menuitem label=\"label 2\"></xb-menuitem>"
+                    <br/>
+                    "    <xb-menuitem label=\"label 3\"></xb-menuitem>"
+                    <br/>
+                    "    <xb-menuseparator></xb-menuseparator>"
+                    <br/>
+                    "    <xb-menuitem label=\"label 4\" disabled></xb-menuitem>"
+                    <br/>
+                    "</xb-menu-inline>"
                 </code>
             </pre>
         </div>

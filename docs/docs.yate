@@ -45,9 +45,6 @@ match .* _navbar {
                     <li><a href="/jsdoc">JSDoc</a></li>
                     <li><a href="https://github.com/Katochimoto/xblocks">GitHub</a></li>
                 </ul>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search..." />
-                </form>
             </div>
         </div>
     </nav>

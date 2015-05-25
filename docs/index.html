@@ -298,7 +298,7 @@ $(function() {
 
         var scrollNode = $('.anchor[data-hash="' + hash + '"]');
         if (scrollNode.length) {
-            $('body').animate({ 'scrollTop': scrollNode.offset().top - 70 });
+            $('html,body').animate({ 'scrollTop': scrollNode.offset().top - 70 });
         }
 
         $('.sidebar')

@@ -137,4 +137,58 @@ match .* _content {
             </code>
         </pre>
     </div>
+
+    <h2 class="sub-header anchor" data-hash="getting-started/templates">
+        "Templates"
+    </h2>
+
+    <p>
+        "This template does not utilize CDNs."
+    </p>
+
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<!DOCTYPE html>"
+                <br/>
+                "<html lang=\"en\">"
+                <br/>
+                "  <head>"
+                <br/>
+                "    <meta charset=\"utf-8\" />"
+                <br/>
+                "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />"
+                <br/>
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />"
+                <br/>
+                "    <title>Xblocks Basic Template</title>"
+                <br/>
+                "    <!-- CSS -->"
+                <br/>
+                "    <link href=\"/bower_components/xblocks/build/xblocks.min.css\" rel=\"stylesheet\" />"
+                <br/>
+                "    <!-- JS -->"
+                <br/>
+                "    <script src=\"/bower_components/es5-shim/es5-shim.min.js\"></script>"
+                <br/>
+                "    <script src=\"/bower_components/react/react-with-addons.min.js\"></script>"
+                <br/>
+                "    <script src=\"/bower_components/tether/tether.min.js\"></script>"
+                <br/>
+                "    <script src=\"/bower_components/xblocks-core/dist/xblocks-core-full.min.js\"></script>"
+                <br/>
+                "    <script src=\"/bower_components/xblocks/build/xblocks.min.js\"></script>"
+                <br/>
+                "  </head>"
+                <br/>
+                "  <body>"
+                <br/>
+                "    <xb-button>button</xb-button>"
+                <br/>
+                "  </body>"
+                <br/>
+                "</html>"
+            </code>
+        </pre>
+    </div>
 }
