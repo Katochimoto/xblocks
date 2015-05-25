@@ -358,11 +358,11 @@ match .* _content {
         <div class="panel-body highlight">
             <pre>
                 <code class="html">
-                    "<xb-radio name=\"radio1\" value=\"1\" checked>radio 1</xb-radio>"
+                    "<xb-radio name=\"radio\" value=\"1\" checked>radio 1</xb-radio>"
                     <br/>
-                    "<xb-radio name=\"radio1\" value=\"2\">radio 2</xb-radio>"
+                    "<xb-radio name=\"radio\" value=\"2\">radio 2</xb-radio>"
                     <br/>
-                    "<xb-radio name=\"radio1\" value=\"3\" disabled>radio 3</xb-radio>"
+                    "<xb-radio name=\"radio\" value=\"3\" disabled>radio 3</xb-radio>"
                 </code>
             </pre>
         </div>
@@ -710,6 +710,8 @@ match .* _content {
         </div>
     </div>
 
+    "Specify the size menu:"
+
     <div class="panel panel-example">
         <div class="panel-heading">
             <xb-menu id="menu2" size="5">
@@ -751,6 +753,8 @@ match .* _content {
         </div>
     </div>
 
+    "Icons in menu items:"
+
     <div class="panel panel-example">
         <div class="panel-heading">
             <xb-menu id="menu3">
@@ -762,7 +766,7 @@ match .* _content {
         <div class="panel-body highlight">
             <pre>
                 <code class="html">
-                    "<xb-menu size=\"5\">"
+                    "<xb-menu>"
                     <br/>
                     "    <xb-menuitem label=\"label 1\" xb-ico-type=\"twitter\" xb-ico-float=\"left\"></xb-menuitem>"
                     <br/>
