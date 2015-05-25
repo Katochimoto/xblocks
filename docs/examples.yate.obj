@@ -1,1 +1,1 @@
-{"version":"0.0.76","filename":"/Users/rikishi/www/xblocks-web/docs/examples.yate","name":"examples","defs":[]}
+{"version":"0.0.76","filename":"/Users/rikishi/www/xblocks-web/docs/examples.yate","name":"examples","defs":[{"id":"external","x":0,"y":2,"p":{"Type":"scalar","Name":"uid","ArgTypes":[],"Rid":0,"Cid":0}}]}
