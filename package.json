@@ -6,7 +6,8 @@
     "dependencies": {
         "jaguarjs-jsdoc": "Katochimoto/jaguarjs-jsdoc.git",
         "jsdoc": "3.3.x",
-        "yate": "0.0.76"
+        "yate": "0.0.76",
+        "uglifyjs": "2.4.10"
     },
     "engines": {
         "node": "0.10"

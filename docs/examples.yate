@@ -71,15 +71,17 @@ match .* _content {
     </code>
     " to display a small icon."
 
-    <div class="bs-docs-example is-code">
-        <xb-ico size="s" type="help"></xb-ico>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-ico size=\"s\" type=\"help\"></xb-ico>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-ico size="s" type="help"></xb-ico>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-ico size=\"s\" type=\"help\"></xb-ico>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "Specify "
@@ -88,56 +90,64 @@ match .* _content {
     </code>
     " to display a big icon."
 
-    <div class="bs-docs-example is-code">
-        <xb-ico size="m" type="print"></xb-ico>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-ico size=\"m\" type=\"print\"></xb-ico>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-ico size="m" type="print"></xb-ico>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-ico size=\"m\" type=\"print\"></xb-ico>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "Icon \"notification\" may contain the value."
 
-    <div class="bs-docs-example is-code">
-        <xb-ico type="notification" value="test"></xb-ico>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-ico type=\"notification\" value=\"test\"></xb-ico>"
-                <br/>
-                "<xb-ico type=\"notification\">test</xb-ico>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-ico type="notification" value="test"></xb-ico>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-ico type=\"notification\" value=\"test\"></xb-ico>"
+                    <br/>
+                    "<xb-ico type=\"notification\">test</xb-ico>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "The icon can be active."
 
-    <div class="bs-docs-example is-code">
-        <xb-ico type="remove" active="active"></xb-ico>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-ico type=\"remove\" active></xb-ico>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-ico type="remove" active="active"></xb-ico>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-ico type=\"remove\" active></xb-ico>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "The icon may not be available."
 
-    <div class="bs-docs-example is-code">
-        <xb-ico type="twitter" disabled="disabled"></xb-ico>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-ico type=\"twitter\" disabled></xb-ico>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-ico type="twitter" disabled="disabled"></xb-ico>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-ico type=\"twitter\" disabled></xb-ico>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     <a href="#/controls/icons">
@@ -164,109 +174,132 @@ match .* _content {
     </code>
     "."
 
-    <div class="bs-docs-example is-code">
-        <xb-button theme="normal">normal</xb-button>
-        " "
-        <div style="background-color:#000;display: inline-block;padding: 5px;">
-            <xb-button theme="pseudo-inverted">pseudo-inverted</xb-button>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-button theme="normal">normal</xb-button>
+            " "
+            <div style="background-color:#000;display: inline-block;padding: 5px;">
+                <xb-button theme="pseudo-inverted">pseudo-inverted</xb-button>
+            </div>
+            " "
+            <xb-button theme="action">action</xb-button>
+            " "
+            <xb-button theme="pseudo">pseudo</xb-button>
+            " "
+            <xb-button theme="dark">dark</xb-button>
+            " "
+            <xb-button theme="promo">promo</xb-button>
+            " "
+            <xb-button theme="flying">flying</xb-button>
         </div>
-        " "
-        <xb-button theme="action">action</xb-button>
-        " "
-        <xb-button theme="pseudo">pseudo</xb-button>
-        " "
-        <xb-button theme="dark">dark</xb-button>
-        " "
-        <xb-button theme="promo">promo</xb-button>
-        " "
-        <xb-button theme="flying">flying</xb-button>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-button theme=\"normal\">normal</xb-button>"
-                <br/>
-                "<xb-button theme=\"flying\">flying</xb-button>"
-            </code>
-        </pre>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-button theme=\"normal\">normal</xb-button>"
+                    <br/>
+                    "<xb-button theme=\"flying\">flying</xb-button>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "Buttons can be of the following types:"
 
-    <div class="bs-docs-example is-code">
-        <xb-button type="label">label</xb-button>
-        " "
-        <xb-button type="inline">inline</xb-button>
-        " "
-        <xb-button type="link">link</xb-button>
-        " "
-        <xb-button type="file">file</xb-button>
-        " "
-        <xb-button type="button">button</xb-button>
-        " "
-        <xb-button type="submit">submit</xb-button>
-        " "
-        <xb-button type="checkbox">checkbox</xb-button>
-        " "
-        <xb-button type="radio">radio</xb-button>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-button type=\"label\">label</xb-button>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-button type="label">label</xb-button>
+            " "
+            <xb-button type="inline">inline</xb-button>
+            " "
+            <xb-button type="link">link</xb-button>
+            " "
+            <xb-button type="file">file</xb-button>
+            " "
+            <xb-button type="button">button</xb-button>
+            " "
+            <xb-button type="submit">submit</xb-button>
+            " "
+            <xb-button type="checkbox">checkbox</xb-button>
+            " "
+            <xb-button type="radio">radio</xb-button>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-button type=\"label\">label</xb-button>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "For the button you can specify the icon:"
 
-    <div class="bs-docs-example is-code">
-        <xb-button xb-ico-float="left" xb-ico-type="help">button</xb-button>
-        " "
-        <xb-button xb-ico-float="right" xb-ico-type="download">button</xb-button>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-button xb-ico-float=\"left\" xb-ico-type=\"help\">button</xb-button>"
-                <br/>
-                "<xb-button xb-ico-float=\"right\" xb-ico-type=\"download\">button</xb-button>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-button xb-ico-float="left" xb-ico-type="help">button</xb-button>
+            " "
+            <xb-button xb-ico-float="right" xb-ico-type="download">button</xb-button>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-button xb-ico-float=\"left\" xb-ico-type=\"help\">button</xb-button>"
+                    <br/>
+                    "<xb-button xb-ico-float=\"right\" xb-ico-type=\"download\">button</xb-button>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "Button checkbox:"
 
-    <div class="bs-docs-example is-code">
-        <xb-button type="checkbox" name="bt1" value="1">checkbox 1</xb-button>
-        " "
-        <xb-button type="checkbox" name="bt2" value="2">checkbox 2</xb-button>
-    </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-button type=\"checkbox\" name=\"bt1\" value=\"1\">checkbox 1</xb-button>"
-                <br/>
-                "<xb-button type=\"checkbox\" name=\"bt2\" value=\"2\">checkbox 2</xb-button>"
-            </code>
-        </pre>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-button type="checkbox" name="bt1" value="1">checkbox 1</xb-button>
+            " "
+            <xb-button type="checkbox" name="bt2" value="2" checked="checked">checkbox 2</xb-button>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-button type=\"checkbox\" name=\"bt1\" value=\"1\">checkbox 1</xb-button>"
+                    <br/>
+                    "<xb-button type=\"checkbox\" name=\"bt2\" value=\"2\" checked>checkbox 2</xb-button>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     "Button radio:"
 
-    <div class="bs-docs-example is-code">
-        <xb-button type="radio" name="bt3" value="1">radio 1</xb-button>
-        " "
-        <xb-button type="radio" name="bt3" value="2">radio 2</xb-button>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-button type="radio" name="bt3" value="1">radio 1</xb-button>
+            " "
+            <xb-button type="radio" name="bt3" value="2" checked="checked">radio 2</xb-button>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-button type=\"radio\" name=\"bt3\" value=\"1\">radio 1</xb-button>"
+                    <br/>
+                    "<xb-button type=\"radio\" name=\"bt3\" value=\"2\" checked>radio 2</xb-button>"
+                </code>
+            </pre>
+        </div>
     </div>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-button type=\"radio\" name=\"bt3\" value=\"1\">radio 1</xb-button>"
-                <br/>
-                "<xb-button type=\"radio\" name=\"bt3\" value=\"2\">radio 2</xb-button>"
-            </code>
-        </pre>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-button disabled="disabled">disabled</xb-button>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-button disabled>disabled</xb-button>"
+                </code>
+            </pre>
+        </div>
     </div>
 
     <a href="#/controls/buttons">
@@ -283,6 +316,27 @@ match .* _content {
     </code>
     "."
 
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-checkbox name="cb1" value="1" checked="checked">checkbox 1</xb-checkbox>
+            " "
+            <xb-checkbox name="cb2" value="2">checkbox 2</xb-checkbox>
+            " "
+            <xb-checkbox name="cb3" value="3" disabled="disabled">checkbox 3</xb-checkbox>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-checkbox name=\"cb1\" value=\"1\" checked>checkbox 1</xb-checkbox>"
+                    <br/>
+                    "<xb-checkbox name=\"cb2\" value=\"2\">checkbox 2</xb-checkbox>"
+                    <br/>
+                    "<xb-checkbox name=\"cb3\" value=\"3\" disabled>checkbox 3</xb-checkbox>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
     <h2 class="sub-header anchor" data-hash="examples/radio">
         "Radio"
     </h2>
@@ -292,6 +346,27 @@ match .* _content {
         "<xb-radio>"
     </code>
     "."
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-radio name="radio1" value="1" checked="checked">radio 1</xb-radio>
+            " "
+            <xb-radio name="radio1" value="2">radio 2</xb-radio>
+            " "
+            <xb-radio name="radio1" value="3" disabled="disabled">radio 3</xb-radio>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-radio name=\"radio1\" value=\"1\" checked>radio 1</xb-radio>"
+                    <br/>
+                    "<xb-radio name=\"radio1\" value=\"2\">radio 2</xb-radio>"
+                    <br/>
+                    "<xb-radio name=\"radio1\" value=\"3\" disabled>radio 3</xb-radio>"
+                </code>
+            </pre>
+        </div>
+    </div>
 
     <h2 class="sub-header anchor" data-hash="examples/input">
         "Input"
@@ -303,6 +378,157 @@ match .* _content {
     </code>
     "."
 
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input value="simple input"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input value=\"simple input\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input placeholder="placeholder"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input placeholder=\"placeholder\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input value="multiline" multiline="multiline"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input value=\"multiline\" multiline></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input prefix="prefix"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input prefix=\"prefix\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input postfix="postfix"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input postfix=\"postfix\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input autosize="autosize" value="autosize"></xb-input>
+            <p></p>
+            <xb-input autosize="autosize" multiline="multiline" value="autosize"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input autosize value=\"autosize\"></xb-input>"
+                    <br/>
+                    "<xb-input autosize multiline value=\"autosize\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input readonly="readonly" value="readonly"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input readonly value=\"readonly\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input disabled="disabled" value="disabled"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input disabled value=\"disabled\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input reset="reset" value="reset"></xb-input>
+            <p></p>
+            <xb-input reset="reset" multiline="multiline" value="reset"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input reset value=\"reset\"></xb-input>"
+                    <br/>
+                    "<xb-input reset multiline value=\"reset\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input ghost="ghost" value="ghost"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input ghost value=\"ghost\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-input xb-link="link" xb-link-href="http://ya.ru" xb-link-target="_blank"></xb-input>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-input xb-link=\"link\" xb-link-href=\"http://ya.ru\" xb-link-target=\"_blank\"></xb-input>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
     <h2 class="sub-header anchor" data-hash="examples/popup">
         "Popup"
     </h2>
@@ -312,6 +538,26 @@ match .* _content {
         "<xb-popup>"
     </code>
     "."
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-popup close="close" id="popup1">
+                "Popup body"
+            </xb-popup>
+            <a href="#" class="popup-open label label-primary" data-popup-id="popup1">show popup</a>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-popup close>"
+                    <br/>
+                    "   Popup body"
+                    <br/>
+                    "</xb-popup>"
+                </code>
+            </pre>
+        </div>
+    </div>
 
     <h2 class="sub-header anchor" data-hash="examples/menu">
         "Menu"

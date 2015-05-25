@@ -7,6 +7,7 @@ src_js := $(patsubst %.yate, %.js, $(src_yate))
 all: node_modules \
 	bower_components \
 	docs/docs.yate.js \
+	jsdoc \
 	$(src_js)
 
 jsdoc: node_modules bower_components
@@ -30,6 +31,7 @@ docs/docs.yate.js: docs/docs.yate node_modules
 
 $(src_js): %.js: %.yate node_modules docs/docs.yate.js
 	$(NPM_BIN)/yate $< --import docs/docs.yate.obj > $@
+	$(NPM_BIN)/uglifyjs -o $@ -- $@
 
 
 .PHONY: all clean
