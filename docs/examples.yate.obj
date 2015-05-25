@@ -1,1 +1,1 @@
-{"version":"0.0.76","filename":"/Users/rikishi/www/xblocks-web/docs/examples.yate","name":"examples","defs":[{"id":"external","x":0,"y":2,"p":{"Type":"scalar","Name":"uid","ArgTypes":[],"Rid":0,"Cid":0}}]}
+{"version":"0.0.76","filename":"/Users/rikishi/www/xblocks-web/docs/examples.yate","name":"examples","defs":[{"id":"external","x":0,"y":2,"p":{"Type":"scalar","Name":"uid","ArgTypes":[],"Rid":0,"Cid":0}},{"id":"external","x":0,"y":3,"p":{"Type":"scalar","Name":"l","ArgTypes":["scalar"],"Rid":0,"Cid":0}}]}

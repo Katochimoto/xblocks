@@ -1,6 +1,7 @@
 module "docs"
 
 external scalar uid()
+external scalar l(scalar)
 
 match / {
     apply . _navbar

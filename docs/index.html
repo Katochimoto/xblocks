@@ -15,6 +15,7 @@
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/styles/dashboard.css" rel="stylesheet" />
     <link href="/styles/bs-docs-sidebar.css" rel="stylesheet" />
+    <link href="/styles/panel-example.css" rel="stylesheet" />
     <link href="/styles/github.css" rel="stylesheet" />
 
     <style type="text/css">
@@ -22,54 +23,15 @@
     padding: 0;
     background: transparent;
 }
-
-.panel-example {
-    border-color: #ddd;
-    margin: 10px 0;
-}
-
-.panel-example > .panel-heading {
-    border-color: #ddd;
-    position: relative;
-    padding-top: 40px;
-    padding-bottom: 15px;
-}
-
-.panel-example > .panel-heading::after {
-    content: "Example";
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    padding: 3px 7px;
-    font-size: 12px;
-    font-weight: bold;
-    background-color: whiteSmoke;
-    border: 1px solid #DDD;
-    color: #9DA0A4;
-    -webkit-border-radius: 4px 0 4px 0;
-    -moz-border-radius: 4px 0 4px 0;
-    border-radius: 4px 0 4px 0;
-}
-
-.panel-example > .panel-body {
-    padding: 0;
-    margin: 0;
-}
-
-.panel-example > .panel-body > pre {
-    border: none;
-    margin: 0;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-}
     </style>
 
-    <script src="/bower_components/es5-shim/es5-shim.min.js"></script>
+    <script src="/bower_components/l10n.js/l10n.min.js"></script>
     <script src="/bower_components/react/react-with-addons.min.js"></script>
     <script src="/bower_components/tether/tether.min.js"></script>
     <script src="/bower_components/xblocks-core/dist/xblocks-core-full.min.js"></script>
     <script src="/bower_components/xblocks/build/xblocks.min.js"></script>
 
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/node_modules/yate/lib/runtime.js"></script>
@@ -77,12 +39,30 @@
     <script src="/scripts/highlight.pack.js"></script>
 
     <script>
+    String.defaultLocale = 'en';
+    String.toLocaleString({
+        'en': {
+            '%test': 'test'
+        },
+        'ru': {
+            '%test': 'тест'
+        }
+    });
+
+    var l = function(string) {
+        return string.toLocaleString();
+    };
+
     yr.externals.uid = (function() {
         var uid = 0;
         return function() {
             return uid++;
         };
     }());
+
+    yr.externals.l = function(key) {
+        return l(key);
+    };
     </script>
 
     <script src="/docs/docs.js"></script>

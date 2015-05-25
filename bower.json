@@ -9,7 +9,8 @@
     "xblocks-core": "0.6.0",
     "xblocks": "0.6.0",
     "bootstrap": "3.3.4",
-    "director": "1.2.8"
+    "director": "1.2.8",
+    "l10n.js": "*"
   },
   "directory": "bower_components"
 }
