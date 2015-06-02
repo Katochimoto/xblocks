@@ -2726,6 +2726,7 @@ xb-input[hidden] {
   line-height: 20px;
   min-height: 32px;
   font-size: 15px;
+  font-weight: inherit;
 }
 .xb-input._complex-content,
 .xb-input._complex > ._content {
@@ -2917,6 +2918,7 @@ xb-checkbox[hidden] {
   vertical-align: inherit;
   font-size: inherit;
   line-height: inherit;
+  font-weight: inherit;
 }
 .xb-checkbox._size-s {
   font-size: 13px;
@@ -3041,6 +3043,7 @@ xb-radio[hidden] {
   vertical-align: inherit;
   font-size: inherit;
   line-height: inherit;
+  font-weight: inherit;
 }
 .xb-radio._size-s {
   font-size: 13px;

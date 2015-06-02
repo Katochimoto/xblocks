@@ -3900,7 +3900,8 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             'disabled': React.PropTypes.bool,
             'selected': React.PropTypes.bool,
             'focused':  React.PropTypes.bool,
-            'submenu':  React.PropTypes.bool
+            'submenu':  React.PropTypes.bool,
+            'ico':      React.PropTypes.object
         },
 
         'getDefaultProps': function() {
@@ -4191,7 +4192,10 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     var menuId = element.getAttribute('contextmenu');
     var menuElement = menuId && doc.getElementById(menuId);
 
-    if (!menuElement || menuElement.xtagName !== 'xb-menu' || menuElement.attrs.type !== 'context') {
+    if (!menuElement ||
+        menuElement.xtagName !== 'xb-menu' ||
+        menuElement.attrs.type !== 'context') {
+
         return;
     }
 

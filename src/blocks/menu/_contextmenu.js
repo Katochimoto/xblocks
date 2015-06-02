@@ -6,7 +6,10 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
     var menuId = element.getAttribute('contextmenu');
     var menuElement = menuId && doc.getElementById(menuId);
 
-    if (!menuElement || menuElement.xtagName !== 'xb-menu' || menuElement.attrs.type !== 'context') {
+    if (!menuElement ||
+        menuElement.xtagName !== 'xb-menu' ||
+        menuElement.attrs.type !== 'context') {
+
         return;
     }
 

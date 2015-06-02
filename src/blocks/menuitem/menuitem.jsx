@@ -24,7 +24,8 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             'disabled': React.PropTypes.bool,
             'selected': React.PropTypes.bool,
             'focused':  React.PropTypes.bool,
-            'submenu':  React.PropTypes.bool
+            'submenu':  React.PropTypes.bool,
+            'ico':      React.PropTypes.object
         },
 
         'getDefaultProps': function() {
