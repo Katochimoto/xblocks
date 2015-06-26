@@ -81,19 +81,10 @@ xv.Ico = xblocks.view.register('xb-ico', [
 
             classes = classNames(classes);
 
-            var tabIndex = this.props.tabindex;
-
-            if (this.props.disabled) {
-                tabIndex = '-1';
-            }
-
             var content = this.props.value || this.props.children;
 
             return (
-                <span className={classes}
-                    title={this.props.title}
-                    tabIndex={tabIndex}
-                    data-xb-content={this.props._uid}>{content}</span>
+                <span className={classes} data-xb-content={this.props._uid}>{content}</span>
             );
         }
         /* jshint ignore:end */

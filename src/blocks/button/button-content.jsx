@@ -36,10 +36,10 @@ xv.ButtonContent = xblocks.view.create({
             icoProps.key = 'ico';
 
             if (!icoProps.float || icoProps.float === 'left') {
-                children.unshift(<xv.Ico {...icoProps}/>);
+                children.unshift(<xb-ico {...icoProps}/>);
 
             } else if (icoProps.float === 'right') {
-                children.push(<xv.Ico {...icoProps}/>);
+                children.push(<xb-ico {...icoProps}/>);
             }
         }
 

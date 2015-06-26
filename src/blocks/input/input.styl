@@ -111,3 +111,14 @@ xb-input
 
   &._autosize
     width: auto !important
+
+  // ссылка внутри сложного инпута
+  & > xb-link
+    display: inline
+
+    & > .xb-link
+      kind: field-left 0.5 * $islands_s
+      skin: input-label
+      height: auto
+      margin-left: $islands_s * -1
+      font-family: Arial, sans-serif

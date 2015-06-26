@@ -178,11 +178,11 @@ xv.Input = xblocks.view.register('xb-input', [
 
                 if (this.props['xb-link']) {
                     var linkProps = xblocks.utils.filterLinkProps(this.props);
-                    linkProps['theme'] = 'input';
+                    linkProps['theme'] = 'empty';
                     linkProps['key'] = 'label';
 
                     children.push(
-                        <xv.Link {...linkProps}>{this.props['xb-link']}</xv.Link>
+                        <xb-link {...linkProps}>{this.props['xb-link']}</xb-link>
                     );
                 }
 

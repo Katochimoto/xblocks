@@ -2243,19 +2243,10 @@ xv.Ico = xblocks.view.register('xb-ico', [
 
             classes = classNames(classes);
 
-            var tabIndex = this.props.tabindex;
-
-            if (this.props.disabled) {
-                tabIndex = '-1';
-            }
-
             var content = this.props.value || this.props.children;
 
             return (
-                React.createElement("span", {className: classes, 
-                    title: this.props.title, 
-                    tabIndex: tabIndex, 
-                    "data-xb-content": this.props._uid}, content)
+                React.createElement("span", {className: classes, "data-xb-content": this.props._uid}, content)
             );
         }
         /* jshint ignore:end */
@@ -2341,7 +2332,7 @@ xv.Link = xblocks.view.register('xb-link', [
             'href':     React.PropTypes.string,
             'name':     React.PropTypes.string,
             'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
-            'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
+            'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ])
         },
 
         'getDefaultProps': function() {
@@ -2451,10 +2442,10 @@ xv.ButtonContent = xblocks.view.create({
             icoProps.key = 'ico';
 
             if (!icoProps.float || icoProps.float === 'left') {
-                children.unshift(React.createElement(xv.Ico, React.__spread({},  icoProps)));
+                children.unshift(React.createElement("xb-ico", React.__spread({},  icoProps)));
 
             } else if (icoProps.float === 'right') {
-                children.push(React.createElement(xv.Ico, React.__spread({},  icoProps)));
+                children.push(React.createElement("xb-ico", React.__spread({},  icoProps)));
             }
         }
 
@@ -3089,11 +3080,11 @@ xv.Input = xblocks.view.register('xb-input', [
 
                 if (this.props['xb-link']) {
                     var linkProps = xblocks.utils.filterLinkProps(this.props);
-                    linkProps['theme'] = 'input';
+                    linkProps['theme'] = 'empty';
                     linkProps['key'] = 'label';
 
                     children.push(
-                        React.createElement(xv.Link, React.__spread({},  linkProps), this.props['xb-link'])
+                        React.createElement("xb-link", React.__spread({},  linkProps), this.props['xb-link'])
                     );
                 }
 
@@ -3935,10 +3926,10 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 icoProps.key = 'ico';
 
                 if (!icoProps.float || icoProps.float === 'left') {
-                    children.unshift(React.createElement(xv.Ico, React.__spread({},  icoProps)));
+                    children.unshift(React.createElement("xb-ico", React.__spread({},  icoProps)));
 
                 } else if (icoProps.float === 'right') {
-                    children.push(React.createElement(xv.Ico, React.__spread({},  icoProps)));
+                    children.push(React.createElement("xb-ico", React.__spread({},  icoProps)));
                 }
             }
 

@@ -23,7 +23,7 @@ xv.Link = xblocks.view.register('xb-link', [
             'href':     React.PropTypes.string,
             'name':     React.PropTypes.string,
             'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
-            'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'input' ])
+            'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ])
         },
 
         'getDefaultProps': function() {
