@@ -74,9 +74,9 @@ var _xbMenuitem = {
  * @mixes xblocks.mixin.eInputValueProps
  * @listens xblocks.utils:Table~event:xb-focus
  * @listens xblocks.utils:Table~event:xb-blur
- * @listens xblocks.element~event:xb-repaint
- * @listens xblocks.element~event:xb-created
- * @listens xblocks.element~event:xb-destroy
+ * @listens xblocks.Element~event:xb-repaint
+ * @listens xblocks.Element~event:xb-created
+ * @listens xblocks.Element~event:xb-destroy
  */
 xb.Menuitem = xblocks.create('xb-menuitem', [
     xblocks.mixin.eDisabled,
