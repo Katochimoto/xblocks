@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xblocks</title>
+
+    <link href="/build/xblocks.css" rel="stylesheet" />
+
+    <script src="/bower_components/react/react-with-addons.min.js"></script>
+    <script src="/bower_components/tether/dist/js/tether.js"></script>
+    <script src="/bower_components/xblocks-core/dist/xblocks-core-full.js"></script>
+    <script src="/build/xblocks.js"></script>
+</head>
+<body style="height: 2000px;">
+<a id="targetMenu"
+    href="#"
+    onclick="document.getElementById('menu').open(); event.preventDefault();"
+    style="top: 1000px; position: absolute;">
+
+    show menu for the target object
+</a>
+
+<xb-menu id="menu" target="#targetMenu" attachment="top left"
+    target-attachment="bottom left">
+    <xb-menuitem label="label 1"></xb-menuitem>
+    <xb-menuitem label="label 2"></xb-menuitem>
+</xb-menu>
+</body>
+</html>

@@ -7,9 +7,6 @@ var _xbMenuitem = {
     'submenuAttrs': {
         'attachment': 'top right',
         'target-attachment': 'top left',
-        // TODO
-        // переписать тетхер и сделать для targetModifier значение по умолчанию
-        // вместо undefined
         'target-modifier': 'initial',
         'constraints': encodeURIComponent(JSON.stringify([
             {

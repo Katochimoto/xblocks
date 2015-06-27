@@ -879,7 +879,8 @@ xblocks.utils.lazyFocus = function(node) {
 /* jshint strict: false */
 
 xblocks.dom.index = function(selector, element, context) {
-    return __indexOf.call((context || __doc).querySelectorAll(selector), element);
+    context = context || __doc;
+    return __indexOf.call(context.querySelectorAll(selector), element);
 };
 
 /* xblocks/dom/index.js end */
@@ -3607,6 +3608,110 @@ var _xbPopup = {
     'onClose': function() {
         this.blur();
         xblocks.event.dispatch(this, 'xb-close');
+    },
+
+    /**
+     * Check valid value for attribute by default
+     * @param {*} value value for attribute
+     * @returns {boolean}
+     */
+    'checkDefaultAttr': function(value) {
+        return (typeof(value) !== 'undefined');
+    },
+
+    /**
+     * Association of attributes and options
+     * @param {Object} options tether options
+     * @param {Object} attrs attributes of element
+     */
+    'fillOptionsFromAttrs': function(options, attrs) {
+        for (var attrName in attrs) {
+            var params = _xbPopup.tetherAttrsAlign[ attrName ];
+            if (!params) {
+                continue;
+            }
+
+            var optionName = params[0];
+            var checker = params[1] || _xbPopup.checkDefaultAttr;
+            var value = attrs[ attrName ];
+
+            if (checker(value)) {
+                if (typeof(optionName) === 'function') {
+                    optionName(options, value);
+
+                } else {
+                    options[ optionName ] = value;
+                }
+            }
+        }
+    },
+
+    /**
+     * The default setting for the popup
+     * @returns {Object}
+     * @this {xb.Popup}
+     */
+    'tetherDefaultOptions': function() {
+        return {
+            'attachment': 'middle center',
+            'classes': { 'element': this.xtagName },
+            'classPrefix': this.xtagName,
+            'element': this,
+            'enabled': false,
+            'optimizations': { 'gpu': true },
+            'target': __doc.body,
+            'targetAttachment': 'middle center',
+            'targetModifier': 'visible'
+        };
+    },
+
+    /**
+     * Union rules attributes
+     * @type {Object}
+     */
+    'tetherAttrsAlign': {
+        'attachment': [ 'attachment' ],
+        'target-attachment': [ 'targetAttachment' ],
+        'target-offset': [ 'targetOffset' ],
+        'offset': [ 'offset' ],
+        'target': [
+            'target',
+            function(value) {
+                return (value && (typeof(value) === 'string' || value instanceof global.HTMLElement));
+            }
+        ],
+        'target-parent': [
+            function(options, value) {
+                options.target = value;
+            },
+            function(value) {
+                return (value && value instanceof global.HTMLElement);
+            }
+        ],
+        'target-modifier': [
+            function(options, value) {
+                options.targetModifier = (value === 'initial' ? undefined : value);
+            },
+            function(value) {
+                return (value === 'initial' || value === 'visible' || value === 'scroll-handle');
+            }
+        ],
+        'optimizations-gpu': [
+            function(options, value) {
+                options.optimizations.gpu = value;
+            },
+            function(value) {
+                return (typeof(value) === 'boolean');
+            }
+        ],
+        'constraints': [
+            function(options, value) {
+                options.constraints = JSON.parse(decodeURIComponent(value));
+            },
+            function(value) {
+                return (value && typeof(value) === 'string');
+            }
+        ]
     }
 };
 
@@ -3641,6 +3746,14 @@ xb.Popup = xblocks.create('xb-popup', [
 
             /**
              * @readonly
+             * @prop {Object} default options
+             */
+            'defaultOptions': {
+                'get': _xbPopup.tetherDefaultOptions
+            },
+
+            /**
+             * @readonly
              * @prop {object} options the display options window
              */
             'options': {
@@ -3649,58 +3762,25 @@ xb.Popup = xblocks.create('xb-popup', [
                         return this._options;
                     }
 
+                    this._options = this.defaultOptions;
+
                     var tetherAttrs = xblocks.dom.attrs.get(this, {
+                        'attachment':        undefined,
+                        'constraints':       undefined,
+                        'offset':            undefined,
                         'optimizations-gpu': true,
-                        'target': __doc.body,
-                        'target-parent': false,
-                        'target-attachment': 'middle center',
-                        'target-modifier': 'visible',
-                        'target-offset': undefined,
-                        'attachment': 'middle center',
-                        'offset': undefined,
-                        'constraints': undefined
+                        'target-attachment': undefined,
+                        'target-modifier':   undefined,
+                        'target-offset':     undefined,
+                        'target-parent':     false,
+                        'target':            undefined
                     });
 
-                    // TODO
-                    // переписать тетхер и сделать для targetModifier значение по умолчанию
-                    // вместо undefined
-                    var targetModifier = tetherAttrs['target-modifier'];
-                    if (!(targetModifier === 'visible' || targetModifier === 'scroll-handle')) {
-                        targetModifier = undefined;
+                    if (tetherAttrs[ 'target-parent' ]) {
+                        tetherAttrs[ 'target-parent' ] = this.parentNode;
                     }
 
-                    this._options = {
-                        'enabled': false,
-                        'element': this,
-                        'target': tetherAttrs['target'],
-                        'targetParent': tetherAttrs['target-parent'],
-                        'attachment': tetherAttrs['attachment'],
-                        'targetAttachment': tetherAttrs['target-attachment'],
-                        'targetModifier': targetModifier,
-                        'classPrefix': this.xtagName,
-                        'optimizations': {
-                            'gpu': tetherAttrs['optimizations-gpu']
-                        },
-                        'classes': {
-                            'element': this.xtagName
-                        }
-                    };
-
-                    if (tetherAttrs['offset']) {
-                        this._options['offset'] = tetherAttrs['offset'];
-                    }
-
-                    if (tetherAttrs['target-offset']) {
-                        this._options['targetOffset'] = tetherAttrs['target-offset'];
-                    }
-
-                    if (tetherAttrs['constraints']) {
-                        this._options['constraints'] = JSON.parse(decodeURIComponent(tetherAttrs['constraints']));
-                    }
-
-                    if (this._options['targetParent']) {
-                        this._options['target'] = this.parentNode;
-                    }
+                    _xbPopup.fillOptionsFromAttrs(this._options, tetherAttrs);
 
                     return this._options;
                 }
@@ -3740,7 +3820,7 @@ xb.Popup = xblocks.create('xb-popup', [
             'setOptions': function(nextOptions) {
                 var tether = this.tether;
 
-                xblocks.utils.merge(true, this.options, nextOptions);
+                xblocks.utils.assign(true, this.options, nextOptions);
                 tether.setOptions(this.options, false);
 
                 if (tether.enabled) {
@@ -3948,9 +4028,6 @@ var _xbMenuitem = {
     'submenuAttrs': {
         'attachment': 'top right',
         'target-attachment': 'top left',
-        // TODO
-        // переписать тетхер и сделать для targetModifier значение по умолчанию
-        // вместо undefined
         'target-modifier': 'initial',
         'constraints': encodeURIComponent(JSON.stringify([
             {
@@ -4171,7 +4248,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 /* blocks/menuitem/menuitem.js end */
 
     /* blocks/menu/menu.js begin */
-/* global global, xblocks, __forEach, xb */
+/* global global, xblocks, __forEach, xb, _xbPopup */
 /* jshint strict: false */
 
 /* blocks/menu/_contextmenu.js begin */
@@ -4216,10 +4293,7 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
         'target': targetElement,
         'attachment': 'top left',
         'targetAttachment': 'bottom left',
-        // TODO
-        // переписать тетхер и сделать для targetModifier значение по умолчанию
-        // вместо undefined
-        'targetModifier': null,
+        'targetModifier': undefined,
         'optimizations': {
             'moveElement': false
         },
@@ -4293,6 +4367,27 @@ var _xbMenu = {
         if (target._xbpopup) {
             target._xbpopup.close();
         }
+    },
+
+    /**
+     * The default setting for the menu
+     * @returns {Object}
+     * @this {xb.Menu}
+     */
+    'tetherDefaultOptions': function() {
+        var options = _xbPopup.tetherDefaultOptions.call(this);
+        options.constraints = [
+            {
+                'to': 'scrollParent',
+                'attachment': 'element'
+            },
+            {
+                'to': 'window',
+                'attachment': 'element'
+            }
+        ];
+
+        return options;
     }
 };
 
@@ -4363,6 +4458,14 @@ xb.Menu = xblocks.create('xb-menu', [
          * @lends xb.Menu.prototype
          */
         'accessors': {
+
+            /**
+             * @readonly
+             * @prop {Object} default options
+             */
+            'defaultOptions': {
+                'get': _xbMenu.tetherDefaultOptions
+            },
 
             /**
              * @readonly
