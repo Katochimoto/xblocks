@@ -39,10 +39,7 @@ __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', fu
         'target': targetElement,
         'attachment': 'top left',
         'targetAttachment': 'bottom left',
-        // TODO
-        // переписать тетхер и сделать для targetModifier значение по умолчанию
-        // вместо undefined
-        'targetModifier': null,
+        'targetModifier': undefined,
         'optimizations': {
             'moveElement': false
         },

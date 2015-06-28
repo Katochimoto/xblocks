@@ -1,4 +1,4 @@
-/* global global, xblocks, __forEach, xb */
+/* global global, xblocks, __forEach, xb, _xbPopup */
 /* jshint strict: false */
 
 /*! borschik:include:_contextmenu.js */
@@ -14,6 +14,27 @@ var _xbMenu = {
         if (target._xbpopup) {
             target._xbpopup.close();
         }
+    },
+
+    /**
+     * The default setting for the menu
+     * @returns {Object}
+     * @this {xb.Menu}
+     */
+    'tetherDefaultOptions': function() {
+        var options = _xbPopup.tetherDefaultOptions.call(this);
+        options.constraints = [
+            {
+                'to': 'scrollParent',
+                'attachment': 'element'
+            },
+            {
+                'to': 'window',
+                'attachment': 'element'
+            }
+        ];
+
+        return options;
     }
 };
 
@@ -84,6 +105,14 @@ xb.Menu = xblocks.create('xb-menu', [
          * @lends xb.Menu.prototype
          */
         'accessors': {
+
+            /**
+             * @readonly
+             * @prop {Object} default options
+             */
+            'defaultOptions': {
+                'get': _xbMenu.tetherDefaultOptions
+            },
 
             /**
              * @readonly
