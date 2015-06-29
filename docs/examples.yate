@@ -844,8 +844,21 @@ match .* _content {
             <a id="targetMenu4" href="#" class="popup-open label label-primary" data-popup-id="menu4">
                 "show menu for the target object"
             </a>
-            <xb-menu id="menu4" target="#targetMenu4" attachment="top left" target-attachment="bottom left">
-                <xb-menuitem label="label 1"></xb-menuitem>
+            <xb-menu id="menu4"
+                target="#targetMenu4"
+                attachment="top left"
+                target-attachment="bottom left"
+                target-modifier="initial">
+
+                <xb-menuitem label="label 1">
+                    <xb-menuitem label="label 1.1"></xb-menuitem>
+                    <xb-menuitem label="label 1.2"></xb-menuitem>
+                    <xb-menuitem label="label 1.3">
+                        <xb-menuitem label="label 1.3.1"></xb-menuitem>
+                        <xb-menuitem label="label 1.3.2"></xb-menuitem>
+                        <xb-menuitem label="label 1.3.3"></xb-menuitem>
+                    </xb-menuitem>
+                </xb-menuitem>
                 <xb-menuitem label="label 2"></xb-menuitem>
             </xb-menu>
         </div>
@@ -858,9 +871,25 @@ match .* _content {
                     <br/>
                     "</a>"
                     <br/><br/>
-                    "<xb-menu id=\"menu\" target=\"#targetMenu\" attachment=\"top left\" target-attachment=\"bottom left\">"
+                    "<xb-menu id=\"menu\" target=\"#targetMenu\" attachment=\"top left\" target-attachment=\"bottom left\" target-modifier=\"initial\">"
                     <br/>
-                    "    <xb-menuitem label=\"label 1\"></xb-menuitem>"
+                    "   <xb-menuitem label=\"label 1\">"
+                    <br/>
+                    "        <xb-menuitem label=\"label 1.1\"></xb-menuitem>"
+                    <br/>
+                    "        <xb-menuitem label=\"label 1.2\"></xb-menuitem>"
+                    <br/>
+                    "        <xb-menuitem label=\"label 1.3\">"
+                    <br/>
+                    "            <xb-menuitem label=\"label 1.3.1\"></xb-menuitem>"
+                    <br/>
+                    "            <xb-menuitem label=\"label 1.3.2\"></xb-menuitem>"
+                    <br/>
+                    "            <xb-menuitem label=\"label 1.3.3\"></xb-menuitem>"
+                    <br/>
+                    "        </xb-menuitem>"
+                    <br/>
+                    "    </xb-menuitem>"
                     <br/>
                     "    <xb-menuitem label=\"label 2\"></xb-menuitem>"
                     <br/>

@@ -3,6 +3,12 @@ module "docs"
 external scalar uid()
 external scalar l(scalar)
 
+func wrap-code (value) {
+    <code>
+        value
+    </code>
+}
+
 match / {
     apply . _navbar
 

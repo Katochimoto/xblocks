@@ -10,6 +10,8 @@ match .* _content {
         "Icons"
     </h2>
 
+    apply . _content-ico
+
     <h2 class="sub-header anchor" data-hash="controls/link">
         "Link"
     </h2>
@@ -37,4 +39,177 @@ match .* _content {
     <h2 class="sub-header anchor" data-hash="controls/menu">
         "Menu"
     </h2>
+}
+
+match .* _content-ico {
+    <p>
+        "Тег "
+        wrap-code("<xb-ico>")
+        " позволяет создавать элемент интерфейса в виде иконки."
+    </p>
+    <p>
+        "Набор иконок заранее определен. Выбор нужной иконки осуществляется указанием атрибута "
+        wrap-code("type")
+        "."
+    </p>
+    <p>
+        "Для большинства иконок закрывающийся тег не требуется, в отличии от иконки с типом "
+        wrap-code("notification")
+        "."
+        " Текст внутри тега либо значение атрибута "
+        wrap-code("value")
+        " являются сообщением."
+    </p>
+
+    <h3>
+        "Синтаксис"
+    </h3>
+
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<xb-ico type=\"notification\">текст сообщения</xb-ico>"
+            </code>
+        </pre>
+    </div>
+
+    <h3>
+        "Атрибуты"
+    </h3>
+
+    <table class="table table-hover">
+        <tr>
+            <td class="text-info">
+                "active"
+            </td>
+            <td>
+                "boolean"
+            </td>
+            <td>
+                "false"
+            </td>
+            <td>
+                "Позволяет использовать иконку как управляющий элемент. При наведении на иконку появится 'лапка' и изменится цвет."
+            </td>
+        </tr>
+        <tr>
+            <td class="text-info">
+                "disabled"
+            </td>
+            <td>
+                "boolean"
+            </td>
+            <td>
+                "false"
+            </td>
+            <td>
+                "Иконка станет серой и перестанет реагировать на события мыши."
+            </td>
+        </tr>
+        <tr>
+            <td class="text-info">
+                "size"
+            </td>
+            <td>
+                "string"
+            </td>
+            <td>
+                wrap-code("s")
+            </td>
+            <td>
+                "Размер иконки. Возможные значения: "
+                wrap-code("s")
+                ", "
+                wrap-code("m")
+                "."
+            </td>
+        </tr>
+        <tr>
+            <td class="text-info">
+                "value"
+            </td>
+            <td>
+                "string"
+            </td>
+            <td>
+                "&"
+                "nbsp;"
+            </td>
+            <td>
+                "Содержимое иконки. Актуально для типа "
+                wrap-code("notification")
+                "."
+            </td>
+        </tr>
+        <tr>
+            <td class="text-info">
+                "type"
+            </td>
+            <td>
+                "string"
+            </td>
+            <td></td>
+            <td>
+                ico-types = [
+                    'attention'
+                    'close'
+                    'check'
+                    'download'
+                    'download-white'
+                    'dropdown'
+                    'eye'
+                    'link'
+                    'link-white'
+                    'mail'
+                    'notification'
+                    'odnoklassniki'
+                    'pause'
+                    'people'
+                    'play'
+                    'print'
+                    'remove'
+                    'services'
+                    'settings'
+                    'three-dots'
+                    'trash'
+                    'trash-white'
+                    'twitter'
+                    'help'
+                    'upload'
+                    'upload-white'
+                    'vk'
+                ]
+                
+                "Тип иконки. Возможные значения: "
+                for ico-types.* {
+                    if (index() > 0) {
+                        ", "
+                    }
+                    wrap-code(.)
+                }
+                "."
+            </td>
+        </tr>
+    </table>
+
+    <h3>
+        "Пример"
+    </h3>
+
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-ico type="twitter" disabled="disabled"></xb-ico>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-ico type=\"twitter\" disabled></xb-ico>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <a href="#/examples/icons">
+        "Больше примеров иконок."
+    </a>
 }

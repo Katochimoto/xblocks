@@ -19,6 +19,18 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var M = new yr.Module();
 
+    // func wrap-code(value) : xml
+    M.f0 = function f0(m, c0, i0, l0, a0, v0) {
+        var r0 = '';
+
+        r0 += closeAttrs(a0);
+        r0 += "<code>";
+        r0 += scalar2xml( v0 );
+        r0 += "</code>";
+
+        return r0;
+    };
+
     var j0 = [ ];
 
     var j1 = [ 1, 0 ];

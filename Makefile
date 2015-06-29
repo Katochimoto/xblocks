@@ -7,7 +7,6 @@ src_js := $(patsubst %.yate, %.js, $(src_yate))
 all: node_modules \
 	bower_components \
 	docs/docs.yate.js \
-	jsdoc \
 	$(src_js)
 
 jsdoc: node_modules bower_components
