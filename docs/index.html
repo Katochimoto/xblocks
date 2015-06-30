@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -31,38 +31,21 @@
     <script src="/bower_components/xblocks-core/dist/xblocks-core-full.min.js"></script>
     <script src="/bower_components/xblocks/build/xblocks.min.js"></script>
 
+    <script>
+    String.defaultLocale = 'ru';
+
+    var loc = function(string) {
+        return string.toLocaleString();
+    };
+    </script>
+
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/node_modules/yate/lib/runtime.js"></script>
     <script src="/bower_components/director/build/director.min.js"></script>
     <script src="/scripts/highlight.pack.js"></script>
-
-    <script>
-    String.defaultLocale = 'en';
-    String.toLocaleString({
-        'en': {
-            '%test': 'test'
-        },
-        'ru': {
-            '%test': 'тест'
-        }
-    });
-
-    var l = function(string) {
-        return string.toLocaleString();
-    };
-
-    yr.externals.uid = (function() {
-        var uid = 0;
-        return function() {
-            return uid++;
-        };
-    }());
-
-    yr.externals.l = function(key) {
-        return l(key);
-    };
-    </script>
+    <script src="/scripts/externals.yate.js"></script>
+    <script src="/scripts/localizations.js"></script>
 
     <script src="/docs/docs.js"></script>
 </head>

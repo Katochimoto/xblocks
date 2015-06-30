@@ -1,7 +1,7 @@
 module "docs"
 
 external scalar uid()
-external scalar l(scalar)
+external scalar loc(scalar)
 
 func wrap-code (value) {
     <code>

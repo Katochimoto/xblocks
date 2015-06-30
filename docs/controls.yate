@@ -6,15 +6,8 @@ match .* _content {
         "Controls"
     </h1>
 
-    <h2 class="sub-header anchor" data-hash="controls/icons">
-        "Icons"
-    </h2>
-
     apply . _content-ico
-
-    <h2 class="sub-header anchor" data-hash="controls/link">
-        "Link"
-    </h2>
+    apply . _content-link
 
     <h2 class="sub-header anchor" data-hash="controls/buttons">
         "Buttons"
@@ -41,7 +34,14 @@ match .* _content {
     </h2>
 }
 
+match .* _content-link {
+    <h2 class="sub-header anchor" data-hash="controls/link">{loc('%Controls_link__title')}</h2>
+    <p>{html(loc('%Controls_link__descr_p1'))}</p>
+}
+
 match .* _content-ico {
+    <h2 class="sub-header anchor" data-hash="controls/icons">{loc('%Controls_icon__title')}</h2>
+
     <p>
         "Тег "
         wrap-code("<xb-ico>")
@@ -179,7 +179,7 @@ match .* _content-ico {
                     'upload-white'
                     'vk'
                 ]
-                
+
                 "Тип иконки. Возможные значения: "
                 for ico-types.* {
                     if (index() > 0) {
