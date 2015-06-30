@@ -40,82 +40,42 @@ match .* _content-link {
 }
 
 match .* _content-ico {
-    <h2 class="sub-header anchor" data-hash="controls/icons">{loc('%Controls_icon__title')}</h2>
+    <h2 class="sub-header anchor" data-hash="controls/icons">{loc('%Controls_ico__title')}</h2>
+    <p>{html(loc('%Controls_ico__descr_p1'))}</p>
+    <p>{html(loc('%Controls_ico__descr_p2'))}</p>
+    <p>{html(loc('%Controls_ico__descr_p3'))}</p>
 
-    <p>
-        "Тег "
-        wrap-code("<xb-ico>")
-        " позволяет создавать элемент интерфейса в виде иконки."
-    </p>
-    <p>
-        "Набор иконок заранее определен. Выбор нужной иконки осуществляется указанием атрибута "
-        wrap-code("type")
-        "."
-    </p>
-    <p>
-        "Для большинства иконок закрывающийся тег не требуется, в отличии от иконки с типом "
-        wrap-code("notification")
-        "."
-        " Текст внутри тега либо значение атрибута "
-        wrap-code("value")
-        " являются сообщением."
-    </p>
-
-    <h3>
-        "Синтаксис"
-    </h3>
-
+    <h3>{loc('%Controls_ico__syntax')}</h3>
     <div class="highlight">
         <pre>
             <code class="html">
-                "<xb-ico type=\"notification\">текст сообщения</xb-ico>"
+                "<xb-ico type=\"notification\">{loc('%Controls_ico__syntax_example')}</xb-ico>"
             </code>
         </pre>
     </div>
 
-    <h3>
-        "Атрибуты"
-    </h3>
-
+    <h3>{loc('%Controls_ico__attrs')}</h3>
     <table class="table table-hover">
         <tr>
-            <td class="text-info">
-                "active"
-            </td>
-            <td>
-                "boolean"
-            </td>
-            <td>
-                "false"
-            </td>
+            <td class="text-info">active</td>
+            <td>boolean</td>
+            <td>false</td>
             <td>
                 "Позволяет использовать иконку как управляющий элемент. При наведении на иконку появится 'лапка' и изменится цвет."
             </td>
         </tr>
         <tr>
-            <td class="text-info">
-                "disabled"
-            </td>
-            <td>
-                "boolean"
-            </td>
-            <td>
-                "false"
-            </td>
+            <td class="text-info">disabled</td>
+            <td>boolean</td>
+            <td>false</td>
             <td>
                 "Иконка станет серой и перестанет реагировать на события мыши."
             </td>
         </tr>
         <tr>
-            <td class="text-info">
-                "size"
-            </td>
-            <td>
-                "string"
-            </td>
-            <td>
-                wrap-code("s")
-            </td>
+            <td class="text-info">size</td>
+            <td>string</td>
+            <td>{wrap-code("s")}</td>
             <td>
                 "Размер иконки. Возможные значения: "
                 wrap-code("s")
@@ -125,16 +85,9 @@ match .* _content-ico {
             </td>
         </tr>
         <tr>
-            <td class="text-info">
-                "value"
-            </td>
-            <td>
-                "string"
-            </td>
-            <td>
-                "&"
-                "nbsp;"
-            </td>
+            <td class="text-info">value</td>
+            <td>string</td>
+            <td>&amp;nbsp;</td>
             <td>
                 "Содержимое иконки. Актуально для типа "
                 wrap-code("notification")
@@ -142,12 +95,8 @@ match .* _content-ico {
             </td>
         </tr>
         <tr>
-            <td class="text-info">
-                "type"
-            </td>
-            <td>
-                "string"
-            </td>
+            <td class="text-info">type</td>
+            <td>string</td>
             <td></td>
             <td>
                 ico-types = [
@@ -192,10 +141,7 @@ match .* _content-ico {
         </tr>
     </table>
 
-    <h3>
-        "Пример"
-    </h3>
-
+    <h3>{loc('%Controls_ico__example')}</h3>
     <div class="panel panel-example">
         <div class="panel-heading">
             <xb-ico type="twitter" disabled="disabled"></xb-ico>
@@ -209,7 +155,5 @@ match .* _content-ico {
         </div>
     </div>
 
-    <a href="#/examples/icons">
-        "Больше примеров иконок."
-    </a>
+    <a href="#/examples/icons">{loc('%Controls_ico__more_example')}</a>
 }
