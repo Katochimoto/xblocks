@@ -37,6 +37,77 @@ match .* _content {
 match .* _content-link {
     <h2 class="sub-header anchor" data-hash="controls/link">{loc('%Controls_link__title')}</h2>
     <p>{html(loc('%Controls_link__descr_p1'))}</p>
+
+    <h3>{loc('%Controls__syntax')}</h3>
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<xb-link href=\"http://ya.ru\" target=\"_blank\">ya.ru</xb-link>"
+            </code>
+        </pre>
+    </div>
+
+    <h3>{loc('%Controls__attrs')}</h3>
+    <table class="table table-hover">
+        <tr>
+            <td class="text-info">href</td>
+            <td>string</td>
+            <td></td>
+            <td>{loc('%Controls_link__attrs_href')}</td>
+        </tr>
+        <tr>
+            <td class="text-info">name</td>
+            <td>string</td>
+            <td></td>
+            <td>{loc('%Controls_link__attrs_name')}</td>
+        </tr>
+        <tr>
+            <td class="text-info">target</td>
+            <td>string</td>
+            <td>{wrap-code('_self')}</td>
+            <td>{loc('%Controls_link__attrs_target')}</td>
+        </tr>
+        <tr>
+            <td class="text-info">theme</td>
+            <td>string</td>
+            <td>{wrap-code('normal')}</td>
+            <td>
+                link-theme = [
+                    'normal'
+                    'outer'
+                    'pseudo'
+                    'empty'
+                ]
+
+                loc('%Controls_link__attrs_theme')
+                " "
+
+                for link-theme.* {
+                    if (index() > 0) {
+                        ", "
+                    }
+                    wrap-code(.)
+                }
+                "."
+            </td>
+        </tr>
+    </table>
+
+    <h3>{loc('%Controls__example')}</h3>
+    <div class="panel panel-example">
+        <div class="panel-heading">
+            <xb-link href="http://ya.ru" target="_blank" theme="outer">ya.ru</xb-link>
+        </div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">
+                    "<xb-link href=\"http://ya.ru\" target=\"_blank\" theme=\"outer\">ya.ru</xb-link>"
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <a href="#/examples/link">{loc('%Controls_link__more_example')}</a>
 }
 
 match .* _content-ico {
@@ -45,7 +116,7 @@ match .* _content-ico {
     <p>{html(loc('%Controls_ico__descr_p2'))}</p>
     <p>{html(loc('%Controls_ico__descr_p3'))}</p>
 
-    <h3>{loc('%Controls_ico__syntax')}</h3>
+    <h3>{loc('%Controls__syntax')}</h3>
     <div class="highlight">
         <pre>
             <code class="html">
@@ -54,45 +125,31 @@ match .* _content-ico {
         </pre>
     </div>
 
-    <h3>{loc('%Controls_ico__attrs')}</h3>
+    <h3>{loc('%Controls__attrs')}</h3>
     <table class="table table-hover">
         <tr>
             <td class="text-info">active</td>
             <td>boolean</td>
             <td>false</td>
-            <td>
-                "Позволяет использовать иконку как управляющий элемент. При наведении на иконку появится 'лапка' и изменится цвет."
-            </td>
+            <td>{loc('%Controls_ico__attrs_active')}</td>
         </tr>
         <tr>
             <td class="text-info">disabled</td>
             <td>boolean</td>
             <td>false</td>
-            <td>
-                "Иконка станет серой и перестанет реагировать на события мыши."
-            </td>
+            <td>{loc('%Controls_ico__attrs_disabled')}</td>
         </tr>
         <tr>
             <td class="text-info">size</td>
             <td>string</td>
-            <td>{wrap-code("s")}</td>
-            <td>
-                "Размер иконки. Возможные значения: "
-                wrap-code("s")
-                ", "
-                wrap-code("m")
-                "."
-            </td>
+            <td>{wrap-code('s')}</td>
+            <td>{html(loc('%Controls_ico__attrs_size'))}</td>
         </tr>
         <tr>
             <td class="text-info">value</td>
             <td>string</td>
             <td>&amp;nbsp;</td>
-            <td>
-                "Содержимое иконки. Актуально для типа "
-                wrap-code("notification")
-                "."
-            </td>
+            <td>{html(loc('%Controls_ico__attrs_value'))}</td>
         </tr>
         <tr>
             <td class="text-info">type</td>
@@ -129,7 +186,9 @@ match .* _content-ico {
                     'vk'
                 ]
 
-                "Тип иконки. Возможные значения: "
+                loc('%Controls_ico__attrs_type')
+                " "
+
                 for ico-types.* {
                     if (index() > 0) {
                         ", "
@@ -141,7 +200,7 @@ match .* _content-ico {
         </tr>
     </table>
 
-    <h3>{loc('%Controls_ico__example')}</h3>
+    <h3>{loc('%Controls__example')}</h3>
     <div class="panel panel-example">
         <div class="panel-heading">
             <xb-ico type="twitter" disabled="disabled"></xb-ico>
