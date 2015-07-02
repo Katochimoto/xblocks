@@ -20,6 +20,7 @@ xblocks.mixin.vCommonAttrs = {
         'accesskey':    React.PropTypes.string,
         'contextmenu':  React.PropTypes.string,
         'dir':          React.PropTypes.oneOf([ 'ltr', 'rtl' ]),
+        'disabled':     React.PropTypes.bool,
         'hidden':       React.PropTypes.bool,
         'spellcheck':   React.PropTypes.bool,
         'tabindex':     React.PropTypes.string,

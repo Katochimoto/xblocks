@@ -14,8 +14,10 @@
  * @class xv.Input
  * @memberof xv
  * @mixes React.addons.PureRenderMixin
+ * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Input = xblocks.view.register('xb-input', [
+    xblocks.mixin.vCommonAttrs,
     xblocks.utils.exportPropTypes('xb-link'),
 
     {
@@ -24,46 +26,41 @@ xv.Input = xblocks.view.register('xb-input', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'name':         React.PropTypes.string,
-            'disabled':     React.PropTypes.bool,
-            'autosize':     React.PropTypes.bool,
-            'multiline':    React.PropTypes.bool,
-            'required':     React.PropTypes.bool,
-            'readonly':     React.PropTypes.bool,
-            'reset':        React.PropTypes.bool,
-            'autofocus':    React.PropTypes.bool,
-            'ghost':        React.PropTypes.bool,
-            'type':         React.PropTypes.oneOf([
-                                'text', 'number', 'date', 'datetime', 'email', 'month',
-                                'range', 'search', 'tel', 'time', 'url', 'week', 'color',
-                                'wysiwyg'
-                            ]),
-            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'rows':         React.PropTypes.string,
+            'autofocus':    React.PropTypes.bool,
+            'autosize':     React.PropTypes.bool,
             'cols':         React.PropTypes.string,
+            'ghost':        React.PropTypes.bool,
+            'multiline':    React.PropTypes.bool,
+            'name':         React.PropTypes.string,
             'placeholder':  React.PropTypes.string,
-            'value':        React.PropTypes.string,
-            'prefix':       React.PropTypes.string,
             'postfix':      React.PropTypes.string,
+            'prefix':       React.PropTypes.string,
+            'readonly':     React.PropTypes.bool,
+            'required':     React.PropTypes.bool,
+            'reset':        React.PropTypes.bool,
+            'rows':         React.PropTypes.string,
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'tabindex':     React.PropTypes.string,
+            'type':         React.PropTypes.oneOf([ 'text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg' ]),
+            'value':        React.PropTypes.string,
             'xb-link':      React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'value':        undefined,
-                'type':         'text',
-                'size':         'm',
-                'rows':         '4',
-                'disabled':     false,
-                'autosize':     false,
-                'multiline':    false,
-                'required':     false,
-                'readonly':     false,
-                'reset':        false,
                 'autofocus':    false,
-                'ghost':        false
+                'autosize':     false,
+                'disabled':     false,
+                'ghost':        false,
+                'multiline':    false,
+                'readonly':     false,
+                'required':     false,
+                'reset':        false,
+                'rows':         '4',
+                'size':         'm',
+                'type':         'text',
+                'value':        undefined
             };
         },
 

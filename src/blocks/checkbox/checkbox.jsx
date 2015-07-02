@@ -19,27 +19,26 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
-            'value':        React.PropTypes.string,
-            'name':         React.PropTypes.string,
-            'form':         React.PropTypes.string,
-            'for':          React.PropTypes.string,
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
-            'disabled':     React.PropTypes.bool,
-            'required':     React.PropTypes.bool
+            'for':          React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'name':         React.PropTypes.string,
+            'required':     React.PropTypes.bool,
+            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
+            'value':        React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'size':         'm',
-                'children':     '',
-                'value':        'on',
-                'tabindex':     '0',
                 'autofocus':    false,
                 'checked':      false,
+                'children':     '',
                 'disabled':     false,
-                'required':     false
+                'required':     false,
+                'size':         'm',
+                'tabindex':     '0',
+                'value':        'on'
             };
         },
 

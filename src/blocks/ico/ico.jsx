@@ -19,10 +19,9 @@ xv.Ico = xblocks.view.register('xb-ico', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'value':    React.PropTypes.string,
             'active':   React.PropTypes.bool,
-            'disabled': React.PropTypes.bool,
             'size':     React.PropTypes.oneOf([ 's', 'm' ]),
+            'value':    React.PropTypes.string,
             'type':     React.PropTypes.oneOf([
                 'attention',
                 'close',

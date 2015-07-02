@@ -19,7 +19,6 @@ xv.Link = xblocks.view.register('xb-link', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'disabled': React.PropTypes.bool,
             'href':     React.PropTypes.string,
             'name':     React.PropTypes.string,
             'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
@@ -29,8 +28,8 @@ xv.Link = xblocks.view.register('xb-link', [
         'getDefaultProps': function() {
             return {
                 'disabled': false,
-                'theme':    'normal',
-                'tabindex': '1'
+                'tabindex': '1',
+                'theme':    'normal'
             };
         },
 

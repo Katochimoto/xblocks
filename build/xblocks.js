@@ -1942,6 +1942,7 @@ xblocks.mixin.vCommonAttrs = {
         'accesskey':    React.PropTypes.string,
         'contextmenu':  React.PropTypes.string,
         'dir':          React.PropTypes.oneOf([ 'ltr', 'rtl' ]),
+        'disabled':     React.PropTypes.bool,
         'hidden':       React.PropTypes.bool,
         'spellcheck':   React.PropTypes.bool,
         'tabindex':     React.PropTypes.string,
@@ -2182,10 +2183,9 @@ xv.Ico = xblocks.view.register('xb-ico', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'value':    React.PropTypes.string,
             'active':   React.PropTypes.bool,
-            'disabled': React.PropTypes.bool,
             'size':     React.PropTypes.oneOf([ 's', 'm' ]),
+            'value':    React.PropTypes.string,
             'type':     React.PropTypes.oneOf([
                 'attention',
                 'close',
@@ -2329,7 +2329,6 @@ xv.Link = xblocks.view.register('xb-link', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'disabled': React.PropTypes.bool,
             'href':     React.PropTypes.string,
             'name':     React.PropTypes.string,
             'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
@@ -2339,8 +2338,8 @@ xv.Link = xblocks.view.register('xb-link', [
         'getDefaultProps': function() {
             return {
                 'disabled': false,
-                'theme':    'normal',
-                'tabindex': '1'
+                'tabindex': '1',
+                'theme':    'normal'
             };
         },
 
@@ -2469,8 +2468,8 @@ xv.ButtonContent = xblocks.view.create({
  * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Button = xblocks.view.register('xb-button', [
-    xblocks.utils.exportPropTypes('xb-ico'),
     xblocks.mixin.vCommonAttrs,
+    xblocks.utils.exportPropTypes('xb-ico'),
 
     {
         'displayName': 'xb-button',
@@ -2478,51 +2477,33 @@ xv.Button = xblocks.view.register('xb-button', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'theme':        React.PropTypes.oneOf([
-                'normal',
-                'action',
-                'dark',
-                'flying',
-                'pseudo-inverted',
-                'pseudo',
-                'promo'
-            ]),
-            'type':         React.PropTypes.oneOf([
-                'label',
-                'inline',
-                'link',
-                'file',
-                'button',
-                'submit',
-                'checkbox',
-                'radio'
-            ]),
-            'target':       React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-            'value':        React.PropTypes.string,
-            'href':         React.PropTypes.string,
-            'name':         React.PropTypes.string,
-            'form':         React.PropTypes.string,
-            'for':          React.PropTypes.string,
-            'multiple':     React.PropTypes.bool,
             'autofocus':    React.PropTypes.bool,
-            'disabled':     React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
-            'required':     React.PropTypes.bool
+            'for':          React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'href':         React.PropTypes.string,
+            'multiple':     React.PropTypes.bool,
+            'name':         React.PropTypes.string,
+            'required':     React.PropTypes.bool,
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'target':       React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
+            'theme':        React.PropTypes.oneOf([ 'action', 'dark', 'flying', 'normal', 'promo', 'pseudo-inverted', 'pseudo' ]),
+            'type':         React.PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
+            'value':        React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'size':         'm',
-                'theme':        'normal',
-                'type':         'button',
-                'tabindex':     '0',
-                'children':     String.fromCharCode(160),
-                'checked':      false,
-                'multiple':     false,
                 'autofocus':    false,
+                'checked':      false,
+                'children':     String.fromCharCode(160),
                 'disabled':     false,
-                'required':     false
+                'multiple':     false,
+                'required':     false,
+                'size':         'm',
+                'tabindex':     '0',
+                'theme':        'normal',
+                'type':         'button'
             };
         },
 
@@ -2917,8 +2898,10 @@ xv.InputController = xblocks.view.create({
  * @class xv.Input
  * @memberof xv
  * @mixes React.addons.PureRenderMixin
+ * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Input = xblocks.view.register('xb-input', [
+    xblocks.mixin.vCommonAttrs,
     xblocks.utils.exportPropTypes('xb-link'),
 
     {
@@ -2927,46 +2910,41 @@ xv.Input = xblocks.view.register('xb-input', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'name':         React.PropTypes.string,
-            'disabled':     React.PropTypes.bool,
-            'autosize':     React.PropTypes.bool,
-            'multiline':    React.PropTypes.bool,
-            'required':     React.PropTypes.bool,
-            'readonly':     React.PropTypes.bool,
-            'reset':        React.PropTypes.bool,
-            'autofocus':    React.PropTypes.bool,
-            'ghost':        React.PropTypes.bool,
-            'type':         React.PropTypes.oneOf([
-                                'text', 'number', 'date', 'datetime', 'email', 'month',
-                                'range', 'search', 'tel', 'time', 'url', 'week', 'color',
-                                'wysiwyg'
-                            ]),
-            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'rows':         React.PropTypes.string,
+            'autofocus':    React.PropTypes.bool,
+            'autosize':     React.PropTypes.bool,
             'cols':         React.PropTypes.string,
+            'ghost':        React.PropTypes.bool,
+            'multiline':    React.PropTypes.bool,
+            'name':         React.PropTypes.string,
             'placeholder':  React.PropTypes.string,
-            'value':        React.PropTypes.string,
-            'prefix':       React.PropTypes.string,
             'postfix':      React.PropTypes.string,
+            'prefix':       React.PropTypes.string,
+            'readonly':     React.PropTypes.bool,
+            'required':     React.PropTypes.bool,
+            'reset':        React.PropTypes.bool,
+            'rows':         React.PropTypes.string,
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'tabindex':     React.PropTypes.string,
+            'type':         React.PropTypes.oneOf([ 'text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg' ]),
+            'value':        React.PropTypes.string,
             'xb-link':      React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'value':        undefined,
-                'type':         'text',
-                'size':         'm',
-                'rows':         '4',
-                'disabled':     false,
-                'autosize':     false,
-                'multiline':    false,
-                'required':     false,
-                'readonly':     false,
-                'reset':        false,
                 'autofocus':    false,
-                'ghost':        false
+                'autosize':     false,
+                'disabled':     false,
+                'ghost':        false,
+                'multiline':    false,
+                'readonly':     false,
+                'required':     false,
+                'reset':        false,
+                'rows':         '4',
+                'size':         'm',
+                'type':         'text',
+                'value':        undefined
             };
         },
 
@@ -3200,27 +3178,26 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
-            'value':        React.PropTypes.string,
-            'name':         React.PropTypes.string,
-            'form':         React.PropTypes.string,
-            'for':          React.PropTypes.string,
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
-            'disabled':     React.PropTypes.bool,
-            'required':     React.PropTypes.bool
+            'for':          React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'name':         React.PropTypes.string,
+            'required':     React.PropTypes.bool,
+            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
+            'value':        React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'size':         'm',
-                'children':     '',
-                'value':        'on',
-                'tabindex':     '0',
                 'autofocus':    false,
                 'checked':      false,
+                'children':     '',
                 'disabled':     false,
-                'required':     false
+                'required':     false,
+                'size':         'm',
+                'tabindex':     '0',
+                'value':        'on'
             };
         },
 
@@ -3362,27 +3339,26 @@ xv.Radio = xblocks.view.register('xb-radio', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
-            'value':        React.PropTypes.string,
-            'name':         React.PropTypes.string,
-            'form':         React.PropTypes.string,
-            'for':          React.PropTypes.string,
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
-            'disabled':     React.PropTypes.bool,
-            'required':     React.PropTypes.bool
+            'for':          React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'name':         React.PropTypes.string,
+            'required':     React.PropTypes.bool,
+            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
+            'value':        React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'size':         'm',
-                'children':     '',
-                'value':        'on',
-                'tabindex':     '0',
                 'autofocus':    false,
                 'checked':      false,
+                'children':     '',
                 'disabled':     false,
-                'required':     false
+                'required':     false,
+                'size':         'm',
+                'tabindex':     '0',
+                'value':        'on'
             };
         },
 
@@ -3967,19 +3943,18 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'label':    React.PropTypes.string.isRequired,
-            'disabled': React.PropTypes.bool,
-            'selected': React.PropTypes.bool,
             'focused':  React.PropTypes.bool,
-            'submenu':  React.PropTypes.bool,
-            'ico':      React.PropTypes.object
+            'ico':      React.PropTypes.object,
+            'label':    React.PropTypes.string.isRequired,
+            'selected': React.PropTypes.bool,
+            'submenu':  React.PropTypes.bool
         },
 
         'getDefaultProps': function() {
             return {
                 'disabled': false,
-                'selected': false,
                 'focused':  false,
+                'selected': false,
                 'submenu':  false
             };
         },
@@ -4337,14 +4312,14 @@ xv.Menu = xblocks.view.register('xb-menu', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'type': React.PropTypes.oneOf([ 'context', 'list' ]),
-            'size': React.PropTypes.string
+            'size': React.PropTypes.string,
+            'type': React.PropTypes.oneOf([ 'context', 'list' ])
         },
 
         'getDefaultProps': function() {
             return {
-                'type': 'list',
-                'size': ''
+                'size': '',
+                'type': 'list'
             };
         },
 
@@ -4659,24 +4634,23 @@ xv.Select = xblocks.view.register('xb-select', [
         'displayName': 'xb-select',
 
         'propTypes': {
+            'autocapitalize':   React.PropTypes.oneOf([ 'on', 'off' ]),
             'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
             'autocorrect':      React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocapitalize':   React.PropTypes.oneOf([ 'on', 'off' ]),
-            'size':             React.PropTypes.string,
-            'form':             React.PropTypes.string,
-            'name':             React.PropTypes.string,
             'autofocus':        React.PropTypes.bool,
+            'form':             React.PropTypes.string,
             'multiple':         React.PropTypes.bool,
+            'name':             React.PropTypes.string,
             'required':         React.PropTypes.bool,
-            'disabled':         React.PropTypes.bool
+            'size':             React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'required':  false,
-                'multiple':  false,
                 'autofocus': false,
                 'disabled':  false,
+                'multiple':  false,
+                'required':  false,
                 'tabindex':  '1'
             };
         },

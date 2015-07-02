@@ -13,8 +13,8 @@
  * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Button = xblocks.view.register('xb-button', [
-    xblocks.utils.exportPropTypes('xb-ico'),
     xblocks.mixin.vCommonAttrs,
+    xblocks.utils.exportPropTypes('xb-ico'),
 
     {
         'displayName': 'xb-button',
@@ -22,51 +22,33 @@ xv.Button = xblocks.view.register('xb-button', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'theme':        React.PropTypes.oneOf([
-                'normal',
-                'action',
-                'dark',
-                'flying',
-                'pseudo-inverted',
-                'pseudo',
-                'promo'
-            ]),
-            'type':         React.PropTypes.oneOf([
-                'label',
-                'inline',
-                'link',
-                'file',
-                'button',
-                'submit',
-                'checkbox',
-                'radio'
-            ]),
-            'target':       React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-            'value':        React.PropTypes.string,
-            'href':         React.PropTypes.string,
-            'name':         React.PropTypes.string,
-            'form':         React.PropTypes.string,
-            'for':          React.PropTypes.string,
-            'multiple':     React.PropTypes.bool,
             'autofocus':    React.PropTypes.bool,
-            'disabled':     React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
-            'required':     React.PropTypes.bool
+            'for':          React.PropTypes.string,
+            'form':         React.PropTypes.string,
+            'href':         React.PropTypes.string,
+            'multiple':     React.PropTypes.bool,
+            'name':         React.PropTypes.string,
+            'required':     React.PropTypes.bool,
+            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'target':       React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
+            'theme':        React.PropTypes.oneOf([ 'action', 'dark', 'flying', 'normal', 'promo', 'pseudo-inverted', 'pseudo' ]),
+            'type':         React.PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
+            'value':        React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'size':         'm',
-                'theme':        'normal',
-                'type':         'button',
-                'tabindex':     '0',
-                'children':     String.fromCharCode(160),
-                'checked':      false,
-                'multiple':     false,
                 'autofocus':    false,
+                'checked':      false,
+                'children':     String.fromCharCode(160),
                 'disabled':     false,
-                'required':     false
+                'multiple':     false,
+                'required':     false,
+                'size':         'm',
+                'tabindex':     '0',
+                'theme':        'normal',
+                'type':         'button'
             };
         },
 

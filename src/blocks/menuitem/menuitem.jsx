@@ -20,19 +20,18 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'label':    React.PropTypes.string.isRequired,
-            'disabled': React.PropTypes.bool,
-            'selected': React.PropTypes.bool,
             'focused':  React.PropTypes.bool,
-            'submenu':  React.PropTypes.bool,
-            'ico':      React.PropTypes.object
+            'ico':      React.PropTypes.object,
+            'label':    React.PropTypes.string.isRequired,
+            'selected': React.PropTypes.bool,
+            'submenu':  React.PropTypes.bool
         },
 
         'getDefaultProps': function() {
             return {
                 'disabled': false,
-                'selected': false,
                 'focused':  false,
+                'selected': false,
                 'submenu':  false
             };
         },

@@ -16,24 +16,23 @@ xv.Select = xblocks.view.register('xb-select', [
         'displayName': 'xb-select',
 
         'propTypes': {
+            'autocapitalize':   React.PropTypes.oneOf([ 'on', 'off' ]),
             'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
             'autocorrect':      React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocapitalize':   React.PropTypes.oneOf([ 'on', 'off' ]),
-            'size':             React.PropTypes.string,
-            'form':             React.PropTypes.string,
-            'name':             React.PropTypes.string,
             'autofocus':        React.PropTypes.bool,
+            'form':             React.PropTypes.string,
             'multiple':         React.PropTypes.bool,
+            'name':             React.PropTypes.string,
             'required':         React.PropTypes.bool,
-            'disabled':         React.PropTypes.bool
+            'size':             React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'required':  false,
-                'multiple':  false,
                 'autofocus': false,
                 'disabled':  false,
+                'multiple':  false,
+                'required':  false,
                 'tabindex':  '1'
             };
         },
