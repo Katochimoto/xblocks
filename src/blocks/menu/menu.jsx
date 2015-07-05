@@ -21,14 +21,12 @@ xv.Menu = xblocks.view.register('xb-menu', [
         'mixins': [ React.addons.PureRenderMixin ],
 
         'propTypes': {
-            'size': React.PropTypes.string,
-            'type': React.PropTypes.oneOf([ 'context', 'list' ])
+            'size': React.PropTypes.string
         },
 
         'getDefaultProps': function() {
             return {
-                'size': '',
-                'type': 'list'
+                'size': ''
             };
         },
 
