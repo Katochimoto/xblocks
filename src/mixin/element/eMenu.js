@@ -57,5 +57,23 @@ xblocks.mixin.eMenu = {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
             }
         }
+    },
+
+    'methods': {
+
+        /**
+         * @param {xb.Menuitem} menuitem
+         */
+        'scrollIntoItem': function(menuitem) {
+            if (!xblocks.dom.isParent(this, menuitem)) {
+                return;
+            }
+
+            var component = this.xblock && this.xblock.getMountedComponent();
+
+            if (component) {
+                component.scrollIntoItem(menuitem);
+            }
+        }
     }
 };

@@ -1913,6 +1913,24 @@ xblocks.mixin.eMenu = {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
             }
         }
+    },
+
+    'methods': {
+
+        /**
+         * @param {xb.Menuitem} menuitem
+         */
+        'scrollIntoItem': function(menuitem) {
+            if (!xblocks.dom.isParent(this, menuitem)) {
+                return;
+            }
+
+            var component = this.xblock && this.xblock.getMountedComponent();
+
+            if (component) {
+                component.scrollIntoItem(menuitem);
+            }
+        }
     }
 };
 
@@ -2106,6 +2124,30 @@ xblocks.mixin.vMenu = {
             global.cancelAnimationFrame(this._enterBottomFrame);
             this._enterBottomFrame = 0;
         }
+    },
+
+    /**
+     * @param {xb.Menuitem} menuitem
+     */
+    'scrollIntoItem': function(menuitem) {
+        var content = React.findDOMNode(this.refs.content);
+        var rectContent = content.getBoundingClientRect();
+        var rectMenuitem = menuitem.getBoundingClientRect();
+
+        if (rectMenuitem.top < rectContent.bottom && rectMenuitem.bottom > rectContent.top) {
+            return;
+        }
+
+        var offset = 0;
+
+        if (rectMenuitem.top >= rectContent.bottom) {
+            offset = rectMenuitem.bottom - rectContent.bottom;
+
+        } else if (rectMenuitem.bottom <= rectContent.top) {
+            offset = rectMenuitem.top - rectContent.top;
+        }
+
+        content.scrollTop = content.scrollTop + offset;
     },
 
     /* jshint ignore:start */
@@ -2339,6 +2381,7 @@ xv.Link = xblocks.view.register('xb-link', [
             return {
                 'disabled': false,
                 'tabindex': '1',
+                'target':   '_self',
                 'theme':    'normal'
             };
         },
@@ -4125,7 +4168,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 
                 // scroll menu only keyboard events
                 } else {
-                    this.scrollIntoView(false);
+                    this.menuInstance.scrollIntoItem(this);
                 }
             }
         },

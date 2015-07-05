@@ -129,7 +129,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 
                 // scroll menu only keyboard events
                 } else {
-                    this.scrollIntoView(false);
+                    this.menuInstance.scrollIntoItem(this);
                 }
             }
         },

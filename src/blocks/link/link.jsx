@@ -29,6 +29,7 @@ xv.Link = xblocks.view.register('xb-link', [
             return {
                 'disabled': false,
                 'tabindex': '1',
+                'target':   '_self',
                 'theme':    'normal'
             };
         },

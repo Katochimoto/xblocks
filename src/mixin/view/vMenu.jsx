@@ -153,6 +153,30 @@ xblocks.mixin.vMenu = {
         }
     },
 
+    /**
+     * @param {xb.Menuitem} menuitem
+     */
+    'scrollIntoItem': function(menuitem) {
+        var content = React.findDOMNode(this.refs.content);
+        var rectContent = content.getBoundingClientRect();
+        var rectMenuitem = menuitem.getBoundingClientRect();
+
+        if (rectMenuitem.top < rectContent.bottom && rectMenuitem.bottom > rectContent.top) {
+            return;
+        }
+
+        var offset = 0;
+
+        if (rectMenuitem.top >= rectContent.bottom) {
+            offset = rectMenuitem.bottom - rectContent.bottom;
+
+        } else if (rectMenuitem.bottom <= rectContent.top) {
+            offset = rectMenuitem.top - rectContent.top;
+        }
+
+        content.scrollTop = content.scrollTop + offset;
+    },
+
     /* jshint ignore:start */
     'render': function() {
         var classes = {
