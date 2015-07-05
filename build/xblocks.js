@@ -4243,6 +4243,9 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 
                         menu.setAttribute('target', '.' + targetClassName);
 
+                        // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
+                        // меню может быть открыто в блоке со скролом,
+                        // в этом случае ограничением для подменю будет блок со скролом
                         if (parentConstraints) {
                             _xbMenuitem.submenuAttrs.constraints = parentConstraints;
                         }
