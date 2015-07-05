@@ -4044,14 +4044,10 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
 
 var _xbMenuitem = {
     'submenuAttrs': {
-        'attachment': 'top right',
-        'target-attachment': 'top left',
+        'attachment': 'top left',
+        'target-attachment': 'top right',
         'target-modifier': 'initial',
         'constraints': encodeURIComponent(JSON.stringify([
-            {
-                'to': 'scrollParent',
-                'attachment': 'element together'
-            },
             {
                 'to': 'window',
                 'attachment': 'element together'
@@ -4243,8 +4239,13 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
                     if (this.submenu) {
                         var targetClassName = '_menuitem-target-' + this.xuid;
                         var menu = this.ownerDocument.createElement('xb-menu');
+                        var parentConstraints = this.menuInstance.getAttribute('constraints');
 
                         menu.setAttribute('target', '.' + targetClassName);
+
+                        if (parentConstraints) {
+                            _xbMenuitem.submenuAttrs.constraints = parentConstraints;
+                        }
 
                         for (var attrName in _xbMenuitem.submenuAttrs) {
                             menu.setAttribute(attrName, _xbMenuitem.submenuAttrs[ attrName ]);
