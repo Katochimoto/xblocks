@@ -4240,18 +4240,17 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
                         var targetClassName = '_menuitem-target-' + this.xuid;
                         var menu = this.ownerDocument.createElement('xb-menu');
                         var parentConstraints = this.menuInstance.getAttribute('constraints');
-
-                        menu.setAttribute('target', '.' + targetClassName);
+                        var attrs = xblocks.utils.merge({ 'target': '.' + targetClassName }, _xbMenuitem.submenuAttrs);
 
                         // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
                         // меню может быть открыто в блоке со скролом,
                         // в этом случае ограничением для подменю будет блок со скролом
                         if (parentConstraints) {
-                            _xbMenuitem.submenuAttrs.constraints = parentConstraints;
+                            attrs.constraints = parentConstraints;
                         }
 
-                        for (var attrName in _xbMenuitem.submenuAttrs) {
-                            menu.setAttribute(attrName, _xbMenuitem.submenuAttrs[ attrName ]);
+                        for (var attrName in attrs) {
+                            menu.setAttribute(attrName, attrs[ attrName ]);
                         }
 
                         menu.innerHTML = this.content;
