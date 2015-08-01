@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /* global React, xv */
 /* jshint strict: false */
 

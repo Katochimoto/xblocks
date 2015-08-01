@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /* global xblocks, xv */
 /* jshint strict: false */
 

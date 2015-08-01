@@ -2531,7 +2531,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -2541,7 +2541,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
   font-family: Arial, sans-serif;
   -webkit-appearance: textfield;
 }
@@ -2581,7 +2581,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -2591,7 +2591,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._simple._size-s:focus {
   outline: none;
@@ -2616,7 +2616,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -2626,7 +2626,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._simple._size-l:focus {
   outline: none;
@@ -2651,7 +2651,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -2661,7 +2661,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._simple._size-xl:focus {
   outline: none;
@@ -2782,7 +2782,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -2792,7 +2792,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._complex > ._reset {
   margin: -5px -5px -5px 0;

@@ -36,7 +36,7 @@ build/xblocks.min.css: build/xblocks.css
 
 
 $(src_jsx_js): %.jsx.js: %.jsx node_modules
-	$(NPM_BIN)/jsx --no-cache-dir --strip-types --harmony $< > $@
+	$(NPM_BIN)/babel $< -o $@
 
 build/xblocks.js: src/xblocks.js $(src_jsx_js) $(src_js) node_modules
 	$(NPM_BIN)/borschik -m no -i $< -o $@
