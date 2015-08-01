@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.exportPropTypes = function(tagName) {
     var props = xblocks.utils.propTypes(tagName);

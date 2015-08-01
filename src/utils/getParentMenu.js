@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * @param {HTMLElement} node

@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks, __doc */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.checkCloseMenu = (function() {
     var _currentMenu = null;

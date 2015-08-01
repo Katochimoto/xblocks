@@ -1,5 +1,7 @@
+//jscs:disable
 /* global global, xblocks, __forEach, xb, _xbPopup */
 /* jshint strict: false */
+//jscs:enable
 
 /*! borschik:include:_contextmenu.js */
 /*! borschik:include:menu.jsx.js */

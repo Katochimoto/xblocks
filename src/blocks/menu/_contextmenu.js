@@ -1,4 +1,6 @@
+//jscs:disable
 /* global xblocks, __doc */
+//jscs:enable
 
 __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
     var element = event.delegateElement;

@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /*! borschik:include:checkbox.jsx.js */
 

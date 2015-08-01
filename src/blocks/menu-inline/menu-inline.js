@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks, __noop, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /**
 * Checked in:

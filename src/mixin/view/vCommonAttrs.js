@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks, React */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Common attributes

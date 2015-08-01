@@ -1,5 +1,7 @@
+//jscs:disable
 /* global global, xblocks, Tether, __doc, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /*! borschik:include:popup.jsx.js */
 

@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks, global, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /*! borschik:include:menuitem.jsx.js */
 

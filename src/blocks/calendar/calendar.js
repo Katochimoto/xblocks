@@ -1,6 +1,7 @@
-/** @jsx React.DOM */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /*! borschik:include:calendar.jsx.js */
 

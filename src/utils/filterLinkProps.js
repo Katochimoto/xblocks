@@ -1,5 +1,7 @@
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.filterLinkProps = function(props) {
     return xblocks.utils.mapObject(

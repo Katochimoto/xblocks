@@ -1,7 +1,11 @@
+//jscs:disable
+
 /*! borschik:include:../node_modules/xblocks-utils/xblocks-utils.js */
 
 /* jshint -W067 */
 /* jshint unused: false */
+//jscs:enable
+
 (function(global, undefined) {
     'use strict';
 
