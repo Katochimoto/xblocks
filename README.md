@@ -7,11 +7,11 @@
 
 ##Dependencies
 
-- [xblocks-core](https://github.com/Katochimoto/xblocks-core) (0.6.1)
-- [React.js](https://github.com/facebook/react) (0.13.2)
-- [X-Tag core](https://github.com/x-tag/core) ([custom build x-tag-core.js](https://github.com/Katochimoto/xblocks-core/blob/master/x-tag-core.js) or 1.0.0)
-- [es5-shim](https://github.com/es-shims/es5-shim) (4.1.1)
-- [tether](https://github.com/HubSpot/tether) (0.6.5) for xb-popup and xb-menu
+- [xblocks-core](https://github.com/Katochimoto/xblocks-core) (0.7.1)
+- [React.js](https://github.com/facebook/react) (0.13.3)
+- [X-Tag core](https://github.com/x-tag/core) ([custom build x-tag-core.js](https://github.com/Katochimoto/xblocks-core/blob/master/x-tag-core.js) or 1.1.9)
+- [es5-shim](https://github.com/es-shims/es5-shim) (4.1.10)
+- [tether](https://github.com/HubSpot/tether) (1.1.0) for xb-popup and xb-menu
 
 ##Browser support
 
