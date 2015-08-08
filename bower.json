@@ -6,7 +6,7 @@
     "react": "0.13.3",
     "jquery": "2.1.4",
     "tether": "1.1.0",
-    "bootstrap": "3.3.4",
+    "bootstrap": "3.3.5",
     "director": "1.2.8",
     "l10n.js": "*"
   },
