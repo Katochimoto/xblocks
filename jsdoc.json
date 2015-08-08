@@ -18,8 +18,9 @@
     ],
     "source": {
         "include": [
-            "./bower_components/xblocks-core/src",
-            "./bower_components/xblocks/src",
+            "./lib/xblocks-core/src",
+            "./lib/xblocks-utils/src",
+            "./lib/xblocks/src",
             "./jsdoc/README.md"
         ],
         "includePattern": ".+\\.js(doc)?$"
