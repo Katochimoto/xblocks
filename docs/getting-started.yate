@@ -1,0 +1,194 @@
+module "getting-started"
+import "docs"
+
+match .* _content {
+    <h1 class="page-header anchor" data-hash="getting-started">
+        "Getting started"
+    </h1>
+
+    <p class="lead">
+        "An overview of Xblocks, how to download and use, basic templates, and more."
+    </p>
+
+    <h2 class="sub-header anchor" data-hash="getting-started/quickstart">
+        "Quick Start"
+    </h2>
+
+    <ol>
+        <li>
+            <a href="#/getting-started/download">Download library</a>
+        </li>
+        <li>
+            "Include the CSS on your head page:"
+            <div class="highlight">
+                <pre>
+                    <code class="html">
+                        "<link href=\"bower_components/xblocks/build/xblocks.min.css\" rel=\"stylesheet\" />"
+                    </code>
+                </pre>
+            </div>
+        </li>
+        <li>
+            "Include the JS on your head page:"
+            <div class="highlight">
+                <pre>
+                    <code class="html">
+                        "<!-- Included xblocks-core, X-Tag and polyfill custom elements -->"
+                        <br/>
+                        "<script src=\"bower_components/xblocks-core/dist/xblocks-core-full.min.js\"></script>"
+                        <br/>
+                        "<!-- Includes a set of custom elements -->"
+                        <br/>
+                        "<script src=\"bower_components/xblocks/build/xblocks.min.js\"></script>"
+                    </code>
+                </pre>
+            </div>
+        </li>
+        <li>
+            "Test connection required dependencies:"
+            <div class="highlight">
+                <pre>
+                    <code class="html">
+                        "<!-- es5-shim -->"
+                        <br/>
+                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.1/es5-shim.min.js\"></script>"
+                        <br/>
+                        "<!-- React -->"
+                        <br/>
+                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js\"></script>"
+                        <br/>
+                        "<!-- Tether -->"
+                        <br/>
+                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/tether/0.7.0/tether.min.js\"></script>"
+                    </code>
+                </pre>
+            </div>
+        </li>
+        <li>
+            "Further work requires no initialization."
+        </li>
+    </ol>
+
+    <h2 class="sub-header anchor" data-hash="getting-started/download">
+        "Download"
+    </h2>
+
+    <small>
+        "Currently "
+        .version
+    </small>
+
+    <h3>
+        "Install with CDN"
+    </h3>
+
+    <p>
+        "You can install Xblocks using "
+        <a href="https://cdnjs.com/" target="_blank">
+            "CDN"
+        </a>
+        ":"
+    </p>
+
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "$ bower install xblocks"
+            </code>
+        </pre>
+    </div>
+
+    <h3>
+        "Install with Bower"
+    </h3>
+
+    <p>
+        "You can also install Xblocks using "
+        <a href="http://bower.io/" target="_blank">
+            "Bower"
+        </a>
+        ":"
+    </p>
+
+    <div class="highlight">
+        <pre>
+            <code class="bash">
+                "$ bower install xblocks"
+            </code>
+        </pre>
+    </div>
+
+    <h3>
+        "Install with npm"
+    </h3>
+
+    <p>
+        "You can also install Bootstrap using "
+        <a href="https://www.npmjs.com/" target="_blank">
+            "npm"
+        </a>
+        ":"
+    </p>
+
+    <div class="highlight">
+        <pre>
+            <code class="bash">
+                "$ npm install xblocks"
+            </code>
+        </pre>
+    </div>
+
+    <h2 class="sub-header anchor" data-hash="getting-started/templates">
+        "Templates"
+    </h2>
+
+    <p>
+        "This template does not utilize CDNs."
+    </p>
+
+    <div class="highlight">
+        <pre>
+            <code class="html">
+                "<!DOCTYPE html>"
+                <br/>
+                "<html lang=\"en\">"
+                <br/>
+                "    <head>"
+                <br/>
+                "        <meta charset=\"utf-8\" />"
+                <br/>
+                "        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />"
+                <br/>
+                "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />"
+                <br/>
+                "        <title>Xblocks Basic Template</title>"
+                <br/>
+                "        <!-- CSS -->"
+                <br/>
+                "        <link href=\"/bower_components/xblocks/build/xblocks.min.css\" rel=\"stylesheet\" />"
+                <br/>
+                "        <!-- JS -->"
+                <br/>
+                "        <script src=\"/bower_components/es5-shim/es5-shim.min.js\"></script>"
+                <br/>
+                "        <script src=\"/bower_components/react/react-with-addons.min.js\"></script>"
+                <br/>
+                "        <script src=\"/bower_components/tether/tether.min.js\"></script>"
+                <br/>
+                "        <script src=\"/bower_components/xblocks-core/dist/xblocks-core-full.min.js\"></script>"
+                <br/>
+                "        <script src=\"/bower_components/xblocks/build/xblocks.min.js\"></script>"
+                <br/>
+                "    </head>"
+                <br/>
+                "    <body>"
+                <br/>
+                "        <xb-button>button</xb-button>"
+                <br/>
+                "    </body>"
+                <br/>
+                "</html>"
+            </code>
+        </pre>
+    </div>
+}

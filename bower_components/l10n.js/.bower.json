@@ -1,0 +1,27 @@
+{
+  "name": "l10n.js",
+  "main": "l10n.js",
+  "homepage": "http://purl.eligrey.com/l10n.js",
+  "description": "Passive localization JavaScript library",
+  "keywords": [
+    "localization",
+    "l10n"
+  ],
+  "authors": [
+    "ΩF:∅ Working Group"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "tests"
+  ],
+  "_release": "1ee3e32ef2",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "1ee3e32ef2487a6512397d9ad926a4fca86ff472"
+  },
+  "_source": "git://github.com/eligrey/l10n.js.git",
+  "_target": "*",
+  "_originalSource": "l10n.js"
+}
