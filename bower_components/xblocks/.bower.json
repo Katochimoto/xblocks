@@ -1,0 +1,46 @@
+{
+  "name": "xblocks",
+  "version": "0.6.0",
+  "dependencies": {
+    "xblocks-core": "0.6.0",
+    "es5-shim": "4.1.0",
+    "react": "0.13.0",
+    "vow": "0.4.8",
+    "tether": "0.6.5"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "src",
+    "package.json",
+    "Makefile",
+    "karma.conf.js"
+  ],
+  "homepage": "http://xblocks.ru",
+  "authors": [
+    "rikishi <bufpost@yandex.ru>"
+  ],
+  "description": "HTML custom elements",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "x-tag",
+    "x-tags",
+    "react",
+    "html5",
+    "xblocks"
+  ],
+  "license": "MIT",
+  "_release": "0.6.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.6.0",
+    "commit": "d184d5f1cfc64c4cab34cd8cf73ffbdf39c9b6a9"
+  },
+  "_source": "git://github.com/Katochimoto/xblocks.git",
+  "_target": "0.6.0",
+  "_originalSource": "xblocks"
+}

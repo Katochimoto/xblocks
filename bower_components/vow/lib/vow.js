@@ -1,7 +1,7 @@
 /**
  * @module vow
  * @author Filatov Dmitry <dfilatov@yandex-team.ru>
- * @version 0.4.10
+ * @version 0.4.8
  * @license
  * Dual licensed under the MIT and GPL licenses:
  *   * http://www.opensource.org/licenses/mit-license.php
@@ -36,19 +36,7 @@ var undef,
             };
         }
 
-        var MutationObserver = global.MutationObserver || global.WebKitMutationObserver; // modern browsers
-        if(MutationObserver) {
-            var num = 1,
-                node = document.createTextNode('');
-
-            new MutationObserver(callFns).observe(node, { characterData : true });
-
-            return function(fn) {
-                enqueueFn(fn) && (node.data = (num *= -1));
-            };
-        }
-
-        if(global.postMessage) {
+        if(global.postMessage) { // modern browsers
             var isPostMessageAsync = true;
             if(global.attachEvent) {
                 var checkAsync = function() {
@@ -165,7 +153,7 @@ var Deferred = function() {
 
 Deferred.prototype = /** @lends Deferred.prototype */{
     /**
-     * Returns the corresponding promise.
+     * Returns corresponding promise.
      *
      * @returns {vow:Promise}
      */
@@ -174,7 +162,7 @@ Deferred.prototype = /** @lends Deferred.prototype */{
     },
 
     /**
-     * Resolves the corresponding promise with the given `value`.
+     * Resolves corresponding promise with given `value`.
      *
      * @param {*} value
      *
@@ -195,7 +183,7 @@ Deferred.prototype = /** @lends Deferred.prototype */{
     },
 
     /**
-     * Rejects the corresponding promise with the given `reason`.
+     * Rejects corresponding promise with given `reason`.
      *
      * @param {*} reason
      *
@@ -230,7 +218,7 @@ Deferred.prototype = /** @lends Deferred.prototype */{
     },
 
     /**
-     * Notifies the corresponding promise with the given `value`.
+     * Notifies corresponding promise with given `value`.
      *
      * @param {*} value
      *
@@ -324,7 +312,7 @@ var Promise = function(resolver) {
 
 Promise.prototype = /** @lends Promise.prototype */ {
     /**
-     * Returns the value of the fulfilled promise or the reason in case of rejection.
+     * Returns value of fulfilled promise or reason in case of rejection.
      *
      * @returns {*}
      */
@@ -333,7 +321,7 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Returns `true` if the promise is resolved.
+     * Returns `true` if promise is resolved.
      *
      * @returns {Boolean}
      */
@@ -342,7 +330,7 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Returns `true` if the promise is fulfilled.
+     * Returns `true` if promise is fulfilled.
      *
      * @returns {Boolean}
      */
@@ -351,7 +339,7 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Returns `true` if the promise is rejected.
+     * Returns `true` if promise is rejected.
      *
      * @returns {Boolean}
      */
@@ -360,12 +348,12 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Adds reactions to the promise.
+     * Adds reactions to promise.
      *
-     * @param {Function} [onFulfilled] Callback that will be invoked with a provided value after the promise has been fulfilled
-     * @param {Function} [onRejected] Callback that will be invoked with a provided reason after the promise has been rejected
-     * @param {Function} [onProgress] Callback that will be invoked with a provided value after the promise has been notified
-     * @param {Object} [ctx] Context of the callbacks execution
+     * @param {Function} [onFulfilled] Callback that will to be invoked with the value after promise has been fulfilled
+     * @param {Function} [onRejected] Callback that will to be invoked with the reason after promise has been rejected
+     * @param {Function} [onProgress] Callback that will to be invoked with the value after promise has been notified
+     * @param {Object} [ctx] Context of callbacks execution
      * @returns {vow:Promise} A new promise, see https://github.com/promises-aplus/promises-spec for details
      */
     then : function(onFulfilled, onRejected, onProgress, ctx) {
@@ -375,10 +363,10 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Adds only a rejection reaction. This method is a shorthand for `promise.then(undefined, onRejected)`.
+     * Adds rejection reaction only. It is shortcut for `promise.then(undefined, onRejected)`.
      *
-     * @param {Function} onRejected Callback that will be called with a provided 'reason' as argument after the promise has been rejected
-     * @param {Object} [ctx] Context of the callback execution
+     * @param {Function} onRejected Callback to be called with the value after promise has been rejected
+     * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
     'catch' : function(onRejected, ctx) {
@@ -386,10 +374,10 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Adds only a rejection reaction. This method is a shorthand for `promise.then(null, onRejected)`. It's also an alias for `catch`.
+     * Adds rejection reaction only. It is shortcut for `promise.then(null, onRejected)`. It's alias for `catch`.
      *
      * @param {Function} onRejected Callback to be called with the value after promise has been rejected
-     * @param {Object} [ctx] Context of the callback execution
+     * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
     fail : function(onRejected, ctx) {
@@ -397,10 +385,10 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Adds a resolving reaction (for both fulfillment and rejection).
+     * Adds resolving reaction (to fulfillment and rejection both).
      *
-     * @param {Function} onResolved Callback that will be invoked with the promise as an argument, after the promise has been resolved.
-     * @param {Object} [ctx] Context of the callback execution
+     * @param {Function} onResolved Callback that to be called with the value after promise has been rejected
+     * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
     always : function(onResolved, ctx) {
@@ -413,10 +401,10 @@ Promise.prototype = /** @lends Promise.prototype */ {
     },
 
     /**
-     * Adds a progress reaction.
+     * Adds progress reaction.
      *
-     * @param {Function} onProgress Callback that will be called with a provided value when the promise has been notified
-     * @param {Object} [ctx] Context of the callback execution
+     * @param {Function} onProgress Callback to be called with the value when promise has been notified
+     * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
     progress : function(onProgress, ctx) {
@@ -425,11 +413,11 @@ Promise.prototype = /** @lends Promise.prototype */ {
 
     /**
      * Like `promise.then`, but "spreads" the array into a variadic value handler.
-     * It is useful with the `vow.all` and the `vow.allResolved` methods.
+     * It is useful with `vow.all` and `vow.allResolved` methods.
      *
-     * @param {Function} [onFulfilled] Callback that will be invoked with a provided value after the promise has been fulfilled
-     * @param {Function} [onRejected] Callback that will be invoked with a provided reason after the promise has been rejected
-     * @param {Object} [ctx] Context of the callbacks execution
+     * @param {Function} [onFulfilled] Callback that will to be invoked with the value after promise has been fulfilled
+     * @param {Function} [onRejected] Callback that will to be invoked with the reason after promise has been rejected
+     * @param {Object} [ctx] Context of callbacks execution
      * @returns {vow:Promise}
      *
      * @example
@@ -456,12 +444,12 @@ Promise.prototype = /** @lends Promise.prototype */ {
 
     /**
      * Like `then`, but terminates a chain of promises.
-     * If the promise has been rejected, this method throws it's "reason" as an exception in a future turn of the event loop.
+     * If the promise has been rejected, throws it as an exception in a future turn of the event loop.
      *
-     * @param {Function} [onFulfilled] Callback that will be invoked with a provided value after the promise has been fulfilled
-     * @param {Function} [onRejected] Callback that will be invoked with a provided reason after the promise has been rejected
-     * @param {Function} [onProgress] Callback that will be invoked with a provided value after the promise has been notified
-     * @param {Object} [ctx] Context of the callbacks execution
+     * @param {Function} [onFulfilled] Callback that will to be invoked with the value after promise has been fulfilled
+     * @param {Function} [onRejected] Callback that will to be invoked with the reason after promise has been rejected
+     * @param {Function} [onProgress] Callback that will to be invoked with the value after promise has been notified
+     * @param {Object} [ctx] Context of callbacks execution
      *
      * @example
      * ```js
@@ -478,7 +466,7 @@ Promise.prototype = /** @lends Promise.prototype */ {
 
     /**
      * Returns a new promise that will be fulfilled in `delay` milliseconds if the promise is fulfilled,
-     * or immediately rejected if the promise is rejected.
+     * or immediately rejected if promise is rejected.
      *
      * @param {Number} delay
      * @returns {vow:Promise}
@@ -734,7 +722,7 @@ Promise.prototype = /** @lends Promise.prototype */ {
 /** @lends Promise */
 var staticMethods = {
     /**
-     * Coerces the given `value` to a promise, or returns the `value` if it's already a promise.
+     * Coerces given `value` to a promise, or returns the `value` if it's already a promise.
      *
      * @param {*} value
      * @returns {vow:Promise}
@@ -744,8 +732,8 @@ var staticMethods = {
     },
 
     /**
-     * Returns a promise, that will be fulfilled only after all the items in `iterable` are fulfilled.
-     * If any of the `iterable` items gets rejected, then the returned promise will be rejected.
+     * Returns a promise to be fulfilled only after all the items in `iterable` are fulfilled,
+     * or to be rejected when any of the `iterable` is rejected.
      *
      * @param {Array|Object} iterable
      * @returns {vow:Promise}
@@ -755,8 +743,8 @@ var staticMethods = {
     },
 
     /**
-     * Returns a promise, that will be fulfilled only when any of the items in `iterable` are fulfilled.
-     * If any of the `iterable` items gets rejected, then the returned promise will be rejected.
+     * Returns a promise to be fulfilled only when any of the items in `iterable` are fulfilled,
+     * or to be rejected when the first item is rejected.
      *
      * @param {Array} iterable
      * @returns {vow:Promise}
@@ -767,7 +755,7 @@ var staticMethods = {
 
     /**
      * Returns a promise that has already been resolved with the given `value`.
-     * If `value` is a promise, the returned promise will have `value`'s state.
+     * If `value` is a promise, returned promise will be adopted with the state of given promise.
      *
      * @param {*} value
      * @returns {vow:Promise}
@@ -809,13 +797,13 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.then`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
-     * @param {Function} [onFulfilled] Callback that will be invoked with a provided value after the promise has been fulfilled
-     * @param {Function} [onRejected] Callback that will be invoked with a provided reason after the promise has been rejected
-     * @param {Function} [onProgress] Callback that will be invoked with a provided value after the promise has been notified
-     * @param {Object} [ctx] Context of the callbacks execution
+     * @param {Function} [onFulfilled] Callback that will to be invoked with the value after promise has been fulfilled
+     * @param {Function} [onRejected] Callback that will to be invoked with the reason after promise has been rejected
+     * @param {Function} [onProgress] Callback that will to be invoked with the value after promise has been notified
+     * @param {Object} [ctx] Context of callbacks execution
      * @returns {vow:Promise}
      */
     when : function(value, onFulfilled, onRejected, onProgress, ctx) {
@@ -824,11 +812,11 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.fail`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
-     * @param {Function} onRejected Callback that will be invoked with a provided reason after the promise has been rejected
-     * @param {Object} [ctx] Context of the callback execution
+     * @param {Function} onRejected Callback that will to be invoked with the reason after promise has been rejected
+     * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
     fail : function(value, onRejected, ctx) {
@@ -837,11 +825,11 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.always`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
-     * @param {Function} onResolved Callback that will be invoked with the promise as an argument, after the promise has been resolved.
-     * @param {Object} [ctx] Context of the callback execution
+     * @param {Function} onResolved Callback that will to be invoked with the reason after promise has been resolved
+     * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
     always : function(value, onResolved, ctx) {
@@ -850,11 +838,11 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.progress`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
-     * @param {Function} onProgress Callback that will be invoked with a provided value after the promise has been notified
-     * @param {Object} [ctx] Context of the callback execution
+     * @param {Function} onProgress Callback that will to be invoked with the reason after promise has been notified
+     * @param {Object} [ctx] Context of callback execution
      * @returns {vow:Promise}
      */
     progress : function(value, onProgress, ctx) {
@@ -863,12 +851,12 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.spread`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
-     * @param {Function} [onFulfilled] Callback that will be invoked with a provided value after the promise has been fulfilled
-     * @param {Function} [onRejected] Callback that will be invoked with a provided reason after the promise has been rejected
-     * @param {Object} [ctx] Context of the callbacks execution
+     * @param {Function} [onFulfilled] Callback that will to be invoked with the value after promise has been fulfilled
+     * @param {Function} [onRejected] Callback that will to be invoked with the reason after promise has been rejected
+     * @param {Object} [ctx] Context of callbacks execution
      * @returns {vow:Promise}
      */
     spread : function(value, onFulfilled, onRejected, ctx) {
@@ -877,13 +865,13 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.done`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
-     * @param {Function} [onFulfilled] Callback that will be invoked with a provided value after the promise has been fulfilled
-     * @param {Function} [onRejected] Callback that will be invoked with a provided reason after the promise has been rejected
-     * @param {Function} [onProgress] Callback that will be invoked with a provided value after the promise has been notified
-     * @param {Object} [ctx] Context of the callbacks execution
+     * @param {Function} [onFulfilled] Callback that will to be invoked with the value after promise has been fulfilled
+     * @param {Function} [onRejected] Callback that will to be invoked with the reason after promise has been rejected
+     * @param {Function} [onProgress] Callback that will to be invoked with the value after promise has been notified
+     * @param {Object} [ctx] Context of callbacks execution
      */
     done : function(value, onFulfilled, onRejected, onProgress, ctx) {
         vow.when(value).done(onFulfilled, onRejected, onProgress, ctx);
@@ -907,20 +895,20 @@ var vow = /** @exports vow */ {
     },
 
     /**
-     * Coerces the given `value` to a promise, or returns the `value` if it's already a promise.
+     * Coerces given `value` to a promise, or returns the `value` if it's already a promise.
      *
      * @param {*} value
      * @returns {vow:Promise}
      */
     cast : function(value) {
-        return value && !!value._vow?
+        return vow.isPromise(value)?
             value :
             vow.resolve(value);
     },
 
     /**
      * Static equivalent to `promise.valueOf`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not an instance of `vow.Promise`, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
      * @returns {*}
@@ -931,7 +919,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.isFulfilled`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not an instance of `vow.Promise`, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
      * @returns {Boolean}
@@ -942,7 +930,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.isRejected`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not an instance of `vow.Promise`, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
      * @returns {Boolean}
@@ -953,7 +941,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.isResolved`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
      * @returns {Boolean}
@@ -964,7 +952,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Returns a promise that has already been resolved with the given `value`.
-     * If `value` is a promise, the returned promise will have `value`'s state.
+     * If `value` is a promise, returned promise will be adopted with the state of given promise.
      *
      * @param {*} value
      * @returns {vow:Promise}
@@ -977,7 +965,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Returns a promise that has already been fulfilled with the given `value`.
-     * If `value` is a promise, the returned promise will be fulfilled with the fulfill/rejection value of `value`.
+     * If `value` is a promise, returned promise will be fulfilled with fulfill/rejection value of given promise.
      *
      * @param {*} value
      * @returns {vow:Promise}
@@ -997,7 +985,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Returns a promise that has already been rejected with the given `reason`.
-     * If `reason` is a promise, the returned promise will be rejected with the fulfill/rejection value of `reason`.
+     * If `reason` is a promise, returned promise will be rejected with fulfill/rejection value of given promise.
      *
      * @param {*} reason
      * @returns {vow:Promise}
@@ -1009,7 +997,7 @@ var vow = /** @exports vow */ {
     },
 
     /**
-     * Invokes the given function `fn` with arguments `args`
+     * Invokes a given function `fn` with arguments `args`
      *
      * @param {Function} fn
      * @param {...*} [args]
@@ -1052,8 +1040,8 @@ var vow = /** @exports vow */ {
     },
 
     /**
-     * Returns a promise, that will be fulfilled only after all the items in `iterable` are fulfilled.
-     * If any of the `iterable` items gets rejected, the promise will be rejected.
+     * Returns a promise to be fulfilled only after all the items in `iterable` are fulfilled,
+     * or to be rejected when any of the `iterable` is rejected.
      *
      * @param {Array|Object} iterable
      * @returns {vow:Promise}
@@ -1120,7 +1108,7 @@ var vow = /** @exports vow */ {
     },
 
     /**
-     * Returns a promise, that will be fulfilled only after all the items in `iterable` are resolved.
+     * Returns a promise to be fulfilled only after all the items in `iterable` are resolved.
      *
      * @param {Array|Object} iterable
      * @returns {vow:Promise}
@@ -1206,8 +1194,8 @@ var vow = /** @exports vow */ {
     },
 
     /**
-     * Returns a promise, that will be fulfilled if any of the items in `iterable` is fulfilled.
-     * If all of the `iterable` items get rejected, the promise will be rejected (with the reason of the first rejected item).
+     * Returns a promise to be fulfilled only when any of the items in `iterable` is fulfilled,
+     * or to be rejected when all the items are rejected (with the reason of the first rejected item).
      *
      * @param {Array} iterable
      * @returns {vow:Promise}
@@ -1236,8 +1224,8 @@ var vow = /** @exports vow */ {
     },
 
     /**
-     * Returns a promise, that will be fulfilled only when any of the items in `iterable` is fulfilled.
-     * If any of the `iterable` items gets rejected, the promise will be rejected.
+     * Returns a promise to be fulfilled only when any of the items in `iterable` is fulfilled,
+     * or to be rejected when the first item is rejected.
      *
      * @param {Array} iterable
      * @returns {vow:Promise}
@@ -1263,7 +1251,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.delay`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
      * @param {Number} delay
@@ -1275,7 +1263,7 @@ var vow = /** @exports vow */ {
 
     /**
      * Static equivalent to `promise.timeout`.
-     * If `value` is not a promise, then `value` is treated as a fulfilled promise.
+     * If given `value` is not a promise, then `value` is equivalent to fulfilled promise.
      *
      * @param {*} value
      * @param {Number} timeout
