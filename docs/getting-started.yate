@@ -153,39 +153,39 @@ match .* _content {
                 <br/>
                 "<html lang=\"en\">"
                 <br/>
-                "  <head>"
+                "    <head>"
                 <br/>
-                "    <meta charset=\"utf-8\" />"
+                "        <meta charset=\"utf-8\" />"
                 <br/>
-                "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />"
+                "        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />"
                 <br/>
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />"
+                "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />"
                 <br/>
-                "    <title>Xblocks Basic Template</title>"
+                "        <title>Xblocks Basic Template</title>"
                 <br/>
-                "    <!-- CSS -->"
+                "        <!-- CSS -->"
                 <br/>
-                "    <link href=\"/bower_components/xblocks/build/xblocks.min.css\" rel=\"stylesheet\" />"
+                "        <link href=\"/bower_components/xblocks/build/xblocks.min.css\" rel=\"stylesheet\" />"
                 <br/>
-                "    <!-- JS -->"
+                "        <!-- JS -->"
                 <br/>
-                "    <script src=\"/bower_components/es5-shim/es5-shim.min.js\"></script>"
+                "        <script src=\"/bower_components/es5-shim/es5-shim.min.js\"></script>"
                 <br/>
-                "    <script src=\"/bower_components/react/react-with-addons.min.js\"></script>"
+                "        <script src=\"/bower_components/react/react-with-addons.min.js\"></script>"
                 <br/>
-                "    <script src=\"/bower_components/tether/tether.min.js\"></script>"
+                "        <script src=\"/bower_components/tether/tether.min.js\"></script>"
                 <br/>
-                "    <script src=\"/bower_components/xblocks-core/dist/xblocks-core-full.min.js\"></script>"
+                "        <script src=\"/bower_components/xblocks-core/dist/xblocks-core-full.min.js\"></script>"
                 <br/>
-                "    <script src=\"/bower_components/xblocks/build/xblocks.min.js\"></script>"
+                "        <script src=\"/bower_components/xblocks/build/xblocks.min.js\"></script>"
                 <br/>
-                "  </head>"
+                "    </head>"
                 <br/>
-                "  <body>"
+                "    <body>"
                 <br/>
-                "    <xb-button>button</xb-button>"
+                "        <xb-button>button</xb-button>"
                 <br/>
-                "  </body>"
+                "    </body>"
                 <br/>
                 "</html>"
             </code>

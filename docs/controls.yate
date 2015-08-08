@@ -7,45 +7,212 @@ match .* _content {
     </h1>
 
     apply . _content-ico
+    <p>&nbsp;</p>
     apply . _content-link
-
-    <h2 class="sub-header anchor" data-hash="controls/buttons">
-        "Buttons"
-    </h2>
-
+    <p>&nbsp;</p>
+    apply . _content-button
+    <p>&nbsp;</p>
     <h2 class="sub-header anchor" data-hash="controls/checkbox">
         "Checkbox"
     </h2>
+    <p>&nbsp;</p>
 
     <h2 class="sub-header anchor" data-hash="controls/radio">
         "Radio"
     </h2>
+    <p>&nbsp;</p>
 
     <h2 class="sub-header anchor" data-hash="controls/input">
         "Input"
     </h2>
+    <p>&nbsp;</p>
 
     <h2 class="sub-header anchor" data-hash="controls/popup">
         "Popup"
     </h2>
+    <p>&nbsp;</p>
 
     <h2 class="sub-header anchor" data-hash="controls/menu">
         "Menu"
     </h2>
 }
 
+match .* _content_attrs (array attrs) {
+    <h3>{loc('%Controls__attrs')}</h3>
+    <table class="table table-hover">
+        for attrs.* {
+            <tr>
+                <td class="text-info">{.name}</td>
+                <td>{.type}</td>
+                <td>
+                    if (.def) {
+                        wrap-code(.def)
+                    }
+                </td>
+                <td>{html(.descr)}</td>
+            </tr>
+        }
+    </table>
+}
+
+match .* _content_sample (scalar sample) {
+    <h3>{loc('%Controls__example')}</h3>
+    <div class="panel panel-example">
+        <div class="panel-heading">{html(sample)}</div>
+        <div class="panel-body highlight">
+            <pre>
+                <code class="html">{sample}</code>
+            </pre>
+        </div>
+    </div>
+}
+
+match .* _content_syntax (scalar sample) {
+    <h3>{loc('%Controls__syntax')}</h3>
+    <div class="highlight">
+        <pre>
+            <code class="html">{sample}</code>
+        </pre>
+    </div>
+}
+
+match .* _content-button {
+    <h2 class="sub-header anchor" data-hash="controls/button">{loc('%Controls_button__title')}</h2>
+    <p>{html(loc('%Controls_button__descr_p1'))}</p>
+    <p>{html(loc('%Controls_button__descr_p2'))}</p>
+
+    apply . _content_syntax ("<xb-button>button</xb-button>")
+
+    button-theme = [
+        'action'
+        'dark'
+        'flying'
+        'normal'
+        'promo'
+        'pseudo-inverted'
+        'pseudo'
+    ]
+
+    button-type = [
+        'label'
+        'inline'
+        'link'
+        'file'
+        'button'
+        'submit'
+        'checkbox'
+        'radio'
+    ]
+
+    button-attrs = [
+        {
+            'name': 'autofocus'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_button__attrs_autofocus')
+        }
+        {
+            'name': 'checked'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_button__attrs_checked')
+        }
+        {
+            'name': 'for'
+            'type': 'string'
+            'descr': loc('%Controls_button__attrs_for')
+        }
+        {
+            'name': 'form'
+            'type': 'string'
+            'descr': loc('%Controls_button__attrs_form')
+        }
+        {
+            'name': 'href'
+            'type': 'string'
+            'descr': loc('%Controls_button__attrs_href')
+        }
+        {
+            'name': 'multiple'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_button__attrs_multiple')
+        }
+        {
+            'name': 'name'
+            'type': 'string'
+            'descr': loc('%Controls_button__attrs_name')
+        }
+        {
+            'name': 'required'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_button__attrs_required')
+        }
+        {
+            'name': 'size'
+            'type': 'string'
+            'def': 'm'
+            'descr': loc('%Controls_button__attrs_size')
+        }
+        {
+            'name': 'target'
+            'type': 'string'
+            'descr': loc('%Controls_button__attrs_target')
+        }
+        {
+            'name': 'theme'
+            'type': 'string'
+            'def': 'normal'
+            'descr': (
+                loc('%Controls_button__attrs_theme')
+                " "
+
+                for button-theme.* {
+                    if (index() > 0) {
+                        ", "
+                    }
+                    wrap-code(.)
+                }
+                "."
+            )
+        }
+        {
+            'name': 'type'
+            'type': 'string'
+            'def': 'button'
+            'descr': (
+                loc('%Controls_button__attrs_type')
+                " "
+
+                for button-type.* {
+                    if (index() > 0) {
+                        ", "
+                    }
+                    wrap-code(.)
+                }
+                "."
+            )
+        }
+        {
+            'name': 'value'
+            'type': 'string'
+            'descr': loc('%Controls_button__attrs_value')
+        }
+    ]
+
+    apply . _content_attrs (button-attrs)
+
+    apply . _content_sample ("<xb-button type=\"checkbox\">checkbox</xb-button>")
+
+    <a href="#/examples/button">{loc('%Controls__more_example')}</a>
+}
+
 match .* _content-link {
     <h2 class="sub-header anchor" data-hash="controls/link">{loc('%Controls_link__title')}</h2>
     <p>{html(loc('%Controls_link__descr_p1'))}</p>
 
-    <h3>{loc('%Controls__syntax')}</h3>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-link href=\"http://ya.ru\" target=\"_blank\">ya.ru</xb-link>"
-            </code>
-        </pre>
-    </div>
+    apply . _content_syntax ("<xb-link href=\"http://ya.ru\" target=\"_blank\">ya.ru</xb-link>")
 
     <h3>{loc('%Controls__attrs')}</h3>
     <table class="table table-hover">
@@ -93,21 +260,9 @@ match .* _content-link {
         </tr>
     </table>
 
-    <h3>{loc('%Controls__example')}</h3>
-    <div class="panel panel-example">
-        <div class="panel-heading">
-            <xb-link href="http://ya.ru" target="_blank" theme="outer">ya.ru</xb-link>
-        </div>
-        <div class="panel-body highlight">
-            <pre>
-                <code class="html">
-                    "<xb-link href=\"http://ya.ru\" target=\"_blank\" theme=\"outer\">ya.ru</xb-link>"
-                </code>
-            </pre>
-        </div>
-    </div>
+    apply . _content_sample ("<xb-link href=\"http://ya.ru\" target=\"_blank\" theme=\"outer\">ya.ru</xb-link>")
 
-    <a href="#/examples/link">{loc('%Controls_link__more_example')}</a>
+    <a href="#/examples/link">{loc('%Controls__more_example')}</a>
 }
 
 match .* _content-ico {
@@ -116,14 +271,7 @@ match .* _content-ico {
     <p>{html(loc('%Controls_ico__descr_p2'))}</p>
     <p>{html(loc('%Controls_ico__descr_p3'))}</p>
 
-    <h3>{loc('%Controls__syntax')}</h3>
-    <div class="highlight">
-        <pre>
-            <code class="html">
-                "<xb-ico type=\"notification\">{loc('%Controls_ico__syntax_example')}</xb-ico>"
-            </code>
-        </pre>
-    </div>
+    apply . _content_syntax ("<xb-ico type=\"notification\">{loc('%Controls_ico__syntax_example')}</xb-ico>")
 
     <h3>{loc('%Controls__attrs')}</h3>
     <table class="table table-hover">
@@ -200,19 +348,7 @@ match .* _content-ico {
         </tr>
     </table>
 
-    <h3>{loc('%Controls__example')}</h3>
-    <div class="panel panel-example">
-        <div class="panel-heading">
-            <xb-ico type="twitter" disabled="disabled"></xb-ico>
-        </div>
-        <div class="panel-body highlight">
-            <pre>
-                <code class="html">
-                    "<xb-ico type=\"twitter\" disabled></xb-ico>"
-                </code>
-            </pre>
-        </div>
-    </div>
+    apply . _content_sample ("<xb-ico type=\"twitter\" disabled></xb-ico>")
 
-    <a href="#/examples/icons">{loc('%Controls_ico__more_example')}</a>
+    <a href="#/examples/icons">{loc('%Controls__more_example')}</a>
 }

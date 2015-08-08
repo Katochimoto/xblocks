@@ -208,8 +208,8 @@ match .* _content {
         "See more info about links."
     </a>
 
-    <h2 class="sub-header anchor" data-hash="examples/buttons">
-        "Buttons"
+    <h2 class="sub-header anchor" data-hash="examples/button">
+        "Button"
     </h2>
 
     "To display buttons, use the tag "
@@ -344,7 +344,7 @@ match .* _content {
         </div>
     </div>
 
-    <a href="#/controls/buttons">
+    <a href="#/controls/button">
         "See more info about buttons."
     </a>
 
@@ -903,7 +903,7 @@ match .* _content {
 
     <div class="panel panel-example">
         <div class="panel-heading">
-            <xb-menu id="menu5" type="context">
+            <xb-menu id="menu5">
                 <xb-menuitem label="label 1"></xb-menuitem>
                 <xb-menuitem label="label 2"></xb-menuitem>
             </xb-menu>
@@ -915,7 +915,7 @@ match .* _content {
         <div class="panel-body highlight">
             <pre>
                 <code class="html">
-                    "<xb-menu type=\"context\" id=\"menuId\">"
+                    "<xb-menu id=\"menuId\">"
                     <br/>
                     "    <xb-menuitem label=\"label 1\"></xb-menuitem>"
                     <br/>
