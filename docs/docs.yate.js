@@ -102,7 +102,7 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "</div>";
         r0 += "<div id=\"" + "navbar" + "\" class=\"" + "navbar-collapse collapse" + "\">";
         r0 += "<ul class=\"" + "nav navbar-nav navbar-right" + "\">";
-        r0 += "<li><a href=\"" + "/xblocks/jsdoc" + "\">" + "JSDoc" + "</a></li>";
+        r0 += "<li><a href=\"" + "../jsdoc" + "\">" + "JSDoc" + "</a></li>";
         r0 += "<li><a href=\"" + "https://github.com/Katochimoto/xblocks" + "\">" + "GitHub" + "</a></li>";
         r0 += "</ul>";
         r0 += "</div>";
