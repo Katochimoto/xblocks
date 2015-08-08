@@ -41,8 +41,8 @@
 
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../node_modules/yate/lib/runtime.js"></script>
     <script src="../bower_components/director/build/director.min.js"></script>
+    <script src="../scripts/runtime.js"></script>
     <script src="../scripts/highlight.pack.js"></script>
     <script src="../scripts/externals.yate.js"></script>
     <script src="../scripts/localizations.js"></script>
@@ -212,7 +212,7 @@ var loadModule = (function() {
             }
 
         } else {
-            $.getScript('/docs/' + module + '.js').then(function() {
+            $.getScript('docs/' + module + '.js').then(function() {
                 _loadModules[ module ] = true;
                 dfd.resolve();
 
