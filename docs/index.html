@@ -212,7 +212,7 @@ var loadModule = (function() {
             }
 
         } else {
-            $.getScript('docs/' + module + '.js').then(function() {
+            $.getScript(module + '.js').then(function() {
                 _loadModules[ module ] = true;
                 dfd.resolve();
 
