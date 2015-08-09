@@ -7,7 +7,7 @@ match .* _content {
     </h1>
 
     <h2 class="sub-header anchor" data-hash="examples/icons">
-        "Icons"
+        "Ico"
     </h2>
 
     "To display icons, use the tag "
@@ -149,7 +149,7 @@ match .* _content {
         </div>
     </div>
 
-    <a href="#/controls/icons">
+    <a href="#/controls/ico">
         "See more info about icons."
     </a>
 

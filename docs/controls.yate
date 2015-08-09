@@ -16,10 +16,7 @@ match .* _content {
     <p>&nbsp;</p>
     apply . _content-radio
     <p>&nbsp;</p>
-
-    <h2 class="sub-header anchor" data-hash="controls/input">
-        "Input"
-    </h2>
+    apply . _content-input
     <p>&nbsp;</p>
 
     <h2 class="sub-header anchor" data-hash="controls/popup">
@@ -37,7 +34,7 @@ match .* _content_attrs (array attrs) {
     <table class="table table-hover">
         for attrs.* {
             <tr>
-                <td class="text-info">{.name}</td>
+                <td class="text-info" nowrap="nowrap">{.name}</td>
                 <td>{.type}</td>
                 <td>
                     if (.def) {
@@ -69,6 +66,121 @@ match .* _content_syntax (scalar sample) {
             <code class="html">{sample}</code>
         </pre>
     </div>
+}
+
+match .* _content-input {
+    <h2 class="sub-header anchor" data-hash="controls/input">{loc('%Controls_input__title')}</h2>
+    <p>{html(loc('%Controls_input__descr_p1'))}</p>
+
+    apply . _content_syntax ("<xb-input name=\"input_name\"></xb-input>")
+
+    attrs = [
+        {
+            'name': 'autocomplete'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_autocomplete')
+        }
+        {
+            'name': 'autofocus'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_autofocus')
+        }
+        {
+            'name': 'autosize'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_input__attrs_autosize')
+        }
+        {
+            'name': 'cols'
+            'type': 'string'
+            'descr': loc('%Controls_input__attrs_cols')
+        }
+        {
+            'name': 'ghost'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_input__attrs_ghost')
+        }
+        {
+            'name': 'multiline'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_input__attrs_multiline')
+        }
+        {
+            'name': 'name'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_name')
+        }
+        {
+            'name': 'placeholder'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_placeholder')
+        }
+        {
+            'name': 'postfix'
+            'type': 'string'
+            'descr': loc('%Controls_input__attrs_postfix')
+        }
+        {
+            'name': 'prefix'
+            'type': 'string'
+            'descr': loc('%Controls_input__attrs_prefix')
+        }
+        {
+            'name': 'readonly'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_readonly')
+        }
+        {
+            'name': 'required'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_required')
+        }
+        {
+            'name': 'reset'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls_input__attrs_reset')
+        }
+        {
+            'name': 'rows'
+            'type': 'string'
+            'def': '4'
+            'descr': loc('%Controls_input__attrs_rows')
+        }
+        {
+            'name': 'size'
+            'type': 'string'
+            'def': 'm'
+            'descr': loc('%Controls_input__attrs_size')
+        }
+        {
+            'name': 'value'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_value')
+        }
+        {
+            'name': 'xb-link'
+            'type': 'string'
+            'descr': loc('%Controls_input__attrs_xb-link')
+        }
+        {
+            'name': 'xb-link-[...]'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_xb-link')
+        }
+    ]
+
+    apply . _content_attrs (attrs)
+
+    apply . _content_sample ("<xb-input name=\"input_name\"></xb-input>")
+
+    <a href="#/examples/input">{loc('%Controls__more_example')}</a>
 }
 
 match .* _content-radio {
@@ -316,11 +428,22 @@ match .* _content-button {
             'type': 'string'
             'descr': loc('%Controls__attrs_value')
         }
+        {
+            'name': 'xb-ico-float'
+            'type': 'string'
+            'def': 'left'
+            'descr': loc('%Controls__attrs_xb-ico-float')
+        }
+        {
+            'name': 'xb-ico-[...]'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_xb-ico')
+        }
     ]
 
     apply . _content_attrs (attrs)
 
-    apply . _content_sample ("<xb-button type=\"checkbox\">checkbox</xb-button>")
+    apply . _content_sample ("<xb-button type=\"checkbox\" xb-ico-type=\"download\" xb-ico-float=\"right\">checkbox</xb-button>")
 
     <a href="#/examples/button">{loc('%Controls__more_example')}</a>
 }
@@ -466,5 +589,5 @@ match .* _content-ico {
 
     apply . _content_sample ("<xb-ico type=\"twitter\" disabled></xb-ico>")
 
-    <a href="#/examples/icons">{loc('%Controls__more_example')}</a>
+    <a href="#/examples/ico">{loc('%Controls__more_example')}</a>
 }
