@@ -1,3 +1,5 @@
+//jscs:disable
+
 /* ../node_modules/xblocks-utils/xblocks-utils.js begin */
 /* jshint -W067 */
 /* jshint unused: false */
@@ -1296,6 +1298,8 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
 
 /* jshint -W067 */
 /* jshint unused: false */
+//jscs:enable
+
 (function(global, undefined) {
     'use strict';
 
@@ -1377,8 +1381,10 @@ xblocks.event.filterMouseLeave = xblocks.event.filterMouseEnter;
 
 
     /* utils.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * @memberOf xblocks
@@ -1390,8 +1396,10 @@ xblocks.utils.REG_PROPS_PREFIX_LINK = /^xb-link-/;
 xblocks.utils.REG_PROPS_PREFIX_ICO = /^xb-ico-/;
 
 /* utils/filterPropsPrefixLink.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.filterPropsPrefixLink = function(name) {
     return xblocks.utils.REG_PROPS_PREFIX_LINK.test(name);
@@ -1400,8 +1408,10 @@ xblocks.utils.filterPropsPrefixLink = function(name) {
 /* utils/filterPropsPrefixLink.js end */
 
 /* utils/filterLinkProps.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.filterLinkProps = function(props) {
     return xblocks.utils.mapObject(
@@ -1413,8 +1423,10 @@ xblocks.utils.filterLinkProps = function(props) {
 /* utils/filterLinkProps.js end */
 
 /* utils/mapPropsPrefixLink.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.mapPropsPrefixLink = function(name, descr) {
     return {
@@ -1426,8 +1438,10 @@ xblocks.utils.mapPropsPrefixLink = function(name, descr) {
 /* utils/mapPropsPrefixLink.js end */
 
 /* utils/filterPropsPrefixIco.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.filterPropsPrefixIco = function(name) {
     return xblocks.utils.REG_PROPS_PREFIX_ICO.test(name);
@@ -1436,8 +1450,10 @@ xblocks.utils.filterPropsPrefixIco = function(name) {
 /* utils/filterPropsPrefixIco.js end */
 
 /* utils/filterIcoProps.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.filterIcoProps = function(props) {
     return xblocks.utils.mapObject(
@@ -1449,8 +1465,10 @@ xblocks.utils.filterIcoProps = function(props) {
 /* utils/filterIcoProps.js end */
 
 /* utils/mapPropsPrefixIco.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.mapPropsPrefixIco = function(name, descr) {
     return {
@@ -1462,8 +1480,10 @@ xblocks.utils.mapPropsPrefixIco = function(name, descr) {
 /* utils/mapPropsPrefixIco.js end */
 
 /* utils/exportPropTypes.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 xblocks.utils.exportPropTypes = function(tagName) {
     var props = xblocks.utils.propTypes(tagName);
@@ -1485,8 +1505,10 @@ xblocks.utils.exportPropTypes = function(tagName) {
 /* utils/exportPropTypes.js end */
 
 /* utils/resetLastRadioChecked.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 (function() {
 
@@ -1515,8 +1537,10 @@ xblocks.utils.exportPropTypes = function(tagName) {
 /* utils/resetLastRadioChecked.js end */
 
 /* utils/getParentMenu.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * @param {HTMLElement} node
@@ -1542,8 +1566,10 @@ xblocks.utils.getParentMenu = function(node) {
 /* utils.js end */
 
     /* mixin.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * @memberOf xblocks
@@ -1552,8 +1578,10 @@ xblocks.utils.getParentMenu = function(node) {
 xblocks.mixin = xblocks.mixin || {};
 
 /* mixin/element/eDisabled.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Disabled element interface
@@ -1602,8 +1630,10 @@ xblocks.mixin.eDisabled = {
 /* mixin/element/eDisabled.js end */
 
 /* mixin/element/eChecked.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Checked element interface
@@ -1655,8 +1685,10 @@ xblocks.mixin.eChecked = {
 /* mixin/element/eChecked.js end */
 
 /* mixin/element/eInputValueState.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Value element interface.
@@ -1741,8 +1773,10 @@ xblocks.mixin.eInputValueState = {
 /* mixin/element/eInputValueState.js end */
 
 /* mixin/element/eInputValueProps.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Value element interface.
@@ -1813,8 +1847,10 @@ xblocks.mixin.eInputValueProps = {
 /* mixin/element/eInputValueProps.js end */
 
 /* mixin/element/eFocus.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Focus element interface
@@ -1855,8 +1891,10 @@ xblocks.mixin.eFocus = {
 /* mixin/element/eFocus.js end */
 
 /* mixin/element/eMenu.js begin */
+//jscs:disable
 /* global xblocks */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
@@ -1939,8 +1977,10 @@ xblocks.mixin.eMenu = {
 
 
 /* mixin/view/vCommonAttrs.js begin */
+//jscs:disable
 /* global xblocks, React */
 /* jshint strict: false */
+//jscs:enable
 
 /**
  * Common attributes
@@ -2195,8 +2235,10 @@ xblocks.mixin.vMenu = {
 
 
     /* blocks/ico/ico.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/ico/ico.jsx.js begin */
 /* global xblocks, React, xv */
@@ -2312,8 +2354,10 @@ xb.Ico = xblocks.create('xb-ico', [
 /* blocks/ico/ico.js end */
 
     /* blocks/link/link.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/link/link.jsx.js begin */
 /* global xblocks, React, xv */
@@ -2393,18 +2437,24 @@ xv.Link = xblocks.view.register('xb-link', [xblocks.mixin.vCommonAttrs, {
  *
  * @class xb.Link
  * @memberof xb
- * @augments HTMLElement
+ * @augments HTMLAnchorElement
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Link = xblocks.create('xb-link', [
-    xblocks.mixin.eDisabled
+    xblocks.mixin.eDisabled,
+
+    {
+        'prototype': Object.create(HTMLAnchorElement.prototype)
+    }
 ]);
 
 /* blocks/link/link.js end */
 
     /* blocks/button/button.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/button/button.jsx.js begin */
 /* global xblocks, React, xv */
@@ -2756,8 +2806,10 @@ xb.Button = xblocks.create('xb-button', [
 /* blocks/button/button.js end */
 
     /* blocks/input/input.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/input/input.jsx.js begin */
 /* global xblocks, React, xv */
@@ -2922,7 +2974,6 @@ xv.Input = xblocks.view.register('xb-input', [xblocks.mixin.vCommonAttrs, xblock
         'reset': React.PropTypes.bool,
         'rows': React.PropTypes.string,
         'size': React.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
-        'tabindex': React.PropTypes.string,
         'type': React.PropTypes.oneOf(['text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg']),
         'value': React.PropTypes.string,
         'xb-link': React.PropTypes.string
@@ -3131,7 +3182,7 @@ xv.Input = xblocks.view.register('xb-input', [xblocks.mixin.vCommonAttrs, xblock
  *
  * @class xb.Input
  * @memberof xb
- * @augments HTMLElement
+ * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
@@ -3142,15 +3193,17 @@ xb.Input = xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        'prototype': Object.create(HTMLElement.prototype)
+        'prototype': Object.create(HTMLInputElement.prototype)
     }
 ]);
 
 /* blocks/input/input.js end */
 
     /* blocks/checkbox/checkbox.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/checkbox/checkbox.jsx.js begin */
 /* global xblocks, React, xv */
@@ -3311,8 +3364,10 @@ xb.Checkbox = xblocks.create('xb-checkbox', [
 /* blocks/checkbox/checkbox.js end */
 
     /* blocks/radio/radio.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/radio/radio.jsx.js begin */
 /* global xblocks, React, xv */
@@ -3483,8 +3538,10 @@ xb.Radio = xblocks.create('xb-radio', [
 /* blocks/radio/radio.js end */
 
     /* blocks/popup/popup.js begin */
+//jscs:disable
 /* global global, xblocks, Tether, __doc, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/popup/popup.jsx.js begin */
 /* global xblocks, React, xv */
@@ -3861,8 +3918,10 @@ xb.Popup = xblocks.create('xb-popup', [
 /* blocks/popup/popup.js end */
 
     /* blocks/menuseparator/menuseparator.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/menuseparator/menuseparator.jsx.js begin */
 /* global xblocks, xv */
@@ -3905,8 +3964,10 @@ xb.Menuseparator = xblocks.create('xb-menuseparator', [
 /* blocks/menuseparator/menuseparator.js end */
 
     /* blocks/menuitem/menuitem.js begin */
+//jscs:disable
 /* global xblocks, global, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/menuitem/menuitem.jsx.js begin */
 /* global xblocks, React, xv */
@@ -4213,11 +4274,15 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 /* blocks/menuitem/menuitem.js end */
 
     /* blocks/menu/menu.js begin */
+//jscs:disable
 /* global global, xblocks, __forEach, xb, _xbPopup */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/menu/_contextmenu.js begin */
+//jscs:disable
 /* global xblocks, __doc */
+//jscs:enable
 
 __doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
     var element = event.delegateElement;
@@ -4486,8 +4551,10 @@ xb.Menu = xblocks.create('xb-menu', [
 /* blocks/menu/menu.js end */
 
     /* blocks/menu-inline/menu-inline.js begin */
+//jscs:disable
 /* global xblocks, __noop, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /**
 * Checked in:
@@ -4589,8 +4656,10 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
 /* blocks/menu-inline/menu-inline.js end */
 
     /* blocks/select/select.js begin */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/select/select.jsx.js begin */
 /* global xblocks, React, Tether, xv */
@@ -4734,9 +4803,10 @@ xb.Select = xblocks.create('xb-select', [
 /* blocks/select/select.js end */
 
     /* blocks/calendar/calendar.js begin */
-/** @jsx React.DOM */
+//jscs:disable
 /* global xblocks, xb */
 /* jshint strict: false */
+//jscs:enable
 
 /* blocks/calendar/calendar.jsx.js begin */
 /* global xblocks, React, xv */

@@ -30,7 +30,7 @@
  *
  * @class xb.Input
  * @memberof xb
- * @augments HTMLElement
+ * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
@@ -41,6 +41,6 @@ xb.Input = xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        'prototype': Object.create(HTMLElement.prototype)
+        'prototype': Object.create(HTMLInputElement.prototype)
     }
 ]);

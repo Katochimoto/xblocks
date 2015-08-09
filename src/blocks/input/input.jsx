@@ -40,7 +40,6 @@ xv.Input = xblocks.view.register('xb-input', [
             'reset':        React.PropTypes.bool,
             'rows':         React.PropTypes.string,
             'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'tabindex':     React.PropTypes.string,
             'type':         React.PropTypes.oneOf([ 'text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg' ]),
             'value':        React.PropTypes.string,
             'xb-link':      React.PropTypes.string

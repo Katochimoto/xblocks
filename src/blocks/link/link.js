@@ -10,9 +10,13 @@
  *
  * @class xb.Link
  * @memberof xb
- * @augments HTMLElement
+ * @augments HTMLAnchorElement
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Link = xblocks.create('xb-link', [
-    xblocks.mixin.eDisabled
+    xblocks.mixin.eDisabled,
+
+    {
+        'prototype': Object.create(HTMLAnchorElement.prototype)
+    }
 ]);
