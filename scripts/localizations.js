@@ -6,6 +6,14 @@ String.toLocaleString({
         '%Controls__example': 'Пример',
         '%Controls__more_example': 'Больше примеров.',
 
+        '%Controls__attrs_autofocus': 'Устанавливает фокус в поле формы.',
+        '%Controls__attrs_checked': 'Предварительно активированный переключатель или флажок.',
+        '%Controls__attrs_form': 'Связывает поле с формой по её идентификатору.',
+        '%Controls__attrs_for': 'Идентификатор элемента, с которым следует установить связь.',
+        '%Controls__attrs_name': 'Имя поля, предназначено для того, чтобы обработчик формы мог его идентифицировать.',
+        '%Controls__attrs_required': 'Обязательное для заполнения поле.',
+        '%Controls__attrs_value': 'Значение элемента.',
+
         '%Controls_ico__title': 'Ico',
         '%Controls_ico__descr_p1': 'Тег <code>&lt;xb-ico&gt;</code> позволяет создавать элемент интерфейса в виде иконки.',
         '%Controls_ico__descr_p2': 'Набор иконок заранее определен. Выбор нужной иконки осуществляется указанием атрибута <code>type</code>.',
@@ -27,22 +35,19 @@ String.toLocaleString({
         '%Controls_button__title': 'Button',
         '%Controls_button__descr_p1': 'Тег <code>&lt;xb-button&gt;</code> предназначен для создания кнопок.',
         '%Controls_button__descr_p2': 'В зависимости от атрибута <code>type</code> кнопка может быть ссылкой или переключателем.',
-        '%Controls_button__attrs_name': 'Имя поля, предназначено для того, чтобы обработчик формы мог его идентифицировать.',
-        '%Controls_button__attrs_autofocus': 'Устанавливает фокус в поле формы.',
-        '%Controls_button__attrs_checked': 'Предварительно активированный переключатель или флажок.',
-        '%Controls_button__attrs_form': 'Связывает поле с формой по её идентификатору.',
-        '%Controls_button__attrs_for': 'Идентификатор элемента, с которым следует установить связь. Для типа <code>label</code>.',
         '%Controls_button__attrs_href': 'Задает адрес документа, на который следует перейти. Для типа <code>link</code>.',
         '%Controls_button__attrs_multiple': 'Позволяет загрузить несколько файлов одновременно. Для типа <code>file</code>.',
-        '%Controls_button__attrs_required': 'Обязательное для заполнения поле.',
         '%Controls_button__attrs_size': 'Размер кнопки. Возможные значения: <code>s</code>, <code>m</code>, <code>l</code>, <code>xl</code>.',
         '%Controls_button__attrs_target': 'Имя окна или фрейма, куда браузер будет загружать документ. Для типа <code>link</code>.',
         '%Controls_button__attrs_theme': 'Тема оформления. Возможные значения:',
         '%Controls_button__attrs_type': 'Тип кнопки. Возможные значения:',
-        '%Controls_button__attrs_value': 'Значение элемента.',
 
         '%Controls_checkbox__title': 'Checkbox',
-        '%Controls_checkbox__descr_p1': 'Тег <code>&lt;xb-checkbox&gt;</code> предназначен для создания переключателя.'
+        '%Controls_checkbox__descr_p1': 'Тег <code>&lt;xb-checkbox&gt;</code> предназначен для создания флажка.',
+        '%Controls_checkbox__attrs_size': 'Размер флажка. Возможные значения: <code>s</code>, <code>m</code>.',
+
+        '%Controls_radio__title': 'Radio',
+        '%Controls_radio__descr_p1': 'Тег <code>&lt;xb-radio&gt;</code> предназначен для создания переключателя.'
     },
 
     'en': {

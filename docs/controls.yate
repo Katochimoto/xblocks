@@ -14,10 +14,7 @@ match .* _content {
     <p>&nbsp;</p>
     apply . _content-checkbox
     <p>&nbsp;</p>
-
-    <h2 class="sub-header anchor" data-hash="controls/radio">
-        "Radio"
-    </h2>
+    apply . _content-radio
     <p>&nbsp;</p>
 
     <h2 class="sub-header anchor" data-hash="controls/input">
@@ -74,11 +71,122 @@ match .* _content_syntax (scalar sample) {
     </div>
 }
 
+match .* _content-radio {
+    <h2 class="sub-header anchor" data-hash="controls/radio">{loc('%Controls_radio__title')}</h2>
+    <p>{html(loc('%Controls_radio__descr_p1'))}</p>
+
+    apply . _content_syntax ("<xb-radio value=\"1\" name=\"radio\">radio label</xb-radio>")
+
+    attrs = [
+        {
+            'name': 'autofocus'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_autofocus')
+        }
+        {
+            'name': 'checked'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_checked')
+        }
+        {
+            'name': 'for'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_for')
+        }
+        {
+            'name': 'form'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_form')
+        }
+        {
+            'name': 'name'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_name')
+        }
+        {
+            'name': 'required'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_required')
+        }
+        {
+            'name': 'size'
+            'type': 'string'
+            'def': 'm'
+            'descr': loc('%Controls_checkbox__attrs_size')
+        }
+        {
+            'name': 'value'
+            'type': 'string'
+            'def': 'on'
+            'descr': loc('%Controls__attrs_value')
+        }
+    ]
+
+    apply . _content_attrs (attrs)
+
+    apply . _content_sample ("<xb-radio value=\"1\" name=\"radio\" checked>radio label1</xb-radio>\n<br/>\n<xb-radio value=\"2\" name=\"radio\">radio label2</xb-radio>")
+
+    <a href="#/examples/radio">{loc('%Controls__more_example')}</a>
+}
+
 match .* _content-checkbox {
     <h2 class="sub-header anchor" data-hash="controls/checkbox">{loc('%Controls_checkbox__title')}</h2>
     <p>{html(loc('%Controls_checkbox__descr_p1'))}</p>
 
     apply . _content_syntax ("<xb-checkbox value=\"1\" name=\"checkbox\">checkbox label</xb-checkbox>")
+
+    attrs = [
+        {
+            'name': 'autofocus'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_autofocus')
+        }
+        {
+            'name': 'checked'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_checked')
+        }
+        {
+            'name': 'for'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_for')
+        }
+        {
+            'name': 'form'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_form')
+        }
+        {
+            'name': 'name'
+            'type': 'string'
+            'descr': loc('%Controls__attrs_name')
+        }
+        {
+            'name': 'required'
+            'type': 'boolean'
+            'def': 'false'
+            'descr': loc('%Controls__attrs_required')
+        }
+        {
+            'name': 'size'
+            'type': 'string'
+            'def': 'm'
+            'descr': loc('%Controls_checkbox__attrs_size')
+        }
+        {
+            'name': 'value'
+            'type': 'string'
+            'def': 'on'
+            'descr': loc('%Controls__attrs_value')
+        }
+    ]
+
+    apply . _content_attrs (attrs)
 
     apply . _content_sample ("<xb-checkbox value=\"1\" name=\"checkbox\">checkbox label</xb-checkbox>")
 
@@ -118,23 +226,23 @@ match .* _content-button {
             'name': 'autofocus'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_button__attrs_autofocus')
+            'descr': loc('%Controls__attrs_autofocus')
         }
         {
             'name': 'checked'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_button__attrs_checked')
+            'descr': loc('%Controls__attrs_checked')
         }
         {
             'name': 'for'
             'type': 'string'
-            'descr': loc('%Controls_button__attrs_for')
+            'descr': loc('%Controls__attrs_for')
         }
         {
             'name': 'form'
             'type': 'string'
-            'descr': loc('%Controls_button__attrs_form')
+            'descr': loc('%Controls__attrs_form')
         }
         {
             'name': 'href'
@@ -150,13 +258,13 @@ match .* _content-button {
         {
             'name': 'name'
             'type': 'string'
-            'descr': loc('%Controls_button__attrs_name')
+            'descr': loc('%Controls__attrs_name')
         }
         {
             'name': 'required'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_button__attrs_required')
+            'descr': loc('%Controls__attrs_required')
         }
         {
             'name': 'size'
@@ -206,7 +314,7 @@ match .* _content-button {
         {
             'name': 'value'
             'type': 'string'
-            'descr': loc('%Controls_button__attrs_value')
+            'descr': loc('%Controls__attrs_value')
         }
     ]
 
