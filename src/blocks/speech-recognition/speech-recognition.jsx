@@ -15,11 +15,12 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
         'displayName': 'xb-speech-recognition',
 
         'propTypes': {
-
+            'active': React.PropTypes.bool
         },
 
         'getDefaultProps': function() {
             return {
+                'active':    false,
                 'disabled':  false
             };
         },
@@ -28,13 +29,16 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
         'render': function() {
             var classes = {
                 'xb-speech-recognition': true,
+                '_active': this.props.active,
                 '_disabled': this.props.disabled
             };
 
             classes = classNames(classes);
 
             return (
-                <div className={classes}></div>
+                <div className={classes}>
+                    <xb-ico type="mic-off" />
+                </div>
             );
         }
         /* jshint ignore:end */

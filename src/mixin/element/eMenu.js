@@ -29,7 +29,7 @@ xblocks.mixin.eMenu = {
          * @this {xb.Menu}
          */
         'keydown:keypass(13,39)': function() {
-            var item = this._xbfocus.getItem();
+            var item = this._xbFocus.getItem();
 
             if (item && item.submenuInstance) {
                 item.submenuInstance.open();

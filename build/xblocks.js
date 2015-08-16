@@ -530,7 +530,7 @@ xblocks.utils.uid = function() {
 
 /* xblocks/utils/uid.js end */
 
-/* xblocks/utils/table.js begin */
+/* xblocks/utils/Table.js begin */
 /* global __pop, __slice */
 
 xblocks.utils.Table = function(node, options) {
@@ -860,7 +860,7 @@ xblocks.utils.Table.prototype = {
     }
 };
 
-/* xblocks/utils/table.js end */
+/* xblocks/utils/Table.js end */
 
 /* xblocks/utils/lazyFocus.js begin */
 /* global xblocks, global */
@@ -872,6 +872,40 @@ xblocks.utils.lazyFocus = function(node) {
 
 /* xblocks/utils/lazyFocus.js end */
 
+/* xblocks/utils/SpeechRecognition.js begin */
+/**
+ *
+ *
+ */
+xblocks.utils.SpeechRecognition = function(options) {
+    options = options || {};
+
+    this.started = false;
+    this._engine = new webkitSpeechRecognition();
+};
+
+xblocks.utils.SpeechRecognition.prototype = {
+    start: function() {
+        if (this.started) {
+            return;
+        }
+
+        this.started = true;
+        this._engine.start();
+    },
+
+    stop: function() {
+        if (!this.started) {
+            return;
+        }
+
+        this.started = false;
+        this._engine.stop();
+    }
+};
+
+/* xblocks/utils/SpeechRecognition.js end */
+
 
 /* xblocks/utils.js end */
 
@@ -881,7 +915,8 @@ xblocks.utils.lazyFocus = function(node) {
 /* jshint strict: false */
 
 xblocks.dom.index = function(selector, element, context) {
-    return __indexOf.call((context || __doc).querySelectorAll(selector), element);
+    context = context || __doc;
+    return __indexOf.call(context.querySelectorAll(selector), element);
 };
 
 /* xblocks/dom/index.js end */
@@ -1922,7 +1957,7 @@ xblocks.mixin.eMenu = {
          * @this {xb.Menu}
          */
         'keydown:keypass(13,39)': function() {
-            var item = this._xbfocus.getItem();
+            var item = this._xbFocus.getItem();
 
             if (item && item.submenuInstance) {
                 item.submenuInstance.open();
@@ -4430,7 +4465,7 @@ xb.Menu = xblocks.create('xb-menu', [
             },
 
             'xb-open': function() {
-                this._xbfocus = new xblocks.utils.Table(this, {
+                this._xbFocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
@@ -4446,9 +4481,9 @@ xb.Menu = xblocks.create('xb-menu', [
             },
 
             'xb-close': function() {
-                if (this._xbfocus) {
-                    this._xbfocus.destroy();
-                    this._xbfocus = undefined;
+                if (this._xbFocus) {
+                    this._xbFocus.destroy();
+                    this._xbFocus = undefined;
                 }
 
                 this._closeAllSubmenu();
@@ -4600,11 +4635,11 @@ xv.MenuInline = xblocks.view.register('xb-menu-inline', [xblocks.mixin.vCommonAt
 
 var _xbMenuInline = {
     'init': function() {
-        if (this._xbfocus) {
-            this._xbfocus.destroy();
+        if (this._xbFocus) {
+            this._xbFocus.destroy();
         }
 
-        this._xbfocus = new xblocks.utils.Table(this, {
+        this._xbFocus = new xblocks.utils.Table(this, {
             'col': 'xb-menu-inline:not([disabled])',
             'rowLoop': true,
             'colLoop': true
@@ -4635,7 +4670,7 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
 
             'blur': function() {
                 if (!this.hasOpenSubmenu) {
-                    this._xbfocus.blurItem();
+                    this._xbFocus.blurItem();
                 }
             }
         },
@@ -4899,10 +4934,13 @@ xb.Calendar = xblocks.create('xb-calendar');
 xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [xblocks.mixin.vCommonAttrs, {
     'displayName': 'xb-speech-recognition',
 
-    'propTypes': {},
+    'propTypes': {
+        'active': React.PropTypes.bool
+    },
 
     'getDefaultProps': function getDefaultProps() {
         return {
+            'active': false,
             'disabled': false
         };
     },
@@ -4911,12 +4949,17 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [xblocks.m
     'render': function render() {
         var classes = {
             'xb-speech-recognition': true,
+            '_active': this.props.active,
             '_disabled': this.props.disabled
         };
 
         classes = classNames(classes);
 
-        return React.createElement('div', { className: classes });
+        return React.createElement(
+            'div',
+            { className: classes },
+            React.createElement('xb-ico', { type: 'mic-off' })
+        );
     }
     /* jshint ignore:end */
 }]);
@@ -4927,15 +4970,56 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [xblocks.m
 /**
  * xb-speech-recognition html element
  *
- * in the development
- *
  * @class xb.SpeechRecognition
  * @augments HTMLElement
  * @memberof xb
+ * @mixes xblocks.mixin.eDisabled
+ * @listens xblocks.Element~event:xb-created
+ * @listens xblocks.Element~event:xb-update
  */
 xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
+    xblocks.mixin.eDisabled,
+
     {
-        'prototype': Object.create(HTMLElement.prototype)
+        'prototype': Object.create(HTMLElement.prototype),
+
+        'events': {
+            'xb-created': function() {
+                this._xbRecognition = new xblocks.utils.SpeechRecognition();
+
+                if (this.state.active) {
+                    this._xbRecognition.start();
+                }
+
+                console.log('>> created', this.state.active);
+            },
+
+            'xb-update': function() {
+                if (this.state.active) {
+                    this._xbRecognition.start();
+
+                } else {
+                    this._xbRecognition.stop();
+                }
+
+                console.log('>> update', this.state.active);
+            },
+
+            'click': function() {
+                this.active = !this.active;
+            }
+        },
+
+        /**
+         * @lends xb.SpeechRecognition.prototype
+         */
+        'accessors': {
+            'active': {
+                'attribute': {
+                    'boolean': true
+                }
+            }
+        }
     }
 ]);
 

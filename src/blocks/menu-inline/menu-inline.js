@@ -13,11 +13,11 @@
 
 var _xbMenuInline = {
     'init': function() {
-        if (this._xbfocus) {
-            this._xbfocus.destroy();
+        if (this._xbFocus) {
+            this._xbFocus.destroy();
         }
 
-        this._xbfocus = new xblocks.utils.Table(this, {
+        this._xbFocus = new xblocks.utils.Table(this, {
             'col': 'xb-menu-inline:not([disabled])',
             'rowLoop': true,
             'colLoop': true
@@ -48,7 +48,7 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
 
             'blur': function() {
                 if (!this.hasOpenSubmenu) {
-                    this._xbfocus.blurItem();
+                    this._xbFocus.blurItem();
                 }
             }
         },

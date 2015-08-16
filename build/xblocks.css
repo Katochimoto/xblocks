@@ -3739,6 +3739,22 @@ xb-select[hidden] {
 ._xb-select-dropdown > ._group > ._item > ._item-control:hover {
   background: rgba(255,193,0,0.37);
 }
+xb-speech-recognition {
+  display: inline-block;
+}
+xb-speech-recognition *,
+xb-speech-recognition *:before,
+xb-speech-recognition *:after {
+  -webkit-box-sizing: initial;
+     -moz-box-sizing: initial;
+          box-sizing: initial;
+}
+xb-speech-recognition[hidden] {
+  display: none;
+}
+.xb-speech-recognition {
+  cursor: pointer;
+}
 ._link {
   color: #22c;
   cursor: pointer;

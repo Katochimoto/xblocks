@@ -60,7 +60,7 @@ xb.Menu = xblocks.create('xb-menu', [
             },
 
             'xb-open': function() {
-                this._xbfocus = new xblocks.utils.Table(this, {
+                this._xbFocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
@@ -76,9 +76,9 @@ xb.Menu = xblocks.create('xb-menu', [
             },
 
             'xb-close': function() {
-                if (this._xbfocus) {
-                    this._xbfocus.destroy();
-                    this._xbfocus = undefined;
+                if (this._xbFocus) {
+                    this._xbFocus.destroy();
+                    this._xbFocus = undefined;
                 }
 
                 this._closeAllSubmenu();
