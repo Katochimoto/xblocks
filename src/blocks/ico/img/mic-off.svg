@@ -1,0 +1,13 @@
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 112 112" enable-background="new 0 0 112 112" xml:space="preserve">
+    <g id="tuts" sketch:type="MSPage">
+        <g id="mic_ff" sketch:type="MSLayerGroup">
+            <g id="speechkit_vector-9" transform="translate(39.000000, 32.000000)" sketch:type="MSShapeGroup" opacity="0.9">
+                <path id="Shape" d="M17,4c2.8,0,5,2.3,5,5.2v15.6c0,2.9-2.2,5.2-5,5.2s-5-2.3-5-5.2V9.2C12,6.3,14.2,4,17,4 M17,0
+                    c-5,0-9,4.1-9,9.2v15.6c0,5.1,4,9.2,9,9.2s9-4.1,9-9.2V9.2C26,4.1,22,0,17,0L17,0z"/>
+                <path id="Shape_1_"
+                    d="M34,23v1.1C34,34,26.4,42,17,42S0,34,0,24.1V23h4v0.1C4,31.3,9.8,38,17,38s13-6.7,13-14.9V23H34z"/>
+                <rect id="Rectangle-311" x="15" y="41" width="4" height="10"/>
+            </g>
+        </g>
+    </g>
+</svg>

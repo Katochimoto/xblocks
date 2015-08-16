@@ -1,6 +1,32 @@
 $svg ?= {}
 
-$svg-icons = 'close' 'download' 'upload' 'eye' 'link' 'trash' 'people' 'help' 'print' 'services' 'settings' 'attention' 'three-dots' 'play' 'pause' 'mail' 'link-white' 'download-white' 'upload-white' 'trash-white' 'vk' 'twitter' 'odnoklassniki'
+$svg-icons = {
+    'attention': 1,
+    'close': 1,
+    'download': 1,
+    'download-white': 1,
+    'eye': 1,
+    'help': 1,
+    'link': 1,
+    'link-white': 1,
+    'mail': 1,
+    'mic-off': 1,
+    'mic-on': 1,
+    'odnoklassniki': 1,
+    'pause': 1,
+    'people': 1,
+    'play': 1,
+    'print': 1,
+    'services': 1,
+    'settings': 1,
+    'three-dots': 1,
+    'trash': 1,
+    'trash-white': 1,
+    'twitter': 1,
+    'upload': 1,
+    'upload-white': 1,
+    'vk': 1
+}
 
 $svg["sizes"] = {
   s: 1.6*rem,
@@ -21,7 +47,7 @@ xb-ico
       width: $size-value
       height: $size-value
 
-  for $icon in $svg-icons
+  for $icon, $icon-on in $svg-icons
     &._type-{$icon}
       background-image: url('img/' + $icon + '.svg')
 

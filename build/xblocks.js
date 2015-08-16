@@ -2263,15 +2263,15 @@ xv.Ico = xblocks.view.register('xb-ico', [xblocks.mixin.vCommonAttrs, {
         'active': React.PropTypes.bool,
         'size': React.PropTypes.oneOf(['s', 'm']),
         'value': React.PropTypes.string,
-        'type': React.PropTypes.oneOf(['attention', 'close', 'check', 'download', 'download-white', 'dropdown', 'eye', 'link', 'link-white', 'mail', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'help', 'upload', 'upload-white', 'vk'])
+        'type': React.PropTypes.oneOf(['attention', 'check', 'close', 'download', 'download-white', 'dropdown', 'eye', 'help', 'link', 'link-white', 'mail', 'mic-off', 'mic-on', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'upload', 'upload-white', 'vk'])
     },
 
     'getDefaultProps': function getDefaultProps() {
         return {
-            'size': 's',
-            'children': String.fromCharCode(160),
             'active': false,
-            'disabled': false
+            'children': String.fromCharCode(160),
+            'disabled': false,
+            'size': 's'
         };
     },
 

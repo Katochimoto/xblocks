@@ -23,15 +23,18 @@ xv.Ico = xblocks.view.register('xb-ico', [
             'value':    React.PropTypes.string,
             'type':     React.PropTypes.oneOf([
                 'attention',
-                'close',
                 'check',
+                'close',
                 'download',
                 'download-white',
                 'dropdown',
                 'eye',
+                'help',
                 'link',
                 'link-white',
                 'mail',
+                'mic-off',
+                'mic-on',
                 'notification',
                 'odnoklassniki',
                 'pause',
@@ -45,7 +48,6 @@ xv.Ico = xblocks.view.register('xb-ico', [
                 'trash',
                 'trash-white',
                 'twitter',
-                'help',
                 'upload',
                 'upload-white',
                 'vk'
@@ -54,10 +56,10 @@ xv.Ico = xblocks.view.register('xb-ico', [
 
         'getDefaultProps': function() {
             return {
-                'size':     's',
-                'children': String.fromCharCode(160),
                 'active':   false,
-                'disabled': false
+                'children': String.fromCharCode(160),
+                'disabled': false,
+                'size':     's'
             };
         },
 

@@ -13,21 +13,8 @@
     <script src="/bower_components/xblocks-core/dist/xblocks-core-full.js"></script>
     <script src="/build/xblocks.js"></script>
 </head>
-<body style="height: 2000px;">
-<a id="targetMenu"
-    href="#"
-    onclick="document.getElementById('menu').open(); event.preventDefault();"
-    style="top: 1000px; position: absolute;">
-
-    show menu for the target object
-</a>
-
-<xb-menu id="menu" target="#targetMenu"
-            attachment="top left"
-            target-attachment="bottom left"
-            target-modifier="initial">
-    <xb-menuitem label="label 1"></xb-menuitem>
-    <xb-menuitem label="label 2"></xb-menuitem>
-</xb-menu>
+<body>
+    <xb-ico type="mic-on"></xb-ico>
+    <xb-ico type="mic-off" ></xb-ico>
 </body>
 </html>
