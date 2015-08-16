@@ -50,6 +50,7 @@
     /*! borschik:include:blocks/menu-inline/menu-inline.js */
     /*! borschik:include:blocks/select/select.js */
     /*! borschik:include:blocks/calendar/calendar.js */
+    /*! borschik:include:blocks/speech-recognition/speech-recognition.js */
 
 }(function() {
     return this || (1, eval)('this');

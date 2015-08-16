@@ -4877,6 +4877,70 @@ xb.Calendar = xblocks.create('xb-calendar');
 
 /* blocks/calendar/calendar.js end */
 
+    /* blocks/speech-recognition/speech-recognition.js begin */
+//jscs:disable
+/* global xblocks, xb */
+/* jshint strict: false */
+//jscs:enable
+
+/* blocks/speech-recognition/speech-recognition.jsx.js begin */
+/* global xblocks, React, Tether, xv */
+/* jshint strict: false */
+
+/**
+ * The template node xb-speech-recognition
+ *
+ * @class xv.SpeechRecognition
+ * @memberof xv
+ * @mixes xblocks.mixin.vCommonAttrs
+ */
+'use strict';
+
+xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [xblocks.mixin.vCommonAttrs, {
+    'displayName': 'xb-speech-recognition',
+
+    'propTypes': {},
+
+    'getDefaultProps': function getDefaultProps() {
+        return {
+            'disabled': false
+        };
+    },
+
+    /* jshint ignore:start */
+    'render': function render() {
+        var classes = {
+            'xb-speech-recognition': true,
+            '_disabled': this.props.disabled
+        };
+
+        classes = classNames(classes);
+
+        return React.createElement('div', { className: classes });
+    }
+    /* jshint ignore:end */
+}]);
+
+/* blocks/speech-recognition/speech-recognition.jsx.js end */
+
+
+/**
+ * xb-speech-recognition html element
+ *
+ * in the development
+ *
+ * @class xb.SpeechRecognition
+ * @augments HTMLElement
+ * @memberof xb
+ */
+xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
+    {
+        'prototype': Object.create(HTMLElement.prototype)
+    }
+]);
+
+/* blocks/speech-recognition/speech-recognition.js end */
+
 
 }(function() {
     return this || (1, eval)('this');
