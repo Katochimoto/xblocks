@@ -2833,36 +2833,35 @@ xv.InputController = xblocks.view.create({
     'mixins': [React.addons.PureRenderMixin],
 
     'propTypes': {
-        'className': React.PropTypes.string,
-        'name': React.PropTypes.string,
-        'disabled': React.PropTypes.bool,
-        'multiline': React.PropTypes.bool,
-        'required': React.PropTypes.bool,
-        'readOnly': React.PropTypes.bool,
-        'autosize': React.PropTypes.bool,
         'autoFocus': React.PropTypes.bool,
-        'rows': React.PropTypes.string,
-        'cols': React.PropTypes.string,
-        'placeholder': React.PropTypes.string,
-        'value': React.PropTypes.string,
-        'tabIndex': React.PropTypes.string,
         'autocomplete': React.PropTypes.oneOf(['on', 'off']),
-
+        'autosize': React.PropTypes.bool,
+        'className': React.PropTypes.string,
+        'cols': React.PropTypes.string,
+        'disabled': React.PropTypes.bool,
+        'isPlaceholderHint': React.PropTypes.bool,
+        'multiline': React.PropTypes.bool,
+        'name': React.PropTypes.string,
         'onChange': React.PropTypes.func,
         'onHintToggle': React.PropTypes.func,
-        'isPlaceholderHint': React.PropTypes.bool
+        'placeholder': React.PropTypes.string,
+        'readOnly': React.PropTypes.bool,
+        'required': React.PropTypes.bool,
+        'rows': React.PropTypes.string,
+        'tabIndex': React.PropTypes.string,
+        'value': React.PropTypes.string
     },
 
     'getDefaultProps': function getDefaultProps() {
         return {
-            'value': undefined,
-            'disabled': false,
-            'multiline': false,
-            'required': false,
-            'readOnly': false,
-            'autosize': false,
             'autoFocus': false,
-            'isPlaceholderHint': false
+            'autosize': false,
+            'disabled': false,
+            'isPlaceholderHint': false,
+            'multiline': false,
+            'readOnly': false,
+            'required': false,
+            'value': undefined
         };
     },
 
@@ -2911,18 +2910,17 @@ xv.InputController = xblocks.view.create({
         }
 
         var props = {
-            'value': this.props.value,
-            'className': this.props.className,
-            'name': this.props.name,
-            'disabled': this.props.disabled,
-            'required': this.props.required,
-            'readOnly': this.props.readOnly,
             'autoFocus': this.props.autoFocus,
-            // macos inserts placeholder default
-            'placeholder': this.props.placeholder || '',
-            'tabIndex': tabIndex,
             'autocomplete': this.props.autocomplete,
-            'onChange': this.props.onChange
+            'className': this.props.className,
+            'disabled': this.props.disabled,
+            'name': this.props.name,
+            'onChange': this.props.onChange,
+            'placeholder': this.props.placeholder || '', // macos inserts placeholder default
+            'readOnly': this.props.readOnly,
+            'required': this.props.required,
+            'tabIndex': tabIndex,
+            'value': this.props.value
         };
 
         if (this.props.multiline) {
@@ -3066,23 +3064,23 @@ xv.Input = xblocks.view.register('xb-input', [xblocks.mixin.vCommonAttrs, xblock
 
         var isPlaceholderHint = false;
         var controllerProps = {
-            'key': 'controller',
-            'ref': 'controller',
-            'className': '_controller',
-            'value': this.state.value,
-            'name': this.props.name,
-            'disabled': this.props.disabled,
-            'required': this.props.required,
-            'readOnly': this.props.readonly,
-            'multiline': this.props.multiline,
             'autoFocus': this.props.autofocus,
-            'rows': this.props.rows,
-            'cols': this.props.cols,
-            'tabIndex': this.props.tabindex,
             'autocomplete': this.props.autocomplete,
             'autosize': this.props.autosize,
+            'className': '_controller',
+            'cols': this.props.cols,
+            'disabled': this.props.disabled,
+            'key': 'controller',
+            'multiline': this.props.multiline,
+            'name': this.props.name,
             'onChange': this._onChange,
-            'onHintToggle': this._onHintToggle
+            'onHintToggle': this._onHintToggle,
+            'readOnly': this.props.readonly,
+            'ref': 'controller',
+            'required': this.props.required,
+            'rows': this.props.rows,
+            'tabIndex': this.props.tabindex,
+            'value': this.state.value
         };
 
         if (isComplex) {

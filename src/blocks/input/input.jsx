@@ -139,23 +139,23 @@ xv.Input = xblocks.view.register('xb-input', [
 
             var isPlaceholderHint = false;
             var controllerProps = {
-                'key':          'controller',
-                'ref':          'controller',
-                'className':    '_controller',
-                'value':        this.state.value,
-                'name':         this.props.name,
-                'disabled':     this.props.disabled,
-                'required':     this.props.required,
-                'readOnly':     this.props.readonly,
-                'multiline':    this.props.multiline,
                 'autoFocus':    this.props.autofocus,
-                'rows':         this.props.rows,
-                'cols':         this.props.cols,
-                'tabIndex':     this.props.tabindex,
                 'autocomplete': this.props.autocomplete,
                 'autosize':     this.props.autosize,
+                'className':    '_controller',
+                'cols':         this.props.cols,
+                'disabled':     this.props.disabled,
+                'key':          'controller',
+                'multiline':    this.props.multiline,
+                'name':         this.props.name,
                 'onChange':     this._onChange,
-                'onHintToggle': this._onHintToggle
+                'onHintToggle': this._onHintToggle,
+                'readOnly':     this.props.readonly,
+                'ref':          'controller',
+                'required':     this.props.required,
+                'rows':         this.props.rows,
+                'tabIndex':     this.props.tabindex,
+                'value':        this.state.value
             };
 
             if (isComplex) {
