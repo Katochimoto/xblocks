@@ -885,6 +885,15 @@ xblocks.utils.SpeechRecognition = function(options) {
 };
 
 xblocks.utils.SpeechRecognition.prototype = {
+    toggle: function(state) {
+        if (state) {
+            this.start();
+
+        } else {
+            this.stop();
+        }
+    },
+
     start: function() {
         if (this.started) {
             return;
@@ -4958,7 +4967,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [xblocks.m
         return React.createElement(
             'div',
             { className: classes },
-            React.createElement('xb-ico', { type: 'mic-off' })
+            React.createElement('xb-ico', { type: this.props.active ? 'mic-on' : 'mic-off' })
         );
     }
     /* jshint ignore:end */
@@ -4986,23 +4995,11 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         'events': {
             'xb-created': function() {
                 this._xbRecognition = new xblocks.utils.SpeechRecognition();
-
-                if (this.state.active) {
-                    this._xbRecognition.start();
-                }
-
-                console.log('>> created', this.state.active);
+                this._xbRecognition.toggle(this.state.active);
             },
 
             'xb-update': function() {
-                if (this.state.active) {
-                    this._xbRecognition.start();
-
-                } else {
-                    this._xbRecognition.stop();
-                }
-
-                console.log('>> update', this.state.active);
+                this._xbRecognition.toggle(this.state.active);
             },
 
             'click': function() {

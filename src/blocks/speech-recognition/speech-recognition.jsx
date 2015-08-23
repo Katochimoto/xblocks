@@ -20,8 +20,8 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
 
         'getDefaultProps': function() {
             return {
-                'active':    false,
-                'disabled':  false
+                'active':   false,
+                'disabled': false
             };
         },
 
@@ -37,7 +37,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
 
             return (
                 <div className={classes}>
-                    <xb-ico type="mic-off" />
+                    <xb-ico type={this.props.active ? 'mic-on' : 'mic-off'} />
                 </div>
             );
         }

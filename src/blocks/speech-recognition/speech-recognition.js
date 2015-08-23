@@ -24,23 +24,11 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         'events': {
             'xb-created': function() {
                 this._xbRecognition = new xblocks.utils.SpeechRecognition();
-
-                if (this.state.active) {
-                    this._xbRecognition.start();
-                }
-
-                console.log('>> created', this.state.active);
+                this._xbRecognition.toggle(this.state.active);
             },
 
             'xb-update': function() {
-                if (this.state.active) {
-                    this._xbRecognition.start();
-
-                } else {
-                    this._xbRecognition.stop();
-                }
-
-                console.log('>> update', this.state.active);
+                this._xbRecognition.toggle(this.state.active);
             },
 
             'click': function() {
