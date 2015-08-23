@@ -875,16 +875,92 @@ xblocks.utils.lazyFocus = function(node) {
 /* xblocks/utils/SpeechRecognition.js begin */
 /**
  *
- *
+ * @param {Object} params
+ * @param {string} params.lang язык, который будет распозноваться
+ * @param {boolean} [params.continuous=false] продолжать распознование при остановке диктовки
+ * @param {boolean} [params.interimResults=false] выводить промежуточные не откорректированные результаты
  */
-xblocks.utils.SpeechRecognition = function(options) {
-    options = options || {};
-
-    this.started = false;
+xblocks.utils.SpeechRecognition = function(params) {
+    this._events = {};
+    this._params = {};
+    this._started = false;
     this._engine = new webkitSpeechRecognition();
+    this._applyParams(params);
+
+    for (var eventName in this._engineEvents) {
+        this._engine[ eventName ] = this._engineEvents[ eventName ].bind(this);
+    }
 };
 
 xblocks.utils.SpeechRecognition.prototype = {
+    _engineEvents: {
+        onend: function(event) {
+            event.detail = {
+                'final': this._transcript
+            };
+
+            this._trigger('end', event);
+        },
+
+        onerror: function(event) {
+            this._trigger('error', event);
+        },
+
+        onresult: function(event) {
+            var transcript = '';
+
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                var result = event.results[ i ];
+
+                if (result.isFinal) {
+                    this._transcript += result[0].transcript;
+
+                } else {
+                    transcript += result[0].transcript;
+                }
+            }
+
+            event.detail = {
+                'interim': transcript,
+                'final': this._transcript
+            };
+
+            this._trigger('result', event);
+        },
+
+        onstart: function(event) {
+            this._trigger('start', event);
+        }
+    },
+
+    _applyParams: function(params) {
+        Object.assign(this._params, {
+            'continuous': false,
+            'interimResults': false,
+            'lang': 'en-US',
+            'maxAlternatives': 1
+        }, params);
+
+        for (var param in this._params) {
+            this._engine[ param ] = this._params[ param ];
+        }
+    },
+
+    _trigger: function(eventName, event) {
+        if (!this._events[ eventName ]) {
+            return;
+        }
+
+        for (var i = 0; i < this._events[ eventName ].length; i++) {
+            (function(callback) {
+                global.setImmediate(function() {
+                    callback(event);
+                });
+
+            }(this._events[ eventName ][ i ]));
+        }
+    },
+
     toggle: function(state) {
         if (state) {
             this.start();
@@ -894,22 +970,49 @@ xblocks.utils.SpeechRecognition.prototype = {
         }
     },
 
-    start: function() {
-        if (this.started) {
+    start: function(params) {
+        if (this._started) {
             return;
         }
 
-        this.started = true;
+        this._started = true;
+        this._transcript = '';
+        this._applyParams(params);
         this._engine.start();
     },
 
     stop: function() {
-        if (!this.started) {
+        if (!this._started) {
             return;
         }
 
-        this.started = false;
+        this._started = false;
         this._engine.stop();
+    },
+
+    addEventListener: function(eventName, callback) {
+        if (!this._events[ eventName ]) {
+            this._events[ eventName ] = [];
+        }
+
+        this.removeEventListener(eventName, callback);
+        this._events[ eventName ].push(callback);
+    },
+
+    removeEventListener: function(eventName, callback) {
+        if (!this._events[ eventName ]) {
+            return;
+        }
+
+        if (callback) {
+            var idx = this._events[ eventName ].indexOf(callback);
+            if (idx !== -1) {
+                this._events[ eventName ].splice(idx, 1);
+            }
+
+        } else {
+            delete this._events[ eventName ];
+        }
     }
 };
 
@@ -4995,6 +5098,12 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         'events': {
             'xb-created': function() {
                 this._xbRecognition = new xblocks.utils.SpeechRecognition();
+                this._xbRecognition.addEventListener('start', function(e) {
+                    console.log(e);
+                });
+                this._xbRecognition.addEventListener('end', function(e) {
+                    console.log(e);
+                });
                 this._xbRecognition.toggle(this.state.active);
             },
 
