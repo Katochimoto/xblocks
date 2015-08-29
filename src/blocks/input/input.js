@@ -41,6 +41,32 @@ xb.Input = xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        'prototype': Object.create(HTMLInputElement.prototype)
+        'prototype': Object.create(HTMLInputElement.prototype),
+
+        'events': {
+            'xb-speech-recognition-start': function(event) {
+                console.log(event);
+            },
+
+            'xb-speech-recognition-result': function(event) {
+                if (event.detail) {
+                    if (event.detail.final) {
+                        this.value = event.detail.final;
+                    }
+                }
+                console.log(event);
+            },
+
+            'xb-speech-recognition-end': function(event) {
+                if (event.detail) {
+                    this.value = event.detail.final;
+                }
+                console.log(event);
+            },
+
+            'xb-speech-recognition-error': function(event) {
+                console.log(event);
+            }
+        }
     }
 ]);

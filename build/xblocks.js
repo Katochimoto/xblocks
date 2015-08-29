@@ -873,6 +873,8 @@ xblocks.utils.lazyFocus = function(node) {
 /* xblocks/utils/lazyFocus.js end */
 
 /* xblocks/utils/SpeechRecognition.js begin */
+/* global global, xblocks */
+
 /**
  *
  * @param {Object} params
@@ -885,7 +887,12 @@ xblocks.utils.SpeechRecognition = function(params) {
     this._params = {};
     this._started = false;
     this._engine = new webkitSpeechRecognition();
-    this._applyParams(params);
+    this._applyParams(params, {
+        'continuous': false,
+        'interimResults': false,
+        'lang': 'en-US',
+        'maxAlternatives': 1
+    });
 
     for (var eventName in this._engineEvents) {
         this._engine[ eventName ] = this._engineEvents[ eventName ].bind(this);
@@ -895,10 +902,7 @@ xblocks.utils.SpeechRecognition = function(params) {
 xblocks.utils.SpeechRecognition.prototype = {
     _engineEvents: {
         onend: function(event) {
-            event.detail = {
-                'final': this._transcript
-            };
-
+            event.detail = { 'final': this._transcript };
             this._trigger('end', event);
         },
 
@@ -920,10 +924,11 @@ xblocks.utils.SpeechRecognition.prototype = {
                 }
             }
 
-            event.detail = {
-                'interim': transcript,
-                'final': this._transcript
-            };
+            event.detail = { 'final': this._transcript };
+
+            if (this._params.interimResults) {
+                event.detail.interim = transcript;
+            }
 
             this._trigger('result', event);
         },
@@ -933,37 +938,9 @@ xblocks.utils.SpeechRecognition.prototype = {
         }
     },
 
-    _applyParams: function(params) {
-        Object.assign(this._params, {
-            'continuous': false,
-            'interimResults': false,
-            'lang': 'en-US',
-            'maxAlternatives': 1
-        }, params);
-
-        for (var param in this._params) {
-            this._engine[ param ] = this._params[ param ];
-        }
-    },
-
-    _trigger: function(eventName, event) {
-        if (!this._events[ eventName ]) {
-            return;
-        }
-
-        for (var i = 0; i < this._events[ eventName ].length; i++) {
-            (function(callback) {
-                global.setImmediate(function() {
-                    callback(event);
-                });
-
-            }(this._events[ eventName ][ i ]));
-        }
-    },
-
-    toggle: function(state) {
+    toggle: function(state, params) {
         if (state) {
-            this.start();
+            this.start(params);
 
         } else {
             this.stop();
@@ -990,13 +967,17 @@ xblocks.utils.SpeechRecognition.prototype = {
         this._engine.stop();
     },
 
-    addEventListener: function(eventName, callback) {
+    abort: function() {
+        this._started = false;
+        this._engine.abort();
+    },
+
+    addEventListener: function(eventName, callback, context) {
         if (!this._events[ eventName ]) {
             this._events[ eventName ] = [];
         }
 
-        this.removeEventListener(eventName, callback);
-        this._events[ eventName ].push(callback);
+        this._events[ eventName ].push([ callback, context ]);
     },
 
     removeEventListener: function(eventName, callback) {
@@ -1005,13 +986,40 @@ xblocks.utils.SpeechRecognition.prototype = {
         }
 
         if (callback) {
-            var idx = this._events[ eventName ].indexOf(callback);
-            if (idx !== -1) {
-                this._events[ eventName ].splice(idx, 1);
-            }
+            this._events[ eventName ] = this._events[ eventName ].filter(this._filterEventsIterator, callback);
 
         } else {
             delete this._events[ eventName ];
+        }
+    },
+
+    _filterEventsIterator: function(item) {
+        return (item[ 0 ] !== this);
+    },
+
+    _applyParams: function(params, defaultParams) {
+        Object.assign(this._params, defaultParams, params);
+
+        for (var param in this._params) {
+            this._engine[ param ] = this._params[ param ];
+        }
+    },
+
+    _trigger: function(eventName, event) {
+        if (!this._events[ eventName ]) {
+            return;
+        }
+
+        global.setImmediate(this._triggerAsync.bind(this, this._events[ eventName ], event));
+    },
+
+    _triggerAsync: function(events, event) {
+        var callback;
+        var i = 0
+
+        for (; i < events.length; i++) {
+            callback = events[ i ];
+            callback[ 0 ].call(callback[ 1 ], event);
         }
     }
 };
@@ -3338,7 +3346,37 @@ xb.Input = xblocks.create('xb-input', [
     xblocks.mixin.eFocus,
 
     {
-        'prototype': Object.create(HTMLInputElement.prototype)
+        'prototype': Object.create(HTMLInputElement.prototype),
+
+        'events': {
+            'xb-speech-recognition-start': function(event) {
+                console.log(event);
+            },
+
+            'xb-speech-recognition-result': function(event) {
+                if (event.detail) {
+                    if (event.detail.interim) {
+                        this.value += event.detail.interim;
+                    }
+
+                    if (event.detail.final) {
+                        this.value = event.detail.final;
+                    }
+                }
+                console.log(event);
+            },
+
+            'xb-speech-recognition-end': function(event) {
+                if (event.detail) {
+                    this.value = event.detail.final;
+                }
+                console.log(event);
+            },
+
+            'xb-speech-recognition-error': function(event) {
+                console.log(event);
+            }
+        }
     }
 ]);
 
@@ -5026,7 +5064,7 @@ xb.Calendar = xblocks.create('xb-calendar');
 
     /* blocks/speech-recognition/speech-recognition.js begin */
 //jscs:disable
-/* global xblocks, xb */
+/* global xblocks, xb, global */
 /* jshint strict: false */
 //jscs:enable
 
@@ -5067,17 +5105,22 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [xblocks.m
 
         classes = classNames(classes);
 
-        return React.createElement(
-            'div',
-            { className: classes },
-            React.createElement('xb-ico', { type: this.props.active ? 'mic-on' : 'mic-off' })
-        );
+        return React.createElement('xb-ico', { className: classes, type: this.props.active ? 'mic-on' : 'mic-off' });
     }
     /* jshint ignore:end */
 }]);
 
 /* blocks/speech-recognition/speech-recognition.jsx.js end */
 
+
+var _xbSpeechRecognition = {
+    'events': {
+        'end': 1,
+        'error': 1,
+        'result': 1,
+        'start': 1
+    }
+};
 
 /**
  * xb-speech-recognition html element
@@ -5088,6 +5131,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [xblocks.m
  * @mixes xblocks.mixin.eDisabled
  * @listens xblocks.Element~event:xb-created
  * @listens xblocks.Element~event:xb-update
+ * @listens xblocks.Element~event:xb-destroy
  */
 xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
     xblocks.mixin.eDisabled,
@@ -5097,18 +5141,30 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
 
         'events': {
             'xb-created': function() {
-                this._xbRecognition = new xblocks.utils.SpeechRecognition();
-                this._xbRecognition.addEventListener('start', function(e) {
-                    console.log(e);
+                this._xbRecognition = new xblocks.utils.SpeechRecognition({
+                    'lang': this.lang || (global.navigator && global.navigator.language) || 'en-US',
+                    'continuous': this.continuous,
+                    'interimResults': this.interimResults
                 });
-                this._xbRecognition.addEventListener('end', function(e) {
-                    console.log(e);
-                });
+
+                for (var eventName in _xbSpeechRecognition.events) {
+                    this._xbRecognition.addEventListener(eventName, this._sendEventToTarget, this);
+                }
+
                 this._xbRecognition.toggle(this.state.active);
             },
 
             'xb-update': function() {
                 this._xbRecognition.toggle(this.state.active);
+            },
+
+            'xb-destroy': function() {
+                for (var eventName in _xbSpeechRecognition.events) {
+                    this._xbRecognition.removeEventListener(eventName, this._sendEventToTarget);
+                }
+
+                this._xbRecognition.abort();
+                this._xbRecognition = undefined;
             },
 
             'click': function() {
@@ -5123,6 +5179,56 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
             'active': {
                 'attribute': {
                     'boolean': true
+                }
+            },
+
+            'lang': {
+                'attribute': {
+                    'name': 'lang'
+                }
+            },
+
+            'continuous': {
+                'attribute': {
+                    'boolean': true
+                }
+            },
+
+            'interimResults': {
+                'attribute': {
+                    'boolean': true,
+                    'name': 'interim-results'
+                }
+            },
+
+            'target': {
+                'attribute': {
+                    'name': 'target'
+                }
+            }
+        },
+
+        'methods': {
+            '_sendEventToTarget': function(event) {
+                var target = this.target;
+                var type = typeof(target);
+                var targetEvent = new xblocks.event.Custom('xb-speech-recognition-' + event.type, {
+                    'bubbles': false,
+                    'cancelable': false,
+                    'detail': event.detail
+                });
+
+                if (type === 'function') {
+                    target(targetEvent);
+
+                } else {
+                    if (type === 'string') {
+                        target = __doc.querySelector(target);
+                    }
+
+                    if (target instanceof HTMLElement) {
+                        target.dispatchEvent(targetEvent);
+                    }
                 }
             }
         }

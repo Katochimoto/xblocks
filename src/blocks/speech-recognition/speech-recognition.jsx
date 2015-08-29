@@ -36,9 +36,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
             classes = classNames(classes);
 
             return (
-                <div className={classes}>
-                    <xb-ico type={this.props.active ? 'mic-on' : 'mic-off'} />
-                </div>
+                <xb-ico className={classes} type={this.props.active ? 'mic-on' : 'mic-off'} />
             );
         }
         /* jshint ignore:end */
