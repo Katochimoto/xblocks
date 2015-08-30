@@ -968,6 +968,10 @@ xblocks.utils.SpeechRecognition.prototype = {
     },
 
     abort: function() {
+        if (!this._started) {
+            return;
+        }
+
         this._started = false;
         this._engine.abort();
     },
@@ -1268,6 +1272,41 @@ xblocks.dom.removeChild = function(element) {
 };
 
 /* xblocks/dom/removeChild.js end */
+
+/* xblocks/dom/replaceTextSelection.js begin */
+//jscs:disable
+/* global xblocks */
+/* jshint strict: false */
+//jscs:enable
+
+/**
+ * Replacing selected text
+ * @param {HTMLElement} element
+ * @param {string} text
+ * @param {function} getter
+ * @param {function} setter
+ */
+xblocks.dom.replaceTextSelection = function(element, text, getter, setter) {
+    var start = element.selectionStart;
+    var end = element.selectionEnd;
+    var scrollLeft = element.scrollLeft;
+    var scrollTop = element.scrollTop;
+    var pos = start + text.length;
+
+    getter(function(value) {
+        value = value.substr(0, start) + text + value.substr(end);
+
+        setter(value, function(callback) {
+            element.selectionStart = pos;
+            element.selectionEnd = pos;
+            element.scrollTop = scrollTop;
+            element.scrollLeft = scrollLeft;
+            callback();
+        });
+    });
+};
+
+/* xblocks/dom/replaceTextSelection.js end */
 
 
 /* xblocks/dom.js end */
@@ -3355,22 +3394,47 @@ xb.Input = xblocks.create('xb-input', [
 
             'xb-speech-recognition-result': function(event) {
                 if (event.detail) {
-                    if (event.detail.interim) {
-                        this.value += event.detail.interim;
-                    }
+                    var input = this.querySelector('input');
 
-                    if (event.detail.final) {
+                    if (event.detail.interim) {
+                        var start = input.selectionStart;
+
+                        xblocks.dom.replaceTextSelection(
+                            input,
+                            event.detail.interim,
+                            function(callback) {
+                                callback(input.value);
+                            },
+                            function(value, callback) {
+                                input.value = value;
+                                callback(function() {
+                                    input.selectionStart = start;
+                                    input.scrollLeft = input.scrollWidth;
+                                });
+                            }
+                        );
+
+                    } else if (event.detail.final) {
                         this.value = event.detail.final;
+                        input.value = event.detail.final;
+                        var len = this.value.length;
+                        input.setSelectionRange(len, len);
+                        input.scrollLeft = input.scrollWidth;
                     }
                 }
-                console.log(event);
+                console.log(event.detail, this);
             },
 
             'xb-speech-recognition-end': function(event) {
                 if (event.detail) {
+                    var input = this.querySelector('input');
                     this.value = event.detail.final;
+                    input.value = event.detail.final;
+                    var len = this.value.length;
+                    input.setSelectionRange(len, len);
+                    input.scrollLeft = input.scrollWidth;
                 }
-                console.log(event);
+                console.log(event.detail);
             },
 
             'xb-speech-recognition-error': function(event) {

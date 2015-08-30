@@ -50,18 +50,47 @@ xb.Input = xblocks.create('xb-input', [
 
             'xb-speech-recognition-result': function(event) {
                 if (event.detail) {
-                    if (event.detail.final) {
+                    var input = this.querySelector('input');
+
+                    if (event.detail.interim) {
+                        var start = input.selectionStart;
+
+                        xblocks.dom.replaceTextSelection(
+                            input,
+                            event.detail.interim,
+                            function(callback) {
+                                callback(input.value);
+                            },
+                            function(value, callback) {
+                                input.value = value;
+                                callback(function() {
+                                    input.selectionStart = start;
+                                    input.scrollLeft = input.scrollWidth;
+                                });
+                            }
+                        );
+
+                    } else if (event.detail.final) {
                         this.value = event.detail.final;
+                        input.value = event.detail.final;
+                        var len = this.value.length;
+                        input.setSelectionRange(len, len);
+                        input.scrollLeft = input.scrollWidth;
                     }
                 }
-                console.log(event);
+                console.log(event.detail, this);
             },
 
             'xb-speech-recognition-end': function(event) {
                 if (event.detail) {
+                    var input = this.querySelector('input');
                     this.value = event.detail.final;
+                    input.value = event.detail.final;
+                    var len = this.value.length;
+                    input.setSelectionRange(len, len);
+                    input.scrollLeft = input.scrollWidth;
                 }
-                console.log(event);
+                console.log(event.detail);
             },
 
             'xb-speech-recognition-error': function(event) {

@@ -48,7 +48,7 @@
         "karma-mocha": "~0.2.x",
         "karma-sinon-expect": "~0.1.x",
         "karma-borschik-preprocessor": "~0.1.x",
-        "karma-react-jsx-preprocessor": "~0.1.x",
+        "karma-babel-preprocessor": "5.2.1",
         "karma-phantomjs-launcher": "~0.2.x",
         "karma-chrome-launcher": "~0.2.x",
         "karma-firefox-launcher": "Katochimoto/karma-firefox-launcher.git",
