@@ -1,13 +1,10 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
+'use strict';
 
 /**
  * @param {HTMLElement} node
  * @returns {HTMLElement|null}
  */
-xblocks.utils.getParentMenu = function(node) {
+module.exports = function(node) {
     var parent = node;
 
     while (parent) {

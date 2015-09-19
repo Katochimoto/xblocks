@@ -1,8 +1,3 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
-
 /**
  * Focus element interface
  *
@@ -27,7 +22,7 @@
  * @memberOf xblocks.mixin
  * @type {object}
  */
-xblocks.mixin.eFocus = {
+module.exports = {
     'methods': {
         'focus': function() {
             this.firstChild.focus();

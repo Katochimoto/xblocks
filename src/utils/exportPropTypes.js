@@ -1,9 +1,6 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
+'use strict';
 
-xblocks.utils.exportPropTypes = function(tagName) {
+module.exports = function(tagName) {
     var props = xblocks.utils.propTypes(tagName);
     var exportProps = {};
     var prefix = tagName + '-';

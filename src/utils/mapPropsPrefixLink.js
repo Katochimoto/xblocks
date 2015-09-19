@@ -1,9 +1,8 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
+'use strict';
 
-xblocks.utils.mapPropsPrefixLink = function(name, descr) {
+var REG_PROPS_PREFIX_LINK = /^xb-link-/;
+
+module.exports = function(name, descr) {
     return {
         'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_LINK, ''),
         'descr': descr

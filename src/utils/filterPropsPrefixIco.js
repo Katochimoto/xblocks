@@ -1,8 +1,7 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
+'use strict';
 
-xblocks.utils.filterPropsPrefixIco = function(name) {
+var REG_PROPS_PREFIX_ICO = /^xb-ico-/;
+
+module.exports = function(name) {
     return xblocks.utils.REG_PROPS_PREFIX_ICO.test(name);
 };

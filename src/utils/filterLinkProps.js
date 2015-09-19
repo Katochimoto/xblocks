@@ -1,9 +1,6 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
+'use strict';
 
-xblocks.utils.filterLinkProps = function(props) {
+module.exports = function(props) {
     return xblocks.utils.mapObject(
         xblocks.utils.filterObject(props, xblocks.utils.filterPropsPrefixLink),
         xblocks.utils.mapPropsPrefixLink

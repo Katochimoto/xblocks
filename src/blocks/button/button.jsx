@@ -1,26 +1,26 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+'use strict';
 
-/*! borschik:include:button-content.jsx.js */
+var React = require('react');
+var classnames = require('classnames');
+var view = require('xblocks/view');
+var ButtonContent = require('./button-content.jsx');
 
 /**
  * The template node xb-button
  *
- * @class xv.Button
- * @memberof xv
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Button = xblocks.view.register('xb-button', [
+module.exports = view.register('xb-button', [
     xblocks.mixin.vCommonAttrs,
     xblocks.utils.exportPropTypes('xb-ico'),
 
     {
-        'displayName': 'xb-button',
+        displayName: 'xb-button',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        propTypes: {
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
             'for':          React.PropTypes.string,
@@ -36,7 +36,7 @@ xv.Button = xblocks.view.register('xb-button', [
             'value':        React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        getDefaultProps: function() {
             return {
                 'autofocus':    false,
                 'checked':      false,
@@ -51,36 +51,35 @@ xv.Button = xblocks.view.register('xb-button', [
             };
         },
 
-        'getInitialState': function() {
+        getInitialState: function() {
             return {
                 'checked': this.props.checked
             };
         },
 
-        'componentWillReceiveProps': function(nextProps) {
+        componentWillReceiveProps: function(nextProps) {
             this.setState({
                 'checked': Boolean(nextProps.checked)
             });
         },
 
-        'componentWillUpdate': function(nextProps, nextState) {
+        componentWillUpdate: function(nextProps, nextState) {
             if (nextProps.type === 'radio' && nextState.checked) {
                 xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
             }
         },
 
-        'componentWillMount': function() {
+        componentWillMount: function() {
             if (this.props.type === 'radio' && this.state.checked) {
                 xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
             }
         },
 
-        '_onChange': function(event) {
+        _onChange: function(event) {
             this.container().checked = event.target.checked;
         },
 
-        /* jshint ignore:start */
-        'render': function() {
+        render: function() {
             var classes = {
                 'xb-button': true,
                 '_disabled': this.props.disabled
@@ -94,7 +93,7 @@ xv.Button = xblocks.view.register('xb-button', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = classNames(classes);
+            classes = classnames(classes);
 
             var icoProps = xblocks.utils.filterIcoProps(this.props);
             var tabIndex = this.props.tabindex;
@@ -105,9 +104,9 @@ xv.Button = xblocks.view.register('xb-button', [
             }
 
             var content = (
-                <xv.ButtonContent key="content" _uid={this.props._uid} ico={icoProps}>
+                <ButtonContent key="content" _uid={this.props._uid} ico={icoProps}>
                     {this.props.children}
-                </xv.ButtonContent>
+                </ButtonContent>
             );
 
             if (type === 'link') {
@@ -176,7 +175,7 @@ xv.Button = xblocks.view.register('xb-button', [
                         <xv.Button {...buttonProps} />
                     );
 
-                    classes = classNames({
+                    classes = classnames({
                         'xb-button': true,
                         '_theme-check': true,
                         '_disabled': this.props.disabled
@@ -231,6 +230,5 @@ xv.Button = xblocks.view.register('xb-button', [
                 );
             }
         }
-        /* jshint ignore:end */
     }
 ]);

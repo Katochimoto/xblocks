@@ -1,8 +1,3 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
-
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
  *
@@ -11,7 +6,7 @@
  * @memberOf xblocks.mixin
  * @type {object}
  */
-xblocks.mixin.eMenu = {
+module.exports = {
     'events': {
 
         /**

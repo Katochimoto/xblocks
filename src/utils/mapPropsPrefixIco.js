@@ -1,9 +1,8 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
+'use strict';
 
-xblocks.utils.mapPropsPrefixIco = function(name, descr) {
+var REG_PROPS_PREFIX_ICO = /^xb-ico-/;
+
+module.exports = function(name, descr) {
     return {
         'name': name.replace(xblocks.utils.REG_PROPS_PREFIX_ICO, ''),
         'descr': descr

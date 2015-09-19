@@ -1,9 +1,13 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
+'use strict';
 
-/*! borschik:include:button.jsx.js */
+require('./button.styl');
+require('./button.jsx');
+
+var block = require('xblocks/block');
+var mixDisabled = require('mixin/element/disabled');
+var mixChecked = require('mixin/element/checked');
+var mixInputValueProps = require('mixin/element/inputValueProps');
+var mixFocus = require('mixin/element/focus');
 
 /**
  * xb-button html element
@@ -31,19 +35,17 @@
  * &#60;xb-button type="radio" name="radio" value="1">radio 1&#60;/xb-button>
  * <xb-button type="radio" name="radio" value="1">radio 1</xb-button> <xb-button type="radio" name="radio" value="2">radio 2</xb-button>
  *
- * @class xb.Button
- * @memberof xb
  * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eChecked
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-xb.Button = xblocks.create('xb-button', [
-    xblocks.mixin.eDisabled,
-    xblocks.mixin.eChecked,
-    xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocus,
+module.exports = block.create('xb-button', [
+    mixDisabled,
+    mixChecked,
+    mixInputValueProps,
+    mixFocus,
 
     {
         'prototype': Object.create(HTMLInputElement.prototype),

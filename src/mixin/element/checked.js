@@ -1,8 +1,3 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
-
 /**
  * Checked element interface
  *
@@ -40,7 +35,7 @@
  * @memberOf xblocks.mixin
  * @type {object}
  */
-xblocks.mixin.eChecked = {
+module.exports = {
     'accessors': {
         'checked': {
             'attribute': {

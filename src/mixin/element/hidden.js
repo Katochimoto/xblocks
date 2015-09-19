@@ -1,16 +1,11 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
-
 /**
- * Disabled element interface
+ * Hidden element interface
  *
- * <xb-button disabled>button</xb-button>
+ * <xb-button hidden>button</xb-button>
  *
  * @example
  * xblocks.create('xb-button', [
- *     xblocks.mixin.eDisabled,
+ *     xblocks.mixin.eHidden,
  *     {
  *         accessors: { ... },
  *         events: { ... },
@@ -21,25 +16,25 @@
  *
  * var e = document.createElement('xb-button');
  * // read
- * console.log(e.disabled)
+ * console.log(e.hidden)
  * // false
  *
  * // write
- * e.disabled = true;
+ * e.hidden = true;
  * // true
  *
  * // jquery write
- * $(e).prop('disabled', false)
+ * $(e).prop('hidden', false)
  * // false
  *
- * @prop {boolean} disabled
+ * @prop {boolean} hidden
  *
  * @memberOf xblocks.mixin
  * @type {object}
  */
-xblocks.mixin.eDisabled = {
+module.exports = {
     'accessors': {
-        'disabled': {
+        'hidden': {
             'attribute': {
                 'boolean': true
             }

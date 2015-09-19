@@ -1,8 +1,3 @@
-//jscs:disable
-/* global xblocks, React */
-/* jshint strict: false */
-//jscs:enable
-
 /**
  * Common attributes
  *
@@ -17,7 +12,7 @@
  * @prop {string} propTypes.tabindex
  * @prop {string} propTypes.title
  */
-xblocks.mixin.vCommonAttrs = {
+module.exports = {
     'propTypes': {
         'accesskey':    React.PropTypes.string,
         'contextmenu':  React.PropTypes.string,

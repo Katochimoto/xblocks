@@ -1,15 +1,10 @@
-//jscs:disable
-/* global xblocks */
-/* jshint strict: false */
-//jscs:enable
-
 /**
  * Value element interface.
- * The value can be changed only through the attribute.
+ * Уou can edit the value, for example in the input or textarea.
  *
  * @example
- * xblocks.create('xb-checkbox', [
- *     xblocks.mixin.eInputValueProps,
+ * xblocks.create('xb-input', [
+ *     xblocks.mixin.eInputValueState,
  *     {
  *         accessors: {
  *             ...
@@ -26,7 +21,7 @@
  *     }
  * ]);
  *
- * var e = document.createElement('xb-checkbox');
+ * var e = document.createElement('xb-input');
  * // read
  * console.log(e.value)
  * // 1
@@ -42,7 +37,7 @@
  * @memberOf xblocks.mixin
  * @type {object}
  */
-xblocks.mixin.eInputValueProps = {
+module.exports = {
     'accessors': {
 
         /**
@@ -54,7 +49,21 @@ xblocks.mixin.eInputValueProps = {
             },
 
             'get': function() {
+                var component = this.xblock && this.xblock.getMountedComponent();
+
+                if (component && typeof(component.state.value) !== 'undefined') {
+                    return component.state.value;
+                }
+
                 return String(this.getAttribute('value') || this.defaultValue || '');
+            },
+
+            'set': function(value) {
+                var component = this.xblock && this.xblock.getMountedComponent();
+
+                if (component) {
+                    component.setState({ 'value': String(value) });
+                }
             }
         },
 
