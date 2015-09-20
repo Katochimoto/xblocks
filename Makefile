@@ -12,10 +12,9 @@ dir=-C $*
 
 all: node_modules \
 	bower_components \
-	build/xblocks.css \
-	build/xblocks.min.css \
-	build/xblocks.js \
-	build/xblocks.min.js \
+	dist/xblocks.css \
+	dist/xblocks.min.css \
+	dist/xblocks.js \
 	$(src_jsx_js)
 
 node_modules: package.json
@@ -26,32 +25,23 @@ bower_components: bower.json
 	bower install
 	touch bower_components
 
-
-build/xblocks.css: src/xblocks.styl $(src_styl) node_modules
+dist/xblocks.css: src/xblocks.styl $(src_styl) node_modules
 	$(NPM_BIN)/stylus --print --resolve-url --inline $< > $@
 	$(NPM_BIN)/autoprefixer --browsers "> 1%, Firefox >= 14, Opera >= 12, Chrome >= 4" $@
 
-build/xblocks.min.css: build/xblocks.css
+dist/xblocks.min.css: dist/xblocks.css
 	$(NPM_BIN)/stylus --compress < $< > $@
-
 
 $(src_jsx_js): %.jsx.js: %.jsx node_modules
 	$(NPM_BIN)/babel $< -o $@
 
-build/xblocks.js: src/xblocks.js $(src_jsx_js) $(src_js) node_modules
-	$(NPM_BIN)/borschik -m no -i $< -o $@
-
-build/xblocks.min.js: build/xblocks.js
-	$(NPM_BIN)/borschik -i $< -o $@
-
+dist/xblocks.js: node_modules $(src_jsx_js) $(src_js)
+	$(NPM_BIN)/webpack src/xblocks.js dist/xblocks.js
+	$(NPM_BIN)/webpack src/xblocks.js dist/xblocks.min.js --optimize-minimize
 
 clean:
-	rm -f build/xblocks.css
-	rm -f build/xblocks.min.css
-	rm -f build/xblocks.js
-	rm -f build/xblocks.min.js
+	rm -rf dist
 	find src -type f -name "*.jsx.js" -exec rm -f {} \;
-
 
 test: node_modules bower_components
 	$(NPM_BIN)/jshint .

@@ -4,7 +4,7 @@ var React = require('react');
 var view = require('xblocks/view');
 var equals = require('xblocks/utils/equals');
 var merge = require('xblocks/utils/merge');
-var isEmptyObject = require('xblocks/utils/isEmptyObject');
+var isEmptyObject = require('xblocks-utils/utils/isEmptyObject');
 
 module.exports = view.create({
     displayName: 'xb-button_content',

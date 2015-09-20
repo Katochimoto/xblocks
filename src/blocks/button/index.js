@@ -1,13 +1,9 @@
 'use strict';
 
-require('./button.styl');
+//require('./button.styl');
 require('./button.jsx');
 
 var block = require('xblocks/block');
-var mixDisabled = require('mixin/element/disabled');
-var mixChecked = require('mixin/element/checked');
-var mixInputValueProps = require('mixin/element/inputValueProps');
-var mixFocus = require('mixin/element/focus');
 
 /**
  * xb-button html element
@@ -42,10 +38,10 @@ var mixFocus = require('mixin/element/focus');
  * @mixes xblocks.mixin.eFocus
  */
 module.exports = block.create('xb-button', [
-    mixDisabled,
-    mixChecked,
-    mixInputValueProps,
-    mixFocus,
+    require('mixin/element/disabled'),
+    require('mixin/element/checked'),
+    require('mixin/element/inputValueProps'),
+    require('mixin/element/focus'),
 
     {
         'prototype': Object.create(HTMLInputElement.prototype),

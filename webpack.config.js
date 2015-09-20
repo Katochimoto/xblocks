@@ -11,11 +11,12 @@ module.exports = {
     },
     'resolve': {
         'modulesDirectories': [
-            'web_modules',
             'node_modules'
         ],
         'alias': {
-            'xblocks': 'xblocks-core/src/xblocks', // || xblocks-utils/src/xblocks
+            'xblocks': 'xblocks-core/src/xblocks',
+            'xblocks-utils': 'xblocks-utils/src/xblocks',
+            'context': path.join(src, 'context'),
             'utils': path.join(src, 'utils'),
             'mixin': path.join(src, 'mixin')
         }
@@ -32,5 +33,18 @@ module.exports = {
             'DEBUG_TIME': false,
             'NODE_ENV': 'production'
         })
-    ]
+    ],
+    'module': {
+        'loaders': [
+            {
+                'test': /\.jsx$/,
+                'exclude': /(node_modules|bower_components)/,
+                'loader': 'babel'
+            },
+            {
+                'test': /\.styl$/,
+                'loader': 'style-loader!css-loader!stylus-loader'
+            }
+        ]
+    }
 };
