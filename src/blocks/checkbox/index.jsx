@@ -1,23 +1,24 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
 
 /**
- * The template node xb-radio
+ * The template node xb-checkbox
  *
- * @class xv.Radio
+ * @class xv.Checkbox
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Radio = xblocks.view.register('xb-radio', [
-    xblocks.mixin.vCommonAttrs,
+module.exports = xblocks.view.register('xb-checkbox', [
+    require('mixin/view/commonAttrs'),
 
     {
-        'displayName': 'xb-radio',
+        displayName: 'xb-checkbox',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        propTypes: {
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
             'for':          React.PropTypes.string,
@@ -28,7 +29,7 @@ xv.Radio = xblocks.view.register('xb-radio', [
             'value':        React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        getDefaultProps: function() {
             return {
                 'autofocus':    false,
                 'checked':      false,
@@ -41,46 +42,35 @@ xv.Radio = xblocks.view.register('xb-radio', [
             };
         },
 
-        'getInitialState': function() {
+        getInitialState: function() {
             return {
                 'checked': this.props.checked
             };
         },
 
-        'componentWillReceiveProps': function(nextProps) {
+        componentWillReceiveProps: function(nextProps) {
             this.setState({
-                'checked': Boolean(nextProps.checked)
+                'checked': nextProps.checked
             });
         },
 
-        'componentWillUpdate': function(nextProps, nextState) {
-            if (nextState.checked) {
-                xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
-            }
+        _onChange: function(event) {
+            this.setState({
+                'checked': event.target.checked
+            });
         },
 
-        'componentWillMount': function() {
-            if (this.state.checked) {
-                xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
-            }
-        },
-
-        '_onChange': function(event) {
-            this.container().checked = event.target.checked;
-        },
-
-        /* jshint ignore:start */
-        'render': function() {
+        render: function() {
             var classes = {
-                'xb-radio':  true,
-                '_disabled': this.props.disabled
+                'xb-checkbox': true,
+                '_disabled':   this.props.disabled
             };
 
             if (this.props.size) {
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = classNames(classes);
+            classes = classnames(classes);
 
             var tabIndex = this.props.tabindex;
 
@@ -93,7 +83,7 @@ xv.Radio = xblocks.view.register('xb-radio', [
                     title={this.props.title}
                     htmlFor={this.props['for']}>
 
-                    <input type="radio"
+                    <input type="checkbox"
                         className="_xb-check_controller"
                         name={this.props.name}
                         value={this.props.value}
@@ -107,13 +97,12 @@ xv.Radio = xblocks.view.register('xb-radio', [
                         tabIndex={tabIndex}
                         form={this.props.form} />
 
-                    <span className="_xb-radio_flag _xb-check_flag">
-                        <span className="_xb-radio_flag-icon"></span>
+                    <span className="_xb-checkbox_flag _xb-check_flag">
+                        <span className="_xb-checkbox_flag-icon"></span>
                     </span>
                     <span data-xb-content={this.props._uid}>{this.props.children}</span>
                 </label>
             );
         }
-        /* jshint ignore:end */
     }
 ]);

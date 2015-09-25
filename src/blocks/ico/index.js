@@ -1,9 +1,7 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:ico.jsx.js */
+var xblocks = require('xblocks');
 
 /**
  * xb-ico html element
@@ -35,8 +33,8 @@
  * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
-xb.Ico = xblocks.create('xb-ico', [
-    xblocks.mixin.eDisabled,
+module.exports = xblocks.create('xb-ico', [
+    require('mixin/element/disabled'),
 
     {
         'accessors': {

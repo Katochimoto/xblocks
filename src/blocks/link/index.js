@@ -1,9 +1,7 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:link.jsx.js */
+var xblocks = require('xblocks');
 
 /**
  * xb-link html element
@@ -13,8 +11,8 @@
  * @augments HTMLAnchorElement
  * @mixes xblocks.mixin.eDisabled
  */
-xb.Link = xblocks.create('xb-link', [
-    xblocks.mixin.eDisabled,
+module.exports = xblocks.create('xb-link', [
+    require('mixin/element/disabled'),
 
     {
         'prototype': Object.create(HTMLAnchorElement.prototype)

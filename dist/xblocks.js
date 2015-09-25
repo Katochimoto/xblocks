@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("xtag"), require("React"), require("xblocks"));
+		module.exports = factory(require("xtag"), require("xblocks"), require("React"));
 	else if(typeof define === 'function' && define.amd)
-		define(["xtag", "React", "xblocks"], factory);
+		define(["xtag", "xblocks", "React"], factory);
 	else if(typeof exports === 'object')
-		exports["xblocks"] = factory(require("xtag"), require("React"), require("xblocks"));
+		exports["xblocks"] = factory(require("xtag"), require("xblocks"), require("React"));
 	else
-		root["xblocks"] = factory(root["xtag"], root["React"], root["xblocks"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_69__) {
+		root["xblocks"] = factory(root["xtag"], root["xblocks"], root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -61,7 +61,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	var context = __webpack_require__(2);
 
 	context.xb = {
-	    'Button': __webpack_require__(3)
+	    'Button': __webpack_require__(3),
+	    'Checkbox': __webpack_require__(74),
+	    'Ico': __webpack_require__(76),
+	    'Link': __webpack_require__(78),
+	    'Menuseparator': __webpack_require__(80),
+	    'Radio': __webpack_require__(82),
+	    'Input': __webpack_require__(84),
+	    'Popup': __webpack_require__(88),
+	    'Menuitem': __webpack_require__(90),
+	    'Menu': __webpack_require__(92),
+	    'MenuInline': __webpack_require__(96),
+	    'Select': '',
+	    'SpeechRecognition': '',
+	    'Calendar': ''
 	};
 
 	/*
@@ -109,12 +122,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	//require('./button.styl');
+	//require('./index.styl');
 	'use strict';
 
 	__webpack_require__(4);
 
-	var xblocks = __webpack_require__(69);
+	var xblocks = __webpack_require__(5);
 
 	/**
 	 * xb-button html element
@@ -173,12 +186,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = __webpack_require__(5);
-	var classnames = __webpack_require__(6);
-	var resetLastRadioChecked = __webpack_require__(7);
-	var filterProps = __webpack_require__(8);
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+	var resetLastRadioChecked = __webpack_require__(8);
+	var filterProps = __webpack_require__(9);
 
-	var ButtonContent = __webpack_require__(65);
+	var ButtonContent = __webpack_require__(66);
 
 	/**
 	 * The template node xb-button
@@ -186,7 +200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes React.addons.PureRenderMixin
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 */
-	module.exports = xblocks.view.register('xb-button', [__webpack_require__(67), __webpack_require__(68)('xb-ico'), {
+	module.exports = xblocks.view.register('xb-button', [__webpack_require__(68), __webpack_require__(69)('xb-ico'), {
 	    displayName: 'xb-button',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -398,6 +412,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -452,7 +472,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -478,13 +498,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var pick = __webpack_require__(9);
-	var transform = __webpack_require__(38);
+	var pick = __webpack_require__(10);
+	var transform = __webpack_require__(39);
 
 	var pickIterator = function pickIterator(value, key) {
 	    return this.test(key);
@@ -498,7 +518,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -509,11 +529,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFlatten = __webpack_require__(10),
-	    bindCallback = __webpack_require__(27),
-	    pickByArray = __webpack_require__(29),
-	    pickByCallback = __webpack_require__(30),
-	    restParam = __webpack_require__(37);
+	var baseFlatten = __webpack_require__(11),
+	    bindCallback = __webpack_require__(28),
+	    pickByArray = __webpack_require__(30),
+	    pickByCallback = __webpack_require__(31),
+	    restParam = __webpack_require__(38);
 
 	/**
 	 * Creates an object composed of the picked `object` properties. Property
@@ -554,14 +574,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(11),
-	    isArguments = __webpack_require__(12),
-	    isArray = __webpack_require__(22),
-	    isArrayLike = __webpack_require__(13),
-	    isObjectLike = __webpack_require__(19);
+	var arrayPush = __webpack_require__(12),
+	    isArguments = __webpack_require__(13),
+	    isArray = __webpack_require__(23),
+	    isArrayLike = __webpack_require__(14),
+	    isObjectLike = __webpack_require__(20);
 
 	/**
 	 * The base implementation of `_.flatten` with added support for restricting
@@ -601,7 +621,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	/**
@@ -627,11 +647,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(13),
-	    isObjectLike = __webpack_require__(19);
+	var isArrayLike = __webpack_require__(14),
+	    isObjectLike = __webpack_require__(20);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -667,11 +687,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(14),
-	    isLength = __webpack_require__(21);
+	var getLength = __webpack_require__(15),
+	    isLength = __webpack_require__(22);
 
 	/**
 	 * Checks if `value` is array-like.
@@ -688,10 +708,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(15);
+	var baseProperty = __webpack_require__(16);
 
 	/**
 	 * Gets the "length" property value of `object`.
@@ -709,10 +729,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(16);
+	var toObject = __webpack_require__(17);
 
 	/**
 	 * The base implementation of `_.property` without support for deep paths.
@@ -731,12 +751,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(17),
-	    isString = __webpack_require__(18),
-	    support = __webpack_require__(20);
+	var isObject = __webpack_require__(18),
+	    isString = __webpack_require__(19),
+	    support = __webpack_require__(21);
 
 	/**
 	 * Converts `value` to an object if it's not one.
@@ -763,7 +783,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -797,10 +817,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(19);
+	var isObjectLike = __webpack_require__(20);
 
 	/** `Object#toString` result references. */
 	var stringTag = '[object String]';
@@ -838,7 +858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	/**
@@ -856,7 +876,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	/** Used for native method references. */
@@ -958,7 +978,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	/**
@@ -984,12 +1004,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(23),
-	    isLength = __webpack_require__(21),
-	    isObjectLike = __webpack_require__(19);
+	var getNative = __webpack_require__(24),
+	    isLength = __webpack_require__(22),
+	    isObjectLike = __webpack_require__(20);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]';
@@ -1030,10 +1050,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isNative = __webpack_require__(24);
+	var isNative = __webpack_require__(25);
 
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -1052,12 +1072,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(25),
-	    isHostObject = __webpack_require__(26),
-	    isObjectLike = __webpack_require__(19);
+	var isFunction = __webpack_require__(26),
+	    isHostObject = __webpack_require__(27),
+	    isObjectLike = __webpack_require__(20);
 
 	/** Used to detect host constructors (Safari > 5). */
 	var reIsHostCtor = /^\[object .+?Constructor\]$/;
@@ -1107,10 +1127,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(17);
+	var isObject = __webpack_require__(18);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]';
@@ -1151,7 +1171,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	/**
@@ -1178,10 +1198,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var identity = __webpack_require__(28);
+	var identity = __webpack_require__(29);
 
 	/**
 	 * A specialized version of `baseCallback` which only supports `this` binding
@@ -1223,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	/**
@@ -1249,10 +1269,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(16);
+	var toObject = __webpack_require__(17);
 
 	/**
 	 * A specialized version of `_.pick` which picks `object` properties specified
@@ -1283,10 +1303,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseForIn = __webpack_require__(31);
+	var baseForIn = __webpack_require__(32);
 
 	/**
 	 * A specialized version of `_.pick` which picks `object` properties `predicate`
@@ -1311,11 +1331,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(32),
-	    keysIn = __webpack_require__(34);
+	var baseFor = __webpack_require__(33),
+	    keysIn = __webpack_require__(35);
 
 	/**
 	 * The base implementation of `_.forIn` without support for callback
@@ -1334,10 +1354,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createBaseFor = __webpack_require__(33);
+	var createBaseFor = __webpack_require__(34);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -1357,10 +1377,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(16);
+	var toObject = __webpack_require__(17);
 
 	/**
 	 * Creates a base function for `_.forIn` or `_.forInRight`.
@@ -1390,18 +1410,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayEach = __webpack_require__(35),
-	    isArguments = __webpack_require__(12),
-	    isArray = __webpack_require__(22),
-	    isFunction = __webpack_require__(25),
-	    isIndex = __webpack_require__(36),
-	    isLength = __webpack_require__(21),
-	    isObject = __webpack_require__(17),
-	    isString = __webpack_require__(18),
-	    support = __webpack_require__(20);
+	var arrayEach = __webpack_require__(36),
+	    isArguments = __webpack_require__(13),
+	    isArray = __webpack_require__(23),
+	    isFunction = __webpack_require__(26),
+	    isIndex = __webpack_require__(37),
+	    isLength = __webpack_require__(22),
+	    isObject = __webpack_require__(18),
+	    isString = __webpack_require__(19),
+	    support = __webpack_require__(21);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]',
@@ -1532,7 +1552,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	/**
@@ -1560,7 +1580,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	/** Used to detect unsigned integer values. */
@@ -1590,7 +1610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -1654,7 +1674,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1665,14 +1685,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var arrayEach = __webpack_require__(35),
-	    baseCallback = __webpack_require__(39),
-	    baseCreate = __webpack_require__(63),
-	    baseForOwn = __webpack_require__(64),
-	    isArray = __webpack_require__(22),
-	    isFunction = __webpack_require__(25),
-	    isObject = __webpack_require__(17),
-	    isTypedArray = __webpack_require__(50);
+	var arrayEach = __webpack_require__(36),
+	    baseCallback = __webpack_require__(40),
+	    baseCreate = __webpack_require__(64),
+	    baseForOwn = __webpack_require__(65),
+	    isArray = __webpack_require__(23),
+	    isFunction = __webpack_require__(26),
+	    isObject = __webpack_require__(18),
+	    isTypedArray = __webpack_require__(51);
 
 	/**
 	 * An alternative to `_.reduce`; this method transforms `object` to a new
@@ -1729,14 +1749,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMatches = __webpack_require__(40),
-	    baseMatchesProperty = __webpack_require__(54),
-	    bindCallback = __webpack_require__(27),
-	    identity = __webpack_require__(28),
-	    property = __webpack_require__(61);
+	var baseMatches = __webpack_require__(41),
+	    baseMatchesProperty = __webpack_require__(55),
+	    bindCallback = __webpack_require__(28),
+	    identity = __webpack_require__(29),
+	    property = __webpack_require__(62);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -1770,12 +1790,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsMatch = __webpack_require__(41),
-	    getMatchData = __webpack_require__(51),
-	    toObject = __webpack_require__(16);
+	var baseIsMatch = __webpack_require__(42),
+	    getMatchData = __webpack_require__(52),
+	    toObject = __webpack_require__(17);
 
 	/**
 	 * The base implementation of `_.matches` which does not clone `source`.
@@ -1807,11 +1827,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(42),
-	    toObject = __webpack_require__(16);
+	var baseIsEqual = __webpack_require__(43),
+	    toObject = __webpack_require__(17);
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
@@ -1865,12 +1885,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqualDeep = __webpack_require__(43),
-	    isObject = __webpack_require__(17),
-	    isObjectLike = __webpack_require__(19);
+	var baseIsEqualDeep = __webpack_require__(44),
+	    isObject = __webpack_require__(18),
+	    isObjectLike = __webpack_require__(20);
 
 	/**
 	 * The base implementation of `_.isEqual` without support for `this` binding
@@ -1899,15 +1919,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var equalArrays = __webpack_require__(44),
-	    equalByTag = __webpack_require__(46),
-	    equalObjects = __webpack_require__(47),
-	    isArray = __webpack_require__(22),
-	    isHostObject = __webpack_require__(26),
-	    isTypedArray = __webpack_require__(50);
+	var equalArrays = __webpack_require__(45),
+	    equalByTag = __webpack_require__(47),
+	    equalObjects = __webpack_require__(48),
+	    isArray = __webpack_require__(23),
+	    isHostObject = __webpack_require__(27),
+	    isTypedArray = __webpack_require__(51);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -2008,10 +2028,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arraySome = __webpack_require__(45);
+	var arraySome = __webpack_require__(46);
 
 	/**
 	 * A specialized version of `baseIsEqualDeep` for arrays with support for
@@ -2065,7 +2085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports) {
 
 	/**
@@ -2094,7 +2114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	/** `Object#toString` result references. */
@@ -2148,10 +2168,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(48);
+	var keys = __webpack_require__(49);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -2221,14 +2241,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(23),
-	    isArrayLike = __webpack_require__(13),
-	    isObject = __webpack_require__(17),
-	    shimKeys = __webpack_require__(49),
-	    support = __webpack_require__(20);
+	var getNative = __webpack_require__(24),
+	    isArrayLike = __webpack_require__(14),
+	    isObject = __webpack_require__(18),
+	    shimKeys = __webpack_require__(50),
+	    support = __webpack_require__(21);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeKeys = getNative(Object, 'keys');
@@ -2273,15 +2293,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(12),
-	    isArray = __webpack_require__(22),
-	    isIndex = __webpack_require__(36),
-	    isLength = __webpack_require__(21),
-	    isString = __webpack_require__(18),
-	    keysIn = __webpack_require__(34);
+	var isArguments = __webpack_require__(13),
+	    isArray = __webpack_require__(23),
+	    isIndex = __webpack_require__(37),
+	    isLength = __webpack_require__(22),
+	    isString = __webpack_require__(19),
+	    keysIn = __webpack_require__(35);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -2321,11 +2341,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLength = __webpack_require__(21),
-	    isObjectLike = __webpack_require__(19);
+	var isLength = __webpack_require__(22),
+	    isObjectLike = __webpack_require__(20);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -2401,11 +2421,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isStrictComparable = __webpack_require__(52),
-	    pairs = __webpack_require__(53);
+	var isStrictComparable = __webpack_require__(53),
+	    pairs = __webpack_require__(54);
 
 	/**
 	 * Gets the propery names, values, and compare flags of `object`.
@@ -2428,10 +2448,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(17);
+	var isObject = __webpack_require__(18);
 
 	/**
 	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -2449,11 +2469,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(48),
-	    toObject = __webpack_require__(16);
+	var keys = __webpack_require__(49),
+	    toObject = __webpack_require__(17);
 
 	/**
 	 * Creates a two dimensional array of the key-value pairs for `object`,
@@ -2488,18 +2508,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(55),
-	    baseIsEqual = __webpack_require__(42),
-	    baseSlice = __webpack_require__(56),
-	    isArray = __webpack_require__(22),
-	    isKey = __webpack_require__(57),
-	    isStrictComparable = __webpack_require__(52),
-	    last = __webpack_require__(58),
-	    toObject = __webpack_require__(16),
-	    toPath = __webpack_require__(59);
+	var baseGet = __webpack_require__(56),
+	    baseIsEqual = __webpack_require__(43),
+	    baseSlice = __webpack_require__(57),
+	    isArray = __webpack_require__(23),
+	    isKey = __webpack_require__(58),
+	    isStrictComparable = __webpack_require__(53),
+	    last = __webpack_require__(59),
+	    toObject = __webpack_require__(17),
+	    toPath = __webpack_require__(60);
 
 	/**
 	 * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
@@ -2539,10 +2559,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(16);
+	var toObject = __webpack_require__(17);
 
 	/**
 	 * The base implementation of `get` without support for string paths
@@ -2575,7 +2595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports) {
 
 	/**
@@ -2613,11 +2633,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(22),
-	    toObject = __webpack_require__(16);
+	var isArray = __webpack_require__(23),
+	    toObject = __webpack_require__(17);
 
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
@@ -2647,7 +2667,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/**
@@ -2672,11 +2692,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(60),
-	    isArray = __webpack_require__(22);
+	var baseToString = __webpack_require__(61),
+	    isArray = __webpack_require__(23);
 
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -2706,7 +2726,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports) {
 
 	/**
@@ -2725,12 +2745,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(15),
-	    basePropertyDeep = __webpack_require__(62),
-	    isKey = __webpack_require__(57);
+	var baseProperty = __webpack_require__(16),
+	    basePropertyDeep = __webpack_require__(63),
+	    isKey = __webpack_require__(58);
 
 	/**
 	 * Creates a function that returns the property value at `path` on a
@@ -2762,11 +2782,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(55),
-	    toPath = __webpack_require__(59);
+	var baseGet = __webpack_require__(56),
+	    toPath = __webpack_require__(60);
 
 	/**
 	 * A specialized version of `baseProperty` which supports deep paths.
@@ -2787,10 +2807,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(17);
+	var isObject = __webpack_require__(18);
 
 	/**
 	 * The base implementation of `_.create` without support for assigning
@@ -2816,11 +2836,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(32),
-	    keys = __webpack_require__(48);
+	var baseFor = __webpack_require__(33),
+	    keys = __webpack_require__(49);
 
 	/**
 	 * The base implementation of `_.forOwn` without support for callback
@@ -2839,15 +2859,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = __webpack_require__(5);
-	var isEmpty = __webpack_require__(66);
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var isEmpty = __webpack_require__(67);
 
 	module.exports = xblocks.view.create({
 	    displayName: 'xb-button_content',
@@ -2890,7 +2911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2901,13 +2922,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(12),
-	    isArray = __webpack_require__(22),
-	    isArrayLike = __webpack_require__(13),
-	    isFunction = __webpack_require__(25),
-	    isObjectLike = __webpack_require__(19),
-	    isString = __webpack_require__(18),
-	    keys = __webpack_require__(48);
+	var isArguments = __webpack_require__(13),
+	    isArray = __webpack_require__(23),
+	    isArrayLike = __webpack_require__(14),
+	    isFunction = __webpack_require__(26),
+	    isObjectLike = __webpack_require__(20),
+	    isString = __webpack_require__(19),
+	    keys = __webpack_require__(49);
 
 	/**
 	 * Checks if `value` is empty. A value is considered empty unless it's an
@@ -2951,12 +2972,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var React = __webpack_require__(5);
+	var React = __webpack_require__(6);
 
 	/**
 	 * Common attributes
@@ -2986,12 +3007,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(69);
+	var xblocks = __webpack_require__(5);
 
 	module.exports = function (tagName) {
 	    var props = xblocks.utils.propTypes(tagName);
@@ -3009,12 +3030,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'propTypes': exportProps
 	    };
 	};
-
-/***/ },
-/* 69 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_69__;
 
 /***/ },
 /* 70 */
@@ -3232,6 +3247,2231 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }
 	};
+
+/***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(75);
+
+	var xblocks = __webpack_require__(5);
+
+	/**
+	 * xb-checkbox html element
+	 *
+	 * @prop {string} [size=m] size, possible values: s|m
+	 * @prop {string} [value=on]
+	 * @prop {string} [name]
+	 * @prop {string} [form]
+	 * @prop {string} [for]
+	 * @prop {boolean} [autofocus=false]
+	 * @prop {boolean} [disabled=false]
+	 * @prop {boolean} [checked=false]
+	 * @prop {boolean} [required=false]
+	 *
+	 * @class xb.Checkbox
+	 * @memberof xb
+	 * @augments HTMLInputElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eChecked
+	 * @mixes xblocks.mixin.eInputValueProps
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	module.exports = xblocks.create('xb-checkbox', [__webpack_require__(70), __webpack_require__(71), __webpack_require__(72), __webpack_require__(73), {
+	    'prototype': Object.create(HTMLInputElement.prototype),
+
+	    'accessors': {
+	        'defaultValue': {
+	            'get': function get() {
+	                return 'on';
+	            }
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+
+	/**
+	 * The template node xb-checkbox
+	 *
+	 * @class xv.Checkbox
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	module.exports = xblocks.view.register('xb-checkbox', [__webpack_require__(68), {
+	    displayName: 'xb-checkbox',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'autofocus': React.PropTypes.bool,
+	        'checked': React.PropTypes.bool,
+	        'for': React.PropTypes.string,
+	        'form': React.PropTypes.string,
+	        'name': React.PropTypes.string,
+	        'required': React.PropTypes.bool,
+	        'size': React.PropTypes.oneOf(['s', 'm']),
+	        'value': React.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'checked': false,
+	            'children': '',
+	            'disabled': false,
+	            'required': false,
+	            'size': 'm',
+	            'tabindex': '0',
+	            'value': 'on'
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            'checked': this.props.checked
+	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            'checked': nextProps.checked
+	        });
+	    },
+
+	    _onChange: function _onChange(event) {
+	        this.setState({
+	            'checked': event.target.checked
+	        });
+	    },
+
+	    render: function render() {
+	        var classes = {
+	            'xb-checkbox': true,
+	            '_disabled': this.props.disabled
+	        };
+
+	        if (this.props.size) {
+	            classes['_size-' + this.props.size] = true;
+	        }
+
+	        classes = classnames(classes);
+
+	        var tabIndex = this.props.tabindex;
+
+	        if (this.props.disabled) {
+	            tabIndex = '-1';
+	        }
+
+	        return React.createElement(
+	            'label',
+	            { className: classes,
+	                title: this.props.title,
+	                htmlFor: this.props['for'] },
+	            React.createElement('input', { type: 'checkbox',
+	                className: '_xb-check_controller',
+	                name: this.props.name,
+	                value: this.props.value,
+	                disabled: this.props.disabled,
+	                defaultChecked: this.props.checked,
+	                checked: this.state.checked,
+	                autoFocus: this.props.autofocus,
+	                readOnly: true,
+	                onChange: this._onChange,
+	                required: this.props.required,
+	                tabIndex: tabIndex,
+	                form: this.props.form }),
+	            React.createElement(
+	                'span',
+	                { className: '_xb-checkbox_flag _xb-check_flag' },
+	                React.createElement('span', { className: '_xb-checkbox_flag-icon' })
+	            ),
+	            React.createElement(
+	                'span',
+	                { 'data-xb-content': this.props._uid },
+	                this.props.children
+	            )
+	        );
+	    }
+	}]);
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(77);
+
+	var xblocks = __webpack_require__(5);
+
+	/**
+	 * xb-ico html element
+	 *
+	 * @prop {string} [value=&160;] the text inside the tag
+	 * @prop {boolean} [active=false]
+	 * @prop {boolean} [disabled=false]
+	 * @prop {string} [size=s] icon size, possible values: s|m
+	 * @prop {string} type icon type, possible values: attention|close|check|download|download-white|dropdown|eye|link|link-white|mail|notification|odnoklassniki|pause|people|play|print|remove|services|settings|three-dots|trash|trash-white|twitter|help|upload|upload-white|vk
+	 *
+	 * @example
+	 * &#60;xb-ico type="notification" value="attribute value">&#60;/xb-ico>
+	 * <xb-ico value="attribute value" type="notification"></xb-ico>
+	 *
+	 * @example
+	 * &#60;xb-ico disabled type="attention">&#60;/xb-ico>
+	 * <xb-ico disabled type="attention"></xb-ico>
+	 *
+	 * @example
+	 * &#60;xb-ico active type="attention">&#60;/xb-ico>
+	 * <xb-ico active type="attention"></xb-ico>
+	 *
+	 * @example
+	 * &#60;xb-ico size="m" type="attention">&#60;/xb-ico>
+	 * <xb-ico size="m" type="attention"></xb-ico>
+	 *
+	 * @class xb.Ico
+	 * @memberof xb
+	 * @augments HTMLElement
+	 * @mixes xblocks.mixin.eDisabled
+	 */
+	module.exports = xblocks.create('xb-ico', [__webpack_require__(70), {
+	    'accessors': {
+	        'active': {
+	            'attribute': {
+	                'boolean': true
+	            }
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+
+	/**
+	 * The template node xb-ico
+	 *
+	 * @class xv.Ico
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	module.exports = xblocks.view.register('xb-ico', [__webpack_require__(68), {
+	    displayName: 'xb-ico',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'active': React.PropTypes.bool,
+	        'size': React.PropTypes.oneOf(['s', 'm']),
+	        'value': React.PropTypes.string,
+	        'type': React.PropTypes.oneOf(['attention', 'check', 'close', 'download', 'download-white', 'dropdown', 'eye', 'help', 'link', 'link-white', 'mail', 'mic-off', 'mic-on', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'upload', 'upload-white', 'vk'])
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'active': false,
+	            'children': String.fromCharCode(160),
+	            'disabled': false,
+	            'size': 's'
+	        };
+	    },
+
+	    render: function render() {
+	        var classes = {
+	            'xb-ico': true,
+	            '_active': this.props.active,
+	            '_disabled': this.props.disabled
+	        };
+
+	        if (this.props.type) {
+	            classes['_type-' + this.props.type] = true;
+	        }
+
+	        if (this.props.size) {
+	            classes['_size-' + this.props.size] = true;
+	        }
+
+	        classes = classnames(classes);
+
+	        var content = this.props.value || this.props.children;
+
+	        return React.createElement(
+	            'span',
+	            { className: classes, 'data-xb-content': this.props._uid },
+	            content
+	        );
+	    }
+	}]);
+
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(79);
+
+	var xblocks = __webpack_require__(5);
+
+	/**
+	 * xb-link html element
+	 *
+	 * @class xb.Link
+	 * @memberof xb
+	 * @augments HTMLAnchorElement
+	 * @mixes xblocks.mixin.eDisabled
+	 */
+	module.exports = xblocks.create('xb-link', [__webpack_require__(70), {
+	    'prototype': Object.create(HTMLAnchorElement.prototype)
+	}]);
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+
+	/**
+	 * The template node xb-link
+	 *
+	 * @class xv.Link
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	module.exports = xblocks.view.register('xb-link', [__webpack_require__(68), {
+	    displayName: 'xb-link',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'href': React.PropTypes.string,
+	        'name': React.PropTypes.string,
+	        'target': React.PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
+	        'theme': React.PropTypes.oneOf(['normal', 'outer', 'pseudo', 'empty'])
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'disabled': false,
+	            'tabindex': '1',
+	            'target': '_self',
+	            'theme': 'normal'
+	        };
+	    },
+
+	    render: function render() {
+	        var classes = {
+	            'xb-link': true,
+	            '_disabled': this.props.disabled
+	        };
+
+	        if (this.props.theme) {
+	            classes['_theme-' + this.props.theme] = true;
+	        }
+
+	        var tabIndex = this.props.tabindex;
+
+	        if (this.props.disabled) {
+	            tabIndex = '-1';
+	        }
+
+	        classes = classnames(classes);
+
+	        var content = this.props.value || this.props.children;
+
+	        return React.createElement(
+	            'a',
+	            { name: this.props.name,
+	                href: this.props.href,
+	                target: this.props.target,
+	                tabIndex: tabIndex,
+	                className: classes,
+	                'data-xb-content': this.props._uid },
+	            content
+	        );
+	    }
+	}]);
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(81);
+
+	var xblocks = __webpack_require__(5);
+
+	/**
+	 * xb-menuseparator html element
+	 *
+	 * @class xb.Menuseparator
+	 * @memberof xb
+	 * @augments HTMLElement
+	 */
+	module.exports = xblocks.create('xb-menuseparator', [{
+	    'prototype': Object.create(HTMLElement.prototype)
+	}]);
+
+/***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+
+	/**
+	 * The template node xb-menuseparator
+	 *
+	 * @class xv.Menuseparator
+	 * @memberof xv
+	 */
+	module.exports = xblocks.view.register('xb-menuseparator', {
+	    displayName: 'xb-menuseparator',
+
+	    render: function render() {
+	        return React.createElement('div', { className: 'xb-menuseparator' });
+	    }
+	});
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(83);
+
+	var xblocks = __webpack_require__(5);
+
+	/**
+	 * xb-radio html element
+	 *
+	 * @prop {string} [size=m] size, possible values: s|m
+	 * @prop {string} [value=on]
+	 * @prop {string} [name]
+	 * @prop {string} [form]
+	 * @prop {string} [for]
+	 * @prop {boolean} [autofocus=false]
+	 * @prop {boolean} [disabled=false]
+	 * @prop {boolean} [checked=false]
+	 * @prop {boolean} [required=false]
+	 *
+	 * @class xb.Radio
+	 * @memberof xb
+	 * @augments HTMLInputElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eChecked
+	 * @mixes xblocks.mixin.eInputValueProps
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	module.exports = xblocks.create('xb-radio', [__webpack_require__(70), __webpack_require__(71), __webpack_require__(72), __webpack_require__(73), {
+	    'prototype': Object.create(HTMLInputElement.prototype),
+
+	    'accessors': {
+	        'defaultValue': {
+	            'get': function get() {
+	                return 'on';
+	            }
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+	var resetLastRadioChecked = __webpack_require__(8);
+
+	/**
+	 * The template node xb-radio
+	 *
+	 * @class xv.Radio
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	module.exports = xblocks.view.register('xb-radio', [__webpack_require__(68), {
+	    displayName: 'xb-radio',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'autofocus': React.PropTypes.bool,
+	        'checked': React.PropTypes.bool,
+	        'for': React.PropTypes.string,
+	        'form': React.PropTypes.string,
+	        'name': React.PropTypes.string,
+	        'required': React.PropTypes.bool,
+	        'size': React.PropTypes.oneOf(['s', 'm']),
+	        'value': React.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'checked': false,
+	            'children': '',
+	            'disabled': false,
+	            'required': false,
+	            'size': 'm',
+	            'tabindex': '0',
+	            'value': 'on'
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            'checked': this.props.checked
+	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            'checked': Boolean(nextProps.checked)
+	        });
+	    },
+
+	    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
+	        if (nextState.checked) {
+	            resetLastRadioChecked(this.container(), nextProps.name);
+	        }
+	    },
+
+	    componentWillMount: function componentWillMount() {
+	        if (this.state.checked) {
+	            resetLastRadioChecked(this.container(), this.props.name);
+	        }
+	    },
+
+	    _onChange: function _onChange(event) {
+	        this.container().checked = event.target.checked;
+	    },
+
+	    render: function render() {
+	        var classes = {
+	            'xb-radio': true,
+	            '_disabled': this.props.disabled
+	        };
+
+	        if (this.props.size) {
+	            classes['_size-' + this.props.size] = true;
+	        }
+
+	        classes = classnames(classes);
+
+	        var tabIndex = this.props.tabindex;
+
+	        if (this.props.disabled) {
+	            tabIndex = '-1';
+	        }
+
+	        return React.createElement(
+	            'label',
+	            { className: classes,
+	                title: this.props.title,
+	                htmlFor: this.props['for'] },
+	            React.createElement('input', { type: 'radio',
+	                className: '_xb-check_controller',
+	                name: this.props.name,
+	                value: this.props.value,
+	                disabled: this.props.disabled,
+	                defaultChecked: this.props.checked,
+	                checked: this.state.checked,
+	                autoFocus: this.props.autofocus,
+	                readOnly: true,
+	                onChange: this._onChange,
+	                required: this.props.required,
+	                tabIndex: tabIndex,
+	                form: this.props.form }),
+	            React.createElement(
+	                'span',
+	                { className: '_xb-radio_flag _xb-check_flag' },
+	                React.createElement('span', { className: '_xb-radio_flag-icon' })
+	            ),
+	            React.createElement(
+	                'span',
+	                { 'data-xb-content': this.props._uid },
+	                this.props.children
+	            )
+	        );
+	    }
+	}]);
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(85);
+
+	var xblocks = __webpack_require__(5);
+
+	/**
+	 * xb-input html element
+	 *
+	 * @prop {string} [name]
+	 * @prop {string} [type=text] text|number|date|datetime|email|month|range|search|tel|time|url|week|color
+	 * @prop {string} [size=m] s|m|l|xl
+	 * @prop {string} [autocomplete] on|off
+	 * @prop {string} [rows=4]
+	 * @prop {string} [cols]
+	 * @prop {string} [placeholder]
+	 * @prop {string} [value]
+	 * @prop {string} [prefix]
+	 * @prop {string} [postfix]
+	 * @prop {string} [tabindex]
+	 * @prop {boolean} [disabled=false]
+	 * @prop {boolean} [autosize=false]
+	 * @prop {boolean} [multiline=false]
+	 * @prop {boolean} [required=false]
+	 * @prop {boolean} [readonly=false]
+	 * @prop {boolean} [reset=false]
+	 * @prop {boolean} [autofocus=false]
+	 * @prop {boolean} [ghost=false]
+	 *
+	 * @class xb.Input
+	 * @memberof xb
+	 * @augments HTMLInputElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eInputValueState
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	module.exports = xblocks.create('xb-input', [__webpack_require__(70), __webpack_require__(87), __webpack_require__(73), {
+	    'prototype': Object.create(HTMLInputElement.prototype),
+
+	    'events': {
+	        'xb-speech-recognition-start': function xbSpeechRecognitionStart(event) {
+	            console.log(event);
+	        },
+
+	        'xb-speech-recognition-result': function xbSpeechRecognitionResult(event) {
+	            if (event.detail) {
+	                var input = this.querySelector('input');
+
+	                if (event.detail.interim) {
+	                    var start = input.selectionStart;
+
+	                    xblocks.dom.replaceTextSelection(input, event.detail.interim, function (callback) {
+	                        callback(input.value);
+	                    }, function (value, callback) {
+	                        input.value = value;
+	                        callback(function () {
+	                            input.selectionStart = start;
+	                            input.scrollLeft = input.scrollWidth;
+	                        });
+	                    });
+	                } else if (event.detail.final) {
+	                    this.value = event.detail.final;
+	                    input.value = event.detail.final;
+	                    var len = this.value.length;
+	                    input.setSelectionRange(len, len);
+	                    input.scrollLeft = input.scrollWidth;
+	                }
+	            }
+	            console.log(event.detail, this);
+	        },
+
+	        'xb-speech-recognition-end': function xbSpeechRecognitionEnd(event) {
+	            if (event.detail) {
+	                var input = this.querySelector('input');
+	                this.value = event.detail.final;
+	                input.value = event.detail.final;
+	                var len = this.value.length;
+	                input.setSelectionRange(len, len);
+	                input.scrollLeft = input.scrollWidth;
+	            }
+	            console.log(event.detail);
+	        },
+
+	        'xb-speech-recognition-error': function xbSpeechRecognitionError(event) {
+	            console.log(event);
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+
+	var InputController = __webpack_require__(86);
+
+	/**
+	 * The template node xb-input
+	 *
+	 * @class xv.Input
+	 * @memberof xv
+	 * @mixes React.addons.PureRenderMixin
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 */
+	module.exports = xblocks.view.register('xb-input', [__webpack_require__(68), __webpack_require__(69)('xb-link'), {
+	    displayName: 'xb-input',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'autocomplete': React.PropTypes.oneOf(['on', 'off']),
+	        'autofocus': React.PropTypes.bool,
+	        'autosize': React.PropTypes.bool,
+	        'cols': React.PropTypes.string,
+	        'ghost': React.PropTypes.bool,
+	        'multiline': React.PropTypes.bool,
+	        'name': React.PropTypes.string,
+	        'placeholder': React.PropTypes.string,
+	        'postfix': React.PropTypes.string,
+	        'prefix': React.PropTypes.string,
+	        'readonly': React.PropTypes.bool,
+	        'required': React.PropTypes.bool,
+	        'reset': React.PropTypes.bool,
+	        'rows': React.PropTypes.string,
+	        'size': React.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
+	        'type': React.PropTypes.oneOf(['text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg']),
+	        'value': React.PropTypes.string,
+	        'xb-link': React.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'autosize': false,
+	            'disabled': false,
+	            'ghost': false,
+	            'multiline': false,
+	            'readonly': false,
+	            'required': false,
+	            'reset': false,
+	            'rows': '4',
+	            'size': 'm',
+	            'type': 'text',
+	            'value': undefined
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            'value': this.props.value
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        // check show or hide placeholder after mount element
+	        this.refs.controller._dispatchEventToggleHint('', this.props.value);
+	    },
+
+	    /**
+	     * Remember current value in state
+	     * @param {Event} event
+	     * @private
+	     */
+	    _onChange: function _onChange(event) {
+	        this.setState({
+	            'value': event.target.value
+	        });
+	    },
+
+	    /**
+	     * Show or hide placeholder
+	     * @param {boolean} toggle
+	     * @private
+	     */
+	    _onHintToggle: function _onHintToggle(toggle) {
+	        React.findDOMNode(this.refs.placeholder).style.visibility = toggle ? 'inherit' : 'hidden';
+	    },
+
+	    /**
+	     * Check show complex input
+	     * @returns {boolean}
+	     * @private
+	     */
+	    _isComplex: function _isComplex() {
+	        return Boolean(this.props.postfix || this.props.prefix || this.props.reset || this.props.autosize || this.props['xb-link'] || this.props.placeholder);
+	    },
+
+	    /**
+	     * Click reset button
+	     * @private
+	     */
+	    _onClickReset: function _onClickReset() {
+	        this.setState({
+	            'value': ''
+	        });
+	    },
+
+	    render: function render() {
+	        var isComplex = this._isComplex();
+	        var classes = {
+	            'xb-input': true,
+	            '_disabled': this.props.disabled,
+	            '_autosize': this.props.autosize,
+	            '_ghost': this.props.ghost,
+	            '_complex': isComplex,
+	            '_simple': !isComplex
+	        };
+
+	        if (this.props.size) {
+	            classes['_size-' + this.props.size] = true;
+	        }
+
+	        classes = classnames(classes);
+
+	        var isPlaceholderHint = false;
+	        var controllerProps = {
+	            'autoFocus': this.props.autofocus,
+	            'autocomplete': this.props.autocomplete,
+	            'autosize': this.props.autosize,
+	            'className': '_controller',
+	            'cols': this.props.cols,
+	            'disabled': this.props.disabled,
+	            'key': 'controller',
+	            'multiline': this.props.multiline,
+	            'name': this.props.name,
+	            'onChange': this._onChange,
+	            'onHintToggle': this._onHintToggle,
+	            'readOnly': this.props.readonly,
+	            'ref': 'controller',
+	            'required': this.props.required,
+	            'rows': this.props.rows,
+	            'tabIndex': this.props.tabindex,
+	            'value': this.state.value
+	        };
+
+	        if (isComplex) {
+	            var children = [];
+
+	            if (this.props.placeholder) {
+	                isPlaceholderHint = true;
+
+	                children.push(React.createElement(
+	                    'span',
+	                    { ref: 'placeholder', key: 'placeholder', className: '_hint' },
+	                    React.createElement(
+	                        'span',
+	                        { className: '_hint-inner' },
+	                        this.props.placeholder
+	                    )
+	                ));
+	            }
+
+	            if (this.props['xb-link']) {
+	                var linkProps = filterProps(/^xb-link-/, this.props);
+	                linkProps['theme'] = 'empty';
+	                linkProps['key'] = 'label';
+
+	                children.push(React.createElement(
+	                    'xb-link',
+	                    linkProps,
+	                    this.props['xb-link']
+	                ));
+	            }
+
+	            if (this.props.prefix) {
+	                children.push(React.createElement(
+	                    'span',
+	                    { key: 'prefix', className: '_left' },
+	                    this.props.prefix
+	                ));
+	            }
+
+	            if (this.props.postfix) {
+	                children.push(React.createElement(
+	                    'span',
+	                    { key: 'postfix', className: '_right' },
+	                    this.props.postfix
+	                ));
+	            }
+
+	            if (this.props.reset) {
+	                children.push(React.createElement('span', { key: 'reset', className: '_reset', onClick: this._onClickReset }));
+	            }
+
+	            children.push(React.createElement(
+	                'span',
+	                { key: 'content', className: '_content' },
+	                React.createElement(InputController, _extends({}, controllerProps, { isPlaceholderHint: isPlaceholderHint })),
+	                React.createElement('span', { key: 'view', className: '_view' })
+	            ));
+
+	            return React.createElement(
+	                'label',
+	                { className: classes },
+	                children
+	            );
+	        } else {
+
+	            return React.createElement(InputController, _extends({}, controllerProps, { className: classes, isPlaceholderHint: isPlaceholderHint }));
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+
+	/**
+	 * @class xv.InputController
+	 * @memberof xv
+	 */
+	module.exports = xblocks.view.create({
+	    displayName: 'xb-input_controller',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'autoFocus': React.PropTypes.bool,
+	        'autocomplete': React.PropTypes.oneOf(['on', 'off']),
+	        'autosize': React.PropTypes.bool,
+	        'className': React.PropTypes.string,
+	        'cols': React.PropTypes.string,
+	        'disabled': React.PropTypes.bool,
+	        'isPlaceholderHint': React.PropTypes.bool,
+	        'multiline': React.PropTypes.bool,
+	        'name': React.PropTypes.string,
+	        'onChange': React.PropTypes.func,
+	        'onHintToggle': React.PropTypes.func,
+	        'placeholder': React.PropTypes.string,
+	        'readOnly': React.PropTypes.bool,
+	        'required': React.PropTypes.bool,
+	        'rows': React.PropTypes.string,
+	        'tabIndex': React.PropTypes.string,
+	        'value': React.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autoFocus': false,
+	            'autosize': false,
+	            'disabled': false,
+	            'isPlaceholderHint': false,
+	            'multiline': false,
+	            'readOnly': false,
+	            'required': false,
+	            'value': undefined
+	        };
+	    },
+
+	    componentDidUpdate: function componentDidUpdate(prevProps) {
+	        this._recalculateSize();
+	        this._dispatchEventToggleHint(prevProps.value, this.props.value);
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        this._recalculateSize();
+	    },
+
+	    _dispatchEventToggleHint: function _dispatchEventToggleHint(prevValue, nextValue) {
+	        if (this.props.isPlaceholderHint) {
+	            var hasPrevValue = Boolean(prevValue);
+	            var hasNestValue = Boolean(nextValue);
+
+	            /* jshint -W016 */
+	            if (hasPrevValue ^ hasNestValue) {
+	                this.props.onHintToggle(hasPrevValue && !hasNestValue);
+	            }
+	        }
+	    },
+
+	    _recalculateSize: function _recalculateSize() {
+	        if (!this.props.autosize) {
+	            return;
+	        }
+
+	        var node = React.findDOMNode(this);
+
+	        if (this.props.multiline) {
+	            node.style.height = '0px';
+	            node.style.height = node.scrollHeight + 'px';
+	        } else {
+	            node.style.width = '20px';
+	            node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
+	        }
+	    },
+
+	    render: function render() {
+	        var tabIndex = this.props.tabIndex;
+	        if (this.props.disabled && tabIndex) {
+	            tabIndex = '-1';
+	        }
+
+	        var props = {
+	            'autoFocus': this.props.autoFocus,
+	            'autocomplete': this.props.autocomplete,
+	            'className': this.props.className,
+	            'disabled': this.props.disabled,
+	            'name': this.props.name,
+	            'onChange': this.props.onChange,
+	            'placeholder': this.props.placeholder || '', // macos inserts placeholder default
+	            'readOnly': this.props.readOnly,
+	            'required': this.props.required,
+	            'tabIndex': tabIndex,
+	            'value': this.props.value
+	        };
+
+	        if (this.props.multiline) {
+	            return React.createElement('textarea', _extends({}, props, { rows: this.props.rows, cols: this.props.cols }));
+	        } else {
+	            return React.createElement('input', _extends({}, props, { type: 'text' }));
+	        }
+	    }
+	});
+
+/***/ },
+/* 87 */
+/***/ function(module, exports) {
+
+	/**
+	 * Value element interface.
+	 * Уou can edit the value, for example in the input or textarea.
+	 *
+	 * @example
+	 * xblocks.create('xb-input', [
+	 *     xblocks.mixin.eInputValueState,
+	 *     {
+	 *         accessors: {
+	 *             ...
+	 *             // override the default values
+	 *             'defaultValue': {
+	 *                 'get': function() {
+	 *                     return 'on';
+	 *                  }
+	 *              }
+	 *         },
+	 *         events: { ... },
+	 *         methods: { ... }
+	 *         ...
+	 *     }
+	 * ]);
+	 *
+	 * var e = document.createElement('xb-input');
+	 * // read
+	 * console.log(e.value)
+	 * // 1
+	 *
+	 * // write
+	 * e.value = "123";
+	 * // 123
+	 *
+	 * // jquery write
+	 * $(e).attr('value', '321')
+	 * // 321
+	 *
+	 * @memberOf xblocks.mixin
+	 * @type {object}
+	 */
+	'use strict';
+
+	module.exports = {
+	    'accessors': {
+
+	        /**
+	         * @prop {string} value
+	         */
+	        'value': {
+	            'attribute': {
+	                'name': 'value'
+	            },
+
+	            'get': function get() {
+	                var component = this.xblock && this.xblock.getMountedComponent();
+
+	                if (component && typeof component.state.value !== 'undefined') {
+	                    return component.state.value;
+	                }
+
+	                return String(this.getAttribute('value') || this.defaultValue || '');
+	            },
+
+	            'set': function set(value) {
+	                var component = this.xblock && this.xblock.getMountedComponent();
+
+	                if (component) {
+	                    component.setState({ 'value': String(value) });
+	                }
+	            }
+	        },
+
+	        /**
+	         * @prop {string} defaultValue
+	         */
+	        'defaultValue': {
+	            'get': function get() {
+	                return '';
+	            }
+	        }
+	    }
+	};
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(89);
+
+	var context = __webpack_require__(2);
+	var xblocks = __webpack_require__(5);
+
+	var popupCommon = {
+	    onOpen: function onOpen() {
+	        this.focus();
+	        xblocks.event.dispatch(this, 'xb-open');
+	    },
+
+	    onClose: function onClose() {
+	        this.blur();
+	        xblocks.event.dispatch(this, 'xb-close');
+	    },
+
+	    /**
+	     * Check valid value for attribute by default
+	     * @param {*} value value for attribute
+	     * @returns {boolean}
+	     */
+	    checkDefaultAttr: function checkDefaultAttr(value) {
+	        return typeof value !== 'undefined';
+	    },
+
+	    /**
+	     * Association of attributes and options
+	     * @param {Object} options tether options
+	     * @param {Object} attrs attributes of element
+	     */
+	    fillOptionsFromAttrs: function fillOptionsFromAttrs(options, attrs) {
+	        for (var attrName in attrs) {
+	            var params = popupCommon.tetherAttrsAlign[attrName];
+	            if (!params) {
+	                continue;
+	            }
+
+	            var optionName = params[0];
+	            var checker = params[1] || popupCommon.checkDefaultAttr;
+	            var value = attrs[attrName];
+
+	            if (checker(value)) {
+	                if (typeof optionName === 'function') {
+	                    optionName(options, value);
+	                } else {
+	                    options[optionName] = value;
+	                }
+	            }
+	        }
+	    },
+
+	    /**
+	     * The default setting for the popup
+	     * @returns {Object}
+	     * @this {xb.Popup}
+	     */
+	    tetherDefaultOptions: function tetherDefaultOptions() {
+	        return {
+	            'attachment': 'middle center',
+	            'classes': { 'element': this.xtagName },
+	            'classPrefix': this.xtagName,
+	            'element': this,
+	            'enabled': false,
+	            'optimizations': { 'gpu': true },
+	            'target': this.ownerDocument.body,
+	            'targetAttachment': 'middle center',
+	            'targetModifier': 'visible'
+	        };
+	    },
+
+	    /**
+	     * Union rules attributes
+	     * @type {Object}
+	     */
+	    tetherAttrsAlign: {
+	        'attachment': ['attachment'],
+	        'target-attachment': ['targetAttachment'],
+	        'target-offset': ['targetOffset'],
+	        'offset': ['offset'],
+	        'target': ['target', function (value) {
+	            return value && (typeof value === 'string' || value instanceof context.HTMLElement);
+	        }],
+	        'target-parent': [function (options, value) {
+	            options.target = value;
+	        }, function (value) {
+	            return value && value instanceof context.HTMLElement;
+	        }],
+	        'target-modifier': [function (options, value) {
+	            options.targetModifier = value === 'initial' ? undefined : value;
+	        }, function (value) {
+	            return value === 'initial' || value === 'visible' || value === 'scroll-handle';
+	        }],
+	        'optimizations-gpu': [function (options, value) {
+	            options.optimizations.gpu = value;
+	        }, function (value) {
+	            return typeof value === 'boolean';
+	        }],
+	        'constraints': [function (options, value) {
+	            options.constraints = JSON.parse(decodeURIComponent(value));
+	        }, function (value) {
+	            return value && typeof value === 'string';
+	        }]
+	    }
+	};
+
+	/**
+	 * xb-popup html element
+	 *
+	 * @constructor
+	 * @augments HTMLElement
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	module.exports = xblocks.create('xb-popup', [__webpack_require__(73), {
+	    prototype: Object.create(HTMLElement.prototype),
+
+	    events: {
+	        'jsx-click-close': function jsxClickClose(event) {
+	            event.stopImmediatePropagation();
+	            this.close();
+	        },
+
+	        'keydown:keypass(27)': function keydownKeypass27() {
+	            this.close();
+	        }
+	    },
+
+	    /**
+	     * @lends xb.Popup.prototype
+	     */
+	    accessors: {
+
+	        /**
+	         * @readonly
+	         * @prop {Object} default options
+	         */
+	        defaultOptions: {
+	            get: popupCommon.tetherDefaultOptions
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {object} options the display options window
+	         */
+	        options: {
+	            get: function get() {
+	                if (this._options) {
+	                    return this._options;
+	                }
+
+	                this._options = this.defaultOptions;
+
+	                var tetherAttrs = xblocks.dom.attrs.get(this, {
+	                    'attachment': undefined,
+	                    'constraints': undefined,
+	                    'offset': undefined,
+	                    'optimizations-gpu': true,
+	                    'target-attachment': undefined,
+	                    'target-modifier': undefined,
+	                    'target-offset': undefined,
+	                    'target-parent': false,
+	                    'target': undefined
+	                });
+
+	                if (tetherAttrs['target-parent']) {
+	                    tetherAttrs['target-parent'] = this.parentNode;
+	                }
+
+	                popupCommon.fillOptionsFromAttrs(this._options, tetherAttrs);
+
+	                return this._options;
+	            }
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {Tether} tether Tether the window object
+	         */
+	        tether: {
+	            get: function get() {
+	                if (!this._tether) {
+	                    this._tether = new Tether(this.options);
+	                }
+
+	                return this._tether;
+	            }
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {boolean} opened window is open
+	         */
+	        opened: {
+	            get: function get() {
+	                return this.tether.enabled;
+	            }
+	        }
+	    },
+
+	    methods: {
+	        /**
+	         * Change the settings window
+	         * @memberOf xb.Popup.prototype
+	         * @param {object} nextOptions new settings
+	         */
+	        setOptions: function setOptions(nextOptions) {
+	            var tether = this.tether;
+
+	            xblocks.utils.assign(true, this.options, nextOptions);
+	            tether.setOptions(this.options, false);
+
+	            if (tether.enabled) {
+	                tether.position();
+	            }
+	        },
+
+	        /**
+	         * Open the window
+	         * @memberOf xb.Popup.prototype
+	         * @param {object} options new settings
+	         * @returns {boolean}
+	         */
+	        open: function open(options) {
+	            var tether = this.tether;
+
+	            if (tether.enabled) {
+	                return false;
+	            }
+
+	            if (typeof options === 'object') {
+	                this.setOptions(options);
+	            }
+
+	            xblocks.event.dispatch(this, 'xb-before-open');
+
+	            tether.enable(true);
+	            tether.target._xbpopup = this;
+
+	            // FireFox does not set the focus without delay
+	            context.setImmediate(popupCommon.onOpen.bind(this));
+
+	            return true;
+	        },
+
+	        /**
+	         * Close the window
+	         * @memberOf xb.Popup.prototype
+	         * @returns {boolean}
+	         */
+	        close: function close() {
+	            var tether = this.tether;
+
+	            if (!tether.enabled) {
+	                return false;
+	            }
+
+	            xblocks.event.dispatch(this, 'xb-before-close');
+
+	            tether.target._xbpopup = undefined;
+	            tether.disable();
+	            tether.clearCache();
+
+	            // FireFox does not fire a blur event
+	            context.setImmediate(popupCommon.onClose.bind(this));
+
+	            return true;
+	        },
+
+	        /**
+	         * Recalculate the location
+	         * @memberOf xb.Popup.prototype
+	         * @returns {boolean}
+	         */
+	        position: function position() {
+	            this.tether.position();
+	            return true;
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+
+	/**
+	 * The template node xb-popup
+	 *
+	 * @class xv.Popup
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	module.exports = xblocks.view.register('xb-popup', [__webpack_require__(68), {
+	    displayName: 'xb-popup',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'close': React.PropTypes.bool,
+	        'theme': React.PropTypes.oneOf(['blank', 'error', 'island', 'modal', 'normal'])
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'close': false,
+	            'theme': 'normal'
+	        };
+	    },
+
+	    _onClickClose: function _onClickClose() {
+	        xblocks.event.dispatch(React.findDOMNode(this), 'jsx-click-close', { 'bubbles': true, 'cancelable': true });
+	    },
+
+	    render: function render() {
+	        var children = [React.createElement('div', { key: 'content',
+	            className: '_content',
+	            'data-xb-content': this.props._uid,
+	            dangerouslySetInnerHTML: { __html: this.props.children } })];
+
+	        children.unshift(this.template('xb-popup-title', {
+	            'key': 'title',
+	            'className': '_title'
+	        }));
+
+	        if (this.props.close) {
+	            children.unshift(React.createElement('a', { key: 'close', className: '_close', onClick: this._onClickClose }));
+	        }
+
+	        children.push(this.template('xb-popup-buttons', {
+	            'key': 'buttons',
+	            'className': '_buttons'
+	        }));
+
+	        var classes = {
+	            '_popup': true
+	        };
+
+	        if (this.props.theme) {
+	            classes['_theme-' + this.props.theme] = true;
+	        }
+
+	        classes = classnames(classes);
+
+	        return React.createElement(
+	            'div',
+	            { className: classes, tabIndex: '0' },
+	            children
+	        );
+	    }
+	}]);
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(91);
+
+	var context = __webpack_require__(2);
+	var xblocks = __webpack_require__(5);
+
+	var _xbMenuitem = {
+	    submenuAttrs: {
+	        'attachment': 'top left',
+	        'target-attachment': 'top right',
+	        'target-modifier': 'initial',
+	        'constraints': encodeURIComponent(JSON.stringify([{
+	            'to': 'window',
+	            'attachment': 'element together'
+	        }]))
+	    },
+
+	    submenu: (function () {
+	        var timerOpenSubmenu = 0;
+
+	        return {
+
+	            /**
+	             * @param {xb.Menu} [submenu]
+	             * @this {context}
+	             */
+	            open: function open(submenu) {
+	                if (submenu && !timerOpenSubmenu) {
+	                    timerOpenSubmenu = context.setTimeout(submenu.open.bind(submenu), 200);
+	                }
+	            },
+
+	            /**
+	             * @this {context}
+	             */
+	            cancel: function cancel() {
+	                if (timerOpenSubmenu) {
+	                    context.clearTimeout(timerOpenSubmenu);
+	                    timerOpenSubmenu = 0;
+	                }
+	            },
+
+	            /**
+	             * @this {xb.Menuitem}
+	             */
+	            remove: function remove() {
+	                if (this._submenuInstance) {
+	                    _xbMenuitem.submenu.cancel();
+
+	                    this._submenuInstance.close();
+	                    xblocks.dom.removeChild(this._submenuInstance);
+	                    this._submenuInstance = undefined;
+	                }
+	            }
+	        };
+	    })()
+	};
+
+	/**
+	 * xb-menuitem html element
+	 *
+	 * @class xb.Menuitem
+	 * @memberof xb
+	 * @augments HTMLElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eInputValueProps
+	 * @listens xblocks.utils:Table~event:xb-focus
+	 * @listens xblocks.utils:Table~event:xb-blur
+	 * @listens xblocks.Element~event:xb-repaint
+	 * @listens xblocks.Element~event:xb-created
+	 * @listens xblocks.Element~event:xb-destroy
+	 */
+	module.exports = xblocks.create('xb-menuitem', [__webpack_require__(70), __webpack_require__(72), {
+	    'prototype': Object.create(HTMLElement.prototype),
+
+	    'events': {
+	        /**
+	         * @callback
+	         */
+	        'xb-created': function xbCreated() {
+	            _xbMenuitem.submenu.remove.call(this);
+	            this.submenu = Boolean(this.content.trim());
+	        },
+
+	        /**
+	         * @callback
+	         */
+	        'xb-repaint': _xbMenuitem.submenu.remove,
+
+	        /**
+	         * @callback
+	         */
+	        'xb-destroy': _xbMenuitem.submenu.remove,
+
+	        /**
+	         * @callback
+	         */
+	        'xb-blur': function xbBlur() {
+	            this.focused = false;
+
+	            _xbMenuitem.submenu.cancel();
+
+	            var submenu = this.submenuInstance;
+	            if (submenu && submenu.opened) {
+	                // to close the submenu and return focus
+	                xblocks.utils.lazyFocus(this.menuInstance);
+	            }
+	        },
+
+	        /**
+	         * @callback
+	         * @param {xblocks:utils:Table~event:xb-focus} event
+	         */
+	        'xb-focus': function xbFocus(event) {
+	            this.focused = true;
+
+	            // open the submenu only event-mouse
+	            if (event.detail.originalEvent.type !== 'keydown') {
+	                _xbMenuitem.submenu.open(this.submenuInstance);
+
+	                // scroll menu only keyboard events
+	            } else {
+	                    this.menuInstance.scrollIntoItem(this);
+	                }
+	        }
+	    },
+
+	    /**
+	     * @lends xb.Menuitem.prototype
+	     */
+	    'accessors': {
+	        /**
+	         * @prop {string} label
+	         */
+
+	        /**
+	         * @prop {boolean} [disabled=false]
+	         */
+
+	        /**
+	         * @prop {boolean} [focused=false] Item in focus
+	         */
+	        'focused': {
+	            'attribute': {
+	                'boolean': true
+	            }
+	        },
+
+	        /**
+	         * @prop {boolean} [selected=false] Item is selected
+	         */
+	        'selected': {
+	            'attribute': {
+	                'boolean': true
+	            }
+	        },
+
+	        /**
+	         * @prop {boolean} [submenu=false] Item has a submenu
+	         */
+	        'submenu': {
+	            'attribute': {
+	                'boolean': true
+	            }
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
+	         */
+	        'menuInstance': {
+	            'get': function get() {
+	                if (this._menuInstance || this._menuInstance === null) {
+	                    return this._menuInstance;
+	                }
+
+	                this._menuInstance = xblocks.utils.getParentMenu(this);
+
+	                return this._menuInstance;
+	            }
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {xb.Menu|null} submenuInstance Submenu instance
+	         */
+	        'submenuInstance': {
+	            'get': function get() {
+	                if (this._submenuInstance || this._submenuInstance === null) {
+	                    return this._submenuInstance;
+	                }
+
+	                this._submenuInstance = null;
+
+	                if (this.submenu) {
+	                    var targetClassName = '_menuitem-target-' + this.xuid;
+	                    var menu = this.ownerDocument.createElement('xb-menu');
+	                    var parentConstraints = this.menuInstance.getAttribute('constraints');
+	                    var attrs = xblocks.utils.merge({ 'target': '.' + targetClassName }, _xbMenuitem.submenuAttrs);
+
+	                    // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
+	                    // меню может быть открыто в блоке со скролом,
+	                    // в этом случае ограничением для подменю будет блок со скролом
+	                    if (parentConstraints) {
+	                        attrs.constraints = parentConstraints;
+	                    }
+
+	                    for (var attrName in attrs) {
+	                        menu.setAttribute(attrName, attrs[attrName]);
+	                    }
+
+	                    menu.innerHTML = this.content;
+
+	                    this.classList.add(targetClassName);
+	                    this._submenuInstance = this.ownerDocument.body.appendChild(menu);
+	                }
+
+	                return this._submenuInstance;
+	            }
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+	var React = __webpack_require__(6);
+	var classnames = __webpack_require__(7);
+	var isEmpty = __webpack_require__(67);
+
+	/**
+	 * The template node xb-menuitem
+	 *
+	 * @class xv.Menuitem
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	module.exports = xblocks.view.register('xb-menuitem', [__webpack_require__(68), __webpack_require__(69)('xb-ico'), {
+	    displayName: 'xb-menuitem',
+
+	    mixins: [React.addons.PureRenderMixin],
+
+	    propTypes: {
+	        'focused': React.PropTypes.bool,
+	        'ico': React.PropTypes.object,
+	        'label': React.PropTypes.string.isRequired,
+	        'selected': React.PropTypes.bool,
+	        'submenu': React.PropTypes.bool
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'disabled': false,
+	            'focused': false,
+	            'selected': false,
+	            'submenu': false
+	        };
+	    },
+
+	    render: function render() {
+	        var classes = {
+	            'xb-menuitem': true,
+	            '_disabled': this.props.disabled,
+	            '_focused': this.props.focused,
+	            '_selected': this.props.selected,
+	            '_submenu': this.props.submenu
+	        };
+
+	        classes = classnames(classes);
+
+	        var children = [React.createElement(
+	            'span',
+	            { className: '_label', key: 'label' },
+	            this.props.label
+	        )];
+
+	        var icoProps = filterProps(/^xb-ico-/, this.props);
+
+	        if (!isEmpty(icoProps) && icoProps.type) {
+	            icoProps.key = 'ico';
+
+	            if (!icoProps.float || icoProps.float === 'left') {
+	                children.unshift(React.createElement('xb-ico', icoProps));
+	            } else if (icoProps.float === 'right') {
+	                children.push(React.createElement('xb-ico', icoProps));
+	            }
+	        }
+
+	        return React.createElement(
+	            'div',
+	            { className: classes },
+	            children
+	        );
+	    }
+	}]);
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(93);
+	__webpack_require__(94);
+
+	var context = __webpack_require__(2);
+	var xblocks = __webpack_require__(5);
+
+	var _xbMenu = {
+
+	    /**
+	     * @param {xb.Menuitem} target
+	     * @this {global}
+	     */
+	    closeSubmenu: function closeSubmenu(target) {
+	        if (target._xbpopup) {
+	            target._xbpopup.close();
+	        }
+	    },
+
+	    /**
+	     * The default setting for the menu
+	     * @returns {Object}
+	     * @this {xb.Menu}
+	     */
+	    tetherDefaultOptions: function tetherDefaultOptions() {
+	        var options = _xbPopup.tetherDefaultOptions.call(this);
+	        options.constraints = [{
+	            'to': 'scrollParent',
+	            'attachment': 'element'
+	        }, {
+	            'to': 'window',
+	            'attachment': 'element'
+	        }];
+
+	        return options;
+	    }
+	};
+
+	/**
+	 * xb-menu html element
+	 *
+	 * @class xb.Menu
+	 * @augments xb.Popup
+	 * @memberof xb
+	 * @mixes xblocks.mixin.eMenu
+	 */
+	module.exports = xblocks.create('xb-menu', [__webpack_require__(95), {
+	    'prototype': Object.create(xb.Popup.prototype || new xb.Popup()),
+
+	    'events': {
+	        'xb-before-open': function xbBeforeOpen() {
+	            this.style.visibility = 'hidden';
+	        },
+
+	        'xb-open': function xbOpen() {
+	            this._xbFocus = new xblocks.utils.Table(this, {
+	                'rowLoop': true,
+	                'colLoop': true
+	            });
+
+	            var component = this.xblock.getMountedComponent();
+	            if (component) {
+	                // check show scroll navigator after open menu
+	                component.afterOpen(this._afterOpen.bind(this));
+	            } else {
+	                this._afterOpen();
+	            }
+	        },
+
+	        'xb-close': function xbClose() {
+	            if (this._xbFocus) {
+	                this._xbFocus.destroy();
+	                this._xbFocus = undefined;
+	            }
+
+	            this._closeAllSubmenu();
+	        },
+
+	        'keydown:keypass(27)': function keydownKeypass27() {
+	            this.close();
+
+	            // focus of ancestor
+	            var parentMenu = this.parentMenu;
+	            if (parentMenu) {
+	                context.setTimeout(parentMenu.focus.bind(parentMenu), 0);
+	            }
+	        },
+
+	        'blur': function blur() {
+	            if (!this.hasOpenSubmenu) {
+	                this.close();
+	                // event.relatedTarget is null in firefox
+	                global.setImmediate(this._closeUpFocus.bind(this));
+	            }
+	        }
+	    },
+
+	    /**
+	     * @lends xb.Menu.prototype
+	     */
+	    'accessors': {
+
+	        /**
+	         * @readonly
+	         * @prop {Object} default options
+	         */
+	        'defaultOptions': {
+	            'get': _xbMenu.tetherDefaultOptions
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {xb.Menu} [parentMenu] menu-ancestor
+	         */
+	        'parentMenu': {
+	            'get': function get() {
+	                return this.tether.target.menuInstance;
+	            }
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
+	         */
+	        'firstParentMenu': {
+	            'get': function get() {
+	                var parentMenu = this.parentMenu;
+
+	                if (parentMenu) {
+	                    return parentMenu.firstParentMenu || parentMenu;
+	                }
+
+	                return this;
+	            }
+	        }
+	    },
+
+	    'methods': {
+	        '_closeAllSubmenu': function _closeAllSubmenu() {
+	            __forEach.call(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), _xbMenu.closeSubmenu);
+	        },
+
+	        '_afterOpen': function _afterOpen() {
+	            this.position();
+	            this.style.visibility = 'visible';
+	            // the focus is not put on the invisible element
+	            // put again
+	            context.setTimeout(this.focus.bind(this), 0);
+	        },
+
+	        '_closeUpFocus': function _closeUpFocus() {
+	            var focusMenu = xblocks.utils.getParentMenu(this.ownerDocument.activeElement);
+	            var parent = this.parentMenu;
+
+	            while (parent) {
+	                if (parent === focusMenu) {
+	                    break;
+	                }
+
+	                parent.close();
+	                parent = parent.parentMenu;
+	            }
+	        }
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 93 */
+/***/ function(module, exports) {
+
+	//jscs:disable
+	/* global xblocks, __doc */
+	//jscs:enable
+
+	'use strict';
+
+	__doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function (event) {
+	    var element = event.delegateElement;
+	    var doc = element.ownerDocument;
+	    var menuId = element.getAttribute('contextmenu');
+	    var menuElement = menuId && doc.getElementById(menuId);
+
+	    if (!menuElement || menuElement.xtagName !== 'xb-menu') {
+	        return;
+	    }
+
+	    event.preventDefault();
+	    event.stopImmediatePropagation();
+
+	    var targetElementId = 'xb-contextmenu-target';
+	    var targetElement = doc.getElementById(targetElementId);
+
+	    if (targetElement) {
+	        if (targetElement._xbpopup) {
+	            targetElement._xbpopup.close();
+	        }
+	    } else {
+	        targetElement = doc.createElement('div');
+	        targetElement.id = targetElementId;
+	        targetElement.style.position = 'absolute';
+	        targetElement.style.visibility = 'hidden';
+	        doc.body.appendChild(targetElement);
+	    }
+
+	    targetElement.style.top = event.pageY + 'px';
+	    targetElement.style.left = event.pageX + 'px';
+
+	    menuElement.open({
+	        'target': targetElement,
+	        'attachment': 'top left',
+	        'targetAttachment': 'bottom left',
+	        'targetModifier': undefined,
+	        'optimizations': {
+	            'moveElement': false
+	        },
+	        'constraints': [{
+	            'to': 'scrollParent',
+	            'attachment': 'element'
+	        }, {
+	            'to': 'window',
+	            'attachment': 'element'
+	        }]
+	    });
+	}), false);
+
+/***/ },
+/* 94 */
+/***/ function(module, exports) {
+
+	/* global xblocks, React, xv */
+	/* jshint strict: false */
+
+	/**
+	 * The template node xb-menu
+	 *
+	 * @class xv.Menu
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes xblocks.mixin.vMenu
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	'use strict';
+
+	xv.Menu = xblocks.view.register('xb-menu', [xblocks.mixin.vCommonAttrs, xblocks.mixin.vMenu, {
+	    'displayName': 'xb-menu',
+
+	    'mixins': [React.addons.PureRenderMixin],
+
+	    'propTypes': {
+	        'size': React.PropTypes.string
+	    },
+
+	    'getDefaultProps': function getDefaultProps() {
+	        return {
+	            'size': ''
+	        };
+	    },
+
+	    'afterOpen': function afterOpen(callback) {
+	        this._updateMaxHeight(this.props.size, callback);
+	    }
+	}]);
+
+/***/ },
+/* 95 */
+/***/ function(module, exports) {
+
+	/**
+	 * Common interface for elements xb-menu and xb-menu-inline.
+	 *
+	 * @prop {boolean} hasOpenSubmenu The menu contains the open submenu
+	 *
+	 * @memberOf xblocks.mixin
+	 * @type {object}
+	 */
+	'use strict';
+
+	module.exports = {
+	    'events': {
+
+	        /**
+	         * Оpen the submenu
+	         * @this {xb.Menuitem}
+	         */
+	        'click:delegate(xb-menuitem:not([disabled]))': function clickDelegateXbMenuitemNotDisabled() {
+	            if (this.submenuInstance) {
+	                this.submenuInstance.open();
+	            }
+	        },
+
+	        /**
+	         * Оpen the submenu
+	         * @this {xb.Menu}
+	         */
+	        'keydown:keypass(13,39)': function keydownKeypass1339() {
+	            var item = this._xbFocus.getItem();
+
+	            if (item && item.submenuInstance) {
+	                item.submenuInstance.open();
+	            }
+	        },
+
+	        /**
+	         * Restore focus
+	         * @param {Event} event
+	         * @this {xb.Menu}
+	         */
+	        'jsx-scroll-throttle': function jsxScrollThrottle(event) {
+	            // close all submenu
+	            event.stopImmediatePropagation();
+	            xblocks.utils.lazyFocus(this);
+	        }
+	    },
+
+	    'accessors': {
+
+	        /**
+	         * The menu contains the open submenu
+	         * @prop {boolean} hasOpenSubmenu
+	         */
+	        'hasOpenSubmenu': {
+	            'get': function get() {
+	                return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
+	            }
+	        }
+	    },
+
+	    'methods': {
+
+	        /**
+	         * @param {xb.Menuitem} menuitem
+	         */
+	        'scrollIntoItem': function scrollIntoItem(menuitem) {
+	            if (!xblocks.dom.isParent(this, menuitem)) {
+	                return;
+	            }
+
+	            var component = this.xblock && this.xblock.getMountedComponent();
+
+	            if (component) {
+	                component.scrollIntoItem(menuitem);
+	            }
+	        }
+	    }
+	};
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//require('./index.styl');
+	'use strict';
+
+	__webpack_require__(97);
+
+	var context = __webpack_require__(2);
+	var xblocks = __webpack_require__(5);
+
+	var _xbMenuInline = {
+	    'init': function init() {
+	        if (this._xbFocus) {
+	            this._xbFocus.destroy();
+	        }
+
+	        this._xbFocus = new xblocks.utils.Table(this, {
+	            'col': 'xb-menu-inline:not([disabled])',
+	            'rowLoop': true,
+	            'colLoop': true
+	        });
+	    }
+	};
+
+	/**
+	 * xb-menu-inline html element
+	 *
+	 * @class xb.MenuInline
+	 * @memberof xb
+	 * @augments HTMLElement
+	 * @mixes xblocks.mixin.eFocus
+	 * @mixes xblocks.mixin.eMenu
+	 */
+	module.exports = xblocks.create('xb-menu-inline', [__webpack_require__(73), __webpack_require__(95), {
+	    prototype: Object.create(HTMLElement.prototype),
+
+	    events: {
+	        'xb-created': _xbMenuInline.init,
+
+	        'xb-repaint': _xbMenuInline.init,
+
+	        'blur': function blur() {
+	            if (!this.hasOpenSubmenu) {
+	                this._xbFocus.blurItem();
+	            }
+	        }
+	    },
+
+	    methods: {
+	        open: __noop,
+
+	        close: function close() {
+	            // FireFox does not fire a blur event
+	            context.setTimeout(this.focus.bind(this), 0);
+	        }
+	    }
+	}]);
+
+/***/ },
+/* 97 */
+/***/ function(module, exports) {
+
+	/* global xblocks, React, xv */
+	/* jshint strict: false */
+
+	/**
+	 * The template node xb-menu-inline
+	 *
+	 * @class xv.MenuInline
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes xblocks.mixin.vMenu
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	'use strict';
+
+	xv.MenuInline = xblocks.view.register('xb-menu-inline', [xblocks.mixin.vCommonAttrs, xblocks.mixin.vMenu, {
+	    'displayName': 'xb-menu-inline',
+
+	    'mixins': [React.addons.PureRenderMixin],
+
+	    'propTypes': {
+	        'size': React.PropTypes.string
+	    },
+
+	    'getDefaultProps': function getDefaultProps() {
+	        return {
+	            'size': ''
+	        };
+	    },
+
+	    'componentDidMount': function componentDidMount() {
+	        this._updateMaxHeight(this.props.size);
+	    }
+	}]);
 
 /***/ }
 /******/ ])

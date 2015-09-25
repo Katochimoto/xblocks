@@ -1,12 +1,10 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:checkbox.jsx.js */
+var xblocks = require('xblocks');
 
 /**
- * xb-checkbox html element
+ * xb-radio html element
  *
  * @prop {string} [size=m] size, possible values: s|m
  * @prop {string} [value=on]
@@ -18,7 +16,7 @@
  * @prop {boolean} [checked=false]
  * @prop {boolean} [required=false]
  *
- * @class xb.Checkbox
+ * @class xb.Radio
  * @memberof xb
  * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
@@ -26,11 +24,11 @@
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-xb.Checkbox = xblocks.create('xb-checkbox', [
-    xblocks.mixin.eDisabled,
-    xblocks.mixin.eChecked,
-    xblocks.mixin.eInputValueProps,
-    xblocks.mixin.eFocus,
+module.exports = xblocks.create('xb-radio', [
+    require('mixin/element/disabled'),
+    require('mixin/element/checked'),
+    require('mixin/element/inputValueProps'),
+    require('mixin/element/focus'),
 
     {
         'prototype': Object.create(HTMLInputElement.prototype),

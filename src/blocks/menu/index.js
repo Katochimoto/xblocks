@@ -1,10 +1,9 @@
-//jscs:disable
-/* global global, xblocks, __forEach, xb, _xbPopup */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./_contextmenu');
+require('./index.jsx');
 
-/*! borschik:include:_contextmenu.js */
-/*! borschik:include:menu.jsx.js */
+var context = require('context');
+var xblocks = require('xblocks');
 
 var _xbMenu = {
 
@@ -12,7 +11,7 @@ var _xbMenu = {
      * @param {xb.Menuitem} target
      * @this {global}
      */
-    'closeSubmenu': function(target) {
+    closeSubmenu: function(target) {
         if (target._xbpopup) {
             target._xbpopup.close();
         }
@@ -23,7 +22,7 @@ var _xbMenu = {
      * @returns {Object}
      * @this {xb.Menu}
      */
-    'tetherDefaultOptions': function() {
+    tetherDefaultOptions: function() {
         var options = _xbPopup.tetherDefaultOptions.call(this);
         options.constraints = [
             {
@@ -48,8 +47,8 @@ var _xbMenu = {
  * @memberof xb
  * @mixes xblocks.mixin.eMenu
  */
-xb.Menu = xblocks.create('xb-menu', [
-    xblocks.mixin.eMenu,
+module.exports = xblocks.create('xb-menu', [
+    require('mixin/element/menu'),
 
     {
         'prototype': Object.create(xb.Popup.prototype || new xb.Popup()),
@@ -90,7 +89,7 @@ xb.Menu = xblocks.create('xb-menu', [
                 // focus of ancestor
                 var parentMenu = this.parentMenu;
                 if (parentMenu) {
-                    xblocks.utils.lazyFocus(parentMenu);
+                    context.setTimeout(parentMenu.focus.bind(parentMenu), 0);
                 }
             },
 
@@ -156,7 +155,7 @@ xb.Menu = xblocks.create('xb-menu', [
                 this.style.visibility = 'visible';
                 // the focus is not put on the invisible element
                 // put again
-                xblocks.utils.lazyFocus(this);
+                context.setTimeout(this.focus.bind(this), 0);
             },
 
             '_closeUpFocus': function() {

@@ -1,5 +1,7 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
+var isEmpty = require('_/lang/isEmpty');
 
 /**
  * The template node xb-menuitem
@@ -9,16 +11,16 @@
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Menuitem = xblocks.view.register('xb-menuitem', [
-    xblocks.utils.exportPropTypes('xb-ico'),
-    xblocks.mixin.vCommonAttrs,
+module.exports = xblocks.view.register('xb-menuitem', [
+    require('mixin/view/commonAttrs'),
+    require('utils/exportPropTypes')('xb-ico'),
 
     {
-        'displayName': 'xb-menuitem',
+        displayName: 'xb-menuitem',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        propTypes: {
             'focused':  React.PropTypes.bool,
             'ico':      React.PropTypes.object,
             'label':    React.PropTypes.string.isRequired,
@@ -26,7 +28,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             'submenu':  React.PropTypes.bool
         },
 
-        'getDefaultProps': function() {
+        getDefaultProps: function() {
             return {
                 'disabled': false,
                 'focused':  false,
@@ -35,8 +37,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             };
         },
 
-        /* jshint ignore:start */
-        'render': function() {
+        render: function() {
             var classes = {
                 'xb-menuitem': true,
                 '_disabled':   this.props.disabled,
@@ -45,15 +46,15 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 '_submenu':    this.props.submenu,
             };
 
-            classes = classNames(classes);
+            classes = classnames(classes);
 
             var children = [
                 <span className="_label" key="label">{this.props.label}</span>
             ];
 
-            var icoProps = xblocks.utils.filterIcoProps(this.props);
+            var icoProps = filterProps(/^xb-ico-/, this.props);
 
-            if (!xblocks.utils.isEmptyObject(icoProps) && icoProps.type) {
+            if (!isEmpty(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';
 
                 if (!icoProps.float || icoProps.float === 'left') {
@@ -68,6 +69,5 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 <div className={classes}>{children}</div>
             );
         }
-        /* jshint ignore:end */
     }
 ]);

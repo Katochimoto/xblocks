@@ -1,11 +1,8 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
 
-/*! borschik:include:input-controller.jsx.js */
-
-// TODO "list" attribute
-// TODO "pattern" attribute
-// TODO "title" attribute
+var InputController = require('./_controller.jsx');
 
 /**
  * The template node xb-input
@@ -15,16 +12,16 @@
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Input = xblocks.view.register('xb-input', [
-    xblocks.mixin.vCommonAttrs,
-    xblocks.utils.exportPropTypes('xb-link'),
+module.exports = xblocks.view.register('xb-input', [
+    require('mixin/view/commonAttrs'),
+    require('utils/exportPropTypes')('xb-link'),
 
     {
-        'displayName': 'xb-input',
+        displayName: 'xb-input',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        propTypes: {
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
             'autofocus':    React.PropTypes.bool,
             'autosize':     React.PropTypes.bool,
@@ -45,7 +42,7 @@ xv.Input = xblocks.view.register('xb-input', [
             'xb-link':      React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        getDefaultProps: function() {
             return {
                 'autofocus':    false,
                 'autosize':     false,
@@ -62,13 +59,13 @@ xv.Input = xblocks.view.register('xb-input', [
             };
         },
 
-        'getInitialState': function() {
+        getInitialState: function() {
             return {
                 'value': this.props.value
             };
         },
 
-        'componentDidMount': function() {
+        componentDidMount: function() {
             // check show or hide placeholder after mount element
             this.refs.controller._dispatchEventToggleHint('', this.props.value);
         },
@@ -78,7 +75,7 @@ xv.Input = xblocks.view.register('xb-input', [
          * @param {Event} event
          * @private
          */
-        '_onChange': function(event) {
+        _onChange: function(event) {
             this.setState({
                 'value': event.target.value
             });
@@ -89,7 +86,7 @@ xv.Input = xblocks.view.register('xb-input', [
          * @param {boolean} toggle
          * @private
          */
-        '_onHintToggle': function(toggle) {
+        _onHintToggle: function(toggle) {
             React.findDOMNode(this.refs.placeholder).style.visibility = (toggle ? 'inherit' : 'hidden');
         },
 
@@ -98,7 +95,7 @@ xv.Input = xblocks.view.register('xb-input', [
          * @returns {boolean}
          * @private
          */
-        '_isComplex': function() {
+        _isComplex: function() {
             return Boolean(
                 this.props.postfix ||
                 this.props.prefix ||
@@ -113,14 +110,13 @@ xv.Input = xblocks.view.register('xb-input', [
          * Click reset button
          * @private
          */
-        '_onClickReset': function() {
+        _onClickReset: function() {
             this.setState({
                 'value': ''
             });
         },
 
-        /* jshint ignore:start */
-        'render': function() {
+        render: function() {
             var isComplex = this._isComplex();
             var classes = {
                 'xb-input':     true,
@@ -135,7 +131,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = classNames(classes);
+            classes = classnames(classes);
 
             var isPlaceholderHint = false;
             var controllerProps = {
@@ -172,7 +168,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 }
 
                 if (this.props['xb-link']) {
-                    var linkProps = xblocks.utils.filterLinkProps(this.props);
+                    var linkProps = filterProps(/^xb-link-/, this.props);
                     linkProps['theme'] = 'empty';
                     linkProps['key'] = 'label';
 
@@ -201,7 +197,7 @@ xv.Input = xblocks.view.register('xb-input', [
 
                 children.push(
                     <span key="content" className="_content">
-                        <xv.InputController {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
+                        <InputController {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
                         <span key="view" className="_view"></span>
                     </span>
                 );
@@ -213,10 +209,9 @@ xv.Input = xblocks.view.register('xb-input', [
             } else {
 
                 return (
-                    <xv.InputController {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
+                    <InputController {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
                 );
             }
         }
-        /* jshint ignore:end */
     }
 ]);

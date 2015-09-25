@@ -1,5 +1,6 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
 
 /**
  * The template node xb-popup
@@ -9,27 +10,33 @@
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Popup = xblocks.view.register('xb-popup', [
-    xblocks.mixin.vCommonAttrs,
+module.exports = xblocks.view.register('xb-popup', [
+    require('mixin/view/commonAttrs'),
 
     {
-        'displayName': 'xb-popup',
+        displayName: 'xb-popup',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        propTypes: {
             'close': React.PropTypes.bool,
-            'theme': React.PropTypes.oneOf([ 'normal', 'modal', 'island', 'error', 'blank' ])
+            'theme': React.PropTypes.oneOf([
+                'blank',
+                'error',
+                'island',
+                'modal',
+                'normal'
+            ])
         },
 
-        'getDefaultProps': function() {
+        getDefaultProps: function() {
             return {
                 'close': false,
                 'theme': 'normal'
             };
         },
 
-        '_onClickClose': function() {
+        _onClickClose: function() {
             xblocks.event.dispatch(
                 React.findDOMNode(this),
                 'jsx-click-close',
@@ -37,8 +44,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
             );
         },
 
-        /* jshint ignore:start */
-        'render': function() {
+        render: function() {
             var children = [
                 <div key="content"
                     className="_content"
@@ -70,12 +76,11 @@ xv.Popup = xblocks.view.register('xb-popup', [
                 classes[ '_theme-' + this.props.theme ] = true;
             }
 
-            classes = classNames(classes);
+            classes = classnames(classes);
 
             return (
                 <div className={classes} tabIndex="0">{children}</div>
             );
         }
-        /* jshint ignore:end */
     }
 ]);

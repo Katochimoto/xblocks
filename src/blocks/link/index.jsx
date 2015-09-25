@@ -1,5 +1,6 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
 
 /**
  * The template node xb-link
@@ -9,22 +10,22 @@
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Link = xblocks.view.register('xb-link', [
-    xblocks.mixin.vCommonAttrs,
+module.exports = xblocks.view.register('xb-link', [
+    require('mixin/view/commonAttrs'),
 
     {
-        'displayName': 'xb-link',
+        displayName: 'xb-link',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        propTypes: {
             'href':     React.PropTypes.string,
             'name':     React.PropTypes.string,
             'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
             'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ])
         },
 
-        'getDefaultProps': function() {
+        getDefaultProps: function() {
             return {
                 'disabled': false,
                 'tabindex': '1',
@@ -33,8 +34,7 @@ xv.Link = xblocks.view.register('xb-link', [
             };
         },
 
-        /* jshint ignore:start */
-        'render': function() {
+        render: function() {
             var classes = {
                 'xb-link':   true,
                 '_disabled': this.props.disabled
@@ -50,7 +50,7 @@ xv.Link = xblocks.view.register('xb-link', [
                 tabIndex = '-1';
             }
 
-            classes = classNames(classes);
+            classes = classnames(classes);
 
             var content = this.props.value || this.props.children;
 
@@ -63,6 +63,5 @@ xv.Link = xblocks.view.register('xb-link', [
                     data-xb-content={this.props._uid}>{content}</a>
             );
         }
-        /* jshint ignore:end */
     }
 ]);

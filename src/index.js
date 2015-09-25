@@ -3,7 +3,20 @@ require('xtag');
 var context = require('context');
 
 context.xb = {
-    'Button': require('./blocks/button')
+    'Button': require('./blocks/button'),
+    'Checkbox': require('./blocks/checkbox'),
+    'Ico': require('./blocks/ico'),
+    'Link': require('./blocks/link'),
+    'Menuseparator': require('./blocks/menuseparator'),
+    'Radio': require('./blocks/radio'),
+    'Input': require('./blocks/input'),
+    'Popup': require('./blocks/popup'),
+    'Menuitem': require('./blocks/menuitem'),
+    'Menu': require('./blocks/menu'),
+    'MenuInline': require('./blocks/menu-inline'),
+    'Select': '',
+    'SpeechRecognition': '',
+    'Calendar': ''
 };
 
 /*

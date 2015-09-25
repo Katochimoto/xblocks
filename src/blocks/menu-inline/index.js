@@ -1,15 +1,8 @@
-//jscs:disable
-/* global xblocks, __noop, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/**
-* Checked in:
-* ChromeCanary 40
-* FireFox Developer Edition 35
-*/
-
-/*! borschik:include:menu-inline.jsx.js */
+var context = require('context');
+var xblocks = require('xblocks');
 
 var _xbMenuInline = {
     'init': function() {
@@ -34,14 +27,14 @@ var _xbMenuInline = {
  * @mixes xblocks.mixin.eFocus
  * @mixes xblocks.mixin.eMenu
  */
-xb.MenuInline = xblocks.create('xb-menu-inline', [
-    xblocks.mixin.eFocus,
-    xblocks.mixin.eMenu,
+module.exports = xblocks.create('xb-menu-inline', [
+    require('mixin/element/focus'),
+    require('mixin/element/menu'),
 
     {
-        'prototype': Object.create(HTMLElement.prototype),
+        prototype: Object.create(HTMLElement.prototype),
 
-        'events': {
+        events: {
             'xb-created': _xbMenuInline.init,
 
             'xb-repaint': _xbMenuInline.init,
@@ -53,12 +46,12 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
             }
         },
 
-        'methods': {
-            'open': __noop,
+        methods: {
+            open: __noop,
 
-            'close': function() {
+            close: function() {
                 // FireFox does not fire a blur event
-                xblocks.utils.lazyFocus(this);
+                context.setTimeout(this.focus.bind(this), 0);
             }
         }
     }

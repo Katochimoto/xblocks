@@ -1,3 +1,4 @@
+var xblocks = require('xblocks');
 var React = require('react');
 var isEmpty = require('_/lang/isEmpty');
 

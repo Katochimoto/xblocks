@@ -1,9 +1,7 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:menuseparator.jsx.js */
+var xblocks = require('xblocks');
 
 /**
  * xb-menuseparator html element
@@ -12,7 +10,7 @@
  * @memberof xb
  * @augments HTMLElement
  */
-xb.Menuseparator = xblocks.create('xb-menuseparator', [
+module.exports = xblocks.create('xb-menuseparator', [
     {
         'prototype': Object.create(HTMLElement.prototype)
     }

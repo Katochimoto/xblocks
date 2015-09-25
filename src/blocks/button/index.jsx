@@ -1,5 +1,4 @@
-'use strict';
-
+var xblocks = require('xblocks');
 var React = require('react');
 var classnames = require('classnames');
 var resetLastRadioChecked = require('utils/resetLastRadioChecked');

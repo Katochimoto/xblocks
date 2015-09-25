@@ -1,9 +1,7 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:input.jsx.js */
+var xblocks = require('xblocks');
 
 /**
  * xb-input html element
@@ -35,10 +33,10 @@
  * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
  */
-xb.Input = xblocks.create('xb-input', [
-    xblocks.mixin.eDisabled,
-    xblocks.mixin.eInputValueState,
-    xblocks.mixin.eFocus,
+module.exports = xblocks.create('xb-input', [
+    require('mixin/element/disabled'),
+    require('mixin/element/inputValueState'),
+    require('mixin/element/focus'),
 
     {
         'prototype': Object.create(HTMLInputElement.prototype),

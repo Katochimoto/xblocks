@@ -1,12 +1,11 @@
-//jscs:disable
-/* global xblocks, global, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:menuitem.jsx.js */
+var context = require('context');
+var xblocks = require('xblocks');
 
 var _xbMenuitem = {
-    'submenuAttrs': {
+    submenuAttrs: {
         'attachment': 'top left',
         'target-attachment': 'top right',
         'target-modifier': 'initial',
@@ -18,27 +17,27 @@ var _xbMenuitem = {
         ]))
     },
 
-    'submenu': (function() {
+    submenu: (function() {
         var timerOpenSubmenu = 0;
 
         return {
 
             /**
              * @param {xb.Menu} [submenu]
-             * @this {global}
+             * @this {context}
              */
-            'open': function(submenu) {
+            open: function(submenu) {
                 if (submenu && !timerOpenSubmenu) {
-                    timerOpenSubmenu = global.setTimeout(submenu.open.bind(submenu), 200);
+                    timerOpenSubmenu = context.setTimeout(submenu.open.bind(submenu), 200);
                 }
             },
 
             /**
-             * @this {global}
+             * @this {context}
              */
-            'cancel': function() {
+            cancel: function() {
                 if (timerOpenSubmenu) {
-                    global.clearTimeout(timerOpenSubmenu);
+                    context.clearTimeout(timerOpenSubmenu);
                     timerOpenSubmenu = 0;
                 }
             },
@@ -46,7 +45,7 @@ var _xbMenuitem = {
             /**
              * @this {xb.Menuitem}
              */
-            'remove': function() {
+            remove: function() {
                 if (this._submenuInstance) {
                     _xbMenuitem.submenu.cancel();
 
@@ -73,9 +72,9 @@ var _xbMenuitem = {
  * @listens xblocks.Element~event:xb-created
  * @listens xblocks.Element~event:xb-destroy
  */
-xb.Menuitem = xblocks.create('xb-menuitem', [
-    xblocks.mixin.eDisabled,
-    xblocks.mixin.eInputValueProps,
+module.exports = xblocks.create('xb-menuitem', [
+    require('mixin/element/disabled'),
+    require('mixin/element/inputValueProps'),
 
     {
         'prototype': Object.create(HTMLElement.prototype),

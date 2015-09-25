@@ -1,16 +1,16 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
 
 /**
  * @class xv.InputController
  * @memberof xv
  */
-xv.InputController = xblocks.view.create({
-    'displayName': 'xb-input_controller',
+module.exports = xblocks.view.create({
+    displayName: 'xb-input_controller',
 
-    'mixins': [ React.addons.PureRenderMixin ],
+    mixins: [ React.addons.PureRenderMixin ],
 
-    'propTypes': {
+    propTypes: {
         'autoFocus':        React.PropTypes.bool,
         'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
         'autosize':         React.PropTypes.bool,
@@ -30,7 +30,7 @@ xv.InputController = xblocks.view.create({
         'value':            React.PropTypes.string
     },
 
-    'getDefaultProps': function() {
+    getDefaultProps: function() {
         return {
             'autoFocus':            false,
             'autosize':             false,
@@ -43,16 +43,16 @@ xv.InputController = xblocks.view.create({
         };
     },
 
-    'componentDidUpdate': function(prevProps) {
+    componentDidUpdate: function(prevProps) {
         this._recalculateSize();
         this._dispatchEventToggleHint(prevProps.value, this.props.value);
     },
 
-    'componentDidMount': function() {
+    componentDidMount: function() {
         this._recalculateSize();
     },
 
-    '_dispatchEventToggleHint': function(prevValue, nextValue) {
+    _dispatchEventToggleHint: function(prevValue, nextValue) {
         if (this.props.isPlaceholderHint) {
             var hasPrevValue = Boolean(prevValue);
             var hasNestValue = Boolean(nextValue);
@@ -64,7 +64,7 @@ xv.InputController = xblocks.view.create({
         }
     },
 
-    '_recalculateSize': function() {
+    _recalculateSize: function() {
         if (!this.props.autosize) {
             return;
         }
@@ -81,8 +81,7 @@ xv.InputController = xblocks.view.create({
         }
     },
 
-    /* jshint ignore:start */
-    'render': function() {
+    render: function() {
         var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';
@@ -113,5 +112,4 @@ xv.InputController = xblocks.view.create({
             );
         }
     }
-    /* jshint ignore:end */
 });

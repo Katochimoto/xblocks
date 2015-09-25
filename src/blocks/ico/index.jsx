@@ -1,5 +1,6 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
 
 /**
  * The template node xb-ico
@@ -9,15 +10,15 @@
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Ico = xblocks.view.register('xb-ico', [
-    xblocks.mixin.vCommonAttrs,
+module.exports = xblocks.view.register('xb-ico', [
+    require('mixin/view/commonAttrs'),
 
     {
-        'displayName': 'xb-ico',
+        displayName: 'xb-ico',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        propTypes: {
             'active':   React.PropTypes.bool,
             'size':     React.PropTypes.oneOf([ 's', 'm' ]),
             'value':    React.PropTypes.string,
@@ -54,7 +55,7 @@ xv.Ico = xblocks.view.register('xb-ico', [
             ])
         },
 
-        'getDefaultProps': function() {
+        getDefaultProps: function() {
             return {
                 'active':   false,
                 'children': String.fromCharCode(160),
@@ -63,8 +64,7 @@ xv.Ico = xblocks.view.register('xb-ico', [
             };
         },
 
-        /* jshint ignore:start */
-        'render': function() {
+        render: function() {
             var classes = {
                 'xb-ico':    true,
                 '_active':   this.props.active,
@@ -79,7 +79,7 @@ xv.Ico = xblocks.view.register('xb-ico', [
                 classes[ '_size-' + this.props.size ] = true;
             }
 
-            classes = classNames(classes);
+            classes = classnames(classes);
 
             var content = this.props.value || this.props.children;
 
@@ -87,6 +87,5 @@ xv.Ico = xblocks.view.register('xb-ico', [
                 <span className={classes} data-xb-content={this.props._uid}>{content}</span>
             );
         }
-        /* jshint ignore:end */
     }
 ]);

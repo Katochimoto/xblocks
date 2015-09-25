@@ -1,17 +1,16 @@
-//jscs:disable
-/* global global, xblocks, Tether, __doc, xb */
-/* jshint strict: false */
-//jscs:enable
+//require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:popup.jsx.js */
+var context = require('context');
+var xblocks = require('xblocks');
 
-var _xbPopup = {
-    'onOpen': function() {
+var popupCommon = {
+    onOpen: function() {
         this.focus();
         xblocks.event.dispatch(this, 'xb-open');
     },
 
-    'onClose': function() {
+    onClose: function() {
         this.blur();
         xblocks.event.dispatch(this, 'xb-close');
     },
@@ -21,8 +20,8 @@ var _xbPopup = {
      * @param {*} value value for attribute
      * @returns {boolean}
      */
-    'checkDefaultAttr': function(value) {
-        return (typeof(value) !== 'undefined');
+    checkDefaultAttr: function(value) {
+        return (typeof value !== 'undefined');
     },
 
     /**
@@ -30,15 +29,15 @@ var _xbPopup = {
      * @param {Object} options tether options
      * @param {Object} attrs attributes of element
      */
-    'fillOptionsFromAttrs': function(options, attrs) {
+    fillOptionsFromAttrs: function(options, attrs) {
         for (var attrName in attrs) {
-            var params = _xbPopup.tetherAttrsAlign[ attrName ];
+            var params = popupCommon.tetherAttrsAlign[ attrName ];
             if (!params) {
                 continue;
             }
 
             var optionName = params[0];
-            var checker = params[1] || _xbPopup.checkDefaultAttr;
+            var checker = params[1] || popupCommon.checkDefaultAttr;
             var value = attrs[ attrName ];
 
             if (checker(value)) {
@@ -57,7 +56,7 @@ var _xbPopup = {
      * @returns {Object}
      * @this {xb.Popup}
      */
-    'tetherDefaultOptions': function() {
+    tetherDefaultOptions: function() {
         return {
             'attachment': 'middle center',
             'classes': { 'element': this.xtagName },
@@ -65,7 +64,7 @@ var _xbPopup = {
             'element': this,
             'enabled': false,
             'optimizations': { 'gpu': true },
-            'target': __doc.body,
+            'target': this.ownerDocument.body,
             'targetAttachment': 'middle center',
             'targetModifier': 'visible'
         };
@@ -75,7 +74,7 @@ var _xbPopup = {
      * Union rules attributes
      * @type {Object}
      */
-    'tetherAttrsAlign': {
+    tetherAttrsAlign: {
         'attachment': [ 'attachment' ],
         'target-attachment': [ 'targetAttachment' ],
         'target-offset': [ 'targetOffset' ],
@@ -83,7 +82,7 @@ var _xbPopup = {
         'target': [
             'target',
             function(value) {
-                return (value && (typeof(value) === 'string' || value instanceof global.HTMLElement));
+                return (value && (typeof value === 'string' || value instanceof context.HTMLElement));
             }
         ],
         'target-parent': [
@@ -91,7 +90,7 @@ var _xbPopup = {
                 options.target = value;
             },
             function(value) {
-                return (value && value instanceof global.HTMLElement);
+                return (value && value instanceof context.HTMLElement);
             }
         ],
         'target-modifier': [
@@ -115,7 +114,7 @@ var _xbPopup = {
                 options.constraints = JSON.parse(decodeURIComponent(value));
             },
             function(value) {
-                return (value && typeof(value) === 'string');
+                return (value && typeof value === 'string');
             }
         ]
     }
@@ -128,13 +127,13 @@ var _xbPopup = {
  * @augments HTMLElement
  * @mixes xblocks.mixin.eFocus
  */
-xb.Popup = xblocks.create('xb-popup', [
-    xblocks.mixin.eFocus,
+module.exports = xblocks.create('xb-popup', [
+    require('mixin/element/focus'),
 
     {
-        'prototype': Object.create(HTMLElement.prototype),
+        prototype: Object.create(HTMLElement.prototype),
 
-        'events': {
+        events: {
             'jsx-click-close': function(event) {
                 event.stopImmediatePropagation();
                 this.close();
@@ -148,22 +147,22 @@ xb.Popup = xblocks.create('xb-popup', [
         /**
          * @lends xb.Popup.prototype
          */
-        'accessors': {
+        accessors: {
 
             /**
              * @readonly
              * @prop {Object} default options
              */
-            'defaultOptions': {
-                'get': _xbPopup.tetherDefaultOptions
+            defaultOptions: {
+                get: popupCommon.tetherDefaultOptions
             },
 
             /**
              * @readonly
              * @prop {object} options the display options window
              */
-            'options': {
-                'get': function() {
+            options: {
+                get: function() {
                     if (this._options) {
                         return this._options;
                     }
@@ -186,7 +185,7 @@ xb.Popup = xblocks.create('xb-popup', [
                         tetherAttrs[ 'target-parent' ] = this.parentNode;
                     }
 
-                    _xbPopup.fillOptionsFromAttrs(this._options, tetherAttrs);
+                    popupCommon.fillOptionsFromAttrs(this._options, tetherAttrs);
 
                     return this._options;
                 }
@@ -196,8 +195,8 @@ xb.Popup = xblocks.create('xb-popup', [
              * @readonly
              * @prop {Tether} tether Tether the window object
              */
-            'tether': {
-                'get': function() {
+            tether: {
+                get: function() {
                     if (!this._tether) {
                         this._tether = new Tether(this.options);
                     }
@@ -210,20 +209,20 @@ xb.Popup = xblocks.create('xb-popup', [
              * @readonly
              * @prop {boolean} opened window is open
              */
-            'opened': {
-                'get': function() {
+            opened: {
+                get: function() {
                     return this.tether.enabled;
                 }
             }
         },
 
-        'methods': {
+        methods: {
             /**
              * Change the settings window
              * @memberOf xb.Popup.prototype
              * @param {object} nextOptions new settings
              */
-            'setOptions': function(nextOptions) {
+            setOptions: function(nextOptions) {
                 var tether = this.tether;
 
                 xblocks.utils.assign(true, this.options, nextOptions);
@@ -240,7 +239,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @param {object} options new settings
              * @returns {boolean}
              */
-            'open': function(options) {
+            open: function(options) {
                 var tether = this.tether;
 
                 if (tether.enabled) {
@@ -257,7 +256,7 @@ xb.Popup = xblocks.create('xb-popup', [
                 tether.target._xbpopup = this;
 
                 // FireFox does not set the focus without delay
-                global.setImmediate(_xbPopup.onOpen.bind(this));
+                context.setImmediate(popupCommon.onOpen.bind(this));
 
                 return true;
             },
@@ -267,7 +266,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
-            'close': function() {
+            close: function() {
                 var tether = this.tether;
 
                 if (!tether.enabled) {
@@ -281,7 +280,7 @@ xb.Popup = xblocks.create('xb-popup', [
                 tether.clearCache();
 
                 // FireFox does not fire a blur event
-                global.setImmediate(_xbPopup.onClose.bind(this));
+                context.setImmediate(popupCommon.onClose.bind(this));
 
                 return true;
             },
@@ -291,7 +290,7 @@ xb.Popup = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
-            'position': function() {
+            position: function() {
                 this.tether.position();
                 return true;
             }
