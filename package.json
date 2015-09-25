@@ -46,6 +46,7 @@
     "karma-safari-launcher": "~0.1.x",
     "karma-sinon-chai": "^1.0.0",
     "karma-webpack": "^1.7.0",
+    "lodash-cli": "^3.10.1",
     "mocha": "2.3.2",
     "react": "0.14.0-rc1",
     "style-loader": "^0.12.4",

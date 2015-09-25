@@ -1,24 +1,40 @@
 var path = require('path');
 var webpack = require('webpack');
-var src = path.join(__dirname, 'src');
+var merge = require('./lodash/object/merge');
 
-module.exports = {
-    'context': path.join(__dirname, 'src'),
+var src = path.join(__dirname, 'src');
+var dist = path.join(__dirname, 'dist');
+
+var dedupe = new webpack.optimize.DedupePlugin();
+
+var define = new webpack.DefinePlugin({
+    'NODE_ENV': 'production'
+});
+
+var uglify = new webpack.optimize.UglifyJsPlugin({
     'output': {
-        'path': path.join(__dirname, 'dist'),
+        'comments': false
+    },
+    'compress': {
+        'warnings': false
+    }
+});
+
+var params = {
+    'entry': './index.js',
+    'context': src,
+    'output': {
+        'path': dist,
+        'filename': 'xblocks.js',
         'library': 'xblocks',
         'libraryTarget': 'umd'
     },
     'resolve': {
-        'modulesDirectories': [
-            'node_modules'
-        ],
         'alias': {
-            'xblocks': 'xblocks-core/src/xblocks',
-            'xblocks-utils': 'xblocks-utils/src/xblocks',
+            '_': path.join(__dirname, 'lodash'),
             'context': path.join(src, 'context'),
-            'utils': path.join(src, 'utils'),
-            'mixin': path.join(src, 'mixin')
+            'mixin': path.join(src, 'mixin'),
+            'utils': path.join(src, 'utils')
         }
     },
     'externals': {
@@ -27,19 +43,13 @@ module.exports = {
         'xtag': 'xtag',
         'xblocks': 'xblocks'
     },
-    'plugins': [
-        new webpack.DefinePlugin({
-            'DEBUG': false,
-            'DEBUG_TIME': false,
-            'NODE_ENV': 'production'
-        })
-    ],
+    'plugins': [ define, dedupe ],
     'module': {
         'loaders': [
             {
-                'test': /\.jsx$/,
-                'exclude': /(node_modules|bower_components)/,
-                'loader': 'babel'
+                'test': /\.jsx?$/,
+                'loader': 'babel',
+                'include': [ src ]
             },
             {
                 'test': /\.styl$/,
@@ -48,3 +58,13 @@ module.exports = {
         ]
     }
 };
+
+module.exports = [
+    merge({}, params),
+    merge({}, params, {
+        'output': {
+            'filename': 'xblocks.min.js'
+        },
+        'plugins': [ define, dedupe, uglify ]
+    })
+];

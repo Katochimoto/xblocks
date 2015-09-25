@@ -2,8 +2,10 @@
 
 var React = require('react');
 var classnames = require('classnames');
-var view = require('xblocks/view');
-var ButtonContent = require('./button-content.jsx');
+var resetLastRadioChecked = require('utils/resetLastRadioChecked');
+var filterProps = require('utils/filterProps');
+
+var ButtonContent = require('./_content.jsx');
 
 /**
  * The template node xb-button
@@ -11,9 +13,9 @@ var ButtonContent = require('./button-content.jsx');
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-module.exports = view.register('xb-button', [
-    xblocks.mixin.vCommonAttrs,
-    xblocks.utils.exportPropTypes('xb-ico'),
+module.exports = xblocks.view.register('xb-button', [
+    require('mixin/view/commonAttrs'),
+    require('utils/exportPropTypes')('xb-ico'),
 
     {
         displayName: 'xb-button',
@@ -65,13 +67,13 @@ module.exports = view.register('xb-button', [
 
         componentWillUpdate: function(nextProps, nextState) {
             if (nextProps.type === 'radio' && nextState.checked) {
-                xblocks.utils.resetLastRadioChecked(this.container(), nextProps.name);
+                resetLastRadioChecked(this.container(), nextProps.name);
             }
         },
 
         componentWillMount: function() {
             if (this.props.type === 'radio' && this.state.checked) {
-                xblocks.utils.resetLastRadioChecked(this.container(), this.props.name);
+                resetLastRadioChecked(this.container(), this.props.name);
             }
         },
 
@@ -95,7 +97,7 @@ module.exports = view.register('xb-button', [
 
             classes = classnames(classes);
 
-            var icoProps = xblocks.utils.filterIcoProps(this.props);
+            var icoProps = filterProps(/^xb-ico-/, this.props);
             var tabIndex = this.props.tabindex;
             var type = this.props.type;
 
@@ -165,14 +167,8 @@ module.exports = view.register('xb-button', [
                             tabIndex={tabIndex}/>
                     );
 
-                    var buttonProps = xblocks.utils.merge({}, this.props, {
-                        'key': 'content',
-                        'type': 'inline',
-                        'tabindex': null
-                    });
-
                     children.push(
-                        <xv.Button {...buttonProps} />
+                        <xv.Button {...this.props} key="content" type="inline" tabindex="null" />
                     );
 
                     classes = classnames({

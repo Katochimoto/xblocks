@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @param {HTMLElement} node
  * @returns {HTMLElement|null}

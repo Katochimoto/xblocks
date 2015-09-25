@@ -2,9 +2,7 @@ NPM_BIN=$(CURDIR)/node_modules/.bin
 export NPM_BIN
 
 src_styl := $(shell find src -type f -name "*.styl")
-src_jsx := $(shell find src -type f -name "*.jsx")
-src_jsx_js := $(addsuffix .js, $(src_jsx))
-src_js := $(shell find src -type f -name "*.js" | grep -v ".jsx.js")
+src_js := $(shell find src -type f -regex ".*\.\(js\|jsx\)")
 
 MAKEFLAGS+=-j 4
 
@@ -12,10 +10,10 @@ dir=-C $*
 
 all: node_modules \
 	bower_components \
+	lodash \
 	dist/xblocks.css \
 	dist/xblocks.min.css \
-	dist/xblocks.js \
-	$(src_jsx_js)
+	dist
 
 node_modules: package.json
 	npm install
@@ -32,23 +30,24 @@ dist/xblocks.css: src/xblocks.styl $(src_styl) node_modules
 dist/xblocks.min.css: dist/xblocks.css
 	$(NPM_BIN)/stylus --compress < $< > $@
 
-$(src_jsx_js): %.jsx.js: %.jsx node_modules
-	$(NPM_BIN)/babel $< -o $@
-
-dist/xblocks.js: node_modules $(src_jsx_js) $(src_js)
-	$(NPM_BIN)/webpack src/xblocks.js dist/xblocks.js
-	$(NPM_BIN)/webpack src/xblocks.js dist/xblocks.min.js --optimize-minimize
+dist: node_modules lodash $(src_js) webpack.config.js
+	$(NPM_BIN)/webpack --progress
+	touch dist
 
 clean:
 	rm -rf dist
-	find src -type f -name "*.jsx.js" -exec rm -f {} \;
+	rm -rf lodash
 
-test: node_modules bower_components
+lodash: node_modules Makefile
+	$(NPM_BIN)/lodash exports=umd include=debounce,throttle,merge,isEmpty,pick,transform modularize -o $@
+	touch lodash
+
+test: node_modules bower_components lodash
 	$(NPM_BIN)/jshint .
 	$(NPM_BIN)/jscs .
 	./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
 
-testall: node_modules bower_components
+testall: node_modules bower_components lodash
 	$(NPM_BIN)/jshint .
 	$(NPM_BIN)/jscs .
 	./node_modules/karma/bin/karma start --single-run

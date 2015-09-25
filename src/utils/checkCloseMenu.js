@@ -1,5 +1,3 @@
-'use strict';
-
 var _currentMenu = null;
 
 var _onMousedown = function(event) {

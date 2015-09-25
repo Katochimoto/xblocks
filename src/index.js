@@ -1,4 +1,4 @@
-'use strict';
+require('xtag');
 
 var context = require('context');
 

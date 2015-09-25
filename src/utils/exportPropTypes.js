@@ -1,4 +1,4 @@
-'use strict';
+var xblocks = require('xblocks');
 
 module.exports = function(tagName) {
     var props = xblocks.utils.propTypes(tagName);
