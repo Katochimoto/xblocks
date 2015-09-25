@@ -1,16 +1,18 @@
 //require('./index.styl');
 require('./index.jsx');
 
-var context = require('context');
 var xblocks = require('xblocks');
+var lazyFocus = require('utils/lazyFocus');
+var Table = require('utils/Table');
+var noop = require('_/utility/noop');
 
-var _xbMenuInline = {
-    'init': function() {
+var menuCommon = {
+    init: function() {
         if (this._xbFocus) {
             this._xbFocus.destroy();
         }
 
-        this._xbFocus = new xblocks.utils.Table(this, {
+        this._xbFocus = new Table(this, {
             'col': 'xb-menu-inline:not([disabled])',
             'rowLoop': true,
             'colLoop': true
@@ -35,11 +37,11 @@ module.exports = xblocks.create('xb-menu-inline', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': _xbMenuInline.init,
+            'xb-created': menuCommon.init,
 
-            'xb-repaint': _xbMenuInline.init,
+            'xb-repaint': menuCommon.init,
 
-            'blur': function() {
+            blur: function() {
                 if (!this.hasOpenSubmenu) {
                     this._xbFocus.blurItem();
                 }
@@ -47,11 +49,11 @@ module.exports = xblocks.create('xb-menu-inline', [
         },
 
         methods: {
-            open: __noop,
+            open: noop,
 
             close: function() {
                 // FireFox does not fire a blur event
-                context.setTimeout(this.focus.bind(this), 0);
+                lazyFocus(this);
             }
         }
     }

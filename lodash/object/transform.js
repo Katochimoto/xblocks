@@ -1,6 +1,6 @@
 /**
  * lodash 3.10.1 (Custom Build) <https://lodash.com/>
- * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform" modularize -o lodash`
+ * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

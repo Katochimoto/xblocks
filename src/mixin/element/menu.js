@@ -1,3 +1,5 @@
+var lazyFocus = require('utils/lazyFocus');
+
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
  *
@@ -7,7 +9,7 @@
  * @type {object}
  */
 module.exports = {
-    'events': {
+    events: {
 
         /**
          * Оpen the submenu
@@ -39,29 +41,29 @@ module.exports = {
         'jsx-scroll-throttle': function(event) {
             // close all submenu
             event.stopImmediatePropagation();
-            xblocks.utils.lazyFocus(this);
+            lazyFocus(this);
         }
     },
 
-    'accessors': {
+    accessors: {
 
         /**
          * The menu contains the open submenu
          * @prop {boolean} hasOpenSubmenu
          */
-        'hasOpenSubmenu': {
-            'get': function() {
+        hasOpenSubmenu: {
+            get: function() {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
             }
         }
     },
 
-    'methods': {
+    methods: {
 
         /**
          * @param {xb.Menuitem} menuitem
          */
-        'scrollIntoItem': function(menuitem) {
+        scrollIntoItem: function(menuitem) {
             if (!xblocks.dom.isParent(this, menuitem)) {
                 return;
             }

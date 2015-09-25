@@ -71,7 +71,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'Popup': __webpack_require__(88),
 	    'Menuitem': __webpack_require__(90),
 	    'Menu': __webpack_require__(92),
-	    'MenuInline': __webpack_require__(96),
+	    'MenuInline': __webpack_require__(97),
 	    'Select': '',
 	    'SpeechRecognition': '',
 	    'Calendar': ''
@@ -523,7 +523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform" modularize -o lodash`
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
 	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1679,7 +1679,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform" modularize -o lodash`
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
 	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -2916,7 +2916,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform" modularize -o lodash`
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
 	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -5032,8 +5032,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(93);
 	__webpack_require__(94);
 
-	var context = __webpack_require__(2);
 	var xblocks = __webpack_require__(5);
+	var lazyFocus = __webpack_require__(95);
 
 	var _xbMenu = {
 
@@ -5074,7 +5074,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberof xb
 	 * @mixes xblocks.mixin.eMenu
 	 */
-	module.exports = xblocks.create('xb-menu', [__webpack_require__(95), {
+	module.exports = xblocks.create('xb-menu', [__webpack_require__(96), {
 	    'prototype': Object.create(xb.Popup.prototype || new xb.Popup()),
 
 	    'events': {
@@ -5112,7 +5112,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // focus of ancestor
 	            var parentMenu = this.parentMenu;
 	            if (parentMenu) {
-	                context.setTimeout(parentMenu.focus.bind(parentMenu), 0);
+	                lazyFocus(parentMenu);
 	            }
 	        },
 
@@ -5175,7 +5175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.style.visibility = 'visible';
 	            // the focus is not put on the invisible element
 	            // put again
-	            context.setTimeout(this.focus.bind(this), 0);
+	            lazyFocus(this);
 	        },
 
 	        '_closeUpFocus': function _closeUpFocus() {
@@ -5294,7 +5294,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 95 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(2);
+
+	/**
+	 * @function xblocks.utils.lazyFocus
+	 * @param   {[type]} node [description]
+	 * @returns {[type]}      [description]
+	 */
+	module.exports = function (node) {
+	  context.setTimeout(node.focus.bind(node), 0);
+	};
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var lazyFocus = __webpack_require__(95);
 
 	/**
 	 * Common interface for elements xb-menu and xb-menu-inline.
@@ -5304,10 +5325,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberOf xblocks.mixin
 	 * @type {object}
 	 */
-	'use strict';
-
 	module.exports = {
-	    'events': {
+	    events: {
 
 	        /**
 	         * Оpen the submenu
@@ -5339,29 +5358,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'jsx-scroll-throttle': function jsxScrollThrottle(event) {
 	            // close all submenu
 	            event.stopImmediatePropagation();
-	            xblocks.utils.lazyFocus(this);
+	            lazyFocus(this);
 	        }
 	    },
 
-	    'accessors': {
+	    accessors: {
 
 	        /**
 	         * The menu contains the open submenu
 	         * @prop {boolean} hasOpenSubmenu
 	         */
-	        'hasOpenSubmenu': {
-	            'get': function get() {
+	        hasOpenSubmenu: {
+	            get: function get() {
 	                return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
 	            }
 	        }
 	    },
 
-	    'methods': {
+	    methods: {
 
 	        /**
 	         * @param {xb.Menuitem} menuitem
 	         */
-	        'scrollIntoItem': function scrollIntoItem(menuitem) {
+	        scrollIntoItem: function scrollIntoItem(menuitem) {
 	            if (!xblocks.dom.isParent(this, menuitem)) {
 	                return;
 	            }
@@ -5376,19 +5395,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(97);
+	__webpack_require__(98);
 
-	var context = __webpack_require__(2);
 	var xblocks = __webpack_require__(5);
+	var lazyFocus = __webpack_require__(95);
+	var noop = __webpack_require__(99);
 
-	var _xbMenuInline = {
-	    'init': function init() {
+	var menuCommon = {
+	    init: function init() {
 	        if (this._xbFocus) {
 	            this._xbFocus.destroy();
 	        }
@@ -5410,15 +5430,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eFocus
 	 * @mixes xblocks.mixin.eMenu
 	 */
-	module.exports = xblocks.create('xb-menu-inline', [__webpack_require__(73), __webpack_require__(95), {
+	module.exports = xblocks.create('xb-menu-inline', [__webpack_require__(73), __webpack_require__(96), {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
-	        'xb-created': _xbMenuInline.init,
+	        'xb-created': menuCommon.init,
 
-	        'xb-repaint': _xbMenuInline.init,
+	        'xb-repaint': menuCommon.init,
 
-	        'blur': function blur() {
+	        blur: function blur() {
 	            if (!this.hasOpenSubmenu) {
 	                this._xbFocus.blurItem();
 	            }
@@ -5426,17 +5446,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    methods: {
-	        open: __noop,
+	        open: noop,
 
 	        close: function close() {
 	            // FireFox does not fire a blur event
-	            context.setTimeout(this.focus.bind(this), 0);
+	            lazyFocus(this);
 	        }
 	    }
 	}]);
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports) {
 
 	/* global xblocks, React, xv */
@@ -5472,6 +5492,40 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._updateMaxHeight(this.props.size);
 	    }
 	}]);
+
+/***/ },
+/* 99 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/**
+	 * A no-operation function that returns `undefined` regardless of the
+	 * arguments it receives.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Utility
+	 * @example
+	 *
+	 * var object = { 'user': 'fred' };
+	 *
+	 * _.noop(object) === undefined;
+	 * // => true
+	 */
+	function noop() {
+	  // No operation performed.
+	}
+
+	module.exports = noop;
+
 
 /***/ }
 /******/ ])

@@ -2,8 +2,8 @@
 require('./_contextmenu');
 require('./index.jsx');
 
-var context = require('context');
 var xblocks = require('xblocks');
+var lazyFocus = require('utils/lazyFocus');
 
 var _xbMenu = {
 
@@ -89,7 +89,7 @@ module.exports = xblocks.create('xb-menu', [
                 // focus of ancestor
                 var parentMenu = this.parentMenu;
                 if (parentMenu) {
-                    context.setTimeout(parentMenu.focus.bind(parentMenu), 0);
+                    lazyFocus(parentMenu);
                 }
             },
 
@@ -155,7 +155,7 @@ module.exports = xblocks.create('xb-menu', [
                 this.style.visibility = 'visible';
                 // the focus is not put on the invisible element
                 // put again
-                context.setTimeout(this.focus.bind(this), 0);
+                lazyFocus(this);
             },
 
             '_closeUpFocus': function() {
