@@ -55,8 +55,7 @@
     "stylus": "0.52.0",
     "stylus-loader": "^1.3.0",
     "vow": "0.4.10",
-    "xblocks-core": "Katochimoto/xblocks-core.git#rc-1.0.0",
-    "xblocks-utils": "Katochimoto/xblocks-utils.git#rc-1.0.0"
+    "xblocks-core": "Katochimoto/xblocks-core.git#rc-1.0.0"
   },
   "engines": {
     "node": ">=0.6.0"

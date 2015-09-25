@@ -5405,7 +5405,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var xblocks = __webpack_require__(5);
 	var lazyFocus = __webpack_require__(95);
-	var noop = __webpack_require__(99);
+	var Table = __webpack_require__(99);
+	var noop = __webpack_require__(124);
 
 	var menuCommon = {
 	    init: function init() {
@@ -5413,7 +5414,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this._xbFocus.destroy();
 	        }
 
-	        this._xbFocus = new xblocks.utils.Table(this, {
+	        this._xbFocus = new Table(this, {
 	            'col': 'xb-menu-inline:not([disabled])',
 	            'rowLoop': true,
 	            'colLoop': true
@@ -5495,6 +5496,1542 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var xblocks = __webpack_require__(5);
+	var delegate = __webpack_require__(100);
+	var filterClick = __webpack_require__(104);
+	var filterMouse = __webpack_require__(105);
+	var matchesSelector = __webpack_require__(102);
+	var eachAfter = __webpack_require__(106);
+	var eachBefore = __webpack_require__(109);
+	var index = __webpack_require__(111);
+	var merge = __webpack_require__(112);
+	var throttle = __webpack_require__(121);
+	var pop = Array.prototype.pop;
+	var slice = Array.prototype.slice;
+
+	module.exports = Table;
+
+	function Table(node, options) {
+	    this._options = merge({
+	        'col': 'xb-menu:not([disabled])',
+	        'row': 'xb-menuitem:not([disabled])',
+	        'colLoop': false,
+	        'rowLoop': false
+	    }, options);
+
+	    this._node = node;
+	    this._item = undefined;
+	    this._originalEvent = undefined;
+
+	    this._onKeydown = this._onKeydown.bind(this);
+	    this._onMouseover = delegate(this._options.row, this._onMouseover.bind(this));
+	    this._onMouseout = delegate(this._options.row, this._onMouseout.bind(this));
+	    this._onMousemove = throttle(delegate(this._options.row, this._onMouseAction.bind(this)));
+	    this._onClick = filterClick('left', delegate(this._options.row, this._onMouseAction.bind(this)));
+
+	    this._bind();
+	}
+
+	Table.prototype = {
+	    EVENT_BLUR: 'xb-blur',
+	    EVENT_FOCUS: 'xb-focus',
+
+	    destroy: function destroy() {
+	        this._unbind();
+	        this._node = undefined;
+	        this._originalEvent = undefined;
+
+	        if (this._item) {
+	            var item = this._item;
+	            this._item = undefined;
+	            xblocks.event.dispatch(item, this.EVENT_BLUR);
+	        }
+	    },
+
+	    getItem: function getItem() {
+	        return this._item;
+	    },
+
+	    blurItem: function blurItem() {
+	        if (this._item) {
+	            var item = this._item;
+	            this._item = undefined;
+	            xblocks.event.dispatch(item, this.EVENT_BLUR);
+	        }
+	    },
+
+	    _bind: function _bind() {
+	        this._node.addEventListener('keydown', this._onKeydown, false);
+	        this._node.addEventListener('click', this._onClick, false);
+	        this._node.addEventListener('mouseover', this._onMouseover, false);
+	        this._node.addEventListener('mouseout', this._onMouseout, false);
+	        this._node.addEventListener('mousemove', this._onMousemove, false);
+	    },
+
+	    _unbind: function _unbind() {
+	        this._node.removeEventListener('keydown', this._onKeydown, false);
+	        this._node.removeEventListener('click', this._onClick, false);
+	        this._node.removeEventListener('mouseover', this._onMouseover, false);
+	        this._node.removeEventListener('mouseout', this._onMouseout, false);
+	        this._node.removeEventListener('mousemove', this._onMousemove, false);
+	    },
+
+	    _col: function _col(item) {
+	        if (!item) {
+	            return;
+	        }
+
+	        var col = item;
+	        while (col = col.parentNode) {
+	            if (matchesSelector(col, this._options.col)) {
+	                return col;
+	            }
+
+	            if (col === this._node) {
+	                break;
+	            }
+	        }
+	    },
+
+	    _colFirst: function _colFirst() {
+	        return this._node.querySelector(this._options.col) || this._node;
+	    },
+
+	    _colLast: function _colLast() {
+	        return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
+	    },
+
+	    _colMatchIterate: function _colMatchIterate(data, element) {
+	        if (matchesSelector(element, this._options.col)) {
+	            data.col = element;
+	            return false;
+	        }
+	    },
+
+	    _colNext: function _colNext(col) {
+	        var data = {};
+	        eachAfter(col, this._colMatchIterate.bind(this, data), this._node, false);
+	        return data.col;
+	    },
+
+	    _colPrev: function _colPrev(col) {
+	        var data = {};
+	        eachBefore(col, this._colMatchIterate.bind(this, data), this._node, false);
+	        return data.col;
+	    },
+
+	    _rowFirst: function _rowFirst(col) {
+	        return col.querySelector(this._options.row);
+	    },
+
+	    _rowLast: function _rowLast(col) {
+	        return pop.call(slice.call(col.querySelectorAll(this._options.row)));
+	    },
+
+	    _rowMatchIterate: function _rowMatchIterate(data, element) {
+	        if (matchesSelector(element, this._options.row)) {
+	            data.row = element;
+	            return false;
+	        }
+	    },
+
+	    _rowNext: function _rowNext(row) {
+	        var data = {};
+	        eachAfter(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+	        return data.row;
+	    },
+
+	    _rowPrev: function _rowPrev(row) {
+	        var data = {};
+	        eachBefore(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+	        return data.row;
+	    },
+
+	    _rowIndex: function _rowIndex(row) {
+	        return index(this._options.row, row, this._col(row));
+	    },
+
+	    _rowByIndex: function _rowByIndex(col, idx) {
+	        return col.querySelectorAll(this._options.row)[idx];
+	    },
+
+	    _focus: function _focus(element) {
+	        if (element === this._item) {
+	            return;
+	        }
+
+	        if (this._item) {
+	            xblocks.event.dispatch(this._item, this.EVENT_BLUR, {
+	                'detail': { 'originalEvent': this._originalEvent }
+	            });
+	        }
+
+	        this._item = element;
+	        xblocks.event.dispatch(this._item, this.EVENT_FOCUS, {
+	            'detail': { 'originalEvent': this._originalEvent }
+	        });
+	    },
+
+	    _onKeydown: function _onKeydown(event) {
+	        if (event.altKey || event.metaKey || event.shiftKey) {
+	            return;
+	        }
+
+	        var action;
+
+	        switch (event.keyCode) {
+	            case 37:
+	                // ArrowLeft
+	                action = '_onArrowLeft';
+	                break;
+	            case 38:
+	                // ArrowUp
+	                action = '_onArrowUp';
+	                break;
+	            case 39:
+	                // ArrowRight
+	                action = '_onArrowRight';
+	                break;
+	            case 40:
+	                // ArrowDown
+	                action = '_onArrowDown';
+	                break;
+	        }
+
+	        if (!action) {
+	            return;
+	        }
+
+	        event.preventDefault();
+	        event.stopPropagation();
+	        this._originalEvent = event;
+
+	        this[action]();
+	    },
+
+	    _onMouseAction: function _onMouseAction(event) {
+	        if (!this._item || this._item !== event.delegateElement) {
+	            this._originalEvent = event;
+	            this._focus(event.delegateElement);
+	        }
+	    },
+
+	    _onMouseover: function _onMouseover(event) {
+	        filterMouse(event.delegateElement, event, this._onMouseAction.bind(this));
+	    },
+
+	    _onMouseout: function _onMouseout(event) {
+	        filterMouse(event.delegateElement, event, this._onMouseAction.bind(this));
+	    },
+
+	    _onArrowLeft: function _onArrowLeft() {
+	        if (!this._item) {
+	            this._focus(this._rowFirst(this._colFirst()));
+	        } else {
+	            var idx = this._rowIndex(this._item);
+	            var col = this._colPrev(this._col(this._item));
+
+	            if (!col) {
+	                col = this._colLast();
+	                if (!this._options.colLoop) {
+	                    idx--;
+	                }
+	            }
+
+	            var row = this._rowByIndex(col, idx);
+
+	            if (!row) {
+	                row = this._rowLast(col);
+	            }
+
+	            this._focus(row);
+	        }
+	    },
+
+	    _onArrowRight: function _onArrowRight() {
+	        if (!this._item) {
+	            this._focus(this._rowFirst(this._colFirst()));
+	        } else {
+	            var idx = this._rowIndex(this._item);
+	            var col = this._colNext(this._col(this._item));
+
+	            if (!col) {
+	                col = this._colFirst();
+	                if (!this._options.colLoop) {
+	                    idx++;
+	                }
+	            }
+
+	            var row = this._rowByIndex(col, idx);
+
+	            if (!row) {
+	                row = this._rowFirst(col);
+	            }
+
+	            this._focus(row);
+	        }
+	    },
+
+	    _onArrowUp: function _onArrowUp() {
+	        if (!this._item) {
+	            this._focus(this._rowFirst(this._colFirst()));
+	        } else {
+	            var row = this._rowPrev(this._item);
+
+	            if (!row) {
+	                var col;
+
+	                if (this._options.rowLoop) {
+	                    col = this._col(this._item);
+	                } else {
+	                    col = this._colPrev(this._col(this._item)) || this._colLast();
+	                }
+
+	                row = this._rowLast(col);
+	            }
+
+	            this._focus(row);
+	        }
+	    },
+
+	    _onArrowDown: function _onArrowDown() {
+	        if (!this._item) {
+	            this._focus(this._rowFirst(this._colFirst()));
+	        } else {
+	            var row = this._rowNext(this._item);
+
+	            if (!row) {
+	                var col;
+
+	                if (this._options.rowLoop) {
+	                    col = this._col(this._item);
+	                } else {
+	                    col = this._colNext(this._col(this._item)) || this._colFirst();
+	                }
+
+	                row = this._rowFirst(col);
+	            }
+
+	            this._focus(row);
+	        }
+	    }
+	};
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var delegateMatch = __webpack_require__(101);
+	var wrap = __webpack_require__(103);
+
+	/**
+	 * @function xblocks.event.delegate
+	 * @param   {[type]}   selector [description]
+	 * @param   {Function} callback [description]
+	 * @returns {[type]}            [description]
+	 */
+	module.exports = function (selector, callback) {
+
+	    return function (event) {
+	        wrap(event);
+
+	        var match = delegateMatch(selector, event.target);
+
+	        if (!match) {
+	            return;
+	        }
+
+	        event.delegateElement = match;
+
+	        callback.call(match, event);
+	    };
+	};
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var matchesSelector = __webpack_require__(102);
+
+	/**
+	 * @function xblocks.event.delegateMatch
+	 * @param   {[type]} selector [description]
+	 * @param   {[type]} target   [description]
+	 * @returns {[type]}          [description]
+	 */
+	module.exports = function (selector, target) {
+	    if (!target || !target.tagName) {
+	        return;
+	    }
+
+	    var match;
+
+	    if (matchesSelector(target, selector)) {
+	        match = target;
+	    } else if (matchesSelector(target, selector + ' *')) {
+	        var parent = target.parentNode;
+
+	        while (parent) {
+	            if (matchesSelector(parent, selector)) {
+	                match = parent;
+	                break;
+	            }
+
+	            parent = parent.parentNode;
+	        }
+	    }
+
+	    return match;
+	};
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(2);
+	var indexOf = Array.prototype.indexOf;
+	var proto = context.Element.prototype;
+	var matches = proto.matches || proto.matchesSelector || proto.webkitMatchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector || proto.oMatchesSelector || function (selector) {
+	    return indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1;
+	};
+
+	/**
+	 * @function xblocks.dom.matchesSelector
+	 * @param   {[type]} element  [description]
+	 * @param   {[type]} selector [description]
+	 * @returns {boolean}
+	 */
+	module.exports = function (element, selector) {
+	    return element.nodeType === 1 ? matches.call(element, selector) : false;
+	};
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(2);
+	var doc = context.document;
+	var html = doc.documentElement;
+	var hop = Object.prototype.hasOwnProperty;
+	var clickWhich = {
+	    1: 'left',
+	    2: 'center',
+	    3: 'right'
+	};
+
+	/**
+	 * @function xblocks.event.wrap
+	 * @param   {[type]} event [description]
+	 * @returns {[type]}       [description]
+	 */
+	module.exports = function (event) {
+	    if (event.xbWrapped) {
+	        return event;
+	    }
+
+	    event.xbWrapped = true;
+
+	    if (event.srcElement && !event.target) {
+	        event.target = event.srcElement;
+	    }
+
+	    if (!event.relatedTarget && event.fromElement) {
+	        event.relatedTarget = event.fromElement === event.target ? event.toElement : event.fromElement;
+	    }
+
+	    if (!hop.call(event, 'pageX') && hop.call(event, 'clientX')) {
+	        event.pageX = event.clientX;
+	        event.pageY = event.clientY;
+
+	        if (html) {
+	            event.pageX += html.scrollLeft - (html.clientLeft || 0);
+	            event.pageY += html.scrollTop - (html.clientTop || 0);
+	        } else if (doc.body) {
+	            event.pageX += doc.body.scrollLeft;
+	            event.pageY += doc.body.scrollTop;
+	        }
+	    }
+
+	    if (!event.which && event.button) {
+	        /* jshint -W016 */
+	        if (event.button & 1) {
+	            event.which = 1;
+	        } else if (event.button & 4) {
+	            event.which = 2;
+	        } else if (event.button & 2) {
+	            event.which = 3;
+	        }
+	    }
+
+	    if (event.which) {
+	        event.whichStr = clickWhich[event.which];
+	    }
+
+	    return event;
+	};
+
+/***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var wrap = __webpack_require__(103);
+
+	/**
+	 * @function xblocks.event.filterClick
+	 * @param   {[type]}   which    [description]
+	 * @param   {Function} callback [description]
+	 * @returns {[type]}            [description]
+	 */
+	module.exports = function (which, callback) {
+	    which = Array.isArray(which) ? which : [which];
+
+	    return function (event) {
+	        if (event.type !== 'click') {
+	            return;
+	        }
+
+	        wrap(event);
+
+	        if (which.indexOf(event.whichStr) !== -1) {
+	            callback.call(this, event);
+	        }
+	    };
+	};
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var wrap = __webpack_require__(103);
+
+	/**
+	 * @function xblocks.event.filterMouseEnter
+	 * @param {HTMLElement} element
+	 * @param {Event} event mouseover or mouseout event
+	 * @param {function} callback
+	 */
+	module.exports = function (element, event, callback) {
+	    wrap(event);
+
+	    var toElement = event.relatedTarget;
+
+	    while (toElement && toElement !== element) {
+	        toElement = toElement.parentNode;
+	    }
+
+	    if (toElement === element) {
+	        return;
+	    }
+
+	    return callback.call(element, event);
+	};
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var isParent = __webpack_require__(107);
+	var eachInnerFollowing = __webpack_require__(108);
+
+	/**
+	 * @function xblocks.dom.eachAfter
+	 * @param   {[type]}   node     [description]
+	 * @param   {Function} callback [description]
+	 * @param   {[type]}   context  [description]
+	 * @param   {[type]}   inner    [description]
+	 * @returns {[type]}            [description]
+	 */
+	module.exports = function (node, callback, context, inner) {
+	    inner = typeof inner === 'undefined' ? true : Boolean(inner);
+	    var next;
+	    var cbcall;
+
+	    do {
+	        if (context && !isParent(context, node)) {
+	            return;
+	        }
+
+	        next = node;
+
+	        while (next = next.nextSibling) {
+	            cbcall = inner ? eachInnerFollowing(next, callback) : callback && callback(next);
+
+	            if (typeof cbcall !== 'undefined' && !cbcall) {
+	                return false;
+	            }
+	        }
+	    } while (node = node.parentNode);
+	};
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(2);
+	var html = context.document.documentElement;
+
+	/**
+	 * @function xblocks.dom.isParent
+	 * @param {HTMLElement} container
+	 * @param {HTMLElement} element
+	 * @returns {boolean}
+	 */
+	module.exports = (function () {
+
+	    if ('compareDocumentPosition' in html) {
+	        return function (container, element) {
+	            return (container.compareDocumentPosition(element) & 16) === 16;
+	        };
+	    } else if ('contains' in html) {
+	        return function (container, element) {
+	            return container !== element && container.contains(element);
+	        };
+	    } else {
+	        return function (container, element) {
+	            while (element = element.parentNode) {
+	                if (element === container) {
+	                    return true;
+	                }
+	            }
+
+	            return false;
+	        };
+	    }
+	})();
+
+/***/ },
+/* 108 */
+/***/ function(module, exports) {
+
+	/**
+	 * Проход по всем потомкам в прямом порядке (от певой до последней)
+	 * @function xblocks.dom.eachInnerFollowing
+	 */
+	'use strict';
+
+	module.exports = function (node, callback) {
+	    var stack = [node];
+	    var item;
+	    var cbcall;
+	    var childsLength;
+
+	    while (item = stack.pop()) {
+	        cbcall = callback && callback(item, stack);
+
+	        if (typeof cbcall !== 'undefined' && !cbcall) {
+	            return false;
+	        } else if (cbcall === 'next') {
+	            continue;
+	        }
+
+	        if (item.nodeType !== 1) {
+	            continue;
+	        }
+
+	        if (!item.hasChildNodes()) {
+	            continue;
+	        }
+
+	        childsLength = item.childNodes.length;
+
+	        while (childsLength--) {
+	            stack.push(item.childNodes[childsLength]);
+	        }
+	    }
+
+	    return true;
+	};
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var isParent = __webpack_require__(107);
+	var eachInnerPrevious = __webpack_require__(110);
+
+	/**
+	 * @function xblocks.dom.eachBefore
+	 * @param   {[type]}   node     [description]
+	 * @param   {Function} callback [description]
+	 * @param   {[type]}   context  [description]
+	 * @param   {[type]}   inner    [description]
+	 * @returns {[type]}            [description]
+	 */
+	module.exports = function (node, callback, context, inner) {
+	    inner = typeof inner === 'undefined' ? true : Boolean(inner);
+	    var prev;
+	    var cbcall;
+
+	    do {
+	        if (context && !isParent(context, node)) {
+	            return;
+	        }
+
+	        prev = node;
+
+	        while (prev = prev.previousSibling) {
+	            cbcall = inner ? eachInnerPrevious(prev, callback) : callback && callback(prev);
+
+	            if (typeof cbcall !== 'undefined' && !cbcall) {
+	                return false;
+	            }
+	        }
+	    } while (node = node.parentNode);
+	};
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+	/**
+	 * Проход по всем потомкам в обратном порядке (от последней до первой)
+	 * @function xblocks.dom.eachInnerPrevious
+	 */
+	'use strict';
+
+	module.exports = function (node, callback) {
+	    var stack = [node];
+	    var item;
+	    var cbcall;
+	    var i;
+	    var childsLength;
+
+	    while (item = stack.pop()) {
+	        cbcall = callback && callback(item, stack);
+
+	        if (typeof cbcall !== 'undefined' && !cbcall) {
+	            return false;
+	        } else if (cbcall === 'next') {
+	            continue;
+	        }
+
+	        if (item.nodeType !== 1) {
+	            continue;
+	        }
+
+	        if (!item.hasChildNodes()) {
+	            continue;
+	        }
+
+	        childsLength = item.childNodes.length;
+	        i = 0;
+
+	        for (; i < childsLength; i++) {
+	            stack.push(item.childNodes[i]);
+	        }
+	    }
+
+	    return true;
+	};
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var globalContext = __webpack_require__(2);
+	var indexOf = Array.prototype.indexOf;
+
+	/**
+	 * @function xblocks.dom.index
+	 * @param   {[type]} selector [description]
+	 * @param   {[type]} element  [description]
+	 * @param   {[type]} context  [description]
+	 * @returns {[type]}          [description]
+	 */
+	module.exports = function (selector, element, context) {
+	  context = context || globalContext.document;
+	  return indexOf.call(context.querySelectorAll(selector), element);
+	};
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var baseMerge = __webpack_require__(113),
+	    createAssigner = __webpack_require__(119);
+
+	/**
+	 * Recursively merges own enumerable properties of the source object(s), that
+	 * don't resolve to `undefined` into the destination object. Subsequent sources
+	 * overwrite property assignments of previous sources. If `customizer` is
+	 * provided it's invoked to produce the merged values of the destination and
+	 * source properties. If `customizer` returns `undefined` merging is handled
+	 * by the method instead. The `customizer` is bound to `thisArg` and invoked
+	 * with five arguments: (objectValue, sourceValue, key, object, source).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The destination object.
+	 * @param {...Object} [sources] The source objects.
+	 * @param {Function} [customizer] The function to customize assigned values.
+	 * @param {*} [thisArg] The `this` binding of `customizer`.
+	 * @returns {Object} Returns `object`.
+	 * @example
+	 *
+	 * var users = {
+	 *   'data': [{ 'user': 'barney' }, { 'user': 'fred' }]
+	 * };
+	 *
+	 * var ages = {
+	 *   'data': [{ 'age': 36 }, { 'age': 40 }]
+	 * };
+	 *
+	 * _.merge(users, ages);
+	 * // => { 'data': [{ 'user': 'barney', 'age': 36 }, { 'user': 'fred', 'age': 40 }] }
+	 *
+	 * // using a customizer callback
+	 * var object = {
+	 *   'fruits': ['apple'],
+	 *   'vegetables': ['beet']
+	 * };
+	 *
+	 * var other = {
+	 *   'fruits': ['banana'],
+	 *   'vegetables': ['carrot']
+	 * };
+	 *
+	 * _.merge(object, other, function(a, b) {
+	 *   if (_.isArray(a)) {
+	 *     return a.concat(b);
+	 *   }
+	 * });
+	 * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot'] }
+	 */
+	var merge = createAssigner(baseMerge);
+
+	module.exports = merge;
+
+
+/***/ },
+/* 113 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var arrayEach = __webpack_require__(36),
+	    baseMergeDeep = __webpack_require__(114),
+	    isArray = __webpack_require__(23),
+	    isArrayLike = __webpack_require__(14),
+	    isObject = __webpack_require__(18),
+	    isObjectLike = __webpack_require__(20),
+	    isTypedArray = __webpack_require__(51),
+	    keys = __webpack_require__(49);
+
+	/**
+	 * The base implementation of `_.merge` without support for argument juggling,
+	 * multiple sources, and `this` binding `customizer` functions.
+	 *
+	 * @private
+	 * @param {Object} object The destination object.
+	 * @param {Object} source The source object.
+	 * @param {Function} [customizer] The function to customize merged values.
+	 * @param {Array} [stackA=[]] Tracks traversed source objects.
+	 * @param {Array} [stackB=[]] Associates values with source counterparts.
+	 * @returns {Object} Returns `object`.
+	 */
+	function baseMerge(object, source, customizer, stackA, stackB) {
+	  if (!isObject(object)) {
+	    return object;
+	  }
+	  var isSrcArr = isArrayLike(source) && (isArray(source) || isTypedArray(source)),
+	      props = isSrcArr ? undefined : keys(source);
+
+	  arrayEach(props || source, function(srcValue, key) {
+	    if (props) {
+	      key = srcValue;
+	      srcValue = source[key];
+	    }
+	    if (isObjectLike(srcValue)) {
+	      stackA || (stackA = []);
+	      stackB || (stackB = []);
+	      baseMergeDeep(object, source, key, baseMerge, customizer, stackA, stackB);
+	    }
+	    else {
+	      var value = object[key],
+	          result = customizer ? customizer(value, srcValue, key, object, source) : undefined,
+	          isCommon = result === undefined;
+
+	      if (isCommon) {
+	        result = srcValue;
+	      }
+	      if ((result !== undefined || (isSrcArr && !(key in object))) &&
+	          (isCommon || (result === result ? (result !== value) : (value === value)))) {
+	        object[key] = result;
+	      }
+	    }
+	  });
+	  return object;
+	}
+
+	module.exports = baseMerge;
+
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var arrayCopy = __webpack_require__(115),
+	    isArguments = __webpack_require__(13),
+	    isArray = __webpack_require__(23),
+	    isArrayLike = __webpack_require__(14),
+	    isPlainObject = __webpack_require__(116),
+	    isTypedArray = __webpack_require__(51),
+	    toPlainObject = __webpack_require__(117);
+
+	/**
+	 * A specialized version of `baseMerge` for arrays and objects which performs
+	 * deep merges and tracks traversed objects enabling objects with circular
+	 * references to be merged.
+	 *
+	 * @private
+	 * @param {Object} object The destination object.
+	 * @param {Object} source The source object.
+	 * @param {string} key The key of the value to merge.
+	 * @param {Function} mergeFunc The function to merge values.
+	 * @param {Function} [customizer] The function to customize merged values.
+	 * @param {Array} [stackA=[]] Tracks traversed source objects.
+	 * @param {Array} [stackB=[]] Associates values with source counterparts.
+	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+	 */
+	function baseMergeDeep(object, source, key, mergeFunc, customizer, stackA, stackB) {
+	  var length = stackA.length,
+	      srcValue = source[key];
+
+	  while (length--) {
+	    if (stackA[length] == srcValue) {
+	      object[key] = stackB[length];
+	      return;
+	    }
+	  }
+	  var value = object[key],
+	      result = customizer ? customizer(value, srcValue, key, object, source) : undefined,
+	      isCommon = result === undefined;
+
+	  if (isCommon) {
+	    result = srcValue;
+	    if (isArrayLike(srcValue) && (isArray(srcValue) || isTypedArray(srcValue))) {
+	      result = isArray(value)
+	        ? value
+	        : (isArrayLike(value) ? arrayCopy(value) : []);
+	    }
+	    else if (isPlainObject(srcValue) || isArguments(srcValue)) {
+	      result = isArguments(value)
+	        ? toPlainObject(value)
+	        : (isPlainObject(value) ? value : {});
+	    }
+	    else {
+	      isCommon = false;
+	    }
+	  }
+	  // Add the source value to the stack of traversed objects and associate
+	  // it with its merged value.
+	  stackA.push(srcValue);
+	  stackB.push(result);
+
+	  if (isCommon) {
+	    // Recursively merge objects and arrays (susceptible to call stack limits).
+	    object[key] = mergeFunc(result, srcValue, customizer, stackA, stackB);
+	  } else if (result === result ? (result !== value) : (value === value)) {
+	    object[key] = result;
+	  }
+	}
+
+	module.exports = baseMergeDeep;
+
+
+/***/ },
+/* 115 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copies the values of `source` to `array`.
+	 *
+	 * @private
+	 * @param {Array} source The array to copy values from.
+	 * @param {Array} [array=[]] The array to copy values to.
+	 * @returns {Array} Returns `array`.
+	 */
+	function arrayCopy(source, array) {
+	  var index = -1,
+	      length = source.length;
+
+	  array || (array = Array(length));
+	  while (++index < length) {
+	    array[index] = source[index];
+	  }
+	  return array;
+	}
+
+	module.exports = arrayCopy;
+
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseForIn = __webpack_require__(32),
+	    isArguments = __webpack_require__(13),
+	    isHostObject = __webpack_require__(27),
+	    isObjectLike = __webpack_require__(20),
+	    support = __webpack_require__(21);
+
+	/** `Object#toString` result references. */
+	var objectTag = '[object Object]';
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Checks if `value` is a plain object, that is, an object created by the
+	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
+	 *
+	 * **Note:** This method assumes objects created by the `Object` constructor
+	 * have no inherited enumerable properties.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * _.isPlainObject(new Foo);
+	 * // => false
+	 *
+	 * _.isPlainObject([1, 2, 3]);
+	 * // => false
+	 *
+	 * _.isPlainObject({ 'x': 0, 'y': 0 });
+	 * // => true
+	 *
+	 * _.isPlainObject(Object.create(null));
+	 * // => true
+	 */
+	function isPlainObject(value) {
+	  var Ctor;
+
+	  // Exit early for non `Object` objects.
+	  if (!(isObjectLike(value) && objToString.call(value) == objectTag && !isHostObject(value) && !isArguments(value)) ||
+	      (!hasOwnProperty.call(value, 'constructor') && (Ctor = value.constructor, typeof Ctor == 'function' && !(Ctor instanceof Ctor)))) {
+	    return false;
+	  }
+	  // IE < 9 iterates inherited properties before own properties. If the first
+	  // iterated property is an object's own property then there are no inherited
+	  // enumerable properties.
+	  var result;
+	  if (support.ownLast) {
+	    baseForIn(value, function(subValue, key, object) {
+	      result = hasOwnProperty.call(object, key);
+	      return false;
+	    });
+	    return result !== false;
+	  }
+	  // In most environments an object's own properties are iterated before
+	  // its inherited properties. If the last iterated property is an object's
+	  // own property then there are no inherited enumerable properties.
+	  baseForIn(value, function(subValue, key) {
+	    result = key;
+	  });
+	  return result === undefined || hasOwnProperty.call(value, result);
+	}
+
+	module.exports = isPlainObject;
+
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseCopy = __webpack_require__(118),
+	    keysIn = __webpack_require__(35);
+
+	/**
+	 * Converts `value` to a plain object flattening inherited enumerable
+	 * properties of `value` to own properties of the plain object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to convert.
+	 * @returns {Object} Returns the converted plain object.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.assign({ 'a': 1 }, new Foo);
+	 * // => { 'a': 1, 'b': 2 }
+	 *
+	 * _.assign({ 'a': 1 }, _.toPlainObject(new Foo));
+	 * // => { 'a': 1, 'b': 2, 'c': 3 }
+	 */
+	function toPlainObject(value) {
+	  return baseCopy(value, keysIn(value));
+	}
+
+	module.exports = toPlainObject;
+
+
+/***/ },
+/* 118 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copies properties of `source` to `object`.
+	 *
+	 * @private
+	 * @param {Object} source The object to copy properties from.
+	 * @param {Array} props The property names to copy.
+	 * @param {Object} [object={}] The object to copy properties to.
+	 * @returns {Object} Returns `object`.
+	 */
+	function baseCopy(source, props, object) {
+	  object || (object = {});
+
+	  var index = -1,
+	      length = props.length;
+
+	  while (++index < length) {
+	    var key = props[index];
+	    object[key] = source[key];
+	  }
+	  return object;
+	}
+
+	module.exports = baseCopy;
+
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var bindCallback = __webpack_require__(28),
+	    isIterateeCall = __webpack_require__(120),
+	    restParam = __webpack_require__(38);
+
+	/**
+	 * Creates a `_.assign`, `_.defaults`, or `_.merge` function.
+	 *
+	 * @private
+	 * @param {Function} assigner The function to assign values.
+	 * @returns {Function} Returns the new assigner function.
+	 */
+	function createAssigner(assigner) {
+	  return restParam(function(object, sources) {
+	    var index = -1,
+	        length = object == null ? 0 : sources.length,
+	        customizer = length > 2 ? sources[length - 2] : undefined,
+	        guard = length > 2 ? sources[2] : undefined,
+	        thisArg = length > 1 ? sources[length - 1] : undefined;
+
+	    if (typeof customizer == 'function') {
+	      customizer = bindCallback(customizer, thisArg, 5);
+	      length -= 2;
+	    } else {
+	      customizer = typeof thisArg == 'function' ? thisArg : undefined;
+	      length -= (customizer ? 1 : 0);
+	    }
+	    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+	      customizer = length < 3 ? undefined : customizer;
+	      length = 1;
+	    }
+	    while (++index < length) {
+	      var source = sources[index];
+	      if (source) {
+	        assigner(object, source, customizer);
+	      }
+	    }
+	    return object;
+	  });
+	}
+
+	module.exports = createAssigner;
+
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isArrayLike = __webpack_require__(14),
+	    isIndex = __webpack_require__(37),
+	    isObject = __webpack_require__(18);
+
+	/**
+	 * Checks if the provided arguments are from an iteratee call.
+	 *
+	 * @private
+	 * @param {*} value The potential iteratee value argument.
+	 * @param {*} index The potential iteratee index or key argument.
+	 * @param {*} object The potential iteratee object argument.
+	 * @returns {boolean} Returns `true` if the arguments are from an iteratee call, else `false`.
+	 */
+	function isIterateeCall(value, index, object) {
+	  if (!isObject(object)) {
+	    return false;
+	  }
+	  var type = typeof index;
+	  if (type == 'number'
+	      ? (isArrayLike(object) && isIndex(index, object.length))
+	      : (type == 'string' && index in object)) {
+	    var other = object[index];
+	    return value === value ? (value === other) : (other !== other);
+	  }
+	  return false;
+	}
+
+	module.exports = isIterateeCall;
+
+
+/***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var debounce = __webpack_require__(122),
+	    isObject = __webpack_require__(18);
+
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/**
+	 * Creates a throttled function that only invokes `func` at most once per
+	 * every `wait` milliseconds. The throttled function comes with a `cancel`
+	 * method to cancel delayed invocations. Provide an options object to indicate
+	 * that `func` should be invoked on the leading and/or trailing edge of the
+	 * `wait` timeout. Subsequent calls to the throttled function return the
+	 * result of the last `func` call.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
+	 * on the trailing edge of the timeout only if the the throttled function is
+	 * invoked more than once during the `wait` timeout.
+	 *
+	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+	 * for details over the differences between `_.throttle` and `_.debounce`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Function
+	 * @param {Function} func The function to throttle.
+	 * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+	 * @param {Object} [options] The options object.
+	 * @param {boolean} [options.leading=true] Specify invoking on the leading
+	 *  edge of the timeout.
+	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
+	 *  edge of the timeout.
+	 * @returns {Function} Returns the new throttled function.
+	 * @example
+	 *
+	 * // avoid excessively updating the position while scrolling
+	 * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+	 *
+	 * // invoke `renewToken` when the click event is fired, but not more than once every 5 minutes
+	 * jQuery('.interactive').on('click', _.throttle(renewToken, 300000, {
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // cancel a trailing throttled call
+	 * jQuery(window).on('popstate', throttled.cancel);
+	 */
+	function throttle(func, wait, options) {
+	  var leading = true,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  if (options === false) {
+	    leading = false;
+	  } else if (isObject(options)) {
+	    leading = 'leading' in options ? !!options.leading : leading;
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+	  return debounce(func, wait, { 'leading': leading, 'maxWait': +wait, 'trailing': trailing });
+	}
+
+	module.exports = throttle;
+
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isObject = __webpack_require__(18),
+	    now = __webpack_require__(123);
+
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max;
+
+	/**
+	 * Creates a debounced function that delays invoking `func` until after `wait`
+	 * milliseconds have elapsed since the last time the debounced function was
+	 * invoked. The debounced function comes with a `cancel` method to cancel
+	 * delayed invocations. Provide an options object to indicate that `func`
+	 * should be invoked on the leading and/or trailing edge of the `wait` timeout.
+	 * Subsequent calls to the debounced function return the result of the last
+	 * `func` invocation.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
+	 * on the trailing edge of the timeout only if the the debounced function is
+	 * invoked more than once during the `wait` timeout.
+	 *
+	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+	 * for details over the differences between `_.debounce` and `_.throttle`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Function
+	 * @param {Function} func The function to debounce.
+	 * @param {number} [wait=0] The number of milliseconds to delay.
+	 * @param {Object} [options] The options object.
+	 * @param {boolean} [options.leading=false] Specify invoking on the leading
+	 *  edge of the timeout.
+	 * @param {number} [options.maxWait] The maximum time `func` is allowed to be
+	 *  delayed before it's invoked.
+	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
+	 *  edge of the timeout.
+	 * @returns {Function} Returns the new debounced function.
+	 * @example
+	 *
+	 * // avoid costly calculations while the window size is in flux
+	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+	 *
+	 * // invoke `sendMail` when the click event is fired, debouncing subsequent calls
+	 * jQuery('#postbox').on('click', _.debounce(sendMail, 300, {
+	 *   'leading': true,
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // ensure `batchLog` is invoked once after 1 second of debounced calls
+	 * var source = new EventSource('/stream');
+	 * jQuery(source).on('message', _.debounce(batchLog, 250, {
+	 *   'maxWait': 1000
+	 * }));
+	 *
+	 * // cancel a debounced call
+	 * var todoChanges = _.debounce(batchLog, 1000);
+	 * Object.observe(models.todo, todoChanges);
+	 *
+	 * Object.observe(models, function(changes) {
+	 *   if (_.find(changes, { 'user': 'todo', 'type': 'delete'})) {
+	 *     todoChanges.cancel();
+	 *   }
+	 * }, ['delete']);
+	 *
+	 * // ...at some point `models.todo` is changed
+	 * models.todo.completed = true;
+	 *
+	 * // ...before 1 second has passed `models.todo` is deleted
+	 * // which cancels the debounced `todoChanges` call
+	 * delete models.todo;
+	 */
+	function debounce(func, wait, options) {
+	  var args,
+	      maxTimeoutId,
+	      result,
+	      stamp,
+	      thisArg,
+	      timeoutId,
+	      trailingCall,
+	      lastCalled = 0,
+	      maxWait = false,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  wait = wait < 0 ? 0 : (+wait || 0);
+	  if (options === true) {
+	    var leading = true;
+	    trailing = false;
+	  } else if (isObject(options)) {
+	    leading = !!options.leading;
+	    maxWait = 'maxWait' in options && nativeMax(+options.maxWait || 0, wait);
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+
+	  function cancel() {
+	    if (timeoutId) {
+	      clearTimeout(timeoutId);
+	    }
+	    if (maxTimeoutId) {
+	      clearTimeout(maxTimeoutId);
+	    }
+	    lastCalled = 0;
+	    maxTimeoutId = timeoutId = trailingCall = undefined;
+	  }
+
+	  function complete(isCalled, id) {
+	    if (id) {
+	      clearTimeout(id);
+	    }
+	    maxTimeoutId = timeoutId = trailingCall = undefined;
+	    if (isCalled) {
+	      lastCalled = now();
+	      result = func.apply(thisArg, args);
+	      if (!timeoutId && !maxTimeoutId) {
+	        args = thisArg = undefined;
+	      }
+	    }
+	  }
+
+	  function delayed() {
+	    var remaining = wait - (now() - stamp);
+	    if (remaining <= 0 || remaining > wait) {
+	      complete(trailingCall, maxTimeoutId);
+	    } else {
+	      timeoutId = setTimeout(delayed, remaining);
+	    }
+	  }
+
+	  function maxDelayed() {
+	    complete(trailing, timeoutId);
+	  }
+
+	  function debounced() {
+	    args = arguments;
+	    stamp = now();
+	    thisArg = this;
+	    trailingCall = trailing && (timeoutId || !leading);
+
+	    if (maxWait === false) {
+	      var leadingCall = leading && !timeoutId;
+	    } else {
+	      if (!maxTimeoutId && !leading) {
+	        lastCalled = stamp;
+	      }
+	      var remaining = maxWait - (stamp - lastCalled),
+	          isCalled = remaining <= 0 || remaining > maxWait;
+
+	      if (isCalled) {
+	        if (maxTimeoutId) {
+	          maxTimeoutId = clearTimeout(maxTimeoutId);
+	        }
+	        lastCalled = stamp;
+	        result = func.apply(thisArg, args);
+	      }
+	      else if (!maxTimeoutId) {
+	        maxTimeoutId = setTimeout(maxDelayed, remaining);
+	      }
+	    }
+	    if (isCalled && timeoutId) {
+	      timeoutId = clearTimeout(timeoutId);
+	    }
+	    else if (!timeoutId && wait !== maxWait) {
+	      timeoutId = setTimeout(delayed, wait);
+	    }
+	    if (leadingCall) {
+	      isCalled = true;
+	      result = func.apply(thisArg, args);
+	    }
+	    if (isCalled && !timeoutId && !maxTimeoutId) {
+	      args = thisArg = undefined;
+	    }
+	    return result;
+	  }
+	  debounced.cancel = cancel;
+	  return debounced;
+	}
+
+	module.exports = debounce;
+
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(24);
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeNow = getNative(Date, 'now');
+
+	/**
+	 * Gets the number of milliseconds that have elapsed since the Unix epoch
+	 * (1 January 1970 00:00:00 UTC).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Date
+	 * @example
+	 *
+	 * _.defer(function(stamp) {
+	 *   console.log(_.now() - stamp);
+	 * }, _.now());
+	 * // => logs the number of milliseconds it took for the deferred function to be invoked
+	 */
+	var now = nativeNow || function() {
+	  return new Date().getTime();
+	};
+
+	module.exports = now;
+
+
+/***/ },
+/* 124 */
 /***/ function(module, exports) {
 
 	/**
