@@ -34,7 +34,9 @@ var params = {
             '_': path.join(__dirname, 'lodash'),
             'context': path.join(src, 'context'),
             'mixin': path.join(src, 'mixin'),
-            'utils': path.join(src, 'utils')
+            'utils': path.join(src, 'utils'),
+            'dom': path.join(src, 'dom'),
+            'event': path.join(src, 'event')
         }
     },
     'externals': {

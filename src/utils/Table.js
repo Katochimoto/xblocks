@@ -1,12 +1,11 @@
-var XBEvent = require('xblocks/event');
-var delegate = require('../event/delegate');
-var filterClick = require('../event/filterClick');
-var filterMouse = require('../event/filterMouse');
-var matchesSelector = require('../dom/matchesSelector');
-var eachAfter = require('../dom/eachAfter');
-var eachBefore = require('../dom/eachBefore');
-var index = require('../dom/index');
-
+var xblocks = require('xblocks');
+var delegate = require('event/delegate');
+var filterClick = require('event/filterClick');
+var filterMouse = require('event/filterMouse');
+var matchesSelector = require('dom/matchesSelector');
+var eachAfter = require('dom/eachAfter');
+var eachBefore = require('dom/eachBefore');
+var index = require('dom/index');
 var merge = require('_/object/merge');
 var throttle = require('_/function/throttle');
 var pop = Array.prototype.pop;
@@ -47,7 +46,7 @@ Table.prototype = {
         if (this._item) {
             var item = this._item;
             this._item = undefined;
-            XBEvent.dispatch(item, this.EVENT_BLUR);
+            xblocks.event.dispatch(item, this.EVENT_BLUR);
         }
     },
 
@@ -59,7 +58,7 @@ Table.prototype = {
         if (this._item) {
             var item = this._item;
             this._item = undefined;
-            XBEvent.dispatch(item, this.EVENT_BLUR);
+            xblocks.event.dispatch(item, this.EVENT_BLUR);
         }
     },
 
@@ -164,13 +163,13 @@ Table.prototype = {
         }
 
         if (this._item) {
-            XBEvent.dispatch(this._item, this.EVENT_BLUR, {
+            xblocks.event.dispatch(this._item, this.EVENT_BLUR, {
                 'detail': { 'originalEvent': this._originalEvent }
             });
         }
 
         this._item = element;
-        XBEvent.dispatch(this._item, this.EVENT_FOCUS, {
+        xblocks.event.dispatch(this._item, this.EVENT_FOCUS, {
             'detail': { 'originalEvent': this._originalEvent }
         });
     },
