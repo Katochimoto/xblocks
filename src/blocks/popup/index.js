@@ -1,8 +1,9 @@
-//require('./index.styl');
-require('./index.jsx');
+// require('./index.styl');
 
+var Tether = require('tether');
 var context = require('context');
 var xblocks = require('xblocks');
+var tetherDefaultOptions = require('utils/tetherDefaultOptions');
 
 var popupCommon = {
     onOpen: function () {
@@ -41,7 +42,7 @@ var popupCommon = {
             var value = attrs[ attrName ];
 
             if (checker(value)) {
-                if (typeof(optionName) === 'function') {
+                if (typeof optionName === 'function') {
                     optionName(options, value);
 
                 } else {
@@ -49,25 +50,6 @@ var popupCommon = {
                 }
             }
         }
-    },
-
-    /**
-     * The default setting for the popup
-     * @returns {Object}
-     * @this {xb.Popup}
-     */
-    tetherDefaultOptions: function () {
-        return {
-            'attachment': 'middle center',
-            'classes': { 'element': this.xtagName },
-            'classPrefix': this.xtagName,
-            'element': this,
-            'enabled': false,
-            'optimizations': { 'gpu': true },
-            'target': this.ownerDocument.body,
-            'targetAttachment': 'middle center',
-            'targetModifier': 'visible'
-        };
     },
 
     /**
@@ -106,7 +88,7 @@ var popupCommon = {
                 options.optimizations.gpu = value;
             },
             function (value) {
-                return (typeof(value) === 'boolean');
+                return (typeof value === 'boolean');
             }
         ],
         'constraints': [
@@ -154,7 +136,7 @@ module.exports = xblocks.create('xb-popup', [
              * @prop {Object} default options
              */
             defaultOptions: {
-                get: popupCommon.tetherDefaultOptions
+                get: tetherDefaultOptions
             },
 
             /**
@@ -246,7 +228,7 @@ module.exports = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                if (typeof(options) === 'object') {
+                if (typeof options === 'object') {
                     this.setOptions(options);
                 }
 

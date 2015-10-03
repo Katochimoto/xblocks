@@ -1,9 +1,14 @@
 // require('./index.styl');
 require('./_contextmenu');
-require('./index.jsx');
 
 var xblocks = require('xblocks');
 var lazyFocus = require('utils/lazyFocus');
+var tetherDefaultOptions = require('utils/tetherDefaultOptions');
+var Popup = require('../popup');
+var Table = require('utils/Table');
+var getParentMenu = require('utils/getParentMenu');
+
+var forEach = Array.prototype.forEach;
 
 var _xbMenu = {
 
@@ -23,7 +28,7 @@ var _xbMenu = {
      * @this {xb.Menu}
      */
     tetherDefaultOptions: function () {
-        var options = _xbPopup.tetherDefaultOptions.call(this);
+        var options = tetherDefaultOptions.call(this);
         options.constraints = [
             {
                 'to': 'scrollParent',
@@ -45,13 +50,13 @@ var _xbMenu = {
  * @class xb.Menu
  * @augments xb.Popup
  * @memberof xb
- * @mixes xblocks.mixin.eMenu
+ * @mixes xblocks.mixin.menu
  */
 module.exports = xblocks.create('xb-menu', [
     require('mixin/element/menu'),
 
     {
-        'prototype': Object.create(xb.Popup.prototype || new xb.Popup()),
+        'prototype': Object.create(Popup.prototype || new Popup()),
 
         'events': {
             'xb-before-open': function () {
@@ -59,7 +64,7 @@ module.exports = xblocks.create('xb-menu', [
             },
 
             'xb-open': function () {
-                this._xbFocus = new xblocks.utils.Table(this, {
+                this._xbFocus = new Table(this, {
                     'rowLoop': true,
                     'colLoop': true
                 });
@@ -144,7 +149,7 @@ module.exports = xblocks.create('xb-menu', [
 
         'methods': {
             '_closeAllSubmenu': function () {
-                __forEach.call(
+                forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
                     _xbMenu.closeSubmenu
                 );
@@ -159,7 +164,7 @@ module.exports = xblocks.create('xb-menu', [
             },
 
             '_closeUpFocus': function () {
-                var focusMenu = xblocks.utils.getParentMenu(this.ownerDocument.activeElement);
+                var focusMenu = getParentMenu(this.ownerDocument.activeElement);
                 var parent = this.parentMenu;
 
                 while (parent) {

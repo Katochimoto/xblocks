@@ -1,25 +1,38 @@
 require('./polyfills/requestAnimationFrame');
 require('./xtag');
 
+require('./blocks/input');
+
 exports.xv = {
     'Button': require('./blocks/button/index.jsx'),
+    'Calendar': '',
+    'Checkbox': require('./blocks/checkbox/index.jsx'),
+    'Ico': require('./blocks/ico/index.jsx'),
+    'Link': require('./blocks/link/index.jsx'),
+    'Menu': require('./blocks/menu/index.jsx'),
+    'MenuInline': require('./blocks/menu-inline/index.jsx'),
+    'Menuitem': require('./blocks/menuitem/index.jsx'),
+    'Menuseparator': require('./blocks/menuseparator/index.jsx'),
+    'Popup': require('./blocks/popup/index.jsx'),
+    'Radio': require('./blocks/radio/index.jsx'),
+    'Select': '',
+    'SpeechRecognition': ''
 };
 
 exports.xb = {
     'Button': require('./blocks/button'),
+    'Calendar': '',
     'Checkbox': require('./blocks/checkbox'),
     'Ico': require('./blocks/ico'),
     'Link': require('./blocks/link'),
-    'Menuseparator': require('./blocks/menuseparator'),
-    'Radio': require('./blocks/radio'),
-    'Input': require('./blocks/input'),
-    'Popup': require('./blocks/popup'),
-    'Menuitem': require('./blocks/menuitem'),
     'Menu': require('./blocks/menu'),
     'MenuInline': require('./blocks/menu-inline'),
+    'Menuitem': require('./blocks/menuitem'),
+    'Menuseparator': require('./blocks/menuseparator'),
+    'Popup': require('./blocks/popup'),
+    'Radio': require('./blocks/radio'),
     'Select': '',
-    'SpeechRecognition': '',
-    'Calendar': ''
+    'SpeechRecognition': ''
 };
 
 /*

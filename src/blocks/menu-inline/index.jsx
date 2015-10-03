@@ -1,5 +1,5 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
 
 /**
  * The template node xb-menu-inline
@@ -10,26 +10,28 @@
  * @mixes xblocks.mixin.vMenu
  * @mixes React.addons.PureRenderMixin
  */
-xv.MenuInline = xblocks.view.register('xb-menu-inline', [
-    xblocks.mixin.vCommonAttrs,
-    xblocks.mixin.vMenu,
+module.exports = xblocks.view.register('xb-menu-inline', [
+    require('mixin/view/commonAttrs'),
+    require('mixin/view/menu'),
 
     {
-        'displayName': 'xb-menu-inline',
+        displayName: 'xb-menu-inline',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        // @ifdef DEBUG
+        propTypes: {
             'size': React.PropTypes.string
         },
+        // @endif
 
-        'getDefaultProps': function () {
+        getDefaultProps: function () {
             return {
                 'size': ''
             };
         },
 
-        'componentDidMount': function () {
+        componentDidMount: function () {
             this._updateMaxHeight(this.props.size);
         }
     }

@@ -1,15 +1,12 @@
-var xblocks = require('xblocks');
-var React = require('react');
+import xblocks from 'xblocks';
+import React from 'react';
 
-/**
- * @class xv.InputController
- * @memberof xv
- */
-module.exports = xblocks.view.create({
+export default xblocks.view.create({
     displayName: 'xb-input_controller',
 
     mixins: [ React.addons.PureRenderMixin ],
 
+    // @ifdef DEBUG
     propTypes: {
         'autoFocus':        React.PropTypes.bool,
         'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
@@ -29,6 +26,7 @@ module.exports = xblocks.view.create({
         'tabIndex':         React.PropTypes.string,
         'value':            React.PropTypes.string
     },
+    // @endif
 
     getDefaultProps: function () {
         return {

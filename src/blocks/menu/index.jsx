@@ -1,5 +1,5 @@
-/* global xblocks, React, xv */
-/* jshint strict: false */
+var xblocks = require('xblocks');
+var React = require('react');
 
 /**
  * The template node xb-menu
@@ -10,26 +10,28 @@
  * @mixes xblocks.mixin.vMenu
  * @mixes React.addons.PureRenderMixin
  */
-xv.Menu = xblocks.view.register('xb-menu', [
-    xblocks.mixin.vCommonAttrs,
-    xblocks.mixin.vMenu,
+module.exports = xblocks.view.register('xb-menu', [
+    require('mixin/view/commonAttrs'),
+    require('mixin/view/menu'),
 
     {
-        'displayName': 'xb-menu',
+        displayName: 'xb-menu',
 
-        'mixins': [ React.addons.PureRenderMixin ],
+        mixins: [ React.addons.PureRenderMixin ],
 
-        'propTypes': {
+        // @ifdef DEBUG
+        propTypes: {
             'size': React.PropTypes.string
         },
+        // @endif
 
-        'getDefaultProps': function () {
+        getDefaultProps: function () {
             return {
                 'size': ''
             };
         },
 
-        'afterOpen': function (callback) {
+        afterOpen: function (callback) {
             this._updateMaxHeight(this.props.size, callback);
         }
     }

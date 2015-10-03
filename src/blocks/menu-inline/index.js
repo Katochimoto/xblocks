@@ -1,5 +1,4 @@
-//require('./index.styl');
-require('./index.jsx');
+// require('./index.styl');
 
 var xblocks = require('xblocks');
 var lazyFocus = require('utils/lazyFocus');

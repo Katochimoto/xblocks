@@ -1,7 +1,9 @@
-// require('./index.styl');
+require('./index.styl');
 require('./index.jsx');
 
-var xblocks = require('xblocks');
+import xb from 'context';
+import xblocks from 'xblocks';
+import replaceTextSelection from 'dom';
 
 /**
  * xb-input html element
@@ -33,16 +35,16 @@ var xblocks = require('xblocks');
  * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
  */
-module.exports = xblocks.create('xb-input', [
+xb.Input = xblocks.create('xb-input', [
     require('mixin/element/disabled'),
     require('mixin/element/inputValueState'),
     require('mixin/element/focus'),
 
     {
-        'prototype': Object.create(HTMLInputElement.prototype),
+        prototype: Object.create(HTMLInputElement.prototype),
 
-        'events': {
-            'xb-speech-recognition-start': function (event) {
+        events: {
+            'xb-speech-recognition-start': function () {
                 // console.log(event);
             },
 
@@ -53,7 +55,7 @@ module.exports = xblocks.create('xb-input', [
                     if (event.detail.interim) {
                         var start = input.selectionStart;
 
-                        xblocks.dom.replaceTextSelection(
+                        replaceTextSelection(
                             input,
                             event.detail.interim,
                             function (callback) {
@@ -91,9 +93,11 @@ module.exports = xblocks.create('xb-input', [
                 // console.log(event.detail);
             },
 
-            'xb-speech-recognition-error': function (event) {
+            'xb-speech-recognition-error': function () {
                 // console.log(event);
             }
         }
     }
 ]);
+
+export default xb.Input;

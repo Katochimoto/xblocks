@@ -1,5 +1,4 @@
-//require('./index.styl');
-require('./index.jsx');
+// require('./index.styl');
 
 var context = require('context');
 var xblocks = require('xblocks');

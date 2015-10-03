@@ -1,10 +1,3 @@
-//jscs:disable
-/* global xblocks, xb, global */
-/* jshint strict: false */
-//jscs:enable
-
-/*! borschik:include:speech-recognition.jsx.js */
-
 var _xbSpeechRecognition = {
     'events': {
         'end': 1,

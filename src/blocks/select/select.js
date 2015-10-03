@@ -1,10 +1,3 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
-
-/*! borschik:include:select.jsx.js */
-
 /**
  * xb-select html element
  *
@@ -14,6 +7,7 @@
  * @augments HTMLSelectElement
  * @memberof xb
  */
+/*
 xb.Select = xblocks.create('xb-select', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eFocus,
@@ -22,3 +16,4 @@ xb.Select = xblocks.create('xb-select', [
         'prototype': Object.create(HTMLSelectElement.prototype)
     }
 ]);
+*/

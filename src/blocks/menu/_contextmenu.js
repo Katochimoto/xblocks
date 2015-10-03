@@ -1,8 +1,7 @@
-//jscs:disable
-/* global xblocks, __doc */
-//jscs:enable
+var context = require('context');
+var delegate = require('event/delegate');
 
-__doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function (event) {
+context.document.addEventListener('contextmenu', delegate('[contextmenu]', function (event) {
     var element = event.delegateElement;
     var doc = element.ownerDocument;
     var menuId = element.getAttribute('contextmenu');

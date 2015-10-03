@@ -1,5 +1,4 @@
 // require('./index.styl');
-require('./index.jsx');
 
 var xblocks = require('xblocks');
 

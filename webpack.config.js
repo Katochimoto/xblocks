@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var merge = require('./lodash/object/merge');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var src = path.join(__dirname, 'src');
 var dist = path.join(__dirname, 'dist');
@@ -33,13 +34,17 @@ var uglify = new webpack.optimize.UglifyJsPlugin({
     }
 });
 
+var extractText = new ExtractTextPlugin('[name].css');
+
 var params = {
-    'entry': './index.js',
+    'entry': {
+        'xblocks': './index.js'
+    },
     'context': src,
     'output': {
         'path': dist,
-        'filename': 'xblocks.js',
-        'library': 'xblocks',
+        'filename': '[name].js',
+        'library': '[name]',
         'libraryTarget': 'umd'
     },
     'resolve': {
@@ -56,9 +61,10 @@ var params = {
         'react': 'React',
         'react-dom': 'ReactDOM',
         'xtag': 'xtag',
-        'xblocks': 'xblocks'
+        'xblocks': 'xblocks',
+        'tether': 'Tether'
     },
-    'plugins': [ define, dedupe ],
+    'plugins': [ define, dedupe, extractText ],
     'module': {
         /*
         'preLoaders': [
@@ -76,8 +82,12 @@ var params = {
                 'include': [ src ]
             },
             {
+                'test': /\.css$/,
+                'loader': ExtractTextPlugin.extract('style-loader', 'css-loader')
+            },
+            {
                 'test': /\.styl$/,
-                'loader': 'style-loader!css-loader!stylus-loader'
+                'loader': ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader')
             }
         ]
     }
@@ -92,7 +102,7 @@ if (!isDev) {
         'output': {
             'filename': 'xblocks.min.js'
         },
-        'plugins': [ define, dedupe, uglify ]
+        'plugins': [ define, dedupe, uglify, extractText ]
     }));
 }
 

@@ -1,8 +1,8 @@
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
-
-var InputController = require('./_controller.jsx');
+import xv from 'context';
+import xblocks from 'xblocks';
+import React from 'react';
+import classnames from 'classnames';
+import InputController from './controller.jsx';
 
 /**
  * The template node xb-input
@@ -12,7 +12,7 @@ var InputController = require('./_controller.jsx');
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-module.exports = xblocks.view.register('xb-input', [
+xv.Input = xblocks.view.register('xb-input', [
     require('mixin/view/commonAttrs'),
     require('utils/exportPropTypes')('xb-link'),
 
@@ -21,6 +21,7 @@ module.exports = xblocks.view.register('xb-input', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
+        // @ifdef DEBUG
         propTypes: {
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
             'autofocus':    React.PropTypes.bool,
@@ -41,6 +42,7 @@ module.exports = xblocks.view.register('xb-input', [
             'value':        React.PropTypes.string,
             'xb-link':      React.PropTypes.string
         },
+        // @endif
 
         getDefaultProps: function () {
             return {
@@ -215,3 +217,5 @@ module.exports = xblocks.view.register('xb-input', [
         }
     }
 ]);
+
+export default xv.Input;

@@ -1,4 +1,6 @@
-var React = require('react');
+// @ifdef DEBUG
+var PropTypes = require('react').PropTypes;
+// @endif
 
 /**
  * Common attributes
@@ -15,14 +17,16 @@ var React = require('react');
  * @prop {string} propTypes.title
  */
 module.exports = {
-    'propTypes': {
-        'accesskey':    React.PropTypes.string,
-        'contextmenu':  React.PropTypes.string,
-        'dir':          React.PropTypes.oneOf([ 'ltr', 'rtl' ]),
-        'disabled':     React.PropTypes.bool,
-        'hidden':       React.PropTypes.bool,
-        'spellcheck':   React.PropTypes.bool,
-        'tabindex':     React.PropTypes.string,
-        'title':        React.PropTypes.string
+    // @ifdef DEBUG
+    propTypes: {
+        'accesskey':    PropTypes.string,
+        'contextmenu':  PropTypes.string,
+        'dir':          PropTypes.oneOf([ 'ltr', 'rtl' ]),
+        'disabled':     PropTypes.bool,
+        'hidden':       PropTypes.bool,
+        'spellcheck':   PropTypes.bool,
+        'tabindex':     PropTypes.string,
+        'title':        PropTypes.string
     }
+    // @endif
 };

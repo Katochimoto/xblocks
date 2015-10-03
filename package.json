@@ -37,6 +37,7 @@
     "eslint-config-yandex": "^1.0.5",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.4.1",
+    "extract-text-webpack-plugin": "^0.8.2",
     "karma": "~0.13.x",
     "karma-babel-preprocessor": "~5.2.x",
     "karma-chai": "~0.1.x",

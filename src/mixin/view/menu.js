@@ -1,5 +1,8 @@
-/* global xblocks, global, React */
-/* jshint strict: false */
+var classnames = require('classnames');
+var React = require('react');
+var xblocks = require('xblocks');
+var throttle = require('_/function/throttle');
+var throttleAnimationFrame = require('utils/throttleAnimationFrame');
 
 /**
  * Common interface for views xb-menu and xb-menu-inline
@@ -7,8 +10,8 @@
  * @memberOf xblocks.mixin
  * @type {object}
  */
-xblocks.mixin.vMenu = {
-    'getInitialState': function () {
+module.exports = {
+    getInitialState: function () {
         return {
             'maxHeight': 0,
             'isShowScrollTop': false,
@@ -16,24 +19,24 @@ xblocks.mixin.vMenu = {
         };
     },
 
-    'componentWillMount': function () {
+    componentWillMount: function () {
         this._enterTopFrame = 0;
         this._enterBottomFrame = 0;
         this._lockScroll = false;
-        this._onScroll = xblocks.utils.throttleAnimationFrame(this._onScroll);
-        this._onScrollThrottle = xblocks.utils.throttle(this._onScrollThrottle, 500, {
+        this._onScroll = throttleAnimationFrame(this._onScroll);
+        this._onScrollThrottle = throttle(this._onScrollThrottle, 500, {
             'leading': true,
             'trailing': false
         });
     },
 
-    'componentWillReceiveProps': function (nextProps) {
+    componentWillReceiveProps: function (nextProps) {
         if (nextProps.size !== this.props.size) {
             this._updateMaxHeight(nextProps.size);
         }
     },
 
-    '_updateMaxHeight': function (size, callback) {
+    _updateMaxHeight: function (size, callback) {
         size = Number(size);
         var maxHeight = 0;
 
@@ -53,7 +56,7 @@ xblocks.mixin.vMenu = {
         }, this._redrawScrollNavigator.bind(this, callback));
     },
 
-    '_redrawScrollNavigator': function (callback) {
+    _redrawScrollNavigator: function (callback) {
         var target = React.findDOMNode(this.refs.content);
         var safeArea = 5;
         var height = Math.max(target.scrollHeight, target.clientHeight);
@@ -66,7 +69,7 @@ xblocks.mixin.vMenu = {
         }, this._redrawScrollNavigatorSuccess.bind(this, callback));
     },
 
-    '_redrawScrollNavigatorSuccess': function (callback) {
+    _redrawScrollNavigatorSuccess: function (callback) {
         if (!this.state.isShowScrollTop) {
             this._onMouseLeaveTop();
         }
@@ -80,7 +83,7 @@ xblocks.mixin.vMenu = {
         }
     },
 
-    '_onWheel': function (event) {
+    _onWheel: function (event) {
         var content = React.findDOMNode(this.refs.content);
         var delta = event.deltaY;
         var scrollTop = content.scrollTop;
@@ -96,7 +99,7 @@ xblocks.mixin.vMenu = {
         }
     },
 
-    '_onScroll': function () {
+    _onScroll: function () {
         if (this._lockScroll) {
             return;
         }
@@ -106,11 +109,11 @@ xblocks.mixin.vMenu = {
         this._redrawScrollNavigator(this._onScrollSuccess);
     },
 
-    '_onScrollSuccess': function () {
+    _onScrollSuccess: function () {
         this._lockScroll = false;
     },
 
-    '_onScrollThrottle': function () {
+    _onScrollThrottle: function () {
         xblocks.event.dispatch(
             React.findDOMNode(this.refs.content),
             'jsx-scroll-throttle',
@@ -118,34 +121,34 @@ xblocks.mixin.vMenu = {
         );
     },
 
-    '_animationScrollTop': function () {
+    _animationScrollTop: function () {
         React.findDOMNode(this.refs.content).scrollTop--;
         this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
     },
 
-    '_onMouseEnterTop': function () {
+    _onMouseEnterTop: function () {
         this._onMouseLeaveTop();
         this._animationScrollTop();
     },
 
-    '_onMouseLeaveTop': function () {
+    _onMouseLeaveTop: function () {
         if (this._enterTopFrame) {
             global.cancelAnimationFrame(this._enterTopFrame);
             this._enterTopFrame = 0;
         }
     },
 
-    '_animationScrollBottom': function () {
+    _animationScrollBottom: function () {
         React.findDOMNode(this.refs.content).scrollTop++;
         this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
     },
 
-    '_onMouseEnterBottom': function () {
+    _onMouseEnterBottom: function () {
         this._onMouseLeaveBottom();
         this._animationScrollBottom();
     },
 
-    '_onMouseLeaveBottom': function () {
+    _onMouseLeaveBottom: function () {
         if (this._enterBottomFrame) {
             global.cancelAnimationFrame(this._enterBottomFrame);
             this._enterBottomFrame = 0;
@@ -155,7 +158,7 @@ xblocks.mixin.vMenu = {
     /**
      * @param {xb.Menuitem} menuitem
      */
-    'scrollIntoItem': function (menuitem) {
+    scrollIntoItem: function (menuitem) {
         var content = React.findDOMNode(this.refs.content);
         var rectContent = content.getBoundingClientRect();
         var rectMenuitem = menuitem.getBoundingClientRect();
@@ -176,13 +179,12 @@ xblocks.mixin.vMenu = {
         content.scrollTop = content.scrollTop + offset;
     },
 
-    /* jshint ignore:start */
-    'render': function () {
+    render: function () {
         var classes = {
             '_popup': true
         };
 
-        classes = classNames(classes);
+        classes = classnames(classes);
 
         var scrollTopStyle = {
             'display': (this.state.isShowScrollTop ? 'block' : 'none')
@@ -216,5 +218,4 @@ xblocks.mixin.vMenu = {
             </div>
         );
     }
-    /* jshint ignore:end */
 };
