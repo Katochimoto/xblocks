@@ -2,9 +2,9 @@ require('./polyfills/requestAnimationFrame');
 require('./xtag');
 
 require('./blocks/input');
+require('./blocks/button');
 
 exports.xv = {
-    'Button': require('./blocks/button/index.jsx'),
     'Calendar': '',
     'Checkbox': require('./blocks/checkbox/index.jsx'),
     'Ico': require('./blocks/ico/index.jsx'),
@@ -20,7 +20,6 @@ exports.xv = {
 };
 
 exports.xb = {
-    'Button': require('./blocks/button'),
     'Calendar': '',
     'Checkbox': require('./blocks/checkbox'),
     'Ico': require('./blocks/ico'),

@@ -1,5 +1,5 @@
 // @ifdef DEBUG
-var PropTypes = require('react').PropTypes;
+import { PropTypes } from 'react';
 // @endif
 
 /**
@@ -16,7 +16,7 @@ var PropTypes = require('react').PropTypes;
  * @prop {string} propTypes.tabindex
  * @prop {string} propTypes.title
  */
-module.exports = {
+export default {
     // @ifdef DEBUG
     propTypes: {
         'accesskey':    PropTypes.string,

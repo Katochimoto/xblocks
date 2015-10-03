@@ -1,6 +1,8 @@
-// require('./index.styl');
+require('./index.styl');
+require('./index.jsx');
 
-var xblocks = require('xblocks');
+import xb from 'context';
+import xblocks from 'xblocks';
 
 /**
  * xb-button html element
@@ -34,18 +36,18 @@ var xblocks = require('xblocks');
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-module.exports = xblocks.create('xb-button', [
+xb.Button = xblocks.create('xb-button', [
     require('mixin/element/disabled'),
     require('mixin/element/checked'),
     require('mixin/element/inputValueProps'),
     require('mixin/element/focus'),
 
     {
-        'prototype': Object.create(HTMLInputElement.prototype),
+        prototype: Object.create(HTMLInputElement.prototype),
 
-        'accessors': {
-            'defaultValue': {
-                'get': function () {
+        accessors: {
+            defaultValue: {
+                get: function () {
                     var type = this.attrs.type;
                     if (type === 'checkbox' || type === 'radio') {
                         return 'on';
@@ -57,3 +59,5 @@ module.exports = xblocks.create('xb-button', [
         }
     }
 ]);
+
+export default xb.Button;

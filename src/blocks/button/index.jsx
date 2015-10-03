@@ -1,10 +1,10 @@
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
-var resetLastRadioChecked = require('utils/resetLastRadioChecked');
-var filterProps = require('utils/filterProps');
-
-var ButtonContent = require('./_content.jsx');
+import xv from 'context';
+import xblocks from 'xblocks';
+import React from 'react';
+import classnames from 'classnames';
+import { resetLastRadioChecked, filterProps, exportPropTypes } from 'utils';
+import commonAttrs from 'mixin/view/commonAttrs';
+import Content from './content.jsx';
 
 /**
  * The template node xb-button
@@ -12,9 +12,9 @@ var ButtonContent = require('./_content.jsx');
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-module.exports = xblocks.view.register('xb-button', [
-    require('mixin/view/commonAttrs'),
-    require('utils/exportPropTypes')('xb-ico'),
+xv.Button = xblocks.view.register('xb-button', [
+    commonAttrs,
+    exportPropTypes('xb-ico'),
 
     {
         displayName: 'xb-button',
@@ -107,9 +107,9 @@ module.exports = xblocks.view.register('xb-button', [
             }
 
             var content = (
-                <ButtonContent key="content" _uid={this.props._uid} ico={icoProps}>
+                <Content key="content" _uid={this.props._uid} ico={icoProps}>
                     {this.props.children}
-                </ButtonContent>
+                </Content>
             );
 
             if (type === 'link') {
@@ -229,3 +229,5 @@ module.exports = xblocks.view.register('xb-button', [
         }
     }
 ]);
+
+export default xv.Button;

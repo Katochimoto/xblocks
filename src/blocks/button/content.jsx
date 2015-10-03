@@ -1,8 +1,8 @@
-var xblocks = require('xblocks');
-var React = require('react');
-var isEmpty = require('_/lang/isEmpty');
+import xblocks from 'xblocks';
+import React from 'react';
+import { isEmpty } from '_/lang';
 
-module.exports = xblocks.view.create({
+export default xblocks.view.create({
     displayName: 'xb-button_content',
 
     mixins: [ React.addons.PureRenderMixin ],
