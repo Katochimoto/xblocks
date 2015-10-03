@@ -58,6 +58,13 @@ var params = {
     },
     'plugins': [ define, dedupe ],
     'module': {
+        'preLoaders': [
+            {
+                'test': /\.jsx?$/,
+                'loader': 'eslint',
+                'include': [ src ]
+            }
+        ],
         'loaders': [
             {
                 'test': /\.jsx?$/,

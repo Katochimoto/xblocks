@@ -59,9 +59,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(1);
 	__webpack_require__(3);
 
-	var context = __webpack_require__(2);
-
-	context.xb = {
+	exports.xb = {
 	    'Button': __webpack_require__(14),
 	    'Checkbox': __webpack_require__(79),
 	    'Ico': __webpack_require__(81),

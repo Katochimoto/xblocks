@@ -17,3 +17,4 @@ karma.conf.js
 webpack.config.js
 .eslintignore
 .eslintrc
+.codeclimate.yml

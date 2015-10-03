@@ -1,9 +1,7 @@
 require('./polyfills/requestAnimationFrame');
 require('./xtag');
 
-var context = require('context');
-
-context.xb = {
+exports.xb = {
     'Button': require('./blocks/button'),
     'Checkbox': require('./blocks/checkbox'),
     'Ico': require('./blocks/ico'),
