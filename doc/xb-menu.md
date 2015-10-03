@@ -50,7 +50,7 @@ Child elements can only be **xb-menuitem** and **xb-menuseparator**.
 </script>
 
 <script>
-$('.menu').on('click', function(event) {
+$('.menu').on('click', function (event) {
     event.preventDefault();
     var ref = $(this).attr('ref');
     var $popup = $('#' + ref);
@@ -61,8 +61,8 @@ $('.menu').on('click', function(event) {
 
 
 
-    setTimeout(function() {
-        $('xb-menu').each(function() {
+    setTimeout(function () {
+        $('xb-menu').each(function () {
             this.close();
         });
         

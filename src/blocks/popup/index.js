@@ -5,12 +5,12 @@ var context = require('context');
 var xblocks = require('xblocks');
 
 var popupCommon = {
-    onOpen: function() {
+    onOpen: function () {
         this.focus();
         xblocks.event.dispatch(this, 'xb-open');
     },
 
-    onClose: function() {
+    onClose: function () {
         this.blur();
         xblocks.event.dispatch(this, 'xb-close');
     },
@@ -20,7 +20,7 @@ var popupCommon = {
      * @param {*} value value for attribute
      * @returns {boolean}
      */
-    checkDefaultAttr: function(value) {
+    checkDefaultAttr: function (value) {
         return (typeof value !== 'undefined');
     },
 
@@ -29,7 +29,7 @@ var popupCommon = {
      * @param {Object} options tether options
      * @param {Object} attrs attributes of element
      */
-    fillOptionsFromAttrs: function(options, attrs) {
+    fillOptionsFromAttrs: function (options, attrs) {
         for (var attrName in attrs) {
             var params = popupCommon.tetherAttrsAlign[ attrName ];
             if (!params) {
@@ -56,7 +56,7 @@ var popupCommon = {
      * @returns {Object}
      * @this {xb.Popup}
      */
-    tetherDefaultOptions: function() {
+    tetherDefaultOptions: function () {
         return {
             'attachment': 'middle center',
             'classes': { 'element': this.xtagName },
@@ -81,39 +81,39 @@ var popupCommon = {
         'offset': [ 'offset' ],
         'target': [
             'target',
-            function(value) {
+            function (value) {
                 return (value && (typeof value === 'string' || value instanceof context.HTMLElement));
             }
         ],
         'target-parent': [
-            function(options, value) {
+            function (options, value) {
                 options.target = value;
             },
-            function(value) {
+            function (value) {
                 return (value && value instanceof context.HTMLElement);
             }
         ],
         'target-modifier': [
-            function(options, value) {
+            function (options, value) {
                 options.targetModifier = (value === 'initial' ? undefined : value);
             },
-            function(value) {
+            function (value) {
                 return (value === 'initial' || value === 'visible' || value === 'scroll-handle');
             }
         ],
         'optimizations-gpu': [
-            function(options, value) {
+            function (options, value) {
                 options.optimizations.gpu = value;
             },
-            function(value) {
+            function (value) {
                 return (typeof(value) === 'boolean');
             }
         ],
         'constraints': [
-            function(options, value) {
+            function (options, value) {
                 options.constraints = JSON.parse(decodeURIComponent(value));
             },
-            function(value) {
+            function (value) {
                 return (value && typeof value === 'string');
             }
         ]
@@ -134,12 +134,12 @@ module.exports = xblocks.create('xb-popup', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'jsx-click-close': function(event) {
+            'jsx-click-close': function (event) {
                 event.stopImmediatePropagation();
                 this.close();
             },
 
-            'keydown:keypass(27)': function() {
+            'keydown:keypass(27)': function () {
                 this.close();
             }
         },
@@ -162,7 +162,7 @@ module.exports = xblocks.create('xb-popup', [
              * @prop {object} options the display options window
              */
             options: {
-                get: function() {
+                get: function () {
                     if (this._options) {
                         return this._options;
                     }
@@ -196,7 +196,7 @@ module.exports = xblocks.create('xb-popup', [
              * @prop {Tether} tether Tether the window object
              */
             tether: {
-                get: function() {
+                get: function () {
                     if (!this._tether) {
                         this._tether = new Tether(this.options);
                     }
@@ -210,7 +210,7 @@ module.exports = xblocks.create('xb-popup', [
              * @prop {boolean} opened window is open
              */
             opened: {
-                get: function() {
+                get: function () {
                     return this.tether.enabled;
                 }
             }
@@ -222,7 +222,7 @@ module.exports = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @param {object} nextOptions new settings
              */
-            setOptions: function(nextOptions) {
+            setOptions: function (nextOptions) {
                 var tether = this.tether;
 
                 xblocks.utils.assign(true, this.options, nextOptions);
@@ -239,7 +239,7 @@ module.exports = xblocks.create('xb-popup', [
              * @param {object} options new settings
              * @returns {boolean}
              */
-            open: function(options) {
+            open: function (options) {
                 var tether = this.tether;
 
                 if (tether.enabled) {
@@ -266,7 +266,7 @@ module.exports = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
-            close: function() {
+            close: function () {
                 var tether = this.tether;
 
                 if (!tether.enabled) {
@@ -290,7 +290,7 @@ module.exports = xblocks.create('xb-popup', [
              * @memberOf xb.Popup.prototype
              * @returns {boolean}
              */
-            position: function() {
+            position: function () {
                 this.tether.position();
                 return true;
             }

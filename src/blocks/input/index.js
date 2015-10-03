@@ -1,4 +1,4 @@
-//require('./index.styl');
+// require('./index.styl');
 require('./index.jsx');
 
 var xblocks = require('xblocks');
@@ -42,11 +42,11 @@ module.exports = xblocks.create('xb-input', [
         'prototype': Object.create(HTMLInputElement.prototype),
 
         'events': {
-            'xb-speech-recognition-start': function(event) {
-                console.log(event);
+            'xb-speech-recognition-start': function (event) {
+                // console.log(event);
             },
 
-            'xb-speech-recognition-result': function(event) {
+            'xb-speech-recognition-result': function (event) {
                 if (event.detail) {
                     var input = this.querySelector('input');
 
@@ -56,12 +56,12 @@ module.exports = xblocks.create('xb-input', [
                         xblocks.dom.replaceTextSelection(
                             input,
                             event.detail.interim,
-                            function(callback) {
+                            function (callback) {
                                 callback(input.value);
                             },
-                            function(value, callback) {
+                            function (value, callback) {
                                 input.value = value;
-                                callback(function() {
+                                callback(function () {
                                     input.selectionStart = start;
                                     input.scrollLeft = input.scrollWidth;
                                 });
@@ -76,10 +76,10 @@ module.exports = xblocks.create('xb-input', [
                         input.scrollLeft = input.scrollWidth;
                     }
                 }
-                console.log(event.detail, this);
+                // console.log(event.detail, this);
             },
 
-            'xb-speech-recognition-end': function(event) {
+            'xb-speech-recognition-end': function (event) {
                 if (event.detail) {
                     var input = this.querySelector('input');
                     this.value = event.detail.final;
@@ -88,11 +88,11 @@ module.exports = xblocks.create('xb-input', [
                     input.setSelectionRange(len, len);
                     input.scrollLeft = input.scrollWidth;
                 }
-                console.log(event.detail);
+                // console.log(event.detail);
             },
 
-            'xb-speech-recognition-error': function(event) {
-                console.log(event);
+            'xb-speech-recognition-error': function (event) {
+                // console.log(event);
             }
         }
     }

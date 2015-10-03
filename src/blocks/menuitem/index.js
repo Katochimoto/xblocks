@@ -17,7 +17,7 @@ var _xbMenuitem = {
         ]))
     },
 
-    submenu: (function() {
+    submenu: (function () {
         var timerOpenSubmenu = 0;
 
         return {
@@ -26,7 +26,7 @@ var _xbMenuitem = {
              * @param {xb.Menu} [submenu]
              * @this {context}
              */
-            open: function(submenu) {
+            open: function (submenu) {
                 if (submenu && !timerOpenSubmenu) {
                     timerOpenSubmenu = context.setTimeout(submenu.open.bind(submenu), 200);
                 }
@@ -35,7 +35,7 @@ var _xbMenuitem = {
             /**
              * @this {context}
              */
-            cancel: function() {
+            cancel: function () {
                 if (timerOpenSubmenu) {
                     context.clearTimeout(timerOpenSubmenu);
                     timerOpenSubmenu = 0;
@@ -45,7 +45,7 @@ var _xbMenuitem = {
             /**
              * @this {xb.Menuitem}
              */
-            remove: function() {
+            remove: function () {
                 if (this._submenuInstance) {
                     _xbMenuitem.submenu.cancel();
 
@@ -83,7 +83,7 @@ module.exports = xblocks.create('xb-menuitem', [
             /**
              * @callback
              */
-            'xb-created': function() {
+            'xb-created': function () {
                 _xbMenuitem.submenu.remove.call(this);
                 this.submenu = Boolean(this.content.trim());
             },
@@ -101,7 +101,7 @@ module.exports = xblocks.create('xb-menuitem', [
             /**
              * @callback
              */
-            'xb-blur': function() {
+            'xb-blur': function () {
                 this.focused = false;
 
                 _xbMenuitem.submenu.cancel();
@@ -117,7 +117,7 @@ module.exports = xblocks.create('xb-menuitem', [
              * @callback
              * @param {xblocks:utils:Table~event:xb-focus} event
              */
-            'xb-focus': function(event) {
+            'xb-focus': function (event) {
                 this.focused = true;
 
                 // open the submenu only event-mouse
@@ -175,7 +175,7 @@ module.exports = xblocks.create('xb-menuitem', [
              * @prop {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
              */
             'menuInstance': {
-                'get': function() {
+                'get': function () {
                     if (this._menuInstance || this._menuInstance === null) {
                         return this._menuInstance;
                     }
@@ -191,7 +191,7 @@ module.exports = xblocks.create('xb-menuitem', [
              * @prop {xb.Menu|null} submenuInstance Submenu instance
              */
             'submenuInstance': {
-                'get': function() {
+                'get': function () {
                     if (this._submenuInstance || this._submenuInstance === null) {
                         return this._submenuInstance;
                     }

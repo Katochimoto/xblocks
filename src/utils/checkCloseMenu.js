@@ -1,6 +1,6 @@
 var _currentMenu = null;
 
-var _onMousedown = function(event) {
+var _onMousedown = function (event) {
     if (!_currentMenu) {
         _unbind();
         return;
@@ -16,18 +16,18 @@ var _onMousedown = function(event) {
     }
 };
 
-var _onXbClose = function() {
+var _onXbClose = function () {
     _unbind();
 };
 
-var _bind = function(menuNode) {
+var _bind = function (menuNode) {
     _unbind();
     _currentMenu = menuNode;
     _currentMenu.addEventListener('xb-close', _onXbClose, false);
     __doc.addEventListener('mousedown', _onMousedown, false);
 };
 
-var _unbind = function() {
+var _unbind = function () {
     if (_currentMenu) {
         __doc.removeEventListener('mousedown', _onMousedown, false);
         _currentMenu.removeEventListener('xb-close', _onXbClose, false);
@@ -40,7 +40,7 @@ var _unbind = function() {
  * @param   {[type]} menuNode [description]
  * @returns {[type]}          [description]
  */
-module.exports = function(menuNode) {
+module.exports = function (menuNode) {
     var firstParentMenu = menuNode.firstParentMenu;
 
     if (_currentMenu) {

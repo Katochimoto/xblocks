@@ -23,13 +23,13 @@ xv.MenuInline = xblocks.view.register('xb-menu-inline', [
             'size': React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        'getDefaultProps': function () {
             return {
                 'size': ''
             };
         },
 
-        'componentDidMount': function() {
+        'componentDidMount': function () {
             this._updateMaxHeight(this.props.size);
         }
     }

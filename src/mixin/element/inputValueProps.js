@@ -10,7 +10,7 @@
  *             ...
  *             // override the default values
  *             'defaultValue': {
- *                 'get': function() {
+ *                 'get': function () {
  *                     return 'on';
  *                  }
  *              }
@@ -48,7 +48,7 @@ module.exports = {
                 'name': 'value'
             },
 
-            'get': function() {
+            'get': function () {
                 return String(this.getAttribute('value') || this.defaultValue || '');
             }
         },
@@ -57,7 +57,7 @@ module.exports = {
          * @prop {string} defaultValue
          */
         'defaultValue': {
-            'get': function() {
+            'get': function () {
                 return '';
             }
         }

@@ -32,7 +32,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         'prototype': Object.create(HTMLElement.prototype),
 
         'events': {
-            'xb-created': function() {
+            'xb-created': function () {
                 this._xbRecognition = new xblocks.utils.SpeechRecognition({
                     'lang': this.lang || (global.navigator && global.navigator.language) || 'en-US',
                     'continuous': this.continuous,
@@ -46,11 +46,11 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
                 this._xbRecognition.toggle(this.state.active);
             },
 
-            'xb-update': function() {
+            'xb-update': function () {
                 this._xbRecognition.toggle(this.state.active);
             },
 
-            'xb-destroy': function() {
+            'xb-destroy': function () {
                 for (var eventName in _xbSpeechRecognition.events) {
                     this._xbRecognition.removeEventListener(eventName, this._sendEventToTarget);
                 }
@@ -59,7 +59,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
                 this._xbRecognition = undefined;
             },
 
-            'click': function() {
+            'click': function () {
                 this.active = !this.active;
             }
         },
@@ -101,7 +101,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         },
 
         'methods': {
-            '_sendEventToTarget': function(event) {
+            '_sendEventToTarget': function (event) {
                 var target = this.target;
                 var type = typeof(target);
                 var targetEvent = new xblocks.event.Custom('xb-speech-recognition-' + event.type, {

@@ -18,7 +18,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
             'active': React.PropTypes.bool
         },
 
-        'getDefaultProps': function() {
+        'getDefaultProps': function () {
             return {
                 'active':   false,
                 'disabled': false
@@ -26,7 +26,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
         },
 
         /* jshint ignore:start */
-        'render': function() {
+        'render': function () {
             var classes = {
                 'xb-speech-recognition': true,
                 '_active': this.props.active,

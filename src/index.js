@@ -1,6 +1,10 @@
 require('./polyfills/requestAnimationFrame');
 require('./xtag');
 
+exports.xv = {
+    'Button': require('./blocks/button/index.jsx'),
+};
+
 exports.xb = {
     'Button': require('./blocks/button'),
     'Checkbox': require('./blocks/checkbox'),
@@ -19,7 +23,7 @@ exports.xb = {
 };
 
 /*
-(function(global, undefined) {
+(function (global, undefined) {
 
 
     global.xb = {};
@@ -35,10 +39,10 @@ exports.xb = {
     var xv = global.xv;
 
     var __doc = global.document;
-    var __noop = function() {};
+    var __noop = function () {};
     var __forEach = Array.prototype.forEach;
 
-}(function() {
+}(function () {
     return this || (1, eval)('this');
 }()));
 */

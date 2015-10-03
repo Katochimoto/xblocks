@@ -9,7 +9,7 @@ var xblocks = require('xblocks');
 module.exports = xblocks.view.register('xb-menuseparator', {
     displayName: 'xb-menuseparator',
 
-    render: function() {
+    render: function () {
         return (
             <div className="xb-menuseparator"></div>
         );

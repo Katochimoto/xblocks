@@ -1,5 +1,4 @@
-//require('./index.styl');
-require('./index.jsx');
+// require('./index.styl');
 
 var xblocks = require('xblocks');
 
@@ -46,7 +45,7 @@ module.exports = xblocks.create('xb-button', [
 
         'accessors': {
             'defaultValue': {
-                'get': function() {
+                'get': function () {
                     var type = this.attrs.type;
                     if (type === 'checkbox' || type === 'radio') {
                         return 'on';

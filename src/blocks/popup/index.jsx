@@ -29,14 +29,14 @@ module.exports = xblocks.view.register('xb-popup', [
             ])
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 'close': false,
                 'theme': 'normal'
             };
         },
 
-        _onClickClose: function() {
+        _onClickClose: function () {
             xblocks.event.dispatch(
                 React.findDOMNode(this),
                 'jsx-click-close',
@@ -44,7 +44,7 @@ module.exports = xblocks.view.register('xb-popup', [
             );
         },
 
-        render: function() {
+        render: function () {
             var children = [
                 <div key="content"
                     className="_content"

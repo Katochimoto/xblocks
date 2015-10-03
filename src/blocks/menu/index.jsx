@@ -23,13 +23,13 @@ xv.Menu = xblocks.view.register('xb-menu', [
             'size': React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        'getDefaultProps': function () {
             return {
                 'size': ''
             };
         },
 
-        'afterOpen': function(callback) {
+        'afterOpen': function (callback) {
             this._updateMaxHeight(this.props.size, callback);
         }
     }

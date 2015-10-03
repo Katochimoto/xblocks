@@ -24,11 +24,11 @@
  */
 module.exports = {
     'methods': {
-        'focus': function() {
+        'focus': function () {
             this.firstChild.focus();
         },
 
-        'blur': function() {
+        'blur': function () {
             this.firstChild.blur();
         }
     }

@@ -7,7 +7,7 @@ var checkedCache = {};
  * @props {HTMLElement} element
  * @props {string} name
  */
-module.exports = function(element, name) {
+module.exports = function (element, name) {
     name = String(name);
     var lastCheckedElement = checkedCache[ name ];
 

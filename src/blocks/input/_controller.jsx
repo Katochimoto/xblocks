@@ -30,7 +30,7 @@ module.exports = xblocks.view.create({
         'value':            React.PropTypes.string
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             'autoFocus':            false,
             'autosize':             false,
@@ -43,16 +43,16 @@ module.exports = xblocks.view.create({
         };
     },
 
-    componentDidUpdate: function(prevProps) {
+    componentDidUpdate: function (prevProps) {
         this._recalculateSize();
         this._dispatchEventToggleHint(prevProps.value, this.props.value);
     },
 
-    componentDidMount: function() {
+    componentDidMount: function () {
         this._recalculateSize();
     },
 
-    _dispatchEventToggleHint: function(prevValue, nextValue) {
+    _dispatchEventToggleHint: function (prevValue, nextValue) {
         if (this.props.isPlaceholderHint) {
             var hasPrevValue = Boolean(prevValue);
             var hasNestValue = Boolean(nextValue);
@@ -64,7 +64,7 @@ module.exports = xblocks.view.create({
         }
     },
 
-    _recalculateSize: function() {
+    _recalculateSize: function () {
         if (!this.props.autosize) {
             return;
         }
@@ -81,7 +81,7 @@ module.exports = xblocks.view.create({
         }
     },
 
-    render: function() {
+    render: function () {
         var tabIndex = this.props.tabIndex;
         if (this.props.disabled && tabIndex) {
             tabIndex = '-1';

@@ -7,17 +7,19 @@ module.exports = xblocks.view.create({
 
     mixins: [ React.addons.PureRenderMixin ],
 
+    // @ifdef DEBUG
     propTypes: {
         'ico': React.PropTypes.object
     },
+    // @endif
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             'ico': {}
         };
     },
 
-    render: function() {
+    render: function () {
         var children = [
             <span className="_content-content"
                 key="content"

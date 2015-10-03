@@ -15,7 +15,7 @@ module.exports = {
          * Оpen the submenu
          * @this {xb.Menuitem}
          */
-        'click:delegate(xb-menuitem:not([disabled]))': function() {
+        'click:delegate(xb-menuitem:not([disabled]))': function () {
             if (this.submenuInstance) {
                 this.submenuInstance.open();
             }
@@ -25,7 +25,7 @@ module.exports = {
          * Оpen the submenu
          * @this {xb.Menu}
          */
-        'keydown:keypass(13,39)': function() {
+        'keydown:keypass(13,39)': function () {
             var item = this._xbFocus.getItem();
 
             if (item && item.submenuInstance) {
@@ -38,7 +38,7 @@ module.exports = {
          * @param {Event} event
          * @this {xb.Menu}
          */
-        'jsx-scroll-throttle': function(event) {
+        'jsx-scroll-throttle': function (event) {
             // close all submenu
             event.stopImmediatePropagation();
             lazyFocus(this);
@@ -52,7 +52,7 @@ module.exports = {
          * @prop {boolean} hasOpenSubmenu
          */
         hasOpenSubmenu: {
-            get: function() {
+            get: function () {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
             }
         }
@@ -63,7 +63,7 @@ module.exports = {
         /**
          * @param {xb.Menuitem} menuitem
          */
-        scrollIntoItem: function(menuitem) {
+        scrollIntoItem: function (menuitem) {
             if (!xblocks.dom.isParent(this, menuitem)) {
                 return;
             }

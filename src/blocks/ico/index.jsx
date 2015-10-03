@@ -55,7 +55,7 @@ module.exports = xblocks.view.register('xb-ico', [
             ])
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 'active':   false,
                 'children': String.fromCharCode(160),
@@ -64,7 +64,7 @@ module.exports = xblocks.view.register('xb-ico', [
             };
         },
 
-        render: function() {
+        render: function () {
             var classes = {
                 'xb-ico':    true,
                 '_active':   this.props.active,

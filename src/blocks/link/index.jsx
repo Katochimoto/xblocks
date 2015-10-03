@@ -25,7 +25,7 @@ module.exports = xblocks.view.register('xb-link', [
             'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ])
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 'disabled': false,
                 'tabindex': '1',
@@ -34,7 +34,7 @@ module.exports = xblocks.view.register('xb-link', [
             };
         },
 
-        render: function() {
+        render: function () {
             var classes = {
                 'xb-link':   true,
                 '_disabled': this.props.disabled

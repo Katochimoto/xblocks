@@ -21,6 +21,7 @@ module.exports = xblocks.view.register('xb-button', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
+        // @ifdef DEBUG
         propTypes: {
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
@@ -36,8 +37,9 @@ module.exports = xblocks.view.register('xb-button', [
             'type':         React.PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
             'value':        React.PropTypes.string
         },
+        // @endif
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 'autofocus':    false,
                 'checked':      false,
@@ -52,35 +54,35 @@ module.exports = xblocks.view.register('xb-button', [
             };
         },
 
-        getInitialState: function() {
+        getInitialState: function () {
             return {
                 'checked': this.props.checked
             };
         },
 
-        componentWillReceiveProps: function(nextProps) {
+        componentWillReceiveProps: function (nextProps) {
             this.setState({
                 'checked': Boolean(nextProps.checked)
             });
         },
 
-        componentWillUpdate: function(nextProps, nextState) {
+        componentWillUpdate: function (nextProps, nextState) {
             if (nextProps.type === 'radio' && nextState.checked) {
                 resetLastRadioChecked(this.container(), nextProps.name);
             }
         },
 
-        componentWillMount: function() {
+        componentWillMount: function () {
             if (this.props.type === 'radio' && this.state.checked) {
                 resetLastRadioChecked(this.container(), this.props.name);
             }
         },
 
-        _onChange: function(event) {
+        _onChange: function (event) {
             this.container().checked = event.target.checked;
         },
 
-        render: function() {
+        render: function () {
             var classes = {
                 'xb-button': true,
                 '_disabled': this.props.disabled

@@ -1,6 +1,6 @@
 var xblocks = require('xblocks');
 
-module.exports = function(tagName) {
+module.exports = function (tagName) {
     var props = xblocks.utils.propTypes(tagName);
     var exportProps = {};
     var prefix = tagName + '-';

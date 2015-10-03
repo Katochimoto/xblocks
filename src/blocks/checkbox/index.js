@@ -1,4 +1,4 @@
-//require('./index.styl');
+// require('./index.styl');
 require('./index.jsx');
 
 var xblocks = require('xblocks');
@@ -35,7 +35,7 @@ module.exports = xblocks.create('xb-checkbox', [
 
         'accessors': {
             'defaultValue': {
-                'get': function() {
+                'get': function () {
                     return 'on';
                 }
             }

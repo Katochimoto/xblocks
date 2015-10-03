@@ -26,7 +26,7 @@ xv.Select = xblocks.view.register('xb-select', [
             'size':             React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        'getDefaultProps': function () {
             return {
                 'autofocus': false,
                 'disabled':  false,
@@ -36,7 +36,7 @@ xv.Select = xblocks.view.register('xb-select', [
             };
         },
 
-        'componentDidMount': function() {
+        'componentDidMount': function () {
             new Tether({
                 element: React.findDOMNode(this.refs.dropdown),
                 target: React.findDOMNode(this.refs.control),
@@ -59,7 +59,7 @@ xv.Select = xblocks.view.register('xb-select', [
         },
 
         /* jshint ignore:start */
-        'render': function() {
+        'render': function () {
             var classes = {
                 'xb-select': true,
                 '_disabled': this.props.disabled

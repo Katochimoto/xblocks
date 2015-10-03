@@ -2,7 +2,7 @@
 /* global xblocks, __doc */
 //jscs:enable
 
-__doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function(event) {
+__doc.addEventListener('contextmenu', xblocks.event.delegate('[contextmenu]', function (event) {
     var element = event.delegateElement;
     var doc = element.ownerDocument;
     var menuId = element.getAttribute('contextmenu');

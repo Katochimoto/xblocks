@@ -6,10 +6,12 @@ var src = path.join(__dirname, 'src');
 var dist = path.join(__dirname, 'dist');
 var isDev = (process.env.NODE_ENV === 'development');
 var nodeEnv = isDev ? 'development' : 'production';
+var preprocessParams = '?NODE_ENV=' + nodeEnv;
 var envParams = {};
 
 if (isDev) {
     dist = path.join(__dirname, 'samples', 'dist');
+    preprocessParams = '?+DEBUG&NODE_ENV=' + nodeEnv;
     envParams = {
         'debug': true,
         'devtool': 'eval'
@@ -58,6 +60,7 @@ var params = {
     },
     'plugins': [ define, dedupe ],
     'module': {
+        /*
         'preLoaders': [
             {
                 'test': /\.jsx?$/,
@@ -65,10 +68,11 @@ var params = {
                 'include': [ src ]
             }
         ],
+        */
         'loaders': [
             {
                 'test': /\.jsx?$/,
-                'loader': 'babel!preprocess?NODE_ENV=' + nodeEnv,
+                'loader': 'babel!preprocess' + preprocessParams,
                 'include': [ src ]
             },
             {

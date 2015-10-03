@@ -42,7 +42,7 @@ module.exports = xblocks.view.register('xb-input', [
             'xb-link':      React.PropTypes.string
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 'autofocus':    false,
                 'autosize':     false,
@@ -59,13 +59,13 @@ module.exports = xblocks.view.register('xb-input', [
             };
         },
 
-        getInitialState: function() {
+        getInitialState: function () {
             return {
                 'value': this.props.value
             };
         },
 
-        componentDidMount: function() {
+        componentDidMount: function () {
             // check show or hide placeholder after mount element
             this.refs.controller._dispatchEventToggleHint('', this.props.value);
         },
@@ -75,7 +75,7 @@ module.exports = xblocks.view.register('xb-input', [
          * @param {Event} event
          * @private
          */
-        _onChange: function(event) {
+        _onChange: function (event) {
             this.setState({
                 'value': event.target.value
             });
@@ -86,7 +86,7 @@ module.exports = xblocks.view.register('xb-input', [
          * @param {boolean} toggle
          * @private
          */
-        _onHintToggle: function(toggle) {
+        _onHintToggle: function (toggle) {
             React.findDOMNode(this.refs.placeholder).style.visibility = (toggle ? 'inherit' : 'hidden');
         },
 
@@ -95,7 +95,7 @@ module.exports = xblocks.view.register('xb-input', [
          * @returns {boolean}
          * @private
          */
-        _isComplex: function() {
+        _isComplex: function () {
             return Boolean(
                 this.props.postfix ||
                 this.props.prefix ||
@@ -110,13 +110,13 @@ module.exports = xblocks.view.register('xb-input', [
          * Click reset button
          * @private
          */
-        _onClickReset: function() {
+        _onClickReset: function () {
             this.setState({
                 'value': ''
             });
         },
 
-        render: function() {
+        render: function () {
             var isComplex = this._isComplex();
             var classes = {
                 'xb-input':     true,

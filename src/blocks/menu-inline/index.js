@@ -7,7 +7,7 @@ var Table = require('utils/Table');
 var noop = require('_/utility/noop');
 
 var menuCommon = {
-    init: function() {
+    init: function () {
         if (this._xbFocus) {
             this._xbFocus.destroy();
         }
@@ -41,7 +41,7 @@ module.exports = xblocks.create('xb-menu-inline', [
 
             'xb-repaint': menuCommon.init,
 
-            blur: function() {
+            blur: function () {
                 if (!this.hasOpenSubmenu) {
                     this._xbFocus.blurItem();
                 }
@@ -51,7 +51,7 @@ module.exports = xblocks.create('xb-menu-inline', [
         methods: {
             open: noop,
 
-            close: function() {
+            close: function () {
                 // FireFox does not fire a blur event
                 lazyFocus(this);
             }

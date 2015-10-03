@@ -1,6 +1,6 @@
-describe('xb-radio ->', function() {
+describe('xb-radio ->', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
         this.xElement = document.createElement('xb-radio');
         this.xElement.setAttribute('type', 'radio');
         this.xElement.setAttribute('name', 'test');
@@ -10,7 +10,7 @@ describe('xb-radio ->', function() {
         this.xElement2.setAttribute('name', 'test');
     });
 
-    afterEach(function() {
+    afterEach(function () {
         if (this.xElement.parentNode) {
             this.xElement.parentNode.removeChild(this.xElement);
         }
@@ -20,7 +20,7 @@ describe('xb-radio ->', function() {
         }
     });
 
-    it('при установке свойства checked, оно должно сниматься с предыдущего одноименного элемента', function() {
+    it('при установке свойства checked, оно должно сниматься с предыдущего одноименного элемента', function () {
         var that = this;
         var defer1 = vow.defer();
         var defer2 = vow.defer();
@@ -38,8 +38,8 @@ describe('xb-radio ->', function() {
         document.body.appendChild(that.xElement);
         document.body.appendChild(that.xElement2);
 
-        return new vow.Promise(function(resolve) {
-            vow.all([ defer1.promise(), defer2.promise() ]).then(function() {
+        return new vow.Promise(function (resolve) {
+            vow.all([ defer1.promise(), defer2.promise() ]).then(function () {
 
                 that.xElement.addEventListener('xb-update', function _onXbUpdate() {
                     that.xElement.removeEventListener('xb-update', _onXbUpdate, false);

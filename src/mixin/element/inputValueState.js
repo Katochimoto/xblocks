@@ -10,7 +10,7 @@
  *             ...
  *             // override the default values
  *             'defaultValue': {
- *                 'get': function() {
+ *                 'get': function () {
  *                     return 'on';
  *                  }
  *              }
@@ -48,7 +48,7 @@ module.exports = {
                 'name': 'value'
             },
 
-            'get': function() {
+            'get': function () {
                 var component = this.xblock && this.xblock.getMountedComponent();
 
                 if (component && typeof(component.state.value) !== 'undefined') {
@@ -58,7 +58,7 @@ module.exports = {
                 return String(this.getAttribute('value') || this.defaultValue || '');
             },
 
-            'set': function(value) {
+            'set': function (value) {
                 var component = this.xblock && this.xblock.getMountedComponent();
 
                 if (component) {
@@ -71,7 +71,7 @@ module.exports = {
          * @prop {string} defaultValue
          */
         'defaultValue': {
-            'get': function() {
+            'get': function () {
                 return '';
             }
         }

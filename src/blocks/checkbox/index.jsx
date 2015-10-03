@@ -29,7 +29,7 @@ module.exports = xblocks.view.register('xb-checkbox', [
             'value':        React.PropTypes.string
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 'autofocus':    false,
                 'checked':      false,
@@ -42,25 +42,25 @@ module.exports = xblocks.view.register('xb-checkbox', [
             };
         },
 
-        getInitialState: function() {
+        getInitialState: function () {
             return {
                 'checked': this.props.checked
             };
         },
 
-        componentWillReceiveProps: function(nextProps) {
+        componentWillReceiveProps: function (nextProps) {
             this.setState({
                 'checked': nextProps.checked
             });
         },
 
-        _onChange: function(event) {
+        _onChange: function (event) {
             this.setState({
                 'checked': event.target.checked
             });
         },
 
-        render: function() {
+        render: function () {
             var classes = {
                 'xb-checkbox': true,
                 '_disabled':   this.props.disabled

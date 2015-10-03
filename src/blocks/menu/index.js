@@ -1,4 +1,4 @@
-//require('./index.styl');
+// require('./index.styl');
 require('./_contextmenu');
 require('./index.jsx');
 
@@ -11,7 +11,7 @@ var _xbMenu = {
      * @param {xb.Menuitem} target
      * @this {global}
      */
-    closeSubmenu: function(target) {
+    closeSubmenu: function (target) {
         if (target._xbpopup) {
             target._xbpopup.close();
         }
@@ -22,7 +22,7 @@ var _xbMenu = {
      * @returns {Object}
      * @this {xb.Menu}
      */
-    tetherDefaultOptions: function() {
+    tetherDefaultOptions: function () {
         var options = _xbPopup.tetherDefaultOptions.call(this);
         options.constraints = [
             {
@@ -54,11 +54,11 @@ module.exports = xblocks.create('xb-menu', [
         'prototype': Object.create(xb.Popup.prototype || new xb.Popup()),
 
         'events': {
-            'xb-before-open': function() {
+            'xb-before-open': function () {
                 this.style.visibility = 'hidden';
             },
 
-            'xb-open': function() {
+            'xb-open': function () {
                 this._xbFocus = new xblocks.utils.Table(this, {
                     'rowLoop': true,
                     'colLoop': true
@@ -74,7 +74,7 @@ module.exports = xblocks.create('xb-menu', [
                 }
             },
 
-            'xb-close': function() {
+            'xb-close': function () {
                 if (this._xbFocus) {
                     this._xbFocus.destroy();
                     this._xbFocus = undefined;
@@ -83,7 +83,7 @@ module.exports = xblocks.create('xb-menu', [
                 this._closeAllSubmenu();
             },
 
-            'keydown:keypass(27)': function() {
+            'keydown:keypass(27)': function () {
                 this.close();
 
                 // focus of ancestor
@@ -93,7 +93,7 @@ module.exports = xblocks.create('xb-menu', [
                 }
             },
 
-            'blur': function() {
+            'blur': function () {
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
@@ -120,7 +120,7 @@ module.exports = xblocks.create('xb-menu', [
              * @prop {xb.Menu} [parentMenu] menu-ancestor
              */
             'parentMenu': {
-                'get': function() {
+                'get': function () {
                     return this.tether.target.menuInstance;
                 }
             },
@@ -130,7 +130,7 @@ module.exports = xblocks.create('xb-menu', [
              * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
              */
             'firstParentMenu': {
-                'get': function() {
+                'get': function () {
                     var parentMenu = this.parentMenu;
 
                     if (parentMenu) {
@@ -143,14 +143,14 @@ module.exports = xblocks.create('xb-menu', [
         },
 
         'methods': {
-            '_closeAllSubmenu': function() {
+            '_closeAllSubmenu': function () {
                 __forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
                     _xbMenu.closeSubmenu
                 );
             },
 
-            '_afterOpen': function() {
+            '_afterOpen': function () {
                 this.position();
                 this.style.visibility = 'visible';
                 // the focus is not put on the invisible element
@@ -158,7 +158,7 @@ module.exports = xblocks.create('xb-menu', [
                 lazyFocus(this);
             },
 
-            '_closeUpFocus': function() {
+            '_closeUpFocus': function () {
                 var focusMenu = xblocks.utils.getParentMenu(this.ownerDocument.activeElement);
                 var parent = this.parentMenu;
 

@@ -28,7 +28,7 @@ module.exports = xblocks.view.register('xb-menuitem', [
             'submenu':  React.PropTypes.bool
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 'disabled': false,
                 'focused':  false,
@@ -37,7 +37,7 @@ module.exports = xblocks.view.register('xb-menuitem', [
             };
         },
 
-        render: function() {
+        render: function () {
             var classes = {
                 'xb-menuitem': true,
                 '_disabled':   this.props.disabled,
