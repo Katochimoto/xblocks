@@ -1,5 +1,5 @@
 require('./polyfills/requestAnimationFrame');
-require('xtag');
+require('./xtag');
 
 var context = require('context');
 

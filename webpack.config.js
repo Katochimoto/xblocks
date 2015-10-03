@@ -4,11 +4,22 @@ var merge = require('./lodash/object/merge');
 
 var src = path.join(__dirname, 'src');
 var dist = path.join(__dirname, 'dist');
+var isDev = (process.env.NODE_ENV === 'development');
+var nodeEnv = isDev ? 'development' : 'production';
+var envParams = {};
+
+if (isDev) {
+    dist = path.join(__dirname, 'samples', 'dist');
+    envParams = {
+        'debug': true,
+        'devtool': 'eval'
+    };
+}
 
 var dedupe = new webpack.optimize.DedupePlugin();
 
 var define = new webpack.DefinePlugin({
-    'NODE_ENV': 'production'
+    'NODE_ENV': nodeEnv
 });
 
 var uglify = new webpack.optimize.UglifyJsPlugin({
@@ -50,7 +61,7 @@ var params = {
         'loaders': [
             {
                 'test': /\.jsx?$/,
-                'loader': 'babel',
+                'loader': 'babel!preprocess?NODE_ENV=' + nodeEnv,
                 'include': [ src ]
             },
             {
@@ -61,12 +72,17 @@ var params = {
     }
 };
 
-module.exports = [
-    merge({}, params),
-    merge({}, params, {
+var runs = [
+    merge({}, params, envParams)
+];
+
+if (!isDev) {
+    runs.push(merge({}, params, {
         'output': {
             'filename': 'xblocks.min.js'
         },
         'plugins': [ define, dedupe, uglify ]
-    })
-];
+    }));
+}
+
+module.exports = runs;

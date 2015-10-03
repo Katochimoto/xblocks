@@ -7,7 +7,7 @@
 		exports["xblocks"] = factory(require("xtag"), require("xblocks"), require("React"));
 	else
 		root["xblocks"] = factory(root["xtag"], root["xblocks"], root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_17__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -57,21 +57,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	__webpack_require__(1);
+	__webpack_require__(3);
 
 	var context = __webpack_require__(2);
 
 	context.xb = {
-	    'Button': __webpack_require__(3),
-	    'Checkbox': __webpack_require__(74),
-	    'Ico': __webpack_require__(76),
-	    'Link': __webpack_require__(78),
-	    'Menuseparator': __webpack_require__(80),
-	    'Radio': __webpack_require__(82),
-	    'Input': __webpack_require__(84),
-	    'Popup': __webpack_require__(88),
-	    'Menuitem': __webpack_require__(90),
-	    'Menu': __webpack_require__(92),
-	    'MenuInline': __webpack_require__(97),
+	    'Button': __webpack_require__(14),
+	    'Checkbox': __webpack_require__(79),
+	    'Ico': __webpack_require__(81),
+	    'Link': __webpack_require__(83),
+	    'Menuseparator': __webpack_require__(85),
+	    'Radio': __webpack_require__(87),
+	    'Input': __webpack_require__(89),
+	    'Popup': __webpack_require__(93),
+	    'Menuitem': __webpack_require__(95),
+	    'Menu': __webpack_require__(97),
+	    'MenuInline': __webpack_require__(102),
 	    'Select': '',
 	    'SpeechRecognition': '',
 	    'Calendar': ''
@@ -104,9 +105,38 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
+	'use strict';
+
+	var context = __webpack_require__(2);
+	var lastTime = 0;
+	var vendors = ['ms', 'moz', 'webkit', 'o'];
+	var vendor;
+
+	for (var x = 0; x < 4 && !context.requestAnimationFrame; ++x) {
+	    vendor = vendors[x];
+	    context.requestAnimationFrame = context[vendor + 'RequestAnimationFrame'];
+	    context.cancelAnimationFrame = context[vendor + 'CancelAnimationFrame'] || context[vendor + 'CancelRequestAnimationFrame'];
+	}
+
+	if (!context.requestAnimationFrame) {
+	    context.requestAnimationFrame = function (callback) {
+	        var currTime = Date.now();
+	        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+	        var id = context.setTimeout(function () {
+	            callback(currTime + timeToCall);
+	        }, timeToCall);
+	        lastTime = currTime + timeToCall;
+	        return id;
+	    };
+	}
+
+	if (!context.cancelAnimationFrame) {
+	    context.cancelAnimationFrame = function (id) {
+	        context.clearTimeout(id);
+	    };
+	}
 
 /***/ },
 /* 2 */
@@ -122,12 +152,585 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var xtag = __webpack_require__(4);
+	var debounce = __webpack_require__(5);
+	var throttle = __webpack_require__(13);
+
+	/**
+	 * @example
+	 * "scroll:debounce(100,true,false)": function () {}
+	 *
+	 * @type {Object}
+	 */
+	xtag.pseudos.debounce = {
+	    onCompiled: function onCompiled(listener, pseudo) {
+	        var len = pseudo.arguments.length;
+	        var wait = Number(pseudo.arguments[0]);
+	        var leading = true;
+	        var trailing = false;
+
+	        if (len > 1) {
+	            leading = pseudo.arguments[1] === 'true';
+	        }
+
+	        if (len > 2) {
+	            trailing = pseudo.arguments[2] === 'true';
+	        }
+
+	        return debounce(listener, wait, {
+	            'leading': leading,
+	            'trailing': trailing
+	        });
+	    }
+	};
+
+	/**
+	 * @example
+	 * "scroll:throttle(100,true,false)": function () {}
+	 *
+	 * @type {Object}
+	 */
+	xtag.pseudos.throttle = {
+	    onCompiled: function onCompiled(listener, pseudo) {
+	        var len = pseudo.arguments.length;
+	        var wait = Number(pseudo.arguments[0]);
+	        var leading = true;
+	        var trailing = false;
+
+	        if (len > 1) {
+	            leading = pseudo.arguments[1] === 'true';
+	        }
+
+	        if (len > 2) {
+	            trailing = pseudo.arguments[2] === 'true';
+	        }
+
+	        return throttle(listener, wait, {
+	            'leading': leading,
+	            'trailing': trailing
+	        });
+	    }
+	};
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isObject = __webpack_require__(6),
+	    now = __webpack_require__(7);
+
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max;
+
+	/**
+	 * Creates a debounced function that delays invoking `func` until after `wait`
+	 * milliseconds have elapsed since the last time the debounced function was
+	 * invoked. The debounced function comes with a `cancel` method to cancel
+	 * delayed invocations. Provide an options object to indicate that `func`
+	 * should be invoked on the leading and/or trailing edge of the `wait` timeout.
+	 * Subsequent calls to the debounced function return the result of the last
+	 * `func` invocation.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
+	 * on the trailing edge of the timeout only if the the debounced function is
+	 * invoked more than once during the `wait` timeout.
+	 *
+	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+	 * for details over the differences between `_.debounce` and `_.throttle`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Function
+	 * @param {Function} func The function to debounce.
+	 * @param {number} [wait=0] The number of milliseconds to delay.
+	 * @param {Object} [options] The options object.
+	 * @param {boolean} [options.leading=false] Specify invoking on the leading
+	 *  edge of the timeout.
+	 * @param {number} [options.maxWait] The maximum time `func` is allowed to be
+	 *  delayed before it's invoked.
+	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
+	 *  edge of the timeout.
+	 * @returns {Function} Returns the new debounced function.
+	 * @example
+	 *
+	 * // avoid costly calculations while the window size is in flux
+	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+	 *
+	 * // invoke `sendMail` when the click event is fired, debouncing subsequent calls
+	 * jQuery('#postbox').on('click', _.debounce(sendMail, 300, {
+	 *   'leading': true,
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // ensure `batchLog` is invoked once after 1 second of debounced calls
+	 * var source = new EventSource('/stream');
+	 * jQuery(source).on('message', _.debounce(batchLog, 250, {
+	 *   'maxWait': 1000
+	 * }));
+	 *
+	 * // cancel a debounced call
+	 * var todoChanges = _.debounce(batchLog, 1000);
+	 * Object.observe(models.todo, todoChanges);
+	 *
+	 * Object.observe(models, function(changes) {
+	 *   if (_.find(changes, { 'user': 'todo', 'type': 'delete'})) {
+	 *     todoChanges.cancel();
+	 *   }
+	 * }, ['delete']);
+	 *
+	 * // ...at some point `models.todo` is changed
+	 * models.todo.completed = true;
+	 *
+	 * // ...before 1 second has passed `models.todo` is deleted
+	 * // which cancels the debounced `todoChanges` call
+	 * delete models.todo;
+	 */
+	function debounce(func, wait, options) {
+	  var args,
+	      maxTimeoutId,
+	      result,
+	      stamp,
+	      thisArg,
+	      timeoutId,
+	      trailingCall,
+	      lastCalled = 0,
+	      maxWait = false,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  wait = wait < 0 ? 0 : (+wait || 0);
+	  if (options === true) {
+	    var leading = true;
+	    trailing = false;
+	  } else if (isObject(options)) {
+	    leading = !!options.leading;
+	    maxWait = 'maxWait' in options && nativeMax(+options.maxWait || 0, wait);
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+
+	  function cancel() {
+	    if (timeoutId) {
+	      clearTimeout(timeoutId);
+	    }
+	    if (maxTimeoutId) {
+	      clearTimeout(maxTimeoutId);
+	    }
+	    lastCalled = 0;
+	    maxTimeoutId = timeoutId = trailingCall = undefined;
+	  }
+
+	  function complete(isCalled, id) {
+	    if (id) {
+	      clearTimeout(id);
+	    }
+	    maxTimeoutId = timeoutId = trailingCall = undefined;
+	    if (isCalled) {
+	      lastCalled = now();
+	      result = func.apply(thisArg, args);
+	      if (!timeoutId && !maxTimeoutId) {
+	        args = thisArg = undefined;
+	      }
+	    }
+	  }
+
+	  function delayed() {
+	    var remaining = wait - (now() - stamp);
+	    if (remaining <= 0 || remaining > wait) {
+	      complete(trailingCall, maxTimeoutId);
+	    } else {
+	      timeoutId = setTimeout(delayed, remaining);
+	    }
+	  }
+
+	  function maxDelayed() {
+	    complete(trailing, timeoutId);
+	  }
+
+	  function debounced() {
+	    args = arguments;
+	    stamp = now();
+	    thisArg = this;
+	    trailingCall = trailing && (timeoutId || !leading);
+
+	    if (maxWait === false) {
+	      var leadingCall = leading && !timeoutId;
+	    } else {
+	      if (!maxTimeoutId && !leading) {
+	        lastCalled = stamp;
+	      }
+	      var remaining = maxWait - (stamp - lastCalled),
+	          isCalled = remaining <= 0 || remaining > maxWait;
+
+	      if (isCalled) {
+	        if (maxTimeoutId) {
+	          maxTimeoutId = clearTimeout(maxTimeoutId);
+	        }
+	        lastCalled = stamp;
+	        result = func.apply(thisArg, args);
+	      }
+	      else if (!maxTimeoutId) {
+	        maxTimeoutId = setTimeout(maxDelayed, remaining);
+	      }
+	    }
+	    if (isCalled && timeoutId) {
+	      timeoutId = clearTimeout(timeoutId);
+	    }
+	    else if (!timeoutId && wait !== maxWait) {
+	      timeoutId = setTimeout(delayed, wait);
+	    }
+	    if (leadingCall) {
+	      isCalled = true;
+	      result = func.apply(thisArg, args);
+	    }
+	    if (isCalled && !timeoutId && !maxTimeoutId) {
+	      args = thisArg = undefined;
+	    }
+	    return result;
+	  }
+	  debounced.cancel = cancel;
+	  return debounced;
+	}
+
+	module.exports = debounce;
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+
+	module.exports = isObject;
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(8);
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeNow = getNative(Date, 'now');
+
+	/**
+	 * Gets the number of milliseconds that have elapsed since the Unix epoch
+	 * (1 January 1970 00:00:00 UTC).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Date
+	 * @example
+	 *
+	 * _.defer(function(stamp) {
+	 *   console.log(_.now() - stamp);
+	 * }, _.now());
+	 * // => logs the number of milliseconds it took for the deferred function to be invoked
+	 */
+	var now = nativeNow || function() {
+	  return new Date().getTime();
+	};
+
+	module.exports = now;
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isNative = __webpack_require__(9);
+
+	/**
+	 * Gets the native function at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {string} key The key of the method to get.
+	 * @returns {*} Returns the function if it's native, else `undefined`.
+	 */
+	function getNative(object, key) {
+	  var value = object == null ? undefined : object[key];
+	  return isNative(value) ? value : undefined;
+	}
+
+	module.exports = getNative;
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isFunction = __webpack_require__(10),
+	    isHostObject = __webpack_require__(11),
+	    isObjectLike = __webpack_require__(12);
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Used to detect if a method is native. */
+	var reIsNative = RegExp('^' +
+	  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
+	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (isFunction(value)) {
+	    return reIsNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && (isHostObject(value) ? reIsNative : reIsHostCtor).test(value);
+	}
+
+	module.exports = isNative;
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(6);
+
+	/** `Object#toString` result references. */
+	var funcTag = '[object Function]';
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in older versions of Chrome and Safari which return 'function' for regexes
+	  // and Safari 8 which returns 'object' for typed array constructors.
+	  return isObject(value) && objToString.call(value) == funcTag;
+	}
+
+	module.exports = isFunction;
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is a host object in IE < 9.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+	 */
+	var isHostObject = (function() {
+	  try {
+	    Object({ 'toString': 0 } + '');
+	  } catch(e) {
+	    return function() { return false; };
+	  }
+	  return function(value) {
+	    // IE < 9 presents many host objects as `Object` objects that can coerce
+	    // to strings despite having improperly defined `toString` methods.
+	    return typeof value.toString != 'function' && typeof (value + '') == 'string';
+	  };
+	}());
+
+	module.exports = isHostObject;
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var debounce = __webpack_require__(5),
+	    isObject = __webpack_require__(6);
+
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/**
+	 * Creates a throttled function that only invokes `func` at most once per
+	 * every `wait` milliseconds. The throttled function comes with a `cancel`
+	 * method to cancel delayed invocations. Provide an options object to indicate
+	 * that `func` should be invoked on the leading and/or trailing edge of the
+	 * `wait` timeout. Subsequent calls to the throttled function return the
+	 * result of the last `func` call.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
+	 * on the trailing edge of the timeout only if the the throttled function is
+	 * invoked more than once during the `wait` timeout.
+	 *
+	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+	 * for details over the differences between `_.throttle` and `_.debounce`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Function
+	 * @param {Function} func The function to throttle.
+	 * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+	 * @param {Object} [options] The options object.
+	 * @param {boolean} [options.leading=true] Specify invoking on the leading
+	 *  edge of the timeout.
+	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
+	 *  edge of the timeout.
+	 * @returns {Function} Returns the new throttled function.
+	 * @example
+	 *
+	 * // avoid excessively updating the position while scrolling
+	 * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+	 *
+	 * // invoke `renewToken` when the click event is fired, but not more than once every 5 minutes
+	 * jQuery('.interactive').on('click', _.throttle(renewToken, 300000, {
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // cancel a trailing throttled call
+	 * jQuery(window).on('popstate', throttled.cancel);
+	 */
+	function throttle(func, wait, options) {
+	  var leading = true,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  if (options === false) {
+	    leading = false;
+	  } else if (isObject(options)) {
+	    leading = 'leading' in options ? !!options.leading : leading;
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+	  return debounce(func, wait, { 'leading': leading, 'maxWait': +wait, 'trailing': trailing });
+	}
+
+	module.exports = throttle;
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(4);
+	__webpack_require__(15);
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * xb-button html element
@@ -161,7 +764,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueProps
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	module.exports = xblocks.create('xb-button', [__webpack_require__(70), __webpack_require__(71), __webpack_require__(72), __webpack_require__(73), {
+	module.exports = xblocks.create('xb-button', [__webpack_require__(75), __webpack_require__(76), __webpack_require__(77), __webpack_require__(78), {
 	    'prototype': Object.create(HTMLInputElement.prototype),
 
 	    'accessors': {
@@ -179,20 +782,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 4 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
-	var resetLastRadioChecked = __webpack_require__(8);
-	var filterProps = __webpack_require__(9);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
+	var resetLastRadioChecked = __webpack_require__(19);
+	var filterProps = __webpack_require__(20);
 
-	var ButtonContent = __webpack_require__(66);
+	var ButtonContent = __webpack_require__(71);
 
 	/**
 	 * The template node xb-button
@@ -200,7 +803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes React.addons.PureRenderMixin
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 */
-	module.exports = xblocks.view.register('xb-button', [__webpack_require__(68), __webpack_require__(69)('xb-ico'), {
+	module.exports = xblocks.view.register('xb-button', [__webpack_require__(73), __webpack_require__(74)('xb-ico'), {
 	    displayName: 'xb-button',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -405,19 +1008,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 5 */
+/* 16 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_16__;
 
 /***/ },
-/* 6 */
+/* 17 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
 
 /***/ },
-/* 7 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -472,7 +1075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 8 */
+/* 19 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -498,13 +1101,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 9 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var pick = __webpack_require__(10);
-	var transform = __webpack_require__(39);
+	var pick = __webpack_require__(21);
+	var transform = __webpack_require__(44);
 
 	var pickIterator = function pickIterator(value, key) {
 	    return this.test(key);
@@ -518,7 +1121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 10 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -529,11 +1132,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFlatten = __webpack_require__(11),
-	    bindCallback = __webpack_require__(28),
-	    pickByArray = __webpack_require__(30),
-	    pickByCallback = __webpack_require__(31),
-	    restParam = __webpack_require__(38);
+	var baseFlatten = __webpack_require__(22),
+	    bindCallback = __webpack_require__(33),
+	    pickByArray = __webpack_require__(35),
+	    pickByCallback = __webpack_require__(36),
+	    restParam = __webpack_require__(43);
 
 	/**
 	 * Creates an object composed of the picked `object` properties. Property
@@ -574,14 +1177,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 11 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(12),
-	    isArguments = __webpack_require__(13),
-	    isArray = __webpack_require__(23),
-	    isArrayLike = __webpack_require__(14),
-	    isObjectLike = __webpack_require__(20);
+	var arrayPush = __webpack_require__(23),
+	    isArguments = __webpack_require__(24),
+	    isArray = __webpack_require__(32),
+	    isArrayLike = __webpack_require__(25),
+	    isObjectLike = __webpack_require__(12);
 
 	/**
 	 * The base implementation of `_.flatten` with added support for restricting
@@ -621,7 +1224,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 12 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/**
@@ -647,11 +1250,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(14),
-	    isObjectLike = __webpack_require__(20);
+	var isArrayLike = __webpack_require__(25),
+	    isObjectLike = __webpack_require__(12);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -687,11 +1290,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 14 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(15),
-	    isLength = __webpack_require__(22);
+	var getLength = __webpack_require__(26),
+	    isLength = __webpack_require__(31);
 
 	/**
 	 * Checks if `value` is array-like.
@@ -708,10 +1311,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(16);
+	var baseProperty = __webpack_require__(27);
 
 	/**
 	 * Gets the "length" property value of `object`.
@@ -729,10 +1332,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(17);
+	var toObject = __webpack_require__(28);
 
 	/**
 	 * The base implementation of `_.property` without support for deep paths.
@@ -751,12 +1354,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(18),
-	    isString = __webpack_require__(19),
-	    support = __webpack_require__(21);
+	var isObject = __webpack_require__(6),
+	    isString = __webpack_require__(29),
+	    support = __webpack_require__(30);
 
 	/**
 	 * Converts `value` to an object if it's not one.
@@ -783,44 +1386,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-
-	module.exports = isObject;
-
-
-/***/ },
-/* 19 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(20);
+	var isObjectLike = __webpack_require__(12);
 
 	/** `Object#toString` result references. */
 	var stringTag = '[object String]';
@@ -858,25 +1427,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return !!value && typeof value == 'object';
-	}
-
-	module.exports = isObjectLike;
-
-
-/***/ },
-/* 21 */
+/* 30 */
 /***/ function(module, exports) {
 
 	/** Used for native method references. */
@@ -978,7 +1529,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 31 */
 /***/ function(module, exports) {
 
 	/**
@@ -1004,12 +1555,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 23 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(24),
-	    isLength = __webpack_require__(22),
-	    isObjectLike = __webpack_require__(20);
+	var getNative = __webpack_require__(8),
+	    isLength = __webpack_require__(31),
+	    isObjectLike = __webpack_require__(12);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]';
@@ -1050,158 +1601,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isNative = __webpack_require__(25);
-
-	/**
-	 * Gets the native function at `key` of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @param {string} key The key of the method to get.
-	 * @returns {*} Returns the function if it's native, else `undefined`.
-	 */
-	function getNative(object, key) {
-	  var value = object == null ? undefined : object[key];
-	  return isNative(value) ? value : undefined;
-	}
-
-	module.exports = getNative;
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isFunction = __webpack_require__(26),
-	    isHostObject = __webpack_require__(27),
-	    isObjectLike = __webpack_require__(20);
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/** Used to detect if a method is native. */
-	var reIsNative = RegExp('^' +
-	  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
-	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (isFunction(value)) {
-	    return reIsNative.test(fnToString.call(value));
-	  }
-	  return isObjectLike(value) && (isHostObject(value) ? reIsNative : reIsHostCtor).test(value);
-	}
-
-	module.exports = isNative;
-
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isObject = __webpack_require__(18);
-
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]';
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * Checks if `value` is classified as a `Function` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 *
-	 * _.isFunction(/abc/);
-	 * // => false
-	 */
-	function isFunction(value) {
-	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in older versions of Chrome and Safari which return 'function' for regexes
-	  // and Safari 8 which returns 'object' for typed array constructors.
-	  return isObject(value) && objToString.call(value) == funcTag;
-	}
-
-	module.exports = isFunction;
-
-
-/***/ },
-/* 27 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is a host object in IE < 9.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
-	 */
-	var isHostObject = (function() {
-	  try {
-	    Object({ 'toString': 0 } + '');
-	  } catch(e) {
-	    return function() { return false; };
-	  }
-	  return function(value) {
-	    // IE < 9 presents many host objects as `Object` objects that can coerce
-	    // to strings despite having improperly defined `toString` methods.
-	    return typeof value.toString != 'function' && typeof (value + '') == 'string';
-	  };
-	}());
-
-	module.exports = isHostObject;
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var identity = __webpack_require__(29);
+	var identity = __webpack_require__(34);
 
 	/**
 	 * A specialized version of `baseCallback` which only supports `this` binding
@@ -1243,7 +1646,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 34 */
 /***/ function(module, exports) {
 
 	/**
@@ -1269,10 +1672,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 30 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(17);
+	var toObject = __webpack_require__(28);
 
 	/**
 	 * A specialized version of `_.pick` which picks `object` properties specified
@@ -1303,10 +1706,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseForIn = __webpack_require__(32);
+	var baseForIn = __webpack_require__(37);
 
 	/**
 	 * A specialized version of `_.pick` which picks `object` properties `predicate`
@@ -1331,11 +1734,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(33),
-	    keysIn = __webpack_require__(35);
+	var baseFor = __webpack_require__(38),
+	    keysIn = __webpack_require__(40);
 
 	/**
 	 * The base implementation of `_.forIn` without support for callback
@@ -1354,10 +1757,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createBaseFor = __webpack_require__(34);
+	var createBaseFor = __webpack_require__(39);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -1377,10 +1780,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(17);
+	var toObject = __webpack_require__(28);
 
 	/**
 	 * Creates a base function for `_.forIn` or `_.forInRight`.
@@ -1410,18 +1813,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayEach = __webpack_require__(36),
-	    isArguments = __webpack_require__(13),
-	    isArray = __webpack_require__(23),
-	    isFunction = __webpack_require__(26),
-	    isIndex = __webpack_require__(37),
-	    isLength = __webpack_require__(22),
-	    isObject = __webpack_require__(18),
-	    isString = __webpack_require__(19),
-	    support = __webpack_require__(21);
+	var arrayEach = __webpack_require__(41),
+	    isArguments = __webpack_require__(24),
+	    isArray = __webpack_require__(32),
+	    isFunction = __webpack_require__(10),
+	    isIndex = __webpack_require__(42),
+	    isLength = __webpack_require__(31),
+	    isObject = __webpack_require__(6),
+	    isString = __webpack_require__(29),
+	    support = __webpack_require__(30);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]',
@@ -1552,7 +1955,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 41 */
 /***/ function(module, exports) {
 
 	/**
@@ -1580,7 +1983,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/** Used to detect unsigned integer values. */
@@ -1610,7 +2013,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 43 */
 /***/ function(module, exports) {
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -1674,7 +2077,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1685,14 +2088,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var arrayEach = __webpack_require__(36),
-	    baseCallback = __webpack_require__(40),
-	    baseCreate = __webpack_require__(64),
-	    baseForOwn = __webpack_require__(65),
-	    isArray = __webpack_require__(23),
-	    isFunction = __webpack_require__(26),
-	    isObject = __webpack_require__(18),
-	    isTypedArray = __webpack_require__(51);
+	var arrayEach = __webpack_require__(41),
+	    baseCallback = __webpack_require__(45),
+	    baseCreate = __webpack_require__(69),
+	    baseForOwn = __webpack_require__(70),
+	    isArray = __webpack_require__(32),
+	    isFunction = __webpack_require__(10),
+	    isObject = __webpack_require__(6),
+	    isTypedArray = __webpack_require__(56);
 
 	/**
 	 * An alternative to `_.reduce`; this method transforms `object` to a new
@@ -1749,14 +2152,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMatches = __webpack_require__(41),
-	    baseMatchesProperty = __webpack_require__(55),
-	    bindCallback = __webpack_require__(28),
-	    identity = __webpack_require__(29),
-	    property = __webpack_require__(62);
+	var baseMatches = __webpack_require__(46),
+	    baseMatchesProperty = __webpack_require__(60),
+	    bindCallback = __webpack_require__(33),
+	    identity = __webpack_require__(34),
+	    property = __webpack_require__(67);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -1790,12 +2193,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 41 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsMatch = __webpack_require__(42),
-	    getMatchData = __webpack_require__(52),
-	    toObject = __webpack_require__(17);
+	var baseIsMatch = __webpack_require__(47),
+	    getMatchData = __webpack_require__(57),
+	    toObject = __webpack_require__(28);
 
 	/**
 	 * The base implementation of `_.matches` which does not clone `source`.
@@ -1827,11 +2230,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(43),
-	    toObject = __webpack_require__(17);
+	var baseIsEqual = __webpack_require__(48),
+	    toObject = __webpack_require__(28);
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
@@ -1885,12 +2288,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 43 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqualDeep = __webpack_require__(44),
-	    isObject = __webpack_require__(18),
-	    isObjectLike = __webpack_require__(20);
+	var baseIsEqualDeep = __webpack_require__(49),
+	    isObject = __webpack_require__(6),
+	    isObjectLike = __webpack_require__(12);
 
 	/**
 	 * The base implementation of `_.isEqual` without support for `this` binding
@@ -1919,15 +2322,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var equalArrays = __webpack_require__(45),
-	    equalByTag = __webpack_require__(47),
-	    equalObjects = __webpack_require__(48),
-	    isArray = __webpack_require__(23),
-	    isHostObject = __webpack_require__(27),
-	    isTypedArray = __webpack_require__(51);
+	var equalArrays = __webpack_require__(50),
+	    equalByTag = __webpack_require__(52),
+	    equalObjects = __webpack_require__(53),
+	    isArray = __webpack_require__(32),
+	    isHostObject = __webpack_require__(11),
+	    isTypedArray = __webpack_require__(56);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -2028,10 +2431,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arraySome = __webpack_require__(46);
+	var arraySome = __webpack_require__(51);
 
 	/**
 	 * A specialized version of `baseIsEqualDeep` for arrays with support for
@@ -2085,7 +2488,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
+/* 51 */
 /***/ function(module, exports) {
 
 	/**
@@ -2114,7 +2517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 52 */
 /***/ function(module, exports) {
 
 	/** `Object#toString` result references. */
@@ -2168,10 +2571,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(49);
+	var keys = __webpack_require__(54);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -2241,14 +2644,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(24),
-	    isArrayLike = __webpack_require__(14),
-	    isObject = __webpack_require__(18),
-	    shimKeys = __webpack_require__(50),
-	    support = __webpack_require__(21);
+	var getNative = __webpack_require__(8),
+	    isArrayLike = __webpack_require__(25),
+	    isObject = __webpack_require__(6),
+	    shimKeys = __webpack_require__(55),
+	    support = __webpack_require__(30);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeKeys = getNative(Object, 'keys');
@@ -2293,15 +2696,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(13),
-	    isArray = __webpack_require__(23),
-	    isIndex = __webpack_require__(37),
-	    isLength = __webpack_require__(22),
-	    isString = __webpack_require__(19),
-	    keysIn = __webpack_require__(35);
+	var isArguments = __webpack_require__(24),
+	    isArray = __webpack_require__(32),
+	    isIndex = __webpack_require__(42),
+	    isLength = __webpack_require__(31),
+	    isString = __webpack_require__(29),
+	    keysIn = __webpack_require__(40);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -2341,11 +2744,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLength = __webpack_require__(22),
-	    isObjectLike = __webpack_require__(20);
+	var isLength = __webpack_require__(31),
+	    isObjectLike = __webpack_require__(12);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -2421,11 +2824,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isStrictComparable = __webpack_require__(53),
-	    pairs = __webpack_require__(54);
+	var isStrictComparable = __webpack_require__(58),
+	    pairs = __webpack_require__(59);
 
 	/**
 	 * Gets the propery names, values, and compare flags of `object`.
@@ -2448,10 +2851,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(18);
+	var isObject = __webpack_require__(6);
 
 	/**
 	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -2469,11 +2872,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(49),
-	    toObject = __webpack_require__(17);
+	var keys = __webpack_require__(54),
+	    toObject = __webpack_require__(28);
 
 	/**
 	 * Creates a two dimensional array of the key-value pairs for `object`,
@@ -2508,18 +2911,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 55 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(56),
-	    baseIsEqual = __webpack_require__(43),
-	    baseSlice = __webpack_require__(57),
-	    isArray = __webpack_require__(23),
-	    isKey = __webpack_require__(58),
-	    isStrictComparable = __webpack_require__(53),
-	    last = __webpack_require__(59),
-	    toObject = __webpack_require__(17),
-	    toPath = __webpack_require__(60);
+	var baseGet = __webpack_require__(61),
+	    baseIsEqual = __webpack_require__(48),
+	    baseSlice = __webpack_require__(62),
+	    isArray = __webpack_require__(32),
+	    isKey = __webpack_require__(63),
+	    isStrictComparable = __webpack_require__(58),
+	    last = __webpack_require__(64),
+	    toObject = __webpack_require__(28),
+	    toPath = __webpack_require__(65);
 
 	/**
 	 * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
@@ -2559,10 +2962,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(17);
+	var toObject = __webpack_require__(28);
 
 	/**
 	 * The base implementation of `get` without support for string paths
@@ -2595,7 +2998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 62 */
 /***/ function(module, exports) {
 
 	/**
@@ -2633,11 +3036,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(23),
-	    toObject = __webpack_require__(17);
+	var isArray = __webpack_require__(32),
+	    toObject = __webpack_require__(28);
 
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
@@ -2667,7 +3070,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 64 */
 /***/ function(module, exports) {
 
 	/**
@@ -2692,11 +3095,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(61),
-	    isArray = __webpack_require__(23);
+	var baseToString = __webpack_require__(66),
+	    isArray = __webpack_require__(32);
 
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -2726,7 +3129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 66 */
 /***/ function(module, exports) {
 
 	/**
@@ -2745,12 +3148,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(16),
-	    basePropertyDeep = __webpack_require__(63),
-	    isKey = __webpack_require__(58);
+	var baseProperty = __webpack_require__(27),
+	    basePropertyDeep = __webpack_require__(68),
+	    isKey = __webpack_require__(63);
 
 	/**
 	 * Creates a function that returns the property value at `path` on a
@@ -2782,11 +3185,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 63 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(56),
-	    toPath = __webpack_require__(60);
+	var baseGet = __webpack_require__(61),
+	    toPath = __webpack_require__(65);
 
 	/**
 	 * A specialized version of `baseProperty` which supports deep paths.
@@ -2807,10 +3210,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 64 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(18);
+	var isObject = __webpack_require__(6);
 
 	/**
 	 * The base implementation of `_.create` without support for assigning
@@ -2836,11 +3239,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 65 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(33),
-	    keys = __webpack_require__(49);
+	var baseFor = __webpack_require__(38),
+	    keys = __webpack_require__(54);
 
 	/**
 	 * The base implementation of `_.forOwn` without support for callback
@@ -2859,16 +3262,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 66 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var isEmpty = __webpack_require__(67);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var isEmpty = __webpack_require__(72);
 
 	module.exports = xblocks.view.create({
 	    displayName: 'xb-button_content',
@@ -2911,7 +3314,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 67 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2922,13 +3325,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(13),
-	    isArray = __webpack_require__(23),
-	    isArrayLike = __webpack_require__(14),
-	    isFunction = __webpack_require__(26),
-	    isObjectLike = __webpack_require__(20),
-	    isString = __webpack_require__(19),
-	    keys = __webpack_require__(49);
+	var isArguments = __webpack_require__(24),
+	    isArray = __webpack_require__(32),
+	    isArrayLike = __webpack_require__(25),
+	    isFunction = __webpack_require__(10),
+	    isObjectLike = __webpack_require__(12),
+	    isString = __webpack_require__(29),
+	    keys = __webpack_require__(54);
 
 	/**
 	 * Checks if `value` is empty. A value is considered empty unless it's an
@@ -2972,12 +3375,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 68 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var React = __webpack_require__(6);
+	var React = __webpack_require__(17);
 
 	/**
 	 * Common attributes
@@ -3007,12 +3410,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 69 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	module.exports = function (tagName) {
 	    var props = xblocks.utils.propTypes(tagName);
@@ -3032,7 +3435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 70 */
+/* 75 */
 /***/ function(module, exports) {
 
 	/**
@@ -3082,7 +3485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 71 */
+/* 76 */
 /***/ function(module, exports) {
 
 	/**
@@ -3135,7 +3538,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 72 */
+/* 77 */
 /***/ function(module, exports) {
 
 	/**
@@ -3207,7 +3610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 73 */
+/* 78 */
 /***/ function(module, exports) {
 
 	/**
@@ -3249,15 +3652,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 74 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(75);
+	__webpack_require__(80);
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * xb-checkbox html element
@@ -3280,7 +3683,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueProps
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	module.exports = xblocks.create('xb-checkbox', [__webpack_require__(70), __webpack_require__(71), __webpack_require__(72), __webpack_require__(73), {
+	module.exports = xblocks.create('xb-checkbox', [__webpack_require__(75), __webpack_require__(76), __webpack_require__(77), __webpack_require__(78), {
 	    'prototype': Object.create(HTMLInputElement.prototype),
 
 	    'accessors': {
@@ -3293,14 +3696,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 75 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
 
 	/**
 	 * The template node xb-checkbox
@@ -3310,7 +3713,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	module.exports = xblocks.view.register('xb-checkbox', [__webpack_require__(68), {
+	module.exports = xblocks.view.register('xb-checkbox', [__webpack_require__(73), {
 	    displayName: 'xb-checkbox',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -3408,15 +3811,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 76 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(77);
+	__webpack_require__(82);
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * xb-ico html element
@@ -3448,7 +3851,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @augments HTMLElement
 	 * @mixes xblocks.mixin.eDisabled
 	 */
-	module.exports = xblocks.create('xb-ico', [__webpack_require__(70), {
+	module.exports = xblocks.create('xb-ico', [__webpack_require__(75), {
 	    'accessors': {
 	        'active': {
 	            'attribute': {
@@ -3459,14 +3862,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 77 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
 
 	/**
 	 * The template node xb-ico
@@ -3476,7 +3879,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	module.exports = xblocks.view.register('xb-ico', [__webpack_require__(68), {
+	module.exports = xblocks.view.register('xb-ico', [__webpack_require__(73), {
 	    displayName: 'xb-ico',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -3525,15 +3928,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 78 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(79);
+	__webpack_require__(84);
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * xb-link html element
@@ -3543,19 +3946,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @augments HTMLAnchorElement
 	 * @mixes xblocks.mixin.eDisabled
 	 */
-	module.exports = xblocks.create('xb-link', [__webpack_require__(70), {
+	module.exports = xblocks.create('xb-link', [__webpack_require__(75), {
 	    'prototype': Object.create(HTMLAnchorElement.prototype)
 	}]);
 
 /***/ },
-/* 79 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
 
 	/**
 	 * The template node xb-link
@@ -3565,7 +3968,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	module.exports = xblocks.view.register('xb-link', [__webpack_require__(68), {
+	module.exports = xblocks.view.register('xb-link', [__webpack_require__(73), {
 	    displayName: 'xb-link',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -3620,15 +4023,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 80 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(81);
+	__webpack_require__(86);
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * xb-menuseparator html element
@@ -3642,12 +4045,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 81 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * The template node xb-menuseparator
@@ -3664,15 +4067,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 82 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(83);
+	__webpack_require__(88);
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * xb-radio html element
@@ -3695,7 +4098,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueProps
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	module.exports = xblocks.create('xb-radio', [__webpack_require__(70), __webpack_require__(71), __webpack_require__(72), __webpack_require__(73), {
+	module.exports = xblocks.create('xb-radio', [__webpack_require__(75), __webpack_require__(76), __webpack_require__(77), __webpack_require__(78), {
 	    'prototype': Object.create(HTMLInputElement.prototype),
 
 	    'accessors': {
@@ -3708,15 +4111,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 83 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
-	var resetLastRadioChecked = __webpack_require__(8);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
+	var resetLastRadioChecked = __webpack_require__(19);
 
 	/**
 	 * The template node xb-radio
@@ -3726,7 +4129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	module.exports = xblocks.view.register('xb-radio', [__webpack_require__(68), {
+	module.exports = xblocks.view.register('xb-radio', [__webpack_require__(73), {
 	    displayName: 'xb-radio',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -3834,15 +4237,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 84 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(85);
+	__webpack_require__(90);
 
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	/**
 	 * xb-input html element
@@ -3874,7 +4277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueState
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	module.exports = xblocks.create('xb-input', [__webpack_require__(70), __webpack_require__(87), __webpack_require__(73), {
+	module.exports = xblocks.create('xb-input', [__webpack_require__(75), __webpack_require__(92), __webpack_require__(78), {
 	    'prototype': Object.create(HTMLInputElement.prototype),
 
 	    'events': {
@@ -3928,18 +4331,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 85 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
 
-	var InputController = __webpack_require__(86);
+	var InputController = __webpack_require__(91);
 
 	/**
 	 * The template node xb-input
@@ -3949,7 +4352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes React.addons.PureRenderMixin
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 */
-	module.exports = xblocks.view.register('xb-input', [__webpack_require__(68), __webpack_require__(69)('xb-link'), {
+	module.exports = xblocks.view.register('xb-input', [__webpack_require__(73), __webpack_require__(74)('xb-link'), {
 	    displayName: 'xb-input',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -4149,15 +4552,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 86 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
 
 	/**
 	 * @class xv.InputController
@@ -4267,7 +4670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 87 */
+/* 92 */
 /***/ function(module, exports) {
 
 	/**
@@ -4353,16 +4756,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 88 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(89);
+	__webpack_require__(94);
 
 	var context = __webpack_require__(2);
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	var popupCommon = {
 	    onOpen: function onOpen() {
@@ -4471,7 +4874,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @augments HTMLElement
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	module.exports = xblocks.create('xb-popup', [__webpack_require__(73), {
+	module.exports = xblocks.create('xb-popup', [__webpack_require__(78), {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
@@ -4639,14 +5042,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 89 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
 
 	/**
 	 * The template node xb-popup
@@ -4656,7 +5059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	module.exports = xblocks.view.register('xb-popup', [__webpack_require__(68), {
+	module.exports = xblocks.view.register('xb-popup', [__webpack_require__(73), {
 	    displayName: 'xb-popup',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -4716,16 +5119,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 90 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(91);
+	__webpack_require__(96);
 
 	var context = __webpack_require__(2);
-	var xblocks = __webpack_require__(5);
+	var xblocks = __webpack_require__(16);
 
 	var _xbMenuitem = {
 	    submenuAttrs: {
@@ -4793,7 +5196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @listens xblocks.Element~event:xb-created
 	 * @listens xblocks.Element~event:xb-destroy
 	 */
-	module.exports = xblocks.create('xb-menuitem', [__webpack_require__(70), __webpack_require__(72), {
+	module.exports = xblocks.create('xb-menuitem', [__webpack_require__(75), __webpack_require__(77), {
 	    'prototype': Object.create(HTMLElement.prototype),
 
 	    'events': {
@@ -4945,15 +5348,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 91 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
-	var React = __webpack_require__(6);
-	var classnames = __webpack_require__(7);
-	var isEmpty = __webpack_require__(67);
+	var xblocks = __webpack_require__(16);
+	var React = __webpack_require__(17);
+	var classnames = __webpack_require__(18);
+	var isEmpty = __webpack_require__(72);
 
 	/**
 	 * The template node xb-menuitem
@@ -4963,7 +5366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	module.exports = xblocks.view.register('xb-menuitem', [__webpack_require__(68), __webpack_require__(69)('xb-ico'), {
+	module.exports = xblocks.view.register('xb-menuitem', [__webpack_require__(73), __webpack_require__(74)('xb-ico'), {
 	    displayName: 'xb-menuitem',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -5023,17 +5426,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 92 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(93);
-	__webpack_require__(94);
+	__webpack_require__(98);
+	__webpack_require__(99);
 
-	var xblocks = __webpack_require__(5);
-	var lazyFocus = __webpack_require__(95);
+	var xblocks = __webpack_require__(16);
+	var lazyFocus = __webpack_require__(100);
 
 	var _xbMenu = {
 
@@ -5074,7 +5477,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberof xb
 	 * @mixes xblocks.mixin.eMenu
 	 */
-	module.exports = xblocks.create('xb-menu', [__webpack_require__(96), {
+	module.exports = xblocks.create('xb-menu', [__webpack_require__(101), {
 	    'prototype': Object.create(xb.Popup.prototype || new xb.Popup()),
 
 	    'events': {
@@ -5196,7 +5599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 93 */
+/* 98 */
 /***/ function(module, exports) {
 
 	//jscs:disable
@@ -5255,7 +5658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}), false);
 
 /***/ },
-/* 94 */
+/* 99 */
 /***/ function(module, exports) {
 
 	/* global xblocks, React, xv */
@@ -5293,7 +5696,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 95 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5310,12 +5713,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 96 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var lazyFocus = __webpack_require__(95);
+	var lazyFocus = __webpack_require__(100);
 
 	/**
 	 * Common interface for elements xb-menu and xb-menu-inline.
@@ -5395,18 +5798,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 97 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//require('./index.styl');
 	'use strict';
 
-	__webpack_require__(98);
+	__webpack_require__(103);
 
-	var xblocks = __webpack_require__(5);
-	var lazyFocus = __webpack_require__(95);
-	var Table = __webpack_require__(99);
-	var noop = __webpack_require__(124);
+	var xblocks = __webpack_require__(16);
+	var lazyFocus = __webpack_require__(100);
+	var Table = __webpack_require__(104);
+	var noop = __webpack_require__(126);
 
 	var menuCommon = {
 	    init: function init() {
@@ -5431,7 +5834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eFocus
 	 * @mixes xblocks.mixin.eMenu
 	 */
-	module.exports = xblocks.create('xb-menu-inline', [__webpack_require__(73), __webpack_require__(96), {
+	module.exports = xblocks.create('xb-menu-inline', [__webpack_require__(78), __webpack_require__(101), {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
@@ -5457,7 +5860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 98 */
+/* 103 */
 /***/ function(module, exports) {
 
 	/* global xblocks, React, xv */
@@ -5495,21 +5898,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 99 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var xblocks = __webpack_require__(5);
-	var delegate = __webpack_require__(100);
-	var filterClick = __webpack_require__(104);
-	var filterMouse = __webpack_require__(105);
-	var matchesSelector = __webpack_require__(102);
-	var eachAfter = __webpack_require__(106);
-	var eachBefore = __webpack_require__(109);
-	var index = __webpack_require__(111);
-	var merge = __webpack_require__(112);
-	var throttle = __webpack_require__(121);
+	var xblocks = __webpack_require__(16);
+	var delegate = __webpack_require__(105);
+	var filterClick = __webpack_require__(109);
+	var filterMouse = __webpack_require__(110);
+	var matchesSelector = __webpack_require__(107);
+	var eachAfter = __webpack_require__(111);
+	var eachBefore = __webpack_require__(114);
+	var index = __webpack_require__(116);
+	var merge = __webpack_require__(117);
+	var throttle = __webpack_require__(13);
 	var pop = Array.prototype.pop;
 	var slice = Array.prototype.slice;
 
@@ -5822,13 +6225,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 100 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var delegateMatch = __webpack_require__(101);
-	var wrap = __webpack_require__(103);
+	var delegateMatch = __webpack_require__(106);
+	var wrap = __webpack_require__(108);
 
 	/**
 	 * @function xblocks.event.delegate
@@ -5854,12 +6257,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 101 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var matchesSelector = __webpack_require__(102);
+	var matchesSelector = __webpack_require__(107);
 
 	/**
 	 * @function xblocks.event.delegateMatch
@@ -5893,7 +6296,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 102 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5916,7 +6319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 103 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5983,12 +6386,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 104 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var wrap = __webpack_require__(103);
+	var wrap = __webpack_require__(108);
 
 	/**
 	 * @function xblocks.event.filterClick
@@ -6013,12 +6416,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 105 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var wrap = __webpack_require__(103);
+	var wrap = __webpack_require__(108);
 
 	/**
 	 * @function xblocks.event.filterMouseEnter
@@ -6043,13 +6446,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 106 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var isParent = __webpack_require__(107);
-	var eachInnerFollowing = __webpack_require__(108);
+	var isParent = __webpack_require__(112);
+	var eachInnerFollowing = __webpack_require__(113);
 
 	/**
 	 * @function xblocks.dom.eachAfter
@@ -6082,7 +6485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 107 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6120,7 +6523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	})();
 
 /***/ },
-/* 108 */
+/* 113 */
 /***/ function(module, exports) {
 
 	/**
@@ -6163,13 +6566,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 109 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var isParent = __webpack_require__(107);
-	var eachInnerPrevious = __webpack_require__(110);
+	var isParent = __webpack_require__(112);
+	var eachInnerPrevious = __webpack_require__(115);
 
 	/**
 	 * @function xblocks.dom.eachBefore
@@ -6202,7 +6605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 110 */
+/* 115 */
 /***/ function(module, exports) {
 
 	/**
@@ -6247,7 +6650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 111 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6268,7 +6671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 112 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6279,8 +6682,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseMerge = __webpack_require__(113),
-	    createAssigner = __webpack_require__(119);
+	var baseMerge = __webpack_require__(118),
+	    createAssigner = __webpack_require__(124);
 
 	/**
 	 * Recursively merges own enumerable properties of the source object(s), that
@@ -6336,17 +6739,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 113 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayEach = __webpack_require__(36),
-	    baseMergeDeep = __webpack_require__(114),
-	    isArray = __webpack_require__(23),
-	    isArrayLike = __webpack_require__(14),
-	    isObject = __webpack_require__(18),
-	    isObjectLike = __webpack_require__(20),
-	    isTypedArray = __webpack_require__(51),
-	    keys = __webpack_require__(49);
+	var arrayEach = __webpack_require__(41),
+	    baseMergeDeep = __webpack_require__(119),
+	    isArray = __webpack_require__(32),
+	    isArrayLike = __webpack_require__(25),
+	    isObject = __webpack_require__(6),
+	    isObjectLike = __webpack_require__(12),
+	    isTypedArray = __webpack_require__(56),
+	    keys = __webpack_require__(54);
 
 	/**
 	 * The base implementation of `_.merge` without support for argument juggling,
@@ -6398,16 +6801,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayCopy = __webpack_require__(115),
-	    isArguments = __webpack_require__(13),
-	    isArray = __webpack_require__(23),
-	    isArrayLike = __webpack_require__(14),
-	    isPlainObject = __webpack_require__(116),
-	    isTypedArray = __webpack_require__(51),
-	    toPlainObject = __webpack_require__(117);
+	var arrayCopy = __webpack_require__(120),
+	    isArguments = __webpack_require__(24),
+	    isArray = __webpack_require__(32),
+	    isArrayLike = __webpack_require__(25),
+	    isPlainObject = __webpack_require__(121),
+	    isTypedArray = __webpack_require__(56),
+	    toPlainObject = __webpack_require__(122);
 
 	/**
 	 * A specialized version of `baseMerge` for arrays and objects which performs
@@ -6471,7 +6874,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 115 */
+/* 120 */
 /***/ function(module, exports) {
 
 	/**
@@ -6497,14 +6900,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 116 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseForIn = __webpack_require__(32),
-	    isArguments = __webpack_require__(13),
-	    isHostObject = __webpack_require__(27),
-	    isObjectLike = __webpack_require__(20),
-	    support = __webpack_require__(21);
+	var baseForIn = __webpack_require__(37),
+	    isArguments = __webpack_require__(24),
+	    isHostObject = __webpack_require__(11),
+	    isObjectLike = __webpack_require__(12),
+	    support = __webpack_require__(30);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -6583,11 +6986,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 117 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCopy = __webpack_require__(118),
-	    keysIn = __webpack_require__(35);
+	var baseCopy = __webpack_require__(123),
+	    keysIn = __webpack_require__(40);
 
 	/**
 	 * Converts `value` to a plain object flattening inherited enumerable
@@ -6620,7 +7023,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 118 */
+/* 123 */
 /***/ function(module, exports) {
 
 	/**
@@ -6649,12 +7052,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 119 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var bindCallback = __webpack_require__(28),
-	    isIterateeCall = __webpack_require__(120),
-	    restParam = __webpack_require__(38);
+	var bindCallback = __webpack_require__(33),
+	    isIterateeCall = __webpack_require__(125),
+	    restParam = __webpack_require__(43);
 
 	/**
 	 * Creates a `_.assign`, `_.defaults`, or `_.merge` function.
@@ -6696,12 +7099,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 120 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(14),
-	    isIndex = __webpack_require__(37),
-	    isObject = __webpack_require__(18);
+	var isArrayLike = __webpack_require__(25),
+	    isIndex = __webpack_require__(42),
+	    isObject = __webpack_require__(6);
 
 	/**
 	 * Checks if the provided arguments are from an iteratee call.
@@ -6730,308 +7133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 121 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var debounce = __webpack_require__(122),
-	    isObject = __webpack_require__(18);
-
-	/** Used as the `TypeError` message for "Functions" methods. */
-	var FUNC_ERROR_TEXT = 'Expected a function';
-
-	/**
-	 * Creates a throttled function that only invokes `func` at most once per
-	 * every `wait` milliseconds. The throttled function comes with a `cancel`
-	 * method to cancel delayed invocations. Provide an options object to indicate
-	 * that `func` should be invoked on the leading and/or trailing edge of the
-	 * `wait` timeout. Subsequent calls to the throttled function return the
-	 * result of the last `func` call.
-	 *
-	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
-	 * on the trailing edge of the timeout only if the the throttled function is
-	 * invoked more than once during the `wait` timeout.
-	 *
-	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
-	 * for details over the differences between `_.throttle` and `_.debounce`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Function
-	 * @param {Function} func The function to throttle.
-	 * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
-	 * @param {Object} [options] The options object.
-	 * @param {boolean} [options.leading=true] Specify invoking on the leading
-	 *  edge of the timeout.
-	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
-	 *  edge of the timeout.
-	 * @returns {Function} Returns the new throttled function.
-	 * @example
-	 *
-	 * // avoid excessively updating the position while scrolling
-	 * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
-	 *
-	 * // invoke `renewToken` when the click event is fired, but not more than once every 5 minutes
-	 * jQuery('.interactive').on('click', _.throttle(renewToken, 300000, {
-	 *   'trailing': false
-	 * }));
-	 *
-	 * // cancel a trailing throttled call
-	 * jQuery(window).on('popstate', throttled.cancel);
-	 */
-	function throttle(func, wait, options) {
-	  var leading = true,
-	      trailing = true;
-
-	  if (typeof func != 'function') {
-	    throw new TypeError(FUNC_ERROR_TEXT);
-	  }
-	  if (options === false) {
-	    leading = false;
-	  } else if (isObject(options)) {
-	    leading = 'leading' in options ? !!options.leading : leading;
-	    trailing = 'trailing' in options ? !!options.trailing : trailing;
-	  }
-	  return debounce(func, wait, { 'leading': leading, 'maxWait': +wait, 'trailing': trailing });
-	}
-
-	module.exports = throttle;
-
-
-/***/ },
-/* 122 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.10.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash exports="umd" include="debounce,throttle,merge,isEmpty,pick,transform,noop" modularize -o lodash`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var isObject = __webpack_require__(18),
-	    now = __webpack_require__(123);
-
-	/** Used as the `TypeError` message for "Functions" methods. */
-	var FUNC_ERROR_TEXT = 'Expected a function';
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeMax = Math.max;
-
-	/**
-	 * Creates a debounced function that delays invoking `func` until after `wait`
-	 * milliseconds have elapsed since the last time the debounced function was
-	 * invoked. The debounced function comes with a `cancel` method to cancel
-	 * delayed invocations. Provide an options object to indicate that `func`
-	 * should be invoked on the leading and/or trailing edge of the `wait` timeout.
-	 * Subsequent calls to the debounced function return the result of the last
-	 * `func` invocation.
-	 *
-	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
-	 * on the trailing edge of the timeout only if the the debounced function is
-	 * invoked more than once during the `wait` timeout.
-	 *
-	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
-	 * for details over the differences between `_.debounce` and `_.throttle`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Function
-	 * @param {Function} func The function to debounce.
-	 * @param {number} [wait=0] The number of milliseconds to delay.
-	 * @param {Object} [options] The options object.
-	 * @param {boolean} [options.leading=false] Specify invoking on the leading
-	 *  edge of the timeout.
-	 * @param {number} [options.maxWait] The maximum time `func` is allowed to be
-	 *  delayed before it's invoked.
-	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
-	 *  edge of the timeout.
-	 * @returns {Function} Returns the new debounced function.
-	 * @example
-	 *
-	 * // avoid costly calculations while the window size is in flux
-	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
-	 *
-	 * // invoke `sendMail` when the click event is fired, debouncing subsequent calls
-	 * jQuery('#postbox').on('click', _.debounce(sendMail, 300, {
-	 *   'leading': true,
-	 *   'trailing': false
-	 * }));
-	 *
-	 * // ensure `batchLog` is invoked once after 1 second of debounced calls
-	 * var source = new EventSource('/stream');
-	 * jQuery(source).on('message', _.debounce(batchLog, 250, {
-	 *   'maxWait': 1000
-	 * }));
-	 *
-	 * // cancel a debounced call
-	 * var todoChanges = _.debounce(batchLog, 1000);
-	 * Object.observe(models.todo, todoChanges);
-	 *
-	 * Object.observe(models, function(changes) {
-	 *   if (_.find(changes, { 'user': 'todo', 'type': 'delete'})) {
-	 *     todoChanges.cancel();
-	 *   }
-	 * }, ['delete']);
-	 *
-	 * // ...at some point `models.todo` is changed
-	 * models.todo.completed = true;
-	 *
-	 * // ...before 1 second has passed `models.todo` is deleted
-	 * // which cancels the debounced `todoChanges` call
-	 * delete models.todo;
-	 */
-	function debounce(func, wait, options) {
-	  var args,
-	      maxTimeoutId,
-	      result,
-	      stamp,
-	      thisArg,
-	      timeoutId,
-	      trailingCall,
-	      lastCalled = 0,
-	      maxWait = false,
-	      trailing = true;
-
-	  if (typeof func != 'function') {
-	    throw new TypeError(FUNC_ERROR_TEXT);
-	  }
-	  wait = wait < 0 ? 0 : (+wait || 0);
-	  if (options === true) {
-	    var leading = true;
-	    trailing = false;
-	  } else if (isObject(options)) {
-	    leading = !!options.leading;
-	    maxWait = 'maxWait' in options && nativeMax(+options.maxWait || 0, wait);
-	    trailing = 'trailing' in options ? !!options.trailing : trailing;
-	  }
-
-	  function cancel() {
-	    if (timeoutId) {
-	      clearTimeout(timeoutId);
-	    }
-	    if (maxTimeoutId) {
-	      clearTimeout(maxTimeoutId);
-	    }
-	    lastCalled = 0;
-	    maxTimeoutId = timeoutId = trailingCall = undefined;
-	  }
-
-	  function complete(isCalled, id) {
-	    if (id) {
-	      clearTimeout(id);
-	    }
-	    maxTimeoutId = timeoutId = trailingCall = undefined;
-	    if (isCalled) {
-	      lastCalled = now();
-	      result = func.apply(thisArg, args);
-	      if (!timeoutId && !maxTimeoutId) {
-	        args = thisArg = undefined;
-	      }
-	    }
-	  }
-
-	  function delayed() {
-	    var remaining = wait - (now() - stamp);
-	    if (remaining <= 0 || remaining > wait) {
-	      complete(trailingCall, maxTimeoutId);
-	    } else {
-	      timeoutId = setTimeout(delayed, remaining);
-	    }
-	  }
-
-	  function maxDelayed() {
-	    complete(trailing, timeoutId);
-	  }
-
-	  function debounced() {
-	    args = arguments;
-	    stamp = now();
-	    thisArg = this;
-	    trailingCall = trailing && (timeoutId || !leading);
-
-	    if (maxWait === false) {
-	      var leadingCall = leading && !timeoutId;
-	    } else {
-	      if (!maxTimeoutId && !leading) {
-	        lastCalled = stamp;
-	      }
-	      var remaining = maxWait - (stamp - lastCalled),
-	          isCalled = remaining <= 0 || remaining > maxWait;
-
-	      if (isCalled) {
-	        if (maxTimeoutId) {
-	          maxTimeoutId = clearTimeout(maxTimeoutId);
-	        }
-	        lastCalled = stamp;
-	        result = func.apply(thisArg, args);
-	      }
-	      else if (!maxTimeoutId) {
-	        maxTimeoutId = setTimeout(maxDelayed, remaining);
-	      }
-	    }
-	    if (isCalled && timeoutId) {
-	      timeoutId = clearTimeout(timeoutId);
-	    }
-	    else if (!timeoutId && wait !== maxWait) {
-	      timeoutId = setTimeout(delayed, wait);
-	    }
-	    if (leadingCall) {
-	      isCalled = true;
-	      result = func.apply(thisArg, args);
-	    }
-	    if (isCalled && !timeoutId && !maxTimeoutId) {
-	      args = thisArg = undefined;
-	    }
-	    return result;
-	  }
-	  debounced.cancel = cancel;
-	  return debounced;
-	}
-
-	module.exports = debounce;
-
-
-/***/ },
-/* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var getNative = __webpack_require__(24);
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeNow = getNative(Date, 'now');
-
-	/**
-	 * Gets the number of milliseconds that have elapsed since the Unix epoch
-	 * (1 January 1970 00:00:00 UTC).
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Date
-	 * @example
-	 *
-	 * _.defer(function(stamp) {
-	 *   console.log(_.now() - stamp);
-	 * }, _.now());
-	 * // => logs the number of milliseconds it took for the deferred function to be invoked
-	 */
-	var now = nativeNow || function() {
-	  return new Date().getTime();
-	};
-
-	module.exports = now;
-
-
-/***/ },
-/* 124 */
+/* 126 */
 /***/ function(module, exports) {
 
 	/**
