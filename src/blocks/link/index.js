@@ -1,5 +1,7 @@
-// require('./index.styl');
+require('./index.styl');
+require('./index.jsx');
 
+var xb = require('context').xb;
 var xblocks = require('xblocks');
 
 /**
@@ -10,10 +12,12 @@ var xblocks = require('xblocks');
  * @augments HTMLAnchorElement
  * @mixes xblocks.mixin.eDisabled
  */
-module.exports = xblocks.create('xb-link', [
+xb.Link = xblocks.create('xb-link', [
     require('mixin/element/disabled'),
 
     {
-        'prototype': Object.create(HTMLAnchorElement.prototype)
+        prototype: Object.create(HTMLAnchorElement.prototype)
     }
 ]);
+
+module.exports = xb.Link;

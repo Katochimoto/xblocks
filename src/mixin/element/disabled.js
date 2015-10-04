@@ -33,10 +33,10 @@
  * @type {object}
  */
 module.exports = {
-    'accessors': {
-        'disabled': {
-            'attribute': {
-                'boolean': true
+    accessors: {
+        disabled: {
+            attribute: {
+                boolean: true
             }
         }
     }

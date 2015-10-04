@@ -38,17 +38,17 @@
  * @type {object}
  */
 module.exports = {
-    'accessors': {
+    accessors: {
 
         /**
          * @prop {string} value
          */
-        'value': {
-            'attribute': {
-                'name': 'value'
+        value: {
+            attribute: {
+                name: 'value'
             },
 
-            'get': function () {
+            get: function () {
                 var component = this.xblock && this.xblock.getMountedComponent();
 
                 if (component && typeof(component.state.value) !== 'undefined') {
@@ -58,7 +58,7 @@ module.exports = {
                 return String(this.getAttribute('value') || this.defaultValue || '');
             },
 
-            'set': function (value) {
+            set: function (value) {
                 var component = this.xblock && this.xblock.getMountedComponent();
 
                 if (component) {
@@ -70,8 +70,8 @@ module.exports = {
         /**
          * @prop {string} defaultValue
          */
-        'defaultValue': {
-            'get': function () {
+        defaultValue: {
+            get: function () {
                 return '';
             }
         }

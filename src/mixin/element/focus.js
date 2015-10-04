@@ -23,12 +23,12 @@
  * @type {object}
  */
 module.exports = {
-    'methods': {
-        'focus': function () {
+    methods: {
+        focus: function () {
             this.firstChild.focus();
         },
 
-        'blur': function () {
+        blur: function () {
             this.firstChild.blur();
         }
     }

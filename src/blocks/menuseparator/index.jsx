@@ -1,3 +1,4 @@
+var xv = require('context').xv;
 var xblocks = require('xblocks');
 
 /**
@@ -6,7 +7,7 @@ var xblocks = require('xblocks');
  * @class xv.Menuseparator
  * @memberof xv
  */
-module.exports = xblocks.view.register('xb-menuseparator', {
+xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
     displayName: 'xb-menuseparator',
 
     render: function () {
@@ -15,3 +16,5 @@ module.exports = xblocks.view.register('xb-menuseparator', {
         );
     }
 });
+
+module.exports = xv.Menuseparator;

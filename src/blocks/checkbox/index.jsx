@@ -1,3 +1,4 @@
+var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
 var classnames = require('classnames');
@@ -10,7 +11,7 @@ var classnames = require('classnames');
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-module.exports = xblocks.view.register('xb-checkbox', [
+xv.Checkbox = xblocks.view.register('xb-checkbox', [
     require('mixin/view/commonAttrs'),
 
     {
@@ -18,6 +19,7 @@ module.exports = xblocks.view.register('xb-checkbox', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
+        // @ifdef DEBUG
         propTypes: {
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
@@ -28,6 +30,7 @@ module.exports = xblocks.view.register('xb-checkbox', [
             'size':         React.PropTypes.oneOf([ 's', 'm' ]),
             'value':        React.PropTypes.string
         },
+        // @endif
 
         getDefaultProps: function () {
             return {
@@ -100,9 +103,13 @@ module.exports = xblocks.view.register('xb-checkbox', [
                     <span className="_xb-checkbox_flag _xb-check_flag">
                         <span className="_xb-checkbox_flag-icon"></span>
                     </span>
-                    <span data-xb-content={this.props._uid}>{this.props.children}</span>
+                    <span data-xb-content={this.props._uid}>
+                        {this.props.children}
+                    </span>
                 </label>
             );
         }
     }
 ]);
+
+module.exports = xv.Checkbox;

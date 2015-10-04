@@ -1,5 +1,7 @@
-// require('./index.styl');
+require('./index.styl');
+require('./index.jsx');
 
+var xb = require('context').xb;
 var xblocks = require('xblocks');
 
 /**
@@ -23,21 +25,23 @@ var xblocks = require('xblocks');
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-module.exports = xblocks.create('xb-radio', [
+xb.Radio = xblocks.create('xb-radio', [
     require('mixin/element/disabled'),
     require('mixin/element/checked'),
     require('mixin/element/inputValueProps'),
     require('mixin/element/focus'),
 
     {
-        'prototype': Object.create(HTMLInputElement.prototype),
+        prototype: Object.create(HTMLInputElement.prototype),
 
-        'accessors': {
-            'defaultValue': {
-                'get': function () {
+        accessors: {
+            defaultValue: {
+                get: function () {
                     return 'on';
                 }
             }
         }
     }
 ]);
+
+module.exports = xb.Radio;

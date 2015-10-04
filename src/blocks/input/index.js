@@ -1,9 +1,9 @@
 require('./index.styl');
 require('./index.jsx');
 
-import xb from 'context';
-import xblocks from 'xblocks';
-import replaceTextSelection from 'dom';
+var xb = require('context').xb;
+var xblocks = require('xblocks');
+var replaceTextSelection = require('dom/replaceTextSelection');
 
 /**
  * xb-input html element
@@ -100,4 +100,4 @@ xb.Input = xblocks.create('xb-input', [
     }
 ]);
 
-export default xb.Input;
+module.exports = xb.Input;

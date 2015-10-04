@@ -1,6 +1,8 @@
 /* global xblocks, React, Tether, xv */
 /* jshint strict: false */
 
+var ReactDOM = require('react-dom');
+
 /**
  * The template node xb-select
  *
@@ -38,8 +40,8 @@ xv.Select = xblocks.view.register('xb-select', [
 
         'componentDidMount': function () {
             new Tether({
-                element: React.findDOMNode(this.refs.dropdown),
-                target: React.findDOMNode(this.refs.control),
+                element: this.refs.dropdown,
+                target: ReactDOM.findDOMNode(this.refs.control),
                 attachment: 'top left',
                 targetAttachment: 'bottom left',
                 classPrefix: 'xb-dialog',

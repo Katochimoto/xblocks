@@ -38,17 +38,17 @@
  * @type {object}
  */
 module.exports = {
-    'accessors': {
+    accessors: {
 
         /**
          * @prop {string} value
          */
-        'value': {
-            'attribute': {
-                'name': 'value'
+        value: {
+            attribute: {
+                name: 'value'
             },
 
-            'get': function () {
+            get: function () {
                 return String(this.getAttribute('value') || this.defaultValue || '');
             }
         },
@@ -56,8 +56,8 @@ module.exports = {
         /**
          * @prop {string} defaultValue
          */
-        'defaultValue': {
-            'get': function () {
+        defaultValue: {
+            get: function () {
                 return '';
             }
         }

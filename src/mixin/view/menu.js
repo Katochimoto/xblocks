@@ -3,6 +3,7 @@ var React = require('react');
 var xblocks = require('xblocks');
 var throttle = require('_/function/throttle');
 var throttleAnimationFrame = require('utils/throttleAnimationFrame');
+var animationFrame = require('polyfills/requestAnimationFrame');
 
 /**
  * Common interface for views xb-menu and xb-menu-inline
@@ -41,7 +42,7 @@ module.exports = {
         var maxHeight = 0;
 
         if (size > 0) {
-            var contentNode = React.findDOMNode(this.refs.content);
+            var contentNode = this.refs.content;
             var element = contentNode.children[ size - 1 ];
 
             if (element) {
@@ -57,7 +58,7 @@ module.exports = {
     },
 
     _redrawScrollNavigator: function (callback) {
-        var target = React.findDOMNode(this.refs.content);
+        var target = this.refs.content;
         var safeArea = 5;
         var height = Math.max(target.scrollHeight, target.clientHeight);
         var isShowScrollTop = (target.scrollTop > safeArea);
@@ -84,7 +85,7 @@ module.exports = {
     },
 
     _onWheel: function (event) {
-        var content = React.findDOMNode(this.refs.content);
+        var content = this.refs.content;
         var delta = event.deltaY;
         var scrollTop = content.scrollTop;
         var offsetHeight = content.offsetHeight;
@@ -115,15 +116,15 @@ module.exports = {
 
     _onScrollThrottle: function () {
         xblocks.event.dispatch(
-            React.findDOMNode(this.refs.content),
+            this.refs.content,
             'jsx-scroll-throttle',
             { 'bubbles': true, 'cancelable': true }
         );
     },
 
     _animationScrollTop: function () {
-        React.findDOMNode(this.refs.content).scrollTop--;
-        this._enterTopFrame = global.requestAnimationFrame(this._animationScrollTop);
+        this.refs.content.scrollTop--;
+        this._enterTopFrame = animationFrame.requestAnimationFrame(this._animationScrollTop);
     },
 
     _onMouseEnterTop: function () {
@@ -133,14 +134,14 @@ module.exports = {
 
     _onMouseLeaveTop: function () {
         if (this._enterTopFrame) {
-            global.cancelAnimationFrame(this._enterTopFrame);
+            animationFrame.cancelAnimationFrame(this._enterTopFrame);
             this._enterTopFrame = 0;
         }
     },
 
     _animationScrollBottom: function () {
-        React.findDOMNode(this.refs.content).scrollTop++;
-        this._enterBottomFrame = global.requestAnimationFrame(this._animationScrollBottom);
+        this.refs.content.scrollTop++;
+        this._enterBottomFrame = animationFrame.requestAnimationFrame(this._animationScrollBottom);
     },
 
     _onMouseEnterBottom: function () {
@@ -150,7 +151,7 @@ module.exports = {
 
     _onMouseLeaveBottom: function () {
         if (this._enterBottomFrame) {
-            global.cancelAnimationFrame(this._enterBottomFrame);
+            animationFrame.cancelAnimationFrame(this._enterBottomFrame);
             this._enterBottomFrame = 0;
         }
     },
@@ -159,7 +160,7 @@ module.exports = {
      * @param {xb.Menuitem} menuitem
      */
     scrollIntoItem: function (menuitem) {
-        var content = React.findDOMNode(this.refs.content);
+        var content = this.refs.content;
         var rectContent = content.getBoundingClientRect();
         var rectMenuitem = menuitem.getBoundingClientRect();
 
@@ -204,6 +205,7 @@ module.exports = {
                     className="_popup-scroll-top"
                     onMouseEnter={this._onMouseEnterTop}
                     onMouseLeave={this._onMouseLeaveTop} />
+
                 <div ref="content"
                     style={contentStyle}
                     className="_popup-content"
@@ -211,6 +213,7 @@ module.exports = {
                     onWheel={this._onWheel}
                     data-xb-content={this.props._uid}
                     dangerouslySetInnerHTML={{ __html: this.props.children.trim() }} />
+
                 <div style={scrollBottomStyle}
                     className="_popup-scroll-bottom"
                     onMouseEnter={this._onMouseEnterBottom}

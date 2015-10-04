@@ -1,4 +1,4 @@
-var globalContext = require('context');
+var animationFrame = require('polyfills/requestAnimationFrame');
 
 /**
  * @function xblocks.utils.throttleAnimationFrame
@@ -17,7 +17,7 @@ module.exports = function (callback, context) {
             return;
         }
 
-        throttle = globalContext.requestAnimationFrame(animationCallback);
+        throttle = animationFrame.requestAnimationFrame(animationCallback);
 
         callback.apply(context || this, arguments);
     };

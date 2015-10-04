@@ -1,3 +1,4 @@
+var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
 var classnames = require('classnames');
@@ -11,7 +12,7 @@ var resetLastRadioChecked = require('utils/resetLastRadioChecked');
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-module.exports = xblocks.view.register('xb-radio', [
+xv.Radio = xblocks.view.register('xb-radio', [
     require('mixin/view/commonAttrs'),
 
     {
@@ -19,6 +20,7 @@ module.exports = xblocks.view.register('xb-radio', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
+        // @ifdef DEBUG
         propTypes: {
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,
@@ -29,6 +31,7 @@ module.exports = xblocks.view.register('xb-radio', [
             'size':         React.PropTypes.oneOf([ 's', 'm' ]),
             'value':        React.PropTypes.string
         },
+        // @endif
 
         getDefaultProps: function () {
             return {
@@ -111,9 +114,13 @@ module.exports = xblocks.view.register('xb-radio', [
                     <span className="_xb-radio_flag _xb-check_flag">
                         <span className="_xb-radio_flag-icon"></span>
                     </span>
-                    <span data-xb-content={this.props._uid}>{this.props.children}</span>
+                    <span data-xb-content={this.props._uid}>
+                        {this.props.children}
+                    </span>
                 </label>
             );
         }
     }
 ]);
+
+module.exports = xv.Radio;

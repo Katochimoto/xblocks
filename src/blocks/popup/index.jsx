@@ -1,5 +1,7 @@
+var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
+var ReactDOM = require('react-dom');
 var classnames = require('classnames');
 
 /**
@@ -10,7 +12,7 @@ var classnames = require('classnames');
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-module.exports = xblocks.view.register('xb-popup', [
+xv.Popup = xblocks.view.register('xb-popup', [
     require('mixin/view/commonAttrs'),
 
     {
@@ -18,6 +20,7 @@ module.exports = xblocks.view.register('xb-popup', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
+        // @ifdef DEBUG
         propTypes: {
             'close': React.PropTypes.bool,
             'theme': React.PropTypes.oneOf([
@@ -28,6 +31,7 @@ module.exports = xblocks.view.register('xb-popup', [
                 'normal'
             ])
         },
+        // @endif
 
         getDefaultProps: function () {
             return {
@@ -36,9 +40,9 @@ module.exports = xblocks.view.register('xb-popup', [
             };
         },
 
-        _onClickClose: function () {
+        onClickClose: function () {
             xblocks.event.dispatch(
-                React.findDOMNode(this),
+                ReactDOM.findDOMNode(this),
                 'jsx-click-close',
                 { 'bubbles': true, 'cancelable': true }
             );
@@ -59,7 +63,7 @@ module.exports = xblocks.view.register('xb-popup', [
 
             if (this.props.close) {
                 children.unshift(
-                    <a key="close" className="_close" onClick={this._onClickClose} />
+                    <a key="close" className="_close" onClick={this.onClickClose} />
                 );
             }
 
@@ -84,3 +88,5 @@ module.exports = xblocks.view.register('xb-popup', [
         }
     }
 ]);
+
+module.exports = xv.Popup;

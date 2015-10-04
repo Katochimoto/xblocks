@@ -1,8 +1,8 @@
-import xv from 'context';
-import xblocks from 'xblocks';
-import React from 'react';
-import classnames from 'classnames';
-import InputController from './controller.jsx';
+var xv = require('context').xv;
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
+var Controller = require('./controller.jsx');
 
 /**
  * The template node xb-input
@@ -69,7 +69,7 @@ xv.Input = xblocks.view.register('xb-input', [
 
         componentDidMount: function () {
             // check show or hide placeholder after mount element
-            this.refs.controller._dispatchEventToggleHint('', this.props.value);
+            this.refs.controller.dispatchEventToggleHint('', this.props.value);
         },
 
         /**
@@ -77,7 +77,7 @@ xv.Input = xblocks.view.register('xb-input', [
          * @param {Event} event
          * @private
          */
-        _onChange: function (event) {
+        onChange: function (event) {
             this.setState({
                 'value': event.target.value
             });
@@ -88,8 +88,18 @@ xv.Input = xblocks.view.register('xb-input', [
          * @param {boolean} toggle
          * @private
          */
-        _onHintToggle: function (toggle) {
-            React.findDOMNode(this.refs.placeholder).style.visibility = (toggle ? 'inherit' : 'hidden');
+        onHintToggle: function (toggle) {
+            this.refs.placeholder.style.visibility = (toggle ? 'inherit' : 'hidden');
+        },
+
+        /**
+         * Click reset button
+         * @private
+         */
+        onClickReset: function () {
+            this.setState({
+                'value': ''
+            });
         },
 
         /**
@@ -97,7 +107,7 @@ xv.Input = xblocks.view.register('xb-input', [
          * @returns {boolean}
          * @private
          */
-        _isComplex: function () {
+        isComplex: function () {
             return Boolean(
                 this.props.postfix ||
                 this.props.prefix ||
@@ -108,18 +118,8 @@ xv.Input = xblocks.view.register('xb-input', [
             );
         },
 
-        /**
-         * Click reset button
-         * @private
-         */
-        _onClickReset: function () {
-            this.setState({
-                'value': ''
-            });
-        },
-
         render: function () {
-            var isComplex = this._isComplex();
+            var isComplex = this.isComplex();
             var classes = {
                 'xb-input':     true,
                 '_disabled':    this.props.disabled,
@@ -146,8 +146,8 @@ xv.Input = xblocks.view.register('xb-input', [
                 'key':          'controller',
                 'multiline':    this.props.multiline,
                 'name':         this.props.name,
-                'onChange':     this._onChange,
-                'onHintToggle': this._onHintToggle,
+                'onChange':     this.onChange,
+                'onHintToggle': this.onHintToggle,
                 'readOnly':     this.props.readonly,
                 'ref':          'controller',
                 'required':     this.props.required,
@@ -193,13 +193,13 @@ xv.Input = xblocks.view.register('xb-input', [
 
                 if (this.props.reset) {
                     children.push(
-                        <span key="reset" className="_reset" onClick={this._onClickReset}></span>
+                        <span key="reset" className="_reset" onClick={this.onClickReset}></span>
                     );
                 }
 
                 children.push(
                     <span key="content" className="_content">
-                        <InputController {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
+                        <Controller {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
                         <span key="view" className="_view"></span>
                     </span>
                 );
@@ -211,11 +211,11 @@ xv.Input = xblocks.view.register('xb-input', [
             } else {
 
                 return (
-                    <InputController {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
+                    <Controller {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
                 );
             }
         }
     }
 ]);
 
-export default xv.Input;
+module.exports = xv.Input;

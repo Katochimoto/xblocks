@@ -1,10 +1,11 @@
-import xv from 'context';
-import xblocks from 'xblocks';
-import React from 'react';
-import classnames from 'classnames';
-import { resetLastRadioChecked, filterProps, exportPropTypes } from 'utils';
-import commonAttrs from 'mixin/view/commonAttrs';
-import Content from './content.jsx';
+var xv = require('context').xv;
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
+var resetLastRadioChecked = require('utils/resetLastRadioChecked');
+var filterProps = require('utils/filterProps');
+var exportPropTypes = require('utils/exportPropTypes');
+var Content = require('./content.jsx');
 
 /**
  * The template node xb-button
@@ -13,8 +14,8 @@ import Content from './content.jsx';
  * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Button = xblocks.view.register('xb-button', [
-    commonAttrs,
-    exportPropTypes('xb-ico'),
+    require('mixin/view/commonAttrs'),
+    require('utils/exportPropTypes')('xb-ico'),
 
     {
         displayName: 'xb-button',
@@ -230,4 +231,4 @@ xv.Button = xblocks.view.register('xb-button', [
     }
 ]);
 
-export default xv.Button;
+module.exports = xv.Button;

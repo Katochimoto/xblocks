@@ -44,7 +44,7 @@ clean:
 	rm -rf lodash
 
 lodash: node_modules Makefile
-	$(NPM_BIN)/lodash exports=umd include=debounce,throttle,merge,isEmpty,pick,transform,noop modularize -o $@
+	$(NPM_BIN)/lodash exports=umd include=debounce,throttle,merge,isEmpty,pick,transform,noop,capitalize modularize -o $@
 	touch lodash
 
 test: node_modules bower_components lodash

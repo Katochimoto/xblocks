@@ -1,5 +1,7 @@
-// require('./index.styl');
+require('./index.styl');
+require('./index.jsx');
 
+var xb = require('context').xb;
 var Tether = require('tether');
 var context = require('context');
 var xblocks = require('xblocks');
@@ -109,7 +111,7 @@ var popupCommon = {
  * @augments HTMLElement
  * @mixes xblocks.mixin.eFocus
  */
-module.exports = xblocks.create('xb-popup', [
+xb.Popup = xblocks.create('xb-popup', [
     require('mixin/element/focus'),
 
     {
@@ -279,3 +281,5 @@ module.exports = xblocks.create('xb-popup', [
         }
     }
 ]);
+
+module.exports = xb.Popup;

@@ -1,7 +1,8 @@
-import xblocks from 'xblocks';
-import React from 'react';
+var xblocks = require('xblocks');
+var React = require('react');
+var ReactDOM = require('react-dom');
 
-export default xblocks.view.create({
+module.exports = xblocks.view.create({
     displayName: 'xb-input_controller',
 
     mixins: [ React.addons.PureRenderMixin ],
@@ -42,15 +43,15 @@ export default xblocks.view.create({
     },
 
     componentDidUpdate: function (prevProps) {
-        this._recalculateSize();
-        this._dispatchEventToggleHint(prevProps.value, this.props.value);
+        this.recalculateSize();
+        this.dispatchEventToggleHint(prevProps.value, this.props.value);
     },
 
     componentDidMount: function () {
-        this._recalculateSize();
+        this.recalculateSize();
     },
 
-    _dispatchEventToggleHint: function (prevValue, nextValue) {
+    dispatchEventToggleHint: function (prevValue, nextValue) {
         if (this.props.isPlaceholderHint) {
             var hasPrevValue = Boolean(prevValue);
             var hasNestValue = Boolean(nextValue);
@@ -62,12 +63,12 @@ export default xblocks.view.create({
         }
     },
 
-    _recalculateSize: function () {
+    recalculateSize: function () {
         if (!this.props.autosize) {
             return;
         }
 
-        var node = React.findDOMNode(this);
+        var node = ReactDOM.findDOMNode(this);
 
         if (this.props.multiline) {
             node.style.height = '0px';

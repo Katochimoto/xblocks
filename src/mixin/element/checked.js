@@ -36,10 +36,10 @@
  * @type {object}
  */
 module.exports = {
-    'accessors': {
-        'checked': {
-            'attribute': {
-                'boolean': true
+    accessors: {
+        checked: {
+            attribute: {
+                boolean: true
             }
         }
     }

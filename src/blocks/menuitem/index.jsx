@@ -1,3 +1,4 @@
+var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
 var classnames = require('classnames');
@@ -11,7 +12,7 @@ var isEmpty = require('_/lang/isEmpty');
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-module.exports = xblocks.view.register('xb-menuitem', [
+xv.Menuitem = xblocks.view.register('xb-menuitem', [
     require('mixin/view/commonAttrs'),
     require('utils/exportPropTypes')('xb-ico'),
 
@@ -20,6 +21,7 @@ module.exports = xblocks.view.register('xb-menuitem', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
+        // @ifdef DEBUG
         propTypes: {
             'focused':  React.PropTypes.bool,
             'ico':      React.PropTypes.object,
@@ -27,6 +29,7 @@ module.exports = xblocks.view.register('xb-menuitem', [
             'selected': React.PropTypes.bool,
             'submenu':  React.PropTypes.bool
         },
+        // @endif
 
         getDefaultProps: function () {
             return {
@@ -71,3 +74,5 @@ module.exports = xblocks.view.register('xb-menuitem', [
         }
     }
 ]);
+
+module.exports = xv.Menuitem;

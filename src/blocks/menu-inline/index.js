@@ -1,5 +1,7 @@
-// require('./index.styl');
+require('./index.styl');
+require('./index.jsx');
 
+var xb = require('context').xb;
 var xblocks = require('xblocks');
 var lazyFocus = require('utils/lazyFocus');
 var Table = require('utils/Table');
@@ -28,7 +30,7 @@ var menuCommon = {
  * @mixes xblocks.mixin.eFocus
  * @mixes xblocks.mixin.eMenu
  */
-module.exports = xblocks.create('xb-menu-inline', [
+xb.MenuInline = xblocks.create('xb-menu-inline', [
     require('mixin/element/focus'),
     require('mixin/element/menu'),
 
@@ -57,3 +59,5 @@ module.exports = xblocks.create('xb-menu-inline', [
         }
     }
 ]);
+
+module.exports = xb.MenuInline;

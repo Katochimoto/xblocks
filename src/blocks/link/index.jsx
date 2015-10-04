@@ -1,3 +1,4 @@
+var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
 var classnames = require('classnames');
@@ -10,7 +11,7 @@ var classnames = require('classnames');
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-module.exports = xblocks.view.register('xb-link', [
+xv.Link = xblocks.view.register('xb-link', [
     require('mixin/view/commonAttrs'),
 
     {
@@ -18,12 +19,14 @@ module.exports = xblocks.view.register('xb-link', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
+        // @ifdef DEBUG
         propTypes: {
             'href':     React.PropTypes.string,
             'name':     React.PropTypes.string,
             'target':   React.PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
             'theme':    React.PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ])
         },
+        // @endif
 
         getDefaultProps: function () {
             return {
@@ -60,8 +63,13 @@ module.exports = xblocks.view.register('xb-link', [
                     target={this.props.target}
                     tabIndex={tabIndex}
                     className={classes}
-                    data-xb-content={this.props._uid}>{content}</a>
+                    data-xb-content={this.props._uid}>
+
+                    {content}
+                </a>
             );
         }
     }
 ]);
+
+module.exports = xv.Link;

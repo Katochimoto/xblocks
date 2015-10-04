@@ -1,5 +1,7 @@
-// require('./index.styl');
+require('./index.styl');
+require('./index.jsx');
 
+var xb = require('context').xb;
 var context = require('context');
 var xblocks = require('xblocks');
 
@@ -71,7 +73,7 @@ var _xbMenuitem = {
  * @listens xblocks.Element~event:xb-created
  * @listens xblocks.Element~event:xb-destroy
  */
-module.exports = xblocks.create('xb-menuitem', [
+xb.Menuitem = xblocks.create('xb-menuitem', [
     require('mixin/element/disabled'),
     require('mixin/element/inputValueProps'),
 
@@ -226,3 +228,5 @@ module.exports = xblocks.create('xb-menuitem', [
         }
     }
 ]);
+
+module.exports = xb.Menuitem;

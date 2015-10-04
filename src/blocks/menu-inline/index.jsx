@@ -1,3 +1,4 @@
+var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
 
@@ -10,7 +11,7 @@ var React = require('react');
  * @mixes xblocks.mixin.vMenu
  * @mixes React.addons.PureRenderMixin
  */
-module.exports = xblocks.view.register('xb-menu-inline', [
+xv.MenuInline = xblocks.view.register('xb-menu-inline', [
     require('mixin/view/commonAttrs'),
     require('mixin/view/menu'),
 
@@ -36,3 +37,5 @@ module.exports = xblocks.view.register('xb-menu-inline', [
         }
     }
 ]);
+
+module.exports = xv.MenuInline;

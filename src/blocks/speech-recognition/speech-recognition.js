@@ -1,3 +1,9 @@
+require('./index.styl');
+require('./index.jsx');
+
+var xb = require('context').xb;
+var xblocks = require('xblocks');
+
 var _xbSpeechRecognition = {
     'events': {
         'end': 1,
@@ -19,12 +25,12 @@ var _xbSpeechRecognition = {
  * @listens xblocks.Element~event:xb-destroy
  */
 xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
-    xblocks.mixin.eDisabled,
+    require('mixin/element/disabled'),
 
     {
-        'prototype': Object.create(HTMLElement.prototype),
+        prototype: Object.create(HTMLElement.prototype),
 
-        'events': {
+        events: {
             'xb-created': function () {
                 this._xbRecognition = new xblocks.utils.SpeechRecognition({
                     'lang': this.lang || (global.navigator && global.navigator.language) || 'en-US',
@@ -60,7 +66,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         /**
          * @lends xb.SpeechRecognition.prototype
          */
-        'accessors': {
+        accessors: {
             'active': {
                 'attribute': {
                     'boolean': true
@@ -93,7 +99,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
             }
         },
 
-        'methods': {
+        methods: {
             '_sendEventToTarget': function (event) {
                 var target = this.target;
                 var type = typeof(target);
@@ -119,3 +125,5 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         }
     }
 ]);
+
+module.exports = xb.SpeechRecognition;

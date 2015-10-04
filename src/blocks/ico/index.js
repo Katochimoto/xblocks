@@ -1,5 +1,7 @@
-// require('./index.styl');
+require('./index.styl');
+require('./index.jsx');
 
+var xb = require('context').xb;
 var xblocks = require('xblocks');
 
 /**
@@ -34,16 +36,18 @@ var xblocks = require('xblocks');
  * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
-module.exports = xblocks.create('xb-ico', [
+xb.Ico = xblocks.create('xb-ico', [
     require('mixin/element/disabled'),
 
     {
-        'accessors': {
-            'active': {
-                'attribute': {
-                    'boolean': true
+        accessors: {
+            active: {
+                attribute: {
+                    boolean: true
                 }
             }
         }
     }
 ]);
+
+module.exports = xb.Ico;

@@ -54,7 +54,8 @@ var params = {
             'mixin': path.join(src, 'mixin'),
             'utils': path.join(src, 'utils'),
             'dom': path.join(src, 'dom'),
-            'event': path.join(src, 'event')
+            'event': path.join(src, 'event'),
+            'polyfills': path.join(src, 'polyfills')
         }
     },
     'externals': {
@@ -88,6 +89,10 @@ var params = {
             {
                 'test': /\.styl$/,
                 'loader': ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader')
+            },
+            {
+                'test': /\.(gif|png|jpe?g|svg)$/i,
+                'loader': 'url'
             }
         ]
     }

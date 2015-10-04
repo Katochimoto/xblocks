@@ -1,8 +1,8 @@
-import xblocks from 'xblocks';
-import React from 'react';
-import { isEmpty } from '_/lang';
+var xblocks = require('xblocks');
+var React = require('react');
+var isEmpty = require('_/lang/isEmpty');
 
-export default xblocks.view.create({
+module.exports = xblocks.view.create({
     displayName: 'xb-button_content',
 
     mixins: [ React.addons.PureRenderMixin ],
@@ -23,7 +23,10 @@ export default xblocks.view.create({
         var children = [
             <span className="_content-content"
                 key="content"
-                data-xb-content={this.props._uid}>{this.props.children}</span>
+                data-xb-content={this.props._uid}>
+
+                {this.props.children}
+            </span>
         ];
 
         if (!isEmpty(this.props.ico) && this.props.ico.type) {

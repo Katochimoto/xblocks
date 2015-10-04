@@ -1,8 +1,8 @@
 require('./index.styl');
 require('./index.jsx');
 
-import xb from 'context';
-import xblocks from 'xblocks';
+var xb = require('context').xb;
+var xblocks = require('xblocks');
 
 /**
  * xb-button html element
@@ -60,4 +60,4 @@ xb.Button = xblocks.create('xb-button', [
     }
 ]);
 
-export default xb.Button;
+module.exports = xb.Button;
