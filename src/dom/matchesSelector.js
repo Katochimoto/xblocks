@@ -1,12 +1,9 @@
 var context = require('context');
+var vendor = require('utils/vendor');
 var indexOf = Array.prototype.indexOf;
 var proto = context.Element.prototype;
 var matches = proto.matches ||
-    proto.matchesSelector ||
-    proto.webkitMatchesSelector ||
-    proto.mozMatchesSelector ||
-    proto.msMatchesSelector ||
-    proto.oMatchesSelector ||
+    vendor(matchesSelector, proto) ||
     function (selector) {
         return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
     };
