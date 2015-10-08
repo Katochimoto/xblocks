@@ -2,6 +2,7 @@ var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
 var classnames = require('classnames');
+var filterProps = require('utils/filterProps');
 var Controller = require('./controller.jsx');
 
 /**

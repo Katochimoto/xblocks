@@ -51,7 +51,7 @@ module.exports = {
             get: function () {
                 var component = this.xblock && this.xblock.getMountedComponent();
 
-                if (component && typeof(component.state.value) !== 'undefined') {
+                if (component && typeof component.state.value !== 'undefined') {
                     return component.state.value;
                 }
 

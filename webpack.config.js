@@ -67,7 +67,6 @@ var params = {
     },
     'plugins': [ define, dedupe, extractText ],
     'module': {
-        /*
         'preLoaders': [
             {
                 'test': /\.jsx?$/,
@@ -75,7 +74,6 @@ var params = {
                 'include': [ src ]
             }
         ],
-        */
         'loaders': [
             {
                 'test': /\.jsx?$/,

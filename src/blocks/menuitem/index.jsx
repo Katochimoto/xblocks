@@ -2,6 +2,7 @@ var xv = require('context').xv;
 var xblocks = require('xblocks');
 var React = require('react');
 var classnames = require('classnames');
+var filterProps = require('utils/filterProps');
 var isEmpty = require('_/lang/isEmpty');
 
 /**
@@ -46,7 +47,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 '_disabled':   this.props.disabled,
                 '_focused':    this.props.focused,
                 '_selected':   this.props.selected,
-                '_submenu':    this.props.submenu,
+                '_submenu':    this.props.submenu
             };
 
             classes = classnames(classes);

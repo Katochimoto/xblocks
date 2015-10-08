@@ -1,4 +1,5 @@
 var lazyFocus = require('utils/lazyFocus');
+var isParent = require('dom/isParent');
 
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
@@ -64,7 +65,7 @@ module.exports = {
          * @param {xb.Menuitem} menuitem
          */
         scrollIntoItem: function (menuitem) {
-            if (!xblocks.dom.isParent(this, menuitem)) {
+            if (!isParent(this, menuitem)) {
                 return;
             }
 

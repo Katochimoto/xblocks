@@ -3,7 +3,7 @@ var vendor = require('utils/vendor');
 var indexOf = Array.prototype.indexOf;
 var proto = context.Element.prototype;
 var matches = proto.matches ||
-    vendor(matchesSelector, proto) ||
+    vendor('matchesSelector', proto) ||
     function (selector) {
         return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);
     };

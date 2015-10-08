@@ -4,7 +4,6 @@ var React = require('react');
 var classnames = require('classnames');
 var resetLastRadioChecked = require('utils/resetLastRadioChecked');
 var filterProps = require('utils/filterProps');
-var exportPropTypes = require('utils/exportPropTypes');
 var Content = require('./content.jsx');
 
 /**

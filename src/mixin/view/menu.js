@@ -1,5 +1,4 @@
 var classnames = require('classnames');
-var React = require('react');
 var xblocks = require('xblocks');
 var throttle = require('_/function/throttle');
 var throttleAnimationFrame = require('utils/throttleAnimationFrame');
