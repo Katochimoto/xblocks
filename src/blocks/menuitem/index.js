@@ -4,8 +4,11 @@ require('./index.jsx');
 var xb = require('context').xb;
 var context = require('context');
 var xblocks = require('xblocks');
+var lazyFocus = require('utils/lazyFocus');
+var getParentMenu = require('utils/getParentMenu');
+var merge = require('_/object/merge');
 
-var _xbMenuitem = {
+var menuitemCommon = {
     submenuAttrs: {
         'attachment': 'top left',
         'target-attachment': 'top right',
@@ -48,11 +51,12 @@ var _xbMenuitem = {
              */
             remove: function () {
                 if (this._submenuInstance) {
-                    _xbMenuitem.submenu.cancel();
-
-                    this._submenuInstance.close();
-                    xblocks.dom.removeChild(this._submenuInstance);
+                    var submenu = this._submenuInstance;
                     this._submenuInstance = undefined;
+
+                    menuitemCommon.submenu.cancel();
+                    submenu.close();
+                    xblocks.dom.removeChild(submenu);
                 }
             }
         };
@@ -78,26 +82,26 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
     require('mixin/element/inputValueProps'),
 
     {
-        'prototype': Object.create(HTMLElement.prototype),
+        prototype: Object.create(HTMLElement.prototype),
 
-        'events': {
+        events: {
             /**
              * @callback
              */
             'xb-created': function () {
-                _xbMenuitem.submenu.remove.call(this);
+                menuitemCommon.submenu.remove.call(this);
                 this.submenu = Boolean(this.content.trim());
             },
 
             /**
              * @callback
              */
-            'xb-repaint': _xbMenuitem.submenu.remove,
+            'xb-repaint': menuitemCommon.submenu.remove,
 
             /**
              * @callback
              */
-            'xb-destroy': _xbMenuitem.submenu.remove,
+            'xb-destroy': menuitemCommon.submenu.remove,
 
             /**
              * @callback
@@ -105,12 +109,12 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
             'xb-blur': function () {
                 this.focused = false;
 
-                _xbMenuitem.submenu.cancel();
+                menuitemCommon.submenu.cancel();
 
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
                     // to close the submenu and return focus
-                    xblocks.utils.lazyFocus(this.menuInstance);
+                    lazyFocus(this.menuInstance);
                 }
             },
 
@@ -123,7 +127,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
 
                 // open the submenu only event-mouse
                 if (event.detail.originalEvent.type !== 'keydown') {
-                    _xbMenuitem.submenu.open(this.submenuInstance);
+                    menuitemCommon.submenu.open(this.submenuInstance);
 
                 // scroll menu only keyboard events
                 } else {
@@ -135,39 +139,31 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
         /**
          * @lends xb.Menuitem.prototype
          */
-        'accessors': {
-            /**
-             * @prop {string} label
-             */
-
-             /**
-              * @prop {boolean} [disabled=false]
-              */
-
+        accessors: {
             /**
              * @prop {boolean} [focused=false] Item in focus
              */
-            'focused': {
-                'attribute': {
-                    'boolean': true
+            focused: {
+                attribute: {
+                    boolean: true
                 }
             },
 
             /**
              * @prop {boolean} [selected=false] Item is selected
              */
-            'selected': {
-                'attribute': {
-                    'boolean': true
+            selected: {
+                attribute: {
+                    boolean: true
                 }
             },
 
             /**
              * @prop {boolean} [submenu=false] Item has a submenu
              */
-            'submenu': {
-                'attribute': {
-                    'boolean': true
+            submenu: {
+                attribute: {
+                    boolean: true
                 }
             },
 
@@ -175,13 +171,13 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
              * @readonly
              * @prop {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
              */
-            'menuInstance': {
-                'get': function () {
+            menuInstance: {
+                get: function () {
                     if (this._menuInstance || this._menuInstance === null) {
                         return this._menuInstance;
                     }
 
-                    this._menuInstance = xblocks.utils.getParentMenu(this);
+                    this._menuInstance = getParentMenu(this);
 
                     return this._menuInstance;
                 }
@@ -191,8 +187,8 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
              * @readonly
              * @prop {xb.Menu|null} submenuInstance Submenu instance
              */
-            'submenuInstance': {
-                'get': function () {
+            submenuInstance: {
+                get: function () {
                     if (this._submenuInstance || this._submenuInstance === null) {
                         return this._submenuInstance;
                     }
@@ -203,7 +199,7 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
                         var targetClassName = '_menuitem-target-' + this.xuid;
                         var menu = this.ownerDocument.createElement('xb-menu');
                         var parentConstraints = this.menuInstance.getAttribute('constraints');
-                        var attrs = xblocks.utils.merge({ 'target': '.' + targetClassName }, _xbMenuitem.submenuAttrs);
+                        var attrs = merge({ 'target': '.' + targetClassName }, menuitemCommon.submenuAttrs);
 
                         // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
                         // меню может быть открыто в блоке со скролом,

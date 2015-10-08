@@ -31,15 +31,21 @@ module.exports = xblocks.view.create({
 
         if (!isEmpty(this.props.ico) && this.props.ico.type) {
             if (!this.props.ico.float || this.props.ico.float === 'left') {
-                children.unshift(<xb-ico {...this.props.ico} key="ico" />);
+                children.unshift(
+                    <xb-ico {...this.props.ico} key="ico" />
+                );
 
             } else if (this.props.ico.float === 'right') {
-                children.push(<xb-ico {...this.props.ico} key="ico" />);
+                children.push(
+                    <xb-ico {...this.props.ico} key="ico" />
+                );
             }
         }
 
         return (
-            <span className="_content">{children}</span>
+            <span className="_content">
+                {children}
+            </span>
         );
     }
 });

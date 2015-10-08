@@ -12,7 +12,7 @@ var getParentMenu = require('utils/getParentMenu');
 
 var forEach = Array.prototype.forEach;
 
-var _xbMenu = {
+var menuCommon = {
 
     /**
      * @param {xb.Menuitem} target
@@ -119,7 +119,7 @@ xb.Menu = xblocks.create('xb-menu', [
              * @prop {Object} default options
              */
             defaultOptions: {
-                get: _xbMenu.tetherDefaultOptions
+                get: menuCommon.tetherDefaultOptions
             },
 
             /**
@@ -153,7 +153,7 @@ xb.Menu = xblocks.create('xb-menu', [
             _closeAllSubmenu: function () {
                 forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    _xbMenu.closeSubmenu
+                    menuCommon.closeSubmenu
                 );
             },
 

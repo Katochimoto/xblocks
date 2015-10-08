@@ -53,7 +53,9 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
             classes = classnames(classes);
 
             var children = [
-                <span className="_label" key="label">{this.props.label}</span>
+                <span className="_label" key="label">
+                    {this.props.label}
+                </span>
             ];
 
             var icoProps = filterProps(/^xb-ico-/, this.props);
@@ -62,15 +64,21 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
                 icoProps.key = 'ico';
 
                 if (!icoProps.float || icoProps.float === 'left') {
-                    children.unshift(<xb-ico {...icoProps} />);
+                    children.unshift(
+                        <xb-ico {...icoProps} />
+                    );
 
                 } else if (icoProps.float === 'right') {
-                    children.push(<xb-ico {...icoProps} />);
+                    children.push(
+                        <xb-ico {...icoProps} />
+                    );
                 }
             }
 
             return (
-                <div className={classes}>{children}</div>
+                <div className={classes}>
+                    {children}
+                </div>
             );
         }
     }

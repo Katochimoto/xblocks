@@ -83,7 +83,9 @@ xv.Popup = xblocks.view.register('xb-popup', [
             classes = classnames(classes);
 
             return (
-                <div className={classes} tabIndex="0">{children}</div>
+                <div className={classes} tabIndex="0">
+                    {children}
+                </div>
             );
         }
     }

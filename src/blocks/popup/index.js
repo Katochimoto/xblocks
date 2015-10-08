@@ -6,6 +6,7 @@ var Tether = require('tether');
 var context = require('context');
 var xblocks = require('xblocks');
 var tetherDefaultOptions = require('utils/tetherDefaultOptions');
+var assign = require('_/object/assign');
 
 var popupCommon = {
     onOpen: function () {
@@ -207,9 +208,9 @@ xb.Popup = xblocks.create('xb-popup', [
              * @param {object} nextOptions new settings
              */
             setOptions: function (nextOptions) {
-                var tether = this.tether;
+                assign(this.options, nextOptions);
 
-                xblocks.utils.assign(true, this.options, nextOptions);
+                var tether = this.tether;
                 tether.setOptions(this.options, false);
 
                 if (tether.enabled) {

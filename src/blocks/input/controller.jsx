@@ -56,7 +56,6 @@ module.exports = xblocks.view.create({
             var hasPrevValue = Boolean(prevValue);
             var hasNestValue = Boolean(nextValue);
 
-            /* jshint -W016 */
             if (hasPrevValue ^ hasNestValue) {
                 this.props.onHintToggle(hasPrevValue && !hasNestValue);
             }

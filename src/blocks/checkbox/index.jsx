@@ -66,7 +66,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
         render: function () {
             var classes = {
                 'xb-checkbox': true,
-                '_disabled':   this.props.disabled
+                '_disabled': this.props.disabled
             };
 
             if (this.props.size) {
@@ -86,19 +86,19 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                     title={this.props.title}
                     htmlFor={this.props['for']}>
 
-                    <input type="checkbox"
-                        className="_xb-check_controller"
-                        name={this.props.name}
-                        value={this.props.value}
-                        disabled={this.props.disabled}
-                        defaultChecked={this.props.checked}
+                    <input autoFocus={this.props.autofocus}
                         checked={this.state.checked}
-                        autoFocus={this.props.autofocus}
-                        readOnly={true}
+                        className="_xb-check_controller"
+                        defaultChecked={this.props.checked}
+                        disabled={this.props.disabled}
+                        form={this.props.form}
+                        name={this.props.name}
                         onChange={this._onChange}
+                        readOnly={true}
                         required={this.props.required}
                         tabIndex={tabIndex}
-                        form={this.props.form} />
+                        type="checkbox"
+                        value={this.props.value} />
 
                     <span className="_xb-checkbox_flag _xb-check_flag">
                         <span className="_xb-checkbox_flag-icon"></span>

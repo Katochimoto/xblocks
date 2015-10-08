@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
 var merge = require('./lodash/object/merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -82,17 +83,29 @@ var params = {
             },
             {
                 'test': /\.css$/,
-                'loader': ExtractTextPlugin.extract('style-loader', 'css-loader')
+                'loader': ExtractTextPlugin.extract('style', 'css!postcss')
             },
             {
                 'test': /\.styl$/,
-                'loader': ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader')
+                'loader': ExtractTextPlugin.extract('style', 'css!postcss!stylus')
             },
             {
                 'test': /\.(gif|png|jpe?g|svg)$/i,
                 'loader': 'url'
             }
         ]
+    },
+    'postcss': function () {
+        return [
+            autoprefixer({
+                'browsers': [
+                    '> 1%',
+                    'Firefox >= 14',
+                    'Opera >= 12',
+                    'Chrome >= 4'
+                ]
+            })
+        ];
     }
 };
 

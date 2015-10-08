@@ -200,7 +200,8 @@ xv.Input = xblocks.view.register('xb-input', [
 
                 children.push(
                     <span key="content" className="_content">
-                        <Controller {...controllerProps} isPlaceholderHint={isPlaceholderHint} />
+                        <Controller {...controllerProps}
+                            isPlaceholderHint={isPlaceholderHint} />
                         <span key="view" className="_view"></span>
                     </span>
                 );
@@ -212,7 +213,9 @@ xv.Input = xblocks.view.register('xb-input', [
             } else {
 
                 return (
-                    <Controller {...controllerProps} className={classes} isPlaceholderHint={isPlaceholderHint} />
+                    <Controller {...controllerProps}
+                        className={classes}
+                        isPlaceholderHint={isPlaceholderHint} />
                 );
             }
         }
