@@ -103,7 +103,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         methods: {
             '_sendEventToTarget': function (event) {
                 var target = this.target;
-                var type = typeof(target);
+                var type = typeof target;
                 var targetEvent = new xblocks.event.Custom('xb-speech-recognition-' + event.type, {
                     'bubbles': false,
                     'cancelable': false,
@@ -115,7 +115,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
 
                 } else {
                     if (type === 'string') {
-                        target = __doc.querySelector(target);
+                        target = context.document.querySelector(target);
                     }
 
                     if (target instanceof HTMLElement) {

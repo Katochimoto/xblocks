@@ -1,4 +1,6 @@
-describe('xb-button ->', function () {
+import vow from 'vow';
+
+xdescribe('xb-button ->', function () {
 
     beforeEach(function () {
         this.xElement = document.createElement('xb-button');

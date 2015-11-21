@@ -1,7 +1,7 @@
 (function () {
 
     function clearTestContext(context) {
-        if (!context || typeof(context) !== 'object') {
+        if (!context || typeof context !== 'object') {
             return;
         }
 

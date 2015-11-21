@@ -1,4 +1,6 @@
-describe('xb-radio ->', function () {
+import vow from 'vow';
+
+xdescribe('xb-radio ->', function () {
 
     beforeEach(function () {
         this.xElement = document.createElement('xb-radio');

@@ -1,3 +1,8 @@
+var context = require('context');
+var wrap = require('event/wrap');
+var delegateMatch = require('event/delegateMatch');
+var doc = context.document;
+
 var _currentMenu = null;
 
 var _onMousedown = function (event) {
@@ -6,9 +11,9 @@ var _onMousedown = function (event) {
         return;
     }
 
-    xblocks.event.wrap(event);
+    wrap(event);
 
-    var match = xblocks.event.delegateMatch('xb-menu', event.target);
+    var match = delegateMatch('xb-menu', event.target);
 
     if (!match || match.firstParentMenu !== _currentMenu) {
         _currentMenu.close();
@@ -24,12 +29,12 @@ var _bind = function (menuNode) {
     _unbind();
     _currentMenu = menuNode;
     _currentMenu.addEventListener('xb-close', _onXbClose, false);
-    __doc.addEventListener('mousedown', _onMousedown, false);
+    doc.addEventListener('mousedown', _onMousedown, false);
 };
 
 var _unbind = function () {
     if (_currentMenu) {
-        __doc.removeEventListener('mousedown', _onMousedown, false);
+        doc.removeEventListener('mousedown', _onMousedown, false);
         _currentMenu.removeEventListener('xb-close', _onXbClose, false);
         _currentMenu = null;
     }

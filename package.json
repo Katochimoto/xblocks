@@ -1,7 +1,7 @@
 {
   "name": "xblocks",
   "description": "HTML custom elements",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "keywords": [
     "x-tag",
     "x-tags",
@@ -51,10 +51,10 @@
     "karma-opera-launcher": "~0.3.x",
     "karma-phantomjs-launcher": "~0.2.x",
     "karma-safari-launcher": "~0.1.x",
-    "karma-sinon-chai": "^1.0.0",
+    "karma-sinon-chai": "~1.1.x",
     "karma-webpack": "^1.7.0",
     "lodash-cli": "^3.10.1",
-    "mocha": "2.3.2",
+    "mocha": "^2.3.4",
     "postcss-loader": "^0.8.0",
     "preprocess": "^3.0.2",
     "preprocess-loader": "^0.2.0",
@@ -72,7 +72,7 @@
     "setimmediate2": "~2.0.x"
   },
   "engines": {
-    "node": ">=0.6.0"
+    "node": ">=4.0.0"
   },
   "scripts": {
     "test": "make; make test",
