@@ -6607,6 +6607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 
 	        throttle = animationFrame.requestAnimationFrame(animationCallback);
+	        console.log(animationFrame);
 
 	        callback.apply(context || this, arguments);
 	    };
@@ -6636,10 +6637,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    context.clearTimeout(id);
 	};
 
-	module.exports = {
-	    'requestAnimationFrame': context.requestAnimationFrame,
-	    'cancelAnimationFrame': context.cancelAnimationFrame
-	};
+	exports.requestAnimationFrame = context.requestAnimationFrame;
+	exports.cancelAnimationFrame = context.cancelAnimationFrame;
 
 /***/ },
 /* 168 */

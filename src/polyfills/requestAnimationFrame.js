@@ -19,7 +19,5 @@ context.cancelAnimationFrame = vendor('cancelAnimationFrame') ||
         context.clearTimeout(id);
     };
 
-module.exports = {
-    'requestAnimationFrame': context.requestAnimationFrame,
-    'cancelAnimationFrame': context.cancelAnimationFrame
-};
+exports.requestAnimationFrame = context.requestAnimationFrame;
+exports.cancelAnimationFrame = context.cancelAnimationFrame;
