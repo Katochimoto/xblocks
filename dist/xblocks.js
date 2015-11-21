@@ -6636,8 +6636,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    context.clearTimeout(id);
 	};
 
-	exports.requestAnimationFrame = context.requestAnimationFrame;
-	exports.cancelAnimationFrame = context.cancelAnimationFrame;
+	exports.requestAnimationFrame = requestAnimationFrame;
+	exports.cancelAnimationFrame = cancelAnimationFrame;
 
 /***/ },
 /* 168 */
