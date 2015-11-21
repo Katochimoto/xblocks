@@ -1,16 +1,19 @@
 {
   "name": "react",
-  "version": "0.13.3",
-  "main": "react.js",
+  "main": [
+    "react.js",
+    "react-dom.js"
+  ],
   "ignore": [],
   "homepage": "https://github.com/facebook/react-bower",
-  "_release": "0.13.3",
+  "version": "0.14.3",
+  "_release": "0.14.3",
   "_resolution": {
     "type": "version",
-    "tag": "v0.13.3",
-    "commit": "f68289bbb050e7ede4a3de6dac528647a6b6489a"
+    "tag": "v0.14.3",
+    "commit": "2eef4b2e33f37217032b9ed7f829e7cc479d8f68"
   },
   "_source": "git://github.com/facebook/react-bower.git",
-  "_target": "0.13.3",
+  "_target": "0.14.3",
   "_originalSource": "react"
 }
