@@ -6606,7 +6606,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return;
 	        }
 
-	        console.log(animationFrame, animationFrame.requestAnimationFrame);
+	        debugger;
 	        throttle = animationFrame.requestAnimationFrame(animationCallback);
 
 	        callback.apply(context || this, arguments);
