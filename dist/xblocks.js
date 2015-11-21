@@ -6606,7 +6606,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return;
 	        }
 
-	        console.log(callback, context);
 	        throttle = animationFrame.requestAnimationFrame(animationCallback);
 
 	        callback.apply(context || this, arguments);
@@ -6623,7 +6622,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var vendor = __webpack_require__(168);
 	var lastTime = 0;
 
-	context.requestAnimationFrame = vendor('requestAnimationFrame') || function (callback) {
+	var requestAnimationFrame = vendor('requestAnimationFrame') || function (callback) {
 	    var currTime = Date.now();
 	    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
 	    var id = context.setTimeout(function () {
@@ -6633,7 +6632,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return id;
 	};
 
-	context.cancelAnimationFrame = vendor('cancelAnimationFrame') || vendor('cancelRequestAnimationFrame') || function (id) {
+	var cancelAnimationFrame = vendor('cancelAnimationFrame') || vendor('cancelRequestAnimationFrame') || function (id) {
 	    context.clearTimeout(id);
 	};
 
