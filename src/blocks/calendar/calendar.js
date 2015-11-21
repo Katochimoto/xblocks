@@ -1,10 +1,3 @@
-//jscs:disable
-/* global xblocks, xb */
-/* jshint strict: false */
-//jscs:enable
-
-/*! borschik:include:calendar.jsx.js */
-
 /**
  * xb-calendar html element
  *
@@ -14,4 +7,4 @@
  * @augments HTMLElement
  * @memberof xb
  */
-xb.Calendar = xblocks.create('xb-calendar');
+// xb.Calendar = xblocks.create('xb-calendar');

@@ -137,7 +137,7 @@ Events:
 </script>
 
 <script>
-$('.popup').on('click', function(event) {
+$('.popup').on('click', function (event) {
     event.preventDefault();
     var ref = $(this).attr('ref');
     var $popup = $('#' + ref);
@@ -148,8 +148,8 @@ $('.popup').on('click', function(event) {
 
 
 
-    setTimeout(function() {
-        $('xb-popup').each(function() {
+    setTimeout(function () {
+        $('xb-popup').each(function () {
             this.close();
         });
 

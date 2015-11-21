@@ -21,14 +21,14 @@ xv.Calendar = xblocks.view.register('xb-calendar', [
             'startWeekDay': React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        'getDefaultProps': function () {
             return {
                 'startWeekDay': '1'
             };
         },
 
         /* jshint ignore:start */
-        'render': function() {
+        'render': function () {
             this.datetime = moment();
 
             var startWeekDay = Number(this.props.startWeekDay);

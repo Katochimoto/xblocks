@@ -1,67 +1,85 @@
 {
-    "name": "xblocks",
-    "description": "HTML custom elements",
-    "version": "0.7.0",
-    "keywords": [
-        "x-tag",
-        "x-tags",
-        "react",
-        "html5",
-        "xblocks"
-    ],
-    "homepage": "http://xblocks.ru",
-    "author": {
-        "name": "Rikishi",
-        "email": "bufpost@yandex.ru",
-        "url": "https://github.com/Katochimoto"
-    },
-    "bugs": {
-        "url": "https://github.com/Katochimoto/xblocks/issues",
-        "email": "bufpost@yandex.ru"
-    },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:Katochimoto/xblocks.git"
-    },
-    "devDependencies": {
-        "xblocks-utils": "0.6.0",
-
-        "babel": "5.8.20",
-        "borschik": "1.4.1",
-        "autoprefixer": "5.2.0",
-        "stylus": "0.52.0",
-        "classnames": "2.1.3",
-
-        "stylobate": "0.25.x",
-        "stylobate-islands": "0.28.x",
-
-        "jshint": "2.8.0",
-        "jscs": "2.0.0",
-
-        "vow": "0.4.10",
-        "mocha": "2.2.5",
-        "expect.js": "0.3.1",
-        "sinon": "1.15.4",
-
-        "karma": "~0.13.x",
-        "karma-mocha": "~0.2.x",
-        "karma-sinon-expect": "~0.1.x",
-        "karma-borschik-preprocessor": "~0.1.x",
-        "karma-babel-preprocessor": "5.2.1",
-        "karma-phantomjs-launcher": "~0.2.x",
-        "karma-chrome-launcher": "~0.2.x",
-        "karma-firefox-launcher": "Katochimoto/karma-firefox-launcher.git",
-        "karma-safari-launcher": "~0.1.x",
-        "karma-opera-launcher": "~0.1.x"
-    },
-    "engines": {
-        "node": ">=0.6.0"
-    },
-    "scripts": {
-        "test": "make && make test"
-    },
-    "directories": {
-        "test": "test"
-    }
+  "name": "xblocks",
+  "description": "HTML custom elements",
+  "version": "1.0.0",
+  "keywords": [
+    "x-tag",
+    "x-tags",
+    "react",
+    "html5",
+    "xblocks"
+  ],
+  "homepage": "http://xblocks.ru",
+  "author": {
+    "name": "Rikishi",
+    "email": "bufpost@yandex.ru",
+    "url": "https://github.com/Katochimoto"
+  },
+  "bugs": {
+    "url": "https://github.com/Katochimoto/xblocks/issues",
+    "email": "bufpost@yandex.ru"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Katochimoto/xblocks.git"
+  },
+  "devDependencies": {
+    "autoprefixer": "6.1.0",
+    "babel": "~5.8.x",
+    "babel-core": "~5.8.x",
+    "babel-eslint": "~4.1.x",
+    "babel-loader": "~5.3.x",
+    "classnames": "~2.2.x",
+    "css-loader": "^0.23.0",
+    "es5-shim": "^4.3.1",
+    "eslint": "^1.10.1",
+    "eslint-config-yandex": "^1.0.5",
+    "eslint-loader": "^1.0.0",
+    "eslint-plugin-react": "^3.10.0",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.4",
+    "image-webpack-loader": "^1.6.2",
+    "imagemin": "^4.0.0",
+    "karma": "~0.13.x",
+    "karma-babel-preprocessor": "~5.2.x",
+    "karma-chai": "~0.1.x",
+    "karma-chrome-launcher": "~0.2.x",
+    "karma-coverage": "~0.5.x",
+    "karma-firefox-launcher": "Katochimoto/karma-firefox-launcher.git",
+    "karma-mocha": "~0.2.x",
+    "karma-opera-launcher": "~0.3.x",
+    "karma-phantomjs-launcher": "~0.2.x",
+    "karma-safari-launcher": "~0.1.x",
+    "karma-sinon-chai": "~1.1.x",
+    "karma-webpack": "^1.7.0",
+    "lodash-cli": "^3.10.1",
+    "mocha": "^2.3.4",
+    "postcss-loader": "^0.8.0",
+    "preprocess": "^3.0.2",
+    "preprocess-loader": "^0.2.0",
+    "react": "0.14.3",
+    "react-dom": "0.14.3",
+    "style-loader": "^0.13.0",
+    "stylobate": "0.25.x",
+    "stylobate-islands": "0.28.x",
+    "stylus": "0.52.0",
+    "stylus-loader": "^1.3.0",
+    "tether": "^1.1.1",
+    "url-loader": "^0.5.6",
+    "vow": "0.4.10",
+    "xblocks-core": "Katochimoto/xblocks-core.git#rc-1.0.0",
+    "setimmediate2": "~2.0.x"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "test": "make; make test",
+    "prod": "NODE_ENV=production ./node_modules/.bin/webpack --progress",
+    "dev": "NODE_ENV=development ./node_modules/.bin/webpack --progress --watch"
+  },
+  "directories": {
+    "test": "test"
+  }
 }

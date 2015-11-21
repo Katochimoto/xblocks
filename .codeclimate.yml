@@ -1,6 +1,9 @@
 languages:
   JavaScript: true
 exclude_paths:
-- "build/*"
+- "dist/*"
 - "test/*"
+- "lodash/*"
+- "samples/*"
 - "karma.conf.js"
+- "webpack.config.js"

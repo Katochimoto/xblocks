@@ -1,9 +1,9 @@
-//jscs:disable
-/* global xblocks, xb, global */
-/* jshint strict: false */
-//jscs:enable
+require('./index.styl');
+require('./index.jsx');
 
-/*! borschik:include:speech-recognition.jsx.js */
+var context = require('context');
+var xb = require('context').xb;
+var xblocks = require('xblocks');
 
 var _xbSpeechRecognition = {
     'events': {
@@ -26,15 +26,15 @@ var _xbSpeechRecognition = {
  * @listens xblocks.Element~event:xb-destroy
  */
 xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
-    xblocks.mixin.eDisabled,
+    require('mixin/element/disabled'),
 
     {
-        'prototype': Object.create(HTMLElement.prototype),
+        prototype: Object.create(HTMLElement.prototype),
 
-        'events': {
-            'xb-created': function() {
+        events: {
+            'xb-created': function () {
                 this._xbRecognition = new xblocks.utils.SpeechRecognition({
-                    'lang': this.lang || (global.navigator && global.navigator.language) || 'en-US',
+                    'lang': this.lang || (context.navigator && context.navigator.language) || 'en-US',
                     'continuous': this.continuous,
                     'interimResults': this.interimResults
                 });
@@ -46,11 +46,11 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
                 this._xbRecognition.toggle(this.state.active);
             },
 
-            'xb-update': function() {
+            'xb-update': function () {
                 this._xbRecognition.toggle(this.state.active);
             },
 
-            'xb-destroy': function() {
+            'xb-destroy': function () {
                 for (var eventName in _xbSpeechRecognition.events) {
                     this._xbRecognition.removeEventListener(eventName, this._sendEventToTarget);
                 }
@@ -59,7 +59,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
                 this._xbRecognition = undefined;
             },
 
-            'click': function() {
+            'click': function () {
                 this.active = !this.active;
             }
         },
@@ -67,7 +67,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         /**
          * @lends xb.SpeechRecognition.prototype
          */
-        'accessors': {
+        accessors: {
             'active': {
                 'attribute': {
                     'boolean': true
@@ -100,10 +100,10 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
             }
         },
 
-        'methods': {
-            '_sendEventToTarget': function(event) {
+        methods: {
+            '_sendEventToTarget': function (event) {
                 var target = this.target;
-                var type = typeof(target);
+                var type = typeof target;
                 var targetEvent = new xblocks.event.Custom('xb-speech-recognition-' + event.type, {
                     'bubbles': false,
                     'cancelable': false,
@@ -115,7 +115,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
 
                 } else {
                     if (type === 'string') {
-                        target = __doc.querySelector(target);
+                        target = context.document.querySelector(target);
                     }
 
                     if (target instanceof HTMLElement) {
@@ -126,3 +126,5 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         }
     }
 ]);
+
+module.exports = xb.SpeechRecognition;

@@ -1,26 +1,28 @@
-describe('xb-button ->', function() {
+import vow from 'vow';
 
-    beforeEach(function() {
+xdescribe('xb-button ->', function () {
+
+    beforeEach(function () {
         this.xElement = document.createElement('xb-button');
     });
 
-    afterEach(function() {
+    afterEach(function () {
         if (this.xElement.parentNode) {
             this.xElement.parentNode.removeChild(this.xElement);
         }
     });
 
-    describe('checkbox ->', function() {
+    describe('checkbox ->', function () {
 
-        beforeEach(function() {
+        beforeEach(function () {
             this.xElement.setAttribute('type', 'checkbox');
         });
 
-        it('checked можно указать через атрибут', function() {
+        it('checked можно указать через атрибут', function () {
             var that = this;
             this.xElement.setAttribute('checked', 'true');
 
-            return new vow.Promise(function(resolve) {
+            return new vow.Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -32,11 +34,11 @@ describe('xb-button ->', function() {
             });
         });
 
-        it('checked можно указать через свойство', function() {
+        it('checked можно указать через свойство', function () {
             var that = this;
             this.xElement.checked = true;
 
-            return new vow.Promise(function(resolve) {
+            return new vow.Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -48,11 +50,11 @@ describe('xb-button ->', function() {
             });
         });
 
-        it('checked можно изменить через свойство', function() {
+        it('checked можно изменить через свойство', function () {
             var that = this;
             this.xElement.checked = true;
 
-            return new vow.Promise(function(resolve) {
+            return new vow.Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -73,11 +75,11 @@ describe('xb-button ->', function() {
             });
         });
 
-        it('checked можно изменить через атрибут', function() {
+        it('checked можно изменить через атрибут', function () {
             var that = this;
             this.xElement.setAttribute('checked', 'true');
 
-            return new vow.Promise(function(resolve) {
+            return new vow.Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -100,9 +102,9 @@ describe('xb-button ->', function() {
 
     });
 
-    describe('radio ->', function() {
+    describe('radio ->', function () {
 
-        beforeEach(function() {
+        beforeEach(function () {
             this.xElement.setAttribute('type', 'radio');
             this.xElement.setAttribute('name', 'test');
 
@@ -111,13 +113,13 @@ describe('xb-button ->', function() {
             this.xElement2.setAttribute('name', 'test');
         });
 
-        afterEach(function() {
+        afterEach(function () {
             if (this.xElement2.parentNode) {
                 this.xElement2.parentNode.removeChild(this.xElement2);
             }
         });
 
-        it('при установке свойства checked, оно должно сниматься с предыдущего одноименного элемента', function() {
+        it('при установке свойства checked, оно должно сниматься с предыдущего одноименного элемента', function () {
             var that = this;
             var defer1 = vow.defer();
             var defer2 = vow.defer();
@@ -135,8 +137,8 @@ describe('xb-button ->', function() {
             document.body.appendChild(that.xElement);
             document.body.appendChild(that.xElement2);
 
-            return new vow.Promise(function(resolve) {
-                vow.all([ defer1.promise(), defer2.promise() ]).then(function() {
+            return new vow.Promise(function (resolve) {
+                vow.all([ defer1.promise(), defer2.promise() ]).then(function () {
 
                     that.xElement.addEventListener('xb-update', function _onXbUpdate() {
                         that.xElement.removeEventListener('xb-update', _onXbUpdate, false);

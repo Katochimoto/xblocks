@@ -1,5 +1,7 @@
-/* global xblocks, React, Tether, xv */
-/* jshint strict: false */
+var xv = require('context').xv;
+var xblocks = require('xblocks');
+var React = require('react');
+var classnames = require('classnames');
 
 /**
  * The template node xb-speech-recognition
@@ -9,24 +11,25 @@
  * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
-    xblocks.mixin.vCommonAttrs,
+    require('mixin/view/commonAttrs'),
 
     {
-        'displayName': 'xb-speech-recognition',
+        displayName: 'xb-speech-recognition',
 
-        'propTypes': {
+        // @ifdef DEBUG
+        propTypes: {
             'active': React.PropTypes.bool
         },
+        // @endif
 
-        'getDefaultProps': function() {
+        getDefaultProps: function () {
             return {
                 'active':   false,
                 'disabled': false
             };
         },
 
-        /* jshint ignore:start */
-        'render': function() {
+        render: function () {
             var classes = {
                 'xb-speech-recognition': true,
                 '_active': this.props.active,
@@ -39,6 +42,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
                 <xb-ico className={classes} type={this.props.active ? 'mic-on' : 'mic-off'} />
             );
         }
-        /* jshint ignore:end */
     }
 ]);
+
+module.exports = xv.SpeechRecognition;

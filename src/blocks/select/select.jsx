@@ -1,6 +1,8 @@
 /* global xblocks, React, Tether, xv */
 /* jshint strict: false */
 
+var ReactDOM = require('react-dom');
+
 /**
  * The template node xb-select
  *
@@ -26,7 +28,7 @@ xv.Select = xblocks.view.register('xb-select', [
             'size':             React.PropTypes.string
         },
 
-        'getDefaultProps': function() {
+        'getDefaultProps': function () {
             return {
                 'autofocus': false,
                 'disabled':  false,
@@ -36,10 +38,10 @@ xv.Select = xblocks.view.register('xb-select', [
             };
         },
 
-        'componentDidMount': function() {
+        'componentDidMount': function () {
             new Tether({
-                element: React.findDOMNode(this.refs.dropdown),
-                target: React.findDOMNode(this.refs.control),
+                element: this.refs.dropdown,
+                target: ReactDOM.findDOMNode(this.refs.control),
                 attachment: 'top left',
                 targetAttachment: 'bottom left',
                 classPrefix: 'xb-dialog',
@@ -59,7 +61,7 @@ xv.Select = xblocks.view.register('xb-select', [
         },
 
         /* jshint ignore:start */
-        'render': function() {
+        'render': function () {
             var classes = {
                 'xb-select': true,
                 '_disabled': this.props.disabled

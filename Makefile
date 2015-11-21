@@ -1,10 +1,7 @@
 NPM_BIN=$(CURDIR)/node_modules/.bin
 export NPM_BIN
 
-src_styl := $(shell find src -type f -name "*.styl")
-src_jsx := $(shell find src -type f -name "*.jsx")
-src_jsx_js := $(addsuffix .js, $(src_jsx))
-src_js := $(shell find src -type f -name "*.js" | grep -v ".jsx.js")
+src := $(shell find src -type f)
 
 MAKEFLAGS+=-j 4
 
@@ -12,11 +9,8 @@ dir=-C $*
 
 all: node_modules \
 	bower_components \
-	build/xblocks.css \
-	build/xblocks.min.css \
-	build/xblocks.js \
-	build/xblocks.min.js \
-	$(src_jsx_js)
+	lodash \
+	dist
 
 node_modules: package.json
 	npm install
@@ -26,41 +20,29 @@ bower_components: bower.json
 	bower install
 	touch bower_components
 
+dist: node_modules lodash $(src) webpack.config.js
+	npm run prod
+	touch dist
 
-build/xblocks.css: src/xblocks.styl $(src_styl) node_modules
-	$(NPM_BIN)/stylus --print --resolve-url --inline $< > $@
-	$(NPM_BIN)/autoprefixer --browsers "> 1%, Firefox >= 14, Opera >= 12, Chrome >= 4" $@
-
-build/xblocks.min.css: build/xblocks.css
-	$(NPM_BIN)/stylus --compress < $< > $@
-
-
-$(src_jsx_js): %.jsx.js: %.jsx node_modules
-	$(NPM_BIN)/babel $< -o $@
-
-build/xblocks.js: src/xblocks.js $(src_jsx_js) $(src_js) node_modules
-	$(NPM_BIN)/borschik -m no -i $< -o $@
-
-build/xblocks.min.js: build/xblocks.js
-	$(NPM_BIN)/borschik -i $< -o $@
-
+samples/dist: node_modules lodash $(src) webpack.config.js
+	npm run dev
+	touch samples/dist
 
 clean:
-	rm -f build/xblocks.css
-	rm -f build/xblocks.min.css
-	rm -f build/xblocks.js
-	rm -f build/xblocks.min.js
-	find src -type f -name "*.jsx.js" -exec rm -f {} \;
+	rm -rf dist
+	rm -rf samples/dist
+	rm -rf lodash
 
+lodash: node_modules Makefile
+	$(NPM_BIN)/lodash exports=umd include=debounce,throttle,merge,isEmpty,pick,transform,noop,capitalize,assign modularize -o $@
+	touch lodash
 
-test: node_modules bower_components
-	$(NPM_BIN)/jshint .
-	$(NPM_BIN)/jscs .
+test: node_modules bower_components lodash
+	$(NPM_BIN)/eslint .
 	./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
 
-testall: node_modules bower_components
-	$(NPM_BIN)/jshint .
-	$(NPM_BIN)/jscs .
+testall: node_modules bower_components lodash
+	$(NPM_BIN)/eslint .
 	./node_modules/karma/bin/karma start --single-run
 
 .PHONY: all clean test testall
