@@ -9,6 +9,7 @@ var tetherDefaultOptions = require('utils/tetherDefaultOptions');
 var Popup = require('../popup');
 var Table = require('utils/Table');
 var getParentMenu = require('utils/getParentMenu');
+var immediate = require('setimmediate2/src');
 
 var forEach = Array.prototype.forEach;
 
@@ -104,7 +105,7 @@ xb.Menu = xblocks.create('xb-menu', [
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
-                    global.setImmediate(this._closeUpFocus.bind(this));
+                    immediate.setImmediate(this._closeUpFocus.bind(this));
                 }
             }
         },

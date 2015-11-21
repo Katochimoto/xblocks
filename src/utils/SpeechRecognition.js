@@ -1,4 +1,5 @@
 var context = require('context');
+var immediate = require('setimmediate2/src');
 
 module.exports = SpeechRecognition;
 
@@ -142,7 +143,7 @@ SpeechRecognition.prototype = {
             return;
         }
 
-        context.setImmediate(this._triggerAsync.bind(this, this._events[ eventName ], event));
+        immediate.setImmediate(this._triggerAsync.bind(this, this._events[ eventName ], event));
     },
 
     _triggerAsync: function (events, event) {

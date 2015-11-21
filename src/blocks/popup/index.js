@@ -7,6 +7,7 @@ var context = require('context');
 var xblocks = require('xblocks');
 var tetherDefaultOptions = require('utils/tetherDefaultOptions');
 var assign = require('_/object/assign');
+var immediate = require('setimmediate2/src');
 
 var popupCommon = {
     onOpen: function () {
@@ -241,7 +242,7 @@ xb.Popup = xblocks.create('xb-popup', [
                 tether.target._xbpopup = this;
 
                 // FireFox does not set the focus without delay
-                context.setImmediate(popupCommon.onOpen.bind(this));
+                immediate.setImmediate(popupCommon.onOpen.bind(this));
 
                 return true;
             },
@@ -265,7 +266,7 @@ xb.Popup = xblocks.create('xb-popup', [
                 tether.clearCache();
 
                 // FireFox does not fire a blur event
-                context.setImmediate(popupCommon.onClose.bind(this));
+                immediate.setImmediate(popupCommon.onClose.bind(this));
 
                 return true;
             },

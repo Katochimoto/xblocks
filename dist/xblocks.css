@@ -41,9 +41,9 @@
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -323,9 +323,9 @@ xb-ico[hidden] {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -465,7 +465,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -475,7 +475,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
   font-family: Arial, sans-serif;
   -webkit-appearance: textfield;
 }
@@ -515,7 +515,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -525,7 +525,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._simple._size-s:focus {
   outline: none;
@@ -550,7 +550,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -560,7 +560,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._simple._size-l:focus {
   outline: none;
@@ -585,7 +585,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -595,7 +595,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._simple._size-xl:focus {
   outline: none;
@@ -716,7 +716,7 @@ xb-input[hidden] {
   border-color: rgba(0,0,0,0.27);
   border-top-color: rgba(0,0,0,0.38);
   border-bottom-color: rgba(0,0,0,0.16);
-  background: #fff;
+  background: #fff /* ie fallback */;
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background: -webkit-linear-gradient(#fff, #fff);
   background: -moz-linear-gradient(#fff, #fff);
@@ -726,7 +726,7 @@ xb-input[hidden] {
   background-size: 16px 16px;
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
           box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
+  -webkit-appearance: none /* override for <input type="search"> */;
 }
 .xb-input._complex > ._reset {
   margin: -5px -5px -5px 0;
@@ -848,9 +848,9 @@ xb-input[hidden] {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -2921,7 +2921,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border: none;
   outline: 0;
   background: #f9c400;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), to(#be8c05));
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), color-stop(92%, #be8c05));
   background: -webkit-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -moz-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -o-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
@@ -2941,7 +2941,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
 }
 .xb-button._theme-promo:active {
   background: #ffe652;
-  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), to(#dec35e));
+  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), color-stop(8%, #dec35e));
   background: -webkit-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -moz-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -o-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
@@ -2997,7 +2997,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border: none;
   outline: 0;
   background: #f9c400;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), to(#be8c05));
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), color-stop(92%, #be8c05));
   background: -webkit-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -moz-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -o-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
@@ -3017,7 +3017,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
 }
 .xb-button._theme-promo._size-s:active {
   background: #ffe652;
-  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), to(#dec35e));
+  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), color-stop(8%, #dec35e));
   background: -webkit-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -moz-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -o-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
@@ -3073,7 +3073,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border: none;
   outline: 0;
   background: #f9c400;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), to(#be8c05));
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), color-stop(92%, #be8c05));
   background: -webkit-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -moz-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -o-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
@@ -3093,7 +3093,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
 }
 .xb-button._theme-promo._size-l:active {
   background: #ffe652;
-  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), to(#dec35e));
+  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), color-stop(8%, #dec35e));
   background: -webkit-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -moz-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -o-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
@@ -3149,7 +3149,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   border: none;
   outline: 0;
   background: #f9c400;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), to(#be8c05));
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffe025), color-stop(92%, #f9c400), color-stop(92%, #be8c05));
   background: -webkit-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -moz-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
   background: -o-linear-gradient(top, #ffe025, #f9c400 92%, #be8c05);
@@ -3169,7 +3169,7 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
 }
 .xb-button._theme-promo._size-xl:active {
   background: #ffe652;
-  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), to(#dec35e));
+  background: -webkit-gradient(linear, left top, left bottom, from(#c69007), color-stop(8%, #f8c106), color-stop(8%, #dec35e));
   background: -webkit-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -moz-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
   background: -o-linear-gradient(top, #c69007, #f8c106 8%, #dec35e);
@@ -3225,9 +3225,9 @@ input[type=file]:hover:not(:checked) + .xb-button._theme-dark._size-xl:before,
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -3393,9 +3393,9 @@ xb-link[hidden] {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -3645,9 +3645,9 @@ input:not(:checked) + ._xb-checkbox_flag > ._xb-checkbox_flag-icon {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -3910,9 +3910,9 @@ xb-popup > ._popup > ._close:hover {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -4140,9 +4140,9 @@ xb-popup > ._popup._theme-blank > ._content:after {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -4282,8 +4282,7 @@ xb-menu > ._popup {
   overflow: hidden;
   padding: 0;
   outline: none;
-  -ms-touch-action: none;
-      touch-action: none;
+  touch-action: none;
   -webkit-touch-callout: none;
   touch-callout: none;
   -webkit-user-select: none;
@@ -4402,9 +4401,9 @@ xb-menu > ._popup > ._popup-scroll-bottom:after {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -4540,8 +4539,7 @@ xb-menu-inline > ._popup {
   overflow: hidden;
   padding: 0;
   outline: none;
-  -ms-touch-action: none;
-      touch-action: none;
+  touch-action: none;
   -webkit-touch-callout: none;
   touch-callout: none;
   -webkit-user-select: none;
@@ -4667,9 +4665,9 @@ xb-menu-inline > ._popup > ._popup-scroll-bottom:after {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;
@@ -4868,9 +4866,9 @@ xb-menuitem[hidden] {
   color: #22c;
   cursor: pointer;
   -webkit-transition: color 0.15s ease-out;
-     -moz-transition: color 0.15s ease-out;
-       -o-transition: color 0.15s ease-out;
-          transition: color 0.15s ease-out;
+  -moz-transition: color 0.15s ease-out;
+  -o-transition: color 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 a._link {
   text-decoration: none;

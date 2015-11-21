@@ -1,6 +1,7 @@
 require('./index.styl');
 require('./index.jsx');
 
+var context = require('context');
 var xb = require('context').xb;
 var xblocks = require('xblocks');
 
@@ -33,7 +34,7 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         events: {
             'xb-created': function () {
                 this._xbRecognition = new xblocks.utils.SpeechRecognition({
-                    'lang': this.lang || (global.navigator && global.navigator.language) || 'en-US',
+                    'lang': this.lang || (context.navigator && context.navigator.language) || 'en-US',
                     'continuous': this.continuous,
                     'interimResults': this.interimResults
                 });

@@ -115,6 +115,7 @@ var runs = [
 
 if (!isDev) {
     runs.push(merge({}, params, {
+        'devtool': '#source-map',
         'output': {
             'filename': 'xblocks.min.js'
         },

@@ -88,35 +88,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(137);
 	__webpack_require__(141);
 	__webpack_require__(145);
-	__webpack_require__(151);
-	__webpack_require__(177);
-	__webpack_require__(182);
-	__webpack_require__(186);
-
-	/*
-	(function (global, undefined) {
-
-
-	    global.xb = {};
-	    global.xv = {};
-
-	    var Tether = global.Tether;
-
-	    var React = global.React;
-
-	    var xblocks = global.xblocks;
-
-	    var xb = global.xb;
-	    var xv = global.xv;
-
-	    var __doc = global.document;
-	    var __noop = function () {};
-	    var __forEach = Array.prototype.forEach;
-
-	}(function () {
-	    return this || (1, eval)('this');
-	}()));
-	*/
+	__webpack_require__(161);
+	__webpack_require__(187);
+	__webpack_require__(192);
+	__webpack_require__(196);
 
 /***/ },
 /* 1 */
@@ -888,12 +863,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
+		function classNames () {
 			var classes = '';
 
 			for (var i = 0; i < arguments.length; i++) {
@@ -902,15 +879,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
+				if (argType === 'string' || argType === 'number') {
 					classes += ' ' + arg;
-
 				} else if (Array.isArray(arg)) {
 					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
+						if (hasOwn.call(arg, key) && arg[key]) {
 							classes += ' ' + key;
 						}
 					}
@@ -922,15 +897,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
 			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
 			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -938,6 +912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 47 */
 /***/ function(module, exports) {
 
+	
 	/**
 	 * Common attributes
 	 *
@@ -5450,6 +5425,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var xblocks = __webpack_require__(44);
 	var tetherDefaultOptions = __webpack_require__(150);
 	var assign = __webpack_require__(55);
+	var immediate = __webpack_require__(151);
 
 	var popupCommon = {
 	    onOpen: function onOpen() {
@@ -5665,7 +5641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            tether.target._xbpopup = this;
 
 	            // FireFox does not set the focus without delay
-	            context.setImmediate(popupCommon.onOpen.bind(this));
+	            immediate.setImmediate(popupCommon.onOpen.bind(this));
 
 	            return true;
 	        },
@@ -5689,7 +5665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            tether.clearCache();
 
 	            // FireFox does not fire a blur event
-	            context.setImmediate(popupCommon.onClose.bind(this));
+	            immediate.setImmediate(popupCommon.onClose.bind(this));
 
 	            return true;
 	        },
@@ -5829,19 +5805,351 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+	'use strict';
 
-	__webpack_require__(152);
-	__webpack_require__(154);
-	__webpack_require__(160);
+	var context = __webpack_require__(152);
+	var useNative = __webpack_require__(153);
+	var Timer = __webpack_require__(154);
+	var setTimeoutPolifill = __webpack_require__(155);
+	var polifills = [
+	    __webpack_require__(156),
+	    __webpack_require__(157),
+	    __webpack_require__(158),
+	    __webpack_require__(159),
+	    __webpack_require__(160)
+	];
+	var setImmediate;
+	var clearImmediate;
+
+	if (useNative()) {
+	    setImmediate = context.setImmediate ||
+	        context.msSetImmediate ||
+	        usePolifill(polifills, setTimeoutPolifill);
+
+	    clearImmediate = context.clearImmediate ||
+	        context.msClearImmediate ||
+	        Timer.clear;
+
+	} else {
+	    setImmediate = setTimeoutPolifill.init();
+	    clearImmediate = Timer.clear;
+	}
+
+	exports.setImmediate = setImmediate;
+	exports.clearImmediate = clearImmediate;
+
+	exports.msSetImmediate = setImmediate;
+	exports.msClearImmediate = clearImmediate;
+
+	function usePolifill(polifills, def) {
+	    for (var i = 0; i < polifills.length; i++) {
+	        var polifill = polifills[ i ];
+	        if (polifill.canUse()) {
+	            return polifill.init();
+	        }
+	    }
+
+	    return def.init();
+	}
+
+
+/***/ },
+/* 152 */
+/***/ function(module, exports) {
+
+	/*jshint -W067*/
+	'use strict';
+
+	module.exports = (function() {
+	    return this || (1, eval)('this');
+	})();
+
+
+/***/ },
+/* 153 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var context = __webpack_require__(152);
+
+	// @see http://codeforhire.com/2013/09/21/setimmediate-and-messagechannel-broken-on-internet-explorer-10/
+	module.exports = function() {
+	    return !(context.navigator && /Trident|Edge/.test(context.navigator.userAgent));
+	};
+
+
+/***/ },
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(152);
+
+	var nextId = 1;
+	var tasks = {};
+	var lock = false;
+
+	function wrap(handler) {
+	    var args = Array.prototype.slice.call(arguments, 1);
+
+	    return function() {
+	        handler.apply(undefined, args);
+	    };
+	}
+
+	function create(args) {
+	    tasks[ nextId ] = wrap.apply(undefined, args);
+	    return nextId++;
+	}
+
+	function clear(handleId) {
+	    delete tasks[ handleId ];
+	}
+
+	function run(handleId) {
+	    if (lock) {
+	        context.setTimeout( wrap( run, handleId ), 0 );
+
+	    } else {
+	        var task = tasks[ handleId ];
+
+	        if (task) {
+	            lock = true;
+
+	            try {
+	                task();
+
+	            } finally {
+	                clear( handleId );
+	                lock = false;
+	            }
+	        }
+	    }
+	}
+
+	exports.run = run;
+	exports.wrap = wrap;
+	exports.create = create;
+	exports.clear = clear;
+
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(152);
+	var Timer = __webpack_require__(154);
+
+	exports.init = function() {
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        context.setTimeout( Timer.wrap( Timer.run, handleId ), 0 );
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'setTimeout';
+	    return polifill;
+	};
+
+	exports.canUse = function() {
+	    return true;
+	};
+
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(152);
+	var Timer = __webpack_require__(154);
+
+	exports.init = function() {
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        context.process.nextTick( Timer.wrap( Timer.run, handleId ) );
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'nextTick';
+	    return polifill;
+	};
+
+	// Don't get fooled by e.g. browserify environments.
+	// For Node.js before 0.9
+	exports.canUse = function() {
+	    return (Object.prototype.toString.call(context.process) === '[object process]');
+	};
+
+
+/***/ },
+/* 157 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(152);
+	var Timer = __webpack_require__(154);
+
+	exports.init = function() {
+	    var messagePrefix = 'setImmediate$' + Math.random() + '$';
+
+	    var onGlobalMessage = function(event) {
+	        if (event.source === context &&
+	            typeof(event.data) === 'string' &&
+	            event.data.indexOf(messagePrefix) === 0) {
+
+	            Timer.run(Number(event.data.slice(messagePrefix.length)));
+	        }
+	    };
+
+	    if (context.addEventListener) {
+	        context.addEventListener('message', onGlobalMessage, false);
+
+	    } else {
+	        context.attachEvent('onmessage', onGlobalMessage);
+	    }
+
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        context.postMessage(messagePrefix + handleId, '*');
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'postMessage';
+	    return polifill;
+	};
+
+	// For non-IE10 modern browsers
+	exports.canUse = function() {
+	    if (context.importScripts || !context.postMessage) {
+	        return false;
+	    }
+
+	    var asynch = true;
+	    var oldOnMessage = context.onmessage;
+	    context.onmessage = function() {
+	        asynch = false;
+	    };
+
+	    context.postMessage('', '*');
+	    context.onmessage = oldOnMessage;
+	    return asynch;
+	};
+
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(152);
+	var Timer = __webpack_require__(154);
+
+	exports.init = function() {
+	    var channel = new context.MessageChannel();
+
+	    channel.port1.onmessage = function(event) {
+	        Timer.run(Number(event.data));
+	    };
+
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        channel.port2.postMessage(handleId);
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'messageChannel';
+	    return polifill;
+	};
+
+	// For web workers, where supported
+	exports.canUse = function() {
+	    return Boolean(context.MessageChannel);
+	};
+
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(152);
+	var Timer = __webpack_require__(154);
+
+	exports.init = function() {
+	    var html = context.document.documentElement;
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        var script = context.document.createElement('script');
+
+	        script.onreadystatechange = function() {
+	            Timer.run(handleId);
+	            script.onreadystatechange = null;
+	            html.removeChild(script);
+	            script = null;
+	        };
+
+	        html.appendChild(script);
+	        return handleId;
+	    };
+
+	    polifill.usePolifill = 'readyStateChange';
+	    return polifill;
+	};
+
+	// For IE 6–8
+	exports.canUse = function() {
+	    return (context.document && ('onreadystatechange' in context.document.createElement('script')));
+	};
+
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var context = __webpack_require__(152);
+	var Timer = __webpack_require__(154);
+
+	exports.init = function() {
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        var img = new context.Image();
+	        img.onload = img.onerror = Timer.wrap( Timer.run, handleId );
+	        img.src = '';
+
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'image';
+	    return polifill;
+	};
+
+	exports.canUse = function() {
+	    return Boolean(context.window && context.Image);
+	};
+
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(162);
+	__webpack_require__(164);
+	__webpack_require__(170);
 
 	var xb = __webpack_require__(43).xb;
 	var xblocks = __webpack_require__(44);
-	var lazyFocus = __webpack_require__(165);
+	var lazyFocus = __webpack_require__(175);
 	var _tetherDefaultOptions = __webpack_require__(150);
 	var Popup = __webpack_require__(145);
-	var Table = __webpack_require__(166);
-	var getParentMenu = __webpack_require__(175);
+	var Table = __webpack_require__(176);
+	var getParentMenu = __webpack_require__(185);
+	var immediate = __webpack_require__(151);
 
 	var forEach = Array.prototype.forEach;
 
@@ -5884,7 +6192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberof xb
 	 * @mixes xblocks.mixin.menu
 	 */
-	xb.Menu = xblocks.create('xb-menu', [__webpack_require__(176), {
+	xb.Menu = xblocks.create('xb-menu', [__webpack_require__(186), {
 	    prototype: Object.create(Popup.prototype || new Popup()),
 
 	    events: {
@@ -5930,7 +6238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!this.hasOpenSubmenu) {
 	                this.close();
 	                // event.relatedTarget is null in firefox
-	                global.setImmediate(this._closeUpFocus.bind(this));
+	                immediate.setImmediate(this._closeUpFocus.bind(this));
 	            }
 	        }
 	    },
@@ -6005,13 +6313,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 	module.exports = xb.Menu;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 152 */
+/* 162 */
 13,
-/* 153 */,
-/* 154 */
+/* 163 */,
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6029,7 +6336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vMenu
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	xv.Menu = xblocks.view.register('xb-menu', [__webpack_require__(47), __webpack_require__(155), {
+	xv.Menu = xblocks.view.register('xb-menu', [__webpack_require__(47), __webpack_require__(165), {
 	    displayName: 'xb-menu',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -6054,7 +6361,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = xv.Menu;
 
 /***/ },
-/* 155 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6062,8 +6369,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var classnames = __webpack_require__(46);
 	var xblocks = __webpack_require__(44);
 	var throttle = __webpack_require__(11);
-	var throttleAnimationFrame = __webpack_require__(156);
-	var animationFrame = __webpack_require__(157);
+	var throttleAnimationFrame = __webpack_require__(166);
+	var animationFrame = __webpack_require__(167);
 
 	/**
 	 * Common interface for views xb-menu and xb-menu-inline
@@ -6275,12 +6582,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 156 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var animationFrame = __webpack_require__(157);
+	var animationFrame = __webpack_require__(167);
 
 	/**
 	 * @function xblocks.utils.throttleAnimationFrame
@@ -6306,13 +6613,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 157 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var context = __webpack_require__(43);
-	var vendor = __webpack_require__(158);
+	var vendor = __webpack_require__(168);
 	var lastTime = 0;
 
 	context.requestAnimationFrame = vendor('requestAnimationFrame') || function (callback) {
@@ -6335,13 +6642,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 158 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var globalContext = __webpack_require__(43);
-	var capitalize = __webpack_require__(159);
+	var capitalize = __webpack_require__(169);
 	var vendors = ['ms', 'moz', 'webkit', 'o'];
 
 	module.exports = function (name, context) {
@@ -6364,7 +6671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 159 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6399,13 +6706,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 160 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var context = __webpack_require__(43);
-	var delegate = __webpack_require__(161);
+	var delegate = __webpack_require__(171);
 
 	context.document.addEventListener('contextmenu', delegate('[contextmenu]', function (event) {
 	    var element = event.delegateElement;
@@ -6457,13 +6764,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}), false);
 
 /***/ },
-/* 161 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var delegateMatch = __webpack_require__(162);
-	var wrap = __webpack_require__(164);
+	var delegateMatch = __webpack_require__(172);
+	var wrap = __webpack_require__(174);
 
 	/**
 	 * @function xblocks.event.delegate
@@ -6489,12 +6796,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 162 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var matchesSelector = __webpack_require__(163);
+	var matchesSelector = __webpack_require__(173);
 
 	/**
 	 * @function xblocks.event.delegateMatch
@@ -6528,13 +6835,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 163 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var context = __webpack_require__(43);
-	var vendor = __webpack_require__(158);
+	var vendor = __webpack_require__(168);
 	var indexOf = Array.prototype.indexOf;
 	var proto = context.Element.prototype;
 	var matches = proto.matches || vendor('matchesSelector', proto) || function (selector) {
@@ -6552,7 +6859,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 164 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6619,7 +6926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 165 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6636,19 +6943,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 166 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var xblocks = __webpack_require__(44);
-	var delegate = __webpack_require__(161);
-	var filterClick = __webpack_require__(167);
-	var filterMouse = __webpack_require__(168);
-	var matchesSelector = __webpack_require__(163);
-	var eachAfter = __webpack_require__(169);
-	var eachBefore = __webpack_require__(172);
-	var index = __webpack_require__(174);
+	var delegate = __webpack_require__(171);
+	var filterClick = __webpack_require__(177);
+	var filterMouse = __webpack_require__(178);
+	var matchesSelector = __webpack_require__(173);
+	var eachAfter = __webpack_require__(179);
+	var eachBefore = __webpack_require__(182);
+	var index = __webpack_require__(184);
 	var merge = __webpack_require__(79);
 	var throttle = __webpack_require__(11);
 	var pop = Array.prototype.pop;
@@ -6963,12 +7270,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 167 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var wrap = __webpack_require__(164);
+	var wrap = __webpack_require__(174);
 
 	/**
 	 * @function xblocks.event.filterClick
@@ -6993,12 +7300,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 168 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var wrap = __webpack_require__(164);
+	var wrap = __webpack_require__(174);
 
 	/**
 	 * @function xblocks.event.filterMouseEnter
@@ -7023,13 +7330,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 169 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var isParent = __webpack_require__(170);
-	var eachInnerFollowing = __webpack_require__(171);
+	var isParent = __webpack_require__(180);
+	var eachInnerFollowing = __webpack_require__(181);
 
 	/**
 	 * @function xblocks.dom.eachAfter
@@ -7062,7 +7369,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 170 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7100,7 +7407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	})();
 
 /***/ },
-/* 171 */
+/* 181 */
 /***/ function(module, exports) {
 
 	/**
@@ -7143,13 +7450,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 172 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var isParent = __webpack_require__(170);
-	var eachInnerPrevious = __webpack_require__(173);
+	var isParent = __webpack_require__(180);
+	var eachInnerPrevious = __webpack_require__(183);
 
 	/**
 	 * @function xblocks.dom.eachBefore
@@ -7182,7 +7489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 173 */
+/* 183 */
 /***/ function(module, exports) {
 
 	/**
@@ -7227,7 +7534,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 174 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7248,7 +7555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 175 */
+/* 185 */
 /***/ function(module, exports) {
 
 	/**
@@ -7272,13 +7579,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 176 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var lazyFocus = __webpack_require__(165);
-	var isParent = __webpack_require__(170);
+	var lazyFocus = __webpack_require__(175);
+	var isParent = __webpack_require__(180);
 
 	/**
 	 * Common interface for elements xb-menu and xb-menu-inline.
@@ -7358,19 +7665,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 177 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(178);
-	__webpack_require__(180);
+	__webpack_require__(188);
+	__webpack_require__(190);
 
 	var xb = __webpack_require__(43).xb;
 	var xblocks = __webpack_require__(44);
-	var lazyFocus = __webpack_require__(165);
-	var Table = __webpack_require__(166);
-	var noop = __webpack_require__(181);
+	var lazyFocus = __webpack_require__(175);
+	var Table = __webpack_require__(176);
+	var noop = __webpack_require__(191);
 
 	var menuCommon = {
 	    init: function init() {
@@ -7395,7 +7702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eFocus
 	 * @mixes xblocks.mixin.eMenu
 	 */
-	xb.MenuInline = xblocks.create('xb-menu-inline', [__webpack_require__(123), __webpack_require__(176), {
+	xb.MenuInline = xblocks.create('xb-menu-inline', [__webpack_require__(123), __webpack_require__(186), {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
@@ -7423,10 +7730,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = xb.MenuInline;
 
 /***/ },
-/* 178 */
+/* 188 */
 13,
-/* 179 */,
-/* 180 */
+/* 189 */,
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7444,7 +7751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vMenu
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	xv.MenuInline = xblocks.view.register('xb-menu-inline', [__webpack_require__(47), __webpack_require__(155), {
+	xv.MenuInline = xblocks.view.register('xb-menu-inline', [__webpack_require__(47), __webpack_require__(165), {
 	    displayName: 'xb-menu-inline',
 
 	    mixins: [React.addons.PureRenderMixin],
@@ -7469,7 +7776,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = xv.MenuInline;
 
 /***/ },
-/* 181 */
+/* 191 */
 /***/ function(module, exports) {
 
 	/**
@@ -7503,19 +7810,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 182 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(183);
-	__webpack_require__(185);
+	__webpack_require__(193);
+	__webpack_require__(195);
 
 	var xb = __webpack_require__(43).xb;
 	var context = __webpack_require__(43);
 	var xblocks = __webpack_require__(44);
-	var lazyFocus = __webpack_require__(165);
-	var getParentMenu = __webpack_require__(175);
+	var lazyFocus = __webpack_require__(175);
+	var getParentMenu = __webpack_require__(185);
 	var merge = __webpack_require__(79);
 
 	var menuitemCommon = {
@@ -7731,10 +8038,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = xb.Menuitem;
 
 /***/ },
-/* 183 */
+/* 193 */
 13,
-/* 184 */,
-/* 185 */
+/* 194 */,
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7818,13 +8125,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = xv.Menuitem;
 
 /***/ },
-/* 186 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(187);
-	__webpack_require__(189);
+	__webpack_require__(197);
+	__webpack_require__(199);
 
 	var xb = __webpack_require__(43).xb;
 	var xblocks = __webpack_require__(44);
@@ -7843,10 +8150,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = xb.Menuseparator;
 
 /***/ },
-/* 187 */
+/* 197 */
 13,
-/* 188 */,
-/* 189 */
+/* 198 */,
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
