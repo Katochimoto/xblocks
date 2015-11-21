@@ -1,6 +1,6 @@
 {
   "name": "xblocks-web",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "dependencies": {
     "es5-shim": "4.3.1",
     "react": "0.14.3",
