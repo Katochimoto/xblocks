@@ -20,6 +20,6 @@ context.cancelAnimationFrame = vendor('cancelAnimationFrame') ||
     };
 
 module.exports = {
-    'requestAnimationFrame': context.requestAnimationFrame,
-    'cancelAnimationFrame': context.cancelAnimationFrame
+    'requestAnimationFrame': context.requestAnimationFrame.bind(context),
+    'cancelAnimationFrame': context.cancelAnimationFrame.bind(context)
 };

@@ -17,7 +17,6 @@ module.exports = function (callback, context) {
             return;
         }
 
-        console.log(animationCallback);
         throttle = animationFrame.requestAnimationFrame(animationCallback);
 
         callback.apply(context || this, arguments);
