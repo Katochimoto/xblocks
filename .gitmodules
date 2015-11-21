@@ -4,6 +4,3 @@
 [submodule "lib/xblocks-core"]
 	path = lib/xblocks-core
 	url = https://github.com/Katochimoto/xblocks-core.git
-[submodule "lib/xblocks-utils"]
-	path = lib/xblocks-utils
-	url = https://github.com/Katochimoto/xblocks-utils.git
