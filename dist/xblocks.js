@@ -6606,8 +6606,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return;
 	        }
 
+	        console.log(animationFrame, animationFrame.requestAnimationFrame);
 	        throttle = animationFrame.requestAnimationFrame(animationCallback);
-	        console.log(animationFrame);
 
 	        callback.apply(context || this, arguments);
 	    };
