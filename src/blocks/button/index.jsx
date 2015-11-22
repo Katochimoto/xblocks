@@ -1,10 +1,13 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
-var resetLastRadioChecked = require('utils/resetLastRadioChecked');
-var filterProps = require('utils/filterProps');
-var Content = require('./content.jsx');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import classnames from 'classnames';
+import resetLastRadioChecked from 'utils/resetLastRadioChecked';
+import filterProps from 'utils/filterProps';
+import exportPropTypes from 'utils/exportPropTypes';
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
+import Content from './content.jsx';
 
 /**
  * The template node xb-button
@@ -13,29 +16,29 @@ var Content = require('./content.jsx');
  * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Button = xblocks.view.register('xb-button', [
-    require('mixin/view/commonAttrs'),
-    require('utils/exportPropTypes')('xb-ico'),
+    mixinViewCommonAttrs,
+    exportPropTypes('xb-ico'),
 
     {
         displayName: 'xb-button',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        mixins: [ PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
-            'autofocus':    React.PropTypes.bool,
-            'checked':      React.PropTypes.bool,
-            'for':          React.PropTypes.string,
-            'form':         React.PropTypes.string,
-            'href':         React.PropTypes.string,
-            'multiple':     React.PropTypes.bool,
-            'name':         React.PropTypes.string,
-            'required':     React.PropTypes.bool,
-            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'target':       React.PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-            'theme':        React.PropTypes.oneOf([ 'action', 'dark', 'flying', 'normal', 'promo', 'pseudo-inverted', 'pseudo' ]),
-            'type':         React.PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
-            'value':        React.PropTypes.string
+            'autofocus':    PropTypes.bool,
+            'checked':      PropTypes.bool,
+            'for':          PropTypes.string,
+            'form':         PropTypes.string,
+            'href':         PropTypes.string,
+            'multiple':     PropTypes.bool,
+            'name':         PropTypes.string,
+            'required':     PropTypes.bool,
+            'size':         PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'target':       PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
+            'theme':        PropTypes.oneOf([ 'action', 'dark', 'flying', 'normal', 'promo', 'pseudo-inverted', 'pseudo' ]),
+            'type':         PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
+            'value':        PropTypes.string
         },
         // @endif
 
@@ -230,4 +233,4 @@ xv.Button = xblocks.view.register('xb-button', [
     }
 ]);
 
-module.exports = xv.Button;
+export default xv.Button;

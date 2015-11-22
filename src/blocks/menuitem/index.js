@@ -2,7 +2,7 @@ require('./index.styl');
 require('./index.jsx');
 
 var xb = require('context').xb;
-var context = require('context');
+import context from 'context';
 var xblocks = require('xblocks');
 var lazyFocus = require('utils/lazyFocus');
 var getParentMenu = require('utils/getParentMenu');

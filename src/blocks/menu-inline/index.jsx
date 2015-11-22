@@ -20,7 +20,7 @@ xv.MenuInline = xblocks.view.register('xb-menu-inline', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'size': React.PropTypes.string
         },

@@ -1,4 +1,4 @@
-var context = require('context');
+import context from 'context';
 var immediate = require('setimmediate2/src');
 
 module.exports = SpeechRecognition;

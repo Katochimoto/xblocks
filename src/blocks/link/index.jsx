@@ -19,7 +19,7 @@ xv.Link = xblocks.view.register('xb-link', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'href':     React.PropTypes.string,
             'name':     React.PropTypes.string,

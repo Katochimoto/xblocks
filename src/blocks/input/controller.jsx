@@ -7,7 +7,7 @@ module.exports = xblocks.view.create({
 
     mixins: [ React.addons.PureRenderMixin ],
 
-    // @ifdef DEBUG
+    // @if NODE_ENV='development'
     propTypes: {
         'autoFocus':        React.PropTypes.bool,
         'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),

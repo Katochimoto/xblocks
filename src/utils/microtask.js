@@ -1,4 +1,4 @@
-var context = require('context');
+import context from 'context';
 var iterations = 0;
 var callbacks = [];
 var twiddle = context.document.createTextNode('');

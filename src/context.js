@@ -2,7 +2,6 @@ var context = (function () {
     return this || (1, eval)('this');
 })();
 
-context.xv = {};
-context.xb = {};
-
-module.exports = context;
+export var xv = context.xv = {};
+export var xb = context.xb = {};
+export default context;

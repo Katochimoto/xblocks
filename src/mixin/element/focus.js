@@ -22,7 +22,7 @@
  * @memberOf xblocks.mixin
  * @type {object}
  */
-module.exports = {
+export default {
     methods: {
         focus: function () {
             this.firstChild.focus();

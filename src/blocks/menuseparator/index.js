@@ -1,8 +1,7 @@
-require('./index.styl');
-require('./index.jsx');
-
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import './index.styl';
+import './index.jsx';
+import { xb } from 'context';
+import xblocks from 'xblocks';
 
 /**
  * xb-menuseparator html element

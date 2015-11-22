@@ -19,7 +19,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'autofocus':    React.PropTypes.bool,
             'checked':      React.PropTypes.bool,

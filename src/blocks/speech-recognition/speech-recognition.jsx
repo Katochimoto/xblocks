@@ -16,7 +16,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
     {
         displayName: 'xb-speech-recognition',
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'active': React.PropTypes.bool
         },

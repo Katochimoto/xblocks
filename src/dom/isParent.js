@@ -1,4 +1,4 @@
-var context = require('context');
+import context from 'context';
 var html = context.document.documentElement;
 
 /**

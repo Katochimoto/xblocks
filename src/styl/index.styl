@@ -1,0 +1,46 @@
+// global class for links
+._link
+  color: #22C
+  cursor: pointer
+  transition: color .15s ease-out
+
+a._link
+  text-decoration: none
+
+._link:hover
+  color: #D00
+
+._link_outer
+  color: #070
+
+._disabled
+  kind: disabled 0.6
+
+._hidden
+  kind: hidden
+
+._xb-check_controller
+  kind: hidden visually
+
+  &:checked + ._xb-check_flag,
+  &:checked + .xb-button
+    skin: button_checked
+
+  &:focus + ._xb-check_flag,
+  &:focus + .xb-button
+    skin: button_focus
+
+._xb-file-intruder
+  kind: file-intruder \
+    (-inner '&-inner') \
+    (-input '&-input') \
+    (-focus '&-focus' 'islands-button_focus_style')
+
+._xb-file-intruder-input[type="button"]
+  margin: 0
+  width: 100%
+  height: 100%
+  font-size: inherit
+
+._xb-file-intruder-input[type="file"]
+  z-index: 0

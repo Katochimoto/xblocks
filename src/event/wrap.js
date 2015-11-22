@@ -1,4 +1,4 @@
-var context = require('context');
+import context from 'context';
 var doc = context.document;
 var html = doc.documentElement;
 var hop = Object.prototype.hasOwnProperty;

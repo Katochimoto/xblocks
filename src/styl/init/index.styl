@@ -1,0 +1,19 @@
+// Styobuild stuff
+use('../../../node_modules/stylobuild', {
+  // false указать нельзя, иначе будет csswring
+  // указываем любой несуществующий минификатор
+  minifier: 'no_minifier',
+  pixrem: false
+})
+
+@require 'mixins.styl'
+
+rem = 10px
+@require '../../../node_modules/stylobate'
+@require '../../../node_modules/stylobate-islands/lib/index'
+set-skin-namespace('islands')
+
+$popupZ = 10
+
+@require 'vars/*.styl'
+@require 'skin/*.styl'

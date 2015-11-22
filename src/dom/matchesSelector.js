@@ -1,4 +1,4 @@
-var context = require('context');
+import context from 'context';
 var vendor = require('utils/vendor');
 var indexOf = Array.prototype.indexOf;
 var proto = context.Element.prototype;

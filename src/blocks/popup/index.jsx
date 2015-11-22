@@ -20,7 +20,7 @@ xv.Popup = xblocks.view.register('xb-popup', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'close': React.PropTypes.bool,
             'theme': React.PropTypes.oneOf([

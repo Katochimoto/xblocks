@@ -19,7 +19,7 @@ xv.Ico = xblocks.view.register('xb-ico', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'active':   React.PropTypes.bool,
             'size':     React.PropTypes.oneOf([ 's', 'm' ]),

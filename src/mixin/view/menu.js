@@ -10,7 +10,7 @@ var animationFrame = require('polyfills/requestAnimationFrame');
  * @memberOf xblocks.mixin
  * @type {object}
  */
-module.exports = {
+export default {
     getInitialState: function () {
         return {
             'maxHeight': 0,

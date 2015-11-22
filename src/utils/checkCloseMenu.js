@@ -1,4 +1,4 @@
-var context = require('context');
+import context from 'context';
 var wrap = require('event/wrap');
 var delegateMatch = require('event/delegateMatch');
 var doc = context.document;

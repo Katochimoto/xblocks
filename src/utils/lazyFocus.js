@@ -1,4 +1,4 @@
-var context = require('context');
+import context from 'context';
 
 /**
  * @function xblocks.utils.lazyFocus

@@ -3,7 +3,7 @@ require('./index.jsx');
 
 var xb = require('context').xb;
 var Tether = require('tether');
-var context = require('context');
+import context from 'context';
 var xblocks = require('xblocks');
 var tetherDefaultOptions = require('utils/tetherDefaultOptions');
 var assign = require('_/object/assign');

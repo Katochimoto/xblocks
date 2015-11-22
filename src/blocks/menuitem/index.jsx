@@ -22,7 +22,7 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'focused':  React.PropTypes.bool,
             'ico':      React.PropTypes.object,

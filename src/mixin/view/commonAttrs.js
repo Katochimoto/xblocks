@@ -1,5 +1,5 @@
-// @ifdef DEBUG
-var PropTypes = require('react').PropTypes;
+// @if NODE_ENV='development'
+import { PropTypes } from 'react';
 // @endif
 
 /**
@@ -16,8 +16,8 @@ var PropTypes = require('react').PropTypes;
  * @prop {string} propTypes.tabindex
  * @prop {string} propTypes.title
  */
-module.exports = {
-    // @ifdef DEBUG
+export default {
+    // @if NODE_ENV='development'
     propTypes: {
         'accesskey':    PropTypes.string,
         'contextmenu':  PropTypes.string,

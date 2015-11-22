@@ -1,7 +1,7 @@
 require('./index.styl');
 require('./index.jsx');
 
-var context = require('context');
+import context from 'context';
 var xb = require('context').xb;
 var xblocks = require('xblocks');
 

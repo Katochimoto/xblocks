@@ -32,7 +32,7 @@
  * @memberOf xblocks.mixin
  * @type {object}
  */
-module.exports = {
+export default {
     accessors: {
         hidden: {
             attribute: {

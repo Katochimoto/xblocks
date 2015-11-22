@@ -1,15 +1,16 @@
-var xblocks = require('xblocks');
-var React = require('react');
-var isEmpty = require('_/lang/isEmpty');
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import isEmpty from '_/lang/isEmpty';
 
-module.exports = xblocks.view.create({
+export default xblocks.view.create({
     displayName: 'xb-button_content',
 
-    mixins: [ React.addons.PureRenderMixin ],
+    mixins: [ PureRenderMixin ],
 
-    // @ifdef DEBUG
+    // @if NODE_ENV='development'
     propTypes: {
-        'ico': React.PropTypes.object
+        'ico': PropTypes.object
     },
     // @endif
 

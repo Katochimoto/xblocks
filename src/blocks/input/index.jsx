@@ -22,7 +22,7 @@ xv.Input = xblocks.view.register('xb-input', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
             'autofocus':    React.PropTypes.bool,

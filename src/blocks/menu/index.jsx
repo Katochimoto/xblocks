@@ -20,7 +20,7 @@ xv.Menu = xblocks.view.register('xb-menu', [
 
         mixins: [ React.addons.PureRenderMixin ],
 
-        // @ifdef DEBUG
+        // @if NODE_ENV='development'
         propTypes: {
             'size': React.PropTypes.string
         },

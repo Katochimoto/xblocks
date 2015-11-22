@@ -1,8 +1,12 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
+import { xb } from 'context';
+import xblocks from 'xblocks';
 
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import mixinDisabled from 'mixin/element/disabled';
+import mixinChecked from 'mixin/element/checked';
+import mixinInputValueProps from 'mixin/element/inputValueProps';
+import mixinFocus from 'mixin/element/focus';
 
 /**
  * xb-button html element
@@ -37,10 +41,10 @@ var xblocks = require('xblocks');
  * @mixes xblocks.mixin.eFocus
  */
 xb.Button = xblocks.create('xb-button', [
-    require('mixin/element/disabled'),
-    require('mixin/element/checked'),
-    require('mixin/element/inputValueProps'),
-    require('mixin/element/focus'),
+    mixinDisabled,
+    mixinChecked,
+    mixinInputValueProps,
+    mixinFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
@@ -60,4 +64,4 @@ xb.Button = xblocks.create('xb-button', [
     }
 ]);
 
-module.exports = xb.Button;
+export default xb.Button;

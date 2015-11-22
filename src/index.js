@@ -1,13 +1,14 @@
-require('./xtag');
+import './styl';
+import './xtag';
 
-require('./blocks/ico');
-require('./blocks/input');
-require('./blocks/button');
-require('./blocks/link');
-require('./blocks/checkbox');
-require('./blocks/radio');
-require('./blocks/popup');
-require('./blocks/menu');
-require('./blocks/menu-inline');
-require('./blocks/menuitem');
-require('./blocks/menuseparator');
+import 'blocks/ico';
+import 'blocks/input';
+import 'blocks/button';
+import 'blocks/link';
+import 'blocks/checkbox';
+import 'blocks/radio';
+import 'blocks/popup';
+import 'blocks/menu';
+import 'blocks/menu-inline';
+import 'blocks/menuitem';
+import 'blocks/menuseparator';

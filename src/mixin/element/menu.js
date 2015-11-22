@@ -9,7 +9,7 @@ var isParent = require('dom/isParent');
  * @memberOf xblocks.mixin
  * @type {object}
  */
-module.exports = {
+export default {
     events: {
 
         /**
