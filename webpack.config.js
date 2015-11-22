@@ -10,14 +10,6 @@ var distPath = path.join(__dirname, 'dist');
 var isDev = (process.env.NODE_ENV === 'development');
 var nodeEnv = isDev ? 'development' : 'production';
 
-var extractText = new ExtractTextPlugin('[name].css', { 'allChunks': true });
-var dedupe = new webpack.optimize.DedupePlugin();
-var define = new webpack.DefinePlugin({ NODE_ENV: nodeEnv });
-var uglify = new webpack.optimize.UglifyJsPlugin({
-    output: { comments: false },
-    compress: { warnings: false }
-});
-
 var params = {
     'debug': isDev,
     'devtool': isDev ? 'eval' : undefined,
@@ -52,7 +44,11 @@ var params = {
         'xblocks': 'xblocks',
         'xtag': 'xtag'
     },
-    'plugins': [ define, dedupe, extractText ],
+    'plugins': [
+        new webpack.DefinePlugin({ NODE_ENV: nodeEnv }),
+        new webpack.optimize.DedupePlugin(),
+        new ExtractTextPlugin('[name].css', { 'allChunks': true })
+    ],
     'module': {
         'preLoaders': [
             {
@@ -103,9 +99,14 @@ var runs = [ params ];
 runs.push(merge({}, params, {
     'devtool': '#source-map',
     'output': {
-        'filename': 'xblocks.min.js'
+        'filename': '[name].min.js'
     },
-    'plugins': [ define, dedupe, uglify, extractText ]
+    'plugins': [
+        new webpack.DefinePlugin({ NODE_ENV: nodeEnv }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({ output: { comments: false }, compress: { warnings: false } }),
+        new ExtractTextPlugin('[name].min.css', { 'allChunks': true })
+    ]
 }));
 
 module.exports = runs;

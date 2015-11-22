@@ -1,4 +1,4 @@
-import './styl';
+import './styl/index.styl';
 import './xtag';
 
 import 'blocks/ico';
