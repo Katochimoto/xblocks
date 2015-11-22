@@ -16,24 +16,98 @@ a._link {
   color: #070;
 }
 ._disabled {
-  kind: disabled 0.6;
+  cursor: default !important;
+  opacity: 0.6;
+  pointer-events: none;
+}
+._disabled ._disabled {
+  opacity: 1;
 }
 ._hidden {
-  kind: hidden;
+  display: none !important;
 }
 ._xb-check_controller {
-  kind: hidden visually;
+  position: absolute !important;
+  clip: rect(1px,1px,1px,1px) !important;
 }
 ._xb-check_controller:checked + ._xb-check_flag,
-._xb-check_controller:checked + .xb-button {
-  skin: button_checked;
+._xb-check_controller:checked + .xb-button,
+._xb-check_controller:checked + ._xb-check_flag:hover,
+._xb-check_controller:checked + .xb-button:hover {
+  background: rgba(255,236,166,0.4);
+  -webkit-box-shadow: 0 1px 7px rgba(30,23,0,0.8) inset, 0 2px 0 -1px rgba(255,255,255,0.2);
+          box-shadow: 0 1px 7px rgba(30,23,0,0.8) inset, 0 2px 0 -1px rgba(255,255,255,0.2);
+}
+._xb-check_controller:checked + ._xb-check_flag:before,
+._xb-check_controller:checked + .xb-button:before,
+._xb-check_controller:checked + ._xb-check_flag:hover:before,
+._xb-check_controller:checked + .xb-button:hover:before {
+  background: #fff1be;
+  background: -webkit-linear-gradient(#ffeca6, #fff6d5);
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffeca6), to(#fff6d5));
+  background: -moz-linear-gradient(#ffeca6, #fff6d5);
+  background: -o-linear-gradient(#ffeca6, #fff6d5);
+  background: linear-gradient(#ffeca6, #fff6d5);
+  -webkit-box-shadow: 0 1px 3px -1px rgba(0,0,0,0.45) inset;
+          box-shadow: 0 1px 3px -1px rgba(0,0,0,0.45) inset;
+}
+._xb-check_controller:checked + ._xb-check_flag .button-content,
+._xb-check_controller:checked + .xb-button .button-content,
+._xb-check_controller:checked + ._xb-check_flag:hover .button-content,
+._xb-check_controller:checked + .xb-button:hover .button-content {
+  top: 1px;
 }
 ._xb-check_controller:focus + ._xb-check_flag,
 ._xb-check_controller:focus + .xb-button {
-  skin: button_focus;
+  outline: 0;
+}
+._xb-check_controller:focus + ._xb-check_flag:after,
+._xb-check_controller:focus + .xb-button:after {
+  z-index: 9;
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+          box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  -webkit-border-radius: inherit;
+          border-radius: inherit;
 }
 ._xb-file-intruder {
-  kind: file-intruder -inner '&-inner' -input '&-input' -focus '&-focus' 'islands-button_focus_style';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+}
+._xb-file-intruder-input:focus + ._xb-file-intruder-focus {
+  -webkit-box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+          box-shadow: 0 0 6px 2px rgba(255,204,0,0.7), inset 0 0 0 1px rgba(193,154,0,0.2);
+  -webkit-border-radius: inherit;
+          border-radius: inherit;
+}
+._xb-file-intruder-inner {
+  float: right;
+  text-align: right;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+._xb-file-intruder-input {
+  position: relative;
+  z-index: 11;
+  display: inline-block;
+  vertical-align: 0;
+  padding: 0;
+  margin: -5em 0 0 -400px;
+  width: 500px;
+  cursor: pointer;
+  font-size: 80px;
+  opacity: 0;
+}
+._xb-file-intruder-focus {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 ._xb-file-intruder-input[type="button"] {
   margin: 0;
