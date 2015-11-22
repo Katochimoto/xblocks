@@ -1,7 +1,9 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import classnames from 'classnames';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 
 /**
  * The template node xb-ico
@@ -12,19 +14,19 @@ var classnames = require('classnames');
  * @mixes React.addons.PureRenderMixin
  */
 xv.Ico = xblocks.view.register('xb-ico', [
-    require('mixin/view/commonAttrs'),
+    mixinViewCommonAttrs,
 
     {
         displayName: 'xb-ico',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        mixins: [ PureRenderMixin ],
 
         // @if NODE_ENV='development'
         propTypes: {
-            'active':   React.PropTypes.bool,
-            'size':     React.PropTypes.oneOf([ 's', 'm' ]),
-            'value':    React.PropTypes.string,
-            'type':     React.PropTypes.oneOf([
+            'active':   PropTypes.bool,
+            'size':     PropTypes.oneOf([ 's', 'm' ]),
+            'value':    PropTypes.string,
+            'type':     PropTypes.oneOf([
                 'attention',
                 'check',
                 'close',
@@ -95,4 +97,4 @@ xv.Ico = xblocks.view.register('xb-ico', [
     }
 ]);
 
-module.exports = xv.Ico;
+export default xv.Ico;

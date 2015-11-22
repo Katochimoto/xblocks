@@ -1,6 +1,6 @@
-/* global xblocks, React, Tether, xv */
-/* jshint strict: false */
-
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
 var ReactDOM = require('react-dom');
 
 /**
@@ -17,15 +17,15 @@ xv.Select = xblocks.view.register('xb-select', [
         'displayName': 'xb-select',
 
         'propTypes': {
-            'autocapitalize':   React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autocorrect':      React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autofocus':        React.PropTypes.bool,
-            'form':             React.PropTypes.string,
-            'multiple':         React.PropTypes.bool,
-            'name':             React.PropTypes.string,
-            'required':         React.PropTypes.bool,
-            'size':             React.PropTypes.string
+            'autocapitalize':   PropTypes.oneOf([ 'on', 'off' ]),
+            'autocomplete':     PropTypes.oneOf([ 'on', 'off' ]),
+            'autocorrect':      PropTypes.oneOf([ 'on', 'off' ]),
+            'autofocus':        PropTypes.bool,
+            'form':             PropTypes.string,
+            'multiple':         PropTypes.bool,
+            'name':             PropTypes.string,
+            'required':         PropTypes.bool,
+            'size':             PropTypes.string
         },
 
         'getDefaultProps': function () {

@@ -1,8 +1,12 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
+import { xb } from 'context';
+import xblocks from 'xblocks';
 
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import mixinDisabled from 'mixin/element/disabled';
+import mixinChecked from 'mixin/element/checked';
+import mixinInputValueProps from 'mixin/element/inputValueProps';
+import mixinFocus from 'mixin/element/focus';
 
 /**
  * xb-checkbox html element
@@ -26,10 +30,10 @@ var xblocks = require('xblocks');
  * @mixes xblocks.mixin.eFocus
  */
 xb.Checkbox = xblocks.create('xb-checkbox', [
-    require('mixin/element/disabled'),
-    require('mixin/element/checked'),
-    require('mixin/element/inputValueProps'),
-    require('mixin/element/focus'),
+    mixinDisabled,
+    mixinChecked,
+    mixinInputValueProps,
+    mixinFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
@@ -44,4 +48,4 @@ xb.Checkbox = xblocks.create('xb-checkbox', [
     }
 ]);
 
-module.exports = xb.Checkbox;
+export default xb.Checkbox;

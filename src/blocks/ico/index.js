@@ -1,8 +1,9 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
+import { xb } from 'context';
+import xblocks from 'xblocks';
 
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import mixinDisabled from 'mixin/element/disabled';
 
 /**
  * xb-ico html element
@@ -37,7 +38,7 @@ var xblocks = require('xblocks');
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Ico = xblocks.create('xb-ico', [
-    require('mixin/element/disabled'),
+    mixinDisabled,
 
     {
         accessors: {
@@ -50,4 +51,4 @@ xb.Ico = xblocks.create('xb-ico', [
     }
 ]);
 
-module.exports = xb.Ico;
+export default xb.Ico;

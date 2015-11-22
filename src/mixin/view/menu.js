@@ -1,5 +1,5 @@
-var classnames = require('classnames');
-var xblocks = require('xblocks');
+import classnames from 'classnames';
+import xblocks from 'xblocks';
 var throttle = require('_/function/throttle');
 var throttleAnimationFrame = require('utils/throttleAnimationFrame');
 var animationFrame = require('polyfills/requestAnimationFrame');

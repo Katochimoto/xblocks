@@ -1,8 +1,8 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
 
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import { xb } from 'context';
+import xblocks from 'xblocks';
 
 /**
  * xb-radio html element
@@ -44,4 +44,4 @@ xb.Radio = xblocks.create('xb-radio', [
     }
 ]);
 
-module.exports = xb.Radio;
+export default xb.Radio;

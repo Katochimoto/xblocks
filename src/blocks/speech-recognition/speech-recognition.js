@@ -1,9 +1,9 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
 
 import context from 'context';
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import { xb } from 'context';
+import xblocks from 'xblocks';
 
 var _xbSpeechRecognition = {
     'events': {
@@ -127,4 +127,4 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
     }
 ]);
 
-module.exports = xb.SpeechRecognition;
+export default xb.SpeechRecognition;

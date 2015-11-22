@@ -1,31 +1,32 @@
-var xblocks = require('xblocks');
-var React = require('react');
-var ReactDOM = require('react-dom');
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import ReactDOM from 'react-dom';
 
-module.exports = xblocks.view.create({
+export default xblocks.view.create({
     displayName: 'xb-input_controller',
 
-    mixins: [ React.addons.PureRenderMixin ],
+    mixins: [ PureRenderMixin ],
 
     // @if NODE_ENV='development'
     propTypes: {
-        'autoFocus':        React.PropTypes.bool,
-        'autocomplete':     React.PropTypes.oneOf([ 'on', 'off' ]),
-        'autosize':         React.PropTypes.bool,
-        'className':        React.PropTypes.string,
-        'cols':             React.PropTypes.string,
-        'disabled':         React.PropTypes.bool,
-        'isPlaceholderHint': React.PropTypes.bool,
-        'multiline':        React.PropTypes.bool,
-        'name':             React.PropTypes.string,
-        'onChange':         React.PropTypes.func,
-        'onHintToggle':     React.PropTypes.func,
-        'placeholder':      React.PropTypes.string,
-        'readOnly':         React.PropTypes.bool,
-        'required':         React.PropTypes.bool,
-        'rows':             React.PropTypes.string,
-        'tabIndex':         React.PropTypes.string,
-        'value':            React.PropTypes.string
+        'autoFocus':        PropTypes.bool,
+        'autocomplete':     PropTypes.oneOf([ 'on', 'off' ]),
+        'autosize':         PropTypes.bool,
+        'className':        PropTypes.string,
+        'cols':             PropTypes.string,
+        'disabled':         PropTypes.bool,
+        'isPlaceholderHint': PropTypes.bool,
+        'multiline':        PropTypes.bool,
+        'name':             PropTypes.string,
+        'onChange':         PropTypes.func,
+        'onHintToggle':     PropTypes.func,
+        'placeholder':      PropTypes.string,
+        'readOnly':         PropTypes.bool,
+        'required':         PropTypes.bool,
+        'rows':             PropTypes.string,
+        'tabIndex':         PropTypes.string,
+        'value':            PropTypes.string
     },
     // @endif
 

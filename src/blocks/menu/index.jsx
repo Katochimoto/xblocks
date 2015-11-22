@@ -1,6 +1,7 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 /**
  * The template node xb-menu
@@ -18,11 +19,11 @@ xv.Menu = xblocks.view.register('xb-menu', [
     {
         displayName: 'xb-menu',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        mixins: [ PureRenderMixin ],
 
         // @if NODE_ENV='development'
         propTypes: {
-            'size': React.PropTypes.string
+            'size': PropTypes.string
         },
         // @endif
 
@@ -38,4 +39,4 @@ xv.Menu = xblocks.view.register('xb-menu', [
     }
 ]);
 
-module.exports = xv.Menu;
+export default xv.Menu;

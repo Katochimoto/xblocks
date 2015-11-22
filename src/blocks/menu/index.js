@@ -1,9 +1,9 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
 require('./contextmenu');
 
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import { xb } from 'context';
+import xblocks from 'xblocks';
 var lazyFocus = require('utils/lazyFocus');
 var tetherDefaultOptions = require('utils/tetherDefaultOptions');
 var Popup = require('../popup');
@@ -183,4 +183,4 @@ xb.Menu = xblocks.create('xb-menu', [
     }
 ]);
 
-module.exports = xb.Menu;
+export default xb.Menu;

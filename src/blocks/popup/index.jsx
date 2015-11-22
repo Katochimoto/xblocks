@@ -1,8 +1,9 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var classnames = require('classnames');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import ReactDOM from 'react-dom';
+import classnames from 'classnames';
 
 /**
  * The template node xb-popup
@@ -18,12 +19,12 @@ xv.Popup = xblocks.view.register('xb-popup', [
     {
         displayName: 'xb-popup',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        mixins: [ PureRenderMixin ],
 
         // @if NODE_ENV='development'
         propTypes: {
-            'close': React.PropTypes.bool,
-            'theme': React.PropTypes.oneOf([
+            'close': PropTypes.bool,
+            'theme': PropTypes.oneOf([
                 'blank',
                 'error',
                 'island',
@@ -91,4 +92,4 @@ xv.Popup = xblocks.view.register('xb-popup', [
     }
 ]);
 
-module.exports = xv.Popup;
+export default xv.Popup;

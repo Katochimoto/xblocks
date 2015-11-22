@@ -1,7 +1,7 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import classnames from 'classnames';
 
 /**
  * The template node xb-speech-recognition
@@ -18,7 +18,7 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
 
         // @if NODE_ENV='development'
         propTypes: {
-            'active': React.PropTypes.bool
+            'active': PropTypes.bool
         },
         // @endif
 
@@ -45,4 +45,4 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
     }
 ]);
 
-module.exports = xv.SpeechRecognition;
+export default xv.SpeechRecognition;

@@ -16,4 +16,4 @@ xb.Menuseparator = xblocks.create('xb-menuseparator', [
     }
 ]);
 
-module.exports = xb.Menuseparator;
+export default xb.Menuseparator;

@@ -1,9 +1,9 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
 
-var xb = require('context').xb;
+import { xb } from 'context';
 import context from 'context';
-var xblocks = require('xblocks');
+import xblocks from 'xblocks';
 var lazyFocus = require('utils/lazyFocus');
 var getParentMenu = require('utils/getParentMenu');
 var merge = require('_/object/merge');
@@ -225,4 +225,4 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
     }
 ]);
 
-module.exports = xb.Menuitem;
+export default xb.Menuitem;

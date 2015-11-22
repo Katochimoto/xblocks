@@ -1,7 +1,9 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import classnames from 'classnames';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 var filterProps = require('utils/filterProps');
 var Controller = require('./controller.jsx');
 
@@ -14,34 +16,34 @@ var Controller = require('./controller.jsx');
  * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.Input = xblocks.view.register('xb-input', [
-    require('mixin/view/commonAttrs'),
+    mixinViewCommonAttrs,
     require('utils/exportPropTypes')('xb-link'),
 
     {
         displayName: 'xb-input',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        mixins: [ PureRenderMixin ],
 
         // @if NODE_ENV='development'
         propTypes: {
-            'autocomplete': React.PropTypes.oneOf([ 'on', 'off' ]),
-            'autofocus':    React.PropTypes.bool,
-            'autosize':     React.PropTypes.bool,
-            'cols':         React.PropTypes.string,
-            'ghost':        React.PropTypes.bool,
-            'multiline':    React.PropTypes.bool,
-            'name':         React.PropTypes.string,
-            'placeholder':  React.PropTypes.string,
-            'postfix':      React.PropTypes.string,
-            'prefix':       React.PropTypes.string,
-            'readonly':     React.PropTypes.bool,
-            'required':     React.PropTypes.bool,
-            'reset':        React.PropTypes.bool,
-            'rows':         React.PropTypes.string,
-            'size':         React.PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'type':         React.PropTypes.oneOf([ 'text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg' ]),
-            'value':        React.PropTypes.string,
-            'xb-link':      React.PropTypes.string
+            'autocomplete': PropTypes.oneOf([ 'on', 'off' ]),
+            'autofocus':    PropTypes.bool,
+            'autosize':     PropTypes.bool,
+            'cols':         PropTypes.string,
+            'ghost':        PropTypes.bool,
+            'multiline':    PropTypes.bool,
+            'name':         PropTypes.string,
+            'placeholder':  PropTypes.string,
+            'postfix':      PropTypes.string,
+            'prefix':       PropTypes.string,
+            'readonly':     PropTypes.bool,
+            'required':     PropTypes.bool,
+            'reset':        PropTypes.bool,
+            'rows':         PropTypes.string,
+            'size':         PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+            'type':         PropTypes.oneOf([ 'text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg' ]),
+            'value':        PropTypes.string,
+            'xb-link':      PropTypes.string
         },
         // @endif
 
@@ -222,4 +224,4 @@ xv.Input = xblocks.view.register('xb-input', [
     }
 ]);
 
-module.exports = xv.Input;
+export default xv.Input;

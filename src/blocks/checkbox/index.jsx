@@ -1,7 +1,9 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import classnames from 'classnames';
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 
 /**
  * The template node xb-checkbox
@@ -12,23 +14,23 @@ var classnames = require('classnames');
  * @mixes React.addons.PureRenderMixin
  */
 xv.Checkbox = xblocks.view.register('xb-checkbox', [
-    require('mixin/view/commonAttrs'),
+    mixinViewCommonAttrs,
 
     {
         displayName: 'xb-checkbox',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        mixins: [ PureRenderMixin ],
 
         // @if NODE_ENV='development'
         propTypes: {
-            'autofocus':    React.PropTypes.bool,
-            'checked':      React.PropTypes.bool,
-            'for':          React.PropTypes.string,
-            'form':         React.PropTypes.string,
-            'name':         React.PropTypes.string,
-            'required':     React.PropTypes.bool,
-            'size':         React.PropTypes.oneOf([ 's', 'm' ]),
-            'value':        React.PropTypes.string
+            'autofocus':    PropTypes.bool,
+            'checked':      PropTypes.bool,
+            'for':          PropTypes.string,
+            'form':         PropTypes.string,
+            'name':         PropTypes.string,
+            'required':     PropTypes.bool,
+            'size':         PropTypes.oneOf([ 's', 'm' ]),
+            'value':        PropTypes.string
         },
         // @endif
 
@@ -112,4 +114,4 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
     }
 ]);
 
-module.exports = xv.Checkbox;
+export default xv.Checkbox;

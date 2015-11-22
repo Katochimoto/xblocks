@@ -1,7 +1,8 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
-var React = require('react');
-var classnames = require('classnames');
+import { xv } from 'context';
+import { PropTypes } from 'react';
+import xblocks from 'xblocks';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import classnames from 'classnames';
 var filterProps = require('utils/filterProps');
 var isEmpty = require('_/lang/isEmpty');
 
@@ -20,15 +21,15 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
     {
         displayName: 'xb-menuitem',
 
-        mixins: [ React.addons.PureRenderMixin ],
+        mixins: [ PureRenderMixin ],
 
         // @if NODE_ENV='development'
         propTypes: {
-            'focused':  React.PropTypes.bool,
-            'ico':      React.PropTypes.object,
-            'label':    React.PropTypes.string.isRequired,
-            'selected': React.PropTypes.bool,
-            'submenu':  React.PropTypes.bool
+            'focused':  PropTypes.bool,
+            'ico':      PropTypes.object,
+            'label':    PropTypes.string.isRequired,
+            'selected': PropTypes.bool,
+            'submenu':  PropTypes.bool
         },
         // @endif
 
@@ -84,4 +85,4 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
     }
 ]);
 
-module.exports = xv.Menuitem;
+export default xv.Menuitem;

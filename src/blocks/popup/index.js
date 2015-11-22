@@ -1,10 +1,10 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
 
-var xb = require('context').xb;
+import { xb } from 'context';
 var Tether = require('tether');
 import context from 'context';
-var xblocks = require('xblocks');
+import xblocks from 'xblocks';
 var tetherDefaultOptions = require('utils/tetherDefaultOptions');
 var assign = require('_/object/assign');
 var immediate = require('setimmediate2/src');
@@ -284,4 +284,4 @@ xb.Popup = xblocks.create('xb-popup', [
     }
 ]);
 
-module.exports = xb.Popup;
+export default xb.Popup;

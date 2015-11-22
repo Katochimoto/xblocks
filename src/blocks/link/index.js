@@ -1,8 +1,7 @@
-require('./index.styl');
-require('./index.jsx');
-
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import './index.styl';
+import './index.jsx';
+import { xb } from 'context';
+import xblocks from 'xblocks';
 
 /**
  * xb-link html element
@@ -20,4 +19,4 @@ xb.Link = xblocks.create('xb-link', [
     }
 ]);
 
-module.exports = xb.Link;
+export default xb.Link;

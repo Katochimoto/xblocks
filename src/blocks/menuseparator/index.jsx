@@ -1,5 +1,5 @@
-var xv = require('context').xv;
-var xblocks = require('xblocks');
+import { xv } from 'context';
+import xblocks from 'xblocks';
 
 /**
  * The template node xb-menuseparator
@@ -17,4 +17,4 @@ xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
     }
 });
 
-module.exports = xv.Menuseparator;
+export default xv.Menuseparator;

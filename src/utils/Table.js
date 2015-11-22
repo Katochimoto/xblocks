@@ -1,4 +1,4 @@
-var xblocks = require('xblocks');
+import xblocks from 'xblocks';
 var delegate = require('event/delegate');
 var filterClick = require('event/filterClick');
 var filterMouse = require('event/filterMouse');

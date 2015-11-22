@@ -1,8 +1,8 @@
-require('./index.styl');
-require('./index.jsx');
+import './index.styl';
+import './index.jsx';
 
-var xb = require('context').xb;
-var xblocks = require('xblocks');
+import { xb } from 'context';
+import xblocks from 'xblocks';
 var lazyFocus = require('utils/lazyFocus');
 var Table = require('utils/Table');
 var noop = require('_/utility/noop');
@@ -60,4 +60,4 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
     }
 ]);
 
-module.exports = xb.MenuInline;
+export default xb.MenuInline;
