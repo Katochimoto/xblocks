@@ -4,6 +4,7 @@ import xblocks from 'xblocks';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 
 /**
  * The template node xb-popup
@@ -14,7 +15,7 @@ import classnames from 'classnames';
  * @mixes React.addons.PureRenderMixin
  */
 xv.Popup = xblocks.view.register('xb-popup', [
-    require('mixin/view/commonAttrs'),
+    mixinViewCommonAttrs,
 
     {
         displayName: 'xb-popup',

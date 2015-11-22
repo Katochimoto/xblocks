@@ -1,9 +1,11 @@
 import './index.styl';
 import './index.jsx';
-
 import { xb } from 'context';
 import xblocks from 'xblocks';
-var replaceTextSelection = require('dom/replaceTextSelection');
+import replaceTextSelection from 'dom/replaceTextSelection';
+import mixinDisabled from 'mixin/element/disabled';
+import mixinFocus from 'mixin/element/focus';
+import inputValueState from 'mixin/element/inputValueState';
 
 /**
  * xb-input html element
@@ -36,9 +38,9 @@ var replaceTextSelection = require('dom/replaceTextSelection');
  * @mixes xblocks.mixin.eFocus
  */
 xb.Input = xblocks.create('xb-input', [
-    require('mixin/element/disabled'),
-    require('mixin/element/inputValueState'),
-    require('mixin/element/focus'),
+    mixinDisabled,
+    inputValueState,
+    mixinFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

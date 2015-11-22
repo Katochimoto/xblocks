@@ -2,7 +2,7 @@
  * @param {HTMLElement} node
  * @returns {HTMLElement|null}
  */
-module.exports = function (node) {
+export default function (node) {
     var parent = node;
 
     while (parent) {
@@ -14,4 +14,4 @@ module.exports = function (node) {
     }
 
     return null;
-};
+}

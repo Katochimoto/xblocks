@@ -2,6 +2,7 @@ import { xv } from 'context';
 import { PropTypes } from 'react';
 import xblocks from 'xblocks';
 import classnames from 'classnames';
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 
 /**
  * The template node xb-speech-recognition
@@ -11,7 +12,7 @@ import classnames from 'classnames';
  * @mixes xblocks.mixin.vCommonAttrs
  */
 xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
-    require('mixin/view/commonAttrs'),
+    mixinViewCommonAttrs,
 
     {
         displayName: 'xb-speech-recognition',

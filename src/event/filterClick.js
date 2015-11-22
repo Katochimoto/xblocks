@@ -1,4 +1,4 @@
-var wrap = require('event/wrap');
+import wrap from 'event/wrap';
 
 /**
  * @function xblocks.event.filterClick
@@ -6,7 +6,7 @@ var wrap = require('event/wrap');
  * @param   {Function} callback [description]
  * @returns {[type]}            [description]
  */
-module.exports = function (which, callback) {
+export default function (which, callback) {
     which = Array.isArray(which) ? which : [ which ];
 
     return function (event) {
@@ -20,4 +20,4 @@ module.exports = function (which, callback) {
             callback.call(this, event);
         }
     };
-};
+}

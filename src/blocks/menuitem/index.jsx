@@ -3,8 +3,10 @@ import { PropTypes } from 'react';
 import xblocks from 'xblocks';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
-var filterProps = require('utils/filterProps');
-var isEmpty = require('_/lang/isEmpty');
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
+import exportPropTypes from 'utils/exportPropTypes';
+import filterProps from 'utils/filterProps';
+import isEmpty from '_/lang/isEmpty';
 
 /**
  * The template node xb-menuitem
@@ -15,8 +17,8 @@ var isEmpty = require('_/lang/isEmpty');
  * @mixes React.addons.PureRenderMixin
  */
 xv.Menuitem = xblocks.view.register('xb-menuitem', [
-    require('mixin/view/commonAttrs'),
-    require('utils/exportPropTypes')('xb-ico'),
+    mixinViewCommonAttrs,
+    exportPropTypes('xb-ico'),
 
     {
         displayName: 'xb-menuitem',

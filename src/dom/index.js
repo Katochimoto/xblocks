@@ -1,4 +1,4 @@
-var globalContext = require('context');
+import globalContext from 'context';
 var indexOf = Array.prototype.indexOf;
 
 /**
@@ -8,7 +8,7 @@ var indexOf = Array.prototype.indexOf;
  * @param   {[type]} context  [description]
  * @returns {[type]}          [description]
  */
-module.exports = function (selector, element, context) {
+export default function (selector, element, context) {
     context = context || globalContext.document;
     return indexOf.call(context.querySelectorAll(selector), element);
-};
+}

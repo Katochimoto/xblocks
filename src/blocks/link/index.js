@@ -2,6 +2,7 @@ import './index.styl';
 import './index.jsx';
 import { xb } from 'context';
 import xblocks from 'xblocks';
+import mixinDisabled from 'mixin/element/disabled';
 
 /**
  * xb-link html element
@@ -12,7 +13,7 @@ import xblocks from 'xblocks';
  * @mixes xblocks.mixin.eDisabled
  */
 xb.Link = xblocks.create('xb-link', [
-    require('mixin/element/disabled'),
+    mixinDisabled,
 
     {
         prototype: Object.create(HTMLAnchorElement.prototype)

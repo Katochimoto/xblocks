@@ -8,6 +8,6 @@ var transformIterator = function (result, value, key) {
     result[ key.replace(this, '') ] = value;
 };
 
-module.exports = function (reg, props) {
+export default function (reg, props) {
     return transform(pick(props, pickIterator, reg), transformIterator, {}, reg);
-};
+}

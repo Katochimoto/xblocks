@@ -1,7 +1,7 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
 import xblocks from 'xblocks';
-var ReactDOM = require('react-dom');
+import ReactDOM from 'react-dom';
 
 /**
  * The template node xb-select

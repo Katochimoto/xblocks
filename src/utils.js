@@ -1,5 +1,9 @@
-module.exports = {
-    'filterProps': require('utils/filterProps'),
-    'resetLastRadioChecked': require('utils/resetLastRadioChecked'),
-    'exportPropTypes': require('utils/exportPropTypes')
+import filterProps from 'utils/filterProps';
+import resetLastRadioChecked from 'utils/resetLastRadioChecked';
+import exportPropTypes from 'utils/exportPropTypes';
+
+export default {
+    filterProps
+    resetLastRadioChecked,
+    exportPropTypes
 };

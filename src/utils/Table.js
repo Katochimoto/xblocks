@@ -1,17 +1,18 @@
 import xblocks from 'xblocks';
-var delegate = require('event/delegate');
-var filterClick = require('event/filterClick');
-var filterMouse = require('event/filterMouse');
-var matchesSelector = require('dom/matchesSelector');
-var eachAfter = require('dom/eachAfter');
-var eachBefore = require('dom/eachBefore');
-var index = require('dom/index');
-var merge = require('_/object/merge');
-var throttle = require('_/function/throttle');
+import delegate from 'event/delegate';
+import filterClick from 'event/filterClick';
+import filterMouse from 'event/filterMouse';
+import matchesSelector from 'dom/matchesSelector';
+import eachAfter from 'dom/eachAfter';
+import eachBefore from 'dom/eachBefore';
+import index from 'dom/index';
+import merge from '_/object/merge';
+import throttle from '_/function/throttle';
+
 var pop = Array.prototype.pop;
 var slice = Array.prototype.slice;
 
-module.exports = Table;
+export default Table;
 
 function Table(node, options) {
     this._options = merge({

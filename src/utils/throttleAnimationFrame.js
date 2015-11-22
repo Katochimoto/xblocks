@@ -1,4 +1,4 @@
-var animationFrame = require('polyfills/requestAnimationFrame');
+import animationFrame from 'polyfills/requestAnimationFrame';
 
 /**
  * @function xblocks.utils.throttleAnimationFrame
@@ -6,7 +6,7 @@ var animationFrame = require('polyfills/requestAnimationFrame');
  * @param   {[type]}   context  [description]
  * @returns {[type]}            [description]
  */
-module.exports = function (callback, context) {
+export default function (callback, context) {
     var throttle = 0;
     var animationCallback = function () {
         throttle = 0;
@@ -21,4 +21,4 @@ module.exports = function (callback, context) {
 
         callback.apply(context || this, arguments);
     };
-};
+}

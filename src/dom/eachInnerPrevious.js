@@ -2,7 +2,7 @@
  * Проход по всем потомкам в обратном порядке (от последней до первой)
  * @function xblocks.dom.eachInnerPrevious
  */
-module.exports = function (node, callback) {
+export default function (node, callback) {
     var stack = [ node ];
     var item;
     var cbcall;
@@ -36,4 +36,4 @@ module.exports = function (node, callback) {
     }
 
     return true;
-};
+}

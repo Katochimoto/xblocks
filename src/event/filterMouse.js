@@ -1,4 +1,4 @@
-var wrap = require('event/wrap');
+import wrap from 'event/wrap';
 
 /**
  * @function xblocks.event.filterMouseEnter
@@ -6,7 +6,7 @@ var wrap = require('event/wrap');
  * @param {Event} event mouseover or mouseout event
  * @param {function} callback
  */
-module.exports = function (element, event, callback) {
+export default function (element, event, callback) {
     wrap(event);
 
     var toElement = event.relatedTarget;
@@ -20,4 +20,4 @@ module.exports = function (element, event, callback) {
     }
 
     return callback.call(element, event);
-};
+}

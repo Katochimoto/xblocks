@@ -1,5 +1,5 @@
-var delegateMatch = require('event/delegateMatch');
-var wrap = require('event/wrap');
+import delegateMatch from 'event/delegateMatch';
+import wrap from 'event/wrap';
 
 /**
  * @function xblocks.event.delegate
@@ -7,7 +7,7 @@ var wrap = require('event/wrap');
  * @param   {Function} callback [description]
  * @returns {[type]}            [description]
  */
-module.exports = function (selector, callback) {
+export default function (selector, callback) {
 
     return function (event) {
         wrap(event);
@@ -22,4 +22,4 @@ module.exports = function (selector, callback) {
 
         callback.call(match, event);
     };
-};
+}

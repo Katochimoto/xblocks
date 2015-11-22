@@ -1,6 +1,6 @@
-var xtag = require('xtag');
-var debounce = require('_/function/debounce');
-var throttle = require('_/function/throttle');
+import xtag from 'xtag';
+import debounce from '_/function/debounce';
+import throttle from '_/function/throttle';
 
 /**
  * @example
@@ -24,8 +24,8 @@ xtag.pseudos.debounce = {
         }
 
         return debounce(listener, wait, {
-            'leading': leading,
-            'trailing': trailing
+            leading: leading,
+            trailing: trailing
         });
     }
 };
@@ -52,8 +52,8 @@ xtag.pseudos.throttle = {
         }
 
         return throttle(listener, wait, {
-            'leading': leading,
-            'trailing': trailing
+            leading: leading,
+            trailing: trailing
         });
     }
 };

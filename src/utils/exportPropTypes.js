@@ -1,6 +1,6 @@
 import xblocks from 'xblocks';
 
-module.exports = function (tagName) {
+export default function (tagName) {
     var props = xblocks.utils.propTypes(tagName);
     var exportProps = {};
     var prefix = tagName + '-';
@@ -15,4 +15,4 @@ module.exports = function (tagName) {
     return {
         'propTypes': exportProps
     };
-};
+}

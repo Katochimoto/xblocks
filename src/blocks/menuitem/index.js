@@ -4,9 +4,11 @@ import './index.jsx';
 import { xb } from 'context';
 import context from 'context';
 import xblocks from 'xblocks';
-var lazyFocus = require('utils/lazyFocus');
-var getParentMenu = require('utils/getParentMenu');
-var merge = require('_/object/merge');
+import lazyFocus from 'utils/lazyFocus';
+import getParentMenu from 'utils/getParentMenu';
+import merge from '_/object/merge';
+import mixinElementDisabled from 'mixin/element/disabled';
+import mixinElementInputValueProps from 'mixin/element/inputValueProps';
 
 var menuitemCommon = {
     submenuAttrs: {
@@ -78,8 +80,8 @@ var menuitemCommon = {
  * @listens xblocks.Element~event:xb-destroy
  */
 xb.Menuitem = xblocks.create('xb-menuitem', [
-    require('mixin/element/disabled'),
-    require('mixin/element/inputValueProps'),
+    mixinElementDisabled,
+    mixinElementInputValueProps,
 
     {
         prototype: Object.create(HTMLElement.prototype),

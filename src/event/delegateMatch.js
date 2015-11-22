@@ -1,4 +1,4 @@
-var matchesSelector = require('dom/matchesSelector');
+import matchesSelector from 'dom/matchesSelector';
 
 /**
  * @function xblocks.event.delegateMatch
@@ -6,7 +6,7 @@ var matchesSelector = require('dom/matchesSelector');
  * @param   {[type]} target   [description]
  * @returns {[type]}          [description]
  */
-module.exports = function (selector, target) {
+export default function (selector, target) {
     if (!target || !target.tagName) {
         return;
     }
@@ -30,4 +30,4 @@ module.exports = function (selector, target) {
     }
 
     return match;
-};
+}

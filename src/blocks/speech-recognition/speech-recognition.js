@@ -4,6 +4,7 @@ import './index.jsx';
 import context from 'context';
 import { xb } from 'context';
 import xblocks from 'xblocks';
+import mixinElementDisabled from 'mixin/element/disabled';
 
 var _xbSpeechRecognition = {
     'events': {
@@ -26,7 +27,7 @@ var _xbSpeechRecognition = {
  * @listens xblocks.Element~event:xb-destroy
  */
 xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
-    require('mixin/element/disabled'),
+    mixinElementDisabled,
 
     {
         prototype: Object.create(HTMLElement.prototype),

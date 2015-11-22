@@ -1,5 +1,5 @@
 import context from 'context';
-var vendor = require('utils/vendor');
+import vendor from 'utils/vendor';
 var lastTime = 0;
 
 context.requestAnimationFrame = vendor('requestAnimationFrame') ||
@@ -19,7 +19,7 @@ context.cancelAnimationFrame = vendor('cancelAnimationFrame') ||
         context.clearTimeout(id);
     };
 
-module.exports = {
-    'requestAnimationFrame': context.requestAnimationFrame.bind(context),
-    'cancelAnimationFrame': context.cancelAnimationFrame.bind(context)
+export default {
+    requestAnimationFrame: context.requestAnimationFrame.bind(context),
+    cancelAnimationFrame: context.cancelAnimationFrame.bind(context)
 };

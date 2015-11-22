@@ -1,5 +1,5 @@
 import context from 'context';
-var delegate = require('event/delegate');
+import delegate from 'event/delegate';
 
 context.document.addEventListener('contextmenu', delegate('[contextmenu]', function (event) {
     var element = event.delegateElement;

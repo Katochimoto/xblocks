@@ -2,12 +2,13 @@ import './index.styl';
 import './index.jsx';
 
 import { xb } from 'context';
-var Tether = require('tether');
+import Tether from 'tether';
 import context from 'context';
 import xblocks from 'xblocks';
-var tetherDefaultOptions = require('utils/tetherDefaultOptions');
-var assign = require('_/object/assign');
-var immediate = require('setimmediate2/src');
+import tetherDefaultOptions from 'utils/tetherDefaultOptions';
+import assign from '_/object/assign';
+import immediate from 'setimmediate2/src';
+import mixinElementFocus from 'mixin/element/focus';
 
 var popupCommon = {
     onOpen: function () {
@@ -114,7 +115,7 @@ var popupCommon = {
  * @mixes xblocks.mixin.eFocus
  */
 xb.Popup = xblocks.create('xb-popup', [
-    require('mixin/element/focus'),
+    mixinElementFocus,
 
     {
         prototype: Object.create(HTMLElement.prototype),

@@ -4,8 +4,10 @@ import xblocks from 'xblocks';
 import classnames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
-var filterProps = require('utils/filterProps');
-var Controller = require('./controller.jsx');
+import filterProps from 'utils/filterProps';
+import exportPropTypes from 'utils/exportPropTypes';
+
+import Controller from './controller.jsx';
 
 /**
  * The template node xb-input
@@ -17,7 +19,7 @@ var Controller = require('./controller.jsx');
  */
 xv.Input = xblocks.view.register('xb-input', [
     mixinViewCommonAttrs,
-    require('utils/exportPropTypes')('xb-link'),
+    exportPropTypes('xb-link'),
 
     {
         displayName: 'xb-input',

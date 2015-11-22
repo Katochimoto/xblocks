@@ -1,8 +1,9 @@
-var globalContext = require('context');
-var capitalize = require('_/string/capitalize');
-var vendors = [ 'ms', 'moz', 'webkit', 'o' ];
+import globalContext from 'context';
+import capitalize from '_/string/capitalize';
 
-module.exports = function (name, context) {
+const vendors = [ 'ms', 'moz', 'webkit', 'o' ];
+
+export default function (name, context) {
     context = context || globalContext;
 
     if (context[ name ]) {
@@ -19,4 +20,4 @@ module.exports = function (name, context) {
             return context[ vendor + name ];
         }
     }
-};
+}

@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import xblocks from 'xblocks';
-var throttle = require('_/function/throttle');
-var throttleAnimationFrame = require('utils/throttleAnimationFrame');
-var animationFrame = require('polyfills/requestAnimationFrame');
+import throttle from '_/function/throttle';
+import throttleAnimationFrame from 'utils/throttleAnimationFrame';
+import animationFrame from 'polyfills/requestAnimationFrame';
 
 /**
  * Common interface for views xb-menu and xb-menu-inline

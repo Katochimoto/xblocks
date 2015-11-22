@@ -3,8 +3,8 @@
  * @param   {[type]} element [description]
  * @returns {[type]}         [description]
  */
-module.exports = function (element) {
+export default function (element) {
     if (element.parentNode) {
         return element.parentNode.removeChild(element);
     }
-};
+}

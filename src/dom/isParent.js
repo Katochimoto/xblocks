@@ -7,7 +7,7 @@ var html = context.document.documentElement;
  * @param {HTMLElement} element
  * @returns {boolean}
  */
-module.exports = (function () {
+export default (function () {
 
     if ('compareDocumentPosition' in html) {
         return function (container, element) {

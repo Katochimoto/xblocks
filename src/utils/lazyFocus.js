@@ -5,6 +5,6 @@ import context from 'context';
  * @param   {[type]} node [description]
  * @returns {[type]}      [description]
  */
-module.exports = function (node) {
+export default function (node) {
     context.setTimeout(node.focus.bind(node), 0);
-};
+}

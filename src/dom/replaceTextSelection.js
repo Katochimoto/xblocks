@@ -6,7 +6,7 @@
  * @param {function} getter
  * @param {function} setter
  */
-module.exports = function (element, text, getter, setter) {
+export default function (element, text, getter, setter) {
     var start = element.selectionStart;
     var end = element.selectionEnd;
     var scrollLeft = element.scrollLeft;
@@ -24,4 +24,4 @@ module.exports = function (element, text, getter, setter) {
             callback();
         });
     });
-};
+}

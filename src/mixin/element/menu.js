@@ -1,5 +1,5 @@
-var lazyFocus = require('utils/lazyFocus');
-var isParent = require('dom/isParent');
+import lazyFocus from 'utils/lazyFocus';
+import isParent from 'dom/isParent';
 
 /**
  * Common interface for elements xb-menu and xb-menu-inline.

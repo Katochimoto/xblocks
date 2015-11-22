@@ -1,6 +1,6 @@
 import context from 'context';
-var wrap = require('event/wrap');
-var delegateMatch = require('event/delegateMatch');
+import wrap from 'event/wrap';
+import delegateMatch from 'event/delegateMatch';
 var doc = context.document;
 
 var _currentMenu = null;
@@ -45,7 +45,7 @@ var _unbind = function () {
  * @param   {[type]} menuNode [description]
  * @returns {[type]}          [description]
  */
-module.exports = function (menuNode) {
+export default function (menuNode) {
     var firstParentMenu = menuNode.firstParentMenu;
 
     if (_currentMenu) {
@@ -64,4 +64,4 @@ module.exports = function (menuNode) {
 
     _bind(firstParentMenu);
     return true;
-};
+}

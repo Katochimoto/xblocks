@@ -18,7 +18,7 @@ var Mutation = context.MutationObserver || context.JsMutationObserver;
  * @param   {Function} callback [description]
  * @returns {[type]}            [description]
  */
-module.exports = function (callback) {
+export default function (callback) {
     twiddle.textContent = iterations++;
     callbacks.push(callback);
-};
+}

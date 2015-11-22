@@ -3,9 +3,11 @@ import './index.jsx';
 
 import { xb } from 'context';
 import xblocks from 'xblocks';
-var lazyFocus = require('utils/lazyFocus');
-var Table = require('utils/Table');
-var noop = require('_/utility/noop');
+import lazyFocus from 'utils/lazyFocus';
+import Table from 'utils/Table';
+import noop from '_/utility/noop';
+import mixinElementMenu from 'mixin/element/menu';
+import mixinElementFocus from 'mixin/element/focus';
 
 var menuCommon = {
     init: function () {
@@ -31,8 +33,8 @@ var menuCommon = {
  * @mixes xblocks.mixin.eMenu
  */
 xb.MenuInline = xblocks.create('xb-menu-inline', [
-    require('mixin/element/focus'),
-    require('mixin/element/menu'),
+    mixinElementFocus,
+    mixinElementMenu,
 
     {
         prototype: Object.create(HTMLElement.prototype),

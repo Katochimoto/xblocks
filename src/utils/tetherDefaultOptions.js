@@ -3,7 +3,7 @@
  * @returns {Object}
  * @this {xb.Popup}
  */
-module.exports = function () {
+export default function () {
     return {
         'attachment': 'middle center',
         'classes': { 'element': this.xtagName },
@@ -15,4 +15,4 @@ module.exports = function () {
         'targetAttachment': 'middle center',
         'targetModifier': 'visible'
     };
-};
+}

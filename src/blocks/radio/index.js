@@ -3,6 +3,10 @@ import './index.jsx';
 
 import { xb } from 'context';
 import xblocks from 'xblocks';
+import mixinElementDisabled from 'mixin/element/disabled';
+import mixinElementChecked from 'mixin/element/checked';
+import mixinElementInputValueProps from 'mixin/element/inputValueProps';
+import mixinElementFocus from 'mixin/element/focus';
 
 /**
  * xb-radio html element
@@ -26,10 +30,10 @@ import xblocks from 'xblocks';
  * @mixes xblocks.mixin.eFocus
  */
 xb.Radio = xblocks.create('xb-radio', [
-    require('mixin/element/disabled'),
-    require('mixin/element/checked'),
-    require('mixin/element/inputValueProps'),
-    require('mixin/element/focus'),
+    mixinElementDisabled,
+    mixinElementChecked,
+    mixinElementInputValueProps,
+    mixinElementFocus,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

@@ -1,5 +1,5 @@
-var isParent = require('dom/isParent');
-var eachInnerPrevious = require('dom/eachInnerPrevious');
+import isParent from 'dom/isParent';
+import eachInnerPrevious from 'dom/eachInnerPrevious';
 
 /**
  * @function xblocks.dom.eachBefore
@@ -9,7 +9,7 @@ var eachInnerPrevious = require('dom/eachInnerPrevious');
  * @param   {[type]}   inner    [description]
  * @returns {[type]}            [description]
  */
-module.exports = function (node, callback, context, inner) {
+export default function (node, callback, context, inner) {
     inner = (typeof inner === 'undefined' ? true : Boolean(inner));
     var prev;
     var cbcall;
@@ -30,4 +30,4 @@ module.exports = function (node, callback, context, inner) {
         }
 
     } while ((node = node.parentNode));
-};
+}

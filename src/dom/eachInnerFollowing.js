@@ -2,7 +2,7 @@
  * Проход по всем потомкам в прямом порядке (от певой до последней)
  * @function xblocks.dom.eachInnerFollowing
  */
-module.exports = function (node, callback) {
+export default function (node, callback) {
     var stack = [ node ];
     var item;
     var cbcall;
@@ -34,4 +34,4 @@ module.exports = function (node, callback) {
     }
 
     return true;
-};
+}

@@ -1,5 +1,6 @@
 import context from 'context';
-var vendor = require('utils/vendor');
+import vendor from 'utils/vendor';
+
 var indexOf = Array.prototype.indexOf;
 var proto = context.Element.prototype;
 var matches = proto.matches ||
@@ -14,6 +15,6 @@ var matches = proto.matches ||
  * @param   {[type]} selector [description]
  * @returns {boolean}
  */
-module.exports = function (element, selector) {
+export default function (element, selector) {
     return (element.nodeType === 1 ? matches.call(element, selector) : false);
-};
+}

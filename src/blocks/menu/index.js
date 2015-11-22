@@ -1,15 +1,16 @@
 import './index.styl';
 import './index.jsx';
-require('./contextmenu');
+import './contextmenu';
 
 import { xb } from 'context';
 import xblocks from 'xblocks';
-var lazyFocus = require('utils/lazyFocus');
-var tetherDefaultOptions = require('utils/tetherDefaultOptions');
-var Popup = require('../popup');
-var Table = require('utils/Table');
-var getParentMenu = require('utils/getParentMenu');
-var immediate = require('setimmediate2/src');
+import lazyFocus from 'utils/lazyFocus';
+import tetherDefaultOptions from 'utils/tetherDefaultOptions';
+import Popup from '../popup';
+import Table from 'utils/Table';
+import getParentMenu from 'utils/getParentMenu';
+import immediate from 'setimmediate2/src';
+import mixinElementMenu from 'mixin/element/menu';
 
 var forEach = Array.prototype.forEach;
 
@@ -56,7 +57,7 @@ var menuCommon = {
  * @mixes xblocks.mixin.menu
  */
 xb.Menu = xblocks.create('xb-menu', [
-    require('mixin/element/menu'),
+    mixinElementMenu,
 
     {
         prototype: Object.create(Popup.prototype || new Popup()),

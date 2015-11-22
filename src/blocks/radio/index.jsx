@@ -3,7 +3,8 @@ import { PropTypes } from 'react';
 import xblocks from 'xblocks';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
-var resetLastRadioChecked = require('utils/resetLastRadioChecked');
+import resetLastRadioChecked from 'utils/resetLastRadioChecked';
+import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 
 /**
  * The template node xb-radio
@@ -14,7 +15,7 @@ var resetLastRadioChecked = require('utils/resetLastRadioChecked');
  * @mixes React.addons.PureRenderMixin
  */
 xv.Radio = xblocks.view.register('xb-radio', [
-    require('mixin/view/commonAttrs'),
+    mixinViewCommonAttrs,
 
     {
         displayName: 'xb-radio',

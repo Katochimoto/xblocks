@@ -13,7 +13,7 @@ var clickWhich = {
  * @param   {[type]} event [description]
  * @returns {[type]}       [description]
  */
-module.exports = function (event) {
+export default function (event) {
     if (event.xbWrapped) {
         return event;
     }
@@ -60,4 +60,4 @@ module.exports = function (event) {
     }
 
     return event;
-};
+}
