@@ -49,17 +49,19 @@ match .* _content {
             <div class="highlight">
                 <pre>
                     <code class="html">
-                        "<!-- es5-shim -->"
+                        "<!-- es5-shim 4.3.1 -->"
                         <br/>
-                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.1/es5-shim.min.js\"></script>"
+                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.3.1/es5-shim.min.js\"></script>"
                         <br/>
-                        "<!-- React -->"
+                        "<!-- React 0.14.3 -->"
                         <br/>
-                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js\"></script>"
+                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-with-addons.min.js\"></script>"
                         <br/>
-                        "<!-- Tether -->"
+                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js\"></script>"
                         <br/>
-                        "<script src=\"//cdnjs.cloudflare.com/ajax/libs/tether/0.7.0/tether.min.js\"></script>"
+                        "<!-- Tether 1.1.1 -->"
+                        <br/>
+                        "<script src=\"/bower_components/tether/tether.min.js\"></script>"
                     </code>
                 </pre>
             </div>
@@ -172,6 +174,8 @@ match .* _content {
                 "        <script src=\"/bower_components/es5-shim/es5-shim.min.js\"></script>"
                 <br/>
                 "        <script src=\"/bower_components/react/react-with-addons.min.js\"></script>"
+                <br/>
+                "        <script src=\"/bower_components/react/react-dom.min.js\"></script>"
                 <br/>
                 "        <script src=\"/bower_components/tether/tether.min.js\"></script>"
                 <br/>
