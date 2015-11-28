@@ -37,6 +37,7 @@
     "eslint-config-yandex": "^1.0.5",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.10.0",
+    "events": "^1.1.0",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.4",
     "image-webpack-loader": "^1.6.2",
@@ -59,8 +60,9 @@
     "preprocess": "^3.0.2",
     "preprocess-loader": "^0.2.0",
     "react": "0.14.3",
-    "react-dom": "0.14.3",
     "react-addons-pure-render-mixin": "^0.14.3",
+    "react-dom": "0.14.3",
+    "setimmediate2": "~2.0.x",
     "style-loader": "^0.13.0",
     "stylobate": "1.0.0-alpha.20",
     "stylobate-islands": "1.0.0-alpha.29",
@@ -70,8 +72,7 @@
     "tether": "^1.1.1",
     "url-loader": "^0.5.6",
     "vow": "0.4.10",
-    "xblocks-core": "Katochimoto/xblocks-core.git#rc-1.0.0",
-    "setimmediate2": "~2.0.x"
+    "xblocks-core": "~1.0.x"
   },
   "engines": {
     "node": ">=4.0.0"

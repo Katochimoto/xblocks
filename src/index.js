@@ -12,3 +12,4 @@ import 'blocks/menu';
 import 'blocks/menu-inline';
 import 'blocks/menuitem';
 import 'blocks/menuseparator';
+import 'blocks/speech-recognition';

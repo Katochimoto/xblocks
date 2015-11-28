@@ -3802,3 +3802,19 @@ xb-menuseparator[hidden] {
   padding: 0;
   outline: none;
 }
+xb-speech-recognition {
+  display: inline-block;
+}
+xb-speech-recognition *,
+xb-speech-recognition *:before,
+xb-speech-recognition *:after {
+  -webkit-box-sizing: initial;
+     -moz-box-sizing: initial;
+          box-sizing: initial;
+}
+xb-speech-recognition[hidden] {
+  display: none;
+}
+.xb-speech-recognition {
+  cursor: pointer;
+}
