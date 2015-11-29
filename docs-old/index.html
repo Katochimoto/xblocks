@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Xblocks - HTML custom elements on the basis React and X-Tag." />
+    <meta name="keywords" content="xblocks, react, x-tag, custom elements, javascript, user interface" />
+    <meta name="author" content="Katochimoto" />
+    <link rel="icon" href="favicon.ico" />
+
+    <title>Xblocks</title>
+
+    <link href="../lib/xblocks/dist/xblocks.css" rel="stylesheet" />
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../styles/dashboard.css" rel="stylesheet" />
+    <link href="../styles/bs-docs-sidebar.css" rel="stylesheet" />
+    <link href="../styles/panel-example.css" rel="stylesheet" />
+    <link href="../styles/github.css" rel="stylesheet" />
+
+    <style type="text/css">
+.hljs {
+    padding: 0;
+    background: transparent;
+}
+    </style>
+
+    <script src="../bower_components/l10n.js/l10n.min.js"></script>
+    <script src="../bower_components/react/react-with-addons.min.js"></script>
+    <script src="../bower_components/react/react-dom.min.js"></script>
+    <script src="../bower_components/tether/dist/js/tether.js"></script>
+    <script src="../lib/xblocks-core/dist/x-tag-core.min.js"></script>
+    <script src="../lib/xblocks-core/dist/xblocks-core.min.js"></script>
+    <script src="../lib/xblocks/dist/xblocks.min.js"></script>
+
+    <script>
+    String.defaultLocale = 'ru';
+
+    var loc = function(string) {
+        return string.toLocaleString();
+    };
+    </script>
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/director/build/director.min.js"></script>
+    <script src="../scripts/runtime.js"></script>
+    <script src="../scripts/highlight.pack.js"></script>
+    <script src="../scripts/externals.yate.js"></script>
+    <script src="../scripts/localizations.js"></script>
+
+    <script src="docs.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+<script>
+var data = {
+    'version': '1.0.2',
+    'navbar': {},
+    'menu': {
+        'items': [
+            {
+                'hash': 'getting-started',
+                'title': 'Getting Started',
+                'menu': {
+                    'items': [
+                        {
+                            'hash': 'getting-started/quickstart',
+                            'title': 'Quick Start'
+                        },
+                        {
+                            'hash': 'getting-started/download',
+                            'title': 'Download'
+                        },
+                        {
+                            'hash': 'getting-started/templates',
+                            'title': 'Templates'
+                        }
+                    ]
+                }
+            },
+
+            {
+                'hash': 'examples',
+                'title': 'Examples',
+                'menu': {
+                    'items': [
+                        {
+                            'hash': 'examples/ico',
+                            'title': 'Ico'
+                        },
+                        {
+                            'hash': 'examples/link',
+                            'title': 'Link'
+                        },
+                        {
+                            'hash': 'examples/button',
+                            'title': 'Button'
+                        },
+                        {
+                            'hash': 'examples/checkbox',
+                            'title': 'Checkbox'
+                        },
+                        {
+                            'hash': 'examples/radio',
+                            'title': 'Radio'
+                        },
+                        {
+                            'hash': 'examples/input',
+                            'title': 'Input'
+                        },
+                        {
+                            'hash': 'examples/popup',
+                            'title': 'Popup'
+                        },
+                        {
+                            'hash': 'examples/menu',
+                            'title': 'Menu'
+                        }
+                    ]
+                }
+            },
+
+            {
+                'hash': 'controls',
+                'title': 'Controls',
+                'menu': {
+                    'items': [
+                        {
+                            'hash': 'controls/ico',
+                            'title': 'Ico'
+                        },
+                        {
+                            'hash': 'controls/link',
+                            'title': 'Link'
+                        },
+                        {
+                            'hash': 'controls/button',
+                            'title': 'Button'
+                        },
+                        {
+                            'hash': 'controls/checkbox',
+                            'title': 'Checkbox'
+                        },
+                        {
+                            'hash': 'controls/radio',
+                            'title': 'Radio'
+                        },
+                        {
+                            'hash': 'controls/input',
+                            'title': 'Input'
+                        },
+                        {
+                            'hash': 'controls/popup',
+                            'title': 'Popup'
+                        },
+                        {
+                            'hash': 'controls/menu',
+                            'title': 'Menu'
+                        }
+                    ]
+                }
+            },
+
+            {
+                'hash': 'extensions',
+                'title': 'Extensions',
+                'menu': {
+                    'items': [
+                        {
+                            'hash': 'extensions/writing-extensions',
+                            'title': 'Writing an Extension'
+                        }
+                    ]
+                }
+            },
+
+            {
+                'hash': 'core',
+                'title': 'Core'
+            },
+
+            {
+                'hash': 'support',
+                'title': 'Browser and device support'
+            },
+
+            {
+                'hash': 'contributing',
+                'title': 'Contributing'
+            },
+
+            {
+                'hash': 'tests',
+                'title': 'Running tests'
+            }
+        ]
+    }
+};
+</script>
+<script>
+var loadModule = (function() {
+    var _loadModules = {};
+
+    return function (module) {
+        var dfd = $.Deferred();
+
+        if (_loadModules.hasOwnProperty(module)) {
+            if (_loadModules[ module ]) {
+                dfd.resolve();
+
+            } else {
+                dfd.reject();
+            }
+
+        } else {
+            $.getScript(module + '.js').then(function() {
+                _loadModules[ module ] = true;
+                dfd.resolve();
+
+            }, function() {
+                _loadModules[ module ] = false;
+                dfd.reject();
+            });
+        }
+
+        return dfd.promise();
+    };
+}());
+</script>
+<script>
+$(function() {
+    $(document).on('click', '.popup-open', function(event) {
+        event.preventDefault();
+        var popupId = $(this).data('popupId');
+        document.getElementById(popupId).open();
+    });
+
+    hljs.configure({ 'tabReplace': '    ' });
+
+    var currentModule;
+    var app = document.getElementById('app');
+    var router = Router({
+        '/:module': {
+            'on': run,
+
+            '/:section': {
+                'on': run
+            }
+        }
+    });
+
+    router.configure({
+        'async': true,
+        'notfound': function() {
+            runDefault();
+        },
+        'after': function(next) {
+            next();
+        }
+    });
+
+    router.init('#/getting-started');
+
+    function run(module, section) {
+        var next = arguments[ arguments.length - 1 ];
+
+        if (currentModule === module) {
+            setActiveMenu(module, section);
+            next();
+            return;
+        }
+
+        currentModule = module;
+
+        loadModule(module).done(function() {
+            app.innerHTML = yr.run(module, data);
+
+            setActiveMenu(module, section);
+            $('.highlight code').each(highlightIterate);
+        })
+        .fail(runDefault)
+        .always(next);
+    }
+
+    function runDefault() {
+        run('getting-started');
+    }
+
+    function setActiveMenu(module, section) {
+        var hash = module;
+
+        if (typeof(section) === 'string') {
+            hash += '/' + section;
+        }
+
+        var scrollNode = $('.anchor[data-hash="' + hash + '"]');
+        if (scrollNode.length) {
+            $('html,body').animate({ 'scrollTop': scrollNode.offset().top - 70 });
+        }
+
+        $('.sidebar')
+            .find('li')
+            .removeClass('active')
+            .end()
+            .find('li[data-hash="' + module + '"]')
+            .addClass('active')
+            .end()
+            .find('li[data-hash="' + hash + '"]')
+            .addClass('active');
+    }
+
+    function highlightIterate(i, block) {
+        hljs.highlightBlock(block);
+    }
+});
+</script>
+</body>
+</html>

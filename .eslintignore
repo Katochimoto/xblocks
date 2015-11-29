@@ -1,0 +1,17 @@
+.git/
+.idea/
+.build/
+bower_components/
+node_modules/
+debian/
+coverage/
+static/
+js/
+yate/
+webpack.config.js
+karma.conf.js
+bower.json
+package.json
+gulpfile.js
+config.tmpl.js
+**/.*
