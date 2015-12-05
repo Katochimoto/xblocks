@@ -26,18 +26,6 @@ a._link {
 ._hidden {
   display: none !important;
 }
-/*
-._xb-check_controller
-  kind: hidden visually
-
-  &:checked + ._xb-check_flag,
-  &:checked + .xb-button
-    skin: button_checked
-
-  &:focus + ._xb-check_flag,
-  &:focus + .xb-button
-    skin: button_focus
-*/
 ._xb-file-intruder {
   position: absolute;
   top: 0;
@@ -87,7 +75,6 @@ a._link {
 ._xb-file-intruder-input[type="file"] {
   z-index: 0;
 }
-.xb-ico,
 .xb-ico._type-remove,
 .xb-ico._type-notification,
 .xb-ico._type-check,
@@ -100,9 +87,30 @@ a._link {
   background: 50% no-repeat;
 }
 .xb-ico._type-remove {
-  width: 16px;
-  height: 16px;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDEuMjA5Yy0zLjc1MSAwLTYuNzkxIDMuMDQtNi43OTEgNi43OTEgMCAzLjc0OSAzLjA0IDYuNzg5IDYuNzkxIDYuNzg5IDMuNzQ5IDAgNi43ODktMy4wNCA2Ljc4OS02Ljc4OSAwLTMuNzUxLTMuMDQtNi43OTEtNi43ODktNi43OTF6bTMuOTkgOS4zNTVsLTEuNDI2IDEuNDI2LTIuNTY0LTIuNTY0LTIuNTY0IDIuNTY0LTEuNDI2LTEuNDI2IDIuNTY0LTIuNTY0LTIuNTY0LTIuNTY0IDEuNDI2LTEuNDI2IDIuNTY0IDIuNTY0IDIuNTY0LTIuNTY0IDEuNDI2IDEuNDI2LTIuNTY0IDIuNTY0IDIuNTY0IDIuNTY0eiIvPjwvc3ZnPg==");
+  width: 14px;
+  height: 14px;
+}
+.xb-ico._type-remove:before,
+.xb-ico._type-remove:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  border-top: 1px solid;
+  margin-left: -10px;
+  -webkit-transform: translateY(-0.5px) rotate(45deg);
+  -ms-transform: translateY(-0.5px) rotate(45deg);
+  -moz-transform: translateY(-0.5px) rotate(45deg);
+    -o-transform: translateY(-0.5px) rotate(45deg);
+       transform: translateY(-0.5px) rotate(45deg);
+}
+.xb-ico._type-remove:after {
+  -webkit-transform: translateY(-0.5px) rotate(-45deg);
+  -ms-transform: translateY(-0.5px) rotate(-45deg);
+  -moz-transform: translateY(-0.5px) rotate(-45deg);
+    -o-transform: translateY(-0.5px) rotate(-45deg);
+       transform: translateY(-0.5px) rotate(-45deg);
 }
 .xb-ico._type-notification {
   height: 15px;
@@ -120,11 +128,59 @@ a._link {
   -webkit-box-shadow: 0 1px 0 1px rgba(0,0,0,0.1), 0 5px 10px -5px rgba(0,0,0,0.5);
           box-shadow: 0 1px 0 1px rgba(0,0,0,0.1), 0 5px 10px -5px rgba(0,0,0,0.5);
 }
-.xb-ico._active {
+.xb-ico._type-attention._active,
+.xb-ico._type-close._active,
+.xb-ico._type-download._active,
+.xb-ico._type-download-white._active,
+.xb-ico._type-eye._active,
+.xb-ico._type-help._active,
+.xb-ico._type-link._active,
+.xb-ico._type-link-white._active,
+.xb-ico._type-mail._active,
+.xb-ico._type-mic-off._active,
+.xb-ico._type-mic-on._active,
+.xb-ico._type-odnoklassniki._active,
+.xb-ico._type-pause._active,
+.xb-ico._type-people._active,
+.xb-ico._type-play._active,
+.xb-ico._type-print._active,
+.xb-ico._type-services._active,
+.xb-ico._type-settings._active,
+.xb-ico._type-three-dots._active,
+.xb-ico._type-trash._active,
+.xb-ico._type-trash-white._active,
+.xb-ico._type-twitter._active,
+.xb-ico._type-upload._active,
+.xb-ico._type-upload-white._active,
+.xb-ico._type-vk._active {
   cursor: pointer;
-  opacity: 0.2;
+  opacity: 0.25;
 }
-.xb-ico._active:hover {
+.xb-ico._type-attention._active:hover,
+.xb-ico._type-close._active:hover,
+.xb-ico._type-download._active:hover,
+.xb-ico._type-download-white._active:hover,
+.xb-ico._type-eye._active:hover,
+.xb-ico._type-help._active:hover,
+.xb-ico._type-link._active:hover,
+.xb-ico._type-link-white._active:hover,
+.xb-ico._type-mail._active:hover,
+.xb-ico._type-mic-off._active:hover,
+.xb-ico._type-mic-on._active:hover,
+.xb-ico._type-odnoklassniki._active:hover,
+.xb-ico._type-pause._active:hover,
+.xb-ico._type-people._active:hover,
+.xb-ico._type-play._active:hover,
+.xb-ico._type-print._active:hover,
+.xb-ico._type-services._active:hover,
+.xb-ico._type-settings._active:hover,
+.xb-ico._type-three-dots._active:hover,
+.xb-ico._type-trash._active:hover,
+.xb-ico._type-trash-white._active:hover,
+.xb-ico._type-twitter._active:hover,
+.xb-ico._type-upload._active:hover,
+.xb-ico._type-upload-white._active:hover,
+.xb-ico._type-vk._active:hover {
   opacity: 1;
 }
 xb-ico {
@@ -141,8 +197,7 @@ xb-ico[hidden] {
   display: none;
 }
 .xb-ico {
-  width: 16px;
-  height: 16px;
+  display: inline-block;
 }
 .xb-ico._size-s {
   width: 16px;
@@ -245,18 +300,18 @@ xb-ico[hidden] {
        transform: scale(0.9) rotate(50deg) skewX(12deg);
 }
 .xb-ico._type-dropdown {
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-  margin-top: -0.33em;
-  -webkit-transform: scale(0.75) rotate(45deg);
-  -ms-transform: scale(0.75) rotate(45deg);
-  -moz-transform: scale(0.75) rotate(45deg);
-    -o-transform: scale(0.75) rotate(45deg);
-       transform: scale(0.75) rotate(45deg);
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  margin-top: -5px;
+  -webkit-transform: scale(0.9) rotate(45deg);
+  -ms-transform: scale(0.9) rotate(45deg);
+  -moz-transform: scale(0.9) rotate(45deg);
+    -o-transform: scale(0.9) rotate(45deg);
+       transform: scale(0.9) rotate(45deg);
 }
 .xb-ico._type-dropdown {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 .xb-input._simple_size-s,
 .xb-input._simple_size-m,

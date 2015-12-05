@@ -63,7 +63,6 @@ xv.Ico = xblocks.view.register('xb-ico', [
         getDefaultProps: function () {
             return {
                 'active':   false,
-                'children': String.fromCharCode(160),
                 'disabled': false,
                 'size':     's'
             };
@@ -86,7 +85,7 @@ xv.Ico = xblocks.view.register('xb-ico', [
 
             classes = classnames(classes);
 
-            var content = this.props.value || this.props.children;
+            var content = this.props.value || this.props.children || String.fromCharCode(160);
 
             return (
                 <span className={classes} data-xb-content={this.props._uid}>

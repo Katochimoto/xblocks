@@ -39,10 +39,7 @@ xb-ico
   skin: xb-inline-block
 
 .xb-ico
-  kind: icon (size 16px 16px)
-
-  &._active
-    skin: icon with-hover
+  display: inline-block
 
   for $size-name, $size-value in $svg.sizes
     &._size-{$size-name}
@@ -53,16 +50,22 @@ xb-ico
     &._type-{$icon}
       background-image: url('img/' + $icon + '.svg')
 
+      &:not(._active)
+        skin: v3-icon
+
+      &._active
+        skin: v3-icon with-hover
+
   &._type-remove
-    skin: icon_remove
+    skin: v3-icon_remove
 
   &._type-notification
-    skin: icon_notification
+    skin: v3-icon_notification
     width: auto !important
     height: auto !important
 
   &._type-check
-    skin: icon_check
+    skin: v3-icon_check
 
   &._type-dropdown
-    skin: icon_dropdown
+    skin: v3-icon_dropdown
