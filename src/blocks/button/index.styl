@@ -100,8 +100,11 @@ a.xb-button
     &_size-xl
       skin: v3-button (_type clear) (_size extra-large)
 
-  & > ._xb-check_controller:checked + .xb-button > ._content
-    skin: v3-button_checked
+  & > ._controller
+    skin: v3-checkbox__controller
 
-  & > ._xb-check_controller:focus + .xb-button
-    skin: v3-button_focus
+    &:checked + .xb-button > ._content
+      skin: v3-button_checked
+
+    &:focus + .xb-button
+      skin: v3-button_focus

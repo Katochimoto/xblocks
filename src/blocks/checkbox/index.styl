@@ -4,23 +4,16 @@ xb-checkbox
   skin: xb-inline-block
 
 .xb-checkbox
-  kind: block inline
-  skin: para no-margin
-  cursor: pointer
-  vertical-align: inherit
-  font-size: inherit
-  line-height: inherit
-  font-weight: inherit
+  &._size-m
+    skin: v3-checkbox \
+          (__view '& > ._view') \
+          (__icon '& > ._icon') \
+          (__text '& > ._label') \
+          (__controller '& > ._controller')
 
-  &._size-s
-    skin: para2 no-margin
-    vertical-align: inherit
-    font-size: inherit
-    line-height: inherit
-
-    & > ._xb-checkbox_flag
-      skin: para2 no-margin
-
-._xb-checkbox_flag
-  kind: icon
-  skin: checkbox (__icon '& > ._xb-checkbox_flag-icon')
+  &._size-l
+    skin: v3-checkbox (_size large) \
+          (__view '& > ._view') \
+          (__icon '& > ._icon') \
+          (__text '& > ._label') \
+          (__controller '& > ._controller')

@@ -29,7 +29,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
             'form':         PropTypes.string,
             'name':         PropTypes.string,
             'required':     PropTypes.bool,
-            'size':         PropTypes.oneOf([ 's', 'm' ]),
+            'size':         PropTypes.oneOf([ 'm', 'l' ]),
             'value':        PropTypes.string
         },
         // @endif
@@ -88,9 +88,10 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                     title={this.props.title}
                     htmlFor={this.props['for']}>
 
-                    <input autoFocus={this.props.autofocus}
+                    <input
+                        autoFocus={this.props.autofocus}
                         checked={this.state.checked}
-                        className="_xb-check_controller"
+                        className="_controller"
                         defaultChecked={this.props.checked}
                         disabled={this.props.disabled}
                         form={this.props.form}
@@ -102,10 +103,10 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                         type="checkbox"
                         value={this.props.value} />
 
-                    <span className="_xb-checkbox_flag _xb-check_flag">
-                        <span className="_xb-checkbox_flag-icon"></span>
+                    <span className="_view">
+                        <span className="_icon">{String.fromCharCode(160)}</span>
                     </span>
-                    <span data-xb-content={this.props._uid}>
+                    <span className="_label" data-xb-content={this.props._uid}>
                         {this.props.children}
                     </span>
                 </label>

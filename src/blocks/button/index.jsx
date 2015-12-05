@@ -161,7 +161,7 @@ xv.Button = xblocks.view.register('xb-button', [
                     children.push(
                         <input key="checkControl"
                             type={type}
-                            className="_xb-check_controller"
+                            className="_controller"
                             name={this.props.name}
                             value={this.props.value}
                             form={this.props.form}
