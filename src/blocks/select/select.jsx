@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Select = xblocks.view.register('xb-select', [
+export default xv.Select = xblocks.view.register('xb-select', [
     xblocks.mixin.vCommonAttrs,
 
     {

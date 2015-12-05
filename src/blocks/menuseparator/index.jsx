@@ -7,7 +7,7 @@ import xblocks from 'xblocks';
  * @class xv.Menuseparator
  * @memberof xv
  */
-xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
+export default xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
     displayName: 'xb-menuseparator',
 
     render: function () {
@@ -16,5 +16,3 @@ xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
         );
     }
 });
-
-export default xv.Menuseparator;

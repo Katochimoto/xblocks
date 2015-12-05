@@ -9,7 +9,7 @@
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Calendar = xblocks.view.register('xb-calendar', [
+export default xv.Calendar = xblocks.view.register('xb-calendar', [
     xblocks.mixin.vCommonAttrs,
 
     {

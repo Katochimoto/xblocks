@@ -14,7 +14,7 @@ import mixinViewMenu from 'mixin/view/menu';
  * @mixes xblocks.mixin.vMenu
  * @mixes React.addons.PureRenderMixin
  */
-xv.Menu = xblocks.view.register('xb-menu', [
+export default xv.Menu = xblocks.view.register('xb-menu', [
     mixinViewCommonAttrs,
     mixinViewMenu,
 
@@ -40,5 +40,3 @@ xv.Menu = xblocks.view.register('xb-menu', [
         }
     }
 ]);
-
-export default xv.Menu;

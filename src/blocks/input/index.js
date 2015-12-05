@@ -37,7 +37,7 @@ import inputValueState from 'mixin/element/inputValueState';
  * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
  */
-xb.Input = xblocks.create('xb-input', [
+export default xb.Input = xblocks.create('xb-input', [
     mixinDisabled,
     inputValueState,
     mixinFocus,
@@ -101,5 +101,3 @@ xb.Input = xblocks.create('xb-input', [
         }
     }
 ]);
-
-export default xb.Input;

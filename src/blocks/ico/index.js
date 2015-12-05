@@ -37,7 +37,7 @@ import mixinDisabled from 'mixin/element/disabled';
  * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
-xb.Ico = xblocks.create('xb-ico', [
+export default xb.Ico = xblocks.create('xb-ico', [
     mixinDisabled,
 
     {
@@ -50,5 +50,3 @@ xb.Ico = xblocks.create('xb-ico', [
         }
     }
 ]);
-
-export default xb.Ico;

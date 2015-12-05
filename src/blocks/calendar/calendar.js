@@ -7,4 +7,4 @@
  * @augments HTMLElement
  * @memberof xb
  */
-// xb.Calendar = xblocks.create('xb-calendar');
+// export default xb.Calendar = xblocks.create('xb-calendar');

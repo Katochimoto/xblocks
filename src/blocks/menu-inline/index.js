@@ -32,7 +32,7 @@ var menuCommon = {
  * @mixes xblocks.mixin.eFocus
  * @mixes xblocks.mixin.eMenu
  */
-xb.MenuInline = xblocks.create('xb-menu-inline', [
+export default xb.MenuInline = xblocks.create('xb-menu-inline', [
     mixinElementFocus,
     mixinElementMenu,
 
@@ -61,5 +61,3 @@ xb.MenuInline = xblocks.create('xb-menu-inline', [
         }
     }
 ]);
-
-export default xb.MenuInline;

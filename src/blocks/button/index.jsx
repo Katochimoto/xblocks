@@ -15,7 +15,7 @@ import Content from './content.jsx';
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Button = xblocks.view.register('xb-button', [
+export default xv.Button = xblocks.view.register('xb-button', [
     mixinViewCommonAttrs,
     exportPropTypes('xb-ico'),
 
@@ -88,20 +88,9 @@ xv.Button = xblocks.view.register('xb-button', [
         render: function () {
             var classes = {
                 'xb-button': true,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                [ `_theme-${this.props.theme}_size-${this.props.size}` ]: true
             };
-
-            /*
-            if (this.props.theme) {
-                classes[ '_theme-' + this.props.theme ] = true;
-            }
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
-            */
-
-            classes[ `_theme-${this.props.theme}_size-${this.props.size}` ] = true;
 
             classes = classnames(classes);
 
@@ -236,5 +225,3 @@ xv.Button = xblocks.view.register('xb-button', [
         }
     }
 ]);
-
-export default xv.Button;

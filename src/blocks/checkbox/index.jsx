@@ -13,7 +13,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Checkbox = xblocks.view.register('xb-checkbox', [
+export default xv.Checkbox = xblocks.view.register('xb-checkbox', [
     mixinViewCommonAttrs,
 
     {
@@ -68,12 +68,9 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
         render: function () {
             var classes = {
                 'xb-checkbox': true,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                [ `_size-${this.props.size}` ]: true
             };
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
 
             classes = classnames(classes);
 
@@ -114,5 +111,3 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
         }
     }
 ]);
-
-export default xv.Checkbox;

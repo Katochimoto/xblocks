@@ -14,7 +14,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Popup = xblocks.view.register('xb-popup', [
+export default xv.Popup = xblocks.view.register('xb-popup', [
     mixinViewCommonAttrs,
 
     {
@@ -92,5 +92,3 @@ xv.Popup = xblocks.view.register('xb-popup', [
         }
     }
 ]);
-
-export default xv.Popup;

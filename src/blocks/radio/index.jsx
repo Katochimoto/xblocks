@@ -14,7 +14,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Radio = xblocks.view.register('xb-radio', [
+export default xv.Radio = xblocks.view.register('xb-radio', [
     mixinViewCommonAttrs,
 
     {
@@ -79,12 +79,9 @@ xv.Radio = xblocks.view.register('xb-radio', [
         render: function () {
             var classes = {
                 'xb-radio':  true,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                [ `_size-${this.props.size}` ]: true
             };
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
 
             classes = classnames(classes);
 
@@ -125,5 +122,3 @@ xv.Radio = xblocks.view.register('xb-radio', [
         }
     }
 ]);
-
-export default xv.Radio;

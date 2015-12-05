@@ -56,7 +56,7 @@ var menuCommon = {
  * @memberof xb
  * @mixes xblocks.mixin.menu
  */
-xb.Menu = xblocks.create('xb-menu', [
+export default xb.Menu = xblocks.create('xb-menu', [
     mixinElementMenu,
 
     {
@@ -183,5 +183,3 @@ xb.Menu = xblocks.create('xb-menu', [
         }
     }
 ]);
-
-export default xb.Menu;

@@ -13,7 +13,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Ico = xblocks.view.register('xb-ico', [
+export default xv.Ico = xblocks.view.register('xb-ico', [
     mixinViewCommonAttrs,
 
     {
@@ -56,7 +56,7 @@ xv.Ico = xblocks.view.register('xb-ico', [
                 'upload',
                 'upload-white',
                 'vk'
-            ])
+            ]).isRequired
         },
         // @endif
 
@@ -72,16 +72,10 @@ xv.Ico = xblocks.view.register('xb-ico', [
             var classes = {
                 'xb-ico':    true,
                 '_active':   this.props.active,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                [ `_type-${this.props.type}` ]: true,
+                [ `_size-${this.props.size}` ]: true
             };
-
-            if (this.props.type) {
-                classes[ '_type-' + this.props.type ] = true;
-            }
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
 
             classes = classnames(classes);
 
@@ -95,5 +89,3 @@ xv.Ico = xblocks.view.register('xb-ico', [
         }
     }
 ]);
-
-export default xv.Ico;

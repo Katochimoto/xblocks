@@ -29,7 +29,7 @@ import mixinElementFocus from 'mixin/element/focus';
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-xb.Radio = xblocks.create('xb-radio', [
+export default xb.Radio = xblocks.create('xb-radio', [
     mixinElementDisabled,
     mixinElementChecked,
     mixinElementInputValueProps,
@@ -47,5 +47,3 @@ xb.Radio = xblocks.create('xb-radio', [
         }
     }
 ]);
-
-export default xb.Radio;

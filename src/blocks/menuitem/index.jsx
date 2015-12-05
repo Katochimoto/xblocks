@@ -16,7 +16,7 @@ import isEmpty from '_/lang/isEmpty';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Menuitem = xblocks.view.register('xb-menuitem', [
+export default xv.Menuitem = xblocks.view.register('xb-menuitem', [
     mixinViewCommonAttrs,
     exportPropTypes('xb-ico'),
 
@@ -86,5 +86,3 @@ xv.Menuitem = xblocks.view.register('xb-menuitem', [
         }
     }
 ]);
-
-export default xv.Menuitem;

@@ -40,7 +40,7 @@ import mixinFocus from 'mixin/element/focus';
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-xb.Button = xblocks.create('xb-button', [
+export default xb.Button = xblocks.create('xb-button', [
     mixinDisabled,
     mixinChecked,
     mixinInputValueProps,
@@ -63,5 +63,3 @@ xb.Button = xblocks.create('xb-button', [
         }
     }
 ]);
-
-export default xb.Button;

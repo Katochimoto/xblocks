@@ -79,7 +79,7 @@ var menuitemCommon = {
  * @listens xblocks.Element~event:xb-created
  * @listens xblocks.Element~event:xb-destroy
  */
-xb.Menuitem = xblocks.create('xb-menuitem', [
+export default xb.Menuitem = xblocks.create('xb-menuitem', [
     mixinElementDisabled,
     mixinElementInputValueProps,
 
@@ -226,5 +226,3 @@ xb.Menuitem = xblocks.create('xb-menuitem', [
         }
     }
 ]);
-
-export default xb.Menuitem;

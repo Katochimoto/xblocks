@@ -29,7 +29,7 @@ import mixinFocus from 'mixin/element/focus';
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-xb.Checkbox = xblocks.create('xb-checkbox', [
+export default xb.Checkbox = xblocks.create('xb-checkbox', [
     mixinDisabled,
     mixinChecked,
     mixinInputValueProps,
@@ -47,5 +47,3 @@ xb.Checkbox = xblocks.create('xb-checkbox', [
         }
     }
 ]);
-
-export default xb.Checkbox;

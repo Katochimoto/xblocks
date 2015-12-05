@@ -114,7 +114,7 @@ var popupCommon = {
  * @augments HTMLElement
  * @mixes xblocks.mixin.eFocus
  */
-xb.Popup = xblocks.create('xb-popup', [
+export default xb.Popup = xblocks.create('xb-popup', [
     mixinElementFocus,
 
     {
@@ -284,5 +284,3 @@ xb.Popup = xblocks.create('xb-popup', [
         }
     }
 ]);
-
-export default xb.Popup;

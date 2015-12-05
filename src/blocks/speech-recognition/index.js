@@ -27,7 +27,7 @@ const SR_LANG_DEFAULT = 'en-US';
  * @listens xblocks.Element~event:xb-update
  * @listens xblocks.Element~event:xb-destroy
  */
-xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
+export default xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
     mixinElementDisabled,
 
     {
@@ -126,5 +126,3 @@ xb.SpeechRecognition = xblocks.create('xb-speech-recognition', [
         }
     }
 ]);
-
-export default xb.SpeechRecognition;

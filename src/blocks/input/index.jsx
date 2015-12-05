@@ -17,7 +17,7 @@ import Controller from './controller.jsx';
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Input = xblocks.view.register('xb-input', [
+export default xv.Input = xblocks.view.register('xb-input', [
     mixinViewCommonAttrs,
     exportPropTypes('xb-link'),
 
@@ -129,11 +129,9 @@ xv.Input = xblocks.view.register('xb-input', [
                 'xb-input':     true,
                 '_disabled':    this.props.disabled,
                 '_autosize':    this.props.autosize,
-                '_ghost':       this.props.ghost
+                '_ghost':       this.props.ghost,
+                [ `_${isComplex ? 'complex' : 'simple'}_size-${this.props.size}` ]: true
             };
-
-            var type = isComplex ? 'complex' : 'simple';
-            classes[ `_${type}_size-${this.props.size}` ] = true;
 
             classes = classnames(classes);
 
@@ -223,5 +221,3 @@ xv.Input = xblocks.view.register('xb-input', [
         }
     }
 ]);
-
-export default xv.Input;
