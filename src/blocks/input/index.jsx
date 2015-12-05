@@ -118,7 +118,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 this.props.prefix ||
                 this.props.reset ||
                 this.props.autosize ||
-                this.props['xb-link'] ||
+                this.props[ 'xb-link' ] ||
                 this.props.placeholder
             );
         },
@@ -129,18 +129,14 @@ xv.Input = xblocks.view.register('xb-input', [
                 'xb-input':     true,
                 '_disabled':    this.props.disabled,
                 '_autosize':    this.props.autosize,
-                '_ghost':       this.props.ghost,
-                '_complex':     isComplex,
-                '_simple':      !isComplex
+                '_ghost':       this.props.ghost
             };
 
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
+            var type = isComplex ? 'complex' : 'simple';
+            classes[ `_${type}_size-${this.props.size}` ] = true;
 
             classes = classnames(classes);
 
-            var isPlaceholderHint = false;
             var controllerProps = {
                 'autoFocus':    this.props.autofocus,
                 'autocomplete': this.props.autocomplete,
@@ -164,16 +160,6 @@ xv.Input = xblocks.view.register('xb-input', [
             if (isComplex) {
                 var children = [];
 
-                if (this.props.placeholder) {
-                    isPlaceholderHint = true;
-
-                    children.push(
-                        <span ref="placeholder" key="placeholder" className="_hint">
-                            <span className="_hint-inner">{this.props.placeholder}</span>
-                        </span>
-                    );
-                }
-
                 if (this.props['xb-link']) {
                     var linkProps = filterProps(/^xb-link-/, this.props);
                     linkProps['theme'] = 'empty';
@@ -190,23 +176,35 @@ xv.Input = xblocks.view.register('xb-input', [
                     );
                 }
 
-                if (this.props.postfix) {
-                    children.push(
-                        <span key="postfix" className="_right">{this.props.postfix}</span>
-                    );
-                }
-
                 if (this.props.reset) {
                     children.push(
                         <span key="reset" className="_reset" onClick={this.onClickReset}></span>
                     );
                 }
 
+                if (this.props.postfix) {
+                    children.push(
+                        <span key="postfix" className="_right">{this.props.postfix}</span>
+                    );
+                }
+
+                var placeholder = null;
+                if (this.props.placeholder) {
+                    placeholder = (
+                        <span ref="placeholder" key="placeholder" className="_hint">
+                            <span className="_hint-inner">{this.props.placeholder}</span>
+                        </span>
+                    );
+                }
+
                 children.push(
                     <span key="content" className="_content">
+                        {placeholder}
                         <Controller {...controllerProps}
-                            isPlaceholderHint={isPlaceholderHint} />
-                        <span key="view" className="_view"></span>
+                            isPlaceholderHint={Boolean(placeholder)} />
+                        <span key="view" className="_view">
+                            {String.fromCharCode(160)}
+                        </span>
                     </span>
                 );
 
@@ -219,7 +217,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 return (
                     <Controller {...controllerProps}
                         className={classes}
-                        isPlaceholderHint={isPlaceholderHint} />
+                        isPlaceholderHint={false} />
                 );
             }
         }
