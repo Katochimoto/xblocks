@@ -10,35 +10,39 @@ export default xblocks.view.create({
 
     // @if NODE_ENV='development'
     propTypes: {
-        'ico': PropTypes.object
+        ico: PropTypes.object
     },
     // @endif
 
     getDefaultProps: function () {
         return {
-            'ico': {}
+            ico: {}
         };
     },
 
     render: function () {
-        var children = [
-            <span className="_content-content"
-                key="content"
-                data-xb-content={this.props._uid}>
+        var children = [];
 
-                {this.props.children}
-            </span>
-        ];
+        if (this.props.children) {
+            children.push(
+                <span className="_text"
+                    key="text"
+                    data-xb-content={this.props._uid}>
+
+                    {this.props.children}
+                </span>
+            );
+        }
 
         if (!isEmpty(this.props.ico) && this.props.ico.type) {
             if (!this.props.ico.float || this.props.ico.float === 'left') {
                 children.unshift(
-                    <xb-ico {...this.props.ico} key="ico" />
+                    <xb-ico {...this.props.ico} className="_before" key="ico" />
                 );
 
             } else if (this.props.ico.float === 'right') {
                 children.push(
-                    <xb-ico {...this.props.ico} key="ico" />
+                    <xb-ico {...this.props.ico} className="_after" key="ico" />
                 );
             }
         }

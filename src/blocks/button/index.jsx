@@ -36,7 +36,7 @@ xv.Button = xblocks.view.register('xb-button', [
             'required':     PropTypes.bool,
             'size':         PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'target':       PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-            'theme':        PropTypes.oneOf([ 'action', 'dark', 'flying', 'normal', 'promo', 'pseudo-inverted', 'pseudo' ]),
+            'theme':        PropTypes.oneOf([ 'action', 'dark', 'normal', 'clear', 'dark-pseudo', 'pseudo' ]),
             'type':         PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
             'value':        PropTypes.string
         },
@@ -91,6 +91,7 @@ xv.Button = xblocks.view.register('xb-button', [
                 '_disabled': this.props.disabled
             };
 
+            /*
             if (this.props.theme) {
                 classes[ '_theme-' + this.props.theme ] = true;
             }
@@ -98,6 +99,9 @@ xv.Button = xblocks.view.register('xb-button', [
             if (this.props.size) {
                 classes[ '_size-' + this.props.size ] = true;
             }
+            */
+
+            classes[ `_theme-${this.props.theme}_size-${this.props.size}` ] = true;
 
             classes = classnames(classes);
 
