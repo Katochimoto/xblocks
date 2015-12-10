@@ -46,14 +46,16 @@ module.exports = {
         'extensions': [ '', '.js', '.styl' ],
         'alias': {
             'components': path.join(clientPath, 'components'),
-            'resources': resourcesPath
+            'resources': resourcesPath,
+            'ui': path.join(clientPath, 'ui')
         }
     },
     'plugins': [
         new webpack.ProvidePlugin({
             '_': 'lodash',
             'React': 'react',
-            'ReactDOM': 'react-dom'
+            'ReactDOM': 'react-dom',
+            'ReactDOMServer': 'react-dom/server'
         }),
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.DedupePlugin(),
@@ -76,6 +78,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             'title': 'Xblocks',
             'inject': 'body',
+            'hash': true,
             'minify': {
                 'removeComments': true,
                 'collapseWhitespace': true,
@@ -115,6 +118,10 @@ module.exports = {
             {
                 'test': /\.(ttf|eot|woff2|woff)$/i,
                 'loader': 'file?name=' + (isDev ? '[name].[ext]' : '[hash]-[name].[ext]')
+            },
+            {
+                'test': /\.txt$/i,
+                'loader': 'text'
             }
         ]
     },

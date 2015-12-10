@@ -161,8 +161,10 @@ export default React.createClass({
 
     renderMenuItem: function (item, key) {
         var href = this.props.history.createPath(item.hash);
+        var find = (_.trimRight(this.props.location.pathname, '/') + '/').indexOf((_.trimRight(href, '/') + '/'));
+
         var classes = classSet({
-            'active': this.props.history.isActive(href)
+            'active': find === 0
         });
 
         return (

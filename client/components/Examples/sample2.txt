@@ -1,0 +1,13 @@
+"<xb-menu id=\"menuId\">"
+<br/>
+"    <xb-menuitem label=\"label 1\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 2\"></xb-menuitem>"
+<br/>
+"</xb-menu>"
+<br/><br/>
+"<span contextmenu=\"menuId\">"
+<br/>
+"    right click to display the context menu"
+<br/>
+"</span>"

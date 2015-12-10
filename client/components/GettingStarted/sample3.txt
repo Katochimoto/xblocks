@@ -1,0 +1,4 @@
+<!-- Included xblocks-core, X-Tag and polyfill custom elements -->
+<script src="bower_components/xblocks-core/dist/xblocks-core-full.min.js"></script>
+<!-- Includes a set of custom elements -->
+<script src="bower_components/xblocks/dist/xblocks.min.js"></script>

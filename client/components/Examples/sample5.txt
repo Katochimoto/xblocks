@@ -1,0 +1,19 @@
+"<xb-menu size=\"5\">"
+<br/>
+"    <xb-menuitem label=\"label 1\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 2\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 3\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 4\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 5\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 6\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 7\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 8\"></xb-menuitem>"
+<br/>
+"</xb-menu>"

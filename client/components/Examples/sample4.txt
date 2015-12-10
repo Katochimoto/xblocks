@@ -1,0 +1,7 @@
+"<xb-menu>"
+<br/>
+"    <xb-menuitem label=\"label 1\" xb-ico-type=\"twitter\" xb-ico-float=\"left\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 2\" xb-ico-type=\"vk\" xb-ico-float=\"right\"></xb-menuitem>"
+<br/>
+"</xb-menu>"

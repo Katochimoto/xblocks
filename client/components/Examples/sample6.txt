@@ -1,0 +1,29 @@
+"<xb-menu>"
+<br/>
+"    <xb-menuitem label=\"label 1\">"
+<br/>
+"        <xb-menuitem label=\"label 1.1\"></xb-menuitem>"
+<br/>
+"        <xb-menuitem label=\"label 1.2\"></xb-menuitem>"
+<br/>
+"        <xb-menuitem label=\"label 1.3\">"
+<br/>
+"            <xb-menuitem label=\"label 1.3.1\"></xb-menuitem>"
+<br/>
+"            <xb-menuitem label=\"label 1.3.2\"></xb-menuitem>"
+<br/>
+"            <xb-menuitem label=\"label 1.3.3\"></xb-menuitem>"
+<br/>
+"        </xb-menuitem>"
+<br/>
+"    </xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 2\"></xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 3\"></xb-menuitem>"
+<br/>
+"    <xb-menuseparator></xb-menuseparator>"
+<br/>
+"    <xb-menuitem label=\"label 4\" disabled></xb-menuitem>"
+<br/>
+"</xb-menu>"

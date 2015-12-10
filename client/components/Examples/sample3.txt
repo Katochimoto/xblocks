@@ -1,0 +1,29 @@
+"<a id=\"targetMenu\" href=\"#\" onclick=\"document.getElementById('menu').open();\">"
+<br/>
+"    show menu for the target object"
+<br/>
+"</a>"
+<br/><br/>
+"<xb-menu id=\"menu\" target=\"#targetMenu\" attachment=\"top left\" target-attachment=\"bottom left\" target-modifier=\"initial\">"
+<br/>
+"   <xb-menuitem label=\"label 1\">"
+<br/>
+"        <xb-menuitem label=\"label 1.1\"></xb-menuitem>"
+<br/>
+"        <xb-menuitem label=\"label 1.2\"></xb-menuitem>"
+<br/>
+"        <xb-menuitem label=\"label 1.3\">"
+<br/>
+"            <xb-menuitem label=\"label 1.3.1\"></xb-menuitem>"
+<br/>
+"            <xb-menuitem label=\"label 1.3.2\"></xb-menuitem>"
+<br/>
+"            <xb-menuitem label=\"label 1.3.3\"></xb-menuitem>"
+<br/>
+"        </xb-menuitem>"
+<br/>
+"    </xb-menuitem>"
+<br/>
+"    <xb-menuitem label=\"label 2\"></xb-menuitem>"
+<br/>
+"</xb-menu>"

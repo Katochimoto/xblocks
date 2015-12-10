@@ -1,0 +1,5 @@
+"<xb-popup theme=\"modal\" close>"
+<br/>
+"   Popup body"
+<br/>
+"</xb-popup>"

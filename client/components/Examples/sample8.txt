@@ -1,0 +1,21 @@
+"<xb-popup close>"
+<br/>
+"    <script type=\"text/x-template\" ref=\"xb-popup-title\">"
+<br/>
+"        Title"
+<br/>
+"    </script>"
+<br/>
+"    <script type=\"text/x-template\">"
+<br/>
+"        Body"
+<br/>
+"    </script>"
+<br/>
+"    <script type=\"text/x-template\" ref=\"xb-popup-buttons\">"
+<br/>
+"        <xb-button>button</xb-button>"
+<br/>
+"    </script>"
+<br/>
+"</xb-popup>"
