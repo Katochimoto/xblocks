@@ -75,10 +75,14 @@ a._link {
 ._xb-file-intruder-input[type="file"] {
   z-index: 0;
 }
-.xb-ico._type-remove,
-.xb-ico._type-notification,
-.xb-ico._type-check,
-.xb-ico._type-dropdown {
+.xb-ico._type-remove:not(._active),
+.xb-ico._type-remove._active,
+.xb-ico._type-notification:not(._active),
+.xb-ico._type-notification._active,
+.xb-ico._type-check:not(._active),
+.xb-ico._type-check._active,
+.xb-ico._type-dropdown:not(._active),
+.xb-ico._type-dropdown._active {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -86,12 +90,15 @@ a._link {
   margin-top: -0.2em;
   background: 50% no-repeat;
 }
-.xb-ico._type-remove {
+.xb-ico._type-remove:not(._active),
+.xb-ico._type-remove._active {
   width: 14px;
   height: 14px;
 }
-.xb-ico._type-remove:before,
-.xb-ico._type-remove:after {
+.xb-ico._type-remove:not(._active):before,
+.xb-ico._type-remove._active:before,
+.xb-ico._type-remove:not(._active):after,
+.xb-ico._type-remove._active:after {
   content: "";
   position: absolute;
   top: 50%;
@@ -105,14 +112,16 @@ a._link {
     -o-transform: translateY(-0.5px) rotate(45deg);
        transform: translateY(-0.5px) rotate(45deg);
 }
-.xb-ico._type-remove:after {
+.xb-ico._type-remove:not(._active):after,
+.xb-ico._type-remove._active:after {
   -webkit-transform: translateY(-0.5px) rotate(-45deg);
   -ms-transform: translateY(-0.5px) rotate(-45deg);
   -moz-transform: translateY(-0.5px) rotate(-45deg);
     -o-transform: translateY(-0.5px) rotate(-45deg);
        transform: translateY(-0.5px) rotate(-45deg);
 }
-.xb-ico._type-notification {
+.xb-ico._type-notification:not(._active),
+.xb-ico._type-notification._active {
   height: 15px;
   min-width: 9px;
   padding: 0 3px;
@@ -200,6 +209,7 @@ xb-ico[hidden] {
   display: inline-block;
   background-position: center center;
   background-repeat: no-repeat;
+  line-height: initial;
 }
 .xb-ico._size-s {
   width: 16px;
@@ -288,7 +298,7 @@ xb-ico[hidden] {
   width: auto !important;
   height: auto !important;
 }
-.xb-ico._type-check {
+.xb-ico._type-check:not(._active) {
   margin: -3px 3px 1px;
   width: 5px;
   height: 13px;
@@ -301,7 +311,20 @@ xb-ico[hidden] {
     -o-transform: scale(0.9) rotate(50deg) skewX(12deg);
        transform: scale(0.9) rotate(50deg) skewX(12deg);
 }
-.xb-ico._type-dropdown {
+.xb-ico._type-check._active {
+  margin: -3px 3px 1px;
+  width: 5px;
+  height: 13px;
+  border-bottom: 3px solid;
+  border-right: 3px solid;
+  color: #000;
+  -webkit-transform: scale(0.9) rotate(50deg) skewX(12deg);
+  -ms-transform: scale(0.9) rotate(50deg) skewX(12deg);
+  -moz-transform: scale(0.9) rotate(50deg) skewX(12deg);
+    -o-transform: scale(0.9) rotate(50deg) skewX(12deg);
+       transform: scale(0.9) rotate(50deg) skewX(12deg);
+}
+.xb-ico._type-dropdown:not(._active) {
   border-bottom: 1px solid;
   border-right: 1px solid;
   margin-top: -5px;
@@ -311,7 +334,21 @@ xb-ico[hidden] {
     -o-transform: scale(0.9) rotate(45deg);
        transform: scale(0.9) rotate(45deg);
 }
-.xb-ico._type-dropdown {
+.xb-ico._type-dropdown:not(._active) {
+  width: 8px;
+  height: 8px;
+}
+.xb-ico._type-dropdown._active {
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  margin-top: -5px;
+  -webkit-transform: scale(0.9) rotate(45deg);
+  -ms-transform: scale(0.9) rotate(45deg);
+  -moz-transform: scale(0.9) rotate(45deg);
+    -o-transform: scale(0.9) rotate(45deg);
+       transform: scale(0.9) rotate(45deg);
+}
+.xb-ico._type-dropdown._active {
   width: 8px;
   height: 8px;
 }

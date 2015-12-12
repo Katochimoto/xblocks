@@ -72,7 +72,10 @@ var params = {
         }
     ],
     'plugins': [
-        new webpack.DefinePlugin({ NODE_ENV: nodeEnv }),
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(nodeEnv),
+            'process.env.NODE_ENV': JSON.stringify(nodeEnv)
+        }),
         new webpack.optimize.DedupePlugin(),
         new ExtractTextPlugin('[name].css', { 'allChunks': true })
     ],
@@ -129,7 +132,10 @@ runs.push(merge({}, params, {
         'filename': '[name].min.js'
     },
     'plugins': [
-        new webpack.DefinePlugin({ NODE_ENV: nodeEnv }),
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(nodeEnv),
+            'process.env.NODE_ENV': JSON.stringify(nodeEnv)
+        }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({ output: { comments: false }, compress: { warnings: false } }),
         new ExtractTextPlugin('[name].min.css', { 'allChunks': true })
