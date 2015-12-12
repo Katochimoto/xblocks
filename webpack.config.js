@@ -57,11 +57,11 @@ var params = {
                 commonjs: 'xtag',
                 amd: 'xtag'
             },
-            'xblocks': {
-                root: 'xblocks',
-                commonjs2: 'xblocks',
-                commonjs: 'xblocks',
-                amd: 'xblocks'
+            'xblocks-core': {
+                root: 'xblocks-core',
+                commonjs2: 'xblocks-core',
+                commonjs: 'xblocks-core',
+                amd: 'xblocks-core'
             },
             'tether': {
                 root: 'Tether',

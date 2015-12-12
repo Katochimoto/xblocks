@@ -1,7 +1,7 @@
 import './index.styl';
 import './index.jsx';
 import { xb } from 'context';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import replaceTextSelection from 'dom/replaceTextSelection';
 import mixinDisabled from 'mixin/element/disabled';
 import mixinFocus from 'mixin/element/focus';
@@ -37,7 +37,7 @@ import inputValueState from 'mixin/element/inputValueState';
  * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
  */
-export default xb.Input = xblocks.create('xb-input', [
+export default xb.Input = xcore.create('xb-input', [
     mixinDisabled,
     inputValueState,
     mixinFocus,

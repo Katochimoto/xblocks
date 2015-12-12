@@ -1,9 +1,9 @@
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import ReactDOM from 'react-dom';
 
-export default xblocks.view.create({
+export default xcore.view.create({
     displayName: 'xb-input_controller',
 
     mixins: [ PureRenderMixin ],

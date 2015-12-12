@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
 import resetLastRadioChecked from 'utils/resetLastRadioChecked';
@@ -15,7 +15,7 @@ import Content from './content.jsx';
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-export default xv.Button = xblocks.view.register('xb-button', [
+export default xv.Button = xcore.view.register('xb-button', [
     mixinViewCommonAttrs,
     exportPropTypes('xb-ico'),
 

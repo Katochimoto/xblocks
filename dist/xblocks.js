@@ -1,12 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("xtag"), require("react"), require("xblocks"), require("react-dom"), require("tether"));
+		module.exports = factory(require("xtag"), require("react"), require("xblocks-core"), require("react-dom"), require("tether"));
 	else if(typeof define === 'function' && define.amd)
-		define(["xtag", "react", "xblocks", "react-dom", "tether"], factory);
+		define(["xtag", "react", "xblocks-core", "react-dom", "tether"], factory);
 	else if(typeof exports === 'object')
-		exports["xblocks"] = factory(require("xtag"), require("react"), require("xblocks"), require("react-dom"), require("tether"));
+		exports["xblocks"] = factory(require("xtag"), require("react"), require("xblocks-core"), require("react-dom"), require("tether"));
 	else
-		root["xblocks"] = factory(root["xtag"], root["React"], root["xblocks"], root["ReactDOM"], root["Tether"]);
+		root["xblocks"] = factory(root["xtag"], root["React"], root["xblocks-core"], root["ReactDOM"], root["Tether"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_18__, __WEBPACK_EXTERNAL_MODULE_96__, __WEBPACK_EXTERNAL_MODULE_120__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -712,9 +712,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _disabled = __webpack_require__(25);
 
@@ -754,7 +754,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @augments HTMLElement
 	 * @mixes xblocks.mixin.eDisabled
 	 */
-	exports.default = _context.xb.Ico = _xblocks2.default.create('xb-ico', [_disabled2.default, {
+	exports.default = _context.xb.Ico = _xblocksCore2.default.create('xb-ico', [_disabled2.default, {
 	    accessors: {
 	        active: {
 	            attribute: {
@@ -780,9 +780,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _classnames = __webpack_require__(19);
 
@@ -808,7 +808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.Ico = _xblocks2.default.view.register('xb-ico', [_commonAttrs2.default, {
+	exports.default = _context.xv.Ico = _xblocksCore2.default.view.register('xb-ico', [_commonAttrs2.default, {
 	    displayName: 'xb-ico',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -1170,9 +1170,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _replaceTextSelection = __webpack_require__(97);
 
@@ -1222,7 +1222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueState
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	exports.default = _context.xb.Input = _xblocks2.default.create('xb-input', [_disabled2.default, _inputValueState2.default, _focus2.default, {
+	exports.default = _context.xb.Input = _xblocksCore2.default.create('xb-input', [_disabled2.default, _inputValueState2.default, _focus2.default, {
 	    prototype: Object.create(HTMLInputElement.prototype),
 
 	    events: {
@@ -1293,9 +1293,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _classnames = __webpack_require__(19);
 
@@ -1333,7 +1333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes React.addons.PureRenderMixin
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 */
-	exports.default = _context.xv.Input = _xblocks2.default.view.register('xb-input', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-link'), {
+	exports.default = _context.xv.Input = _xblocksCore2.default.view.register('xb-input', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-link'), {
 	    displayName: 'xb-input',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -4315,7 +4315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	exports.default = function (tagName) {
-	    var props = _xblocks2.default.utils.propTypes(tagName);
+	    var props = _xblocksCore2.default.utils.propTypes(tagName);
 	    var exportProps = {};
 	    var prefix = tagName + '-';
 	    var p;
@@ -4331,9 +4331,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	};
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4351,9 +4351,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -4365,7 +4365,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _xblocks2.default.view.create({
+	exports.default = _xblocksCore2.default.view.create({
 	    displayName: 'xb-input_controller',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -4655,9 +4655,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _disabled = __webpack_require__(25);
 
@@ -4709,7 +4709,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueProps
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	exports.default = _context.xb.Button = _xblocks2.default.create('xb-button', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focus2.default, {
+	exports.default = _context.xb.Button = _xblocksCore2.default.create('xb-button', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focus2.default, {
 	    prototype: Object.create(HTMLInputElement.prototype),
 
 	    accessors: {
@@ -4744,9 +4744,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -4786,7 +4786,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes React.addons.PureRenderMixin
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 */
-	exports.default = _context.xv.Button = _xblocks2.default.view.register('xb-button', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {
+	exports.default = _context.xv.Button = _xblocksCore2.default.view.register('xb-button', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {
 	    displayName: 'xb-button',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -5029,9 +5029,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -5043,7 +5043,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _xblocks2.default.view.create({
+	exports.default = _xblocksCore2.default.view.create({
 	    displayName: 'xb-button_content',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -5297,9 +5297,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _disabled = __webpack_require__(25);
 
@@ -5315,7 +5315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @augments HTMLAnchorElement
 	 * @mixes xblocks.mixin.eDisabled
 	 */
-	exports.default = _context.xb.Link = _xblocks2.default.create('xb-link', [_disabled2.default, {
+	exports.default = _context.xb.Link = _xblocksCore2.default.create('xb-link', [_disabled2.default, {
 	    prototype: Object.create(HTMLAnchorElement.prototype)
 	}]);
 
@@ -5335,9 +5335,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -5363,7 +5363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.Link = _xblocks2.default.view.register('xb-link', [_commonAttrs2.default, {
+	exports.default = _context.xv.Link = _xblocksCore2.default.view.register('xb-link', [_commonAttrs2.default, {
 	    displayName: 'xb-link',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -5431,9 +5431,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _disabled = __webpack_require__(25);
 
@@ -5474,7 +5474,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueProps
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	exports.default = _context.xb.Checkbox = _xblocks2.default.create('xb-checkbox', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focus2.default, {
+	exports.default = _context.xb.Checkbox = _xblocksCore2.default.create('xb-checkbox', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focus2.default, {
 	    prototype: Object.create(HTMLInputElement.prototype),
 
 	    accessors: {
@@ -5502,9 +5502,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -5530,7 +5530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.Checkbox = _xblocks2.default.view.register('xb-checkbox', [_commonAttrs2.default, {
+	exports.default = _context.xv.Checkbox = _xblocksCore2.default.view.register('xb-checkbox', [_commonAttrs2.default, {
 	    displayName: 'xb-checkbox',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -5646,9 +5646,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _disabled = __webpack_require__(25);
 
@@ -5689,7 +5689,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eInputValueProps
 	 * @mixes xblocks.mixin.eFocus
 	 */
-	exports.default = _context.xb.Radio = _xblocks2.default.create('xb-radio', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focus2.default, {
+	exports.default = _context.xb.Radio = _xblocksCore2.default.create('xb-radio', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focus2.default, {
 	    prototype: Object.create(HTMLInputElement.prototype),
 
 	    accessors: {
@@ -5717,9 +5717,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -5749,7 +5749,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.Radio = _xblocks2.default.view.register('xb-radio', [_commonAttrs2.default, {
+	exports.default = _context.xv.Radio = _xblocksCore2.default.view.register('xb-radio', [_commonAttrs2.default, {
 	    displayName: 'xb-radio',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -5881,9 +5881,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _tether2 = _interopRequireDefault(_tether);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _tetherDefaultOptions = __webpack_require__(121);
 
@@ -5908,12 +5908,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var popupCommon = {
 	    onOpen: function onOpen() {
 	        this.focus();
-	        _xblocks2.default.event.dispatch(this, 'xb-open');
+	        _xblocksCore2.default.event.dispatch(this, 'xb-open');
 	    },
 
 	    onClose: function onClose() {
 	        this.blur();
-	        _xblocks2.default.event.dispatch(this, 'xb-close');
+	        _xblocksCore2.default.event.dispatch(this, 'xb-close');
 	    },
 
 	    /**
@@ -5991,9 +5991,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @constructor
 	 * @augments HTMLElement
-	 * @mixes xblocks.mixin.eFocus
+	 * @mixes .mixin.eFocus
 	 */
-	exports.default = _context.xb.Popup = _xblocks2.default.create('xb-popup', [_focus2.default, {
+	exports.default = _context.xb.Popup = _xblocksCore2.default.create('xb-popup', [_focus2.default, {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
@@ -6032,7 +6032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                this._options = this.defaultOptions;
 
-	                var tetherAttrs = _xblocks2.default.dom.attrs.get(this, {
+	                var tetherAttrs = _xblocksCore2.default.dom.attrs.get(this, {
 	                    'attachment': undefined,
 	                    'constraints': undefined,
 	                    'offset': undefined,
@@ -6113,7 +6113,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.setOptions(options);
 	            }
 
-	            _xblocks2.default.event.dispatch(this, 'xb-before-open');
+	            _xblocksCore2.default.event.dispatch(this, 'xb-before-open');
 
 	            tether.enable(true);
 	            tether.target._xbpopup = this;
@@ -6136,7 +6136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return false;
 	            }
 
-	            _xblocks2.default.event.dispatch(this, 'xb-before-close');
+	            _xblocksCore2.default.event.dispatch(this, 'xb-before-close');
 
 	            tether.target._xbpopup = undefined;
 	            tether.disable();
@@ -6176,9 +6176,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -6206,7 +6206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.Popup = _xblocks2.default.view.register('xb-popup', [_commonAttrs2.default, {
+	exports.default = _context.xv.Popup = _xblocksCore2.default.view.register('xb-popup', [_commonAttrs2.default, {
 	    displayName: 'xb-popup',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -6226,7 +6226,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    onClickClose: function onClickClose() {
-	        _xblocks2.default.event.dispatch(_reactDom2.default.findDOMNode(this), 'jsx-click-close', { 'bubbles': true, 'cancelable': true });
+	        _xblocksCore2.default.event.dispatch(_reactDom2.default.findDOMNode(this), 'jsx-click-close', { 'bubbles': true, 'cancelable': true });
 	    },
 
 	    render: function render() {
@@ -6646,9 +6646,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _lazyFocus = __webpack_require__(145);
 
@@ -6721,7 +6721,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberof xb
 	 * @mixes xblocks.mixin.menu
 	 */
-	exports.default = _context.xb.Menu = _xblocks2.default.create('xb-menu', [_menu2.default, {
+	exports.default = _context.xb.Menu = _xblocksCore2.default.create('xb-menu', [_menu2.default, {
 	    prototype: Object.create(_popup2.default.prototype || new _popup2.default()),
 
 	    events: {
@@ -6857,9 +6857,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -6884,7 +6884,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vMenu
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.Menu = _xblocks2.default.view.register('xb-menu', [_commonAttrs2.default, _menu2.default, {
+	exports.default = _context.xv.Menu = _xblocksCore2.default.view.register('xb-menu', [_commonAttrs2.default, _menu2.default, {
 	    displayName: 'xb-menu',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -6920,9 +6920,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _throttle = __webpack_require__(12);
 
@@ -7046,7 +7046,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    _onScrollThrottle: function _onScrollThrottle() {
-	        _xblocks2.default.event.dispatch(this.refs.content, 'jsx-scroll-throttle', { 'bubbles': true, 'cancelable': true });
+	        _xblocksCore2.default.event.dispatch(this.refs.content, 'jsx-scroll-throttle', { 'bubbles': true, 'cancelable': true });
 	    },
 
 	    _animationScrollTop: function _animationScrollTop() {
@@ -7584,9 +7584,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _delegate = __webpack_require__(141);
 
@@ -7664,7 +7664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (this._item) {
 	            var item = this._item;
 	            this._item = undefined;
-	            _xblocks2.default.event.dispatch(item, this.EVENT_BLUR);
+	            _xblocksCore2.default.event.dispatch(item, this.EVENT_BLUR);
 	        }
 	    },
 
@@ -7676,7 +7676,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (this._item) {
 	            var item = this._item;
 	            this._item = undefined;
-	            _xblocks2.default.event.dispatch(item, this.EVENT_BLUR);
+	            _xblocksCore2.default.event.dispatch(item, this.EVENT_BLUR);
 	        }
 	    },
 
@@ -7781,13 +7781,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 
 	        if (this._item) {
-	            _xblocks2.default.event.dispatch(this._item, this.EVENT_BLUR, {
+	            _xblocksCore2.default.event.dispatch(this._item, this.EVENT_BLUR, {
 	                'detail': { 'originalEvent': this._originalEvent }
 	            });
 	        }
 
 	        this._item = element;
-	        _xblocks2.default.event.dispatch(this._item, this.EVENT_FOCUS, {
+	        _xblocksCore2.default.event.dispatch(this._item, this.EVENT_FOCUS, {
 	            'detail': { 'originalEvent': this._originalEvent }
 	        });
 	    },
@@ -8389,9 +8389,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _lazyFocus = __webpack_require__(145);
 
@@ -8438,7 +8438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.eFocus
 	 * @mixes xblocks.mixin.eMenu
 	 */
-	exports.default = _context.xb.MenuInline = _xblocks2.default.create('xb-menu-inline', [_focus2.default, _menu2.default, {
+	exports.default = _context.xb.MenuInline = _xblocksCore2.default.create('xb-menu-inline', [_focus2.default, _menu2.default, {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
@@ -8479,9 +8479,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -8506,7 +8506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vMenu
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.MenuInline = _xblocks2.default.view.register('xb-menu-inline', [_commonAttrs2.default, _menu2.default, {
+	exports.default = _context.xv.MenuInline = _xblocksCore2.default.view.register('xb-menu-inline', [_commonAttrs2.default, _menu2.default, {
 	    displayName: 'xb-menu-inline',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -8580,9 +8580,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context2 = _interopRequireDefault(_context);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _lazyFocus = __webpack_require__(145);
 
@@ -8652,7 +8652,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                    menuitemCommon.submenu.cancel();
 	                    submenu.close();
-	                    _xblocks2.default.dom.removeChild(submenu);
+	                    _xblocksCore2.default.dom.removeChild(submenu);
 	                }
 	            }
 	        };
@@ -8673,7 +8673,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @listens xblocks.Element~event:xb-created
 	 * @listens xblocks.Element~event:xb-destroy
 	 */
-	exports.default = _context.xb.Menuitem = _xblocks2.default.create('xb-menuitem', [_disabled2.default, _inputValueProps2.default, {
+	exports.default = _context.xb.Menuitem = _xblocksCore2.default.create('xb-menuitem', [_disabled2.default, _inputValueProps2.default, {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
@@ -8832,9 +8832,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(20);
 
@@ -8870,7 +8870,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 * @mixes React.addons.PureRenderMixin
 	 */
-	exports.default = _context.xv.Menuitem = _xblocks2.default.view.register('xb-menuitem', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {
+	exports.default = _context.xv.Menuitem = _xblocksCore2.default.view.register('xb-menuitem', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {
 	    displayName: 'xb-menuitem',
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
@@ -8947,9 +8947,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8960,7 +8960,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberof xb
 	 * @augments HTMLElement
 	 */
-	exports.default = _context.xb.Menuseparator = _xblocks2.default.create('xb-menuseparator', [{
+	exports.default = _context.xb.Menuseparator = _xblocksCore2.default.create('xb-menuseparator', [{
 	    prototype: Object.create(HTMLElement.prototype)
 	}]);
 
@@ -8978,9 +8978,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context = __webpack_require__(16);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8990,7 +8990,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @class xv.Menuseparator
 	 * @memberof xv
 	 */
-	exports.default = _context.xv.Menuseparator = _xblocks2.default.view.register('xb-menuseparator', {
+	exports.default = _context.xv.Menuseparator = _xblocksCore2.default.view.register('xb-menuseparator', {
 	    displayName: 'xb-menuseparator',
 
 	    render: function render() {
@@ -9016,9 +9016,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context2 = _interopRequireDefault(_context);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _disabled = __webpack_require__(25);
 
@@ -9052,7 +9052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @listens xblocks.Element~event:xb-update
 	 * @listens xblocks.Element~event:xb-destroy
 	 */
-	exports.default = _context.xb.SpeechRecognition = _xblocks2.default.create('xb-speech-recognition', [_disabled2.default, {
+	exports.default = _context.xb.SpeechRecognition = _xblocksCore2.default.create('xb-speech-recognition', [_disabled2.default, {
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
@@ -9126,7 +9126,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _passEventToTarget: function _passEventToTarget(event) {
 	            var target = this.target;
 	            var targetType = typeof target === 'undefined' ? 'undefined' : _typeof(target);
-	            var targetEvent = new _xblocks2.default.event.Custom('xb-speech-recognition-' + event.type, {
+	            var targetEvent = new _xblocksCore2.default.event.Custom('xb-speech-recognition-' + event.type, {
 	                bubbles: false,
 	                cancelable: false,
 	                detail: event.detail
@@ -9163,9 +9163,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(17);
 
-	var _xblocks = __webpack_require__(18);
+	var _xblocksCore = __webpack_require__(18);
 
-	var _xblocks2 = _interopRequireDefault(_xblocks);
+	var _xblocksCore2 = _interopRequireDefault(_xblocksCore);
 
 	var _classnames = __webpack_require__(19);
 
@@ -9184,7 +9184,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberof xv
 	 * @mixes xblocks.mixin.vCommonAttrs
 	 */
-	exports.default = _context.xv.SpeechRecognition = _xblocks2.default.view.register('xb-speech-recognition', [_commonAttrs2.default, {
+	exports.default = _context.xv.SpeechRecognition = _xblocksCore2.default.view.register('xb-speech-recognition', [_commonAttrs2.default, {
 	    displayName: 'xb-speech-recognition',
 
 	    // @if NODE_ENV='development'

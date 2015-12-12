@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import classnames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
@@ -17,7 +17,7 @@ import Controller from './controller.jsx';
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-export default xv.Input = xblocks.view.register('xb-input', [
+export default xv.Input = xcore.view.register('xb-input', [
     mixinViewCommonAttrs,
     exportPropTypes('xb-link'),
 

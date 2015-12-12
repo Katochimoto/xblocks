@@ -2,7 +2,7 @@ import './index.styl';
 import './index.jsx';
 
 import { xb } from 'context';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import Table from 'utils/Table';
 import noop from '_/utility/noop';
@@ -32,7 +32,7 @@ var menuCommon = {
  * @mixes xblocks.mixin.eFocus
  * @mixes xblocks.mixin.eMenu
  */
-export default xb.MenuInline = xblocks.create('xb-menu-inline', [
+export default xb.MenuInline = xcore.create('xb-menu-inline', [
     mixinElementFocus,
     mixinElementMenu,
 

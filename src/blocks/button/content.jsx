@@ -1,9 +1,9 @@
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import isEmpty from '_/lang/isEmpty';
 
-export default xblocks.view.create({
+export default xcore.view.create({
     displayName: 'xb-button_content',
 
     mixins: [ PureRenderMixin ],
