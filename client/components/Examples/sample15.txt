@@ -1,0 +1,3 @@
+"<xb-input autosize value=\"autosize\"></xb-input>"
+<br/>
+"<xb-input autosize multiline value=\"autosize\"></xb-input>"

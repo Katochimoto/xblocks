@@ -1,0 +1,2 @@
+<xb-ico type="notification" value="test"></xb-ico>
+<xb-ico type="notification">test</xb-ico>

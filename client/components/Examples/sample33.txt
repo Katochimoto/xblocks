@@ -1,0 +1,1 @@
+<xb-ico type="remove" active></xb-ico>

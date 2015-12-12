@@ -1,5 +1,4 @@
 import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Code from 'ui/Code';
 
 import sample1 from './sample1.txt';
@@ -9,8 +8,6 @@ import sample4 from './sample4.txt';
 
 export default React.createClass({
     displayName: 'GettingStarted',
-
-    mixins: [ PureRenderMixin ],
 
     render: function () {
         return (

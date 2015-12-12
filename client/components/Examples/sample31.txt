@@ -1,0 +1,3 @@
+<xb-link theme="normal">normal</xb-link>
+<xb-link theme="outer">outer</xb-link>
+<xb-link theme="pseudo">pseudo</xb-link>

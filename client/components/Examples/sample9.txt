@@ -1,0 +1,5 @@
+"<xb-popup close>"
+<br/>
+"   Popup body"
+<br/>
+"</xb-popup>"

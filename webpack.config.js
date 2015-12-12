@@ -27,22 +27,23 @@ module.exports = {
             'history',
             'lodash',
             'classnames',
-            'tether'
+            'tether',
+            'resources/prism',
+            'xtag',
+            'xblocks-core',
+            'xblocks'
         ],
         'index': './index.js'
     },
     'output': {
-        'chunkFilename': isDev ? '[name].js' : '[chunkhash]-[name].js',
+        'chunkFilename': '[name].js',
         'crossOriginLoading': 'use-credentials',
-        'filename': isDev ? '[name].js' : '[chunkhash]-[name].js',
-        'hash': true,
+        'filename': '[name].js',
         'libraryTarget': 'umd',
         'path': docsPath
     },
-    'externals': {
-        'xblocks': 'xblocks'
-    },
     'resolve': {
+        'modulesDirectories': [ 'node_modules', 'lib/xblocks-core/dist', 'lib/xblocks/dist' ],
         'extensions': [ '', '.js', '.styl' ],
         'alias': {
             'components': path.join(clientPath, 'components'),
@@ -61,10 +62,10 @@ module.exports = {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             'name': 'vendor',
-            'filename': isDev ? '[name].js' : '[chunkhash]-[name].js',
+            'filename': '[name].js',
             'minChunks': Infinity
         }),
-        new ExtractTextPlugin(isDev ? '[name].css' : '[chunkhash]-[name].css', {
+        new ExtractTextPlugin('[name].css', {
             'allChunks': true
         }),
         new webpack.optimize.UglifyJsPlugin({
@@ -113,11 +114,11 @@ module.exports = {
             },
             {
                 'test': /\.(gif|png|jpe?g|svg)$/i,
-                'loader': 'url?limit=30000&name=' + (isDev ? '[name].[ext]' : '[hash]-[name].[ext]')
+                'loader': 'url?limit=30000&name=[name].[ext]'
             },
             {
                 'test': /\.(ttf|eot|woff2|woff)$/i,
-                'loader': 'file?name=' + (isDev ? '[name].[ext]' : '[hash]-[name].[ext]')
+                'loader': 'file?name=[name].[ext]'
             },
             {
                 'test': /\.txt$/i,

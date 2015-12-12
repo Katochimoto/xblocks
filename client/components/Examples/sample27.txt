@@ -1,0 +1,1 @@
+"<xb-button type=\"label\">label</xb-button>"

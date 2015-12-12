@@ -1,0 +1,3 @@
+"<xb-input reset value=\"reset\"></xb-input>"
+<br/>
+"<xb-input reset multiline value=\"reset\"></xb-input>"

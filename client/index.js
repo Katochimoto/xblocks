@@ -1,9 +1,7 @@
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../lib/xblocks/dist/xblocks.css';
-import 'resources/style';
-
 import 'resources/prism.css';
-import 'resources/prism.js';
+import '../lib/xblocks/dist/xblocks.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import 'resources/style';
 
 import { Router } from 'react-router';
 import { createHashHistory } from 'history';

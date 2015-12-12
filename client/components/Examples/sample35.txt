@@ -1,0 +1,1 @@
+<xb-ico size="m" type="print"></xb-ico>

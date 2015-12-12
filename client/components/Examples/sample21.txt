@@ -1,0 +1,5 @@
+"<xb-radio name=\"radio\" value=\"1\" checked>radio 1</xb-radio>"
+<br/>
+"<xb-radio name=\"radio\" value=\"2\">radio 2</xb-radio>"
+<br/>
+"<xb-radio name=\"radio\" value=\"3\" disabled>radio 3</xb-radio>"
