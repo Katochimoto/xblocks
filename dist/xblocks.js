@@ -79,11 +79,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	__webpack_require__(1);
 
 	__webpack_require__(2);
 
-	__webpack_require__(13);
+	var _context = __webpack_require__(13);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	__webpack_require__(14);
 
 	__webpack_require__(26);
 
@@ -106,6 +114,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(164);
 
 	__webpack_require__(167);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    xb: _context2.default.xb,
+	    xv: _context2.default.xv
+	};
 
 /***/ },
 /* 1 */
@@ -698,6 +713,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 13 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var context = (function () {
+	    return this || (1, eval)('this');
+	})();
+
+	var xv = exports.xv = context.xv = {};
+	var xb = exports.xb = context.xb = {};
+	exports.default = context;
+
+/***/ },
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -706,11 +738,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	__webpack_require__(14);
-
 	__webpack_require__(15);
 
-	var _context = __webpack_require__(16);
+	__webpack_require__(16);
+
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -765,9 +797,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 14 */
-1,
 /* 15 */
+1,
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -776,7 +808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -850,23 +882,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	    }
 	}]);
-
-/***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var context = (function () {
-	    return this || (1, eval)('this');
-	})();
-
-	var xv = exports.xv = context.xv = {};
-	var xb = exports.xb = context.xb = {};
-	exports.default = context;
 
 /***/ },
 /* 17 */
@@ -1168,7 +1183,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(28);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -1289,7 +1304,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -4653,7 +4668,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(102);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -4740,7 +4755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -5295,7 +5310,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(110);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -5331,7 +5346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -5429,7 +5444,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(113);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -5498,7 +5513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -5644,7 +5659,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(116);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -5713,7 +5728,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -5873,7 +5888,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(119);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -6172,7 +6187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -6644,7 +6659,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(140);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -6853,7 +6868,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -7190,7 +7205,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -7250,7 +7265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -7303,7 +7318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -7454,7 +7469,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return element.nodeType === 1 ? matches.call(element, selector) : false;
 	};
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -7533,7 +7548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return event;
 	};
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -7568,7 +7583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _context2.default.setTimeout(node.focus.bind(node), 0);
 	};
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -8053,7 +8068,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -8236,7 +8251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return indexOf.call(context.querySelectorAll(selector), element);
 	};
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -8387,7 +8402,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(159);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -8475,7 +8490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -8576,7 +8591,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(163);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -8828,7 +8843,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
@@ -8945,7 +8960,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(166);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -8976,7 +8991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _xblocksCore = __webpack_require__(18);
 
@@ -9012,7 +9027,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(169);
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -9159,7 +9174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _context = __webpack_require__(16);
+	var _context = __webpack_require__(13);
 
 	var _react = __webpack_require__(17);
 
