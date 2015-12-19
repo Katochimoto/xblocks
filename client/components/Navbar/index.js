@@ -23,9 +23,9 @@ export default React.createClass({
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="http://xblocks.ru">
+                        <a className="navbar-brand" href={HOMEPAGE}>
                             Xblocks
-                            <em className="small">1.0.1</em>
+                            <em className="small"> {VERSION}</em>
                         </a>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">

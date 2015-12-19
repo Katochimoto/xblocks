@@ -7,12 +7,14 @@
         <title>Xblocks Basic Template</title>
         <!-- CSS -->
         <link href="/bower_components/xblocks/dist/xblocks.min.css" rel="stylesheet" />
-        <!-- JS -->
+        <!-- Vendors -->
         <script src="/bower_components/es5-shim/es5-shim.min.js"></script>
         <script src="/bower_components/react/react-with-addons.min.js"></script>
         <script src="/bower_components/react/react-dom.min.js"></script>
         <script src="/bower_components/tether/tether.min.js"></script>
-        <script src="/bower_components/xblocks-core/dist/xblocks-core-full.min.js"></script>
+        <!-- Xblocks -->
+        <script src="/bower_components/xblocks-core/dist/xtag.min.js"></script>
+        <script src="/bower_components/xblocks-core/dist/xblocks-core.min.js"></script>
         <script src="/bower_components/xblocks/dist/xblocks.min.js"></script>
     </head>
     <body>

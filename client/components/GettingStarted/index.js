@@ -5,6 +5,7 @@ import sample1 from './sample1.txt';
 import sample2 from './sample2.txt';
 import sample3 from './sample3.txt';
 import sample4 from './sample4.txt';
+// import sample5 from './sample5.txt';
 
 export default React.createClass({
     displayName: 'GettingStarted',
@@ -50,7 +51,7 @@ export default React.createClass({
                 </h2>
 
                 <small>
-                    Currently
+                    Currently {VERSION}
                 </small>
 
                 <h3>
@@ -79,7 +80,7 @@ export default React.createClass({
                     :
                 </p>
 
-                <Code value="$ bower install xblocks" />
+                <Code value="$ bower i xblocks-core xblocks" />
 
                 <h3>
                     Install with npm
@@ -93,7 +94,7 @@ export default React.createClass({
                     :
                 </p>
 
-                <Code value="$ npm install xblocks" />
+                <Code value="$ npm i xblocks-core xblocks" />
 
                 <h2 className="sub-header anchor" data-hash="templates">
                     Templates

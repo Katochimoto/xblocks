@@ -10,6 +10,8 @@ var componentsPath = path.join(__dirname, 'node_modules');
 var docsPath = path.join(__dirname, 'docs');
 var resourcesPath = path.join(__dirname, 'resources');
 
+var packageData = require('./package.json');
+
 var isDev = true; // process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -52,6 +54,10 @@ module.exports = {
         }
     },
     'plugins': [
+        new webpack.DefinePlugin({
+            'VERSION': JSON.stringify(packageData.version),
+            'HOMEPAGE': JSON.stringify(packageData.homepage)
+        }),
         new webpack.ProvidePlugin({
             '_': 'lodash',
             'React': 'react',

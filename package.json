@@ -3,6 +3,20 @@
   "description": "",
   "version": "1.0.2",
   "homepage": "http://xblocks.ru",
+  "author": {
+    "name": "Rikishi",
+    "email": "bufpost@yandex.ru",
+    "url": "https://github.com/Katochimoto"
+  },
+  "bugs": {
+    "url": "https://github.com/Katochimoto/xblocks/issues",
+    "email": "bufpost@yandex.ru"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Katochimoto/xblocks.git"
+  },
   "dependencies": {
     "bootstrap": "^3.3.6",
     "classnames": "^2.2.1",

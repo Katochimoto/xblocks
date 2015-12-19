@@ -66,19 +66,21 @@
         "react"
     ],
     "globals": {
+        "afterEach": false,
+        "beforeEach": false,
+        "CONFIG": false,
+        "describe": false,
+        "expect": false,
+        "exports": false,
+        "HOMEPAGE": false,
+        "it": false,
+        "module": false,
         "modules": false,
+        "Prism": false,
         "React": false,
         "ReactDOM": false,
-        "CONFIG": false,
-        "module": false,
-        "exports": false,
         "require": false,
-        "describe": false,
-        "it": false,
-        "expect": false,
-        "beforeEach": false,
-        "afterEach": false,
         "sinon": false,
-        "Prism": false
+        "VERSION": false
     }
 }
