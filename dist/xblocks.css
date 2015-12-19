@@ -2611,17 +2611,17 @@ _:-ms-input-placeholder,
   position: absolute !important;
   clip: rect(1px,1px,1px,1px) !important;
 }
-.xb-button > ._controller:checked + .xb-button > ._content {
+.xb-button > ._controller:checked + ._content {
   border-color: rgba(153,122,0,0.5);
   -webkit-box-shadow: inset 0 90px #ffeba0;
           box-shadow: inset 0 90px #ffeba0;
 }
-.xb-button > ._controller:focus + .xb-button {
+.xb-button > ._controller:focus + ._content {
   z-index: 2;
   border-color: rgba(178,142,0,0.6);
   outline: none;
 }
-.xb-button > ._controller:focus + .xb-button:before {
+.xb-button > ._controller:focus + ._content:before {
   content: "";
   position: absolute;
   top: 0;
