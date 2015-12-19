@@ -11,29 +11,24 @@ const routes = [
             {
                 path: 'getting-started',
                 component: GettingStarted,
+                onEnter: onEnterPath,
                 childRoutes: [
                     {
                         path: ':name',
-                        component: GettingStarted
+                        component: GettingStarted,
+                        onEnter: onEnterSubpath
                     }
                 ]
             },
             {
                 path: 'examples',
                 component: Examples,
+                onEnter: onEnterPath,
                 childRoutes: [
                     {
                         path: ':name',
                         component: Examples,
-                        onEnter: function (nextState) {
-                            _.defer(() => {
-                                var scrollNode = document.querySelector(`.anchor[data-hash="${nextState.params.name}"]`);
-                                if (scrollNode) {
-                                    scrollNode.scrollIntoView();
-                                    window.document.body.scrollTop -= 70;
-                                }
-                            });
-                        }
+                        onEnter: onEnterSubpath
                     }
                 ]
             }
@@ -46,3 +41,20 @@ const routes = [
 ];
 
 export default routes;
+
+function onEnterPath() {
+    _.defer(() => {
+        window.scrollTo(0, 0);
+        Prism.highlightAll();
+    });
+}
+
+function onEnterSubpath(nextState) {
+    _.defer(() => {
+        var scrollNode = document.querySelector(`.anchor[data-hash="${nextState.params.name}"]`);
+        if (scrollNode) {
+            scrollNode.scrollIntoView();
+            window.document.body.scrollTop -= 70;
+        }
+    });
+}

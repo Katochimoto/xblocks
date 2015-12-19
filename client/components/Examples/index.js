@@ -15,7 +15,7 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h1 className="page-header anchor" data-hash="examples">
+                <h1 className="page-header">
                     Examples
                 </h1>
 

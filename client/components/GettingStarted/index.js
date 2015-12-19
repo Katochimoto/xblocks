@@ -12,7 +12,7 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h1 className="page-header anchor" data-hash="getting-started">
+                <h1 className="page-header">
                     Getting started
                 </h1>
 
@@ -20,7 +20,7 @@ export default React.createClass({
                     An overview of Xblocks, how to download and use, basic templates, and more.
                 </p>
 
-                <h2 className="sub-header anchor" data-hash="getting-started/quickstart">
+                <h2 className="sub-header anchor" data-hash="quickstart">
                     Quick Start
                 </h2>
 
@@ -30,34 +30,27 @@ export default React.createClass({
                     </li>
                     <li>
                         Include the CSS on your head page:
-                        <Code>
-                            {sample2}
-                        </Code>
+                        <Code value={sample2} />
                     </li>
                     <li>
                         Include the JS on your head page:
-                        <Code>
-                            {sample3}
-                        </Code>
+                        <Code value={sample3} />
                     </li>
                     <li>
                         Test connection required dependencies:
-                        <Code>
-                            {sample4}
-                        </Code>
+                        <Code value={sample4} />
                     </li>
                     <li>
                         Further work requires no initialization.
                     </li>
                 </ol>
 
-                <h2 className="sub-header anchor" data-hash="getting-started/download">
+                <h2 className="sub-header anchor" data-hash="download">
                     Download
                 </h2>
 
                 <small>
                     Currently
-
                 </small>
 
                 <h3>
@@ -72,9 +65,7 @@ export default React.createClass({
                     :
                 </p>
 
-                <Code>
-                    $ bower install xblocks
-                </Code>
+                <Code value="$ bower install xblocks" />
 
                 <h3>
                     Install with Bower
@@ -88,9 +79,7 @@ export default React.createClass({
                     :
                 </p>
 
-                <Code>
-                    $ bower install xblocks
-                </Code>
+                <Code value="$ bower install xblocks" />
 
                 <h3>
                     Install with npm
@@ -104,11 +93,9 @@ export default React.createClass({
                     :
                 </p>
 
-                <Code>
-                    $ npm install xblocks
-                </Code>
+                <Code value="$ npm install xblocks" />
 
-                <h2 className="sub-header anchor" data-hash="getting-started/templates">
+                <h2 className="sub-header anchor" data-hash="templates">
                     Templates
                 </h2>
 
@@ -116,9 +103,7 @@ export default React.createClass({
                     This template does not utilize CDNs.
                 </p>
 
-                <Code>
-                    {sample1}
-                </Code>
+                <Code value={sample1} />
             </div>
         );
     }
