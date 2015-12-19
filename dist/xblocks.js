@@ -4734,8 +4734,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
@@ -4928,32 +4926,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    required: this.props.required,
 	                    tabIndex: tabIndex }));
 
-	                children.push(React.createElement(_context.xv.Button, _extends({}, this.props, { key: 'content', type: 'inline', tabindex: 'null' })));
+	                children.push(content);
 
-	                classes = (0, _classnames2.default)({
+	                /*
+	                children.push(
+	                    <xv.Button {...this.props} key="content" type="inline" tabindex="null" />
+	                );
+	                 classes = classnames({
 	                    'xb-button': true,
 	                    '_theme-check': true,
 	                    '_disabled': this.props.disabled
 	                });
+	                */
 	            } else {
-	                children.push(React.createElement(
-	                    'span',
-	                    { key: 'file-intruder', className: '_xb-file-intruder' },
-	                    React.createElement(
+	                    children.push(React.createElement(
 	                        'span',
-	                        { className: '_xb-file-intruder-inner' },
-	                        React.createElement('input', { className: '_xb-file-intruder-input',
-	                            type: 'button',
-	                            form: this.props.form,
-	                            disabled: this.props.disabled,
-	                            autoFocus: this.props.autofocus,
-	                            tabIndex: tabIndex }),
-	                        React.createElement('span', { className: '_xb-file-intruder-focus' })
-	                    )
-	                ));
+	                        { key: 'file-intruder', className: '_xb-file-intruder' },
+	                        React.createElement(
+	                            'span',
+	                            { className: '_xb-file-intruder-inner' },
+	                            React.createElement('input', { className: '_xb-file-intruder-input',
+	                                type: 'button',
+	                                form: this.props.form,
+	                                disabled: this.props.disabled,
+	                                autoFocus: this.props.autofocus,
+	                                tabIndex: tabIndex }),
+	                            React.createElement('span', { className: '_xb-file-intruder-focus' })
+	                        )
+	                    ));
 
-	                children.push(content);
-	            }
+	                    children.push(content);
+	                }
 
 	            return React.createElement(
 	                'label',

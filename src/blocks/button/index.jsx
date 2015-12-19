@@ -164,6 +164,9 @@ export default xv.Button = xcore.view.register('xb-button', [
                             tabIndex={tabIndex}/>
                     );
 
+                    children.push(content);
+
+                    /*
                     children.push(
                         <xv.Button {...this.props} key="content" type="inline" tabindex="null" />
                     );
@@ -173,6 +176,7 @@ export default xv.Button = xcore.view.register('xb-button', [
                         '_theme-check': true,
                         '_disabled': this.props.disabled
                     });
+                    */
 
                 } else {
                     children.push(

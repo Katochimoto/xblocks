@@ -1290,6 +1290,9 @@ xb-button[hidden] {
 a.xb-button {
   text-decoration: none;
 }
+.xb-button {
+  font-weight: inherit;
+}
 .xb-button._theme-normal_size-s {
   z-index: 1;
   border: 1px solid;
@@ -2682,6 +2685,9 @@ xb-checkbox *:after {
 xb-checkbox[hidden] {
   display: none;
 }
+.xb-checkbox {
+  font-weight: inherit;
+}
 .xb-checkbox._size-m {
   position: relative;
   display: inline-block;
@@ -2879,6 +2885,9 @@ xb-radio *:after {
 }
 xb-radio[hidden] {
   display: none;
+}
+.xb-radio {
+  font-weight: inherit;
 }
 .xb-radio._size-m {
   position: relative;
