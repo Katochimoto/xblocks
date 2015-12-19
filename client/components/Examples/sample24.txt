@@ -1,3 +1,2 @@
-"<xb-button type=\"radio\" name=\"bt3\" value=\"1\">radio 1</xb-button>"
-<br/>
-"<xb-button type=\"radio\" name=\"bt3\" value=\"2\" checked>radio 2</xb-button>"
+<xb-button type="radio" name="bt3" value="1">radio 1</xb-button>
+<xb-button type="radio" name="bt3" value="2" checked>radio 2</xb-button>

@@ -1,13 +1,8 @@
-"<xb-menu id=\"menuId\">"
-<br/>
-"    <xb-menuitem label=\"label 1\"></xb-menuitem>"
-<br/>
-"    <xb-menuitem label=\"label 2\"></xb-menuitem>"
-<br/>
-"</xb-menu>"
-<br/><br/>
-"<span contextmenu=\"menuId\">"
-<br/>
-"    right click to display the context menu"
-<br/>
-"</span>"
+<xb-menu id="menu5">
+    <xb-menuitem label="label 1"></xb-menuitem>
+    <xb-menuitem label="label 2"></xb-menuitem>
+</xb-menu>
+
+<div contextmenu="menu5" class="alert alert-info" role="alert" style="-webkit-user-select:none;user-select:none;">
+    right click to display the context menu
+</div>

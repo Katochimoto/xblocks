@@ -1,3 +1,2 @@
-"<xb-button xb-ico-float=\"left\" xb-ico-type=\"help\">button</xb-button>"
-<br/>
-"<xb-button xb-ico-float=\"right\" xb-ico-type=\"download\">button</xb-button>"
+<xb-button xb-ico-float="left" xb-ico-type="help">button</xb-button>
+<xb-button xb-ico-float="right" xb-ico-type="download">button</xb-button>

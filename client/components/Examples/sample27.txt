@@ -1,1 +1,8 @@
-"<xb-button type=\"label\">label</xb-button>"
+<xb-button type="label">label</xb-button>
+<xb-button type="inline">inline</xb-button>
+<xb-button type="link">link</xb-button>
+<xb-button type="file">file</xb-button>
+<xb-button type="button">button</xb-button>
+<xb-button type="submit">submit</xb-button>
+<xb-button type="checkbox">checkbox</xb-button>
+<xb-button type="radio">radio</xb-button>

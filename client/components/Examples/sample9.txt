@@ -1,5 +1,5 @@
-"<xb-popup close>"
-<br/>
-"   Popup body"
-<br/>
-"</xb-popup>"
+<xb-popup close="close" id="popup9">
+    Popup body
+</xb-popup>
+
+<a href="#" onclick="event.preventDefault(); document.getElementById('popup9').open();">show popup</a>

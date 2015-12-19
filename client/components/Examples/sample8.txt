@@ -1,21 +1,15 @@
-"<xb-popup close>"
-<br/>
-"    <script type=\"text/x-template\" ref=\"xb-popup-title\">"
-<br/>
-"        Title"
-<br/>
-"    </script>"
-<br/>
-"    <script type=\"text/x-template\">"
-<br/>
-"        Body"
-<br/>
-"    </script>"
-<br/>
-"    <script type=\"text/x-template\" ref=\"xb-popup-buttons\">"
-<br/>
-"        <xb-button>button</xb-button>"
-<br/>
-"    </script>"
-<br/>
-"</xb-popup>"
+<xb-popup close="close" id="popup8">
+    <script type="text/x-template" ref="xb-popup-title">
+        Title
+    </script>
+
+    <script type="text/x-template">
+        Body
+    </script>
+
+    <script type="text/x-template" ref="xb-popup-buttons">
+        <xb-button>button</xb-button>
+    </script>
+</xb-popup>
+
+<a href="#" onclick="event.preventDefault(); document.getElementById('popup8').open();">show popup</a>

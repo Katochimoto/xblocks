@@ -1,7 +1,6 @@
-"<xb-menu>"
-<br/>
-"    <xb-menuitem label=\"label 1\" xb-ico-type=\"twitter\" xb-ico-float=\"left\"></xb-menuitem>"
-<br/>
-"    <xb-menuitem label=\"label 2\" xb-ico-type=\"vk\" xb-ico-float=\"right\"></xb-menuitem>"
-<br/>
-"</xb-menu>"
+<xb-menu id="menu3">
+    <xb-menuitem label="label 1" xb-ico-type="twitter" xb-ico-float="left"></xb-menuitem>
+    <xb-menuitem label="label 2" xb-ico-type="vk" xb-ico-float="right"></xb-menuitem>
+</xb-menu>
+
+<a href="#" onclick="event.preventDefault(); document.getElementById('menu3').open();">show menu</a>

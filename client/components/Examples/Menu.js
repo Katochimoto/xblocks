@@ -18,80 +18,47 @@ export default React.createClass({
                 </h2>
 
                 To display menu, use the tag
-                <InlineCode code="<xb-menu>" />
+                <InlineCode value="<xb-menu>" />
                 .
 
                 <div className="panel panel-example">
-                    <div className="panel-heading">
-                        <div dangerouslySetInnerHTML={{ __html: sample6 }} />
-                        <a href="#" className="popup-open label label-primary" data-popup-id="menu1">show menu</a>
-                    </div>
-                    <Code className="panel-body">
-                        {sample6}
-                    </Code>
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample6 }} />
+                    <Code className="panel-body" value={sample6} />
                 </div>
 
                 Specify the size menu:
 
                 <div className="panel panel-example">
-                    <div className="panel-heading">
-                        <div dangerouslySetInnerHTML={{ __html: sample5 }} />
-                        <a href="#" className="popup-open label label-primary" data-popup-id="menu2">show menu</a>
-                    </div>
-                    <Code className="panel-body">
-                        {sample5}
-                    </Code>
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample5 }} />
+                    <Code className="panel-body" value={sample5} />
                 </div>
 
                 Icons in menu items:
 
                 <div className="panel panel-example">
-                    <div className="panel-heading">
-                        <div dangerouslySetInnerHTML={{ __html: sample4 }} />
-                        <a href="#" className="popup-open label label-primary" data-popup-id="menu3">show menu</a>
-                    </div>
-                    <Code className="panel-body">
-                        {sample4}
-                    </Code>
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample4 }} />
+                    <Code className="panel-body" value={sample4} />
                 </div>
 
                 Show menu for the target object:
 
                 <div className="panel panel-example">
-                    <div className="panel-heading">
-                        <a id="targetMenu4" href="#" className="popup-open label label-primary" data-popup-id="menu4">
-                            show menu for the target object
-                        </a>
-                        <div dangerouslySetInnerHTML={{ __html: sample3 }} />
-                    </div>
-                    <Code className="panel-body">
-                        {sample3}
-                    </Code>
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample3 }} />
+                    <Code className="panel-body" value={sample3} />
                 </div>
 
                 Context menu:
 
                 <div className="panel panel-example">
-                    <div className="panel-heading">
-                        <div dangerouslySetInnerHTML={{ __html: sample2 }} />
-                        <div contextmenu="menu5" className="alert alert-info" role="alert" style="-webkit-user-select:none;user-select:none;">
-                            right click to display the context menu
-                        </div>
-                    </div>
-                    <Code className="panel-body">
-                        {sample2}
-                    </Code>
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample2 }} />
+                    <Code className="panel-body" value={sample2} />
                 </div>
 
                 Inline menu:
 
                 <div className="panel panel-example">
-                    <div className="panel-heading">
-                        <div dangerouslySetInnerHTML={{ __html: sample1 }} />
-                    </div>
-                    <Code className="panel-body">
-                        {sample1}
-                    </Code>
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample1 }} />
+                    <Code className="panel-body" value={sample1} />
                 </div>
 
                 <a href="#/controls/menu">

@@ -1,35 +1,28 @@
 import React from 'react';
 import Code from 'ui/Code';
+import InlineCode from 'ui/InlineCode';
+
+import sample21 from './sample21.txt';
 
 export default React.createClass({
     render: function () {
         return (
             <div>
                 <h2 className="sub-header anchor" data-hash="examples/radio">
-                    "Radio"
+                    Radio
                 </h2>
 
-                "To display radio, use the tag "
-                <code>
-                    "<xb-radio>"
-                </code>
-                "."
+                To display radio, use the tag
+                <InlineCode value="<xb-radio>" />
+                .
 
                 <div className="panel panel-example">
-                    <div className="panel-heading">
-                        <xb-radio name="radio1" value="1" checked="checked">radio 1</xb-radio>
-                        " "
-                        <xb-radio name="radio1" value="2">radio 2</xb-radio>
-                        " "
-                        <xb-radio name="radio1" value="3" disabled="disabled">radio 3</xb-radio>
-                    </div>
-                    <Code className="panel-body">
-                        {sample21}
-                    </Code>
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample21 }} />
+                    <Code className="panel-body" value={sample21} />
                 </div>
 
                 <a href="#/controls/radio">
-                    "See more info about radio."
+                    See more info about radio.
                 </a>
             </div>
         );

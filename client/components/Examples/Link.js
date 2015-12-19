@@ -15,28 +15,22 @@ export default React.createClass({
                 </h2>
 
                 To display link, use the tag
-                <InlineCode code="<xb-link>" />
+                <InlineCode value="<xb-link>" />
                 .
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample31 }} />
-                    <Code className="panel-body">
-                        {sample31}
-                    </Code>
+                    <Code className="panel-body" value={sample31} />
                 </div>
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample30 }} />
-                    <Code className="panel-body">
-                        {sample30}
-                    </Code>
+                    <Code className="panel-body" value={sample30} />
                 </div>
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample29 }} />
-                    <Code className="panel-body">
-                        {sample29}
-                    </Code>
+                    <Code className="panel-body" value={sample29} />
                 </div>
 
                 <a href="#/controls/link">

@@ -1,1 +1,1 @@
-"<xb-input readonly value=\"readonly\"></xb-input>"
+<xb-input readonly value="readonly"></xb-input>

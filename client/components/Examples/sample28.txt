@@ -1,1 +1,8 @@
-"<xb-button theme=\"normal\">normal</xb-button>"
+<xb-button theme="action">action</xb-button>
+<xb-button theme="dark">dark</xb-button>
+<xb-button theme="normal">normal</xb-button>
+<xb-button theme="clear">clear</xb-button>
+<xb-button theme="pseudo">pseudo</xb-button>
+<span style="background-color:#000;display: inline-block;padding: 5px;">
+    <xb-button theme="dark-pseudo">dark-pseudo</xb-button>
+</span>

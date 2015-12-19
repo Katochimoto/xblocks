@@ -1,1 +1,1 @@
-"<xb-input disabled value=\"disabled\"></xb-input>"
+<xb-input disabled value="disabled"></xb-input>

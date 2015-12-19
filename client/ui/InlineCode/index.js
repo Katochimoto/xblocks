@@ -6,7 +6,7 @@ export default React.createClass({
     render: function () {
         return (
             <code>
-                {this.props.code}
+                {this.props.value}
             </code>
         );
     }

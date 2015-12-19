@@ -17,7 +17,7 @@ export default React.createClass({
                 </h2>
 
                 To display icons, use the tag
-                <InlineCode code="<xb-ico>" />
+                <InlineCode value="<xb-ico>" />
                 .
 
                 <p></p>
@@ -69,52 +69,42 @@ export default React.createClass({
                 <p></p>
 
                 Specify
-                <InlineCode code='size="s"' />
+                <InlineCode value='size="s"' />
                 to display a small icon.
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample36 }} />
-                    <Code className="panel-body">
-                        {sample36}
-                    </Code>
+                    <Code className="panel-body" value={sample36} />
                 </div>
 
                 Specify
-                <InlineCode code='size="m"' />
+                <InlineCode value='size="m"' />
                 to display a big icon.
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample35 }} />
-                    <Code className="panel-body">
-                        {sample35}
-                    </Code>
+                    <Code className="panel-body" value={sample35} />
                 </div>
 
                 Icon "notification" may contain the value.
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample34 }} />
-                    <Code className="panel-body">
-                        {sample34}
-                    </Code>
+                    <Code className="panel-body" value={sample34} />
                 </div>
 
                 The icon can be active.
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample33 }} />
-                    <Code className="panel-body">
-                        {sample33}
-                    </Code>
+                    <Code className="panel-body" value={sample33} />
                 </div>
 
                 The icon may not be available.
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample32 }} />
-                    <Code className="panel-body">
-                        {sample32}
-                    </Code>
+                    <Code className="panel-body" value={sample32} />
                 </div>
 
                 <a href="#/controls/ico">

@@ -1,1 +1,1 @@
-"<xb-button disabled>disabled</xb-button>"
+<xb-button disabled>disabled</xb-button>
