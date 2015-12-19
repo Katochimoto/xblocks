@@ -59,13 +59,14 @@ export default xv.Button = xcore.view.register('xb-button', [
 
         getInitialState: function () {
             return {
-                'checked': this.props.checked
+                checked: this.props.checked,
+                focused: false
             };
         },
 
         componentWillReceiveProps: function (nextProps) {
             this.setState({
-                'checked': Boolean(nextProps.checked)
+                checked: Boolean(nextProps.checked)
             });
         },
 
@@ -85,10 +86,19 @@ export default xv.Button = xcore.view.register('xb-button', [
             this.container().checked = event.target.checked;
         },
 
+        _onFocus: function () {
+            this.setState({ focused: true });
+        },
+
+        _onBlur: function () {
+            this.setState({ focused: false });
+        },
+
         render: function () {
             var classes = {
                 'xb-button': true,
                 '_disabled': this.props.disabled,
+                '_focused': this.state.focused,
                 [ `_theme-${this.props.theme}_size-${this.props.size}` ]: true
             };
 
@@ -149,19 +159,21 @@ export default xv.Button = xcore.view.register('xb-button', [
                 if (type === 'checkbox' || type === 'radio') {
                     children.push(
                         <input key="checkControl"
-                            type={type}
-                            className="_controller"
-                            name={this.props.name}
-                            value={this.props.value}
-                            form={this.props.form}
-                            disabled={this.props.disabled}
-                            defaultChecked={this.props.checked}
-                            checked={this.state.checked}
                             autoFocus={this.props.autofocus}
-                            readOnly={true}
+                            checked={this.state.checked}
+                            className="_controller"
+                            defaultChecked={this.props.checked}
+                            disabled={this.props.disabled}
+                            form={this.props.form}
+                            name={this.props.name}
+                            onBlur={this._onBlur}
                             onChange={this._onChange}
+                            onFocus={this._onFocus}
+                            readOnly={true}
                             required={this.props.required}
-                            tabIndex={tabIndex}/>
+                            tabIndex={tabIndex}
+                            type={type}
+                            value={this.props.value} />
                     );
 
                     children.push(content);

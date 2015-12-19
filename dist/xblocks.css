@@ -2616,12 +2616,12 @@ _:-ms-input-placeholder,
   -webkit-box-shadow: inset 0 90px #ffeba0;
           box-shadow: inset 0 90px #ffeba0;
 }
-.xb-button > ._controller:focus + ._content {
+.xb-button._focused {
   z-index: 2;
   border-color: rgba(178,142,0,0.6);
   outline: none;
 }
-.xb-button > ._controller:focus + ._content:before {
+.xb-button._focused:before {
   content: "";
   position: absolute;
   top: 0;
