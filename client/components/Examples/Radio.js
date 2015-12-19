@@ -8,7 +8,8 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h2 className="sub-header anchor" data-hash="examples/radio">
+                <a className="anchor" data-hash="radio"></a>
+                <h2 className="sub-header">
                     Radio
                 </h2>
 

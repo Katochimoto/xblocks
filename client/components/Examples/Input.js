@@ -18,7 +18,8 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h2 className="sub-header anchor" data-hash="examples/input">
+                <a className="anchor" data-hash="input"></a>
+                <h2 className="sub-header">
                     Input
                 </h2>
 

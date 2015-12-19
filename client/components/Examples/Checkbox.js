@@ -8,7 +8,8 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h2 className="sub-header anchor" data-hash="examples/checkbox">
+                <a className="anchor" data-hash="checkbox"></a>
+                <h2 className="sub-header">
                     Checkbox
                 </h2>
 

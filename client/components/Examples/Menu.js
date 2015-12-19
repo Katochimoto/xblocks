@@ -13,7 +13,8 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h2 className="sub-header anchor" data-hash="examples/menu">
+                <a className="anchor" data-hash="menu"></a>
+                <h2 className="sub-header">
                     Menu
                 </h2>
 

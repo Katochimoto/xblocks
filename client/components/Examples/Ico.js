@@ -12,7 +12,8 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h2 className="sub-header anchor" data-hash="examples/icons">
+                <a className="anchor" data-hash="ico"></a>
+                <h2 className="sub-header">
                     Ico
                 </h2>
 

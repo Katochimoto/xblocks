@@ -10,7 +10,8 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h2 className="sub-header anchor" data-hash="examples/link">
+                <a className="anchor" data-hash="link"></a>
+                <h2 className="sub-header">
                     Link
                 </h2>
 
