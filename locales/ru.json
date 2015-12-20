@@ -34,7 +34,7 @@
     "controls.link__attrs_href": "Задает адрес документа, на который следует перейти.",
     "controls.link__attrs_name": "Устанавливает имя якоря внутри документа.",
     "controls.link__attrs_target": "Имя окна или фрейма, куда браузер будет загружать документ.",
-    "controls.link__attrs_theme": "Тема оформления. Возможные значения:",
+    "controls.link__attrs_theme": "Тема оформления. Возможные значения: {themes}.",
 
     "controls.button__title": "Button",
     "controls.button__descr_p1": "Тег <code>&lt;xb-button&gt;</code> предназначен для создания кнопок.",

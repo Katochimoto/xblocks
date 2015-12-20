@@ -1,0 +1,1 @@
+<xb-link href="http://ya.ru" target="_blank" theme="outer">ya.ru</xb-link>

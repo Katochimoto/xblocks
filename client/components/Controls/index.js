@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Ico from './Ico';
+import Link from './Link';
 
 export default React.createClass({
     displayName: 'Controls',
@@ -12,6 +14,7 @@ export default React.createClass({
                 </h1>
 
                 <Ico />
+                <Link />
 
                 <h2 className="sub-header anchor" data-hash="popup">
                     Popup
