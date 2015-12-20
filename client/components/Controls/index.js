@@ -11,7 +11,7 @@ export default React.createClass({
                     Controls
                 </h1>
 
-                <Ico {...this.props} />
+                <Ico />
 
                 <h2 className="sub-header anchor" data-hash="popup">
                     Popup

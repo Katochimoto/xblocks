@@ -1,4 +1,8 @@
 {
   "name": "xblocks-web",
-  "version": "1.0.2"
+  "version": "1.0.2",
+  "dependencies": {
+    "jquery": "2.1.4",
+    "bootstrap": "3.3.5"
+  }
 }
