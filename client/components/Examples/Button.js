@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import Code from 'ui/Code';
 import InlineCode from 'ui/InlineCode';
 
@@ -60,9 +61,7 @@ export default React.createClass({
                     <Code className="panel-body" value={sample23} />
                 </div>
 
-                <a href="#/controls/button">
-                    See more info about buttons.
-                </a>
+                <Link to="/controls/button">See more info about buttons.</Link>
             </div>
         );
     }

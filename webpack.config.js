@@ -26,6 +26,7 @@ module.exports = {
             'react-dom',
             'react-addons-pure-render-mixin',
             'react-router',
+            'react-intl',
             'history',
             'lodash',
             'classnames',
@@ -45,7 +46,11 @@ module.exports = {
         'path': docsPath
     },
     'resolve': {
-        'modulesDirectories': [ 'node_modules', 'lib/xblocks-core/dist', 'lib/xblocks/dist' ],
+        'modulesDirectories': [
+            'node_modules',
+            'lib/xblocks-core/dist',
+            'lib/xblocks/dist'
+        ],
         'extensions': [ '', '.js', '.styl' ],
         'alias': {
             'components': path.join(clientPath, 'components'),
@@ -54,6 +59,7 @@ module.exports = {
         }
     },
     'plugins': [
+        // new webpack.ContextReplacementPlugin(/react-intl[\/\\]dist[\/\\]locale-data$/, /ru/),
         new webpack.DefinePlugin({
             'VERSION': JSON.stringify(packageData.version),
             'HOMEPAGE': JSON.stringify(packageData.homepage)
@@ -129,6 +135,10 @@ module.exports = {
             {
                 'test': /\.txt$/i,
                 'loader': 'text'
+            },
+            {
+                'test': /\.json$/i,
+                'loader': 'json'
             }
         ]
     },

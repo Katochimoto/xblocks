@@ -2,6 +2,7 @@ import _ from 'lodash';
 import App from 'components/App';
 import GettingStarted from 'components/GettingStarted';
 import Examples from 'components/Examples';
+import Controls from 'components/Controls';
 
 const routes = [
     {
@@ -28,6 +29,18 @@ const routes = [
                     {
                         path: ':name',
                         component: Examples,
+                        onEnter: onEnterSubpath
+                    }
+                ]
+            },
+            {
+                path: 'controls',
+                component: Controls,
+                onEnter: onEnterPath,
+                childRoutes: [
+                    {
+                        path: ':name',
+                        component: Controls,
                         onEnter: onEnterSubpath
                     }
                 ]

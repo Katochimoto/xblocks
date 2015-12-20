@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import Code from 'ui/Code';
 import InlineCode from 'ui/InlineCode';
 
@@ -22,9 +23,7 @@ export default React.createClass({
                     <Code className="panel-body" value={sample21} />
                 </div>
 
-                <a href="#/controls/radio">
-                    See more info about radio.
-                </a>
+                <Link to="/controls/radio">See more info about radio.</Link>
             </div>
         );
     }

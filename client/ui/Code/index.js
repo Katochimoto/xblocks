@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 export default React.createClass({
     displayName: 'Code',
@@ -11,8 +12,18 @@ export default React.createClass({
     },
 
     render: function () {
-        var code = _.unescape(this.props.value);
-        code = code.trim().replace(/<br\/>/g, '\n');
+        var value = this.props.value;
+        if (!value) {
+            value = ReactDOMServer.renderToStaticMarkup(
+                <div>{this.props.children}</div>
+            );
+        }
+
+        var code = _.unescape(value);
+        code = code.trim()
+            .replace(/^<div>/m, '')
+            .replace(/<\/div>$/m, '')
+            .replace(/<br\/>/g, '\n');
 
         return (
             <div className={this.props.className}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import Code from 'ui/Code';
 
 import sample1 from './sample1.txt';
@@ -27,7 +28,7 @@ export default React.createClass({
 
                 <ol>
                     <li>
-                        <a href="#/getting-started/download">Download library</a>
+                        <Link to="/getting-started/download">Download library</Link>
                     </li>
                     <li>
                         Include the CSS on your head page:

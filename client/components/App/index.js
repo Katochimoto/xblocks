@@ -1,6 +1,7 @@
 import './index.styl';
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import Navbar from 'components/Navbar';
 import Menu from 'components/Menu';
 
