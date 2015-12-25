@@ -30,7 +30,7 @@ match .* _content {
 }
 
 match .* _content_attrs (array attrs) {
-    <h3>{loc('%Controls__attrs')}</h3>
+    <h3>{<FormattedHTMLMessage id="controls._attrs')}</h3>
     <table class="table table-hover">
         for attrs.* {
             <tr>
@@ -48,7 +48,7 @@ match .* _content_attrs (array attrs) {
 }
 
 match .* _content_sample (scalar sample) {
-    <h3>{loc('%Controls__example')}</h3>
+    <h3>{<FormattedHTMLMessage id="controls._example')}</h3>
     <div class="panel panel-example">
         <div class="panel-heading">{html(sample)}</div>
         <div class="panel-body highlight">
@@ -60,7 +60,7 @@ match .* _content_sample (scalar sample) {
 }
 
 match .* _content_syntax (scalar sample) {
-    <h3>{loc('%Controls__syntax')}</h3>
+    <h3>{<FormattedHTMLMessage id="controls._syntax')}</h3>
     <div class="highlight">
         <pre>
             <code class="html">{sample}</code>
@@ -69,8 +69,8 @@ match .* _content_syntax (scalar sample) {
 }
 
 match .* _content-input {
-    <h2 class="sub-header anchor" data-hash="controls/input">{loc('%Controls_input__title')}</h2>
-    <p>{html(loc('%Controls_input__descr_p1'))}</p>
+    <h2 class="sub-header anchor" data-hash="controls/input">{<FormattedHTMLMessage id="controls.input__title')}</h2>
+    <p>{html(<FormattedHTMLMessage id="controls.input__descr_p1'))}</p>
 
     apply . _content_syntax ("<xb-input name=\"input_name\"></xb-input>")
 
@@ -78,101 +78,101 @@ match .* _content-input {
         {
             'name': 'autocomplete'
             'type': 'string'
-            'descr': loc('%Controls__attrs_autocomplete')
+            'descr': <FormattedHTMLMessage id="controls._attrs_autocomplete')
         }
         {
             'name': 'autofocus'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_autofocus')
+            'descr': <FormattedHTMLMessage id="controls._attrs_autofocus')
         }
         {
             'name': 'autosize'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_input__attrs_autosize')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_autosize')
         }
         {
             'name': 'cols'
             'type': 'string'
-            'descr': loc('%Controls_input__attrs_cols')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_cols')
         }
         {
             'name': 'ghost'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_input__attrs_ghost')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_ghost')
         }
         {
             'name': 'multiline'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_input__attrs_multiline')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_multiline')
         }
         {
             'name': 'name'
             'type': 'string'
-            'descr': loc('%Controls__attrs_name')
+            'descr': <FormattedHTMLMessage id="controls._attrs_name')
         }
         {
             'name': 'placeholder'
             'type': 'string'
-            'descr': loc('%Controls__attrs_placeholder')
+            'descr': <FormattedHTMLMessage id="controls._attrs_placeholder')
         }
         {
             'name': 'postfix'
             'type': 'string'
-            'descr': loc('%Controls_input__attrs_postfix')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_postfix')
         }
         {
             'name': 'prefix'
             'type': 'string'
-            'descr': loc('%Controls_input__attrs_prefix')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_prefix')
         }
         {
             'name': 'readonly'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_readonly')
+            'descr': <FormattedHTMLMessage id="controls._attrs_readonly')
         }
         {
             'name': 'required'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_required')
+            'descr': <FormattedHTMLMessage id="controls._attrs_required')
         }
         {
             'name': 'reset'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_input__attrs_reset')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_reset')
         }
         {
             'name': 'rows'
             'type': 'string'
             'def': '4'
-            'descr': loc('%Controls_input__attrs_rows')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_rows')
         }
         {
             'name': 'size'
             'type': 'string'
             'def': 'm'
-            'descr': loc('%Controls_input__attrs_size')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_size')
         }
         {
             'name': 'value'
             'type': 'string'
-            'descr': loc('%Controls__attrs_value')
+            'descr': <FormattedHTMLMessage id="controls._attrs_value')
         }
         {
             'name': 'xb-link'
             'type': 'string'
-            'descr': loc('%Controls_input__attrs_xb-link')
+            'descr': <FormattedHTMLMessage id="controls.input__attrs_xb-link')
         }
         {
             'name': 'xb-link-[...]'
             'type': 'string'
-            'descr': loc('%Controls__attrs_xb-link')
+            'descr': <FormattedHTMLMessage id="controls._attrs_xb-link')
         }
     ]
 
@@ -180,12 +180,12 @@ match .* _content-input {
 
     apply . _content_sample ("<xb-input name=\"input_name\"></xb-input>")
 
-    <a href="#/examples/input">{loc('%Controls__more_example')}</a>
+    <a href="#/examples/input">{<FormattedHTMLMessage id="controls._more_example')}</a>
 }
 
 match .* _content-radio {
-    <h2 class="sub-header anchor" data-hash="controls/radio">{loc('%Controls_radio__title')}</h2>
-    <p>{html(loc('%Controls_radio__descr_p1'))}</p>
+    <h2 class="sub-header anchor" data-hash="controls/radio">{<FormattedHTMLMessage id="controls.radio__title')}</h2>
+    <p>{html(<FormattedHTMLMessage id="controls.radio__descr_p1'))}</p>
 
     apply . _content_syntax ("<xb-radio value=\"1\" name=\"radio\">radio label</xb-radio>")
 
@@ -194,46 +194,46 @@ match .* _content-radio {
             'name': 'autofocus'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_autofocus')
+            'descr': <FormattedHTMLMessage id="controls._attrs_autofocus')
         }
         {
             'name': 'checked'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_checked')
+            'descr': <FormattedHTMLMessage id="controls._attrs_checked')
         }
         {
             'name': 'for'
             'type': 'string'
-            'descr': loc('%Controls__attrs_for')
+            'descr': <FormattedHTMLMessage id="controls._attrs_for')
         }
         {
             'name': 'form'
             'type': 'string'
-            'descr': loc('%Controls__attrs_form')
+            'descr': <FormattedHTMLMessage id="controls._attrs_form')
         }
         {
             'name': 'name'
             'type': 'string'
-            'descr': loc('%Controls__attrs_name')
+            'descr': <FormattedHTMLMessage id="controls._attrs_name')
         }
         {
             'name': 'required'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_required')
+            'descr': <FormattedHTMLMessage id="controls._attrs_required')
         }
         {
             'name': 'size'
             'type': 'string'
             'def': 'm'
-            'descr': loc('%Controls_checkbox__attrs_size')
+            'descr': <FormattedHTMLMessage id="controls.checkbox__attrs_size')
         }
         {
             'name': 'value'
             'type': 'string'
             'def': 'on'
-            'descr': loc('%Controls__attrs_value')
+            'descr': <FormattedHTMLMessage id="controls._attrs_value')
         }
     ]
 
@@ -241,12 +241,12 @@ match .* _content-radio {
 
     apply . _content_sample ("<xb-radio value=\"1\" name=\"radio\" checked>radio label1</xb-radio>\n<br/>\n<xb-radio value=\"2\" name=\"radio\">radio label2</xb-radio>")
 
-    <a href="#/examples/radio">{loc('%Controls__more_example')}</a>
+    <a href="#/examples/radio">{<FormattedHTMLMessage id="controls._more_example')}</a>
 }
 
 match .* _content-checkbox {
-    <h2 class="sub-header anchor" data-hash="controls/checkbox">{loc('%Controls_checkbox__title')}</h2>
-    <p>{html(loc('%Controls_checkbox__descr_p1'))}</p>
+    <h2 class="sub-header anchor" data-hash="controls/checkbox">{<FormattedHTMLMessage id="controls.checkbox__title')}</h2>
+    <p>{html(<FormattedHTMLMessage id="controls.checkbox__descr_p1'))}</p>
 
     apply . _content_syntax ("<xb-checkbox value=\"1\" name=\"checkbox\">checkbox label</xb-checkbox>")
 
@@ -255,46 +255,46 @@ match .* _content-checkbox {
             'name': 'autofocus'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_autofocus')
+            'descr': <FormattedHTMLMessage id="controls._attrs_autofocus')
         }
         {
             'name': 'checked'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_checked')
+            'descr': <FormattedHTMLMessage id="controls._attrs_checked')
         }
         {
             'name': 'for'
             'type': 'string'
-            'descr': loc('%Controls__attrs_for')
+            'descr': <FormattedHTMLMessage id="controls._attrs_for')
         }
         {
             'name': 'form'
             'type': 'string'
-            'descr': loc('%Controls__attrs_form')
+            'descr': <FormattedHTMLMessage id="controls._attrs_form')
         }
         {
             'name': 'name'
             'type': 'string'
-            'descr': loc('%Controls__attrs_name')
+            'descr': <FormattedHTMLMessage id="controls._attrs_name')
         }
         {
             'name': 'required'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_required')
+            'descr': <FormattedHTMLMessage id="controls._attrs_required')
         }
         {
             'name': 'size'
             'type': 'string'
             'def': 'm'
-            'descr': loc('%Controls_checkbox__attrs_size')
+            'descr': <FormattedHTMLMessage id="controls.checkbox__attrs_size')
         }
         {
             'name': 'value'
             'type': 'string'
             'def': 'on'
-            'descr': loc('%Controls__attrs_value')
+            'descr': <FormattedHTMLMessage id="controls._attrs_value')
         }
     ]
 
@@ -302,13 +302,13 @@ match .* _content-checkbox {
 
     apply . _content_sample ("<xb-checkbox value=\"1\" name=\"checkbox\">checkbox label</xb-checkbox>")
 
-    <a href="#/examples/checkbox">{loc('%Controls__more_example')}</a>
+    <a href="#/examples/checkbox">{<FormattedHTMLMessage id="controls._more_example')}</a>
 }
 
 match .* _content-button {
-    <h2 class="sub-header anchor" data-hash="controls/button">{loc('%Controls_button__title')}</h2>
-    <p>{html(loc('%Controls_button__descr_p1'))}</p>
-    <p>{html(loc('%Controls_button__descr_p2'))}</p>
+    <h2 class="sub-header anchor" data-hash="controls/button">{<FormattedHTMLMessage id="controls.button__title')}</h2>
+    <p>{html(<FormattedHTMLMessage id="controls.button__descr_p1'))}</p>
+    <p>{html(<FormattedHTMLMessage id="controls.button__descr_p2'))}</p>
 
     apply . _content_syntax ("<xb-button>button</xb-button>")
 
@@ -338,63 +338,63 @@ match .* _content-button {
             'name': 'autofocus'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_autofocus')
+            'descr': <FormattedHTMLMessage id="controls._attrs_autofocus')
         }
         {
             'name': 'checked'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_checked')
+            'descr': <FormattedHTMLMessage id="controls._attrs_checked')
         }
         {
             'name': 'for'
             'type': 'string'
-            'descr': loc('%Controls__attrs_for')
+            'descr': <FormattedHTMLMessage id="controls._attrs_for')
         }
         {
             'name': 'form'
             'type': 'string'
-            'descr': loc('%Controls__attrs_form')
+            'descr': <FormattedHTMLMessage id="controls._attrs_form')
         }
         {
             'name': 'href'
             'type': 'string'
-            'descr': loc('%Controls_button__attrs_href')
+            'descr': <FormattedHTMLMessage id="controls.button__attrs_href')
         }
         {
             'name': 'multiple'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_button__attrs_multiple')
+            'descr': <FormattedHTMLMessage id="controls.button__attrs_multiple')
         }
         {
             'name': 'name'
             'type': 'string'
-            'descr': loc('%Controls__attrs_name')
+            'descr': <FormattedHTMLMessage id="controls._attrs_name')
         }
         {
             'name': 'required'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls__attrs_required')
+            'descr': <FormattedHTMLMessage id="controls._attrs_required')
         }
         {
             'name': 'size'
             'type': 'string'
             'def': 'm'
-            'descr': loc('%Controls_button__attrs_size')
+            'descr': <FormattedHTMLMessage id="controls.button__attrs_size')
         }
         {
             'name': 'target'
             'type': 'string'
-            'descr': loc('%Controls_button__attrs_target')
+            'descr': <FormattedHTMLMessage id="controls.button__attrs_target')
         }
         {
             'name': 'theme'
             'type': 'string'
             'def': 'normal'
             'descr': (
-                loc('%Controls_button__attrs_theme')
+                <FormattedHTMLMessage id="controls.button__attrs_theme')
                 " "
 
                 for theme.* {
@@ -411,7 +411,7 @@ match .* _content-button {
             'type': 'string'
             'def': 'button'
             'descr': (
-                loc('%Controls_button__attrs_type')
+                <FormattedHTMLMessage id="controls.button__attrs_type')
                 " "
 
                 for type.* {
@@ -426,18 +426,18 @@ match .* _content-button {
         {
             'name': 'value'
             'type': 'string'
-            'descr': loc('%Controls__attrs_value')
+            'descr': <FormattedHTMLMessage id="controls._attrs_value')
         }
         {
             'name': 'xb-ico-float'
             'type': 'string'
             'def': 'left'
-            'descr': loc('%Controls__attrs_xb-ico-float')
+            'descr': <FormattedHTMLMessage id="controls._attrs_xb-ico-float')
         }
         {
             'name': 'xb-ico-[...]'
             'type': 'string'
-            'descr': loc('%Controls__attrs_xb-ico')
+            'descr': <FormattedHTMLMessage id="controls._attrs_xb-ico')
         }
     ]
 
@@ -445,12 +445,12 @@ match .* _content-button {
 
     apply . _content_sample ("<xb-button type=\"checkbox\" xb-ico-type=\"download\" xb-ico-float=\"right\">checkbox</xb-button>")
 
-    <a href="#/examples/button">{loc('%Controls__more_example')}</a>
+    <a href="#/examples/button">{<FormattedHTMLMessage id="controls._more_example')}</a>
 }
 
 match .* _content-link {
-    <h2 class="sub-header anchor" data-hash="controls/link">{loc('%Controls_link__title')}</h2>
-    <p>{html(loc('%Controls_link__descr_p1'))}</p>
+    <h2 class="sub-header anchor" data-hash="controls/link">{<FormattedHTMLMessage id="controls.link__title')}</h2>
+    <p>{html(<FormattedHTMLMessage id="controls.link__descr_p1'))}</p>
 
     apply . _content_syntax ("<xb-link href=\"http://ya.ru\" target=\"_blank\">ya.ru</xb-link>")
 
@@ -465,25 +465,25 @@ match .* _content-link {
         {
             'name': 'href'
             'type': 'string'
-            'descr': loc('%Controls_link__attrs_href')
+            'descr': <FormattedHTMLMessage id="controls.link__attrs_href')
         }
         {
             'name': 'name'
             'type': 'string'
-            'descr': loc('%Controls_link__attrs_name')
+            'descr': <FormattedHTMLMessage id="controls.link__attrs_name')
         }
         {
             'name': 'target'
             'type': 'string'
             'def': '_self'
-            'descr': loc('%Controls_link__attrs_target')
+            'descr': <FormattedHTMLMessage id="controls.link__attrs_target')
         }
         {
             'name': 'theme'
             'type': 'string'
             'def': 'normal'
             'descr': (
-                loc('%Controls_link__attrs_theme')
+                <FormattedHTMLMessage id="controls.link__attrs_theme')
                 " "
 
                 for theme.* {
@@ -501,16 +501,16 @@ match .* _content-link {
 
     apply . _content_sample ("<xb-link href=\"http://ya.ru\" target=\"_blank\" theme=\"outer\">ya.ru</xb-link>")
 
-    <a href="#/examples/link">{loc('%Controls__more_example')}</a>
+    <a href="#/examples/link">{<FormattedHTMLMessage id="controls._more_example')}</a>
 }
 
 match .* _content-ico {
-    <h2 class="sub-header anchor" data-hash="controls/icons">{loc('%Controls_ico__title')}</h2>
-    <p>{html(loc('%Controls_ico__descr_p1'))}</p>
-    <p>{html(loc('%Controls_ico__descr_p2'))}</p>
-    <p>{html(loc('%Controls_ico__descr_p3'))}</p>
+    <h2 class="sub-header anchor" data-hash="controls/icons">{<FormattedHTMLMessage id="controls.ico__title')}</h2>
+    <p>{html(<FormattedHTMLMessage id="controls.ico__descr_p1'))}</p>
+    <p>{html(<FormattedHTMLMessage id="controls.ico__descr_p2'))}</p>
+    <p>{html(<FormattedHTMLMessage id="controls.ico__descr_p3'))}</p>
 
-    apply . _content_syntax ("<xb-ico type=\"notification\">{loc('%Controls_ico__syntax_example')}</xb-ico>")
+    apply . _content_syntax ("<xb-ico type=\"notification\">{<FormattedHTMLMessage id="controls.ico__syntax_example')}</xb-ico>")
 
     types = [
         'attention'
@@ -547,31 +547,31 @@ match .* _content-ico {
             'name': 'active'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_ico__attrs_active')
+            'descr': <FormattedHTMLMessage id="controls.ico__attrs_active')
         }
         {
             'name': 'disabled'
             'type': 'boolean'
             'def': 'false'
-            'descr': loc('%Controls_ico__attrs_disabled')
+            'descr': <FormattedHTMLMessage id="controls.ico__attrs_disabled')
         }
         {
             'name': 'size'
             'type': 'string'
             'def': 's'
-            'descr': loc('%Controls_ico__attrs_size')
+            'descr': <FormattedHTMLMessage id="controls.ico__attrs_size')
         }
         {
             'name': 'value'
             'type': 'string'
             'def': '&amp;nbsp;'
-            'descr': loc('%Controls_ico__attrs_value')
+            'descr': <FormattedHTMLMessage id="controls.ico__attrs_value')
         }
         {
             'name': 'type'
             'type': 'string'
             'descr': (
-                loc('%Controls_ico__attrs_type')
+                <FormattedHTMLMessage id="controls.ico__attrs_type')
                 " "
 
                 for types.* {
@@ -589,5 +589,5 @@ match .* _content-ico {
 
     apply . _content_sample ("<xb-ico type=\"twitter\" disabled></xb-ico>")
 
-    <a href="#/examples/ico">{loc('%Controls__more_example')}</a>
+    <a href="#/examples/ico">{<FormattedHTMLMessage id="controls._more_example')}</a>
 }

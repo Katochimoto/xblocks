@@ -43,8 +43,8 @@
     "controls.button__attrs_multiple": "Позволяет загрузить несколько файлов одновременно. Для типа <code>file</code>.",
     "controls.button__attrs_size": "Размер кнопки. Возможные значения: <code>s</code>, <code>m</code>, <code>l</code>, <code>xl</code>.",
     "controls.button__attrs_target": "Имя окна или фрейма, куда браузер будет загружать документ. Для типа <code>link</code>.",
-    "controls.button__attrs_theme": "Тема оформления. Возможные значения:",
-    "controls.button__attrs_type": "Тип кнопки. Возможные значения:",
+    "controls.button__attrs_theme": "Тема оформления. Возможные значения: {themes}.",
+    "controls.button__attrs_type": "Тип кнопки. Возможные значения: {types}.",
 
     "controls.checkbox__title": "Checkbox",
     "controls.checkbox__descr_p1": "Тег <code>&lt;xb-checkbox&gt;</code> предназначен для создания флажка.",

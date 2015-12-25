@@ -2,6 +2,10 @@ import React from 'react';
 
 import Ico from './Ico';
 import Link from './Link';
+import Button from './Button';
+import Checkbox from './Checkbox';
+import Radio from './Radio';
+import Input from './Input';
 
 export default React.createClass({
     displayName: 'Controls',
@@ -15,6 +19,10 @@ export default React.createClass({
 
                 <Ico />
                 <Link />
+                <Button />
+                <Checkbox />
+                <Radio />
+                <Input />
 
                 <h2 className="sub-header anchor" data-hash="popup">
                     Popup

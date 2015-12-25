@@ -21,13 +21,13 @@ module.exports = {
     'context': clientPath,
     'entry': {
         'vendor': [
-            'es5-shim',
+            'es5-shim/es5-shim.js',
             'react',
             'react-dom',
             'react-addons-pure-render-mixin',
             'react-router',
             'react-intl',
-            'history',
+            'history/umd/History.js',
             'lodash',
             'classnames',
             'tether',
@@ -100,6 +100,10 @@ module.exports = {
         })
     ],
     'module': {
+        'noParse': [
+            /node_modules[\/\\]history[\/\\]umd[\/\\]History.js/,
+            /node_modules[\/\\]es5-shim[\/\\]es5-shim.js/
+        ],
         'preLoaders': [
             {
                 'test': /\.jsx?$/,
