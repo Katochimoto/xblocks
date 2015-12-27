@@ -37,7 +37,7 @@ const types = [
 ];
 
 export default React.createClass({
-    render: function () {
+    render() {
         const attrs = [
             {
                 'name': 'active',

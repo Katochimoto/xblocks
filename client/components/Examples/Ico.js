@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Code from 'ui/Code';
-import InlineCode from 'ui/InlineCode';
 
 import sample32 from './sample32.txt';
 import sample33 from './sample33.txt';
@@ -10,17 +10,15 @@ import sample35 from './sample35.txt';
 import sample36 from './sample36.txt';
 
 export default React.createClass({
-    render: function () {
+    render() {
         return (
             <div>
                 <a className="anchor" data-hash="ico"></a>
                 <h2 className="sub-header">
-                    Ico
+                    <FormattedMessage id="menu.ico" />
                 </h2>
 
-                To display icons, use the tag
-                <InlineCode value="<xb-ico>" />
-                .
+                <FormattedHTMLMessage id="examples.ico_descr5" />
 
                 <p></p>
                 <div className="row">
@@ -70,46 +68,44 @@ export default React.createClass({
                 </div>
                 <p></p>
 
-                Specify
-                <InlineCode value='size="s"' />
-                to display a small icon.
+                <FormattedHTMLMessage id="examples.ico_descr4" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample36 }} />
                     <Code className="panel-body" value={sample36} />
                 </div>
 
-                Specify
-                <InlineCode value='size="m"' />
-                to display a big icon.
+                <FormattedHTMLMessage id="examples.ico_descr3" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample35 }} />
                     <Code className="panel-body" value={sample35} />
                 </div>
 
-                Icon "notification" may contain the value.
+                <FormattedMessage id="examples.ico_descr0" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample34 }} />
                     <Code className="panel-body" value={sample34} />
                 </div>
 
-                The icon can be active.
+                <FormattedMessage id="examples.ico_descr1" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample33 }} />
                     <Code className="panel-body" value={sample33} />
                 </div>
 
-                The icon may not be available.
+                <FormattedMessage id="examples.ico_descr2" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample32 }} />
                     <Code className="panel-body" value={sample32} />
                 </div>
 
-                <Link to="/controls/ico">See more info about icons.</Link>
+                <Link to="/controls/ico">
+                    <FormattedMessage id="examples.more" />
+                </Link>
             </div>
         );
     }

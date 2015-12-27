@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Ico from './Ico';
 import Link from './Link';
@@ -12,11 +13,11 @@ import Menu from './Menu';
 export default React.createClass({
     displayName: 'Examples',
 
-    render: function () {
+    render() {
         return (
             <div>
                 <h1 className="page-header">
-                    Examples
+                    <FormattedMessage id="menu.examples" />
                 </h1>
 
                 <Ico />

@@ -6,7 +6,7 @@ export default React.createClass({
 
     mixins: [ PureRenderMixin ],
 
-    render: function () {
+    render() {
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container-fluid">

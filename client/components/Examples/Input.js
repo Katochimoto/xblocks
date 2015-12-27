@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Code from 'ui/Code';
-import InlineCode from 'ui/InlineCode';
 
 import sample10 from './sample10.txt';
 import sample11 from './sample11.txt';
@@ -16,17 +16,15 @@ import sample19 from './sample19.txt';
 import sample20 from './sample20.txt';
 
 export default React.createClass({
-    render: function () {
+    render() {
         return (
             <div>
                 <a className="anchor" data-hash="input"></a>
                 <h2 className="sub-header">
-                    Input
+                    <FormattedMessage id="menu.input" />
                 </h2>
 
-                To display input, use the tag
-                <InlineCode value="<xb-input>" />
-                .
+                <FormattedHTMLMessage id="examples.input_descr0" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample20 }} />
@@ -83,7 +81,9 @@ export default React.createClass({
                     <Code className="panel-body" value={sample18} />
                 </div>
 
-                <Link to="/controls/input">See more info about input.</Link>
+                <Link to="/controls/input">
+                    <FormattedMessage id="examples.more" />
+                </Link>
             </div>
         );
     }

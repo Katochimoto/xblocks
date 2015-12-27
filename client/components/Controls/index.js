@@ -10,7 +10,7 @@ import Input from './Input';
 export default React.createClass({
     displayName: 'Controls',
 
-    render: function () {
+    render() {
         return (
             <div>
                 <h1 className="page-header">

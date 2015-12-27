@@ -8,7 +8,7 @@ import sample10 from './sample10.txt';
 import sample11 from './sample11.txt';
 
 export default React.createClass({
-    render: function () {
+    render() {
         const attrs = [
             {
                 'name': 'autofocus',

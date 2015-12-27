@@ -8,7 +8,7 @@ import sample6 from './sample6.txt';
 import sample7 from './sample7.txt';
 
 export default React.createClass({
-    render: function () {
+    render() {
         const attrs = [
             {
                 'name': 'autocomplete',

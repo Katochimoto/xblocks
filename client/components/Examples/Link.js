@@ -1,24 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Code from 'ui/Code';
-import InlineCode from 'ui/InlineCode';
 
 import sample29 from './sample29.txt';
 import sample30 from './sample30.txt';
 import sample31 from './sample31.txt';
 
 export default React.createClass({
-    render: function () {
+    render() {
         return (
             <div>
                 <a className="anchor" data-hash="link"></a>
                 <h2 className="sub-header">
-                    Link
+                    <FormattedMessage id="menu.link" />
                 </h2>
 
-                To display link, use the tag
-                <InlineCode value="<xb-link>" />
-                .
+                <FormattedHTMLMessage id="examples.link_descr0" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample31 }} />
@@ -35,7 +33,9 @@ export default React.createClass({
                     <Code className="panel-body" value={sample29} />
                 </div>
 
-                <Link to="/controls/link">See more info about links.</Link>
+                <Link to="/controls/link">
+                    <FormattedMessage id="examples.more" />
+                </Link>
             </div>
         );
     }

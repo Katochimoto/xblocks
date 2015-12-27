@@ -15,7 +15,7 @@ const themes = [
 ];
 
 export default React.createClass({
-    render: function () {
+    render() {
         const attrs = [
             {
                 'name': 'href',

@@ -1,4 +1,76 @@
 {
+    "menu.getting_started": "Getting Started",
+    "menu.quickstart": "Quick Start",
+    "menu.download": "Download",
+    "menu.templates": "Templates",
+    "menu.examples": "Examples",
+    "menu.ico": "Ico",
+    "menu.link": "Link",
+    "menu.button": "Button",
+    "menu.checkbox": "Checkbox",
+    "menu.radio": "Radio",
+    "menu.input": "Input",
+    "menu.popup": "Popup",
+    "menu.menu": "Menu",
+    "menu.controls": "Controls",
+    "menu.extensions": "Extensions",
+    "menu.writing_extensions": "Writing an Extension",
+    "menu.core": "Core",
+    "menu.support": "Browser and device support",
+    "menu.contributing": "Contributing",
+    "menu.tests": "Running tests",
+
+
+    "getting_started.descr0": "An overview of Xblocks, how to download and use, basic templates, and more.",
+    "getting_started.download": "Download library",
+    "getting_started.css": "Include the CSS on your head page:",
+    "getting_started.js": "Include the JS on your head page:",
+    "getting_started.dependencies": "Test connection required dependencies:",
+    "getting_started.descr1": "Further work requires no initialization.",
+    "getting_started.install_cdn": "Install with CDN",
+    "getting_started.version": "Currently {version}",
+    "getting_started.install_cdn_descr": "You can install Xblocks using <a href=\"https://cdnjs.com/\" target=\"_blank\">CDN</a>:",
+    "getting_started.install_bower": "Install with Bower",
+    "getting_started.install_bower_descr": "You can also install Xblocks using <a href=\"http://bower.io/\" target=\"_blank\">Bower</a>:",
+    "getting_started.install_npm": "Install with npm",
+    "getting_started.install_npm_descr": "You can also install Xblocks using <a href=\"https://www.npmjs.com/\" target=\"_blank\">npm</a>:",
+    "getting_started.descr2": "This template does not utilize CDNs.",
+
+
+    "examples.more": "See more info",
+    "examples.button_descr0": "Buttons can be of the following types:",
+    "examples.button_descr1": "For the button you can specify the icon:",
+    "examples.button_descr2": "Button checkbox:",
+    "examples.button_descr3": "Button radio:",
+    "examples.button_tag": "To display buttons, use the tag <code>&lt;xb-button&gt;</code>.",
+
+    "examples.ico_descr0": "Icon \"notification\" may contain the value.",
+    "examples.ico_descr1": "The icon can be active.",
+    "examples.ico_descr2": "The icon may not be available.",
+    "examples.ico_descr3": "Specify <code>size=\"m\"</code> to display a big icon.",
+    "examples.ico_descr4": "Specify <code>size=\"s\"</code> to display a small icon.",
+    "examples.ico_descr5": "To display icons, use the tag <code>&lt;xb-ico&gt;</code>.",
+
+    "examples.checkbox_descr0": "To display checkbox, use the tag <code>&lt;xb-checkbox&gt;</code>.",
+
+    "examples.input_descr0": "To display input, use the tag <code>&lt;xb-input&gt;</code>.",
+
+    "examples.link_descr0": "To display link, use the tag <code>&lt;xb-link&gt;</code>.",
+
+    "examples.menu_descr0": "To display menu, use the tag <code>&lt;xb-menu&gt;</code>.",
+    "examples.menu_descr1": "Specify the size menu:",
+    "examples.menu_descr2": "Icons in menu items:",
+    "examples.menu_descr3": "Show menu for the target object:",
+    "examples.menu_descr4": "Context menu:",
+    "examples.menu_descr5": "Inline menu:",
+
+    "examples.popup_descr0": "To display popup, use the tag <code>&lt;xb-popup&gt;</code>.",
+    "examples.popup_descr1": "Complex window:",
+    "examples.popup_descr2": "Themes:",
+
+    "examples.radio_descr0": "To display radio, use the tag <code>&lt;xb-radio&gt;</code>.",
+
+
     "controls._syntax": "Синтаксис",
     "controls._attrs": "Атрибуты",
     "controls._example": "Пример",

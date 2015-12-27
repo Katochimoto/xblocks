@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { Link } from 'react-router';
+import { FormattedMessage } from 'react-intl';
 import classSet from 'classnames';
 
 export default React.createClass({
@@ -11,25 +12,25 @@ export default React.createClass({
         PureRenderMixin
     ],
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             items: [
                 {
                     hash: '/getting-started',
-                    title: 'Getting Started',
+                    title: <FormattedMessage id="menu.getting_started" />,
                     menu: {
                         items: [
                             {
                                 hash: '/getting-started/quickstart',
-                                title: 'Quick Start'
+                                title: <FormattedMessage id="menu.quickstart" />
                             },
                             {
                                 hash: '/getting-started/download',
-                                title: 'Download'
+                                title: <FormattedMessage id="menu.download" />
                             },
                             {
                                 hash: '/getting-started/templates',
-                                title: 'Templates'
+                                title: <FormattedMessage id="menu.templates" />
                             }
                         ]
                     }
@@ -37,40 +38,40 @@ export default React.createClass({
 
                 {
                     hash: '/examples',
-                    title: 'Examples',
+                    title: <FormattedMessage id="menu.examples" />,
                     menu: {
                         items: [
                             {
                                 hash: '/examples/ico',
-                                title: 'Ico'
+                                title: <FormattedMessage id="menu.ico" />
                             },
                             {
                                 hash: '/examples/link',
-                                title: 'Link'
+                                title: <FormattedMessage id="menu.link" />
                             },
                             {
                                 hash: '/examples/button',
-                                title: 'Button'
+                                title: <FormattedMessage id="menu.button" />
                             },
                             {
                                 hash: '/examples/checkbox',
-                                title: 'Checkbox'
+                                title: <FormattedMessage id="menu.checkbox" />
                             },
                             {
                                 hash: '/examples/radio',
-                                title: 'Radio'
+                                title: <FormattedMessage id="menu.radio" />
                             },
                             {
                                 hash: '/examples/input',
-                                title: 'Input'
+                                title: <FormattedMessage id="menu.input" />
                             },
                             {
                                 hash: '/examples/popup',
-                                title: 'Popup'
+                                title: <FormattedMessage id="menu.popup" />
                             },
                             {
                                 hash: '/examples/menu',
-                                title: 'Menu'
+                                title: <FormattedMessage id="menu.menu" />
                             }
                         ]
                     }
@@ -78,77 +79,77 @@ export default React.createClass({
 
                 {
                     hash: '/controls',
-                    title: 'Controls',
+                    title: <FormattedMessage id="menu.controls" />,
                     menu: {
                         items: [
                             {
                                 hash: '/controls/ico',
-                                title: 'Ico'
+                                title: <FormattedMessage id="menu.ico" />
                             },
                             {
                                 hash: '/controls/link',
-                                title: 'Link'
+                                title: <FormattedMessage id="menu.link" />
                             },
                             {
                                 hash: '/controls/button',
-                                title: 'Button'
+                                title: <FormattedMessage id="menu.button" />
                             },
                             {
                                 hash: '/controls/checkbox',
-                                title: 'Checkbox'
+                                title: <FormattedMessage id="menu.checkbox" />
                             },
                             {
                                 hash: '/controls/radio',
-                                title: 'Radio'
+                                title: <FormattedMessage id="menu.radio" />
                             },
                             {
                                 hash: '/controls/input',
-                                title: 'Input'
+                                title: <FormattedMessage id="menu.input" />
                             },
                             {
                                 hash: '/controls/popup',
-                                title: 'Popup'
+                                title: <FormattedMessage id="menu.popup" />
                             },
                             {
                                 hash: '/controls/menu',
-                                title: 'Menu'
+                                title: <FormattedMessage id="menu.menu" />
                             }
                         ]
                     }
                 },
                 {
                     hash: '/extensions',
-                    title: 'Extensions',
+                    title: <FormattedMessage id="menu.extensions" />,
                     menu: {
                         items: [
                             {
                                 hash: '/extensions/writing-extensions',
-                                title: 'Writing an Extension'
+                                title: <FormattedMessage id="menu.writing_extensions" />
                             }
                         ]
                     }
                 },
                 {
                     hash: '/core',
-                    title: 'Core'
+                    title: <FormattedMessage id="menu.core" />
                 },
                 {
                     hash: '/support',
-                    title: 'Browser and device support'
+                    title: <FormattedMessage id="menu.support" />
                 },
                 {
                     hash: '/contributing',
-                    title: 'Contributing'
+                    title: <FormattedMessage id="menu.contributing" />
                 },
                 {
                     hash: '/tests',
-                    title: 'Running tests'
+                    title: <FormattedMessage id="menu.tests" />
                 }
             ]
         };
     },
 
-    renderMenu: function (items, key) {
+    renderMenu(items, key) {
         key = key || 'menu';
         return (
             <ul className="nav nav-stacked" key={key}>
@@ -159,7 +160,7 @@ export default React.createClass({
         );
     },
 
-    renderMenuItem: function (item, key) {
+    renderMenuItem(item, key) {
         var href = this.props.history.createPath(item.hash);
         var find = (_.trimRight(this.props.location.pathname, '/') + '/').indexOf((_.trimRight(href, '/') + '/'));
 
@@ -178,7 +179,7 @@ export default React.createClass({
         );
     },
 
-    render: function () {
+    render() {
         return (
             <div className="col-sm-3 col-md-2 sidebar bs-docs-sidebar">
                 {this.renderMenu(this.state.items)}

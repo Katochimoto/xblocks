@@ -10,7 +10,7 @@ export default React.createClass({
 
     mixins: [ PureRenderMixin ],
 
-    render: function () {
+    render() {
         return (
             <div>
                 <Navbar />

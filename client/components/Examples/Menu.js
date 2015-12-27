@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Code from 'ui/Code';
-import InlineCode from 'ui/InlineCode';
 
 import sample1 from './sample1.txt';
 import sample2 from './sample2.txt';
@@ -11,59 +11,59 @@ import sample5 from './sample5.txt';
 import sample6 from './sample6.txt';
 
 export default React.createClass({
-    render: function () {
+    render() {
         return (
             <div>
                 <a className="anchor" data-hash="menu"></a>
                 <h2 className="sub-header">
-                    Menu
+                    <FormattedMessage id="menu.menu" />
                 </h2>
 
-                To display menu, use the tag
-                <InlineCode value="<xb-menu>" />
-                .
+                <FormattedHTMLMessage id="examples.menu_descr0" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample6 }} />
                     <Code className="panel-body" value={sample6} />
                 </div>
 
-                Specify the size menu:
+                <FormattedMessage id="examples.menu_descr1" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample5 }} />
                     <Code className="panel-body" value={sample5} />
                 </div>
 
-                Icons in menu items:
+                <FormattedMessage id="examples.menu_descr2" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample4 }} />
                     <Code className="panel-body" value={sample4} />
                 </div>
 
-                Show menu for the target object:
+                <FormattedMessage id="examples.menu_descr3" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample3 }} />
                     <Code className="panel-body" value={sample3} />
                 </div>
 
-                Context menu:
+                <FormattedMessage id="examples.menu_descr4" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample2 }} />
                     <Code className="panel-body" value={sample2} />
                 </div>
 
-                Inline menu:
+                <FormattedMessage id="examples.menu_descr5" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample1 }} />
                     <Code className="panel-body" value={sample1} />
                 </div>
 
-                <Link to="/controls/menu">See more info about menu.</Link>
+                <Link to="/controls/menu">
+                    <FormattedMessage id="examples.more" />
+                </Link>
             </div>
         );
     }

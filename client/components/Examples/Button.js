@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Code from 'ui/Code';
-import InlineCode from 'ui/InlineCode';
 
 import sample23 from './sample23.txt';
 import sample24 from './sample24.txt';
@@ -11,45 +11,43 @@ import sample27 from './sample27.txt';
 import sample28 from './sample28.txt';
 
 export default React.createClass({
-    render: function () {
+    render() {
         return (
             <div>
                 <a className="anchor" data-hash="button"></a>
                 <h2 className="sub-header">
-                    Button
+                    <FormattedMessage id="menu.button" />
                 </h2>
 
-                To display buttons, use the tag
-                <InlineCode value="<xb-button>" />
-                .
+                <FormattedHTMLMessage id="examples.button_tag" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample28 }} />
                     <Code className="panel-body" value={sample28} />
                 </div>
 
-                Buttons can be of the following types:
+                <FormattedMessage id="examples.button_descr0" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample27 }} />
                     <Code className="panel-body" value={sample27} />
                 </div>
 
-                For the button you can specify the icon:
+                <FormattedMessage id="examples.button_descr1" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample26 }} />
                     <Code className="panel-body" value={sample26} />
                 </div>
 
-                Button checkbox:
+                <FormattedMessage id="examples.button_descr2" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample25 }} />
                     <Code className="panel-body" value={sample25} />
                 </div>
 
-                Button radio:
+                <FormattedMessage id="examples.button_descr3" />
 
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample24 }} />
@@ -61,7 +59,9 @@ export default React.createClass({
                     <Code className="panel-body" value={sample23} />
                 </div>
 
-                <Link to="/controls/button">See more info about buttons.</Link>
+                <Link to="/controls/button">
+                    <FormattedMessage id="examples.more" />
+                </Link>
             </div>
         );
     }

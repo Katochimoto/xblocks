@@ -1,109 +1,77 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Code from 'ui/Code';
 
 import sample1 from './sample1.txt';
 import sample2 from './sample2.txt';
 import sample3 from './sample3.txt';
 import sample4 from './sample4.txt';
-// import sample5 from './sample5.txt';
 
 export default React.createClass({
     displayName: 'GettingStarted',
 
-    render: function () {
+    render() {
         return (
             <div>
-                <h1 className="page-header">
-                    Getting started
-                </h1>
-
-                <p className="lead">
-                    An overview of Xblocks, how to download and use, basic templates, and more.
-                </p>
+                <h1 className="page-header"><FormattedMessage id="menu.getting_started" /></h1>
+                <p className="lead"><FormattedMessage id="getting_started.descr0" /></p>
 
                 <h2 className="sub-header anchor" data-hash="quickstart">
-                    Quick Start
+                    <FormattedMessage id="menu.quickstart" />
                 </h2>
 
                 <ol>
                     <li>
-                        <Link to="/getting-started/download">Download library</Link>
+                        <Link to="/getting-started/download">
+                            <FormattedMessage id="getting_started.download" />
+                        </Link>
                     </li>
                     <li>
-                        Include the CSS on your head page:
+                        <FormattedMessage id="getting_started.css" />
                         <Code value={sample2} />
                     </li>
                     <li>
-                        Include the JS on your head page:
+                        <FormattedMessage id="getting_started.js" />
                         <Code value={sample3} />
                     </li>
                     <li>
-                        Test connection required dependencies:
+                        <FormattedMessage id="getting_started.dependencies" />
                         <Code value={sample4} />
                     </li>
                     <li>
-                        Further work requires no initialization.
+                        <FormattedMessage id="getting_started.descr1" />
                     </li>
                 </ol>
 
                 <h2 className="sub-header anchor" data-hash="download">
-                    Download
+                    <FormattedMessage id="menu.download" />
                 </h2>
 
                 <small>
-                    Currently {VERSION}
+                    <FormattedMessage id="getting_started.version" values={{ version: VERSION }} />
                 </small>
 
-                <h3>
-                    Install with CDN
-                </h3>
-
-                <p>
-                    You can install Xblocks using
-                    <a href="https://cdnjs.com/" target="_blank">
-                        CDN
-                    </a>
-                    :
-                </p>
+                <h3><FormattedMessage id="getting_started.install_cdn" /></h3>
+                <p><FormattedHTMLMessage id="getting_started.install_cdn_descr" /></p>
 
                 <Code value="$ bower install xblocks" />
 
-                <h3>
-                    Install with Bower
-                </h3>
-
-                <p>
-                    You can also install Xblocks using
-                    <a href="http://bower.io/" target="_blank">
-                        Bower
-                    </a>
-                    :
-                </p>
+                <h3><FormattedMessage id="getting_started.install_bower" /></h3>
+                <p><FormattedHTMLMessage id="getting_started.install_bower_descr" /></p>
 
                 <Code value="$ bower i xblocks-core xblocks" />
 
-                <h3>
-                    Install with npm
-                </h3>
-
-                <p>
-                    You can also install Xblocks using
-                    <a href="https://www.npmjs.com/" target="_blank">
-                        npm
-                    </a>
-                    :
-                </p>
+                <h3><FormattedMessage id="getting_started.install_npm" /></h3>
+                <p><FormattedHTMLMessage id="getting_started.install_npm_descr" /></p>
 
                 <Code value="$ npm i xblocks-core xblocks" />
 
                 <h2 className="sub-header anchor" data-hash="templates">
-                    Templates
+                    <FormattedMessage id="menu.templates" />
                 </h2>
 
-                <p>
-                    This template does not utilize CDNs.
-                </p>
+                <p><FormattedMessage id="getting_started.descr2" /></p>
 
                 <Code value={sample1} />
             </div>
