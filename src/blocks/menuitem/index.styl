@@ -4,20 +4,17 @@ xb-menuitem
   skin: xb-block
 
 .xb-menuitem
-  skin: menu__item
+  skin: v3-menu__item (_size large)
   outline: none
-
-  &:first-child
-    margin-top: ($islands_s / 2)
-
-  &:last-child
-    margin-bottom: ($islands_s / 2)
 
   &:hover
     background: inherit
 
   &._focused
-    skin: menu__item_hover
+    skin: v3-menu__item_hover
+
+  &._selected
+    skin: v3-menu__item_checked
 
   &._submenu:before
     skin: icon_dropdown selecty small

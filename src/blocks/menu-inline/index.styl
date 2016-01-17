@@ -4,11 +4,11 @@ xb-menu-inline
   skin: xb-inline-block
 
   & > ._popup
-    kind: block
-    skin: isle
+    skin: v3-menu (_size large)
     overflow: hidden
     padding: 0
     outline: none
+    box-shadow: 0 0 0 1px rgba(#000, 0.1)
 
     touch-action: none
     -webkit-touch-callout: none
@@ -26,6 +26,13 @@ xb-menu-inline
 
     & > ._popup-content
       skin: xb-scroll-x 18px
+
+      & > xb-menuitem
+        &:first-child
+          margin-top: ($islands_s / 2)
+
+        &:last-child
+          margin-bottom: ($islands_s / 2)
 
     & > ._popup-scroll-top
       skin: xb-scroll-control-top
