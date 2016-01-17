@@ -3608,7 +3608,6 @@ xb-menuitem[hidden] {
   margin-right: -6px;
   margin-left: 10px;
   content: "";
-  margin-top: -0.2em;
   -webkit-transform: scale(0.75) rotate(-45deg) translate(3px, 5px);
   -ms-transform: scale(0.75) rotate(-45deg) translate(3px, 5px);
   -moz-transform: scale(0.75) rotate(-45deg) translate(3px, 5px);
