@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import ReactDOM from 'react-dom';
 
 /**
@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Select = xblocks.view.register('xb-select', [
+export default xv.Select = xcore.view.register('xb-select', [
     xblocks.mixin.vCommonAttrs,
 
     {

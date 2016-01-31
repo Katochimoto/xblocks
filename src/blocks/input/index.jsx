@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import classnames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
@@ -17,7 +17,7 @@ import Controller from './controller.jsx';
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Input = xblocks.view.register('xb-input', [
+export default xv.Input = xcore.view.register('xb-input', [
     mixinViewCommonAttrs,
     exportPropTypes('xb-link'),
 
@@ -118,7 +118,7 @@ xv.Input = xblocks.view.register('xb-input', [
                 this.props.prefix ||
                 this.props.reset ||
                 this.props.autosize ||
-                this.props['xb-link'] ||
+                this.props[ 'xb-link' ] ||
                 this.props.placeholder
             );
         },
@@ -130,17 +130,11 @@ xv.Input = xblocks.view.register('xb-input', [
                 '_disabled':    this.props.disabled,
                 '_autosize':    this.props.autosize,
                 '_ghost':       this.props.ghost,
-                '_complex':     isComplex,
-                '_simple':      !isComplex
+                [ `_${isComplex ? 'complex' : 'simple'}_size-${this.props.size}` ]: true
             };
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
 
             classes = classnames(classes);
 
-            var isPlaceholderHint = false;
             var controllerProps = {
                 'autoFocus':    this.props.autofocus,
                 'autocomplete': this.props.autocomplete,
@@ -164,16 +158,6 @@ xv.Input = xblocks.view.register('xb-input', [
             if (isComplex) {
                 var children = [];
 
-                if (this.props.placeholder) {
-                    isPlaceholderHint = true;
-
-                    children.push(
-                        <span ref="placeholder" key="placeholder" className="_hint">
-                            <span className="_hint-inner">{this.props.placeholder}</span>
-                        </span>
-                    );
-                }
-
                 if (this.props['xb-link']) {
                     var linkProps = filterProps(/^xb-link-/, this.props);
                     linkProps['theme'] = 'empty';
@@ -190,23 +174,35 @@ xv.Input = xblocks.view.register('xb-input', [
                     );
                 }
 
-                if (this.props.postfix) {
-                    children.push(
-                        <span key="postfix" className="_right">{this.props.postfix}</span>
-                    );
-                }
-
                 if (this.props.reset) {
                     children.push(
                         <span key="reset" className="_reset" onClick={this.onClickReset}></span>
                     );
                 }
 
+                if (this.props.postfix) {
+                    children.push(
+                        <span key="postfix" className="_right">{this.props.postfix}</span>
+                    );
+                }
+
+                var placeholder = null;
+                if (this.props.placeholder) {
+                    placeholder = (
+                        <span ref="placeholder" key="placeholder" className="_hint">
+                            <span className="_hint-inner">{this.props.placeholder}</span>
+                        </span>
+                    );
+                }
+
                 children.push(
                     <span key="content" className="_content">
+                        {placeholder}
                         <Controller {...controllerProps}
-                            isPlaceholderHint={isPlaceholderHint} />
-                        <span key="view" className="_view"></span>
+                            isPlaceholderHint={Boolean(placeholder)} />
+                        <span key="view" className="_view">
+                            {String.fromCharCode(160)}
+                        </span>
                     </span>
                 );
 
@@ -219,11 +215,9 @@ xv.Input = xblocks.view.register('xb-input', [
                 return (
                     <Controller {...controllerProps}
                         className={classes}
-                        isPlaceholderHint={isPlaceholderHint} />
+                        isPlaceholderHint={false} />
                 );
             }
         }
     }
 ]);
-
-export default xv.Input;

@@ -4,7 +4,7 @@ import './index.jsx';
 import { xb } from 'context';
 import Tether from 'tether';
 import context from 'context';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
 import assign from '_/object/assign';
 import immediate from 'setimmediate2/src';
@@ -13,12 +13,12 @@ import mixinElementFocus from 'mixin/element/focus';
 var popupCommon = {
     onOpen: function () {
         this.focus();
-        xblocks.event.dispatch(this, 'xb-open');
+        xcore.event.dispatch(this, 'xb-open');
     },
 
     onClose: function () {
         this.blur();
-        xblocks.event.dispatch(this, 'xb-close');
+        xcore.event.dispatch(this, 'xb-close');
     },
 
     /**
@@ -112,9 +112,9 @@ var popupCommon = {
  *
  * @constructor
  * @augments HTMLElement
- * @mixes xblocks.mixin.eFocus
+ * @mixes .mixin.eFocus
  */
-xb.Popup = xblocks.create('xb-popup', [
+export default xb.Popup = xcore.create('xb-popup', [
     mixinElementFocus,
 
     {
@@ -156,7 +156,7 @@ xb.Popup = xblocks.create('xb-popup', [
 
                     this._options = this.defaultOptions;
 
-                    var tetherAttrs = xblocks.dom.attrs.get(this, {
+                    var tetherAttrs = xcore.dom.attrs.get(this, {
                         'attachment':        undefined,
                         'constraints':       undefined,
                         'offset':            undefined,
@@ -237,7 +237,7 @@ xb.Popup = xblocks.create('xb-popup', [
                     this.setOptions(options);
                 }
 
-                xblocks.event.dispatch(this, 'xb-before-open');
+                xcore.event.dispatch(this, 'xb-before-open');
 
                 tether.enable(true);
                 tether.target._xbpopup = this;
@@ -260,7 +260,7 @@ xb.Popup = xblocks.create('xb-popup', [
                     return false;
                 }
 
-                xblocks.event.dispatch(this, 'xb-before-close');
+                xcore.event.dispatch(this, 'xb-before-close');
 
                 tether.target._xbpopup = undefined;
                 tether.disable();
@@ -284,5 +284,3 @@ xb.Popup = xblocks.create('xb-popup', [
         }
     }
 ]);
-
-export default xb.Popup;

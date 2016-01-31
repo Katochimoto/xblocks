@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
 import resetLastRadioChecked from 'utils/resetLastRadioChecked';
@@ -15,7 +15,7 @@ import Content from './content.jsx';
  * @mixes React.addons.PureRenderMixin
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.Button = xblocks.view.register('xb-button', [
+export default xv.Button = xcore.view.register('xb-button', [
     mixinViewCommonAttrs,
     exportPropTypes('xb-ico'),
 
@@ -36,7 +36,7 @@ xv.Button = xblocks.view.register('xb-button', [
             'required':     PropTypes.bool,
             'size':         PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
             'target':       PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
-            'theme':        PropTypes.oneOf([ 'action', 'dark', 'flying', 'normal', 'promo', 'pseudo-inverted', 'pseudo' ]),
+            'theme':        PropTypes.oneOf([ 'action', 'dark', 'normal', 'clear', 'dark-pseudo', 'pseudo' ]),
             'type':         PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
             'value':        PropTypes.string
         },
@@ -59,13 +59,14 @@ xv.Button = xblocks.view.register('xb-button', [
 
         getInitialState: function () {
             return {
-                'checked': this.props.checked
+                checked: this.props.checked,
+                focused: false
             };
         },
 
         componentWillReceiveProps: function (nextProps) {
             this.setState({
-                'checked': Boolean(nextProps.checked)
+                checked: Boolean(nextProps.checked)
             });
         },
 
@@ -85,19 +86,21 @@ xv.Button = xblocks.view.register('xb-button', [
             this.container().checked = event.target.checked;
         },
 
+        _onFocus: function () {
+            this.setState({ focused: true });
+        },
+
+        _onBlur: function () {
+            this.setState({ focused: false });
+        },
+
         render: function () {
             var classes = {
                 'xb-button': true,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                '_focused': this.state.focused,
+                [ `_theme-${this.props.theme}_size-${this.props.size}` ]: true
             };
-
-            if (this.props.theme) {
-                classes[ '_theme-' + this.props.theme ] = true;
-            }
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
 
             classes = classnames(classes);
 
@@ -156,21 +159,26 @@ xv.Button = xblocks.view.register('xb-button', [
                 if (type === 'checkbox' || type === 'radio') {
                     children.push(
                         <input key="checkControl"
-                            type={type}
-                            className="_xb-check_controller"
-                            name={this.props.name}
-                            value={this.props.value}
-                            form={this.props.form}
-                            disabled={this.props.disabled}
-                            defaultChecked={this.props.checked}
-                            checked={this.state.checked}
                             autoFocus={this.props.autofocus}
-                            readOnly={true}
+                            checked={this.state.checked}
+                            className="_controller"
+                            defaultChecked={this.props.checked}
+                            disabled={this.props.disabled}
+                            form={this.props.form}
+                            name={this.props.name}
+                            onBlur={this._onBlur}
                             onChange={this._onChange}
+                            onFocus={this._onFocus}
+                            readOnly={true}
                             required={this.props.required}
-                            tabIndex={tabIndex}/>
+                            tabIndex={tabIndex}
+                            type={type}
+                            value={this.props.value} />
                     );
 
+                    children.push(content);
+
+                    /*
                     children.push(
                         <xv.Button {...this.props} key="content" type="inline" tabindex="null" />
                     );
@@ -180,6 +188,7 @@ xv.Button = xblocks.view.register('xb-button', [
                         '_theme-check': true,
                         '_disabled': this.props.disabled
                     });
+                    */
 
                 } else {
                     children.push(
@@ -232,5 +241,3 @@ xv.Button = xblocks.view.register('xb-button', [
         }
     }
 ]);
-
-export default xv.Button;

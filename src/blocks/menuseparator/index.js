@@ -1,7 +1,7 @@
 import './index.styl';
 import './index.jsx';
 import { xb } from 'context';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 
 /**
  * xb-menuseparator html element
@@ -10,10 +10,8 @@ import xblocks from 'xblocks';
  * @memberof xb
  * @augments HTMLElement
  */
-xb.Menuseparator = xblocks.create('xb-menuseparator', [
+export default xb.Menuseparator = xcore.create('xb-menuseparator', [
     {
         prototype: Object.create(HTMLElement.prototype)
     }
 ]);
-
-export default xb.Menuseparator;

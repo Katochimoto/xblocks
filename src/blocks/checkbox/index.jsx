@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
@@ -13,7 +13,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Checkbox = xblocks.view.register('xb-checkbox', [
+export default xv.Checkbox = xcore.view.register('xb-checkbox', [
     mixinViewCommonAttrs,
 
     {
@@ -29,7 +29,7 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
             'form':         PropTypes.string,
             'name':         PropTypes.string,
             'required':     PropTypes.bool,
-            'size':         PropTypes.oneOf([ 's', 'm' ]),
+            'size':         PropTypes.oneOf([ 'm', 'l' ]),
             'value':        PropTypes.string
         },
         // @endif
@@ -68,12 +68,9 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
         render: function () {
             var classes = {
                 'xb-checkbox': true,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                [ `_size-${this.props.size}` ]: true
             };
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
 
             classes = classnames(classes);
 
@@ -88,9 +85,10 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                     title={this.props.title}
                     htmlFor={this.props['for']}>
 
-                    <input autoFocus={this.props.autofocus}
+                    <input
+                        autoFocus={this.props.autofocus}
                         checked={this.state.checked}
-                        className="_xb-check_controller"
+                        className="_controller"
                         defaultChecked={this.props.checked}
                         disabled={this.props.disabled}
                         form={this.props.form}
@@ -102,10 +100,10 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
                         type="checkbox"
                         value={this.props.value} />
 
-                    <span className="_xb-checkbox_flag _xb-check_flag">
-                        <span className="_xb-checkbox_flag-icon"></span>
+                    <span className="_view">
+                        <span className="_icon">{String.fromCharCode(160)}</span>
                     </span>
-                    <span data-xb-content={this.props._uid}>
+                    <span className="_label" data-xb-content={this.props._uid}>
                         {this.props.children}
                     </span>
                 </label>
@@ -113,5 +111,3 @@ xv.Checkbox = xblocks.view.register('xb-checkbox', [
         }
     }
 ]);
-
-export default xv.Checkbox;

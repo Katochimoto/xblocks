@@ -37,12 +37,12 @@ $svg["sizes"] = {
 
 xb-ico
   skin: xb-inline-block
+  line-height: normal
 
 .xb-ico
-  kind: icon (size 16px 16px)
-
-  &._active
-    skin: icon with-hover
+  display: inline-block
+  background-position: center center
+  background-repeat: no-repeat
 
   for $size-name, $size-value in $svg.sizes
     &._size-{$size-name}
@@ -53,16 +53,39 @@ xb-ico
     &._type-{$icon}
       background-image: url('img/' + $icon + '.svg')
 
+      &:not(._active)
+        skin: v3-icon
+
+      &._active
+        skin: v3-icon with-hover
+
   &._type-remove
-    skin: icon_remove
+    &:not(._active)
+      skin: v3-icon_remove
+
+    &._active
+      skin: v3-icon_remove with-hover
 
   &._type-notification
-    skin: icon_notification
     width: auto !important
     height: auto !important
 
+    &:not(._active)
+      skin: v3-icon_notification
+
+    &._active
+      skin: v3-icon_notification with-hover
+
   &._type-check
-    skin: icon_check
+    &:not(._active)
+      skin: v3-icon_check
+
+    &._active
+      skin: v3-icon_check with-hover
 
   &._type-dropdown
-    skin: icon_dropdown
+    &:not(._active)
+      skin: v3-icon_dropdown
+
+    &._active
+      skin: v3-icon_dropdown with-hover

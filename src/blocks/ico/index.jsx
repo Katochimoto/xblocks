@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import classnames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
@@ -13,7 +13,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Ico = xblocks.view.register('xb-ico', [
+export default xv.Ico = xcore.view.register('xb-ico', [
     mixinViewCommonAttrs,
 
     {
@@ -56,14 +56,13 @@ xv.Ico = xblocks.view.register('xb-ico', [
                 'upload',
                 'upload-white',
                 'vk'
-            ])
+            ]).isRequired
         },
         // @endif
 
         getDefaultProps: function () {
             return {
                 'active':   false,
-                'children': String.fromCharCode(160),
                 'disabled': false,
                 'size':     's'
             };
@@ -73,20 +72,14 @@ xv.Ico = xblocks.view.register('xb-ico', [
             var classes = {
                 'xb-ico':    true,
                 '_active':   this.props.active,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                [ `_type-${this.props.type}` ]: true,
+                [ `_size-${this.props.size}` ]: true
             };
-
-            if (this.props.type) {
-                classes[ '_type-' + this.props.type ] = true;
-            }
-
-            if (this.props.size) {
-                classes[ '_size-' + this.props.size ] = true;
-            }
 
             classes = classnames(classes);
 
-            var content = this.props.value || this.props.children;
+            var content = this.props.value || this.props.children || String.fromCharCode(160);
 
             return (
                 <span className={classes} data-xb-content={this.props._uid}>
@@ -96,5 +89,3 @@ xv.Ico = xblocks.view.register('xb-ico', [
         }
     }
 ]);
-
-export default xv.Ico;

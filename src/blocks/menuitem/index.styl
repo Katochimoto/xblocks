@@ -4,25 +4,22 @@ xb-menuitem
   skin: xb-block
 
 .xb-menuitem
-  skin: menu-item
+  skin: v3-menu__item (_size large)
   outline: none
-
-  &:first-child
-    margin-top: ($islands_s / 2)
-
-  &:last-child
-    margin-bottom: ($islands_s / 2)
 
   &:hover
     background: inherit
 
   &._focused
-    skin: menu-item_hover
+    skin: v3-menu__item_hover
+
+  &._selected
+    skin: v3-menu__item_checked
 
   &._submenu:before
     skin: icon_dropdown selecty small
     content: ""
-    margin-top: -0.2em
+    margin-top: 0
     transform: scale(0.75) rotate(-45deg) translate(3px, 5px)
 
 

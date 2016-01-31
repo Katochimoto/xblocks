@@ -1,5 +1,5 @@
 import { xv } from 'context';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 
 /**
  * The template node xb-menuseparator
@@ -7,7 +7,7 @@ import xblocks from 'xblocks';
  * @class xv.Menuseparator
  * @memberof xv
  */
-xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
+export default xv.Menuseparator = xcore.view.register('xb-menuseparator', {
     displayName: 'xb-menuseparator',
 
     render: function () {
@@ -16,5 +16,3 @@ xv.Menuseparator = xblocks.view.register('xb-menuseparator', {
         );
     }
 });
-
-export default xv.Menuseparator;

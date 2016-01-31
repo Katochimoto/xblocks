@@ -8,7 +8,7 @@
  * @memberof xb
  */
 /*
-xb.Select = xblocks.create('xb-select', [
+export default xb.Select = xblocks.create('xb-select', [
     xblocks.mixin.eDisabled,
     xblocks.mixin.eFocus,
 

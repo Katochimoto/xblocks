@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
@@ -13,7 +13,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-xv.Link = xblocks.view.register('xb-link', [
+export default xv.Link = xcore.view.register('xb-link', [
     mixinViewCommonAttrs,
 
     {
@@ -26,7 +26,7 @@ xv.Link = xblocks.view.register('xb-link', [
             'href':     PropTypes.string,
             'name':     PropTypes.string,
             'target':   PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
-            'theme':    PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ])
+            'theme':    PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ]).isRequired
         },
         // @endif
 
@@ -42,20 +42,17 @@ xv.Link = xblocks.view.register('xb-link', [
         render: function () {
             var classes = {
                 'xb-link':   true,
-                '_disabled': this.props.disabled
+                '_disabled': this.props.disabled,
+                [ `_theme-${this.props.theme}` ]: true
             };
 
-            if (this.props.theme) {
-                classes[ '_theme-' + this.props.theme ] = true;
-            }
+            classes = classnames(classes);
 
             var tabIndex = this.props.tabindex;
 
             if (this.props.disabled) {
                 tabIndex = '-1';
             }
-
-            classes = classnames(classes);
 
             var content = this.props.value || this.props.children;
 
@@ -73,5 +70,3 @@ xv.Link = xblocks.view.register('xb-link', [
         }
     }
 ]);
-
-export default xv.Link;

@@ -37,15 +37,45 @@ var params = {
             'utils': path.join(srcPath, 'utils')
         }
     },
-    'externals': {
-        'react-dom': 'ReactDOM',
-        'react': 'React',
-        'tether': 'Tether',
-        'xblocks': 'xblocks',
-        'xtag': 'xtag'
-    },
+    'externals': [
+        {
+            'react': {
+                root: 'React',
+                commonjs2: 'react',
+                commonjs: 'react',
+                amd: 'react'
+            },
+            'react-dom': {
+                root: 'ReactDOM',
+                commonjs2: 'react-dom',
+                commonjs: 'react-dom',
+                amd: 'react-dom'
+            },
+            'xtag': {
+                root: 'xtag',
+                commonjs2: 'xtag',
+                commonjs: 'xtag',
+                amd: 'xtag'
+            },
+            'xblocks-core': {
+                root: 'xblocks-core',
+                commonjs2: 'xblocks-core',
+                commonjs: 'xblocks-core',
+                amd: 'xblocks-core'
+            },
+            'tether': {
+                root: 'Tether',
+                commonjs2: 'tether',
+                commonjs: 'tether',
+                amd: 'tether'
+            }
+        }
+    ],
     'plugins': [
-        new webpack.DefinePlugin({ NODE_ENV: nodeEnv }),
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(nodeEnv),
+            'process.env.NODE_ENV': JSON.stringify(nodeEnv)
+        }),
         new webpack.optimize.DedupePlugin(),
         new ExtractTextPlugin('[name].css', { 'allChunks': true })
     ],
@@ -102,7 +132,10 @@ runs.push(merge({}, params, {
         'filename': '[name].min.js'
     },
     'plugins': [
-        new webpack.DefinePlugin({ NODE_ENV: nodeEnv }),
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(nodeEnv),
+            'process.env.NODE_ENV': JSON.stringify(nodeEnv)
+        }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({ output: { comments: false }, compress: { warnings: false } }),
         new ExtractTextPlugin('[name].min.css', { 'allChunks': true })

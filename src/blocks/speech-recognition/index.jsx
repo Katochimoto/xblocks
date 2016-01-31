@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xblocks from 'xblocks';
+import xcore from 'xblocks-core';
 import classNames from 'classnames';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 
@@ -11,7 +11,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @memberof xv
  * @mixes xblocks.mixin.vCommonAttrs
  */
-xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
+export default xv.SpeechRecognition = xcore.view.register('xb-speech-recognition', [
     mixinViewCommonAttrs,
 
     {
@@ -48,5 +48,3 @@ xv.SpeechRecognition = xblocks.view.register('xb-speech-recognition', [
         }
     }
 ]);
-
-export default xv.SpeechRecognition;
