@@ -30,7 +30,6 @@ export default React.createClass({
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a href="../jsdoc">JSDoc</a></li>
                             <li><a href="https://github.com/Katochimoto/xblocks">GitHub</a></li>
                         </ul>
                     </div>

@@ -162,7 +162,7 @@ export default React.createClass({
 
     renderMenuItem(item, key) {
         var href = this.props.history.createPath(item.hash);
-        var find = (_.trimRight(this.props.location.pathname, '/') + '/').indexOf((_.trimRight(href, '/') + '/'));
+        var find = (_.trimEnd(this.props.location.pathname, '/') + '/').indexOf((_.trimEnd(href, '/') + '/'));
 
         var classes = classSet({
             'active': find === 0
