@@ -1,4 +1,4 @@
-import vow from 'vow';
+import vow, { Promise } from 'Vow';
 
 xdescribe('xb-button ->', function () {
 
@@ -22,7 +22,7 @@ xdescribe('xb-button ->', function () {
             var that = this;
             this.xElement.setAttribute('checked', 'true');
 
-            return new vow.Promise(function (resolve) {
+            return new Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -38,7 +38,7 @@ xdescribe('xb-button ->', function () {
             var that = this;
             this.xElement.checked = true;
 
-            return new vow.Promise(function (resolve) {
+            return new Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -54,7 +54,7 @@ xdescribe('xb-button ->', function () {
             var that = this;
             this.xElement.checked = true;
 
-            return new vow.Promise(function (resolve) {
+            return new Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -79,7 +79,7 @@ xdescribe('xb-button ->', function () {
             var that = this;
             this.xElement.setAttribute('checked', 'true');
 
-            return new vow.Promise(function (resolve) {
+            return new Promise(function (resolve) {
                 that.xElement.addEventListener('xb-created', function _onXbCreated() {
                     that.xElement.removeEventListener('xb-created', _onXbCreated, false);
 
@@ -137,7 +137,7 @@ xdescribe('xb-button ->', function () {
             document.body.appendChild(that.xElement);
             document.body.appendChild(that.xElement2);
 
-            return new vow.Promise(function (resolve) {
+            return new Promise(function (resolve) {
                 vow.all([ defer1.promise(), defer2.promise() ]).then(function () {
 
                     that.xElement.addEventListener('xb-update', function _onXbUpdate() {

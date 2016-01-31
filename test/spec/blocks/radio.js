@@ -1,4 +1,4 @@
-import vow from 'vow';
+import vow from 'Vow';
 
 xdescribe('xb-radio ->', function () {
 

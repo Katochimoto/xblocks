@@ -18,11 +18,12 @@ module.exports = function (config) {
         files: [
             'test/helpers/setup.js',
 
-            'bower_components/vow/vow.min.js',
-            'bower_components/es5-shim/es5-shim.js',
-            'bower_components/react/react-with-addons.js',
-            'bower_components/react/react-dom.js',
-            'bower_components/xblocks-core/dist/xblocks-core-full.js',
+            'node_modules/vow/vow.min.js',
+            'node_modules/es5-shim/es5-shim.js',
+            'node_modules/react/dist/react-with-addons.js',
+            'node_modules/react-dom/dist/react-dom.js',
+            'node_modules/xblocks-core/dist/xtag.js',
+            'node_modules/xblocks-core/dist/xblocks-core.js',
 
             'src/xblocks.js',
             'test/spec/**/*.js'
@@ -44,12 +45,42 @@ module.exports = function (config) {
 
         webpack: {
             'externals': {
-                'react': 'React',
-                'react-dom': 'ReactDOM',
-                'xtag': 'xtag',
-                'vow': 'vow',
-                'xblocks': 'xblocks',
-                'tether': 'Tether'
+                'react': {
+                    root: 'React',
+                    commonjs2: 'react',
+                    commonjs: 'react',
+                    amd: 'react'
+                },
+                'react-dom': {
+                    root: 'ReactDOM',
+                    commonjs2: 'react-dom',
+                    commonjs: 'react-dom',
+                    amd: 'react-dom'
+                },
+                'xtag': {
+                    root: 'xtag',
+                    commonjs2: 'xtag',
+                    commonjs: 'xtag',
+                    amd: 'xtag'
+                },
+                'xblocks-core': {
+                    root: 'xblocks-core',
+                    commonjs2: 'xblocks-core',
+                    commonjs: 'xblocks-core',
+                    amd: 'xblocks-core'
+                },
+                'tether': {
+                    root: 'Tether',
+                    commonjs2: 'tether',
+                    commonjs: 'tether',
+                    amd: 'tether'
+                },
+                'vow': {
+                    root: 'vow',
+                    commonjs2: 'vow',
+                    commonjs: 'vow',
+                    amd: 'vow'
+                }
             },
             'resolve': {
                 'alias': {
@@ -63,7 +94,7 @@ module.exports = function (config) {
             },
             'plugins': [
                 new webpack.DefinePlugin({
-                    'NODE_ENV': 'development'
+                    'NODE_ENV': JSON.stringify('development')
                 })
             ],
             'module': {

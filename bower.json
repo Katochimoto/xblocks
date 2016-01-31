@@ -1,12 +1,7 @@
 {
   "name": "xblocks",
   "version": "2.0.0",
-  "dependencies": {
-    "xblocks-core": "2.0.0",
-    "es5-shim": "4.5.2",
-    "react": "0.14.6",
-    "tether": "1.1.1"
-  },
+  "dependencies": {},
   "ignore": [
     "**/.*",
     "node_modules",
@@ -17,7 +12,7 @@
     "Makefile",
     "karma.conf.js"
   ],
-  "homepage": "http://xblocks.ru",
+  "homepage": "http://xblocks.info",
   "authors": [
     "rikishi <bufpost@yandex.ru>"
   ],
