@@ -1,6 +1,7 @@
 import context from 'context';
 import wrap from 'event/wrap';
 import delegateMatch from 'event/delegateMatch';
+
 var doc = context.document;
 
 var _currentMenu = null;
@@ -42,8 +43,8 @@ var _unbind = function () {
 
 /**
  * @function xblocks.utils.checkCloseMenu
- * @param   {[type]} menuNode [description]
- * @returns {[type]}          [description]
+ * @param {HTMLElement} menuNode
+ * @returns {boolean}
  */
 export default function (menuNode) {
     var firstParentMenu = menuNode.firstParentMenu;

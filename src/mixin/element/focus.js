@@ -2,8 +2,11 @@
  * Focus element interface
  *
  * @example
- * xblocks.create('xb-button', [
- *     xblocks.mixin.eFocus,
+ * import { create } from 'xblocks-core';
+ * import mixinFocus from 'mixin/element/focus';
+ *
+ * create('xb-button', [
+ *     mixinFocus,
  *     {
  *         accessors: { ... },
  *         events: { ... },
@@ -19,8 +22,7 @@
  * // set blur
  * e.blur();
  *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     methods: {

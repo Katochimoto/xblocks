@@ -2,13 +2,12 @@ import classnames from 'classnames';
 import { event as xevent } from 'xblocks-core';
 import throttle from 'lodash/throttle';
 import throttleAnimationFrame from 'utils/throttleAnimationFrame';
-import animationFrame from 'polyfills/requestAnimationFrame';
+import { cancelAnimationFrame, requestAnimationFrame } from 'polyfills/requestAnimationFrame';
 
 /**
  * Common interface for views xb-menu and xb-menu-inline
  *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     getInitialState: function () {
@@ -123,7 +122,7 @@ export default {
 
     _animationScrollTop: function () {
         this.refs.content.scrollTop--;
-        this._enterTopFrame = animationFrame.requestAnimationFrame(this._animationScrollTop);
+        this._enterTopFrame = requestAnimationFrame(this._animationScrollTop);
     },
 
     _onMouseEnterTop: function () {
@@ -133,14 +132,14 @@ export default {
 
     _onMouseLeaveTop: function () {
         if (this._enterTopFrame) {
-            animationFrame.cancelAnimationFrame(this._enterTopFrame);
+            cancelAnimationFrame(this._enterTopFrame);
             this._enterTopFrame = 0;
         }
     },
 
     _animationScrollBottom: function () {
         this.refs.content.scrollTop++;
-        this._enterBottomFrame = animationFrame.requestAnimationFrame(this._animationScrollBottom);
+        this._enterBottomFrame = requestAnimationFrame(this._animationScrollBottom);
     },
 
     _onMouseEnterBottom: function () {
@@ -150,7 +149,7 @@ export default {
 
     _onMouseLeaveBottom: function () {
         if (this._enterBottomFrame) {
-            animationFrame.cancelAnimationFrame(this._enterBottomFrame);
+            cancelAnimationFrame(this._enterBottomFrame);
             this._enterBottomFrame = 0;
         }
     },

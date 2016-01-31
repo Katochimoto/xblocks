@@ -56,7 +56,7 @@ export default xv.Ico = view.register('xb-ico', [
                 'upload',
                 'upload-white',
                 'vk'
-            ]).isRequired
+            ])
         },
         // @endif
 

@@ -4,8 +4,11 @@
  * <xb-button disabled>button</xb-button>
  *
  * @example
- * xblocks.create('xb-button', [
- *     xblocks.mixin.eDisabled,
+ * import { create } from 'xblocks-core';
+ * import mixinDisabled from 'mixin/element/disabled';
+ *
+ * create('xb-button', [
+ *     mixinDisabled,
  *     {
  *         accessors: { ... },
  *         events: { ... },
@@ -28,9 +31,7 @@
  * // false
  *
  * @prop {boolean} disabled
- *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     accessors: {

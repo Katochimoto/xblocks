@@ -2,10 +2,9 @@ import delegateMatch from 'event/delegateMatch';
 import wrap from 'event/wrap';
 
 /**
- * @function xblocks.event.delegate
- * @param   {[type]}   selector [description]
- * @param   {Function} callback [description]
- * @returns {[type]}            [description]
+ * @param {string} selector
+ * @param {function} callback
+ * @returns {function}
  */
 export default function (selector, callback) {
 

@@ -1,10 +1,9 @@
 import matchesSelector from 'dom/matchesSelector';
 
 /**
- * @function xblocks.event.delegateMatch
- * @param   {[type]} selector [description]
- * @param   {[type]} target   [description]
- * @returns {[type]}          [description]
+ * @param {string} selector
+ * @param {HTMLElement} target
+ * @returns {?HTMLElement}
  */
 export default function (selector, target) {
     if (!target || !target.tagName) {

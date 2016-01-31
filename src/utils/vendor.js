@@ -3,6 +3,11 @@ import capitalize from 'lodash/capitalize';
 
 const vendors = [ 'ms', 'moz', 'webkit', 'o' ];
 
+/**
+ * @param {string} name
+ * @param {Object} [context]
+ * @returns {*}
+ */
 export default function (name, context) {
     context = context || globalContext;
 

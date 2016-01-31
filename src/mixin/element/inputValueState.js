@@ -3,8 +3,11 @@
  * Уou can edit the value, for example in the input or textarea.
  *
  * @example
- * xblocks.create('xb-input', [
- *     xblocks.mixin.eInputValueState,
+ * import { create } from 'xblocks-core';
+ * import mixinInputValueState from 'mixin/element/inputValueState';
+ *
+ * create('xb-input', [
+ *     mixinInputValueState,
  *     {
  *         accessors: {
  *             ...
@@ -34,8 +37,7 @@
  * $(e).attr('value', '321')
  * // 321
  *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     accessors: {

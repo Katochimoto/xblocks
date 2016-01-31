@@ -3,8 +3,11 @@
  * The value can be changed only through the attribute.
  *
  * @example
- * xblocks.create('xb-checkbox', [
- *     xblocks.mixin.eInputValueProps,
+ * import { create } from 'xblocks-core';
+ * import mixinInputValueProps from 'mixin/element/inputValueProps';
+ *
+ * create('xb-checkbox', [
+ *     mixinInputValueProps,
  *     {
  *         accessors: {
  *             ...
@@ -34,8 +37,7 @@
  * $(e).attr('value', '321')
  * // 321
  *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     accessors: {

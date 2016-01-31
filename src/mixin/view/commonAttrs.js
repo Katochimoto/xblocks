@@ -5,9 +5,8 @@ import { PropTypes } from 'react';
 /**
  * Common attributes
  *
- * @memberOf xblocks.mixin
- * @type {object}
- * @prop {object} propTypes
+ * @type {Object}
+ * @prop {Object} propTypes
  * @prop {string} propTypes.accesskey
  * @prop {string} propTypes.contextmenu
  * @prop {enum} propTypes.dir

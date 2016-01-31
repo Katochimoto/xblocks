@@ -4,8 +4,11 @@
  * <xb-button hidden>button</xb-button>
  *
  * @example
- * xblocks.create('xb-button', [
- *     xblocks.mixin.eHidden,
+ * import { create } from 'xblocks-core';
+ * import mixinHidden from 'mixin/element/hidden';
+ *
+ * create('xb-button', [
+ *     mixinHidden,
  *     {
  *         accessors: { ... },
  *         events: { ... },
@@ -28,9 +31,7 @@
  * // false
  *
  * @prop {boolean} hidden
- *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     accessors: {

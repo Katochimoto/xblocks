@@ -1,5 +1,9 @@
 import { utils } from 'xblocks-core';
 
+/**
+ * @param {string} tagName
+ * @returns {Object}
+ */
 export default function (tagName) {
     var props = utils.propTypes(tagName);
     var exportProps = {};
@@ -13,6 +17,6 @@ export default function (tagName) {
     }
 
     return {
-        'propTypes': exportProps
+        propTypes: exportProps
     };
 }

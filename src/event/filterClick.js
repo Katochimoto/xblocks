@@ -1,10 +1,9 @@
 import wrap from 'event/wrap';
 
 /**
- * @function xblocks.event.filterClick
- * @param   {[type]}   which    [description]
- * @param   {Function} callback [description]
- * @returns {[type]}            [description]
+ * @param {number|number[]} which
+ * @param {function} callback
+ * @returns {function}
  */
 export default function (which, callback) {
     which = Array.isArray(which) ? which : [ which ];

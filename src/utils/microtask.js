@@ -1,8 +1,10 @@
 import context from 'context';
+import vendor from 'utils/vendor';
+
 var iterations = 0;
 var callbacks = [];
 var twiddle = context.document.createTextNode('');
-var Mutation = context.MutationObserver || context.JsMutationObserver;
+var Mutation = vendor('MutationObserver') || context.JsMutationObserver;
 
 (new Mutation(function () {
     while (callbacks.length) {
@@ -14,7 +16,6 @@ var Mutation = context.MutationObserver || context.JsMutationObserver;
 });
 
 /**
- * @function xblocks.utils.microtask
  * @param {function} callback
  */
 export default function (callback) {

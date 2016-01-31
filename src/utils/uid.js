@@ -1,6 +1,5 @@
 /**
  * Generate unique string
- * @function xblocks.utils.uid
  * @returns {string}
  */
 export default function () {

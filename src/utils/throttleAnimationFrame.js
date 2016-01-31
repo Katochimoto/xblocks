@@ -1,4 +1,4 @@
-import animationFrame from 'polyfills/requestAnimationFrame';
+import { requestAnimationFrame } from 'polyfills/requestAnimationFrame';
 
 /**
  * @function xblocks.utils.throttleAnimationFrame
@@ -17,7 +17,7 @@ export default function (callback, context) {
             return;
         }
 
-        throttle = animationFrame.requestAnimationFrame(animationCallback);
+        throttle = requestAnimationFrame(animationCallback);
 
         callback.apply(context || this, arguments);
     };

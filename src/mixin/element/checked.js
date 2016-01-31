@@ -7,8 +7,11 @@
  * <xb-button name="d" type="radio" checked>button radio 1</xb-button> <xb-button name="d" type="radio">button radio 2</xb-button>
  *
  * @example
- * xblocks.create('xb-checkbox', [
- *     xblocks.mixin.eChecked,
+ * import { create } from 'xblocks-core';
+ * import mixinChecked from 'mixin/element/checked';
+ *
+ * create('xb-checkbox', [
+ *     mixinChecked,
  *     {
  *         accessors: { ... },
  *         events: { ... },
@@ -31,9 +34,7 @@
  * // false
  *
  * @prop {boolean} checked
- *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     accessors: {

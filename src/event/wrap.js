@@ -1,17 +1,17 @@
 import context from 'context';
-var doc = context.document;
-var html = doc.documentElement;
-var hop = Object.prototype.hasOwnProperty;
-var clickWhich = {
+
+const doc = context.document;
+const html = doc.documentElement;
+const hop = Object.prototype.hasOwnProperty;
+const clickWhich = {
     1: 'left',
     2: 'center',
     3: 'right'
 };
 
 /**
- * @function xblocks.event.wrap
- * @param   {[type]} event [description]
- * @returns {[type]}       [description]
+ * @param {Event} event
+ * @returns {Event}
  */
 export default function (event) {
     if (event.xbWrapped) {

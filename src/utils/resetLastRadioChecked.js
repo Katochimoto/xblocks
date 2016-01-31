@@ -2,8 +2,6 @@ var checkedCache = {};
 
 /**
  * FIXME don't work cloneNode
- * @memberOf xblocks.utils
- * @name resetLastRadioChecked
  * @param {HTMLElement} element
  * @param {string} name
  */

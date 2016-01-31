@@ -1,7 +1,6 @@
 import wrap from 'event/wrap';
 
 /**
- * @function xblocks.event.filterMouseEnter
  * @param {HTMLElement} element
  * @param {Event} event mouseover or mouseout event
  * @param {function} callback

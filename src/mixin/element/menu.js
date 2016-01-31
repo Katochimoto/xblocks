@@ -5,9 +5,7 @@ import isParent from 'dom/isParent';
  * Common interface for elements xb-menu and xb-menu-inline.
  *
  * @prop {boolean} hasOpenSubmenu The menu contains the open submenu
- *
- * @memberOf xblocks.mixin
- * @type {object}
+ * @type {Object}
  */
 export default {
     events: {
