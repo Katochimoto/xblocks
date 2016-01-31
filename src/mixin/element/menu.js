@@ -14,7 +14,7 @@ export default {
 
         /**
          * Оpen the submenu
-         * @this {xb.Menuitem}
+         * @this xb.Menuitem
          */
         'click:delegate(xb-menuitem:not([disabled]))': function () {
             if (this.submenuInstance) {
@@ -24,7 +24,7 @@ export default {
 
         /**
          * Оpen the submenu
-         * @this {xb.Menu}
+         * @this xb.Menu
          */
         'keydown:keypass(13,39)': function () {
             var item = this._xbFocus.getItem();
@@ -37,7 +37,7 @@ export default {
         /**
          * Restore focus
          * @param {Event} event
-         * @this {xb.Menu}
+         * @this xb.Menu
          */
         'jsx-scroll-throttle': function (event) {
             // close all submenu

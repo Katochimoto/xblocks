@@ -1,6 +1,9 @@
 /**
  * Проход по всем потомкам в обратном порядке (от последней до первой)
  * @function xblocks.dom.eachInnerPrevious
+ * @param {HTMLElement} node
+ * @param {function} callback
+ * @returns {boolean}
  */
 export default function (node, callback) {
     var stack = [ node ];

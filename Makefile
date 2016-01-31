@@ -23,13 +23,8 @@ dist: node_modules $(src) webpack.config.js
 	npm run prod
 	touch dist
 
-samples/dist: node_modules $(src) webpack.config.js
-	npm run dev
-	touch samples/dist
-
 clean:
 	rm -rf dist
-	rm -rf samples/dist
 
 test: node_modules bower_components
 	$(NPM_BIN)/eslint .

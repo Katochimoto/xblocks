@@ -1,7 +1,7 @@
 /**
  * The default setting for the popup
  * @returns {Object}
- * @this {xb.Popup}
+ * @this xb.Popup
  */
 export default function () {
     return {

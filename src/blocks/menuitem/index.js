@@ -122,7 +122,7 @@ export default xb.Menuitem = xcore.create('xb-menuitem', [
 
             /**
              * @callback
-             * @param {xblocks:utils:Table~event:xb-focus} event
+             * @param {Event} event
              */
             'xb-focus': function (event) {
                 this.focused = true;

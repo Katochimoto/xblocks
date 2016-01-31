@@ -4,8 +4,8 @@ var checkedCache = {};
  * FIXME don't work cloneNode
  * @memberOf xblocks.utils
  * @name resetLastRadioChecked
- * @props {HTMLElement} element
- * @props {string} name
+ * @param {HTMLElement} element
+ * @param {string} name
  */
 export default function (element, name) {
     name = String(name);
