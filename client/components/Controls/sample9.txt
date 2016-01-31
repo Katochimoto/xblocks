@@ -1,0 +1,2 @@
+<xb-radio value="1" name="radio" checked>radio label1</xb-radio>
+<xb-radio value="2" name="radio">radio label2</xb-radio>

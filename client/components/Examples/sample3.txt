@@ -1,0 +1,16 @@
+<a id="targetMenu" href="#" onclick="event.preventDefault(); document.getElementById('menu4').open();">
+    show menu for the target object
+</a>
+
+<xb-menu id="menu4" target="#targetMenu" attachment="top left" target-attachment="bottom left" target-modifier="initial">
+   <xb-menuitem label="label 1">
+        <xb-menuitem label="label 1.1"></xb-menuitem>
+        <xb-menuitem label="label 1.2"></xb-menuitem>
+        <xb-menuitem label="label 1.3">
+            <xb-menuitem label="label 1.3.1"></xb-menuitem>
+            <xb-menuitem label="label 1.3.2"></xb-menuitem>
+            <xb-menuitem label="label 1.3.3"></xb-menuitem>
+        </xb-menuitem>
+    </xb-menuitem>
+    <xb-menuitem label="label 2"></xb-menuitem>
+</xb-menu>

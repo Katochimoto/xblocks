@@ -1,0 +1,1 @@
+<xb-input name="input_name"></xb-input>

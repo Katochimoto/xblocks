@@ -1,0 +1,17 @@
+<xb-popup close="close" theme="modal" id="popup3">
+    Popup body
+</xb-popup>
+<xb-popup close="close" theme="island" id="popup4">
+    Popup body
+</xb-popup>
+<xb-popup close="close" theme="error" id="popup5">
+    Popup body
+</xb-popup>
+<xb-popup close="close" theme="blank" id="popup6">
+    Popup body
+</xb-popup>
+
+<a href="#" onclick="event.preventDefault(); document.getElementById('popup3').open();">modal</a>
+<a href="#" onclick="event.preventDefault(); document.getElementById('popup4').open();">island</a>
+<a href="#" onclick="event.preventDefault(); document.getElementById('popup5').open();">error</a>
+<a href="#" onclick="event.preventDefault(); document.getElementById('popup6').open();">blank</a>

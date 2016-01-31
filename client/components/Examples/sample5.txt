@@ -1,0 +1,12 @@
+<xb-menu size="5" id="menu2">
+    <xb-menuitem label="label 1"></xb-menuitem>
+    <xb-menuitem label="label 2"></xb-menuitem>
+    <xb-menuitem label="label 3"></xb-menuitem>
+    <xb-menuitem label="label 4"></xb-menuitem>
+    <xb-menuitem label="label 5"></xb-menuitem>
+    <xb-menuitem label="label 6"></xb-menuitem>
+    <xb-menuitem label="label 7"></xb-menuitem>
+    <xb-menuitem label="label 8"></xb-menuitem>
+</xb-menu>
+
+<a href="#" onclick="event.preventDefault(); document.getElementById('menu2').open();">show menu</a>

@@ -1,0 +1,1 @@
+<xb-input xb-link="link" xb-link-href="http://ya.ru" xb-link-target="_blank"></xb-input>

@@ -1,0 +1,1 @@
+<xb-input postfix="postfix"></xb-input>

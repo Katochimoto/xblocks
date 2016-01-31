@@ -1,0 +1,2 @@
+<xb-button type="checkbox" name="bt1" value="1">checkbox 1</xb-button>
+<xb-button type="checkbox" name="bt2" value="2" checked>checkbox 2</xb-button>

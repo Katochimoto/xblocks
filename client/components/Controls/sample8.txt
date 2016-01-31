@@ -1,0 +1,1 @@
+<xb-radio value="1" name="radio">radio label</xb-radio>

@@ -1,0 +1,3 @@
+<xb-checkbox name="cb1" value="1" checked>checkbox 1</xb-checkbox>
+<xb-checkbox name="cb2" value="2">checkbox 2</xb-checkbox>
+<xb-checkbox name="cb3" value="3" disabled>checkbox 3</xb-checkbox>

@@ -1,0 +1,18 @@
+<xb-input value="complex input"
+    xb-link="link"
+    xb-link-href="http://ya.ru"
+    xb-link-target="_blank"
+    prefix="prefix"
+    postfix="postfix"
+    reset
+    autosize></xb-input>
+<p></p>
+<xb-input value="complex multiline"
+    xb-link="link"
+    xb-link-href="http://ya.ru"
+    xb-link-target="_blank"
+    prefix="prefix"
+    postfix="postfix"
+    reset
+    autosize
+    multiline></xb-input>
