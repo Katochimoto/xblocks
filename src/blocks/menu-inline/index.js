@@ -5,7 +5,7 @@ import { xb } from 'context';
 import xcore from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import Table from 'utils/Table';
-import noop from '_/utility/noop';
+import noop from 'lodash//noop';
 import mixinElementMenu from 'mixin/element/menu';
 import mixinElementFocus from 'mixin/element/focus';
 

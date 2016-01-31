@@ -6,8 +6,8 @@ import matchesSelector from 'dom/matchesSelector';
 import eachAfter from 'dom/eachAfter';
 import eachBefore from 'dom/eachBefore';
 import index from 'dom/index';
-import merge from '_/object/merge';
-import throttle from '_/function/throttle';
+import merge from 'lodash/merge';
+import throttle from 'lodash/throttle';
 
 var pop = Array.prototype.pop;
 var slice = Array.prototype.slice;

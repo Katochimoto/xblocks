@@ -1,4 +1,4 @@
-import { pick, transform } from '_/object';
+import { pick, transform } from 'lodash/object';
 
 var pickIterator = function (value, key) {
     return this.test(key);

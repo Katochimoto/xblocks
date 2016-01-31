@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import xcore from 'xblocks-core';
-import throttle from '_/function/throttle';
+import throttle from 'lodash/throttle';
 import throttleAnimationFrame from 'utils/throttleAnimationFrame';
 import animationFrame from 'polyfills/requestAnimationFrame';
 

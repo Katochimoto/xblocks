@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 import exportPropTypes from 'utils/exportPropTypes';
 import filterProps from 'utils/filterProps';
-import isEmpty from '_/lang/isEmpty';
+import isEmpty from 'lodash/isEmpty';
 
 /**
  * The template node xb-menuitem

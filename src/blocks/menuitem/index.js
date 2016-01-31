@@ -6,7 +6,7 @@ import context from 'context';
 import xcore from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import getParentMenu from 'utils/getParentMenu';
-import merge from '_/object/merge';
+import merge from 'lodash/merge';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementInputValueProps from 'mixin/element/inputValueProps';
 
@@ -30,7 +30,7 @@ var menuitemCommon = {
 
             /**
              * @param {xb.Menu} [submenu]
-             * @this {context}
+             * @this context
              */
             open: function (submenu) {
                 if (submenu && !timerOpenSubmenu) {
@@ -39,7 +39,7 @@ var menuitemCommon = {
             },
 
             /**
-             * @this {context}
+             * @this context
              */
             cancel: function () {
                 if (timerOpenSubmenu) {
@@ -49,7 +49,7 @@ var menuitemCommon = {
             },
 
             /**
-             * @this {xb.Menuitem}
+             * @this xb.Menuitem
              */
             remove: function () {
                 if (this._submenuInstance) {

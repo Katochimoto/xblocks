@@ -9,7 +9,6 @@ bower_components
 test
 coverage
 samples
-lodash
 src
 Makefile
 bower.json

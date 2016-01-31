@@ -18,7 +18,7 @@ var menuCommon = {
 
     /**
      * @param {xb.Menuitem} target
-     * @this {global}
+     * @this global
      */
     closeSubmenu: function (target) {
         if (target._xbpopup) {
@@ -29,7 +29,7 @@ var menuCommon = {
     /**
      * The default setting for the menu
      * @returns {Object}
-     * @this {xb.Menu}
+     * @this xb.Menu
      */
     tetherDefaultOptions: function () {
         var options = tetherDefaultOptions.call(this);

@@ -3,7 +3,6 @@ languages:
 exclude_paths:
 - "dist/*"
 - "test/*"
-- "lodash/*"
 - "samples/*"
 - "karma.conf.js"
 - "webpack.config.js"

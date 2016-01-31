@@ -6,7 +6,7 @@ import Tether from 'tether';
 import context from 'context';
 import xcore from 'xblocks-core';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
-import assign from '_/object/assign';
+import assign from 'lodash/assign';
 import immediate from 'setimmediate2/src';
 import mixinElementFocus from 'mixin/element/focus';
 

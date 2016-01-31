@@ -70,7 +70,7 @@
     "stylobate": "1.0.0-alpha.20",
     "stylobate-islands": "1.0.0-alpha.29",
     "stylobuild": "0.7.0",
-    "stylus": "git://github.com/stylus/stylus.git#feature-selector-refs",
+    "stylus": "0.53.0",
     "stylus-loader": "git://github.com/Katochimoto/stylus-loader.git#stylusRequire",
     "tether": "1.1.1",
     "url-loader": "0.5.6",

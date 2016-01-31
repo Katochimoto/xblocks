@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var stylus = require('stylus');
 var autoprefixer = require('autoprefixer');
-var merge = require('./lodash/object/merge');
+var merge = require('lodash/merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var srcPath = path.join(__dirname, 'src');
@@ -27,7 +27,6 @@ var params = {
     'resolve': {
         'extensions': [ '', '.js', '.jsx', '.styl' ],
         'alias': {
-            '_': path.join(__dirname, 'lodash'),
             'blocks': path.join(srcPath, 'blocks'),
             'context': path.join(srcPath, 'context'),
             'dom': path.join(srcPath, 'dom'),

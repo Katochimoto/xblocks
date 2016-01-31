@@ -1,6 +1,6 @@
 import xtag from 'xtag';
-import debounce from '_/function/debounce';
-import throttle from '_/function/throttle';
+import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
 
 /**
  * @example

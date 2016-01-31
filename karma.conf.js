@@ -53,7 +53,6 @@ module.exports = function (config) {
             },
             'resolve': {
                 'alias': {
-                    '_': path.join(__dirname, 'lodash'),
                     'context': path.join(src, 'context'),
                     'mixin': path.join(src, 'mixin'),
                     'utils': path.join(src, 'utils'),

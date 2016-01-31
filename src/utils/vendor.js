@@ -1,5 +1,5 @@
 import globalContext from 'context';
-import capitalize from '_/string/capitalize';
+import capitalize from 'lodash//capitalize';
 
 const vendors = [ 'ms', 'moz', 'webkit', 'o' ];
 
