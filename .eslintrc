@@ -37,6 +37,17 @@
         ],
         "key-spacing": [
             0
+        ],
+        "valid-jsdoc": [
+            2,
+            {
+                "prefer": {
+                    "return": "returns"
+                },
+                "requireReturn": false,
+                "requireParamDescription": false,
+                "requireReturnDescription": false
+            }
         ]
     },
     "env": {
