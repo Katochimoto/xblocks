@@ -3,10 +3,11 @@ import './index.jsx';
 
 import { xb } from 'context';
 import context from 'context';
-import { create, dom } from 'xblocks-core';
+import { create } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import getParentMenu from 'utils/getParentMenu';
 import merge from 'lodash/merge';
+import removeChild from 'dom/removeChild';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementInputValueProps from 'mixin/element/inputValueProps';
 
@@ -58,7 +59,7 @@ var menuitemCommon = {
 
                     menuitemCommon.submenu.cancel();
                     submenu.close();
-                    dom.removeChild(submenu);
+                    removeChild(submenu);
                 }
             }
         };

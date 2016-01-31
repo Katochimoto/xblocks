@@ -1,13 +1,5 @@
-import pick from 'lodash/pick';
+import pickBy from 'lodash/pickBy';
 import transform from 'lodash/transform';
-
-const pickIterator = function (value, key) {
-    return this.test(key);
-};
-
-const transformIterator = function (result, value, key) {
-    result[ key.replace(this, '') ] = value;
-};
 
 /**
  * @param {RegExp} reg
@@ -15,5 +7,8 @@ const transformIterator = function (result, value, key) {
  * @returns {Object}
  */
 export default function (reg, props) {
-    return transform(pick(props, pickIterator, reg), transformIterator, {}, reg);
+    props = pickBy(props, (name, key) => reg.test(key));
+    return transform(props, (result, value, key) => {
+        result[ key.replace(reg, '') ] = value;
+    }, {});
 }

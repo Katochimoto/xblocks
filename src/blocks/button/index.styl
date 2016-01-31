@@ -24,6 +24,21 @@ a.xb-button
 .xb-button
   font-weight: inherit
 
+  & > ._content
+    & > ._text:not(:empty) + xb-ico,
+    & > xb-ico + ._text:not(:empty)
+      margin-left: 0.5 * $islands_s
+
+  & > ._content
+    & > xb-ico
+      line-height: inherit
+
+      &:last-child
+        margin-right: -0.5 * $islands_s
+
+      &:first-child
+        margin-left: -0.5 * $islands_s
+
   &._theme-normal
     &_size-s
       skin: v3-button (_size small)

@@ -208,6 +208,7 @@ xb-ico[hidden] {
   display: inline-block;
   background-position: center center;
   background-repeat: no-repeat;
+  line-height: normal;
 }
 .xb-ico._size-s {
   width: 16px;
@@ -1284,6 +1285,19 @@ a.xb-button {
 }
 .xb-button {
   font-weight: inherit;
+}
+.xb-button > ._content > ._text:not(:empty) + xb-ico,
+.xb-button > ._content > xb-ico + ._text:not(:empty) {
+  margin-left: 5px;
+}
+.xb-button > ._content > xb-ico {
+  line-height: inherit;
+}
+.xb-button > ._content > xb-ico:last-child {
+  margin-right: -5px;
+}
+.xb-button > ._content > xb-ico:first-child {
+  margin-left: -5px;
 }
 .xb-button._theme-normal_size-s {
   z-index: 1;

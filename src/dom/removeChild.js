@@ -1,7 +1,6 @@
 /**
- * @function xblocks.dom.removeChild
- * @param   {[type]} element [description]
- * @returns {[type]}         [description]
+ * @param {HTMLElement} element
+ * @returns {HTMLElement}
  */
 export default function (element) {
     if (element.parentNode) {
