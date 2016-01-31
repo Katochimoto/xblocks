@@ -1,7 +1,7 @@
-import xcore from 'xblocks-core';
+import { utils } from 'xblocks-core';
 
 export default function (tagName) {
-    var props = xcore.utils.propTypes(tagName);
+    var props = utils.propTypes(tagName);
     var exportProps = {};
     var prefix = tagName + '-';
     var p;

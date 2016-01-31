@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xcore from 'xblocks-core';
+import { view, event as xevent } from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
@@ -14,7 +14,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-export default xv.Popup = xcore.view.register('xb-popup', [
+export default xv.Popup = view.register('xb-popup', [
     mixinViewCommonAttrs,
 
     {
@@ -43,7 +43,7 @@ export default xv.Popup = xcore.view.register('xb-popup', [
         },
 
         onClickClose: function () {
-            xcore.event.dispatch(
+            xevent.dispatch(
                 ReactDOM.findDOMNode(this),
                 'jsx-click-close',
                 { 'bubbles': true, 'cancelable': true }

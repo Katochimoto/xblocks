@@ -3,7 +3,7 @@ import './index.jsx';
 import './contextmenu';
 
 import { xb } from 'context';
-import xcore from 'xblocks-core';
+import { create } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
 import Popup from '../popup';
@@ -56,7 +56,7 @@ var menuCommon = {
  * @memberof xb
  * @mixes xblocks.mixin.menu
  */
-export default xb.Menu = xcore.create('xb-menu', [
+export default xb.Menu = create('xb-menu', [
     mixinElementMenu,
 
     {

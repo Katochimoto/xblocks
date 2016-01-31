@@ -4,7 +4,7 @@ import './index.jsx';
 import { xb } from 'context';
 import Tether from 'tether';
 import context from 'context';
-import xcore from 'xblocks-core';
+import { create, event as xevent, dom } from 'xblocks-core';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
 import assign from 'lodash/assign';
 import immediate from 'setimmediate2/src';
@@ -13,12 +13,12 @@ import mixinElementFocus from 'mixin/element/focus';
 var popupCommon = {
     onOpen: function () {
         this.focus();
-        xcore.event.dispatch(this, 'xb-open');
+        xevent.dispatch(this, 'xb-open');
     },
 
     onClose: function () {
         this.blur();
-        xcore.event.dispatch(this, 'xb-close');
+        xevent.dispatch(this, 'xb-close');
     },
 
     /**
@@ -114,7 +114,7 @@ var popupCommon = {
  * @augments HTMLElement
  * @mixes .mixin.eFocus
  */
-export default xb.Popup = xcore.create('xb-popup', [
+export default xb.Popup = create('xb-popup', [
     mixinElementFocus,
 
     {
@@ -156,7 +156,7 @@ export default xb.Popup = xcore.create('xb-popup', [
 
                     this._options = this.defaultOptions;
 
-                    var tetherAttrs = xcore.dom.attrs.get(this, {
+                    var tetherAttrs = dom.attrs.get(this, {
                         'attachment':        undefined,
                         'constraints':       undefined,
                         'offset':            undefined,
@@ -237,7 +237,7 @@ export default xb.Popup = xcore.create('xb-popup', [
                     this.setOptions(options);
                 }
 
-                xcore.event.dispatch(this, 'xb-before-open');
+                xevent.dispatch(this, 'xb-before-open');
 
                 tether.enable(true);
                 tether.target._xbpopup = this;
@@ -260,7 +260,7 @@ export default xb.Popup = xcore.create('xb-popup', [
                     return false;
                 }
 
-                xcore.event.dispatch(this, 'xb-before-close');
+                xevent.dispatch(this, 'xb-before-close');
 
                 tether.target._xbpopup = undefined;
                 tether.disable();

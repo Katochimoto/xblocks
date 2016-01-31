@@ -1,7 +1,7 @@
 import './index.styl';
 import './index.jsx';
 import { xb } from 'context';
-import xcore from 'xblocks-core';
+import { create } from 'xblocks-core';
 import mixinDisabled from 'mixin/element/disabled';
 
 /**
@@ -12,7 +12,7 @@ import mixinDisabled from 'mixin/element/disabled';
  * @augments HTMLAnchorElement
  * @mixes xblocks.mixin.eDisabled
  */
-export default xb.Link = xcore.create('xb-link', [
+export default xb.Link = create('xb-link', [
     mixinDisabled,
 
     {

@@ -1,7 +1,7 @@
 import './index.styl';
 import './index.jsx';
 import { xb } from 'context';
-import xcore from 'xblocks-core';
+import { create } from 'xblocks-core';
 
 import mixinDisabled from 'mixin/element/disabled';
 
@@ -37,7 +37,7 @@ import mixinDisabled from 'mixin/element/disabled';
  * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  */
-export default xb.Ico = xcore.create('xb-ico', [
+export default xb.Ico = create('xb-ico', [
     mixinDisabled,
 
     {

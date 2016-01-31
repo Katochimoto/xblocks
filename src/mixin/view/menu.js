@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import xcore from 'xblocks-core';
+import { event as xevent } from 'xblocks-core';
 import throttle from 'lodash/throttle';
 import throttleAnimationFrame from 'utils/throttleAnimationFrame';
 import animationFrame from 'polyfills/requestAnimationFrame';
@@ -114,7 +114,7 @@ export default {
     },
 
     _onScrollThrottle: function () {
-        xcore.event.dispatch(
+        xevent.dispatch(
             this.refs.content,
             'jsx-scroll-throttle',
             { 'bubbles': true, 'cancelable': true }

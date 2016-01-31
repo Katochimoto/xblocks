@@ -3,7 +3,7 @@ import './index.jsx';
 
 import context from 'context';
 import { xb } from 'context';
-import xcore from 'xblocks-core';
+import { create, event as xevent } from 'xblocks-core';
 import mixinElementDisabled from 'mixin/element/disabled';
 import SpeechRecognition from 'utils/SpeechRecognition';
 
@@ -27,7 +27,7 @@ const SR_LANG_DEFAULT = 'en-US';
  * @listens xblocks.Element~event:xb-update
  * @listens xblocks.Element~event:xb-destroy
  */
-export default xb.SpeechRecognition = xcore.create('xb-speech-recognition', [
+export default xb.SpeechRecognition = create('xb-speech-recognition', [
     mixinElementDisabled,
 
     {
@@ -104,7 +104,7 @@ export default xb.SpeechRecognition = xcore.create('xb-speech-recognition', [
             _passEventToTarget: function (event) {
                 var target = this.target;
                 var targetType = typeof target;
-                var targetEvent = new xcore.event.Custom('xb-speech-recognition-' + event.type, {
+                var targetEvent = new xevent.Custom('xb-speech-recognition-' + event.type, {
                     bubbles: false,
                     cancelable: false,
                     detail: event.detail

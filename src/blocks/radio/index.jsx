@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xcore from 'xblocks-core';
+import { view } from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
 import resetLastRadioChecked from 'utils/resetLastRadioChecked';
@@ -14,7 +14,7 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  * @mixes xblocks.mixin.vCommonAttrs
  * @mixes React.addons.PureRenderMixin
  */
-export default xv.Radio = xcore.view.register('xb-radio', [
+export default xv.Radio = view.register('xb-radio', [
     mixinViewCommonAttrs,
 
     {

@@ -3,7 +3,7 @@ import './index.jsx';
 
 import { xb } from 'context';
 import context from 'context';
-import xcore from 'xblocks-core';
+import { create, dom } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import getParentMenu from 'utils/getParentMenu';
 import merge from 'lodash/merge';
@@ -58,7 +58,7 @@ var menuitemCommon = {
 
                     menuitemCommon.submenu.cancel();
                     submenu.close();
-                    xcore.dom.removeChild(submenu);
+                    dom.removeChild(submenu);
                 }
             }
         };
@@ -79,7 +79,7 @@ var menuitemCommon = {
  * @listens xblocks.Element~event:xb-created
  * @listens xblocks.Element~event:xb-destroy
  */
-export default xb.Menuitem = xcore.create('xb-menuitem', [
+export default xb.Menuitem = create('xb-menuitem', [
     mixinElementDisabled,
     mixinElementInputValueProps,
 

@@ -1,4 +1,4 @@
-import xcore from 'xblocks-core';
+import { event as xevent } from 'xblocks-core';
 import delegate from 'event/delegate';
 import filterClick from 'event/filterClick';
 import filterMouse from 'event/filterMouse';
@@ -47,7 +47,7 @@ Table.prototype = {
         if (this._item) {
             var item = this._item;
             this._item = undefined;
-            xcore.event.dispatch(item, this.EVENT_BLUR);
+            xevent.dispatch(item, this.EVENT_BLUR);
         }
     },
 
@@ -59,7 +59,7 @@ Table.prototype = {
         if (this._item) {
             var item = this._item;
             this._item = undefined;
-            xcore.event.dispatch(item, this.EVENT_BLUR);
+            xevent.dispatch(item, this.EVENT_BLUR);
         }
     },
 
@@ -164,13 +164,13 @@ Table.prototype = {
         }
 
         if (this._item) {
-            xcore.event.dispatch(this._item, this.EVENT_BLUR, {
+            xevent.dispatch(this._item, this.EVENT_BLUR, {
                 'detail': { 'originalEvent': this._originalEvent }
             });
         }
 
         this._item = element;
-        xcore.event.dispatch(this._item, this.EVENT_FOCUS, {
+        xevent.dispatch(this._item, this.EVENT_FOCUS, {
             'detail': { 'originalEvent': this._originalEvent }
         });
     },

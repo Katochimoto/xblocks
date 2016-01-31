@@ -2,7 +2,7 @@ import './index.styl';
 import './index.jsx';
 
 import { xb } from 'context';
-import xcore from 'xblocks-core';
+import { create } from 'xblocks-core';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementChecked from 'mixin/element/checked';
 import mixinElementInputValueProps from 'mixin/element/inputValueProps';
@@ -29,7 +29,7 @@ import mixinElementFocus from 'mixin/element/focus';
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-export default xb.Radio = xcore.create('xb-radio', [
+export default xb.Radio = create('xb-radio', [
     mixinElementDisabled,
     mixinElementChecked,
     mixinElementInputValueProps,

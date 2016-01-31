@@ -1,6 +1,6 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
-import xcore from 'xblocks-core';
+import { view } from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 import mixinViewMenu from 'mixin/view/menu';
@@ -14,7 +14,7 @@ import mixinViewMenu from 'mixin/view/menu';
  * @mixes xblocks.mixin.vMenu
  * @mixes React.addons.PureRenderMixin
  */
-export default xv.MenuInline = xcore.view.register('xb-menu-inline', [
+export default xv.MenuInline = view.register('xb-menu-inline', [
     mixinViewCommonAttrs,
     mixinViewMenu,
 

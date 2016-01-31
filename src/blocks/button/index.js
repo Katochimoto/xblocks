@@ -1,7 +1,7 @@
 import './index.styl';
 import './index.jsx';
 import { xb } from 'context';
-import xcore from 'xblocks-core';
+import { create } from 'xblocks-core';
 
 import mixinDisabled from 'mixin/element/disabled';
 import mixinChecked from 'mixin/element/checked';
@@ -40,7 +40,7 @@ import mixinFocus from 'mixin/element/focus';
  * @mixes xblocks.mixin.eInputValueProps
  * @mixes xblocks.mixin.eFocus
  */
-export default xb.Button = xcore.create('xb-button', [
+export default xb.Button = create('xb-button', [
     mixinDisabled,
     mixinChecked,
     mixinInputValueProps,
