@@ -15,8 +15,7 @@ var Mutation = context.MutationObserver || context.JsMutationObserver;
 
 /**
  * @function xblocks.utils.microtask
- * @param   {Function} callback [description]
- * @returns {[type]}            [description]
+ * @param {function} callback
  */
 export default function (callback) {
     twiddle.textContent = iterations++;
