@@ -784,10 +784,10 @@ textarea.xb-input._complex_size-s > ._content > ._controller {
 .xb-input._complex_size-l > ._reset,
 .xb-input._complex_size-xl > ._right,
 .xb-input._complex_size-xl > ._reset {
-  -webkit-box-ordinal-group: 2;
   -webkit-order: 1;
-  -moz-box-ordinal-group: 2;
-       order: 1;
+  -webkit-box-ordinal-group: 2;
+     -moz-box-ordinal-group: 2;
+          order: 1;
   position: relative;
   z-index: 9;
   float: right;
@@ -796,11 +796,10 @@ textarea.xb-input._complex_size-s > ._content > ._controller {
 .xb-input._complex_size-m > ._content,
 .xb-input._complex_size-l > ._content,
 .xb-input._complex_size-xl > ._content {
-  -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  -moz-box-flex: 1;
-       flex-grow: 1;
+  -webkit-box-flex: 1;
+     -moz-box-flex: 1;
+          flex-grow: 1;
   display: block;
   overflow: hidden;
   height: 100%;
@@ -1309,10 +1308,10 @@ a.xb-button {
           border-radius: 3px;
   border-color: rgba(0,0,0,0.2);
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
 }
 .xb-button._theme-normal_size-s,
 .xb-button._theme-normal_size-m,
@@ -1397,8 +1396,8 @@ a.xb-button {
 .xb-button._theme-clear_size-xl > ._content {
   position: relative;
   display: block;
-  display: -webkit-inline-box;
   display: -webkit-inline-flex;
+  display: -webkit-inline-box;
   display: -moz-inline-box;
   display: inline-flex;
   -webkit-box-sizing: border-box;
@@ -1573,10 +1572,10 @@ _:-ms-input-placeholder,
 .xb-button._theme-clear_size-m > ._content > ._after,
 .xb-button._theme-clear_size-l > ._content > ._after,
 .xb-button._theme-clear_size-xl > ._content > ._after {
-  -webkit-box-ordinal-group: 2;
   -webkit-order: 1;
-  -moz-box-ordinal-group: 2;
-       order: 1;
+  -webkit-box-ordinal-group: 2;
+     -moz-box-ordinal-group: 2;
+          order: 1;
   float: right;
   -webkit-align-self: center;
   align-self: center;
@@ -1615,10 +1614,10 @@ _:-ms-input-placeholder,
           border-radius: 3px;
   border-color: rgba(0,0,0,0.2);
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
 }
 .xb-button._theme-normal_size-m > ._content {
   background: #fff;
@@ -1691,10 +1690,10 @@ _:-ms-input-placeholder,
           border-radius: 3px;
   border-color: rgba(0,0,0,0.2);
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
 }
 .xb-button._theme-normal_size-l > ._content {
   background: #fff;
@@ -1767,10 +1766,10 @@ _:-ms-input-placeholder,
           border-radius: 3px;
   border-color: rgba(0,0,0,0.2);
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
 }
 .xb-button._theme-normal_size-xl > ._content {
   background: #fff;
@@ -1842,10 +1841,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(191,153,0,0.8);
 }
 .xb-button._theme-action_size-s:hover {
@@ -1884,10 +1883,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(191,153,0,0.8);
 }
 .xb-button._theme-action_size-m:hover {
@@ -1926,10 +1925,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(191,153,0,0.8);
 }
 .xb-button._theme-action_size-l:hover {
@@ -1968,10 +1967,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(191,153,0,0.8);
 }
 .xb-button._theme-action_size-xl:hover {
@@ -2010,10 +2009,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(0,0,0,0.2);
 }
 .xb-button._theme-pseudo_size-s:hover {
@@ -2049,10 +2048,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(0,0,0,0.2);
 }
 .xb-button._theme-pseudo_size-m:hover {
@@ -2088,10 +2087,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(0,0,0,0.2);
 }
 .xb-button._theme-pseudo_size-l:hover {
@@ -2127,10 +2126,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(0,0,0,0.2);
 }
 .xb-button._theme-pseudo_size-xl:hover {
@@ -2166,10 +2165,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark_size-s:hover {
@@ -2208,10 +2207,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark_size-m:hover {
@@ -2250,10 +2249,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark_size-l:hover {
@@ -2292,10 +2291,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark_size-xl:hover {
@@ -2334,10 +2333,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark-pseudo_size-s:hover {
@@ -2373,10 +2372,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark-pseudo_size-m:hover {
@@ -2412,10 +2411,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark-pseudo_size-l:hover {
@@ -2451,10 +2450,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: rgba(255,255,255,0.35);
 }
 .xb-button._theme-dark-pseudo_size-xl:hover {
@@ -2490,10 +2489,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: transparent;
 }
 .xb-button._theme-clear_size-s:focus {
@@ -2523,10 +2522,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: transparent;
 }
 .xb-button._theme-clear_size-m:focus {
@@ -2556,10 +2555,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: transparent;
 }
 .xb-button._theme-clear_size-l:focus {
@@ -2589,10 +2588,10 @@ _:-ms-input-placeholder,
   -webkit-border-radius: 3px;
           border-radius: 3px;
   text-align: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -moz-box-pack: center;
-       justify-content: center;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+          justify-content: center;
   border-color: transparent;
 }
 .xb-button._theme-clear_size-xl:focus {

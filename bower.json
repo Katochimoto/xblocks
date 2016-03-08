@@ -1,7 +1,21 @@
 {
   "name": "xblocks",
   "version": "2.0.0",
-  "dependencies": {},
+  "main": [
+    "dist/xblocks.js",
+    "dist/xblocks.min.js",
+    "dist/xblocks.min.js.map",
+    "dist/xblocks.css",
+    "dist/xblocks.min.css",
+    "dist/xblocks.min.css.map"
+  ],
+  "dependencies": {
+    "xblocks-core": "2.0.1",
+    "react": "0.14.7",
+    "react-dom": "0.14.7",
+    "es5-shim": "4.5.2",
+    "tether": "1.2.0"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
@@ -14,7 +28,7 @@
   ],
   "homepage": "http://xblocks.info",
   "authors": [
-    "rikishi <bufpost@yandex.ru>"
+    "Rikishi <rikishi@protonmail.ch>"
   ],
   "description": "HTML custom elements",
   "moduleType": [
