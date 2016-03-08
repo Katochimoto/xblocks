@@ -36,40 +36,38 @@ var params = {
             'utils': path.join(srcPath, 'utils')
         }
     },
-    'externals': [
-        {
-            'react': {
-                root: 'React',
-                commonjs2: 'react',
-                commonjs: 'react',
-                amd: 'react'
-            },
-            'react-dom': {
-                root: 'ReactDOM',
-                commonjs2: 'react-dom',
-                commonjs: 'react-dom',
-                amd: 'react-dom'
-            },
-            'xtag': {
-                root: 'xtag',
-                commonjs2: 'xtag',
-                commonjs: 'xtag',
-                amd: 'xtag'
-            },
-            'xblocks-core': {
-                root: 'xblocks-core',
-                commonjs2: 'xblocks-core',
-                commonjs: 'xblocks-core',
-                amd: 'xblocks-core'
-            },
-            'tether': {
-                root: 'Tether',
-                commonjs2: 'tether',
-                commonjs: 'tether',
-                amd: 'tether'
-            }
+    'externals': {
+        'react': {
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react',
+            amd: 'react'
+        },
+        'react-dom': {
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom',
+            amd: 'react-dom'
+        },
+        'xtag': {
+            root: 'xtag',
+            commonjs2: 'xtag',
+            commonjs: 'xtag',
+            amd: 'xtag'
+        },
+        'xblocks-core': {
+            root: 'xblocks-core',
+            commonjs2: 'xblocks-core',
+            commonjs: 'xblocks-core',
+            amd: 'xblocks-core'
+        },
+        'tether': {
+            root: 'Tether',
+            commonjs2: 'tether',
+            commonjs: 'tether',
+            amd: 'tether'
         }
-    ],
+    },
     'plugins': [
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(nodeEnv),
