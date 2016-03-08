@@ -2,7 +2,7 @@
   "name": "xblocks",
   "filename": "dist/xblocks.min.js",
   "description": "HTML custom elements",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "keywords": [
     "x-tag",
     "x-tags",
@@ -26,10 +26,10 @@
     "url": "https://github.com/Katochimoto/xblocks"
   },
   "dependencies": {
-    "xblocks-core": "2.0.1",
-    "react": "0.14.6",
-    "react-dom": "0.14.6",
-    "react-addons-pure-render-mixin": "0.14.6",
+    "xblocks-core": "2.0.2",
+    "react": "0.14.7",
+    "react-dom": "0.14.7",
+    "react-addons-pure-render-mixin": "0.14.7",
     "es5-shim": "4.5.2",
     "tether": "1.2.0"
   },

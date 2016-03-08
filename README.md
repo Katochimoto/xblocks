@@ -7,7 +7,7 @@
 
 ##Dependencies
 
-- [xblocks-core](https://github.com/Katochimoto/xblocks-core) (2.0.1)
+- [xblocks-core](https://github.com/Katochimoto/xblocks-core) (2.0.2)
 - [React.js](https://github.com/facebook/react) (0.14.7)
 - [X-Tag core](https://github.com/x-tag/core) ([custom build x-tag-core.js](https://github.com/Katochimoto/xblocks-core/blob/master/x-tag-core.js) or 1.1.9)
 - [es5-shim](https://github.com/es-shims/es5-shim) (4.5.2)
