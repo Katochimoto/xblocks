@@ -13,17 +13,23 @@ export default React.createClass({
 
     render: function () {
         var value = this.props.value;
+        var isChild = false;
+
         if (!value) {
+            isChild = true;
             value = ReactDOMServer.renderToStaticMarkup(
                 <div>{this.props.children}</div>
             );
         }
 
-        var code = _.unescape(value);
-        code = code.trim()
-            .replace(/^<div>/m, '')
-            .replace(/<\/div>$/m, '')
-            .replace(/<br\/>/g, '\n');
+        var code = _.unescape(value).trim();
+
+        if (isChild) {
+            code = code
+                .replace(/^<div>/m, '')
+                .replace(/<\/div>$/m, '')
+                .replace(/<br\/>/g, '\n');
+        }
 
         return (
             <div className={this.props.className}>

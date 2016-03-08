@@ -1,1 +1,36 @@
-$ npm i xblocks-core xblocks
+var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+    'devtool': '#source-map',
+    'target': 'web',
+    'entry': {
+        'vendor': [
+            'es5-shim/es5-shim.js',
+            'react',
+            'react-dom',
+            'react-addons-pure-render-mixin',
+            'tether',
+            'xtag',
+            'xblocks-core',
+            'xblocks'
+            // ...
+        ],
+        'index': './index.js'
+    },
+    'output': {
+        'chunkFilename': '[name].js',
+        'crossOriginLoading': 'use-credentials',
+        'filename': '[name].js',
+        'libraryTarget': 'umd',
+        'path': path.join(__dirname, 'out')
+    },
+    'resolve': {
+        'modulesDirectories': [
+            'node_modules/xblocks-core/dist',
+            'node_modules/xblocks/dist',
+            'node_modules'
+        ]
+    }
+    // ...
+};

@@ -7,6 +7,7 @@ import sample1 from './sample1.txt';
 import sample2 from './sample2.txt';
 import sample3 from './sample3.txt';
 import sample4 from './sample4.txt';
+import sample5 from './sample5.txt';
 
 export default React.createClass({
     displayName: 'GettingStarted',
@@ -15,7 +16,7 @@ export default React.createClass({
         return (
             <div>
                 <h1 className="page-header"><FormattedMessage id="menu.getting_started" /></h1>
-                <p className="lead"><FormattedMessage id="getting_started.descr0" /></p>
+                <FormattedMessage id="getting_started.descr0" />
 
                 <h2 className="sub-header anchor" data-hash="quickstart">
                     <FormattedMessage id="menu.quickstart" />
@@ -32,12 +33,12 @@ export default React.createClass({
                         <Code value={sample2} />
                     </li>
                     <li>
-                        <FormattedMessage id="getting_started.js" />
-                        <Code value={sample3} />
-                    </li>
-                    <li>
                         <FormattedMessage id="getting_started.dependencies" />
                         <Code value={sample4} />
+                    </li>
+                    <li>
+                        <FormattedMessage id="getting_started.js" />
+                        <Code value={sample3} />
                     </li>
                     <li>
                         <FormattedMessage id="getting_started.descr1" />
@@ -52,11 +53,6 @@ export default React.createClass({
                     <FormattedMessage id="getting_started.version" values={{ version: VERSION }} />
                 </small>
 
-                <h3><FormattedMessage id="getting_started.install_cdn" /></h3>
-                <p><FormattedHTMLMessage id="getting_started.install_cdn_descr" /></p>
-
-                <Code value="$ bower install xblocks" />
-
                 <h3><FormattedMessage id="getting_started.install_bower" /></h3>
                 <p><FormattedHTMLMessage id="getting_started.install_bower_descr" /></p>
 
@@ -66,6 +62,11 @@ export default React.createClass({
                 <p><FormattedHTMLMessage id="getting_started.install_npm_descr" /></p>
 
                 <Code value="$ npm i xblocks-core xblocks" />
+
+                <h3><FormattedMessage id="getting_started.webpack" /></h3>
+                <p><FormattedHTMLMessage id="getting_started.webpack_descr" /></p>
+
+                <Code lang="json" value={sample5} />
 
                 <h2 className="sub-header anchor" data-hash="templates">
                     <FormattedMessage id="menu.templates" />
