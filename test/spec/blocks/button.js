@@ -1,4 +1,4 @@
-import vow, { Promise } from 'Vow';
+import vow, { Promise } from 'vow';
 
 xdescribe('xb-button ->', function () {
 
