@@ -21,7 +21,6 @@ export default xv.Checkbox = view.register('xb-checkbox', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             'autofocus':    PropTypes.bool,
             'checked':      PropTypes.bool,
@@ -32,7 +31,6 @@ export default xv.Checkbox = view.register('xb-checkbox', [
             'size':         PropTypes.oneOf([ 'm', 'l' ]),
             'value':        PropTypes.string
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

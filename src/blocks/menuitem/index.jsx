@@ -25,7 +25,6 @@ export default xv.Menuitem = view.register('xb-menuitem', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             'focused':  PropTypes.bool,
             'ico':      PropTypes.object,
@@ -33,7 +32,6 @@ export default xv.Menuitem = view.register('xb-menuitem', [
             'selected': PropTypes.bool,
             'submenu':  PropTypes.bool
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

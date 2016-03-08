@@ -8,11 +8,9 @@ export default view.create({
 
     mixins: [ PureRenderMixin ],
 
-    // @if NODE_ENV='development'
     propTypes: {
         ico: PropTypes.object
     },
-    // @endif
 
     getDefaultProps: function () {
         return {

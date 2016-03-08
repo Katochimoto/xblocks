@@ -21,14 +21,12 @@ export default xv.Link = view.register('xb-link', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             'href':     PropTypes.string,
             'name':     PropTypes.string,
             'target':   PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
             'theme':    PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ]).isRequired
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

@@ -8,7 +8,6 @@ export default view.create({
 
     mixins: [ PureRenderMixin ],
 
-    // @if NODE_ENV='development'
     propTypes: {
         'autoFocus':        PropTypes.bool,
         'autocomplete':     PropTypes.oneOf([ 'on', 'off' ]),
@@ -28,7 +27,6 @@ export default view.create({
         'tabIndex':         PropTypes.string,
         'value':            PropTypes.string
     },
-    // @endif
 
     getDefaultProps: function () {
         return {

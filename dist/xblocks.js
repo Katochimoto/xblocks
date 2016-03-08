@@ -783,6 +783,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
 
+	        propTypes: {
+	            'active': _react.PropTypes.bool,
+	            'size': _react.PropTypes.oneOf(['s', 'm']),
+	            'value': _react.PropTypes.string,
+	            'type': _react.PropTypes.oneOf(['attention', 'check', 'close', 'download', 'download-white', 'dropdown', 'eye', 'help', 'link', 'link-white', 'mail', 'mic-off', 'mic-on', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'upload', 'upload-white', 'vk'])
+	        },
+
 	        getDefaultProps: function getDefaultProps() {
 	            return {
 	                'active': false,
@@ -1019,24 +1026,35 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(exports);
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod.exports);
-	    global.commonAttrs = mod.exports;
-	  }
-	})(this, function (exports) {
-	  "use strict";
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof exports !== "undefined") {
+	        factory(exports, require('react'));
+	    } else {
+	        var mod = {
+	            exports: {}
+	        };
+	        factory(mod.exports, global.react);
+	        global.commonAttrs = mod.exports;
+	    }
+	})(this, function (exports, _react) {
+	    'use strict';
 
-	  Object.defineProperty(exports, "__esModule", {
-	    value: true
-	  });
-	  exports.default = {};
+	    Object.defineProperty(exports, "__esModule", {
+	        value: true
+	    });
+	    exports.default = {
+	        propTypes: {
+	            'accesskey': _react.PropTypes.string,
+	            'contextmenu': _react.PropTypes.string,
+	            'dir': _react.PropTypes.oneOf(['ltr', 'rtl']),
+	            'disabled': _react.PropTypes.bool,
+	            'hidden': _react.PropTypes.bool,
+	            'spellcheck': _react.PropTypes.bool,
+	            'tabindex': _react.PropTypes.string,
+	            'title': _react.PropTypes.string
+	        }
+	    };
 	});
 
 /***/ },
@@ -1349,6 +1367,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        displayName: 'xb-input',
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
+
+	        propTypes: {
+	            'autocomplete': _react.PropTypes.oneOf(['on', 'off']),
+	            'autofocus': _react.PropTypes.bool,
+	            'autosize': _react.PropTypes.bool,
+	            'cols': _react.PropTypes.string,
+	            'ghost': _react.PropTypes.bool,
+	            'multiline': _react.PropTypes.bool,
+	            'name': _react.PropTypes.string,
+	            'placeholder': _react.PropTypes.string,
+	            'postfix': _react.PropTypes.string,
+	            'prefix': _react.PropTypes.string,
+	            'readonly': _react.PropTypes.bool,
+	            'required': _react.PropTypes.bool,
+	            'reset': _react.PropTypes.bool,
+	            'rows': _react.PropTypes.string,
+	            'size': _react.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
+	            'type': _react.PropTypes.oneOf(['text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg']),
+	            'value': _react.PropTypes.string,
+	            'xb-link': _react.PropTypes.string
+	        },
 
 	        getDefaultProps: function getDefaultProps() {
 	            return {
@@ -4990,6 +5029,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
 
+	        propTypes: {
+	            'autoFocus': _react.PropTypes.bool,
+	            'autocomplete': _react.PropTypes.oneOf(['on', 'off']),
+	            'autosize': _react.PropTypes.bool,
+	            'className': _react.PropTypes.string,
+	            'cols': _react.PropTypes.string,
+	            'disabled': _react.PropTypes.bool,
+	            'isPlaceholderHint': _react.PropTypes.bool,
+	            'multiline': _react.PropTypes.bool,
+	            'name': _react.PropTypes.string,
+	            'onChange': _react.PropTypes.func,
+	            'onHintToggle': _react.PropTypes.func,
+	            'placeholder': _react.PropTypes.string,
+	            'readOnly': _react.PropTypes.bool,
+	            'required': _react.PropTypes.bool,
+	            'rows': _react.PropTypes.string,
+	            'tabIndex': _react.PropTypes.string,
+	            'value': _react.PropTypes.string
+	        },
+
 	        getDefaultProps: function getDefaultProps() {
 	            return {
 	                'autoFocus': false,
@@ -5243,6 +5302,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	        displayName: 'xb-button',
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
+
+	        propTypes: {
+	            'autofocus': _react.PropTypes.bool,
+	            'checked': _react.PropTypes.bool,
+	            'for': _react.PropTypes.string,
+	            'form': _react.PropTypes.string,
+	            'href': _react.PropTypes.string,
+	            'multiple': _react.PropTypes.bool,
+	            'name': _react.PropTypes.string,
+	            'required': _react.PropTypes.bool,
+	            'size': _react.PropTypes.oneOf(['s', 'm', 'l', 'xl']),
+	            'target': _react.PropTypes.oneOf(['_blank', '_self', '_parent', '_top']),
+	            'theme': _react.PropTypes.oneOf(['action', 'dark', 'normal', 'clear', 'dark-pseudo', 'pseudo']),
+	            'type': _react.PropTypes.oneOf(['label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio']),
+	            'value': _react.PropTypes.string
+	        },
 
 	        getDefaultProps: function getDefaultProps() {
 	            return {
@@ -5532,6 +5607,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
 
+	        propTypes: {
+	            ico: _react.PropTypes.object
+	        },
+
 	        getDefaultProps: function getDefaultProps() {
 	            return {
 	                ico: {}
@@ -5754,6 +5833,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
 
+	        propTypes: {
+	            'href': _react.PropTypes.string,
+	            'name': _react.PropTypes.string,
+	            'target': _react.PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
+	            'theme': _react.PropTypes.oneOf(['normal', 'outer', 'pseudo', 'empty']).isRequired
+	        },
+
 	        getDefaultProps: function getDefaultProps() {
 	            return {
 	                'disabled': false,
@@ -5899,6 +5985,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        displayName: 'xb-checkbox',
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
+
+	        propTypes: {
+	            'autofocus': _react.PropTypes.bool,
+	            'checked': _react.PropTypes.bool,
+	            'for': _react.PropTypes.string,
+	            'form': _react.PropTypes.string,
+	            'name': _react.PropTypes.string,
+	            'required': _react.PropTypes.bool,
+	            'size': _react.PropTypes.oneOf(['m', 'l']),
+	            'value': _react.PropTypes.string
+	        },
 
 	        getDefaultProps: function getDefaultProps() {
 	            return {
@@ -6706,6 +6803,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        displayName: 'xb-popup',
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
+
+	        propTypes: {
+	            'close': _react.PropTypes.bool,
+	            'theme': _react.PropTypes.oneOf(['blank', 'error', 'island', 'modal', 'normal'])
+	        },
 
 	        getDefaultProps: function getDefaultProps() {
 	            return {
@@ -7627,6 +7729,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        displayName: 'xb-menu',
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
+
+	        propTypes: {
+	            size: _react.PropTypes.string
+	        },
 
 	        getDefaultProps: function getDefaultProps() {
 	            return {
@@ -10370,6 +10476,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
 
+	        propTypes: {
+	            size: _react.PropTypes.string
+	        },
+
 	        getDefaultProps: function getDefaultProps() {
 	            return {
 	                size: ''
@@ -10738,6 +10848,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        displayName: 'xb-menuitem',
 
 	        mixins: [_reactAddonsPureRenderMixin2.default],
+
+	        propTypes: {
+	            'focused': _react.PropTypes.bool,
+	            'ico': _react.PropTypes.object,
+	            'label': _react.PropTypes.string.isRequired,
+	            'selected': _react.PropTypes.bool,
+	            'submenu': _react.PropTypes.bool
+	        },
 
 	        getDefaultProps: function getDefaultProps() {
 	            return {
@@ -11554,6 +11672,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    exports.default = _context.xv.SpeechRecognition = _xblocksCore.view.register('xb-speech-recognition', [_commonAttrs2.default, {
 	        displayName: 'xb-speech-recognition',
+
+	        propTypes: {
+	            active: _react.PropTypes.bool
+	        },
 
 	        getDefaultProps: function getDefaultProps() {
 	            return {

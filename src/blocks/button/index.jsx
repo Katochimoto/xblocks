@@ -24,7 +24,6 @@ export default xv.Button = view.register('xb-button', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             'autofocus':    PropTypes.bool,
             'checked':      PropTypes.bool,
@@ -40,7 +39,6 @@ export default xv.Button = view.register('xb-button', [
             'type':         PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
             'value':        PropTypes.string
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

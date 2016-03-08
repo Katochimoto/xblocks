@@ -23,11 +23,9 @@ export default xv.Menu = view.register('xb-menu', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             size: PropTypes.string
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

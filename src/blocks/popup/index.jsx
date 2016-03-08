@@ -22,7 +22,6 @@ export default xv.Popup = view.register('xb-popup', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             'close': PropTypes.bool,
             'theme': PropTypes.oneOf([
@@ -33,7 +32,6 @@ export default xv.Popup = view.register('xb-popup', [
                 'normal'
             ])
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

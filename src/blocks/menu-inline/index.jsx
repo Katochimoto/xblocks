@@ -23,11 +23,9 @@ export default xv.MenuInline = view.register('xb-menu-inline', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             size: PropTypes.string
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

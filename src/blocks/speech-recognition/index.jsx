@@ -17,11 +17,9 @@ export default xv.SpeechRecognition = view.register('xb-speech-recognition', [
     {
         displayName: 'xb-speech-recognition',
 
-        // @if NODE_ENV='development'
         propTypes: {
             active: PropTypes.bool
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

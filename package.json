@@ -27,8 +27,9 @@
   },
   "dependencies": {
     "xblocks-core": "2.0.1",
-    "react": "0.14.7",
-    "react-dom": "0.14.7",
+    "react": "0.14.6",
+    "react-dom": "0.14.6",
+    "react-addons-pure-render-mixin": "0.14.6",
     "es5-shim": "4.5.2",
     "tether": "1.2.0"
   },
@@ -71,7 +72,6 @@
     "postcss-loader": "0.8.0",
     "preprocess": "3.1.0",
     "preprocess-loader": "0.2.0",
-    "react-addons-pure-render-mixin": "0.14.6",
     "setimmediate2": "2.0.1",
     "style-loader": "0.13.0",
     "stylobate": "1.0.0-alpha.20",

@@ -1,6 +1,4 @@
-// @if NODE_ENV='development'
 import { PropTypes } from 'react';
-// @endif
 
 /**
  * Common attributes
@@ -16,7 +14,6 @@ import { PropTypes } from 'react';
  * @prop {string} propTypes.title
  */
 export default {
-    // @if NODE_ENV='development'
     propTypes: {
         'accesskey':    PropTypes.string,
         'contextmenu':  PropTypes.string,
@@ -27,5 +24,4 @@ export default {
         'tabindex':     PropTypes.string,
         'title':        PropTypes.string
     }
-    // @endif
 };

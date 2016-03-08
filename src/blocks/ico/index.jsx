@@ -21,7 +21,6 @@ export default xv.Ico = view.register('xb-ico', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             'active':   PropTypes.bool,
             'size':     PropTypes.oneOf([ 's', 'm' ]),
@@ -58,7 +57,6 @@ export default xv.Ico = view.register('xb-ico', [
                 'vk'
             ])
         },
-        // @endif
 
         getDefaultProps: function () {
             return {

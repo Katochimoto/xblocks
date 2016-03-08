@@ -26,7 +26,6 @@ export default xv.Input = view.register('xb-input', [
 
         mixins: [ PureRenderMixin ],
 
-        // @if NODE_ENV='development'
         propTypes: {
             'autocomplete': PropTypes.oneOf([ 'on', 'off' ]),
             'autofocus':    PropTypes.bool,
@@ -47,7 +46,6 @@ export default xv.Input = view.register('xb-input', [
             'value':        PropTypes.string,
             'xb-link':      PropTypes.string
         },
-        // @endif
 
         getDefaultProps: function () {
             return {
