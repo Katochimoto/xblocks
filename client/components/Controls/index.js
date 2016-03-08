@@ -7,6 +7,8 @@ import Button from './Button';
 import Checkbox from './Checkbox';
 import Radio from './Radio';
 import Input from './Input';
+import Popup from './Popup';
+import Menu from './Menu';
 
 export default React.createClass({
     displayName: 'Controls',
@@ -24,15 +26,8 @@ export default React.createClass({
                 <Checkbox />
                 <Radio />
                 <Input />
-
-                <h2 className="sub-header anchor" data-hash="popup">
-                    Popup
-                </h2>
-                <p>&nbsp;</p>
-
-                <h2 className="sub-header anchor" data-hash="menu">
-                    Menu
-                </h2>
+                <Popup />
+                <Menu />
             </div>
         );
     }

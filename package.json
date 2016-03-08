@@ -5,17 +5,17 @@
   "homepage": "http://xblocks.info",
   "author": {
     "name": "Rikishi",
-    "email": "bufpost@yandex.ru",
+    "email": "rikishi@protonmail.ch",
     "url": "https://github.com/Katochimoto"
   },
   "bugs": {
     "url": "https://github.com/Katochimoto/xblocks/issues",
-    "email": "bufpost@yandex.ru"
+    "email": "rikishi@protonmail.ch"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Katochimoto/xblocks.git"
+    "url": "https://github.com/Katochimoto/xblocks"
   },
   "dependencies": {
     "bootstrap": "3.3.6",

@@ -35,7 +35,7 @@
     "getting_started.webpack": "Пример настройки Webpack",
     "getting_started.webpack_descr": "Для правильной сборки требуется отдельно указать расположение xtag и xblocks библиотек в `modulesDirectories`.",
 
-    "examples.more": "Посмотреть подробнее",
+    "examples.more": "Подробное описание.",
     "examples.button_descr0": "Кнопки могут быть следующих типов:",
     "examples.button_descr1": "Для кнопки можно указать иконки:",
     "examples.button_descr2": "Кнопка флажок:",
@@ -134,5 +134,32 @@
     "controls.input__attrs_reset": "Выводит кнопку сброса содержимого поля.",
     "controls.input__attrs_rows": "Высота поля в строках текста.",
     "controls.input__attrs_size": "Размер поля ввода. Возможные значения: <code>s</code>, <code>m</code>, <code>l</code>, <code>xl</code>.",
-    "controls.input__attrs_xb-link": "Название ссылки."
+    "controls.input__attrs_xb-link": "Название ссылки.",
+
+    "controls.popup__title": "Popup",
+    "controls.popup__descr_p1": "Тег <code>&lt;xb-popup&gt;</code> предназначен для создания окна.",
+    "controls.popup__attrs_close": "Вывести контрол закрытия окна.",
+    "controls.popup__attrs_theme": "Тема оформления. Возможные значения: {themes}.",
+    "controls.popup__attrs_attachment": "<a href=\"http://tether.io/#attachment\" target=\"_blank\">tether.io/#attachment</a>",
+    "controls.popup__attrs_constraints": "JSON encodeURIComponent параметры настройки <a href=\"tether.io/#constraints\" target=\"_blank\">tether.io/#constraints</a>",
+    "controls.popup__attrs_offset": "<a href=\"http://tether.io/#offset\" target=\"_blank\">tether.io/#offset</a>",
+    "controls.popup__attrs_optimizations-gpu": "<a href=\"http://tether.io/#gpu\" target=\"_blank\">tether.io/#gpu</a>",
+    "controls.popup__attrs_target-attachment": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+    "controls.popup__attrs_target-modifier": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+    "controls.popup__attrs_target-offset": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+    "controls.popup__attrs_target-parent": "Прикрепить элемент к предку.",
+    "controls.popup__attrs_target": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+
+    "controls.menu__title": "Menu",
+    "controls.menu__descr_p1": "Тег <code>&lt;xb-menu&gt;</code> предназначен для создания меню.",
+    "controls.menu__attrs_size": "Максимальное количество видимых пунктов меню.",
+    "controls.menu__attrs_attachment": "<a href=\"http://tether.io/#attachment\" target=\"_blank\">tether.io/#attachment</a>",
+    "controls.menu__attrs_constraints": "JSON encodeURIComponent параметры настройки <a href=\"tether.io/#constraints\" target=\"_blank\">tether.io/#constraints</a>",
+    "controls.menu__attrs_offset": "<a href=\"http://tether.io/#offset\" target=\"_blank\">tether.io/#offset</a>",
+    "controls.menu__attrs_optimizations-gpu": "<a href=\"http://tether.io/#gpu\" target=\"_blank\">tether.io/#gpu</a>",
+    "controls.menu__attrs_target-attachment": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+    "controls.menu__attrs_target-modifier": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+    "controls.menu__attrs_target-offset": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+    "controls.menu__attrs_target-parent": "Прикрепить элемент к предку.",
+    "controls.menu__attrs_target": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>"
 }
