@@ -12,9 +12,9 @@ import { cancelAnimationFrame, requestAnimationFrame } from 'polyfills/requestAn
 export default {
     getInitialState: function () {
         return {
-            'maxHeight': 0,
-            'isShowScrollTop': false,
-            'isShowScrollBottom': false
+            maxHeight: 0,
+            isShowScrollTop: false,
+            isShowScrollBottom: false
         };
     },
 
@@ -24,8 +24,8 @@ export default {
         this._lockScroll = false;
         this._onScroll = throttleAnimationFrame(this._onScroll);
         this._onScrollThrottle = throttle(this._onScrollThrottle, 500, {
-            'leading': true,
-            'trailing': false
+            leading: true,
+            trailing: false
         });
     },
 
@@ -40,32 +40,27 @@ export default {
         var maxHeight = 0;
 
         if (size > 0) {
-            var contentNode = this.refs.content;
-            var element = contentNode.children[ size - 1 ];
+            let contentNode = this._contentNode;
+            let element = contentNode.children[ size - 1 ];
 
             if (element) {
-                var rectContent = contentNode.getBoundingClientRect();
-                var rectElement = element.getBoundingClientRect();
+                let rectContent = contentNode.getBoundingClientRect();
+                let rectElement = element.getBoundingClientRect();
                 maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;
             }
         }
 
-        this.setState({
-            'maxHeight': maxHeight
-        }, this._redrawScrollNavigator.bind(this, callback));
+        this.setState({ maxHeight }, this._redrawScrollNavigator.bind(this, callback));
     },
 
     _redrawScrollNavigator: function (callback) {
-        var target = this.refs.content;
+        var target = this._contentNode;
         var safeArea = 5;
         var height = Math.max(target.scrollHeight, target.clientHeight);
         var isShowScrollTop = (target.scrollTop > safeArea);
         var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
 
-        this.setState({
-            'isShowScrollTop': isShowScrollTop,
-            'isShowScrollBottom': isShowScrollBottom
-        }, this._redrawScrollNavigatorSuccess.bind(this, callback));
+        this.setState({ isShowScrollTop, isShowScrollBottom }, this._redrawScrollNavigatorSuccess.bind(this, callback));
     },
 
     _redrawScrollNavigatorSuccess: function (callback) {
@@ -83,7 +78,7 @@ export default {
     },
 
     _onWheel: function (event) {
-        var content = this.refs.content;
+        var content = this._contentNode;
         var delta = event.deltaY;
         var scrollTop = content.scrollTop;
         var offsetHeight = content.offsetHeight;
@@ -114,14 +109,14 @@ export default {
 
     _onScrollThrottle: function () {
         xevent.dispatch(
-            this.refs.content,
+            this._contentNode,
             'jsx-scroll-throttle',
-            { 'bubbles': true, 'cancelable': true }
+            { bubbles: true, cancelable: true }
         );
     },
 
     _animationScrollTop: function () {
-        this.refs.content.scrollTop--;
+        this._contentNode.scrollTop--;
         this._enterTopFrame = requestAnimationFrame(this._animationScrollTop);
     },
 
@@ -138,7 +133,7 @@ export default {
     },
 
     _animationScrollBottom: function () {
-        this.refs.content.scrollTop++;
+        this._contentNode.scrollTop++;
         this._enterBottomFrame = requestAnimationFrame(this._animationScrollBottom);
     },
 
@@ -158,7 +153,7 @@ export default {
      * @param {xb.Menuitem} menuitem
      */
     scrollIntoItem: function (menuitem) {
-        var content = this.refs.content;
+        var content = this._contentNode;
         var rectContent = content.getBoundingClientRect();
         var rectMenuitem = menuitem.getBoundingClientRect();
 
@@ -179,21 +174,19 @@ export default {
     },
 
     render: function () {
-        var classes = {
+        const classes = classnames({
             '_popup': true
-        };
+        });
 
-        classes = classnames(classes);
-
-        var scrollTopStyle = {
+        const scrollTopStyle = {
             'display': (this.state.isShowScrollTop ? 'block' : 'none')
         };
 
-        var scrollBottomStyle = {
+        const scrollBottomStyle = {
             'display': (this.state.isShowScrollBottom ? 'block' : 'none')
         };
 
-        var contentStyle = {
+        const contentStyle = {
             'maxHeight': (this.state.maxHeight ? this.state.maxHeight + 'px' : 'none')
         };
 
@@ -204,7 +197,7 @@ export default {
                     onMouseEnter={this._onMouseEnterTop}
                     onMouseLeave={this._onMouseLeaveTop} />
 
-                <div ref="content"
+                <div ref={(ref) => this._contentNode = ref}
                     style={contentStyle}
                     className="_popup-content"
                     onScroll={this._onScroll}

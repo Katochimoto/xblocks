@@ -12,9 +12,9 @@ import getParentMenu from 'utils/getParentMenu';
 import immediate from 'setimmediate2/src';
 import mixinElementMenu from 'mixin/element/menu';
 
-var forEach = Array.prototype.forEach;
+const forEach = Array.prototype.forEach;
 
-var menuCommon = {
+const MENU_COMMON = {
 
     /**
      * @param {xb.Menuitem} target
@@ -33,6 +33,7 @@ var menuCommon = {
      */
     tetherDefaultOptions: function () {
         var options = tetherDefaultOptions.call(this);
+
         options.constraints = [
             {
                 'to': 'scrollParent',
@@ -69,8 +70,8 @@ export default xb.Menu = create('xb-menu', [
 
             'xb-open': function () {
                 this._xbFocus = new Table(this, {
-                    'rowLoop': true,
-                    'colLoop': true
+                    rowLoop: true,
+                    colLoop: true
                 });
 
                 var component = this.xblock.getMountedComponent();
@@ -121,7 +122,7 @@ export default xb.Menu = create('xb-menu', [
              * @prop {Object} default options
              */
             defaultOptions: {
-                get: menuCommon.tetherDefaultOptions
+                get: MENU_COMMON.tetherDefaultOptions
             },
 
             /**
@@ -155,7 +156,7 @@ export default xb.Menu = create('xb-menu', [
             _closeAllSubmenu: function () {
                 forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    menuCommon.closeSubmenu
+                    MENU_COMMON.closeSubmenu
                 );
             },
 

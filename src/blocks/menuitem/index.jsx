@@ -43,15 +43,13 @@ export default xv.Menuitem = view.register('xb-menuitem', [
         },
 
         render: function () {
-            var classes = {
+            const classes = classnames({
                 'xb-menuitem': true,
                 '_disabled':   this.props.disabled,
                 '_focused':    this.props.focused,
                 '_selected':   this.props.selected,
                 '_submenu':    this.props.submenu
-            };
-
-            classes = classnames(classes);
+            });
 
             var children = [
                 <span className="_label" key="label">

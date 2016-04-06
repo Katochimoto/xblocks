@@ -2,8 +2,8 @@ import './index.styl';
 import './index.jsx';
 
 import { xb } from 'context';
-import context from 'context';
 import { create } from 'xblocks-core';
+import context from 'context';
 import lazyFocus from 'utils/lazyFocus';
 import getParentMenu from 'utils/getParentMenu';
 import merge from 'lodash/merge';
@@ -11,7 +11,7 @@ import removeChild from 'dom/removeChild';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementInputValueProps from 'mixin/element/inputValueProps';
 
-var menuitemCommon = {
+const MENUITEM_COMMON = {
     submenuAttrs: {
         'attachment': 'top left',
         'target-attachment': 'top right',
@@ -57,7 +57,7 @@ var menuitemCommon = {
                     var submenu = this._submenuInstance;
                     this._submenuInstance = undefined;
 
-                    menuitemCommon.submenu.cancel();
+                    MENUITEM_COMMON.submenu.cancel();
                     submenu.close();
                     removeChild(submenu);
                 }
@@ -92,19 +92,19 @@ export default xb.Menuitem = create('xb-menuitem', [
              * @callback
              */
             'xb-created': function () {
-                menuitemCommon.submenu.remove.call(this);
+                MENUITEM_COMMON.submenu.remove.call(this);
                 this.submenu = Boolean(this.content.trim());
             },
 
             /**
              * @callback
              */
-            'xb-repaint': menuitemCommon.submenu.remove,
+            'xb-repaint': MENUITEM_COMMON.submenu.remove,
 
             /**
              * @callback
              */
-            'xb-destroy': menuitemCommon.submenu.remove,
+            'xb-destroy': MENUITEM_COMMON.submenu.remove,
 
             /**
              * @callback
@@ -112,7 +112,7 @@ export default xb.Menuitem = create('xb-menuitem', [
             'xb-blur': function () {
                 this.focused = false;
 
-                menuitemCommon.submenu.cancel();
+                MENUITEM_COMMON.submenu.cancel();
 
                 var submenu = this.submenuInstance;
                 if (submenu && submenu.opened) {
@@ -128,13 +128,13 @@ export default xb.Menuitem = create('xb-menuitem', [
             'xb-focus': function (event) {
                 this.focused = true;
 
-                // open the submenu only event-mouse
-                if (event.detail.originalEvent.type !== 'keydown') {
-                    menuitemCommon.submenu.open(this.submenuInstance);
-
                 // scroll menu only keyboard events
-                } else {
+                if (event.detail.originalEvent.type === 'keydown') {
                     this.menuInstance.scrollIntoItem(this);
+
+                // open the submenu only event-mouse
+                } else {
+                    MENUITEM_COMMON.submenu.open(this.submenuInstance);
                 }
             }
         },
@@ -199,10 +199,10 @@ export default xb.Menuitem = create('xb-menuitem', [
                     this._submenuInstance = null;
 
                     if (this.submenu) {
-                        var targetClassName = '_menuitem-target-' + this.xuid;
-                        var menu = this.ownerDocument.createElement('xb-menu');
-                        var parentConstraints = this.menuInstance.getAttribute('constraints');
-                        var attrs = merge({ 'target': '.' + targetClassName }, menuitemCommon.submenuAttrs);
+                        let targetClassName = `_menuitem-target-${this.xuid}`;
+                        let menu = this.ownerDocument.createElement('xb-menu');
+                        let parentConstraints = this.menuInstance.getAttribute('constraints');
+                        let attrs = merge({ 'target': `.${targetClassName}` }, MENUITEM_COMMON.submenuAttrs);
 
                         // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
                         // меню может быть открыто в блоке со скролом,
@@ -211,13 +211,14 @@ export default xb.Menuitem = create('xb-menuitem', [
                             attrs.constraints = parentConstraints;
                         }
 
-                        for (var attrName in attrs) {
+                        for (let attrName in attrs) {
                             menu.setAttribute(attrName, attrs[ attrName ]);
                         }
 
                         menu.innerHTML = this.content;
 
                         this.classList.add(targetClassName);
+
                         this._submenuInstance = this.ownerDocument.body.appendChild(menu);
                     }
 

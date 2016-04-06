@@ -9,16 +9,16 @@ import noop from 'lodash/noop';
 import mixinElementMenu from 'mixin/element/menu';
 import mixinElementFocus from 'mixin/element/focus';
 
-var menuCommon = {
+const MENU_COMMON = {
     init: function () {
         if (this._xbFocus) {
             this._xbFocus.destroy();
         }
 
         this._xbFocus = new Table(this, {
-            'col': 'xb-menu-inline:not([disabled])',
-            'rowLoop': true,
-            'colLoop': true
+            col: 'xb-menu-inline:not([disabled])',
+            rowLoop: true,
+            colLoop: true
         });
     }
 };
@@ -40,9 +40,9 @@ export default xb.MenuInline = create('xb-menu-inline', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': menuCommon.init,
+            'xb-created': MENU_COMMON.init,
 
-            'xb-repaint': menuCommon.init,
+            'xb-repaint': MENU_COMMON.init,
 
             blur: function () {
                 if (!this.hasOpenSubmenu) {

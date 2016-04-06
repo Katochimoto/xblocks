@@ -6365,11 +6365,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _context2 = _interopRequireDefault(_context);
 
+	var _xblocksCore = __webpack_require__(15);
+
 	var _tether = __webpack_require__(153);
 
 	var _tether2 = _interopRequireDefault(_tether);
-
-	var _xblocksCore = __webpack_require__(15);
 
 	var _tetherDefaultOptions = __webpack_require__(154);
 
@@ -6389,7 +6389,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var popupCommon = {
+	var POPUP_COMMON = {
 	    onOpen: function onOpen() {
 	        this.focus();
 	        _xblocksCore.event.dispatch(this, 'xb-open');
@@ -6416,13 +6416,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    fillOptionsFromAttrs: function fillOptionsFromAttrs(options, attrs) {
 	        for (var attrName in attrs) {
-	            var params = popupCommon.tetherAttrsAlign[attrName];
+	            var params = POPUP_COMMON.tetherAttrsAlign[attrName];
 	            if (!params) {
 	                continue;
 	            }
 
 	            var optionName = params[0];
-	            var checker = params[1] || popupCommon.checkDefaultAttr;
+	            var checker = params[1] || POPUP_COMMON.checkDefaultAttr;
 	            var value = attrs[attrName];
 
 	            if (checker(value)) {
@@ -6473,8 +6473,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * xb-popup html element
 	 *
-	 * @constructor
+	 * @class xb.Popup
 	 * @augments HTMLElement
+	 * @memberof xb
 	 * @mixes .mixin.eFocus
 	 */
 	exports.default = _context.xb.Popup = (0, _xblocksCore.create)('xb-popup', [_focus2.default, {
@@ -6532,7 +6533,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    tetherAttrs['target-parent'] = this.parentNode;
 	                }
 
-	                popupCommon.fillOptionsFromAttrs(this._options, tetherAttrs);
+	                POPUP_COMMON.fillOptionsFromAttrs(this._options, tetherAttrs);
 
 	                return this._options;
 	            }
@@ -6603,7 +6604,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            tether.target._xbpopup = this;
 
 	            // FireFox does not set the focus without delay
-	            _src2.default.setImmediate(popupCommon.onOpen.bind(this));
+	            _src2.default.setImmediate(POPUP_COMMON.onOpen.bind(this));
 
 	            return true;
 	        },
@@ -6627,7 +6628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            tether.clearCache();
 
 	            // FireFox does not fire a blur event
-	            _src2.default.setImmediate(popupCommon.onClose.bind(this));
+	            _src2.default.setImmediate(POPUP_COMMON.onClose.bind(this));
 
 	            return true;
 	        },
@@ -6670,15 +6671,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _classnames = __webpack_require__(16);
+	var _classnames2 = __webpack_require__(16);
 
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _classnames3 = _interopRequireDefault(_classnames2);
 
 	var _commonAttrs = __webpack_require__(21);
 
 	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	/**
 	 * The template node xb-popup
@@ -6694,19 +6697,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    mixins: [_reactAddonsPureRenderMixin2.default],
 
 	    propTypes: {
-	        'close': _react.PropTypes.bool,
-	        'theme': _react.PropTypes.oneOf(['blank', 'error', 'island', 'modal', 'normal'])
+	        close: _react.PropTypes.bool,
+	        theme: _react.PropTypes.oneOf(['blank', 'error', 'island', 'modal', 'normal'])
 	    },
 
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            'close': false,
-	            'theme': 'normal'
+	            close: false,
+	            theme: 'normal'
 	        };
 	    },
 
 	    onClickClose: function onClickClose() {
-	        _xblocksCore.event.dispatch(_reactDom2.default.findDOMNode(this), 'jsx-click-close', { 'bubbles': true, 'cancelable': true });
+	        _xblocksCore.event.dispatch(_reactDom2.default.findDOMNode(this), 'jsx-click-close', { bubbles: true, cancelable: true });
 	    },
 
 	    render: function render() {
@@ -6729,15 +6732,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'className': '_buttons'
 	        }));
 
-	        var classes = {
+	        var classes = (0, _classnames3.default)(_defineProperty({
 	            '_popup': true
-	        };
-
-	        if (this.props.theme) {
-	            classes['_theme-' + this.props.theme] = true;
-	        }
-
-	        classes = (0, _classnames2.default)(classes);
+	        }, '_theme-' + this.props.theme, Boolean(this.props.theme)));
 
 	        return React.createElement(
 	            'div',
@@ -7543,7 +7540,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var forEach = Array.prototype.forEach;
 
-	var menuCommon = {
+	var MENU_COMMON = {
 
 	    /**
 	     * @param {xb.Menuitem} target
@@ -7562,6 +7559,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    tetherDefaultOptions: function tetherDefaultOptions() {
 	        var options = _tetherDefaultOptions3.default.call(this);
+
 	        options.constraints = [{
 	            'to': 'scrollParent',
 	            'attachment': 'element'
@@ -7592,8 +7590,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        'xb-open': function xbOpen() {
 	            this._xbFocus = new _Table2.default(this, {
-	                'rowLoop': true,
-	                'colLoop': true
+	                rowLoop: true,
+	                colLoop: true
 	            });
 
 	            var component = this.xblock.getMountedComponent();
@@ -7643,7 +7641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @prop {Object} default options
 	         */
 	        defaultOptions: {
-	            get: menuCommon.tetherDefaultOptions
+	            get: MENU_COMMON.tetherDefaultOptions
 	        },
 
 	        /**
@@ -7675,7 +7673,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    methods: {
 	        _closeAllSubmenu: function _closeAllSubmenu() {
-	            forEach.call(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), menuCommon.closeSubmenu);
+	            forEach.call(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), MENU_COMMON.closeSubmenu);
 	        },
 
 	        _afterOpen: function _afterOpen() {
@@ -7799,9 +7797,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = {
 	    getInitialState: function getInitialState() {
 	        return {
-	            'maxHeight': 0,
-	            'isShowScrollTop': false,
-	            'isShowScrollBottom': false
+	            maxHeight: 0,
+	            isShowScrollTop: false,
+	            isShowScrollBottom: false
 	        };
 	    },
 
@@ -7811,8 +7809,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._lockScroll = false;
 	        this._onScroll = (0, _throttleAnimationFrame2.default)(this._onScroll);
 	        this._onScrollThrottle = (0, _throttle2.default)(this._onScrollThrottle, 500, {
-	            'leading': true,
-	            'trailing': false
+	            leading: true,
+	            trailing: false
 	        });
 	    },
 
@@ -7827,7 +7825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var maxHeight = 0;
 
 	        if (size > 0) {
-	            var contentNode = this.refs.content;
+	            var contentNode = this._contentNode;
 	            var element = contentNode.children[size - 1];
 
 	            if (element) {
@@ -7837,22 +7835,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 
-	        this.setState({
-	            'maxHeight': maxHeight
-	        }, this._redrawScrollNavigator.bind(this, callback));
+	        this.setState({ maxHeight: maxHeight }, this._redrawScrollNavigator.bind(this, callback));
 	    },
 
 	    _redrawScrollNavigator: function _redrawScrollNavigator(callback) {
-	        var target = this.refs.content;
+	        var target = this._contentNode;
 	        var safeArea = 5;
 	        var height = Math.max(target.scrollHeight, target.clientHeight);
 	        var isShowScrollTop = target.scrollTop > safeArea;
 	        var isShowScrollBottom = target.scrollTop + target.clientHeight < height - safeArea;
 
-	        this.setState({
-	            'isShowScrollTop': isShowScrollTop,
-	            'isShowScrollBottom': isShowScrollBottom
-	        }, this._redrawScrollNavigatorSuccess.bind(this, callback));
+	        this.setState({ isShowScrollTop: isShowScrollTop, isShowScrollBottom: isShowScrollBottom }, this._redrawScrollNavigatorSuccess.bind(this, callback));
 	    },
 
 	    _redrawScrollNavigatorSuccess: function _redrawScrollNavigatorSuccess(callback) {
@@ -7870,7 +7863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    _onWheel: function _onWheel(event) {
-	        var content = this.refs.content;
+	        var content = this._contentNode;
 	        var delta = event.deltaY;
 	        var scrollTop = content.scrollTop;
 	        var offsetHeight = content.offsetHeight;
@@ -7898,11 +7891,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    _onScrollThrottle: function _onScrollThrottle() {
-	        _xblocksCore.event.dispatch(this.refs.content, 'jsx-scroll-throttle', { 'bubbles': true, 'cancelable': true });
+	        _xblocksCore.event.dispatch(this._contentNode, 'jsx-scroll-throttle', { bubbles: true, cancelable: true });
 	    },
 
 	    _animationScrollTop: function _animationScrollTop() {
-	        this.refs.content.scrollTop--;
+	        this._contentNode.scrollTop--;
 	        this._enterTopFrame = (0, _requestAnimationFrame.requestAnimationFrame)(this._animationScrollTop);
 	    },
 
@@ -7919,7 +7912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    _animationScrollBottom: function _animationScrollBottom() {
-	        this.refs.content.scrollTop++;
+	        this._contentNode.scrollTop++;
 	        this._enterBottomFrame = (0, _requestAnimationFrame.requestAnimationFrame)(this._animationScrollBottom);
 	    },
 
@@ -7939,7 +7932,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {xb.Menuitem} menuitem
 	     */
 	    scrollIntoItem: function scrollIntoItem(menuitem) {
-	        var content = this.refs.content;
+	        var content = this._contentNode;
 	        var rectContent = content.getBoundingClientRect();
 	        var rectMenuitem = menuitem.getBoundingClientRect();
 
@@ -7959,11 +7952,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    render: function render() {
-	        var classes = {
-	            '_popup': true
-	        };
+	        var _this = this;
 
-	        classes = (0, _classnames2.default)(classes);
+	        var classes = (0, _classnames2.default)({
+	            '_popup': true
+	        });
 
 	        var scrollTopStyle = {
 	            'display': this.state.isShowScrollTop ? 'block' : 'none'
@@ -7984,7 +7977,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                className: '_popup-scroll-top',
 	                onMouseEnter: this._onMouseEnterTop,
 	                onMouseLeave: this._onMouseLeaveTop }),
-	            React.createElement('div', { ref: 'content',
+	            React.createElement('div', { ref: function ref(_ref) {
+	                    return _this._contentNode = _ref;
+	                },
 	                style: contentStyle,
 	                className: '_popup-content',
 	                onScroll: this._onScroll,
@@ -8303,19 +8298,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    targetElement.style.left = event.pageX + 'px';
 
 	    menuElement.open({
-	        'target': targetElement,
-	        'attachment': 'top left',
-	        'targetAttachment': 'bottom left',
-	        'targetModifier': undefined,
-	        'optimizations': {
-	            'moveElement': false
+	        target: targetElement,
+	        attachment: 'top left',
+	        targetAttachment: 'bottom left',
+	        targetModifier: undefined,
+	        optimizations: {
+	            moveElement: false
 	        },
-	        'constraints': [{
-	            'to': 'scrollParent',
-	            'attachment': 'element'
+	        constraints: [{
+	            to: 'scrollParent',
+	            attachment: 'element'
 	        }, {
-	            'to': 'window',
-	            'attachment': 'element'
+	            to: 'window',
+	            attachment: 'element'
 	        }]
 	    });
 	}), false);
@@ -10226,7 +10221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var parent = node;
 
 	    while (parent) {
-	        if (parent.xtagName === 'xb-menu' || parent.xtagName === 'xb-menu-inline') {
+	        if (parent.xtagName === MENU_TAG || parent.xtagName === MENU_INLINE_TAG) {
 	            return parent;
 	        }
 
@@ -10235,6 +10230,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return null;
 	};
+
+	var MENU_TAG = 'xb-menu';
+	var MENU_INLINE_TAG = 'xb-menu-inline';
+
+	/**
+	 * @param {HTMLElement} node
+	 * @returns {HTMLElement|null}
+	 */
 
 /***/ },
 /* 227 */
@@ -10371,16 +10374,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var menuCommon = {
+	var MENU_COMMON = {
 	    init: function init() {
 	        if (this._xbFocus) {
 	            this._xbFocus.destroy();
 	        }
 
 	        this._xbFocus = new _Table2.default(this, {
-	            'col': 'xb-menu-inline:not([disabled])',
-	            'rowLoop': true,
-	            'colLoop': true
+	            col: 'xb-menu-inline:not([disabled])',
+	            rowLoop: true,
+	            colLoop: true
 	        });
 	    }
 	};
@@ -10398,9 +10401,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    prototype: Object.create(HTMLElement.prototype),
 
 	    events: {
-	        'xb-created': menuCommon.init,
+	        'xb-created': MENU_COMMON.init,
 
-	        'xb-repaint': menuCommon.init,
+	        'xb-repaint': MENU_COMMON.init,
 
 	        blur: function blur() {
 	            if (!this.hasOpenSubmenu) {
@@ -10551,7 +10554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var menuitemCommon = {
+	var MENUITEM_COMMON = {
 	    submenuAttrs: {
 	        'attachment': 'top left',
 	        'target-attachment': 'top right',
@@ -10595,7 +10598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var submenu = this._submenuInstance;
 	                    this._submenuInstance = undefined;
 
-	                    menuitemCommon.submenu.cancel();
+	                    MENUITEM_COMMON.submenu.cancel();
 	                    submenu.close();
 	                    (0, _removeChild2.default)(submenu);
 	                }
@@ -10626,19 +10629,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @callback
 	         */
 	        'xb-created': function xbCreated() {
-	            menuitemCommon.submenu.remove.call(this);
+	            MENUITEM_COMMON.submenu.remove.call(this);
 	            this.submenu = Boolean(this.content.trim());
 	        },
 
 	        /**
 	         * @callback
 	         */
-	        'xb-repaint': menuitemCommon.submenu.remove,
+	        'xb-repaint': MENUITEM_COMMON.submenu.remove,
 
 	        /**
 	         * @callback
 	         */
-	        'xb-destroy': menuitemCommon.submenu.remove,
+	        'xb-destroy': MENUITEM_COMMON.submenu.remove,
 
 	        /**
 	         * @callback
@@ -10646,7 +10649,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'xb-blur': function xbBlur() {
 	            this.focused = false;
 
-	            menuitemCommon.submenu.cancel();
+	            MENUITEM_COMMON.submenu.cancel();
 
 	            var submenu = this.submenuInstance;
 	            if (submenu && submenu.opened) {
@@ -10662,13 +10665,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'xb-focus': function xbFocus(event) {
 	            this.focused = true;
 
-	            // open the submenu only event-mouse
-	            if (event.detail.originalEvent.type !== 'keydown') {
-	                menuitemCommon.submenu.open(this.submenuInstance);
+	            // scroll menu only keyboard events
+	            if (event.detail.originalEvent.type === 'keydown') {
+	                this.menuInstance.scrollIntoItem(this);
 
-	                // scroll menu only keyboard events
+	                // open the submenu only event-mouse
 	            } else {
-	                    this.menuInstance.scrollIntoItem(this);
+	                    MENUITEM_COMMON.submenu.open(this.submenuInstance);
 	                }
 	        }
 	    },
@@ -10736,7 +10739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var targetClassName = '_menuitem-target-' + this.xuid;
 	                    var menu = this.ownerDocument.createElement('xb-menu');
 	                    var parentConstraints = this.menuInstance.getAttribute('constraints');
-	                    var attrs = (0, _merge2.default)({ 'target': '.' + targetClassName }, menuitemCommon.submenuAttrs);
+	                    var attrs = (0, _merge2.default)({ 'target': '.' + targetClassName }, MENUITEM_COMMON.submenuAttrs);
 
 	                    // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
 	                    // меню может быть открыто в блоке со скролом,
@@ -10752,6 +10755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    menu.innerHTML = this.content;
 
 	                    this.classList.add(targetClassName);
+
 	                    this._submenuInstance = this.ownerDocument.body.appendChild(menu);
 	                }
 
@@ -10836,15 +10840,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    render: function render() {
-	        var classes = {
+	        var classes = (0, _classnames2.default)({
 	            'xb-menuitem': true,
 	            '_disabled': this.props.disabled,
 	            '_focused': this.props.focused,
 	            '_selected': this.props.selected,
 	            '_submenu': this.props.submenu
-	        };
-
-	        classes = (0, _classnames2.default)(classes);
+	        });
 
 	        var children = [React.createElement(
 	            'span',

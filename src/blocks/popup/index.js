@@ -2,15 +2,15 @@ import './index.styl';
 import './index.jsx';
 
 import { xb } from 'context';
+import { create, event as xevent, dom } from 'xblocks-core';
 import Tether from 'tether';
 import context from 'context';
-import { create, event as xevent, dom } from 'xblocks-core';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
 import assign from 'lodash/assign';
 import immediate from 'setimmediate2/src';
 import mixinElementFocus from 'mixin/element/focus';
 
-var popupCommon = {
+const POPUP_COMMON = {
     onOpen: function () {
         this.focus();
         xevent.dispatch(this, 'xb-open');
@@ -36,15 +36,15 @@ var popupCommon = {
      * @param {Object} attrs attributes of element
      */
     fillOptionsFromAttrs: function (options, attrs) {
-        for (var attrName in attrs) {
-            var params = popupCommon.tetherAttrsAlign[ attrName ];
+        for (let attrName in attrs) {
+            let params = POPUP_COMMON.tetherAttrsAlign[ attrName ];
             if (!params) {
                 continue;
             }
 
-            var optionName = params[0];
-            var checker = params[1] || popupCommon.checkDefaultAttr;
-            var value = attrs[ attrName ];
+            let optionName = params[0];
+            let checker = params[1] || POPUP_COMMON.checkDefaultAttr;
+            let value = attrs[ attrName ];
 
             if (checker(value)) {
                 if (typeof optionName === 'function') {
@@ -110,8 +110,9 @@ var popupCommon = {
 /**
  * xb-popup html element
  *
- * @constructor
+ * @class xb.Popup
  * @augments HTMLElement
+ * @memberof xb
  * @mixes .mixin.eFocus
  */
 export default xb.Popup = create('xb-popup', [
@@ -172,7 +173,7 @@ export default xb.Popup = create('xb-popup', [
                         tetherAttrs[ 'target-parent' ] = this.parentNode;
                     }
 
-                    popupCommon.fillOptionsFromAttrs(this._options, tetherAttrs);
+                    POPUP_COMMON.fillOptionsFromAttrs(this._options, tetherAttrs);
 
                     return this._options;
                 }
@@ -243,7 +244,7 @@ export default xb.Popup = create('xb-popup', [
                 tether.target._xbpopup = this;
 
                 // FireFox does not set the focus without delay
-                immediate.setImmediate(popupCommon.onOpen.bind(this));
+                immediate.setImmediate(POPUP_COMMON.onOpen.bind(this));
 
                 return true;
             },
@@ -267,7 +268,7 @@ export default xb.Popup = create('xb-popup', [
                 tether.clearCache();
 
                 // FireFox does not fire a blur event
-                immediate.setImmediate(popupCommon.onClose.bind(this));
+                immediate.setImmediate(POPUP_COMMON.onClose.bind(this));
 
                 return true;
             },

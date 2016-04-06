@@ -23,8 +23,8 @@ export default xv.Popup = view.register('xb-popup', [
         mixins: [ PureRenderMixin ],
 
         propTypes: {
-            'close': PropTypes.bool,
-            'theme': PropTypes.oneOf([
+            close: PropTypes.bool,
+            theme: PropTypes.oneOf([
                 'blank',
                 'error',
                 'island',
@@ -35,8 +35,8 @@ export default xv.Popup = view.register('xb-popup', [
 
         getDefaultProps: function () {
             return {
-                'close': false,
-                'theme': 'normal'
+                close: false,
+                theme: 'normal'
             };
         },
 
@@ -44,7 +44,7 @@ export default xv.Popup = view.register('xb-popup', [
             xevent.dispatch(
                 ReactDOM.findDOMNode(this),
                 'jsx-click-close',
-                { 'bubbles': true, 'cancelable': true }
+                { bubbles: true, cancelable: true }
             );
         },
 
@@ -72,15 +72,10 @@ export default xv.Popup = view.register('xb-popup', [
                 'className': '_buttons'
             }));
 
-            var classes = {
-                '_popup': true
-            };
-
-            if (this.props.theme) {
-                classes[ '_theme-' + this.props.theme ] = true;
-            }
-
-            classes = classnames(classes);
+            const classes = classnames({
+                '_popup': true,
+                [ `_theme-${this.props.theme}` ]: Boolean(this.props.theme)
+            });
 
             return (
                 <div className={classes} tabIndex="0">

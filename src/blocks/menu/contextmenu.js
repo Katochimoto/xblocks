@@ -34,21 +34,21 @@ context.document.addEventListener('contextmenu', delegate('[contextmenu]', funct
     targetElement.style.left = event.pageX + 'px';
 
     menuElement.open({
-        'target': targetElement,
-        'attachment': 'top left',
-        'targetAttachment': 'bottom left',
-        'targetModifier': undefined,
-        'optimizations': {
-            'moveElement': false
+        target: targetElement,
+        attachment: 'top left',
+        targetAttachment: 'bottom left',
+        targetModifier: undefined,
+        optimizations: {
+            moveElement: false
         },
-        'constraints': [
+        constraints: [
             {
-                'to': 'scrollParent',
-                'attachment': 'element'
+                to: 'scrollParent',
+                attachment: 'element'
             },
             {
-                'to': 'window',
-                'attachment': 'element'
+                to: 'window',
+                attachment: 'element'
             }
         ]
     });
