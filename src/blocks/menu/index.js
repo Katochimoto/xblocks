@@ -7,7 +7,7 @@ import { create } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
 import Popup from '../popup';
-import Table from 'utils/Table';
+import TableNavigator from 'utils/TableNavigator';
 import getParentMenu from 'utils/getParentMenu';
 import immediate from 'setimmediate2/src';
 import mixinElementMenu from 'mixin/element/menu';
@@ -69,7 +69,7 @@ export default xb.Menu = create('xb-menu', [
             },
 
             'xb-open': function () {
-                this._xbFocus = new Table(this, {
+                this._xbFocus = new TableNavigator(this, {
                     rowLoop: true,
                     colLoop: true
                 });

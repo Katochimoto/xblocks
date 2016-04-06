@@ -22,61 +22,55 @@ export default xv.Checkbox = view.register('xb-checkbox', [
         mixins: [ PureRenderMixin ],
 
         propTypes: {
-            'autofocus':    PropTypes.bool,
-            'checked':      PropTypes.bool,
-            'for':          PropTypes.string,
-            'form':         PropTypes.string,
-            'name':         PropTypes.string,
-            'required':     PropTypes.bool,
-            'size':         PropTypes.oneOf([ 'm', 'l' ]),
-            'value':        PropTypes.string
+            autofocus:    PropTypes.bool,
+            checked:      PropTypes.bool,
+            for:          PropTypes.string,
+            form:         PropTypes.string,
+            name:         PropTypes.string,
+            required:     PropTypes.bool,
+            size:         PropTypes.oneOf([ 'm', 'l' ]),
+            value:        PropTypes.string
         },
 
         getDefaultProps: function () {
             return {
-                'autofocus':    false,
-                'checked':      false,
-                'children':     '',
-                'disabled':     false,
-                'required':     false,
-                'size':         'm',
-                'tabindex':     '0',
-                'value':        'on'
+                autofocus:    false,
+                checked:      false,
+                children:     '',
+                disabled:     false,
+                required:     false,
+                size:         'm',
+                tabindex:     '0',
+                value:        'on'
             };
         },
 
         getInitialState: function () {
             return {
-                'checked': this.props.checked
+                checked: this.props.checked
             };
         },
 
         componentWillReceiveProps: function (nextProps) {
             this.setState({
-                'checked': nextProps.checked
+                checked: nextProps.checked
             });
         },
 
         _onChange: function (event) {
             this.setState({
-                'checked': event.target.checked
+                checked: event.target.checked
             });
         },
 
         render: function () {
-            var classes = {
+            const classes = classnames({
                 'xb-checkbox': true,
                 '_disabled': this.props.disabled,
                 [ `_size-${this.props.size}` ]: true
-            };
+            });
 
-            classes = classnames(classes);
-
-            var tabIndex = this.props.tabindex;
-
-            if (this.props.disabled) {
-                tabIndex = '-1';
-            }
+            const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 
             return (
                 <label className={classes}

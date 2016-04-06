@@ -64,7 +64,7 @@ export default {
                 var component = this.xblock && this.xblock.getMountedComponent();
 
                 if (component) {
-                    component.setState({ 'value': String(value) });
+                    component.setState({ value: String(value) });
                 }
             }
         },

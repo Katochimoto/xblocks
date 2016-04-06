@@ -1,7 +1,7 @@
 import { xv } from 'context';
 import { PropTypes } from 'react';
 import { view } from 'xblocks-core';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 
 /**
@@ -29,13 +29,13 @@ export default xv.SpeechRecognition = view.register('xb-speech-recognition', [
         },
 
         render: function () {
-            var classes = classNames({
+            const classes = classnames({
                 'xb-speech-recognition': true,
                 '_active': this.props.active,
                 '_disabled': this.props.disabled
             });
 
-            var props = {
+            const props = {
                 'class': classes,
                 'type': this.props.active ? 'mic-on' : 'mic-off'
             };

@@ -74,8 +74,8 @@ const MENUITEM_COMMON = {
  * @augments HTMLElement
  * @mixes xblocks.mixin.eDisabled
  * @mixes xblocks.mixin.eInputValueProps
- * @listens xblocks.utils:Table~event:xb-focus
- * @listens xblocks.utils:Table~event:xb-blur
+ * @listens xblocks.utils:TableNavigator~event:xb-focus
+ * @listens xblocks.utils:TableNavigator~event:xb-blur
  * @listens xblocks.Element~event:xb-repaint
  * @listens xblocks.Element~event:xb-created
  * @listens xblocks.Element~event:xb-destroy

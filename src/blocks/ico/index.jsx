@@ -22,10 +22,10 @@ export default xv.Ico = view.register('xb-ico', [
         mixins: [ PureRenderMixin ],
 
         propTypes: {
-            'active':   PropTypes.bool,
-            'size':     PropTypes.oneOf([ 's', 'm' ]),
-            'value':    PropTypes.string,
-            'type':     PropTypes.oneOf([
+            active:   PropTypes.bool,
+            size:     PropTypes.oneOf([ 's', 'm' ]),
+            value:    PropTypes.string,
+            type:     PropTypes.oneOf([
                 'attention',
                 'check',
                 'close',
@@ -60,24 +60,22 @@ export default xv.Ico = view.register('xb-ico', [
 
         getDefaultProps: function () {
             return {
-                'active':   false,
-                'disabled': false,
-                'size':     's'
+                active:   false,
+                disabled: false,
+                size:     's'
             };
         },
 
         render: function () {
-            var classes = {
+            const classes = classnames({
                 'xb-ico':    true,
                 '_active':   this.props.active,
                 '_disabled': this.props.disabled,
                 [ `_type-${this.props.type}` ]: true,
                 [ `_size-${this.props.size}` ]: true
-            };
+            });
 
-            classes = classnames(classes);
-
-            var content = this.props.value || this.props.children || String.fromCharCode(160);
+            const content = this.props.value || this.props.children || String.fromCharCode(160);
 
             return (
                 <span className={classes} data-xb-content={this.props._uid}>

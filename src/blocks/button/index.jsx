@@ -93,24 +93,17 @@ export default xv.Button = view.register('xb-button', [
         },
 
         render: function () {
-            var classes = {
+            const classes = classnames({
                 'xb-button': true,
                 '_disabled': this.props.disabled,
                 '_focused': this.state.focused,
                 [ `_theme-${this.props.theme}_size-${this.props.size}` ]: true
-            };
+            });
 
-            classes = classnames(classes);
-
-            var icoProps = filterProps(/^xb-ico-/, this.props);
-            var tabIndex = this.props.tabindex;
-            var type = this.props.type;
-
-            if (this.props.disabled) {
-                tabIndex = '-1';
-            }
-
-            var content = (
+            const icoProps = filterProps(/^xb-ico-/, this.props);
+            const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
+            const type = this.props.type;
+            const content = (
                 <Content key="content" _uid={this.props._uid} ico={icoProps}>
                     {this.props.children}
                 </Content>
@@ -175,18 +168,6 @@ export default xv.Button = view.register('xb-button', [
                     );
 
                     children.push(content);
-
-                    /*
-                    children.push(
-                        <xv.Button {...this.props} key="content" type="inline" tabindex="null" />
-                    );
-
-                    classes = classnames({
-                        'xb-button': true,
-                        '_theme-check': true,
-                        '_disabled': this.props.disabled
-                    });
-                    */
 
                 } else {
                     children.push(

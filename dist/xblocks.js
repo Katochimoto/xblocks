@@ -704,9 +704,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _xblocksCore = __webpack_require__(15);
 
-	var _classnames = __webpack_require__(16);
+	var _classnames2 = __webpack_require__(16);
 
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _classnames3 = _interopRequireDefault(_classnames2);
 
 	var _reactAddonsPureRenderMixin = __webpack_require__(17);
 
@@ -734,30 +734,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    mixins: [_reactAddonsPureRenderMixin2.default],
 
 	    propTypes: {
-	        'active': _react.PropTypes.bool,
-	        'size': _react.PropTypes.oneOf(['s', 'm']),
-	        'value': _react.PropTypes.string,
-	        'type': _react.PropTypes.oneOf(['attention', 'check', 'close', 'download', 'download-white', 'dropdown', 'eye', 'help', 'link', 'link-white', 'mail', 'mic-off', 'mic-on', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'upload', 'upload-white', 'vk'])
+	        active: _react.PropTypes.bool,
+	        size: _react.PropTypes.oneOf(['s', 'm']),
+	        value: _react.PropTypes.string,
+	        type: _react.PropTypes.oneOf(['attention', 'check', 'close', 'download', 'download-white', 'dropdown', 'eye', 'help', 'link', 'link-white', 'mail', 'mic-off', 'mic-on', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'upload', 'upload-white', 'vk'])
 	    },
 
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            'active': false,
-	            'disabled': false,
-	            'size': 's'
+	            active: false,
+	            disabled: false,
+	            size: 's'
 	        };
 	    },
 
 	    render: function render() {
-	        var _classes;
+	        var _classnames;
 
-	        var classes = (_classes = {
+	        var classes = (0, _classnames3.default)((_classnames = {
 	            'xb-ico': true,
 	            '_active': this.props.active,
 	            '_disabled': this.props.disabled
-	        }, _defineProperty(_classes, '_type-' + this.props.type, true), _defineProperty(_classes, '_size-' + this.props.size, true), _classes);
-
-	        classes = (0, _classnames2.default)(classes);
+	        }, _defineProperty(_classnames, '_type-' + this.props.type, true), _defineProperty(_classnames, '_size-' + this.props.size, true), _classnames));
 
 	        var content = this.props.value || this.props.children || String.fromCharCode(160);
 
@@ -1020,14 +1018,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	exports.default = {
 	    propTypes: {
-	        'accesskey': _react.PropTypes.string,
-	        'contextmenu': _react.PropTypes.string,
-	        'dir': _react.PropTypes.oneOf(['ltr', 'rtl']),
-	        'disabled': _react.PropTypes.bool,
-	        'hidden': _react.PropTypes.bool,
-	        'spellcheck': _react.PropTypes.bool,
-	        'tabindex': _react.PropTypes.string,
-	        'title': _react.PropTypes.string
+	        accesskey: _react.PropTypes.string,
+	        contextmenu: _react.PropTypes.string,
+	        dir: _react.PropTypes.oneOf(['ltr', 'rtl']),
+	        disabled: _react.PropTypes.bool,
+	        hidden: _react.PropTypes.bool,
+	        spellcheck: _react.PropTypes.bool,
+	        tabindex: _react.PropTypes.string,
+	        title: _react.PropTypes.string
 	    }
 	};
 
@@ -4830,19 +4828,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.default = function (tagName) {
 	    var props = _xblocksCore.utils.propTypes(tagName);
-	    var exportProps = {};
+	    var propTypes = {};
 	    var prefix = tagName + '-';
 	    var p;
 
 	    for (p in props) {
 	        if (props.hasOwnProperty(p) && p[0] !== '_') {
-	            exportProps[prefix + p] = props[p];
+	            propTypes[prefix + p] = props[p];
 	        }
 	    }
 
-	    return {
-	        propTypes: exportProps
-	    };
+	    return { propTypes: propTypes };
 	};
 
 	var _xblocksCore = __webpack_require__(15);
@@ -5133,7 +5129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var component = this.xblock && this.xblock.getMountedComponent();
 
 	                if (component) {
-	                    component.setState({ 'value': String(value) });
+	                    component.setState({ value: String(value) });
 	                }
 	            }
 	        },
@@ -5256,9 +5252,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _classnames = __webpack_require__(16);
+	var _classnames2 = __webpack_require__(16);
 
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _classnames3 = _interopRequireDefault(_classnames2);
 
 	var _resetLastRadioChecked = __webpack_require__(136);
 
@@ -5364,22 +5360,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    render: function render() {
-	        var classes = _defineProperty({
+	        var classes = (0, _classnames3.default)(_defineProperty({
 	            'xb-button': true,
 	            '_disabled': this.props.disabled,
 	            '_focused': this.state.focused
-	        }, '_theme-' + this.props.theme + '_size-' + this.props.size, true);
-
-	        classes = (0, _classnames2.default)(classes);
+	        }, '_theme-' + this.props.theme + '_size-' + this.props.size, true));
 
 	        var icoProps = (0, _filterProps2.default)(/^xb-ico-/, this.props);
-	        var tabIndex = this.props.tabindex;
+	        var tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 	        var type = this.props.type;
-
-	        if (this.props.disabled) {
-	            tabIndex = '-1';
-	        }
-
 	        var content = React.createElement(
 	            _content2.default,
 	            { key: 'content', _uid: this.props._uid, ico: icoProps },
@@ -5443,36 +5432,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    value: this.props.value }));
 
 	                children.push(content);
-
-	                /*
-	                children.push(
-	                    <xv.Button {...this.props} key="content" type="inline" tabindex="null" />
-	                );
-	                 classes = classnames({
-	                    'xb-button': true,
-	                    '_theme-check': true,
-	                    '_disabled': this.props.disabled
-	                });
-	                */
 	            } else {
-	                    children.push(React.createElement(
+	                children.push(React.createElement(
+	                    'span',
+	                    { key: 'file-intruder', className: '_xb-file-intruder' },
+	                    React.createElement(
 	                        'span',
-	                        { key: 'file-intruder', className: '_xb-file-intruder' },
-	                        React.createElement(
-	                            'span',
-	                            { className: '_xb-file-intruder-inner' },
-	                            React.createElement('input', { className: '_xb-file-intruder-input',
-	                                type: 'button',
-	                                form: this.props.form,
-	                                disabled: this.props.disabled,
-	                                autoFocus: this.props.autofocus,
-	                                tabIndex: tabIndex }),
-	                            React.createElement('span', { className: '_xb-file-intruder-focus' })
-	                        )
-	                    ));
+	                        { className: '_xb-file-intruder-inner' },
+	                        React.createElement('input', { className: '_xb-file-intruder-input',
+	                            type: 'button',
+	                            form: this.props.form,
+	                            disabled: this.props.disabled,
+	                            autoFocus: this.props.autofocus,
+	                            tabIndex: tabIndex }),
+	                        React.createElement('span', { className: '_xb-file-intruder-focus' })
+	                    )
+	                ));
 
-	                    children.push(content);
-	                }
+	                children.push(content);
+	            }
 
 	            return React.createElement(
 	                'label',
@@ -5515,16 +5493,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.default = function (element, name) {
 	    name = String(name);
-	    var lastCheckedElement = checkedCache[name];
+	    var lastCheckedElement = CHECKED_CACHE[name];
 
 	    if (lastCheckedElement && lastCheckedElement !== element) {
 	        lastCheckedElement.checked = false;
 	    }
 
-	    checkedCache[name] = element;
+	    CHECKED_CACHE[name] = element;
 	};
 
-	var checkedCache = {};
+	var CHECKED_CACHE = {};
 
 	/**
 	 * FIXME don't work cloneNode
@@ -5854,9 +5832,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _classnames = __webpack_require__(16);
+	var _classnames2 = __webpack_require__(16);
 
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _classnames3 = _interopRequireDefault(_classnames2);
 
 	var _commonAttrs = __webpack_require__(21);
 
@@ -5880,34 +5858,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    mixins: [_reactAddonsPureRenderMixin2.default],
 
 	    propTypes: {
-	        'href': _react.PropTypes.string,
-	        'name': _react.PropTypes.string,
-	        'target': _react.PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
-	        'theme': _react.PropTypes.oneOf(['normal', 'outer', 'pseudo', 'empty']).isRequired
+	        href: _react.PropTypes.string,
+	        name: _react.PropTypes.string,
+	        target: _react.PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
+	        theme: _react.PropTypes.oneOf(['normal', 'outer', 'pseudo', 'empty']).isRequired
 	    },
 
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            'disabled': false,
-	            'tabindex': '1',
-	            'target': '_self',
-	            'theme': 'normal'
+	            disabled: false,
+	            tabindex: '1',
+	            target: '_self',
+	            theme: 'normal'
 	        };
 	    },
 
 	    render: function render() {
-	        var classes = _defineProperty({
+	        var classes = (0, _classnames3.default)(_defineProperty({
 	            'xb-link': true,
 	            '_disabled': this.props.disabled
-	        }, '_theme-' + this.props.theme, true);
+	        }, '_theme-' + this.props.theme, true));
 
-	        classes = (0, _classnames2.default)(classes);
-
-	        var tabIndex = this.props.tabindex;
-
-	        if (this.props.disabled) {
-	            tabIndex = '-1';
-	        }
+	        var tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 
 	        var content = this.props.value || this.props.children;
 
@@ -6015,9 +5987,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _classnames = __webpack_require__(16);
+	var _classnames2 = __webpack_require__(16);
 
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _classnames3 = _interopRequireDefault(_classnames2);
 
 	var _commonAttrs = __webpack_require__(21);
 
@@ -6041,60 +6013,54 @@ return /******/ (function(modules) { // webpackBootstrap
 	    mixins: [_reactAddonsPureRenderMixin2.default],
 
 	    propTypes: {
-	        'autofocus': _react.PropTypes.bool,
-	        'checked': _react.PropTypes.bool,
-	        'for': _react.PropTypes.string,
-	        'form': _react.PropTypes.string,
-	        'name': _react.PropTypes.string,
-	        'required': _react.PropTypes.bool,
-	        'size': _react.PropTypes.oneOf(['m', 'l']),
-	        'value': _react.PropTypes.string
+	        autofocus: _react.PropTypes.bool,
+	        checked: _react.PropTypes.bool,
+	        for: _react.PropTypes.string,
+	        form: _react.PropTypes.string,
+	        name: _react.PropTypes.string,
+	        required: _react.PropTypes.bool,
+	        size: _react.PropTypes.oneOf(['m', 'l']),
+	        value: _react.PropTypes.string
 	    },
 
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            'autofocus': false,
-	            'checked': false,
-	            'children': '',
-	            'disabled': false,
-	            'required': false,
-	            'size': 'm',
-	            'tabindex': '0',
-	            'value': 'on'
+	            autofocus: false,
+	            checked: false,
+	            children: '',
+	            disabled: false,
+	            required: false,
+	            size: 'm',
+	            tabindex: '0',
+	            value: 'on'
 	        };
 	    },
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            'checked': this.props.checked
+	            checked: this.props.checked
 	        };
 	    },
 
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	        this.setState({
-	            'checked': nextProps.checked
+	            checked: nextProps.checked
 	        });
 	    },
 
 	    _onChange: function _onChange(event) {
 	        this.setState({
-	            'checked': event.target.checked
+	            checked: event.target.checked
 	        });
 	    },
 
 	    render: function render() {
-	        var classes = _defineProperty({
+	        var classes = (0, _classnames3.default)(_defineProperty({
 	            'xb-checkbox': true,
 	            '_disabled': this.props.disabled
-	        }, '_size-' + this.props.size, true);
+	        }, '_size-' + this.props.size, true));
 
-	        classes = (0, _classnames2.default)(classes);
-
-	        var tabIndex = this.props.tabindex;
-
-	        if (this.props.disabled) {
-	            tabIndex = '-1';
-	        }
+	        var tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 
 	        return React.createElement(
 	            'label',
@@ -6224,9 +6190,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _classnames = __webpack_require__(16);
+	var _classnames2 = __webpack_require__(16);
 
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _classnames3 = _interopRequireDefault(_classnames2);
 
 	var _resetLastRadioChecked = __webpack_require__(136);
 
@@ -6253,28 +6219,39 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
 
+	    propTypes: {
+	        autofocus: _react.PropTypes.bool,
+	        checked: _react.PropTypes.bool,
+	        for: _react.PropTypes.string,
+	        form: _react.PropTypes.string,
+	        name: _react.PropTypes.string,
+	        required: _react.PropTypes.bool,
+	        size: _react.PropTypes.oneOf(['m', 'l']),
+	        value: _react.PropTypes.string
+	    },
+
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            'autofocus': false,
-	            'checked': false,
-	            'children': '',
-	            'disabled': false,
-	            'required': false,
-	            'size': 'm',
-	            'tabindex': '0',
-	            'value': 'on'
+	            autofocus: false,
+	            checked: false,
+	            children: '',
+	            disabled: false,
+	            required: false,
+	            size: 'm',
+	            tabindex: '0',
+	            value: 'on'
 	        };
 	    },
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            'checked': this.props.checked
+	            checked: this.props.checked
 	        };
 	    },
 
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	        this.setState({
-	            'checked': Boolean(nextProps.checked)
+	            checked: Boolean(nextProps.checked)
 	        });
 	    },
 
@@ -6295,18 +6272,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    render: function render() {
-	        var classes = _defineProperty({
+	        var classes = (0, _classnames3.default)(_defineProperty({
 	            'xb-radio': true,
 	            '_disabled': this.props.disabled
-	        }, '_size-' + this.props.size, true);
+	        }, '_size-' + this.props.size, true));
 
-	        classes = (0, _classnames2.default)(classes);
-
-	        var tabIndex = this.props.tabindex;
-
-	        if (this.props.disabled) {
-	            tabIndex = '-1';
-	        }
+	        var tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 
 	        return React.createElement(
 	            'label',
@@ -6762,15 +6733,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.default = function () {
 	    return {
-	        'attachment': 'middle center',
-	        'classes': { 'element': this.xtagName },
-	        'classPrefix': this.xtagName,
-	        'element': this,
-	        'enabled': false,
-	        'optimizations': { 'gpu': true },
-	        'target': this.ownerDocument.body,
-	        'targetAttachment': 'middle center',
-	        'targetModifier': 'visible'
+	        attachment: 'middle center',
+	        classes: {
+	            element: this.xtagName
+	        },
+	        classPrefix: this.xtagName,
+	        element: this,
+	        enabled: false,
+	        optimizations: {
+	            gpu: true
+	        },
+	        target: this.ownerDocument.body,
+	        targetAttachment: 'middle center',
+	        targetModifier: 'visible'
 	    };
 	};
 
@@ -7520,9 +7495,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _popup2 = _interopRequireDefault(_popup);
 
-	var _Table = __webpack_require__(191);
+	var _TableNavigator = __webpack_require__(191);
 
-	var _Table2 = _interopRequireDefault(_Table);
+	var _TableNavigator2 = _interopRequireDefault(_TableNavigator);
 
 	var _getParentMenu = __webpack_require__(226);
 
@@ -7589,7 +7564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 
 	        'xb-open': function xbOpen() {
-	            this._xbFocus = new _Table2.default(this, {
+	            this._xbFocus = new _TableNavigator2.default(this, {
 	                rowLoop: true,
 	                colLoop: true
 	            });
@@ -8082,7 +8057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var vendor;
 	    var x = 0;
 	    for (; x < 4; ++x) {
-	        vendor = vendors[x];
+	        vendor = VENDORS[x];
 	        if (context[vendor + name]) {
 	            return context[vendor + name];
 	        }
@@ -8099,7 +8074,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var vendors = ['ms', 'moz', 'webkit', 'o'];
+	var VENDORS = ['ms', 'moz', 'webkit', 'o'];
 
 	/**
 	 * @param {string} name
@@ -8536,6 +8511,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _xblocksCore = __webpack_require__(15);
 
 	var _delegate = __webpack_require__(186);
@@ -8576,317 +8553,345 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	var pop = Array.prototype.pop;
 	var slice = Array.prototype.slice;
+	var EVENT_BLUR = 'xb-blur';
+	var EVENT_FOCUS = 'xb-focus';
 
-	exports.default = Table;
+	var TableNavigator = function () {
+	    function TableNavigator(node, options) {
+	        _classCallCheck(this, TableNavigator);
 
+	        this._options = (0, _merge2.default)({
+	            col: 'xb-menu:not([disabled])',
+	            row: 'xb-menuitem:not([disabled])',
+	            colLoop: false,
+	            rowLoop: false
+	        }, options);
 
-	function Table(node, options) {
-	    this._options = (0, _merge2.default)({
-	        'col': 'xb-menu:not([disabled])',
-	        'row': 'xb-menuitem:not([disabled])',
-	        'colLoop': false,
-	        'rowLoop': false
-	    }, options);
-
-	    this._node = node;
-	    this._item = undefined;
-	    this._originalEvent = undefined;
-
-	    this._onKeydown = this._onKeydown.bind(this);
-	    this._onMouseover = (0, _delegate2.default)(this._options.row, this._onMouseover.bind(this));
-	    this._onMouseout = (0, _delegate2.default)(this._options.row, this._onMouseout.bind(this));
-	    this._onMousemove = (0, _throttle2.default)((0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));
-	    this._onClick = (0, _filterClick2.default)('left', (0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));
-
-	    this._bind();
-	}
-
-	Table.prototype = {
-	    EVENT_BLUR: 'xb-blur',
-	    EVENT_FOCUS: 'xb-focus',
-
-	    destroy: function destroy() {
-	        this._unbind();
-	        this._node = undefined;
+	        this._node = node;
+	        this._item = undefined;
 	        this._originalEvent = undefined;
 
-	        if (this._item) {
-	            var item = this._item;
-	            this._item = undefined;
-	            _xblocksCore.event.dispatch(item, this.EVENT_BLUR);
+	        this._onKeydown = this._onKeydown.bind(this);
+	        this._onMouseover = (0, _delegate2.default)(this._options.row, this._onMouseover.bind(this));
+	        this._onMouseout = (0, _delegate2.default)(this._options.row, this._onMouseout.bind(this));
+	        this._onMousemove = (0, _throttle2.default)((0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));
+	        this._onClick = (0, _filterClick2.default)('left', (0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));
+
+	        this._bind();
+	    }
+
+	    _createClass(TableNavigator, [{
+	        key: 'destroy',
+	        value: function destroy() {
+	            this._unbind();
+	            this._node = undefined;
+	            this._originalEvent = undefined;
+	            this.blurItem();
 	        }
-	    },
-
-	    getItem: function getItem() {
-	        return this._item;
-	    },
-
-	    blurItem: function blurItem() {
-	        if (this._item) {
-	            var item = this._item;
-	            this._item = undefined;
-	            _xblocksCore.event.dispatch(item, this.EVENT_BLUR);
+	    }, {
+	        key: 'getItem',
+	        value: function getItem() {
+	            return this._item;
 	        }
-	    },
-
-	    _bind: function _bind() {
-	        this._node.addEventListener('keydown', this._onKeydown, false);
-	        this._node.addEventListener('click', this._onClick, false);
-	        this._node.addEventListener('mouseover', this._onMouseover, false);
-	        this._node.addEventListener('mouseout', this._onMouseout, false);
-	        this._node.addEventListener('mousemove', this._onMousemove, false);
-	    },
-
-	    _unbind: function _unbind() {
-	        this._node.removeEventListener('keydown', this._onKeydown, false);
-	        this._node.removeEventListener('click', this._onClick, false);
-	        this._node.removeEventListener('mouseover', this._onMouseover, false);
-	        this._node.removeEventListener('mouseout', this._onMouseout, false);
-	        this._node.removeEventListener('mousemove', this._onMousemove, false);
-	    },
-
-	    _col: function _col(item) {
-	        if (!item) {
-	            return;
-	        }
-
-	        var col = item;
-	        while (col = col.parentNode) {
-	            if ((0, _matchesSelector2.default)(col, this._options.col)) {
-	                return col;
-	            }
-
-	            if (col === this._node) {
-	                break;
+	    }, {
+	        key: 'blurItem',
+	        value: function blurItem() {
+	            if (this._item) {
+	                var item = this._item;
+	                this._item = undefined;
+	                _xblocksCore.event.dispatch(item, EVENT_BLUR);
 	            }
 	        }
-	    },
-
-	    _colFirst: function _colFirst() {
-	        return this._node.querySelector(this._options.col) || this._node;
-	    },
-
-	    _colLast: function _colLast() {
-	        return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
-	    },
-
-	    _colMatchIterate: function _colMatchIterate(data, element) {
-	        if ((0, _matchesSelector2.default)(element, this._options.col)) {
-	            data.col = element;
-	            return false;
+	    }, {
+	        key: '_bind',
+	        value: function _bind() {
+	            this._node.addEventListener('keydown', this._onKeydown, false);
+	            this._node.addEventListener('click', this._onClick, false);
+	            this._node.addEventListener('mouseover', this._onMouseover, false);
+	            this._node.addEventListener('mouseout', this._onMouseout, false);
+	            this._node.addEventListener('mousemove', this._onMousemove, false);
 	        }
-	    },
-
-	    _colNext: function _colNext(col) {
-	        var data = {};
-	        (0, _eachAfter2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);
-	        return data.col;
-	    },
-
-	    _colPrev: function _colPrev(col) {
-	        var data = {};
-	        (0, _eachBefore2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);
-	        return data.col;
-	    },
-
-	    _rowFirst: function _rowFirst(col) {
-	        return col.querySelector(this._options.row);
-	    },
-
-	    _rowLast: function _rowLast(col) {
-	        return pop.call(slice.call(col.querySelectorAll(this._options.row)));
-	    },
-
-	    _rowMatchIterate: function _rowMatchIterate(data, element) {
-	        if ((0, _matchesSelector2.default)(element, this._options.row)) {
-	            data.row = element;
-	            return false;
+	    }, {
+	        key: '_unbind',
+	        value: function _unbind() {
+	            this._node.removeEventListener('keydown', this._onKeydown, false);
+	            this._node.removeEventListener('click', this._onClick, false);
+	            this._node.removeEventListener('mouseover', this._onMouseover, false);
+	            this._node.removeEventListener('mouseout', this._onMouseout, false);
+	            this._node.removeEventListener('mousemove', this._onMousemove, false);
 	        }
-	    },
+	    }, {
+	        key: '_col',
+	        value: function _col(item) {
+	            if (!item) {
+	                return;
+	            }
 
-	    _rowNext: function _rowNext(row) {
-	        var data = {};
-	        (0, _eachAfter2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
-	        return data.row;
-	    },
+	            var col = item;
+	            while (col = col.parentNode) {
+	                if ((0, _matchesSelector2.default)(col, this._options.col)) {
+	                    return col;
+	                }
 
-	    _rowPrev: function _rowPrev(row) {
-	        var data = {};
-	        (0, _eachBefore2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
-	        return data.row;
-	    },
-
-	    _rowIndex: function _rowIndex(row) {
-	        return (0, _index2.default)(this._options.row, row, this._col(row));
-	    },
-
-	    _rowByIndex: function _rowByIndex(col, idx) {
-	        return col.querySelectorAll(this._options.row)[idx];
-	    },
-
-	    _focus: function _focus(element) {
-	        if (element === this._item) {
-	            return;
+	                if (col === this._node) {
+	                    break;
+	                }
+	            }
 	        }
+	    }, {
+	        key: '_colFirst',
+	        value: function _colFirst() {
+	            return this._node.querySelector(this._options.col) || this._node;
+	        }
+	    }, {
+	        key: '_colLast',
+	        value: function _colLast() {
+	            return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
+	        }
+	    }, {
+	        key: '_colMatchIterate',
+	        value: function _colMatchIterate(data, element) {
+	            if ((0, _matchesSelector2.default)(element, this._options.col)) {
+	                data.col = element;
+	                return false;
+	            }
+	        }
+	    }, {
+	        key: '_colNext',
+	        value: function _colNext(col) {
+	            var data = {};
+	            (0, _eachAfter2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);
+	            return data.col;
+	        }
+	    }, {
+	        key: '_colPrev',
+	        value: function _colPrev(col) {
+	            var data = {};
+	            (0, _eachBefore2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);
+	            return data.col;
+	        }
+	    }, {
+	        key: '_rowFirst',
+	        value: function _rowFirst(col) {
+	            return col.querySelector(this._options.row);
+	        }
+	    }, {
+	        key: '_rowLast',
+	        value: function _rowLast(col) {
+	            return pop.call(slice.call(col.querySelectorAll(this._options.row)));
+	        }
+	    }, {
+	        key: '_rowMatchIterate',
+	        value: function _rowMatchIterate(data, element) {
+	            if ((0, _matchesSelector2.default)(element, this._options.row)) {
+	                data.row = element;
+	                return false;
+	            }
+	        }
+	    }, {
+	        key: '_rowNext',
+	        value: function _rowNext(row) {
+	            var data = {};
+	            (0, _eachAfter2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+	            return data.row;
+	        }
+	    }, {
+	        key: '_rowPrev',
+	        value: function _rowPrev(row) {
+	            var data = {};
+	            (0, _eachBefore2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+	            return data.row;
+	        }
+	    }, {
+	        key: '_rowIndex',
+	        value: function _rowIndex(row) {
+	            return (0, _index2.default)(this._options.row, row, this._col(row));
+	        }
+	    }, {
+	        key: '_rowByIndex',
+	        value: function _rowByIndex(col, idx) {
+	            return col.querySelectorAll(this._options.row)[idx];
+	        }
+	    }, {
+	        key: '_focus',
+	        value: function _focus(element) {
+	            if (element === this._item) {
+	                return;
+	            }
 
-	        if (this._item) {
-	            _xblocksCore.event.dispatch(this._item, this.EVENT_BLUR, {
-	                'detail': { 'originalEvent': this._originalEvent }
+	            if (this._item) {
+	                _xblocksCore.event.dispatch(this._item, EVENT_BLUR, {
+	                    detail: { originalEvent: this._originalEvent }
+	                });
+	            }
+
+	            this._item = element;
+	            _xblocksCore.event.dispatch(this._item, EVENT_FOCUS, {
+	                detail: { originalEvent: this._originalEvent }
 	            });
 	        }
+	    }, {
+	        key: '_onKeydown',
+	        value: function _onKeydown(event) {
+	            if (event.altKey || event.metaKey || event.shiftKey) {
+	                return;
+	            }
 
-	        this._item = element;
-	        _xblocksCore.event.dispatch(this._item, this.EVENT_FOCUS, {
-	            'detail': { 'originalEvent': this._originalEvent }
-	        });
-	    },
+	            var action;
 
-	    _onKeydown: function _onKeydown(event) {
-	        if (event.altKey || event.metaKey || event.shiftKey) {
-	            return;
-	        }
+	            switch (event.keyCode) {
+	                case 37:
+	                    // ArrowLeft
+	                    action = '_onArrowLeft';
+	                    break;
+	                case 38:
+	                    // ArrowUp
+	                    action = '_onArrowUp';
+	                    break;
+	                case 39:
+	                    // ArrowRight
+	                    action = '_onArrowRight';
+	                    break;
+	                case 40:
+	                    // ArrowDown
+	                    action = '_onArrowDown';
+	                    break;
+	            }
 
-	        var action;
+	            if (!action) {
+	                return;
+	            }
 
-	        switch (event.keyCode) {
-	            case 37:
-	                // ArrowLeft
-	                action = '_onArrowLeft';
-	                break;
-	            case 38:
-	                // ArrowUp
-	                action = '_onArrowUp';
-	                break;
-	            case 39:
-	                // ArrowRight
-	                action = '_onArrowRight';
-	                break;
-	            case 40:
-	                // ArrowDown
-	                action = '_onArrowDown';
-	                break;
-	        }
-
-	        if (!action) {
-	            return;
-	        }
-
-	        event.preventDefault();
-	        event.stopPropagation();
-	        this._originalEvent = event;
-
-	        this[action]();
-	    },
-
-	    _onMouseAction: function _onMouseAction(event) {
-	        if (!this._item || this._item !== event.delegateElement) {
+	            event.preventDefault();
+	            event.stopPropagation();
 	            this._originalEvent = event;
-	            this._focus(event.delegateElement);
+
+	            this[action]();
 	        }
-	    },
-
-	    _onMouseover: function _onMouseover(event) {
-	        (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));
-	    },
-
-	    _onMouseout: function _onMouseout(event) {
-	        (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));
-	    },
-
-	    _onArrowLeft: function _onArrowLeft() {
-	        if (!this._item) {
-	            this._focus(this._rowFirst(this._colFirst()));
-	        } else {
-	            var idx = this._rowIndex(this._item);
-	            var col = this._colPrev(this._col(this._item));
-
-	            if (!col) {
-	                col = this._colLast();
-	                if (!this._options.colLoop) {
-	                    idx--;
-	                }
+	    }, {
+	        key: '_onMouseAction',
+	        value: function _onMouseAction(event) {
+	            if (!this._item || this._item !== event.delegateElement) {
+	                this._originalEvent = event;
+	                this._focus(event.delegateElement);
 	            }
-
-	            var row = this._rowByIndex(col, idx);
-
-	            if (!row) {
-	                row = this._rowLast(col);
-	            }
-
-	            this._focus(row);
 	        }
-	    },
-
-	    _onArrowRight: function _onArrowRight() {
-	        if (!this._item) {
-	            this._focus(this._rowFirst(this._colFirst()));
-	        } else {
-	            var idx = this._rowIndex(this._item);
-	            var col = this._colNext(this._col(this._item));
-
-	            if (!col) {
-	                col = this._colFirst();
-	                if (!this._options.colLoop) {
-	                    idx++;
-	                }
-	            }
-
-	            var row = this._rowByIndex(col, idx);
-
-	            if (!row) {
-	                row = this._rowFirst(col);
-	            }
-
-	            this._focus(row);
+	    }, {
+	        key: '_onMouseover',
+	        value: function _onMouseover(event) {
+	            (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));
 	        }
-	    },
+	    }, {
+	        key: '_onMouseout',
+	        value: function _onMouseout(event) {
+	            (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));
+	        }
+	    }, {
+	        key: '_onArrowLeft',
+	        value: function _onArrowLeft() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var idx = this._rowIndex(this._item);
+	                var col = this._colPrev(this._col(this._item));
 
-	    _onArrowUp: function _onArrowUp() {
-	        if (!this._item) {
-	            this._focus(this._rowFirst(this._colFirst()));
-	        } else {
-	            var row = this._rowPrev(this._item);
-
-	            if (!row) {
-	                var col;
-
-	                if (this._options.rowLoop) {
-	                    col = this._col(this._item);
-	                } else {
-	                    col = this._colPrev(this._col(this._item)) || this._colLast();
+	                if (!col) {
+	                    col = this._colLast();
+	                    if (!this._options.colLoop) {
+	                        idx--;
+	                    }
 	                }
 
-	                row = this._rowLast(col);
-	            }
+	                var row = this._rowByIndex(col, idx);
 
-	            this._focus(row);
-	        }
-	    },
-
-	    _onArrowDown: function _onArrowDown() {
-	        if (!this._item) {
-	            this._focus(this._rowFirst(this._colFirst()));
-	        } else {
-	            var row = this._rowNext(this._item);
-
-	            if (!row) {
-	                var col;
-
-	                if (this._options.rowLoop) {
-	                    col = this._col(this._item);
-	                } else {
-	                    col = this._colNext(this._col(this._item)) || this._colFirst();
+	                if (!row) {
+	                    row = this._rowLast(col);
 	                }
 
-	                row = this._rowFirst(col);
+	                this._focus(row);
 	            }
-
-	            this._focus(row);
 	        }
-	    }
-	};
+	    }, {
+	        key: '_onArrowRight',
+	        value: function _onArrowRight() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var idx = this._rowIndex(this._item);
+	                var col = this._colNext(this._col(this._item));
+
+	                if (!col) {
+	                    col = this._colFirst();
+	                    if (!this._options.colLoop) {
+	                        idx++;
+	                    }
+	                }
+
+	                var row = this._rowByIndex(col, idx);
+
+	                if (!row) {
+	                    row = this._rowFirst(col);
+	                }
+
+	                this._focus(row);
+	            }
+	        }
+	    }, {
+	        key: '_onArrowUp',
+	        value: function _onArrowUp() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var row = this._rowPrev(this._item);
+
+	                if (!row) {
+	                    var col = void 0;
+
+	                    if (this._options.rowLoop) {
+	                        col = this._col(this._item);
+	                    } else {
+	                        col = this._colPrev(this._col(this._item)) || this._colLast();
+	                    }
+
+	                    row = this._rowLast(col);
+	                }
+
+	                this._focus(row);
+	            }
+	        }
+	    }, {
+	        key: '_onArrowDown',
+	        value: function _onArrowDown() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var row = this._rowNext(this._item);
+
+	                if (!row) {
+	                    var col = void 0;
+
+	                    if (this._options.rowLoop) {
+	                        col = this._col(this._item);
+	                    } else {
+	                        col = this._colNext(this._col(this._item)) || this._colFirst();
+	                    }
+
+	                    row = this._rowFirst(col);
+	                }
+
+	                this._focus(row);
+	            }
+	        }
+	    }]);
+
+	    return TableNavigator;
+	}();
+
+	exports.default = TableNavigator;
 
 /***/ },
 /* 192 */
@@ -10356,9 +10361,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _lazyFocus2 = _interopRequireDefault(_lazyFocus);
 
-	var _Table = __webpack_require__(191);
+	var _TableNavigator = __webpack_require__(191);
 
-	var _Table2 = _interopRequireDefault(_Table);
+	var _TableNavigator2 = _interopRequireDefault(_TableNavigator);
 
 	var _noop = __webpack_require__(231);
 
@@ -10380,7 +10385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this._xbFocus.destroy();
 	        }
 
-	        this._xbFocus = new _Table2.default(this, {
+	        this._xbFocus = new _TableNavigator2.default(this, {
 	            col: 'xb-menu-inline:not([disabled])',
 	            rowLoop: true,
 	            colLoop: true
@@ -10615,8 +10620,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @augments HTMLElement
 	 * @mixes xblocks.mixin.eDisabled
 	 * @mixes xblocks.mixin.eInputValueProps
-	 * @listens xblocks.utils:Table~event:xb-focus
-	 * @listens xblocks.utils:Table~event:xb-blur
+	 * @listens xblocks.utils:TableNavigator~event:xb-focus
+	 * @listens xblocks.utils:TableNavigator~event:xb-blur
 	 * @listens xblocks.Element~event:xb-repaint
 	 * @listens xblocks.Element~event:xb-created
 	 * @listens xblocks.Element~event:xb-destroy

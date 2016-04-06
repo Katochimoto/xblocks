@@ -4,7 +4,7 @@ import './index.jsx';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
-import Table from 'utils/Table';
+import TableNavigator from 'utils/TableNavigator';
 import noop from 'lodash/noop';
 import mixinElementMenu from 'mixin/element/menu';
 import mixinElementFocus from 'mixin/element/focus';
@@ -15,7 +15,7 @@ const MENU_COMMON = {
             this._xbFocus.destroy();
         }
 
-        this._xbFocus = new Table(this, {
+        this._xbFocus = new TableNavigator(this, {
             col: 'xb-menu-inline:not([disabled])',
             rowLoop: true,
             colLoop: true

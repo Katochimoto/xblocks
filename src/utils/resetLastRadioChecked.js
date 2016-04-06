@@ -1,4 +1,4 @@
-var checkedCache = {};
+const CHECKED_CACHE = {};
 
 /**
  * FIXME don't work cloneNode
@@ -7,11 +7,11 @@ var checkedCache = {};
  */
 export default function (element, name) {
     name = String(name);
-    var lastCheckedElement = checkedCache[ name ];
+    var lastCheckedElement = CHECKED_CACHE[ name ];
 
     if (lastCheckedElement && lastCheckedElement !== element) {
         lastCheckedElement.checked = false;
     }
 
-    checkedCache[ name ] = element;
+    CHECKED_CACHE[ name ] = element;
 }

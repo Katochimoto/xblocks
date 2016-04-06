@@ -22,37 +22,31 @@ export default xv.Link = view.register('xb-link', [
         mixins: [ PureRenderMixin ],
 
         propTypes: {
-            'href':     PropTypes.string,
-            'name':     PropTypes.string,
-            'target':   PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
-            'theme':    PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ]).isRequired
+            href:     PropTypes.string,
+            name:     PropTypes.string,
+            target:   PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
+            theme:    PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ]).isRequired
         },
 
         getDefaultProps: function () {
             return {
-                'disabled': false,
-                'tabindex': '1',
-                'target':   '_self',
-                'theme':    'normal'
+                disabled: false,
+                tabindex: '1',
+                target:   '_self',
+                theme:    'normal'
             };
         },
 
         render: function () {
-            var classes = {
+            const classes = classnames({
                 'xb-link':   true,
                 '_disabled': this.props.disabled,
                 [ `_theme-${this.props.theme}` ]: true
-            };
+            });
 
-            classes = classnames(classes);
+            const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 
-            var tabIndex = this.props.tabindex;
-
-            if (this.props.disabled) {
-                tabIndex = '-1';
-            }
-
-            var content = this.props.value || this.props.children;
+            const content = this.props.value || this.props.children;
 
             return (
                 <a name={this.props.name}

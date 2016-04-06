@@ -9,77 +9,69 @@ import index from 'dom/index';
 import merge from 'lodash/merge';
 import throttle from 'lodash/throttle';
 
-var pop = Array.prototype.pop;
-var slice = Array.prototype.slice;
+const pop = Array.prototype.pop;
+const slice = Array.prototype.slice;
+const EVENT_BLUR = 'xb-blur';
+const EVENT_FOCUS = 'xb-focus';
 
-export default Table;
+export default class TableNavigator {
+    constructor(node, options) {
+        this._options = merge({
+            col: 'xb-menu:not([disabled])',
+            row: 'xb-menuitem:not([disabled])',
+            colLoop: false,
+            rowLoop: false
+        }, options);
 
-function Table(node, options) {
-    this._options = merge({
-        'col': 'xb-menu:not([disabled])',
-        'row': 'xb-menuitem:not([disabled])',
-        'colLoop': false,
-        'rowLoop': false
-    }, options);
+        this._node = node;
+        this._item = undefined;
+        this._originalEvent = undefined;
 
-    this._node = node;
-    this._item = undefined;
-    this._originalEvent = undefined;
+        this._onKeydown = this._onKeydown.bind(this);
+        this._onMouseover = delegate(this._options.row, this._onMouseover.bind(this));
+        this._onMouseout = delegate(this._options.row, this._onMouseout.bind(this));
+        this._onMousemove = throttle(delegate(this._options.row, this._onMouseAction.bind(this)));
+        this._onClick = filterClick('left', delegate(this._options.row, this._onMouseAction.bind(this)));
 
-    this._onKeydown = this._onKeydown.bind(this);
-    this._onMouseover = delegate(this._options.row, this._onMouseover.bind(this));
-    this._onMouseout = delegate(this._options.row, this._onMouseout.bind(this));
-    this._onMousemove = throttle(delegate(this._options.row, this._onMouseAction.bind(this)));
-    this._onClick = filterClick('left', delegate(this._options.row, this._onMouseAction.bind(this)));
+        this._bind();
+    }
 
-    this._bind();
-}
-
-Table.prototype = {
-    EVENT_BLUR: 'xb-blur',
-    EVENT_FOCUS: 'xb-focus',
-
-    destroy: function () {
+    destroy() {
         this._unbind();
         this._node = undefined;
         this._originalEvent = undefined;
+        this.blurItem();
+    }
 
-        if (this._item) {
-            var item = this._item;
-            this._item = undefined;
-            xevent.dispatch(item, this.EVENT_BLUR);
-        }
-    },
-
-    getItem: function () {
+    getItem() {
         return this._item;
-    },
+    }
 
-    blurItem: function () {
+    blurItem() {
         if (this._item) {
-            var item = this._item;
+            let item = this._item;
             this._item = undefined;
-            xevent.dispatch(item, this.EVENT_BLUR);
+            xevent.dispatch(item, EVENT_BLUR);
         }
-    },
+    }
 
-    _bind: function () {
+    _bind() {
         this._node.addEventListener('keydown', this._onKeydown, false);
         this._node.addEventListener('click', this._onClick, false);
         this._node.addEventListener('mouseover', this._onMouseover, false);
         this._node.addEventListener('mouseout', this._onMouseout, false);
         this._node.addEventListener('mousemove', this._onMousemove, false);
-    },
+    }
 
-    _unbind: function () {
+    _unbind() {
         this._node.removeEventListener('keydown', this._onKeydown, false);
         this._node.removeEventListener('click', this._onClick, false);
         this._node.removeEventListener('mouseover', this._onMouseover, false);
         this._node.removeEventListener('mouseout', this._onMouseout, false);
         this._node.removeEventListener('mousemove', this._onMousemove, false);
-    },
+    }
 
-    _col: function (item) {
+    _col(item) {
         if (!item) {
             return;
         }
@@ -94,88 +86,88 @@ Table.prototype = {
                 break;
             }
         }
-    },
+    }
 
-    _colFirst: function () {
+    _colFirst() {
         return this._node.querySelector(this._options.col) || this._node;
-    },
+    }
 
-    _colLast: function () {
+    _colLast() {
         return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
-    },
+    }
 
-    _colMatchIterate: function (data, element) {
+    _colMatchIterate(data, element) {
         if (matchesSelector(element, this._options.col)) {
             data.col = element;
             return false;
         }
-    },
+    }
 
-    _colNext: function (col) {
+    _colNext(col) {
         var data = {};
         eachAfter(col, this._colMatchIterate.bind(this, data), this._node, false);
         return data.col;
-    },
+    }
 
-    _colPrev: function (col) {
+    _colPrev(col) {
         var data = {};
         eachBefore(col, this._colMatchIterate.bind(this, data), this._node, false);
         return data.col;
-    },
+    }
 
-    _rowFirst: function (col) {
+    _rowFirst(col) {
         return col.querySelector(this._options.row);
-    },
+    }
 
-    _rowLast: function (col) {
+    _rowLast(col) {
         return pop.call(slice.call(col.querySelectorAll(this._options.row)));
-    },
+    }
 
-    _rowMatchIterate: function (data, element) {
+    _rowMatchIterate(data, element) {
         if (matchesSelector(element, this._options.row)) {
             data.row = element;
             return false;
         }
-    },
+    }
 
-    _rowNext: function (row) {
+    _rowNext(row) {
         var data = {};
         eachAfter(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
         return data.row;
-    },
+    }
 
-    _rowPrev: function (row) {
+    _rowPrev(row) {
         var data = {};
         eachBefore(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
         return data.row;
-    },
+    }
 
-    _rowIndex: function (row) {
+    _rowIndex(row) {
         return index(this._options.row, row, this._col(row));
-    },
+    }
 
-    _rowByIndex: function (col, idx) {
-        return col.querySelectorAll(this._options.row)[idx];
-    },
+    _rowByIndex(col, idx) {
+        return col.querySelectorAll(this._options.row)[ idx ];
+    }
 
-    _focus: function (element) {
+    _focus(element) {
         if (element === this._item) {
             return;
         }
 
         if (this._item) {
-            xevent.dispatch(this._item, this.EVENT_BLUR, {
-                'detail': { 'originalEvent': this._originalEvent }
+            xevent.dispatch(this._item, EVENT_BLUR, {
+                detail: { originalEvent: this._originalEvent }
             });
         }
 
         this._item = element;
-        xevent.dispatch(this._item, this.EVENT_FOCUS, {
-            'detail': { 'originalEvent': this._originalEvent }
+        xevent.dispatch(this._item, EVENT_FOCUS, {
+            detail: { originalEvent: this._originalEvent }
         });
-    },
+    }
 
-    _onKeydown: function (event) {
+    _onKeydown(event) {
         if (event.altKey || event.metaKey || event.shiftKey) {
             return;
         }
@@ -206,30 +198,30 @@ Table.prototype = {
         this._originalEvent = event;
 
         this[ action ]();
-    },
+    }
 
-    _onMouseAction: function (event) {
+    _onMouseAction(event) {
         if (!this._item || this._item !== event.delegateElement) {
             this._originalEvent = event;
             this._focus(event.delegateElement);
         }
-    },
+    }
 
-    _onMouseover: function (event) {
+    _onMouseover(event) {
         filterMouse(event.delegateElement, event, this._onMouseAction.bind(this));
-    },
+    }
 
-    _onMouseout: function (event) {
+    _onMouseout(event) {
         filterMouse(event.delegateElement, event, this._onMouseAction.bind(this));
-    },
+    }
 
-    _onArrowLeft: function () {
+    _onArrowLeft() {
         if (!this._item) {
             this._focus(this._rowFirst(this._colFirst()));
 
         } else {
-            var idx = this._rowIndex(this._item);
-            var col = this._colPrev(this._col(this._item));
+            let idx = this._rowIndex(this._item);
+            let col = this._colPrev(this._col(this._item));
 
             if (!col) {
                 col = this._colLast();
@@ -238,7 +230,7 @@ Table.prototype = {
                 }
             }
 
-            var row = this._rowByIndex(col, idx);
+            let row = this._rowByIndex(col, idx);
 
             if (!row) {
                 row = this._rowLast(col);
@@ -246,15 +238,15 @@ Table.prototype = {
 
             this._focus(row);
         }
-    },
+    }
 
-    _onArrowRight: function () {
+    _onArrowRight() {
         if (!this._item) {
             this._focus(this._rowFirst(this._colFirst()));
 
         } else {
-            var idx = this._rowIndex(this._item);
-            var col = this._colNext(this._col(this._item));
+            let idx = this._rowIndex(this._item);
+            let col = this._colNext(this._col(this._item));
 
             if (!col) {
                 col = this._colFirst();
@@ -263,7 +255,7 @@ Table.prototype = {
                 }
             }
 
-            var row = this._rowByIndex(col, idx);
+            let row = this._rowByIndex(col, idx);
 
             if (!row) {
                 row = this._rowFirst(col);
@@ -271,17 +263,17 @@ Table.prototype = {
 
             this._focus(row);
         }
-    },
+    }
 
-    _onArrowUp: function () {
+    _onArrowUp() {
         if (!this._item) {
             this._focus(this._rowFirst(this._colFirst()));
 
         } else {
-            var row = this._rowPrev(this._item);
+            let row = this._rowPrev(this._item);
 
             if (!row) {
-                var col;
+                let col;
 
                 if (this._options.rowLoop) {
                     col = this._col(this._item);
@@ -295,17 +287,17 @@ Table.prototype = {
 
             this._focus(row);
         }
-    },
+    }
 
-    _onArrowDown: function () {
+    _onArrowDown() {
         if (!this._item) {
             this._focus(this._rowFirst(this._colFirst()));
 
         } else {
-            var row = this._rowNext(this._item);
+            let row = this._rowNext(this._item);
 
             if (!row) {
-                var col;
+                let col;
 
                 if (this._options.rowLoop) {
                     col = this._col(this._item);
@@ -320,4 +312,4 @@ Table.prototype = {
             this._focus(row);
         }
     }
-};
+}

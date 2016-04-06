@@ -1,7 +1,7 @@
 import globalContext from 'context';
 import capitalize from 'lodash/capitalize';
 
-const vendors = [ 'ms', 'moz', 'webkit', 'o' ];
+const VENDORS = [ 'ms', 'moz', 'webkit', 'o' ];
 
 /**
  * @param {string} name
@@ -20,7 +20,7 @@ export default function (name, context) {
     var vendor;
     var x = 0;
     for (; x < 4; ++x) {
-        vendor = vendors[ x ];
+        vendor = VENDORS[ x ];
         if (context[ vendor + name ]) {
             return context[ vendor + name ];
         }
