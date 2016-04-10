@@ -12,6 +12,10 @@ export default React.createClass({
         PureRenderMixin
     ],
 
+    contextTypes: {
+        router: React.PropTypes.object
+    },
+
     getInitialState() {
         return {
             items: [
@@ -161,7 +165,7 @@ export default React.createClass({
     },
 
     renderMenuItem(item, key) {
-        var href = this.props.history.createPath(item.hash);
+        var href = this.context.router.createPath(item.hash);
         var find = (_.trimEnd(this.props.location.pathname, '/') + '/').indexOf((_.trimEnd(href, '/') + '/'));
 
         var classes = classSet({

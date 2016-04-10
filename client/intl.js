@@ -13,7 +13,7 @@ req.keys().forEach((file) => {
 
 messages = _.assign({}, messages[ 'en' ], messages[ locale ] || {});
 
-var intlReq = require.context('react-intl/dist/locale-data', false, /(ru|en)\.js$/);
+var intlReq = require.context('react-intl/locale-data', false, /(ru|en)\.js$/);
 addLocaleData(intlReq(`./${locale}.js`));
 
 export {

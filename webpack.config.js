@@ -13,6 +13,7 @@ var resourcesPath = path.join(__dirname, 'resources');
 var packageData = require('./package.json');
 
 var isDev = true; // process.env.NODE_ENV === 'development';
+var nodeEnv = 'production';
 
 module.exports = {
     'debug': isDev,
@@ -62,7 +63,12 @@ module.exports = {
         // new webpack.ContextReplacementPlugin(/react-intl[\/\\]dist[\/\\]locale-data$/, /ru/),
         new webpack.DefinePlugin({
             'VERSION': JSON.stringify(packageData.version),
-            'HOMEPAGE': JSON.stringify(packageData.homepage)
+            'HOMEPAGE': JSON.stringify(packageData.homepage),
+            'NODE_ENV': JSON.stringify(nodeEnv),
+            'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+            'process.env': {
+                'NODE_ENV': JSON.stringify(nodeEnv)
+            }
         }),
         new webpack.ProvidePlugin({
             '_': 'lodash',
