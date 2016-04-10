@@ -861,7 +861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013-2015, Facebook, Inc.
+	 * Copyright 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
 	 * This source code is licensed under the BSD-style license found in the
@@ -877,7 +877,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
-	 * same result given the same props and state, provide this Mixin for a
+	 * same result given the same props and state, provide this mixin for a
 	 * considerable performance boost.
 	 *
 	 * Most React components have pure render functions.
@@ -912,7 +912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013-2015, Facebook, Inc.
+	 * Copyright 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
 	 * This source code is licensed under the BSD-style license found in the
@@ -941,21 +941,38 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	/**
-	 * Copyright 2013-2015, Facebook, Inc.
+	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
 	 * This source code is licensed under the BSD-style license found in the
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule shallowEqual
 	 * @typechecks
 	 * 
 	 */
 
+	/*eslint-disable no-self-compare */
+
 	'use strict';
 
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	/**
+	 * inlined Object.is polyfill to avoid requiring consumers ship their own
+	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	 */
+	function is(x, y) {
+	  // SameValue algorithm
+	  if (x === y) {
+	    // Steps 1-5, 7-10
+	    // Steps 6.b-6.e: +0 != -0
+	    return x !== 0 || 1 / x === 1 / y;
+	  } else {
+	    // Step 6.a: NaN == NaN
+	    return x !== x && y !== y;
+	  }
+	}
 
 	/**
 	 * Performs equality by iterating through keys on an object and returning false
@@ -963,7 +980,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Returns true when the values of all keys are strictly equal.
 	 */
 	function shallowEqual(objA, objB) {
-	  if (objA === objB) {
+	  if (is(objA, objB)) {
 	    return true;
 	  }
 
@@ -979,9 +996,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  // Test for A's keys different from B.
-	  var bHasOwnProperty = hasOwnProperty.bind(objB);
 	  for (var i = 0; i < keysA.length; i++) {
-	    if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+	    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
 	      return false;
 	    }
 	  }
@@ -5418,7 +5434,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    autoFocus: this.props.autofocus,
 	                    checked: this.state.checked,
 	                    className: '_controller',
-	                    defaultChecked: this.props.checked,
 	                    disabled: this.props.disabled,
 	                    form: this.props.form,
 	                    name: this.props.name,
@@ -6071,7 +6086,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                autoFocus: this.props.autofocus,
 	                checked: this.state.checked,
 	                className: '_controller',
-	                defaultChecked: this.props.checked,
 	                disabled: this.props.disabled,
 	                form: this.props.form,
 	                name: this.props.name,
@@ -6288,7 +6302,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                autoFocus: this.props.autofocus,
 	                checked: this.state.checked,
 	                className: '_controller',
-	                defaultChecked: this.props.checked,
 	                disabled: this.props.disabled,
 	                form: this.props.form,
 	                name: this.props.name,

@@ -81,7 +81,6 @@ export default xv.Checkbox = view.register('xb-checkbox', [
                         autoFocus={this.props.autofocus}
                         checked={this.state.checked}
                         className="_controller"
-                        defaultChecked={this.props.checked}
                         disabled={this.props.disabled}
                         form={this.props.form}
                         name={this.props.name}

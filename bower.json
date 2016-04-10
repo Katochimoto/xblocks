@@ -3,16 +3,12 @@
   "version": "2.0.4",
   "main": [
     "dist/xblocks.js",
-    "dist/xblocks.min.js",
-    "dist/xblocks.min.js.map",
-    "dist/xblocks.css",
-    "dist/xblocks.min.css",
-    "dist/xblocks.min.css.map"
+    "dist/xblocks.css"
   ],
   "dependencies": {
-    "xblocks-core": "2.0.4",
-    "react": "0.14.7",
-    "es5-shim": "4.5.2",
+    "xblocks-core": "2.0.6",
+    "react": "15.0.1",
+    "es5-shim": "4.5.8",
     "tether": "1.2.0"
   },
   "ignore": [

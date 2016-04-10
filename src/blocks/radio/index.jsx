@@ -92,7 +92,6 @@ export default xv.Radio = view.register('xb-radio', [
                         autoFocus={this.props.autofocus}
                         checked={this.state.checked}
                         className="_controller"
-                        defaultChecked={this.props.checked}
                         disabled={this.props.disabled}
                         form={this.props.form}
                         name={this.props.name}
