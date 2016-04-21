@@ -23,6 +23,7 @@ module.exports = {
     'entry': {
         'vendor': [
             'es5-shim/es5-shim.js',
+            'intl',
             'react',
             'react-dom',
             'react-addons-pure-render-mixin',

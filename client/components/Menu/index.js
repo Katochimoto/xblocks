@@ -122,16 +122,8 @@ export default React.createClass({
                     }
                 },
                 {
-                    hash: '/extensions',
-                    title: <FormattedMessage id="menu.extensions" />,
-                    menu: {
-                        items: [
-                            {
-                                hash: '/extensions/writing-extensions',
-                                title: <FormattedMessage id="menu.writing_extensions" />
-                            }
-                        ]
-                    }
+                    hash: '/extension',
+                    title: <FormattedMessage id="menu.extension" />
                 },
                 {
                     hash: '/core',

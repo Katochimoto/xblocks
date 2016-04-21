@@ -49,10 +49,6 @@ export default React.createClass({
                     <FormattedMessage id="menu.download" />
                 </h2>
 
-                <small>
-                    <FormattedMessage id="getting_started.version" values={{ version: VERSION }} />
-                </small>
-
                 <h3><FormattedMessage id="getting_started.install_bower" /></h3>
                 <p><FormattedHTMLMessage id="getting_started.install_bower_descr" /></p>
 

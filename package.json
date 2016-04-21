@@ -22,6 +22,7 @@
     "classnames": "2.2.3",
     "es5-shim": "4.5.8",
     "history": "2.0.1",
+    "intl": "1.1.0",
     "lodash": "4.9.0",
     "react": "15.0.1",
     "react-addons-pure-render-mixin": "15.0.1",

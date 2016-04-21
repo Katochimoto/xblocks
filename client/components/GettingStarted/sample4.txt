@@ -1,7 +1,7 @@
 <!-- es5-shim -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.8/es5-shim.min.js"></script>
 <!-- React -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-with-addons.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.min.js"></script>
 <!-- Tether -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>

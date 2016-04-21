@@ -3,6 +3,7 @@ import App from 'components/App';
 import GettingStarted from 'components/GettingStarted';
 import Examples from 'components/Examples';
 import Controls from 'components/Controls';
+import Extension from 'components/Extension';
 
 const routes = [
     {
@@ -41,6 +42,18 @@ const routes = [
                     {
                         path: ':name',
                         component: Controls,
+                        onEnter: onEnterSubpath
+                    }
+                ]
+            },
+            {
+                path: 'extension',
+                component: Extension,
+                onEnter: onEnterPath,
+                childRoutes: [
+                    {
+                        path: ':name',
+                        component: Extension,
                         onEnter: onEnterSubpath
                     }
                 ]
