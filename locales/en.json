@@ -17,8 +17,8 @@
     "menu.writing_extensions": "Writing an Extension",
     "menu.core": "Core",
     "menu.support": "Browser and device support",
-    "menu.contributing": "Contributing",
-    "menu.tests": "Running tests",
+    "menu.block": "Веб-компонент",
+    "menu.view": "Вид",
 
     "getting_started.descr0": "An overview of Xblocks, how to download and use, basic templates, and more.",
     "getting_started.download": "Download library",
@@ -161,5 +161,17 @@
     "controls.menu__attrs_target-modifier": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
     "controls.menu__attrs_target-offset": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
     "controls.menu__attrs_target-parent": "Прикрепить элемент к предку.",
-    "controls.menu__attrs_target": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>"
+    "controls.menu__attrs_target": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+
+    "extension.es6": "ES6 и декораторы",
+    "extension.descr0": "Для создания собственных элементов достаточно использовать библиотеку <a href=\"https://github.com/Katochimoto/xblocks-core\" target=\"_blank\">xblocks-core</a>.",
+    "extension.descr1": "Используя декораторы и ES6 классы для определения React компонент, любой компонент можно лекго превратить в веб-компонент.",
+    "extension.es6__install_deep": "Установка зависимостей для сборки",
+    "extension.es6__configure": "Настройка сборки",
+    "extension.descr2": "Файл .babelrc",
+    "extension.es6__example": "Пример",
+    "extension.descr3": "В результате будет создан новый веб-компонент <code>xb-element</code>.",
+    "extension.descr4": "Если вы хотите чтобы компонент динамически изменял своё состояние при изменении атрибутов, обязательно указывайте блок <code>propTypes</code> с описанием типов атрибутов.",
+    "extension.descr5": "Дополнительные свойства веб-компонента можно указать вторым атрибутом декоратора.",
+    "extension.descr6": "Формат свойств совпадает с описанием <a href=\"http://x-tag.github.io/\" target=\"_blank\">x-tag</a> за исключением блока <code>lifecycle</code>. Вместо этого предлагается использовать события <code>xb-created</code>, <code>xb-update</code> и <code>xb-destroy</code>."
 }

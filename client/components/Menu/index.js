@@ -127,19 +127,19 @@ export default React.createClass({
                 },
                 {
                     hash: '/core',
-                    title: <FormattedMessage id="menu.core" />
-                },
-                {
-                    hash: '/support',
-                    title: <FormattedMessage id="menu.support" />
-                },
-                {
-                    hash: '/contributing',
-                    title: <FormattedMessage id="menu.contributing" />
-                },
-                {
-                    hash: '/tests',
-                    title: <FormattedMessage id="menu.tests" />
+                    title: <FormattedMessage id="menu.core" />,
+                    menu: {
+                        items: [
+                            {
+                                hash: '/core/block',
+                                title: <FormattedMessage id="menu.block" />
+                            },
+                            {
+                                hash: '/core/view',
+                                title: <FormattedMessage id="menu.view" />
+                            }
+                        ]
+                    }
                 }
             ]
         };

@@ -5,7 +5,6 @@ import 'resources/style';
 
 import { Router, hashHistory } from 'react-router';
 import { IntlProvider } from 'react-intl';
-
 import routeConfig from './routes';
 import { locale, messages } from './intl';
 

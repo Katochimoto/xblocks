@@ -1,0 +1,15 @@
+import React from 'react';
+import { element } from 'xblocks-core';
+
+@element('xb-element')
+class XBElement extends React.Component {
+    render() {
+        return (
+            <div title={this.props.title}>{this.props.children}</div>
+        );
+    }
+}
+
+XBElement.propTypes = {
+    title: React.PropTypes.string
+};

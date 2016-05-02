@@ -1,0 +1,77 @@
+import { PropTypes } from 'react';
+import { view } from 'xblocks-core';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import classnames from 'classnames';
+
+view.register('xb-button', {
+    displayName: 'xb-button',
+
+    mixins: [ PureRenderMixin ],
+
+    propTypes: {
+        'autofocus':    PropTypes.bool,
+        'for':          PropTypes.string,
+        'form':         PropTypes.string,
+        'href':         PropTypes.string,
+        'multiple':     PropTypes.bool,
+        'name':         PropTypes.string,
+        'required':     PropTypes.bool,
+        'size':         PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+        'target':       PropTypes.oneOf([ '_blank', '_self', '_parent', '_top' ]),
+        'theme':        PropTypes.oneOf([ 'action', 'dark', 'normal', 'clear', 'dark-pseudo', 'pseudo' ]),
+        'type':         PropTypes.oneOf([ 'label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio' ]),
+        'value':        PropTypes.string
+    },
+
+    getDefaultProps: function () {
+        return {
+            'autofocus':    false,
+            'children':     String.fromCharCode(160),
+            'disabled':     false,
+            'multiple':     false,
+            'required':     false,
+            'size':         'm',
+            'tabindex':     '0',
+            'theme':        'normal',
+            'type':         'button'
+        };
+    },
+
+    getInitialState: function () {
+        return {
+            focused: false
+        };
+    },
+
+    render: function () {
+        const classes = classnames({
+            'xb-button': true,
+            '_disabled': this.props.disabled,
+            '_focused': this.state.focused,
+            [ `_theme-${this.props.theme}_size-${this.props.size}` ]: true
+        });
+
+        const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
+        const type = this.props.type;
+        const content = (
+            <Content key="content" _uid={this.props._uid}>
+                {this.props.children}
+            </Content>
+        );
+
+        return (
+            <button className={classes}
+                type={type}
+                form={this.props.form}
+                title={this.props.title}
+                name={this.props.name}
+                value={this.props.value}
+                tabIndex={tabIndex}
+                disabled={this.props.disabled}
+                autoFocus={this.props.autofocus}>
+
+                {content}
+            </button>
+        );
+    }
+});

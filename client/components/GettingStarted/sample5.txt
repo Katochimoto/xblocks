@@ -2,10 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    'devtool': '#source-map',
-    'target': 'web',
-    'entry': {
-        'vendor': [
+    devtool: '#source-map',
+    target: 'web',
+    entry: {
+        vendor: [
             'es5-shim/es5-shim.js',
             'react',
             'react-dom',
@@ -16,17 +16,17 @@ module.exports = {
             'xblocks'
             // ...
         ],
-        'index': './index.js'
+        index: './index.js'
     },
-    'output': {
-        'chunkFilename': '[name].js',
-        'crossOriginLoading': 'use-credentials',
-        'filename': '[name].js',
-        'libraryTarget': 'umd',
-        'path': path.join(__dirname, 'out')
+    output: {
+        chunkFilename: '[name].js',
+        crossOriginLoading: 'use-credentials',
+        filename: '[name].js',
+        libraryTarget: 'umd',
+        path: path.join(__dirname, 'out')
     },
-    'resolve': {
-        'modulesDirectories': [
+    resolve: {
+        modulesDirectories: [
             'node_modules/xblocks-core/dist',
             'node_modules/xblocks/dist',
             'node_modules'

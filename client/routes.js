@@ -4,11 +4,13 @@ import GettingStarted from 'components/GettingStarted';
 import Examples from 'components/Examples';
 import Controls from 'components/Controls';
 import Extension from 'components/Extension';
+import Core from 'components/Core';
 
 const routes = [
     {
         path: '/',
         component: App,
+        indexRoute: { component: GettingStarted },
         childRoutes: [
             {
                 path: 'getting-started',
@@ -54,6 +56,18 @@ const routes = [
                     {
                         path: ':name',
                         component: Extension,
+                        onEnter: onEnterSubpath
+                    }
+                ]
+            },
+            {
+                path: 'core',
+                component: Core,
+                onEnter: onEnterPath,
+                childRoutes: [
+                    {
+                        path: ':name',
+                        component: Core,
                         onEnter: onEnterSubpath
                     }
                 ]

@@ -1,0 +1,50 @@
+import { create } from 'xblocks-core';
+
+create('xb-button', {
+    prototype: Object.create(HTMLInputElement.prototype),
+
+    accessors: {
+        disabled: {
+            attribute: {
+                boolean: true
+            }
+        },
+
+        checked: {
+            attribute: {
+                boolean: true
+            }
+        },
+
+        value: {
+            attribute: {
+                name: 'value'
+            },
+
+            get: function () {
+                return String(this.getAttribute('value') || this.defaultValue || '');
+            }
+        },
+
+        defaultValue: {
+            get: function () {
+                var type = this.attrs.type;
+                if (type === 'checkbox' || type === 'radio') {
+                    return 'on';
+                }
+
+                return '';
+            }
+        }
+    },
+
+    methods: {
+        focus: function () {
+            this.firstChild.focus();
+        },
+
+        blur: function () {
+            this.firstChild.blur();
+        }
+    }
+});

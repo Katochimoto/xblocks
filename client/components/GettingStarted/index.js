@@ -52,17 +52,17 @@ export default React.createClass({
                 <h3><FormattedMessage id="getting_started.install_bower" /></h3>
                 <p><FormattedHTMLMessage id="getting_started.install_bower_descr" /></p>
 
-                <Code value="$ bower i xblocks-core xblocks" />
+                <Code lang="bash" value="$ bower i xblocks-core xblocks" />
 
                 <h3><FormattedMessage id="getting_started.install_npm" /></h3>
                 <p><FormattedHTMLMessage id="getting_started.install_npm_descr" /></p>
 
-                <Code value="$ npm i xblocks-core xblocks" />
+                <Code lang="bash" value="$ npm i xblocks-core xblocks" />
 
                 <h3><FormattedMessage id="getting_started.webpack" /></h3>
                 <p><FormattedHTMLMessage id="getting_started.webpack_descr" /></p>
 
-                <Code lang="json" value={sample5} />
+                <Code lang="javascript" value={sample5} />
 
                 <h2 className="sub-header anchor" data-hash="templates">
                     <FormattedMessage id="menu.templates" />

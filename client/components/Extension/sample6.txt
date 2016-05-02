@@ -1,0 +1,39 @@
+import classnames from 'classnames';
+import { PropTypes } from 'react';
+import { create, view } from 'xblocks-core';
+
+// define element
+create('xb-ico');
+
+// define view
+view.register('xb-ico', {
+    displayName: 'xb-ico',
+
+    propTypes: {
+        size: PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
+        type: PropTypes.oneOf([ 'remove', 'notification', 'check', 'dropdown' ]),
+        active: PropTypes.bool,
+        disabled: PropTypes.bool
+    },
+
+    getDefaultProps: function() {
+        return {
+            size: 'm',
+            children: String.fromCharCode(160)
+        };
+    },
+
+    render: function() {
+        var classes = classnames({
+            'xb-ico': true,
+            '_active': this.props.active,
+            '_disabled': this.props.disabled,
+            [ `_type-${this.props.type}` ]: Boolean(this.props.type),
+            [ `_size-${this.props.size}` ]: Boolean(this.props.size)
+        });
+
+        return (
+            <span className={classes} >{this.props.children}</span>
+        );
+    }
+});

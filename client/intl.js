@@ -1,10 +1,14 @@
 import _ from 'lodash';
 import { addLocaleData } from 'react-intl';
 
-const locale = (navigator.language || navigator.browserLanguage).split('-')[ 0 ];
-
+let locale = (navigator.language || navigator.browserLanguage).split('-')[ 0 ];
 let req = require.context('../locales', false, /\.json$/);
 let messages = {};
+
+let lang = window.location && window.location.search.match(/(?:\&|\?)lang=(ru|en)(?:&|$)/);
+if (lang && lang[1]) {
+    locale = lang[1];
+}
 
 req.keys().forEach(function (file) {
     let loc = file.replace('./', '').replace('.json', '');
