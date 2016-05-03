@@ -15,7 +15,9 @@
         "protected": false,
         "template": "templates/default",
         "encoding": "utf8",
-        "recurse": true
+        "recurse": true,
+        "readme": "./lib/xblocks-core/README.md",
+        "mainpagetitle": "xblocks-core"
     },
     "plugins": [
         "plugins/markdown"
@@ -28,6 +30,7 @@
     },
     "templates": {
         "cleverLinks": false,
-        "monospaceLinks": false
+        "monospaceLinks": false,
+        "title": "qwe"
     }
 }
