@@ -1,0 +1,43 @@
+{
+    "markdown": {
+        "hardwrap": true,
+        "parser": "gfm",
+        "tags": [
+            "description",
+            "examples"
+        ]
+    },
+    "opts": {
+        "private": false,
+        "protected": false,
+        "template": "./node_modules/jaguarjs-jsdoc"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "source": {
+        "include": [
+            "./lib/xblocks-core/src"
+        ],
+        "includePattern": ".+\\.js(doc)?$"
+    },
+    "templates": {
+        "applicationName": "xblocks-core",
+        "cleverLinks": false,
+        "disqus": false,
+        "googleAnalytics": false,
+        "meta": {
+            "title": "",
+            "description": "",
+            "keyword": ""
+        },
+        "monospaceLinks": true,
+        "openGraph": false,
+        "scripts": [
+
+        ],
+        "styles": [
+            
+        ]
+    }
+}

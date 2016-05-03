@@ -67,6 +67,7 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack --progress --watch",
-    "test": "./node_modules/.bin/eslint ."
+    "test": "./node_modules/.bin/eslint .",
+    "jsdoc": "./node_modules/.bin/jsdoc --debug -r -c jsdoc.json -d docs/jsdoc"
   }
 }
