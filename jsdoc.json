@@ -1,16 +1,21 @@
 {
-    "markdown": {
-        "hardwrap": true,
-        "parser": "gfm",
-        "tags": [
-            "description",
-            "examples"
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": [
+            "jsdoc",
+            "closure"
         ]
+    },
+    "markdown": {
+        "hardwrap": false,
+        "idInHeadings": true
     },
     "opts": {
         "private": false,
         "protected": false,
-        "template": "./node_modules/jaguarjs-jsdoc"
+        "template": "templates/default",
+        "encoding": "utf8",
+        "recurse": true
     },
     "plugins": [
         "plugins/markdown"
@@ -22,22 +27,7 @@
         "includePattern": ".+\\.js(doc)?$"
     },
     "templates": {
-        "applicationName": "xblocks-core",
         "cleverLinks": false,
-        "disqus": false,
-        "googleAnalytics": false,
-        "meta": {
-            "title": "",
-            "description": "",
-            "keyword": ""
-        },
-        "monospaceLinks": true,
-        "openGraph": false,
-        "scripts": [
-
-        ],
-        "styles": [
-            
-        ]
+        "monospaceLinks": false
     }
 }

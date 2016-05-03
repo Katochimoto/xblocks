@@ -53,7 +53,7 @@
     "html-webpack-plugin": "2.16.0",
     "image-webpack-loader": "1.8.0",
     "jaguarjs-jsdoc": "Katochimoto/jaguarjs-jsdoc.git",
-    "jsdoc": "3.4.0",
+    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
     "json-loader": "0.5.4",
     "postcss-loader": "0.9.1",
     "preprocess": "3.1.0",

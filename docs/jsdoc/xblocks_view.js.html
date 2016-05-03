@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: xblocks/view.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: xblocks/view.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module xblocks/view
+ */
+
+import React, { PropTypes } from 'react';
+import merge from 'lodash/merge';
+import isArray from 'lodash/isArray';
+import isFunction from 'lodash/isFunction';
+
+const VIEW_COMMON = {
+
+    /**
+     * Required attributes.
+     * @memberOf ReactElement.prototype
+     * @type {Object}
+     */
+    propTypes: {
+        _uid: PropTypes.node,
+        _container: PropTypes.any,  // Bad way ;(
+        children: PropTypes.node
+    },
+
+    /**
+     * Create node by template.
+     * @memberOf ReactElement.prototype
+     * @param {string} ref template name
+     * @param {Object} [props] the attributes of a node
+     * @returns {?ReactElement}
+     */
+    template: function (ref, props) {
+        const xtmpl = this.props._container &amp;&amp; this.props._container.xtmpl;
+
+        if (typeof xtmpl === 'object' &amp;&amp; xtmpl !== null &amp;&amp; xtmpl.hasOwnProperty(ref)) {
+            return (
+                &lt;div {...props} dangerouslySetInnerHTML={{ '__html': this.templatePrepare(xtmpl[ ref ]) }} />
+            );
+        }
+
+        return null;
+    },
+
+    /**
+     * Get the node associated with the view.
+     * @returns {HTMLElement}
+     */
+    container: function () {
+        return this.props._container;
+    }
+};
+
+const VIEW_COMMON_USER = {
+    /**
+     * Custom conversion template.
+     * @param {string} tmplString
+     * @returns {string}
+     */
+    templatePrepare: function (tmplString) {
+        return tmplString;
+    }
+};
+
+const VIEW_COMPONENTS_CLASS = {};
+
+/**
+ * Create class view node.
+ *
+ * @example
+ * import view from 'xblocks/view';
+ *
+ * var XBButtonContent = view.create({
+ *     displayName: 'XBButtonContent',
+ *     render: function () {
+ *         return (
+ *             &lt;span {...this.props}>{this.props.children}&lt;/span>
+ *         );
+ *     }
+ * });
+ *
+ * view.register('xb-button', {
+ *     displayName: 'xb-button',
+ *     render: function () {
+ *         return (
+ *             &lt;button>
+ *                 &lt;XBButtonContent {...this.props} />
+ *             &lt;/button>
+ *         );
+ *     }
+ * });
+ *
+ * @see http://facebook.github.io/react/docs/component-specs.html
+ * @alias module:xblocks/view.create
+ * @param {Object|array} component settings view creation
+ * @returns {function}
+ */
+export function create(component) {
+    component = isArray(component) ? component : [ component ];
+    component.unshift({}, VIEW_COMMON_USER);
+    component.push(VIEW_COMMON);
+
+    return React.createClass(merge.apply({}, component));
+}
+
+/**
+ * Registration of a new node.
+ *
+ * @example
+ * import view from 'xblocks/view';
+ * 
+ * view.register('xb-button', {
+ *     displayName: 'xb-button',
+ *     render: function () {
+ *         return (
+ *             &lt;button {...this.props}>{this.props.children}&lt;/button>
+ *         );
+ *     }
+ * });
+ *
+ * @see http://facebook.github.io/react/docs/component-specs.html
+ * @alias module:xblocks/view.register
+ * @param {string} blockName the name of the new node
+ * @param {Object|array|React.Component} component settings view creation
+ * @returns {function}
+ */
+export function register(blockName, component) {
+    if (React.DOM.hasOwnProperty(blockName)) {
+        /* eslint no-throw-literal:0 */
+        throw 'Specified item "' + blockName + '" is already defined';
+    }
+
+    const componentClass = isFunction(component) ?
+        component :
+        create(component);
+
+    VIEW_COMPONENTS_CLASS[ blockName ] = componentClass;
+
+    React.DOM[ blockName ] = React.createFactory(componentClass);
+
+    return componentClass;
+}
+
+/**
+ * Get factory view node.
+ * @alias module:xblocks/view.getFactory
+ * @param {string} blockName the name of the new node
+ * @returns {function}
+ */
+export function getFactory(blockName) {
+    return React.DOM[ blockName ];
+}
+
+/**
+ * Get class view node.
+ * @alias module:xblocks/view.getClass
+ * @param {string} blockName the name of the new node
+ * @returns {function}
+ */
+export function getClass(blockName) {
+    return VIEW_COMPONENTS_CLASS[ blockName ];
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks_block.html">xblocks/block</a></li><li><a href="module-xblocks_decorator.html">xblocks/decorator</a></li><li><a href="module-xblocks_dom_attrs.html">xblocks/dom/attrs</a></li><li><a href="module-xblocks_dom_cloneNode.html">xblocks/dom/cloneNode</a></li><li><a href="module-xblocks_dom_contentNode.html">xblocks/dom/contentNode</a></li><li><a href="module-xblocks_dom_outerHTML.html">xblocks/dom/outerHTML</a></li><li><a href="module-xblocks_dom_upgrade.html">xblocks/dom/upgrade</a></li><li><a href="module-xblocks_dom_upgradeAll.html">xblocks/dom/upgradeAll</a></li><li><a href="module-xblocks_element.html">xblocks/element</a></li><li><a href="module-xblocks_event.html">xblocks/event</a></li><li><a href="module-xblocks_utils_lazy.html">xblocks/utils/lazy</a></li><li><a href="module-xblocks_utils_propTypes.html">xblocks/utils/propTypes</a></li><li><a href="module-xblocks_view.html">xblocks/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Tue May 03 2016 23:06:28 GMT+0300 (MSK)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

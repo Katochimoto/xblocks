@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: xblocks/block.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: xblocks/block.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module xblocks/block
+ */
+
+import * as xtag from 'xtag';
+import isPlainObject from 'lodash/isPlainObject';
+import isArray from 'lodash/isArray';
+import merge from 'lodash/merge';
+import uniqueId from 'lodash/uniqueId';
+import * as dom from './dom';
+import { XBElement } from './element';
+import { lazy, propTypes } from './utils';
+
+const BLOCK_COMMON = {
+    lifecycle: {
+        /**
+         * The callback of the create element.
+         */
+        created: function () {
+            blockInit(this);
+        },
+
+        /**
+         * The callback of the insert in DOM.
+         */
+        inserted: function () {
+            if (this.xinserted) {
+                return;
+            }
+
+            blockInit(this);
+
+            this.xinserted = true;
+
+            const isScriptContent = Boolean(this.querySelector('script'));
+
+            // asynchronous read content
+            // &lt;xb-test>&lt;script>...&lt;/script>&lt;div>not found&lt;/div>&lt;/xb-test>
+            if (isScriptContent) {
+                lazy(blockCreateLazy, this);
+
+            } else {
+                blockCreate(this);
+            }
+        },
+
+        /**
+         * The callback of the remote in DOM.
+         */
+        removed: function () {
+            this.xinserted = false;
+
+            if (this.xblock) {
+                this.xblock.destroy();
+                this.xblock = undefined;
+            }
+        }
+    },
+
+    accessors: {
+        mounted: {
+            /**
+             * Check react mounted
+             * @returns {boolean}
+             */
+            get: function () {
+                return Boolean(this.xblock &amp;&amp; this.xblock.isMounted());
+            }
+        },
+
+        content: {
+            /**
+             * Receiving the content.
+             * @returns {?string}
+             */
+            get: function () {
+                if (this.mounted) {
+                    return this.xblock.getMountedContent();
+                }
+
+                return dom.contentNode(this).innerHTML;
+            },
+
+            /**
+             * Installing a new content.
+             * @param {string} content
+             */
+            set: function (content) {
+                if (this.mounted) {
+                    this.xblock.setMountedContent(content);
+
+                } else {
+                    dom.contentNode(this).innerHTML = content;
+                    this.upgrade();
+                }
+            }
+        },
+
+        attrs: {
+            /**
+             * Getting object attributes.
+             * @returns {Object}
+             */
+            get: function () {
+                return dom.attrs.toObject(this);
+            }
+        },
+
+        props: {
+            /**
+             * Getting object properties.
+             * @returns {Object}
+             */
+            get: function () {
+                const props = dom.attrs.toObject(this);
+                const xprops = this.xprops;
+                const eprops = xtag.tags[ this.xtagName ].accessors;
+                const common = BLOCK_COMMON.accessors;
+
+                for (let prop in eprops) {
+                    if (xprops.hasOwnProperty(prop) &amp;&amp;
+                        eprops.hasOwnProperty(prop) &amp;&amp;
+                        !common.hasOwnProperty(prop)) {
+
+                        props[ prop ] = this[ prop ];
+                    }
+                }
+
+                dom.attrs.typeConversion(props, xprops);
+                return props;
+            }
+        },
+
+        xprops: {
+            /**
+             * Getting react properties.
+             * @returns {Object}
+             */
+            get: function () {
+                return propTypes(this.xtagName);
+            }
+        },
+
+        outerHTML: dom.outerHTML
+    },
+
+    methods: {
+        /**
+         * Recalculation of the internal structure.
+         */
+        upgrade: function () {
+            dom.upgradeAll(this);
+        },
+
+        /**
+         * Cloning a node.
+         * @param {boolean} deep true if the content to be saved
+         * @returns {HTMLElement}
+         */
+        cloneNode: function (deep) {
+            // not to clone the contents
+            const node = dom.cloneNode(this, false);
+            dom.upgrade(node);
+
+            node.xtmpl = this.xtmpl;
+            node.xinserted = false;
+
+            if (deep) {
+                node.content = this.content;
+            }
+
+            // ???
+            // if ('checked' in this) clone.checked = this.checked;
+
+            return node;
+        }
+    }
+};
+
+/**
+ * Creating a new tag.
+ * @see http://x-tag.github.io/
+ * @alias module:xblocks/block.create
+ * @param {string} blockName the name of the new node
+ * @param {?Object|array} options settings tag creation
+ * @returns {HTMLElement}
+ * @public
+ */
+export function create(blockName, options) {
+    options = isArray(options) ? options : [ options ];
+    options.unshift({});
+    options.push(BLOCK_COMMON);
+
+    // error when merging prototype in FireFox &lt;=19
+    let proto;
+    let i = 1;
+    const l = options.length;
+
+    for (; i &lt; l; i++) {
+        let o = options[ i ];
+
+        if (isPlainObject(o) &amp;&amp; o.prototype) {
+            if (!proto) {
+                proto = o.prototype;
+            }
+
+            delete o.prototype;
+        }
+    }
+
+    options = merge.apply({}, options);
+
+    if (proto) {
+        options.prototype = proto;
+    }
+
+    return xtag.register(blockName, options);
+}
+
+/**
+ * Initialization of the element.
+ * @param {HTMLElement} node
+ * @returns {boolean}
+ * @private
+ */
+function blockInit(node) {
+    if (!node.xtagName) {
+        node.xtagName = node.tagName.toLowerCase();
+        node.xtmpl = {};
+        node.xuid = uniqueId();
+        node.xinserted = false;
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Creating an item.
+ * @param {HTMLElement} node
+ * @private
+ */
+function blockCreate(node) {
+    if (node.hasChildNodes()) {
+        Array.prototype.forEach.call(
+            node.querySelectorAll('script[type="text/x-template"][ref],template[ref]'),
+            tmplCompileIterator,
+            node
+        );
+    }
+
+    node.xblock = new XBElement(node);
+}
+
+/**
+ * Pending the creation of the item.
+ * @param {HTMLElement[]} nodes
+ * @private
+ */
+function blockCreateLazy(nodes) {
+    nodes.forEach(blockCreate);
+}
+
+/**
+ * The selection of templates.
+ * @param {HTMLElement} node
+ * @this HTMLElement
+ * @private
+ */
+function tmplCompileIterator(node) {
+    this.xtmpl[ node.getAttribute('ref') ] = node.innerHTML;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks_block.html">xblocks/block</a></li><li><a href="module-xblocks_decorator.html">xblocks/decorator</a></li><li><a href="module-xblocks_dom_attrs.html">xblocks/dom/attrs</a></li><li><a href="module-xblocks_dom_cloneNode.html">xblocks/dom/cloneNode</a></li><li><a href="module-xblocks_dom_contentNode.html">xblocks/dom/contentNode</a></li><li><a href="module-xblocks_dom_outerHTML.html">xblocks/dom/outerHTML</a></li><li><a href="module-xblocks_dom_upgrade.html">xblocks/dom/upgrade</a></li><li><a href="module-xblocks_dom_upgradeAll.html">xblocks/dom/upgradeAll</a></li><li><a href="module-xblocks_element.html">xblocks/element</a></li><li><a href="module-xblocks_event.html">xblocks/event</a></li><li><a href="module-xblocks_utils_lazy.html">xblocks/utils/lazy</a></li><li><a href="module-xblocks_utils_propTypes.html">xblocks/utils/propTypes</a></li><li><a href="module-xblocks_view.html">xblocks/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Tue May 03 2016 23:06:28 GMT+0300 (MSK)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
