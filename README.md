@@ -1,17 +1,18 @@
-# xblocks
-> HTML custom elements
+HTML custom elements
 
 [![Build Status][build]][build-link] [![NPM version][version]][version-link] [![Dependency Status][dependency]][dependency-link] [![devDependency Status][dev-dependency]][dev-dependency-link] [![Code Climate][climate]][climate-link]
 
+## Документация
 
+[Документация](http://xblocks.info)
 
 ##Dependencies
 
-- [xblocks-core](https://github.com/Katochimoto/xblocks-core) (2.0.2)
-- [React.js](https://github.com/facebook/react) (0.14.7)
+- [xblocks-core](https://github.com/Katochimoto/xblocks-core)
+- [React.js](https://github.com/facebook/react)
 - [X-Tag core](https://github.com/x-tag/core) ([custom build x-tag-core.js](https://github.com/Katochimoto/xblocks-core/blob/master/x-tag-core.js) or 1.1.9)
-- [es5-shim](https://github.com/es-shims/es5-shim) (4.5.2)
-- [tether](https://github.com/HubSpot/tether) (1.2.0) for xb-popup and xb-menu
+- [es5-shim](https://github.com/es-shims/es5-shim)
+- [tether](https://github.com/HubSpot/tether) for xb-popup and xb-menu
 
 ##Browser support
 
@@ -29,8 +30,6 @@ npm install xblocks
 ```
 bower install xblocks
 ```
-
-## Stats
 
 [![NPM](https://nodei.co/npm/xblocks.png?downloads=true&stars=true)](https://nodei.co/npm/xblocks/)
 [![NPM](https://nodei.co/npm-dl/xblocks.png)](https://nodei.co/npm/xblocks/)

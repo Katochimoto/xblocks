@@ -1,5 +1,7 @@
 {
     "rules": {
+        "flow-vars/define-flow-type": 1,
+        "flow-vars/use-flow-type": 1,
         "indent": [
             2,
             4
@@ -65,14 +67,13 @@
         "experimentalObjectRestSpread": true
     },
     "plugins": [
-        "react"
+        "react",
+        "flow-vars"
     ],
     "globals": {
         "module": false,
         "exports": false,
         "require": false,
-        "DEBUG_TIME": false,
-        "DEBUG": false,
         "describe": false,
         "xdescribe": false,
         "it": false,
