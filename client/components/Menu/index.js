@@ -137,6 +137,10 @@ export default React.createClass({
                             {
                                 hash: '/core/view',
                                 title: <FormattedMessage id="menu.view" />
+                            },
+                            {
+                                href: 'http://katochimoto.github.io/xblocks/docs/jsdoc/',
+                                title: 'JSDoc'
                             }
                         ]
                     }
@@ -157,19 +161,31 @@ export default React.createClass({
     },
 
     renderMenuItem(item, key) {
-        var href = this.context.router.createPath(item.hash);
+        var href = item.href || this.context.router.createPath(item.hash);
         var find = (_.trimEnd(this.props.location.pathname, '/') + '/').indexOf((_.trimEnd(href, '/') + '/'));
 
         var classes = classSet({
             'active': find === 0
         });
 
-        return (
-            <li key={key} className={classes}>
+        var link;
+        if (item.href) {
+            link = (
+                <a href={href} target="_blank">
+                    {item.title}
+                </a>
+            );
+        } else {
+            link = (
                 <Link to={href}>
                     {item.title}
                 </Link>
+            );
+        }
 
+        return (
+            <li key={key} className={classes}>
+                {link}
                 {item.menu ? this.renderMenu(item.menu.items, key) : null}
             </li>
         );

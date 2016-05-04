@@ -30,7 +30,6 @@
     },
     "templates": {
         "cleverLinks": false,
-        "monospaceLinks": false,
-        "title": "qwe"
+        "monospaceLinks": false
     }
 }
