@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module xblocks/dom/attrs
+ * @module xblocks-core/dom/attrs
  */
 
 import { PropTypes } from 'react';
@@ -53,7 +53,7 @@ const attrsBoolean = [
  * To obtain the specified attributes.
  *
  * @example
- * import { get } from 'xblocks/dom/attrs';
+ * import { get } from 'xblocks-core/dom/attrs';
  *
  * var node = document.createElement('div');
  * node.setAttribute('attr1', '');
@@ -66,7 +66,7 @@ const attrsBoolean = [
  * });
  * // { 'attr1': true, 'attr2': 'test1' }
  *
- * @alias module:xblocks/dom/attrs.get
+ * @alias module:xblocks-core/dom/attrs.get
  * @param {HTMLElement} element
  * @param {Object} attrs the set of derived attributes (+default values)
  * @returns {Object}
@@ -98,7 +98,7 @@ export function get(element, attrs) {
  * Retrieve object attributes.
  *
  * @example
- * import { toObject } from 'xblocks/dom/attrs';
+ * import { toObject } from 'xblocks-core/dom/attrs';
  *
  * var node = document.createElement('div');
  * node.setAttribute('attr1', '');
@@ -107,7 +107,7 @@ export function get(element, attrs) {
  * toObject(node);
  * // { 'attr1': '', 'attr2': 'test' }
  *
- * @alias module:xblocks/dom/attrs.toObject
+ * @alias module:xblocks-core/dom/attrs.toObject
  * @param {HTMLElement} element
  * @returns {Object}
  */
@@ -125,7 +125,7 @@ export function toObject(element) {
  * Collective conversion of attribute types.
  *
  * @example
- * import { typeConversion } from 'xblocks/dom/attrs';
+ * import { typeConversion } from 'xblocks-core/dom/attrs';
  *
  * typeConversion({
  *     'attr1': '123',
@@ -136,7 +136,7 @@ export function toObject(element) {
  * });
  * // { 'attr1': 123, 'attr2': true }
  *
- * @alias module:xblocks/dom/attrs.typeConversion
+ * @alias module:xblocks-core/dom/attrs.typeConversion
  * @param {Object} props the set of attributes
  * @param {Object} [propTypes] the set of attribute types
  * @returns {Object}
@@ -161,7 +161,7 @@ export function typeConversion(props, propTypes) {
  * Convert the attribute value to the specified type.
  *
  * @example
- * import { valueConversion } from 'xblocks/dom/attrs';
+ * import { valueConversion } from 'xblocks-core/dom/attrs';
  *
  * valueConversion('attr1', 'true');
  * // true
@@ -170,7 +170,7 @@ export function typeConversion(props, propTypes) {
  * valueConversion('attr1', '123', PropTypes.number);
  * // 123
  *
- * @alias module:xblocks/dom/attrs.valueConversion
+ * @alias module:xblocks-core/dom/attrs.valueConversion
  * @param {string} prop attribute name
  * @param {*} value attribute value
  * @param {function} [type] attribute type
@@ -216,13 +216,13 @@ function toObjectIterator(attr) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks_block.html">xblocks/block</a></li><li><a href="module-xblocks_decorator.html">xblocks/decorator</a></li><li><a href="module-xblocks_dom_attrs.html">xblocks/dom/attrs</a></li><li><a href="module-xblocks_dom_cloneNode.html">xblocks/dom/cloneNode</a></li><li><a href="module-xblocks_dom_contentNode.html">xblocks/dom/contentNode</a></li><li><a href="module-xblocks_dom_outerHTML.html">xblocks/dom/outerHTML</a></li><li><a href="module-xblocks_dom_upgrade.html">xblocks/dom/upgrade</a></li><li><a href="module-xblocks_dom_upgradeAll.html">xblocks/dom/upgradeAll</a></li><li><a href="module-xblocks_element.html">xblocks/element</a></li><li><a href="module-xblocks_event.html">xblocks/event</a></li><li><a href="module-xblocks_utils_lazy.html">xblocks/utils/lazy</a></li><li><a href="module-xblocks_utils_propTypes.html">xblocks/utils/propTypes</a></li><li><a href="module-xblocks_view.html">xblocks/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_element.html">xblocks-core/element</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Wed May 04 2016 22:09:35 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Thu May 05 2016 22:33:42 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

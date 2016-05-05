@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: xblocks/dom/cloneNode.js</title>
+    <title>JSDoc: Class: Custom</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,47 +17,145 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: xblocks/dom/cloneNode.js</h1>
+    <h1 class="page-title">Class: Custom</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import context from '../../context';
+        <h2>
+            <span class="ancestors"><a href="module-xblocks-core_event.html">xblocks-core/event</a>~</span>Custom</h2>
+        
+    
+</header>
 
-const elementProto = (context.HTMLElement || context.Element).prototype;
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * Cloning node.
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Node.cloneNode
- * @module xblocks-core/dom/cloneNode
- * @param {HTMLElement} node the node to be cloned
- * @param {boolean} deep true if the children of the node should also be cloned,
- * or false to clone only the specified node.
- * @returns {HTMLElement} The new node that will be a clone of node
- */
-export default function (node, deep) {
-    // FireFox19 cannot use native cloneNode the Node object
-    return elementProto.cloneNode.call(node, deep);
+    
 
-    /*
-    try {
-        // FireFox19 cannot use native cloneNode the Node object
-        return elementProto.cloneNode.call(node, deep);
-    } catch(e) {
-        // FireFox &lt;=13
-        // uncaught exception: [Exception... "Could not convert JavaScript argument"
-        // nsresult: "0x80570009 (NS_ERROR_XPC_BAD_CONVERT_JS)"
-        return node.ownerDocument.importNode(node, deep);
-    }
-    */
-}
-</code></pre>
-        </article>
-    </section>
+    <h4 class="name" id="Custom"><span class="type-signature"></span>new Custom<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Designer events.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="xblocks_event.js.html">xblocks/event.js</a>, <a href="xblocks_event.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>import { Custom } from 'xblocks-core/event';
+
+new Custom('custom-event', {
+    bubbles: true,
+    cancelable: true,
+    detail: { data: '123' }
+})</code></pre>
+    
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

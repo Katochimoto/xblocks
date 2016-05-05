@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module xblocks/view
+ * @module xblocks-core/view
  */
 
 import React, { PropTypes } from 'react';
@@ -93,7 +93,7 @@ const VIEW_COMPONENTS_CLASS = {};
  * Create class view node.
  *
  * @example
- * import view from 'xblocks/view';
+ * import view from 'xblocks-core/view';
  *
  * var XBButtonContent = view.create({
  *     displayName: 'XBButtonContent',
@@ -116,7 +116,7 @@ const VIEW_COMPONENTS_CLASS = {};
  * });
  *
  * @see http://facebook.github.io/react/docs/component-specs.html
- * @alias module:xblocks/view.create
+ * @alias module:xblocks-core/view.create
  * @param {Object|array} component settings view creation
  * @returns {function}
  */
@@ -132,8 +132,7 @@ export function create(component) {
  * Registration of a new node.
  *
  * @example
- * import view from 'xblocks/view';
- * 
+ * import view from 'xblocks-core/view';
  * view.register('xb-button', {
  *     displayName: 'xb-button',
  *     render: function () {
@@ -144,7 +143,7 @@ export function create(component) {
  * });
  *
  * @see http://facebook.github.io/react/docs/component-specs.html
- * @alias module:xblocks/view.register
+ * @alias module:xblocks-core/view.register
  * @param {string} blockName the name of the new node
  * @param {Object|array|React.Component} component settings view creation
  * @returns {function}
@@ -168,7 +167,7 @@ export function register(blockName, component) {
 
 /**
  * Get factory view node.
- * @alias module:xblocks/view.getFactory
+ * @alias module:xblocks-core/view.getFactory
  * @param {string} blockName the name of the new node
  * @returns {function}
  */
@@ -178,7 +177,7 @@ export function getFactory(blockName) {
 
 /**
  * Get class view node.
- * @alias module:xblocks/view.getClass
+ * @alias module:xblocks-core/view.getClass
  * @param {string} blockName the name of the new node
  * @returns {function}
  */
@@ -195,13 +194,13 @@ export function getClass(blockName) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks_block.html">xblocks/block</a></li><li><a href="module-xblocks_decorator.html">xblocks/decorator</a></li><li><a href="module-xblocks_dom_attrs.html">xblocks/dom/attrs</a></li><li><a href="module-xblocks_dom_cloneNode.html">xblocks/dom/cloneNode</a></li><li><a href="module-xblocks_dom_contentNode.html">xblocks/dom/contentNode</a></li><li><a href="module-xblocks_dom_outerHTML.html">xblocks/dom/outerHTML</a></li><li><a href="module-xblocks_dom_upgrade.html">xblocks/dom/upgrade</a></li><li><a href="module-xblocks_dom_upgradeAll.html">xblocks/dom/upgradeAll</a></li><li><a href="module-xblocks_element.html">xblocks/element</a></li><li><a href="module-xblocks_event.html">xblocks/event</a></li><li><a href="module-xblocks_utils_lazy.html">xblocks/utils/lazy</a></li><li><a href="module-xblocks_utils_propTypes.html">xblocks/utils/propTypes</a></li><li><a href="module-xblocks_view.html">xblocks/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_element.html">xblocks-core/element</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Wed May 04 2016 22:09:35 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Thu May 05 2016 22:33:42 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
