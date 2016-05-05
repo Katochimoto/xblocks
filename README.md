@@ -2,11 +2,11 @@ HTML custom elements
 
 [![Build Status][build]][build-link] [![NPM version][version]][version-link] [![Dependency Status][dependency]][dependency-link] [![devDependency Status][dev-dependency]][dev-dependency-link] [![Code Climate][climate]][climate-link]
 
-## Документация
+## Documentation
 
-[Документация](http://xblocks.info)
+[Documentation](http://xblocks.info)
 
-##Dependencies
+## Dependencies
 
 - [xblocks-core](https://github.com/Katochimoto/xblocks-core)
 - [React.js](https://github.com/facebook/react)
@@ -14,7 +14,7 @@ HTML custom elements
 - [es5-shim](https://github.com/es-shims/es5-shim)
 - [tether](https://github.com/HubSpot/tether) for xb-popup and xb-menu
 
-##Browser support
+## Browser support
 
 - Firefox 14+
 - Internet Explorer 9+
@@ -22,7 +22,7 @@ HTML custom elements
 - Safari 4+
 - Opera 12+
 
-##Install
+## Install
 
 ```
 npm install xblocks
