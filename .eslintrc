@@ -1,45 +1,18 @@
 {
     "rules": {
+        "react/jsx-uses-react": 1,
         "flow-vars/define-flow-type": 1,
         "flow-vars/use-flow-type": 1,
-        "indent": [
-            2,
-            4
-        ],
-        "quotes": [
-            2,
-            "single"
-        ],
-        "linebreak-style": [
-            2,
-            "unix"
-        ],
-        "semi": [
-            2,
-            "always"
-        ],
-        "array-bracket-spacing": [
-            2,
-            "always"
-        ],
-        "object-curly-spacing": [
-            2,
-            "always"
-        ],
-        "max-len": [
-            2,
-            200,
-            4
-        ],
-        "vars-on-top": [
-            0
-        ],
-        "no-inner-declarations": [
-            0
-        ],
-        "key-spacing": [
-            0
-        ],
+        "indent": [ 2, 4 ],
+        "quotes": [ 2, "single" ],
+        "linebreak-style": [ 2, "unix" ],
+        "semi": [ 2, "always" ],
+        "array-bracket-spacing": [ 2, "always" ],
+        "object-curly-spacing": [ 2, "always" ],
+        "max-len": [ 2, 200, 4 ],
+        "vars-on-top": [ 0 ],
+        "no-inner-declarations": [ 0 ],
+        "key-spacing": [ 0 ],
         "valid-jsdoc": [
             2,
             {
@@ -64,6 +37,7 @@
     ],
     "ecmaFeatures": {
         "jsx": true,
+        "modules": true,
         "experimentalObjectRestSpread": true
     },
     "plugins": [
