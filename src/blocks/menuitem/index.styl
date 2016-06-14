@@ -13,8 +13,11 @@ xb-menuitem
   &._focused
     skin: v3-menu__item_hover
 
-  &._selected
-    skin: v3-menu__item_checked
+  &._selected:before
+    skin: v3-icon_check selecty small
+    content: ""
+    float: right
+    margin: 3px -6px 0 10px
 
   &._submenu:before
     skin: icon_dropdown selecty small

@@ -6,7 +6,6 @@ import { xb } from 'context';
 import { create } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
-import Popup from '../popup';
 import TableNavigator from 'utils/TableNavigator';
 import getParentMenu from 'utils/getParentMenu';
 import immediate from 'setimmediate2/src';
@@ -61,7 +60,7 @@ export default xb.Menu = create('xb-menu', [
     mixinElementMenu,
 
     {
-        prototype: Object.create(Popup.prototype || new Popup()),
+        prototype: Object.create(document.createElement('xb-popup').constructor).prototype,
 
         events: {
             'xb-before-open': function () {

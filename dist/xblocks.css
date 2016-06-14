@@ -3524,6 +3524,7 @@ xb-menu-inline > ._popup > ._popup-scroll-bottom:after {
   margin-left: -4px;
   left: 50%;
 }
+.xb-menuitem._selected:before,
 .xb-menuitem._submenu:before {
   position: relative;
   display: inline-block;
@@ -3574,23 +3575,19 @@ xb-menuitem[hidden] {
   background: rgba(255,201,0,0.37);
 }
 .xb-menuitem._selected:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-right: 2px solid;
-  border-bottom: 2px solid;
+  margin: -3px 3px 1px;
+  width: 5px;
+  height: 13px;
+  border-bottom: 3px solid;
+  border-right: 3px solid;
   color: #000;
-  -webkit-transform: scale(0.85) rotate(47deg) skewX(12deg);
-  -moz-transform: scale(0.85) rotate(47deg) skewX(12deg);
-    -o-transform: scale(0.85) rotate(47deg) skewX(12deg);
-       transform: scale(0.85) rotate(47deg) skewX(12deg);
-  visibility: hidden;
-  visibility: inherit;
-  left: 1em;
-  margin: 0 0 0 2px;
-  width: 7px;
-  height: 15px;
+  -webkit-transform: scale(0.9) rotate(50deg) skewX(12deg);
+  -moz-transform: scale(0.9) rotate(50deg) skewX(12deg);
+    -o-transform: scale(0.9) rotate(50deg) skewX(12deg);
+       transform: scale(0.9) rotate(50deg) skewX(12deg);
+  content: "";
+  float: right;
+  margin: 3px -6px 0 10px;
 }
 .xb-menuitem._submenu:before {
   border-bottom: 2px solid;

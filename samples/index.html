@@ -11,6 +11,7 @@
     <link href="../dist/xblocks.css" rel="stylesheet"></head>
 
     <script src="../node_modules/es5-shim/es5-shim.js"></script>
+    <script src="../node_modules/tether/dist/js/tether.js"></script>
     <script src="../node_modules/react/dist/react-with-addons.js"></script>
     <script src="../node_modules/react-dom/dist/react-dom.js"></script>
     <script src="../node_modules/xblocks-core/dist/xtag.js"></script>
@@ -27,5 +28,25 @@
     <xb-radio name="radio" value="1" checked>radio 1</xb-radio>
     <xb-radio name="radio" value="2">radio 2</xb-radio>
     <xb-radio name="radio" value="3" disabled>radio 3</xb-radio>
+
+
+    <xb-menu id="menu1">
+        <xb-menuitem label="label 1">
+            <xb-menuitem label="label 1.1"></xb-menuitem>
+            <xb-menuitem label="label 1.2"></xb-menuitem>
+            <xb-menuitem label="label 1.3"></xb-menuitem>
+            <xb-menuitem label="label 1.4"></xb-menuitem>
+        </xb-menuitem>
+        <xb-menuitem label="label 2" selected></xb-menuitem>
+        <xb-menuitem label="label 3"></xb-menuitem>
+        <xb-menuitem label="label 4"></xb-menuitem>
+        <xb-menuitem label="label 5"></xb-menuitem>
+    </xb-menu>
+
+    <script>
+        window.addEventListener('xb-created', function () {
+            document.getElementById('menu1').open();
+        }, false);
+    </script>
 </body>
 </html>

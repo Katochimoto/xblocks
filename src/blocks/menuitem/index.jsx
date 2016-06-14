@@ -8,6 +8,8 @@ import exportPropTypes from 'utils/exportPropTypes';
 import filterProps from 'utils/filterProps';
 import isEmpty from 'lodash/isEmpty';
 
+const REG_PROPS_ICO = /^xb-ico-/;
+
 /**
  * The template node xb-menuitem
  *
@@ -51,13 +53,13 @@ export default xv.Menuitem = view.register('xb-menuitem', [
                 '_submenu':    this.props.submenu
             });
 
-            var children = [
+            let children = [
                 <span className="_label" key="label">
                     {this.props.label}
                 </span>
             ];
 
-            var icoProps = filterProps(/^xb-ico-/, this.props);
+            let icoProps = filterProps(REG_PROPS_ICO, this.props);
 
             if (!isEmpty(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';
