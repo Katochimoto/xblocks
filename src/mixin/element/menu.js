@@ -1,5 +1,6 @@
 import lazyFocus from 'utils/lazyFocus';
 import isParent from 'dom/isParent';
+import ConstantMenu from 'constants/menu';
 
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
@@ -25,7 +26,7 @@ export default {
          * @this xb.Menu
          */
         'keydown:keypass(13,39)': function () {
-            var item = this._xbFocus.getItem();
+            var item = this[ ConstantMenu.TABLE ].getItem();
 
             if (item && item.submenuInstance) {
                 item.submenuInstance.open();

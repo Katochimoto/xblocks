@@ -10,43 +10,7 @@ import TableNavigator from 'utils/TableNavigator';
 import getParentMenu from 'utils/getParentMenu';
 import immediate from 'setimmediate2/src';
 import mixinElementMenu from 'mixin/element/menu';
-
-const forEach = Array.prototype.forEach;
-
-const MENU_COMMON = {
-
-    /**
-     * @param {xb.Menuitem} target
-     * @this global
-     */
-    closeSubmenu: function (target) {
-        if (target._xbpopup) {
-            target._xbpopup.close();
-        }
-    },
-
-    /**
-     * The default setting for the menu
-     * @returns {Object}
-     * @this xb.Menu
-     */
-    tetherDefaultOptions: function () {
-        var options = tetherDefaultOptions.call(this);
-
-        options.constraints = [
-            {
-                'to': 'scrollParent',
-                'attachment': 'element'
-            },
-            {
-                'to': 'window',
-                'attachment': 'element'
-            }
-        ];
-
-        return options;
-    }
-};
+import ConstantMenu from 'constants/menu';
 
 /**
  * xb-menu html element
@@ -68,7 +32,7 @@ export default xb.Menu = create('xb-menu', [
             },
 
             'xb-open': function () {
-                this._xbFocus = new TableNavigator(this, {
+                this[ ConstantMenu.TABLE ] = new TableNavigator(this, {
                     rowLoop: true,
                     colLoop: true
                 });
@@ -84,9 +48,9 @@ export default xb.Menu = create('xb-menu', [
             },
 
             'xb-close': function () {
-                if (this._xbFocus) {
-                    this._xbFocus.destroy();
-                    this._xbFocus = undefined;
+                if (this[ ConstantMenu.TABLE ]) {
+                    this[ ConstantMenu.TABLE ].destroy();
+                    this[ ConstantMenu.TABLE ] = undefined;
                 }
 
                 this._closeAllSubmenu();
@@ -117,16 +81,31 @@ export default xb.Menu = create('xb-menu', [
         accessors: {
 
             /**
+             * @prop {Object} default setting for the menu
              * @readonly
-             * @prop {Object} default options
              */
             defaultOptions: {
-                get: MENU_COMMON.tetherDefaultOptions
+                get: function () {
+                    let options = tetherDefaultOptions.call(this);
+
+                    options.constraints = [
+                        {
+                            'to': 'scrollParent',
+                            'attachment': 'element'
+                        },
+                        {
+                            'to': 'window',
+                            'attachment': 'element'
+                        }
+                    ];
+
+                    return options;
+                }
             },
 
             /**
-             * @readonly
              * @prop {xb.Menu} [parentMenu] menu-ancestor
+             * @readonly
              */
             parentMenu: {
                 get: function () {
@@ -135,12 +114,12 @@ export default xb.Menu = create('xb-menu', [
             },
 
             /**
-             * @readonly
              * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
+             * @readonly
              */
             firstParentMenu: {
                 get: function () {
-                    var parentMenu = this.parentMenu;
+                    const parentMenu = this.parentMenu;
 
                     if (parentMenu) {
                         return parentMenu.firstParentMenu || parentMenu;
@@ -153,10 +132,19 @@ export default xb.Menu = create('xb-menu', [
 
         methods: {
             _closeAllSubmenu: function () {
-                forEach.call(
+                Array.prototype.forEach.call(
                     this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    MENU_COMMON.closeSubmenu
+                    this._closeSubmenu
                 );
+            },
+
+            /**
+             * @param {xb.Menuitem} target
+             */
+            _closeSubmenu: function (target) {
+                if (target._xbpopup) {
+                    target._xbpopup.close();
+                }
             },
 
             _afterOpen: function () {
@@ -168,8 +156,8 @@ export default xb.Menu = create('xb-menu', [
             },
 
             _closeUpFocus: function () {
-                var focusMenu = getParentMenu(this.ownerDocument.activeElement);
-                var parent = this.parentMenu;
+                const focusMenu = getParentMenu(this.ownerDocument.activeElement);
+                let parent = this.parentMenu;
 
                 while (parent) {
                     if (parent === focusMenu) {

@@ -33,7 +33,8 @@ var params = {
             'event': path.join(srcPath, 'event'),
             'mixin': path.join(srcPath, 'mixin'),
             'polyfills': path.join(srcPath, 'polyfills'),
-            'utils': path.join(srcPath, 'utils')
+            'utils': path.join(srcPath, 'utils'),
+            'constants': path.join(srcPath, 'constants')
         }
     },
     'externals': {

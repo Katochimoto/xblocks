@@ -9,7 +9,7 @@ import getParentMenu from 'utils/getParentMenu';
 import merge from 'lodash/merge';
 import removeChild from 'dom/removeChild';
 import mixinElementDisabled from 'mixin/element/disabled';
-import mixinElementInputValueProps from 'mixin/element/inputValueProps';
+import mixinElementValueProps from 'mixin/element/inputValueProps';
 
 const SYMBOL_FOCUSED = Symbol('menuitem-focused');
 const SYMBOL_MENU = Symbol('menuitem-menu');
@@ -44,7 +44,7 @@ const SUBMENU_ATTRS = {
  */
 export default xb.Menuitem = create('xb-menuitem', [
     mixinElementDisabled,
-    mixinElementInputValueProps,
+    mixinElementValueProps,
 
     {
         prototype: Object.create(HTMLElement.prototype),

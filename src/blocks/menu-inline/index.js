@@ -8,14 +8,15 @@ import TableNavigator from 'utils/TableNavigator';
 import noop from 'lodash/noop';
 import mixinElementMenu from 'mixin/element/menu';
 import mixinElementFocus from 'mixin/element/focus';
+import ConstantMenu from 'constants/menu';
 
 const MENU_COMMON = {
     init: function () {
-        if (this._xbFocus) {
-            this._xbFocus.destroy();
+        if (this[ ConstantMenu.TABLE ]) {
+            this[ ConstantMenu.TABLE ].destroy();
         }
 
-        this._xbFocus = new TableNavigator(this, {
+        this[ ConstantMenu.TABLE ] = new TableNavigator(this, {
             col: 'xb-menu-inline:not([disabled])',
             rowLoop: true,
             colLoop: true
@@ -46,7 +47,7 @@ export default xb.MenuInline = create('xb-menu-inline', [
 
             blur: function () {
                 if (!this.hasOpenSubmenu) {
-                    this._xbFocus.blurItem();
+                    this[ ConstantMenu.TABLE ].blurItem();
                 }
             }
         },

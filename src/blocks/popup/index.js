@@ -138,16 +138,16 @@ export default xb.Popup = create('xb-popup', [
         accessors: {
 
             /**
-             * @readonly
              * @prop {Object} default options
+             * @readonly
              */
             defaultOptions: {
                 get: tetherDefaultOptions
             },
 
             /**
-             * @readonly
              * @prop {object} options the display options window
+             * @readonly
              */
             options: {
                 get: function () {
