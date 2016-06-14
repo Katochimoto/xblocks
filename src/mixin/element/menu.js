@@ -26,11 +26,28 @@ export default {
          * @this xb.Menu
          */
         'keydown:keypass(13,39)': function () {
-            var item = this[ ConstantMenu.TABLE ].getItem();
+            const item = this[ ConstantMenu.TABLE ].getItem();
 
             if (item && item.submenuInstance) {
                 item.submenuInstance.open();
             }
+        },
+
+        /**
+         * space
+         * @this xb.Menu
+         */
+        'keydown:keypass(32)': function () {
+            if (!this.selectable) {
+                return;
+            }
+
+            if (!this.multiselect) {
+                // TODO сброс предыдущего значения
+            }
+
+            const item = this[ ConstantMenu.TABLE ].getItem();
+            item.selected = !item.selected;
         },
 
         /**
@@ -54,6 +71,18 @@ export default {
         hasOpenSubmenu: {
             get: function () {
                 return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
+            }
+        },
+
+        selectable: {
+            attribute: {
+                boolean: true
+            }
+        },
+
+        multiselect: {
+            attribute: {
+                boolean: true
             }
         }
     },

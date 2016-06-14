@@ -10,11 +10,7 @@ import merge from 'lodash/merge';
 import removeChild from 'dom/removeChild';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementValueProps from 'mixin/element/inputValueProps';
-
-const SYMBOL_FOCUSED = Symbol('menuitem-focused');
-const SYMBOL_MENU = Symbol('menuitem-menu');
-const SYMBOL_SUBMENU = Symbol('menuitem-submenu');
-const SYMBOL_SUBMENU_TIMER = Symbol('menuitem-submenu-timer');
+import ConstantMenuitem from 'constants/menuitem';
 
 const SUBMENU_ATTRS = {
     'attachment': 'top left',
@@ -112,11 +108,11 @@ export default xb.Menuitem = create('xb-menuitem', [
              */
             focused: {
                 get: function () {
-                    return Boolean(this[ SYMBOL_FOCUSED ]);
+                    return Boolean(this[ ConstantMenuitem.FOCUSED ]);
                 },
 
                 set: function (value) {
-                    this[ SYMBOL_FOCUSED ] = Boolean(value);
+                    this[ ConstantMenuitem.FOCUSED ] = Boolean(value);
                 }
             },
 
@@ -151,13 +147,13 @@ export default xb.Menuitem = create('xb-menuitem', [
              */
             menuInstance: {
                 get: function () {
-                    if (this[ SYMBOL_MENU ] || this[ SYMBOL_MENU ] === null) {
-                        return this[ SYMBOL_MENU ];
+                    let menu = this[ ConstantMenuitem.MENU ];
+
+                    if (!menu && menu !== null) {
+                        menu = this[ ConstantMenuitem.MENU ] = getParentMenu(this);
                     }
 
-                    this[ SYMBOL_MENU ] = getParentMenu(this);
-
-                    return this[ SYMBOL_MENU ];
+                    return menu;
                 }
             },
 
@@ -167,37 +163,13 @@ export default xb.Menuitem = create('xb-menuitem', [
              */
             submenuInstance: {
                 get: function () {
-                    if (this[ SYMBOL_SUBMENU ] || this[ SYMBOL_SUBMENU ] === null) {
-                        return this[ SYMBOL_SUBMENU ];
+                    let submenu = this[ ConstantMenuitem.SUBMENU ];
+
+                    if (!submenu && submenu !== null) {
+                        submenu = this[ ConstantMenuitem.SUBMENU ] = createSubmenu(this);
                     }
 
-                    this[ SYMBOL_SUBMENU ] = null;
-
-                    if (this.submenu) {
-                        let targetClassName = `_menuitem-target-${this.xuid}`;
-                        let menu = this.ownerDocument.createElement('xb-menu');
-                        let parentConstraints = this.menuInstance.getAttribute('constraints');
-                        let attrs = merge({ target: `.${targetClassName}` }, SUBMENU_ATTRS);
-
-                        // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
-                        // меню может быть открыто в блоке со скролом,
-                        // в этом случае ограничением для подменю будет блок со скролом
-                        if (parentConstraints) {
-                            attrs.constraints = parentConstraints;
-                        }
-
-                        for (let attrName in attrs) {
-                            menu.setAttribute(attrName, attrs[ attrName ]);
-                        }
-
-                        menu.innerHTML = this.content;
-
-                        this.classList.add(targetClassName);
-
-                        this[ SYMBOL_SUBMENU ] = this.ownerDocument.body.appendChild(menu);
-                    }
-
-                    return this[ SYMBOL_SUBMENU ];
+                    return submenu;
                 }
             }
         },
@@ -207,7 +179,7 @@ export default xb.Menuitem = create('xb-menuitem', [
              * @private
              */
             _submenuOpen: function () {
-                if (this[ SYMBOL_SUBMENU_TIMER ]) {
+                if (this[ ConstantMenuitem.SUBMENU_TIMER ]) {
                     return;
                 }
 
@@ -216,16 +188,17 @@ export default xb.Menuitem = create('xb-menuitem', [
                     return;
                 }
 
-                this[ SYMBOL_SUBMENU_TIMER ] = context.setTimeout(submenu.open.bind(submenu), 200);
+                this[ ConstantMenuitem.SUBMENU_TIMER ] = context.setTimeout(submenu.open.bind(submenu), 200);
             },
 
             /**
              * @private
              */
             _submenuCancel: function () {
-                if (this[ SYMBOL_SUBMENU_TIMER ]) {
-                    context.clearTimeout(this[ SYMBOL_SUBMENU_TIMER ]);
-                    this[ SYMBOL_SUBMENU_TIMER ] = 0;
+                let timer = this[ ConstantMenuitem.SUBMENU_TIMER ];
+                if (timer) {
+                    context.clearTimeout(timer);
+                    this[ ConstantMenuitem.SUBMENU_TIMER ] = 0;
                 }
             },
 
@@ -233,12 +206,12 @@ export default xb.Menuitem = create('xb-menuitem', [
              * @private
              */
             _submenuRemove: function () {
-                let submenu = this[ SYMBOL_SUBMENU ];
+                let submenu = this[ ConstantMenuitem.SUBMENU ];
                 if (!submenu) {
                     return;
                 }
 
-                this[ SYMBOL_SUBMENU ] = undefined;
+                this[ ConstantMenuitem.SUBMENU ] = undefined;
 
                 this._submenuCancel();
 
@@ -248,3 +221,47 @@ export default xb.Menuitem = create('xb-menuitem', [
         }
     }
 ]);
+
+function createSubmenu(menuitem) {
+    if (!menuitem.submenu) {
+        return null;
+    }
+
+    let parentMenu = menuitem.menuInstance;
+
+    // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
+    // меню может быть открыто в блоке со скролом,
+    // в этом случае ограничением для подменю будет блок со скролом
+    let parentAttrs = {
+        constraints: parentMenu.getAttribute('constraints'),
+        multiselect: parentMenu.hasAttribute('multiselect'),
+        selectable: parentMenu.hasAttribute('selectable')
+    };
+
+    let targetClassName = `_menuitem-target-${menuitem.xuid}`;
+    let menu = menuitem.ownerDocument.createElement('xb-menu');
+    let attrs = merge({ target: `.${targetClassName}` }, SUBMENU_ATTRS);
+
+    for (let attrName in parentAttrs) {
+        if (parentAttrs[ attrName ]) {
+            attrs[ attrName ] = parentAttrs[ attrName ];
+        }
+    }
+
+    for (let attrName in attrs) {
+        if (typeof attrs[ attrName ] === 'boolean') {
+            if (attrs[ attrName ]) {
+                menu.setAttribute(attrName, attrName);
+            }
+
+        } else {
+            menu.setAttribute(attrName, attrs[ attrName ]);
+        }
+    }
+
+    menu.innerHTML = menuitem.content;
+
+    menuitem.classList.add(targetClassName);
+
+    return menuitem.ownerDocument.body.appendChild(menu);
+}
