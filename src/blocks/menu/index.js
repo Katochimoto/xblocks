@@ -101,32 +101,6 @@ export default xb.Menu = create('xb-menu', [
 
                     return options;
                 }
-            },
-
-            /**
-             * @prop {xb.Menu} [parentMenu] menu-ancestor
-             * @readonly
-             */
-            parentMenu: {
-                get: function () {
-                    return this.tether.target.menuInstance;
-                }
-            },
-
-            /**
-             * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
-             * @readonly
-             */
-            firstParentMenu: {
-                get: function () {
-                    const parentMenu = this.parentMenu;
-
-                    if (parentMenu) {
-                        return parentMenu.firstParentMenu || parentMenu;
-                    }
-
-                    return this;
-                }
             }
         },
 

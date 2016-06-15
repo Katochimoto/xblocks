@@ -30,8 +30,8 @@ const SUBMENU_ATTRS = {
  * @class xb.Menuitem
  * @memberof xb
  * @augments HTMLElement
- * @mixes xblocks.mixin.eDisabled
- * @mixes xblocks.mixin.eInputValueProps
+ * @mixes mixin/element/disabled
+ * @mixes mixin/element/inputValueProps
  * @listens xblocks.utils:TableNavigator~event:xb-focus
  * @listens xblocks.utils:TableNavigator~event:xb-blur
  * @listens xblocks.Element~event:xb-repaint
@@ -222,6 +222,11 @@ export default xb.Menuitem = create('xb-menuitem', [
     }
 ]);
 
+/**
+ * @param {xb.Menuitem} menuitem
+ * @returns {xb.Menu|null}
+ * @private
+ */
 function createSubmenu(menuitem) {
     if (!menuitem.submenu) {
         return null;
@@ -234,8 +239,8 @@ function createSubmenu(menuitem) {
     // в этом случае ограничением для подменю будет блок со скролом
     let parentAttrs = {
         constraints: parentMenu.getAttribute('constraints'),
-        multiselect: parentMenu.hasAttribute('multiselect'),
-        selectable: parentMenu.hasAttribute('selectable')
+        multiselect: parentMenu.hasAttribute('multiselect') && 'multiselect',
+        selectable: parentMenu.hasAttribute('selectable') && 'selectable'
     };
 
     let targetClassName = `_menuitem-target-${menuitem.xuid}`;
@@ -249,14 +254,7 @@ function createSubmenu(menuitem) {
     }
 
     for (let attrName in attrs) {
-        if (typeof attrs[ attrName ] === 'boolean') {
-            if (attrs[ attrName ]) {
-                menu.setAttribute(attrName, attrName);
-            }
-
-        } else {
-            menu.setAttribute(attrName, attrs[ attrName ]);
-        }
+        menu.setAttribute(attrName, attrs[ attrName ]);
     }
 
     menu.innerHTML = menuitem.content;

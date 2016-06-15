@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import lazyFocus from 'utils/lazyFocus';
 import isParent from 'dom/isParent';
 import ConstantMenu from 'constants/menu';
@@ -18,6 +19,9 @@ export default {
         'click:delegate(xb-menuitem:not([disabled]))': function () {
             if (this.submenuInstance) {
                 this.submenuInstance.open();
+
+            } else if (this.menuInstance) {
+                menuitemSelect(this.menuInstance);
             }
         },
 
@@ -38,16 +42,7 @@ export default {
          * @this xb.Menu
          */
         'keydown:keypass(32)': function () {
-            if (!this.selectable) {
-                return;
-            }
-
-            if (!this.multiselect) {
-                // TODO сброс предыдущего значения
-            }
-
-            const item = this[ ConstantMenu.TABLE ].getItem();
-            item.selected = !item.selected;
+            menuitemSelect(this);
         },
 
         /**
@@ -84,6 +79,32 @@ export default {
             attribute: {
                 boolean: true
             }
+        },
+
+        /**
+         * @prop {xb.Menu} [parentMenu] menu-ancestor
+         * @readonly
+         */
+        parentMenu: {
+            get: function () {
+                return get(this, 'tether.target.menuInstance');
+            }
+        },
+
+        /**
+         * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
+         * @readonly
+         */
+        firstParentMenu: {
+            get: function () {
+                const parentMenu = this.parentMenu;
+
+                if (parentMenu) {
+                    return parentMenu.firstParentMenu || parentMenu;
+                }
+
+                return this;
+            }
         }
     },
 
@@ -105,3 +126,23 @@ export default {
         }
     }
 };
+
+/**
+ * @param {xb.Menu} menu
+ * @private
+ */
+function menuitemSelect(menu) {
+    if (!menu.selectable) {
+        return;
+    }
+
+    let item = menu[ ConstantMenu.TABLE ].getItem();
+    let selected = !item.selected;
+
+    // сброс выбранных пунктов, если не мультиселект и текущий пункт будет выбран
+    if (!menu.multiselect && selected) {
+        // TODO
+    }
+
+    item.selected = selected;
+}
