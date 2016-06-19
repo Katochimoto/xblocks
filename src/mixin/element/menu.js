@@ -1,4 +1,6 @@
 import get from 'lodash/get';
+import uniqueId from 'lodash/uniqueId';
+import forEach from 'lodash/forEach';
 import lazyFocus from 'utils/lazyFocus';
 import isParent from 'dom/isParent';
 import ConstantMenu from 'constants/menu';
@@ -10,8 +12,16 @@ import ConstantMenu from 'constants/menu';
  * @type {Object}
  */
 export default {
-    events: {
+    lifecycle: {
+        created: function () {
+            forEach(this.querySelectorAll('xb-menuitem[selected]'), function (node) {
+                node.setAttribute('_selecteduid', uniqueId('menuitem-selected'));
+            });
+            console.log('>>>>1', this.innerHTML);
+        }
+    },
 
+    events: {
         /**
          * Оpen the submenu
          * @this xb.Menuitem
@@ -118,7 +128,7 @@ export default {
                 return;
             }
 
-            var component = this.xblock && this.xblock.getMountedComponent();
+            const component = this.getComponent();
 
             if (component) {
                 component.scrollIntoItem(menuitem);

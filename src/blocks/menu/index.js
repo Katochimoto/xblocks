@@ -4,6 +4,7 @@ import './contextmenu';
 
 import { xb } from 'context';
 import { create } from 'xblocks-core';
+import forEach from 'lodash/forEach';
 import lazyFocus from 'utils/lazyFocus';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
 import TableNavigator from 'utils/TableNavigator';
@@ -37,7 +38,7 @@ export default xb.Menu = create('xb-menu', [
                     colLoop: true
                 });
 
-                var component = this.xblock.getMountedComponent();
+                var component = this.getComponent();
                 if (component) {
                     // check show scroll navigator after open menu
                     component.afterOpen(this._afterOpen.bind(this));
@@ -106,10 +107,7 @@ export default xb.Menu = create('xb-menu', [
 
         methods: {
             _closeAllSubmenu: function () {
-                Array.prototype.forEach.call(
-                    this.querySelectorAll('.xb-menu-target.xb-menu-enabled'),
-                    this._closeSubmenu
-                );
+                forEach(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), this._closeSubmenu);
             },
 
             /**

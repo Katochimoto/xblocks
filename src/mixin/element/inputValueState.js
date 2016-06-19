@@ -51,7 +51,7 @@ export default {
             },
 
             get: function () {
-                var component = this.xblock && this.xblock.getMountedComponent();
+                const component = this.getComponent();
 
                 if (component && typeof component.state.value !== 'undefined') {
                     return component.state.value;
@@ -61,7 +61,7 @@ export default {
             },
 
             set: function (value) {
-                var component = this.xblock && this.xblock.getMountedComponent();
+                const component = this.getComponent();
 
                 if (component) {
                     component.setState({ value: String(value) });
