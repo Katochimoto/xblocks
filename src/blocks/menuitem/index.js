@@ -1,16 +1,17 @@
 import './index.styl';
 import './index.jsx';
 
+import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import context from 'context';
 import lazyFocus from 'utils/lazyFocus';
 import getParentMenu from 'utils/getParentMenu';
-import merge from 'lodash/merge';
 import removeChild from 'dom/removeChild';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementValueProps from 'mixin/element/inputValueProps';
 import ConstantMenuitem from 'constants/menuitem';
+import ConstantMenu from 'constants/menu';
 
 const SUBMENU_ATTRS = {
     'attachment': 'top left',
@@ -51,6 +52,7 @@ export default xb.Menuitem = create('xb-menuitem', [
              */
             'xb-created': function () {
                 this._submenuRemove();
+                updateSelection(this);
             },
 
             /**
@@ -137,7 +139,7 @@ export default xb.Menuitem = create('xb-menuitem', [
              */
             submenu: {
                 get: function () {
-                    return Boolean(this.content.trim());
+                    return Boolean(this.content);
                 }
             },
 
@@ -154,6 +156,16 @@ export default xb.Menuitem = create('xb-menuitem', [
                     }
 
                     return menu;
+                }
+            },
+
+            /**
+             * @prop {xb.Menu|xb.MenuInline|null} menuInstance First menu instance
+             * @readonly
+             */
+            firstMenuInstance: {
+                get: function () {
+                    return _.get(this, 'menuInstance.firstParentMenu');
                 }
             },
 
@@ -232,20 +244,20 @@ function createSubmenu(menuitem) {
         return null;
     }
 
-    let parentMenu = menuitem.menuInstance;
+    const parentMenu = menuitem.menuInstance;
 
     // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
     // меню может быть открыто в блоке со скролом,
     // в этом случае ограничением для подменю будет блок со скролом
-    let parentAttrs = {
+    const parentAttrs = {
         constraints: parentMenu.getAttribute('constraints'),
-        multiselect: parentMenu.hasAttribute('multiselect') && 'multiselect',
+        multiple: parentMenu.hasAttribute('multiple') && 'multiple',
         selectable: parentMenu.hasAttribute('selectable') && 'selectable'
     };
 
-    let targetClassName = `_menuitem-target-${menuitem.xuid}`;
-    let menu = menuitem.ownerDocument.createElement('xb-menu');
-    let attrs = merge({ target: `.${targetClassName}` }, SUBMENU_ATTRS);
+    const targetClassName = `_menuitem-target-${menuitem.xuid}`;
+    const menu = menuitem.ownerDocument.createElement('xb-menu');
+    const attrs = _.merge({ target: `.${targetClassName}` }, SUBMENU_ATTRS);
 
     for (let attrName in parentAttrs) {
         if (parentAttrs[ attrName ]) {
@@ -262,4 +274,27 @@ function createSubmenu(menuitem) {
     menuitem.classList.add(targetClassName);
 
     return menuitem.ownerDocument.body.appendChild(menu);
+}
+
+function updateSelection(menuitem) {
+    if (!menuitem.parentNode) {
+        return;
+    }
+
+    const uid = menuitem.getAttribute(ConstantMenuitem.SELECTED_ATTR);
+    if (!uid) {
+        return;
+    }
+
+    const menu = menuitem.firstMenuInstance;
+    if (!menu) {
+        return;
+    }
+
+    const selected = _.has(menu, [ ConstantMenu.SELECTED, uid ]);
+    menuitem.selected = selected;
+
+    if (!selected) {
+        menuitem.removeAttribute(ConstantMenuitem.SELECTED_ATTR);
+    }
 }

@@ -203,7 +203,7 @@ export default {
                     onScroll={this._onScroll}
                     onWheel={this._onWheel}
                     data-xb-content={this.props._uid}
-                    dangerouslySetInnerHTML={{ __html: this.props.children.trim() }} />
+                    dangerouslySetInnerHTML={{ __html: this.props.children }} />
 
                 <div style={scrollBottomStyle}
                     className="_popup-scroll-bottom"

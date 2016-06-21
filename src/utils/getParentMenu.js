@@ -6,7 +6,7 @@ const MENU_INLINE_TAG = 'xb-menu-inline';
  * @returns {HTMLElement|null}
  */
 export default function (node) {
-    var parent = node;
+    let parent = node;
 
     while (parent) {
         if (parent.xtagName === MENU_TAG || parent.xtagName === MENU_INLINE_TAG) {

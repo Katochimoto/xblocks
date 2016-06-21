@@ -2,9 +2,9 @@ import './index.styl';
 import './index.jsx';
 import './contextmenu';
 
+import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
-import forEach from 'lodash/forEach';
 import lazyFocus from 'utils/lazyFocus';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
 import TableNavigator from 'utils/TableNavigator';
@@ -107,7 +107,7 @@ export default xb.Menu = create('xb-menu', [
 
         methods: {
             _closeAllSubmenu: function () {
-                forEach(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), this._closeSubmenu);
+                _.forEach(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), this._closeSubmenu);
             },
 
             /**

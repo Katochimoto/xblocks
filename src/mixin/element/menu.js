@@ -1,9 +1,8 @@
-import get from 'lodash/get';
-import uniqueId from 'lodash/uniqueId';
-import forEach from 'lodash/forEach';
+import _ from 'lodash';
 import lazyFocus from 'utils/lazyFocus';
 import isParent from 'dom/isParent';
 import ConstantMenu from 'constants/menu';
+import ConstantMenuitem from 'constants/menuitem';
 
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
@@ -14,10 +13,26 @@ import ConstantMenu from 'constants/menu';
 export default {
     lifecycle: {
         created: function () {
-            forEach(this.querySelectorAll('xb-menuitem[selected]'), function (node) {
-                node.setAttribute('_selecteduid', uniqueId('menuitem-selected'));
+            const items = this.multiple ?
+                _.toArray(this.querySelectorAll('xb-menuitem[selected]')) :
+                _.castArray(this.querySelector('xb-menuitem[selected]'));
+
+            this[ ConstantMenu.SELECTED ] = _(items)
+                .chain()
+                .compact()
+                .reduce((result, node) => {
+                    const uid = _.uniqueId('selected');
+                    node.setAttribute(ConstantMenuitem.SELECTED_ATTR, uid);
+                    result[ uid ] = node;
+                    return result;
+                }, {})
+                .value();
+
+            // сброс выделения элементов, которые не попали в список выбранных
+            // актуально в случае multiple=false
+            _.forEach(this.querySelectorAll(`xb-menuitem[selected]:not([${ConstantMenuitem.SELECTED_ATTR}])`), node => {
+                node.removeAttribute('selected');
             });
-            console.log('>>>>1', this.innerHTML);
         }
     },
 
@@ -85,7 +100,7 @@ export default {
             }
         },
 
-        multiselect: {
+        multiple: {
             attribute: {
                 boolean: true
             }
@@ -97,7 +112,7 @@ export default {
          */
         parentMenu: {
             get: function () {
-                return get(this, 'tether.target.menuInstance');
+                return _.get(this, 'tether.target.menuInstance');
             }
         },
 
@@ -114,6 +129,16 @@ export default {
                 }
 
                 return this;
+            }
+        },
+
+        /**
+         * @prop {string[]}
+         * @readonly
+         */
+        value: {
+            get: function () {
+                return _.map(this.firstParentMenu[ ConstantMenu.SELECTED ], 'value');
             }
         }
     },
@@ -146,13 +171,36 @@ function menuitemSelect(menu) {
         return;
     }
 
-    let item = menu[ ConstantMenu.TABLE ].getItem();
-    let selected = !item.selected;
+    const item = menu[ ConstantMenu.TABLE ].getItem();
+    const selected = !item.selected;
+    const uid = item.getAttribute(selectedAttr) || _.uniqueId('selected');
+    const firstParentMenu = menu.firstParentMenu;
+    const selectedAttr = ConstantMenuitem.SELECTED_ATTR;
 
     // сброс выбранных пунктов, если не мультиселект и текущий пункт будет выбран
-    if (!menu.multiselect && selected) {
-        // TODO
+    if (!menu.multiple && selected) {
+        _(firstParentMenu[ ConstantMenu.SELECTED ])
+            .chain()
+            .keys()
+            .join(`"],xb-menuitem[${selectedAttr}="`)
+            .thru(value => firstParentMenu.ownerDocument.querySelectorAll(`xb-menuitem[${selectedAttr}="${value}"]`))
+            .forEach(node => {
+                node.selected = false;
+                node.removeAttribute(selectedAttr);
+            })
+            .value();
+
+        firstParentMenu[ ConstantMenu.SELECTED ] = {};
     }
 
-    item.selected = selected;
+    if (selected) {
+        item.selected = true;
+        item.setAttribute(selectedAttr, uid);
+        _.set(firstParentMenu, [ ConstantMenu.SELECTED, uid ], item);
+
+    } else {
+        item.selected = false;
+        item.removeAttribute(selectedAttr);
+        _.unset(firstParentMenu, [ ConstantMenu.SELECTED, uid ]);
+    }
 }
