@@ -1,7 +1,7 @@
+import _ from 'lodash';
 import { PropTypes } from 'react';
 import { view } from 'xblocks-core';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import isEmpty from 'lodash/isEmpty';
 
 export default view.create({
     displayName: 'xb-button_content',
@@ -32,7 +32,7 @@ export default view.create({
             );
         }
 
-        if (!isEmpty(this.props.ico) && this.props.ico.type) {
+        if (!_.isEmpty(this.props.ico) && this.props.ico.type) {
             if (!this.props.ico.float || this.props.ico.float === 'left') {
                 children.unshift(
                     <xb-ico {...this.props.ico} className="_before" key="ico" />

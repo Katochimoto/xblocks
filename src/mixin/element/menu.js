@@ -133,7 +133,7 @@ export default {
         },
 
         /**
-         * @prop {string[]}
+         * @prop {string[]} the values of the selected menu item
          * @readonly
          */
         value: {

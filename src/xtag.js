@@ -1,6 +1,5 @@
+import _ from 'lodash';
 import xtag from 'xtag';
-import debounce from 'lodash/debounce';
-import throttle from 'lodash/throttle';
 
 /**
  * @example
@@ -23,7 +22,7 @@ xtag.pseudos.debounce = {
             trailing = (pseudo.arguments[2] === 'true');
         }
 
-        return debounce(listener, wait, {
+        return _.debounce(listener, wait, {
             leading: leading,
             trailing: trailing
         });
@@ -51,7 +50,7 @@ xtag.pseudos.throttle = {
             trailing = (pseudo.arguments[2] === 'true');
         }
 
-        return throttle(listener, wait, {
+        return _.throttle(listener, wait, {
             leading: leading,
             trailing: trailing
         });

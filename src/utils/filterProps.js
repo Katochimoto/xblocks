@@ -1,5 +1,4 @@
-import pickBy from 'lodash/pickBy';
-import transform from 'lodash/transform';
+import _ from 'lodash';
 
 /**
  * @param {RegExp} reg
@@ -7,8 +6,8 @@ import transform from 'lodash/transform';
  * @returns {Object}
  */
 export default function (reg, props) {
-    props = pickBy(props, (name, key) => reg.test(key));
-    return transform(props, (result, value, key) => {
+    props = _.pickBy(props, (name, key) => reg.test(key));
+    return _.transform(props, (result, value, key) => {
         result[ key.replace(reg, '') ] = value;
     }, {});
 }

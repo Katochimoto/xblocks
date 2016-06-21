@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { xv } from 'context';
 import { PropTypes } from 'react';
 import { view } from 'xblocks-core';
@@ -6,7 +7,6 @@ import classnames from 'classnames';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 import exportPropTypes from 'utils/exportPropTypes';
 import filterProps from 'utils/filterProps';
-import isEmpty from 'lodash/isEmpty';
 
 const REG_PROPS_ICO = /^xb-ico-/;
 
@@ -61,7 +61,7 @@ export default xv.Menuitem = view.register('xb-menuitem', [
 
             let icoProps = filterProps(REG_PROPS_ICO, this.props);
 
-            if (!isEmpty(icoProps) && icoProps.type) {
+            if (!_.isEmpty(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';
 
                 if (!icoProps.float || icoProps.float === 'left') {

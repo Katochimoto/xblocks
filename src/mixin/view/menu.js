@@ -1,6 +1,6 @@
+import _ from 'lodash';
 import classnames from 'classnames';
 import { event as xevent } from 'xblocks-core';
-import throttle from 'lodash/throttle';
 import throttleAnimationFrame from 'utils/throttleAnimationFrame';
 import { cancelAnimationFrame, requestAnimationFrame } from 'polyfills/requestAnimationFrame';
 
@@ -23,7 +23,7 @@ export default {
         this._enterBottomFrame = 0;
         this._lockScroll = false;
         this._onScroll = throttleAnimationFrame(this._onScroll);
-        this._onScrollThrottle = throttle(this._onScrollThrottle, 500, {
+        this._onScrollThrottle = _.throttle(this._onScrollThrottle, 500, {
             leading: true,
             trailing: false
         });

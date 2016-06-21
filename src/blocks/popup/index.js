@@ -1,12 +1,12 @@
 import './index.styl';
 import './index.jsx';
 
+import _ from 'lodash';
 import { xb } from 'context';
 import { create, event as xevent, dom } from 'xblocks-core';
 import Tether from 'tether';
 import context from 'context';
 import tetherDefaultOptions from 'utils/tetherDefaultOptions';
-import assign from 'lodash/assign';
 import immediate from 'setimmediate2/src';
 import mixinElementFocus from 'mixin/element/focus';
 
@@ -211,7 +211,7 @@ export default xb.Popup = create('xb-popup', [
              * @param {object} nextOptions new settings
              */
             setOptions: function (nextOptions) {
-                assign(this.options, nextOptions);
+                _.assign(this.options, nextOptions);
 
                 var tether = this.tether;
                 tether.setOptions(this.options, false);

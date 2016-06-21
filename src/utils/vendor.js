@@ -1,5 +1,5 @@
+import _ from 'lodash';
 import globalContext from 'context';
-import capitalize from 'lodash/capitalize';
 
 const VENDORS = [ 'ms', 'moz', 'webkit', 'o' ];
 
@@ -15,7 +15,7 @@ export default function (name, context) {
         return context[ name ];
     }
 
-    name = capitalize(name);
+    name = _.capitalize(name);
 
     var vendor;
     var x = 0;

@@ -1,11 +1,11 @@
 import './index.styl';
 import './index.jsx';
 
+import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
 import TableNavigator from 'utils/TableNavigator';
-import noop from 'lodash/noop';
 import mixinElementMenu from 'mixin/element/menu';
 import mixinElementFocus from 'mixin/element/focus';
 import ConstantMenu from 'constants/menu';
@@ -40,7 +40,7 @@ export default xb.MenuInline = create('xb-menu-inline', [
         },
 
         methods: {
-            open: noop,
+            open: _.noop,
 
             close: function () {
                 // FireFox does not fire a blur event

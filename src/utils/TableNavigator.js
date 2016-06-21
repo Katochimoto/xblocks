@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { event as xevent } from 'xblocks-core';
 import delegate from 'event/delegate';
 import filterClick from 'event/filterClick';
@@ -6,8 +7,6 @@ import matchesSelector from 'dom/matchesSelector';
 import eachAfter from 'dom/eachAfter';
 import eachBefore from 'dom/eachBefore';
 import index from 'dom/index';
-import merge from 'lodash/merge';
-import throttle from 'lodash/throttle';
 
 const pop = Array.prototype.pop;
 const slice = Array.prototype.slice;
@@ -16,7 +15,7 @@ const EVENT_FOCUS = 'xb-focus';
 
 export default class TableNavigator {
     constructor(node, options) {
-        this._options = merge({
+        this._options = _.merge({
             col: 'xb-menu:not([disabled])',
             row: 'xb-menuitem:not([disabled])',
             colLoop: false,
@@ -30,7 +29,7 @@ export default class TableNavigator {
         this._onKeydown = this._onKeydown.bind(this);
         this._onMouseover = delegate(this._options.row, this._onMouseover.bind(this));
         this._onMouseout = delegate(this._options.row, this._onMouseout.bind(this));
-        this._onMousemove = throttle(delegate(this._options.row, this._onMouseAction.bind(this)));
+        this._onMousemove = _.throttle(delegate(this._options.row, this._onMouseAction.bind(this)));
         this._onClick = filterClick('left', delegate(this._options.row, this._onMouseAction.bind(this)));
 
         this._bind();
