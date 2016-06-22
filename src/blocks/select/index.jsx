@@ -26,7 +26,6 @@ export default xv.Select = view.register('xb-select', [
             autocorrect:      PropTypes.oneOf([ 'on', 'off' ]),
             autofocus:        PropTypes.bool,
             form:             PropTypes.string,
-            multiple:         PropTypes.bool,
             name:             PropTypes.string,
             required:         PropTypes.bool,
             size:             PropTypes.string,
@@ -37,7 +36,6 @@ export default xv.Select = view.register('xb-select', [
             return {
                 autofocus: false,
                 disabled:  false,
-                multiple:  false,
                 required:  false,
                 tabindex:  '0'
             };
