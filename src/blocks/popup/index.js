@@ -6,105 +6,59 @@ import { xb } from 'context';
 import { create, event as xevent, dom } from 'xblocks-core';
 import Tether from 'tether';
 import context from 'context';
-import tetherDefaultOptions from 'utils/tetherDefaultOptions';
+import popupDefaultOptions from 'utils/popupDefaultOptions';
 import immediate from 'setimmediate2/src';
 import mixinElementFocus from 'mixin/element/focus';
+import ConstantPopup from 'constants/popup';
 
-const POPUP_COMMON = {
-    onOpen: function () {
-        this.focus();
-        xevent.dispatch(this, 'xb-open');
-    },
-
-    onClose: function () {
-        this.blur();
-        xevent.dispatch(this, 'xb-close');
-    },
-
-    /**
-     * Check valid value for attribute by default
-     * @param {*} value value for attribute
-     * @returns {boolean}
-     */
-    checkDefaultAttr: function (value) {
-        return (typeof value !== 'undefined');
-    },
-
-    /**
-     * Association of attributes and options
-     * @param {Object} options tether options
-     * @param {Object} attrs attributes of element
-     */
-    fillOptionsFromAttrs: function (options, attrs) {
-        for (let attrName in attrs) {
-            let params = POPUP_COMMON.tetherAttrsAlign[ attrName ];
-            if (!params) {
-                continue;
-            }
-
-            let optionName = params[0];
-            let checker = params[1] || POPUP_COMMON.checkDefaultAttr;
-            let value = attrs[ attrName ];
-
-            if (checker(value)) {
-                if (typeof optionName === 'function') {
-                    optionName(options, value);
-
-                } else {
-                    options[ optionName ] = value;
-                }
-            }
+/**
+ * Union rules attributes
+ * @type {Object}
+ * @constant
+ */
+const ATTRS_ALIGN = {
+    'attachment': [ 'attachment' ],
+    'target-attachment': [ 'targetAttachment' ],
+    'target-offset': [ 'targetOffset' ],
+    'offset': [ 'offset' ],
+    'target': [
+        'target',
+        function (value) {
+            return (value && (typeof value === 'string' || value instanceof context.HTMLElement));
         }
-    },
-
-    /**
-     * Union rules attributes
-     * @type {Object}
-     */
-    tetherAttrsAlign: {
-        'attachment': [ 'attachment' ],
-        'target-attachment': [ 'targetAttachment' ],
-        'target-offset': [ 'targetOffset' ],
-        'offset': [ 'offset' ],
-        'target': [
-            'target',
-            function (value) {
-                return (value && (typeof value === 'string' || value instanceof context.HTMLElement));
-            }
-        ],
-        'target-parent': [
-            function (options, value) {
-                options.target = value;
-            },
-            function (value) {
-                return (value && value instanceof context.HTMLElement);
-            }
-        ],
-        'target-modifier': [
-            function (options, value) {
-                options.targetModifier = (value === 'initial' ? undefined : value);
-            },
-            function (value) {
-                return (value === 'initial' || value === 'visible' || value === 'scroll-handle');
-            }
-        ],
-        'optimizations-gpu': [
-            function (options, value) {
-                options.optimizations.gpu = value;
-            },
-            function (value) {
-                return (typeof value === 'boolean');
-            }
-        ],
-        'constraints': [
-            function (options, value) {
-                options.constraints = JSON.parse(decodeURIComponent(value));
-            },
-            function (value) {
-                return (value && typeof value === 'string');
-            }
-        ]
-    }
+    ],
+    'target-parent': [
+        function (options, value) {
+            options.target = value;
+        },
+        function (value) {
+            return (value && value instanceof context.HTMLElement);
+        }
+    ],
+    'target-modifier': [
+        function (options, value) {
+            options.targetModifier = (value === 'initial' ? undefined : value);
+        },
+        function (value) {
+            return (value === 'initial' || value === 'visible' || value === 'scroll-handle');
+        }
+    ],
+    'optimizations-gpu': [
+        function (options, value) {
+            options.optimizations.gpu = value;
+        },
+        function (value) {
+            return (typeof value === 'boolean');
+        }
+    ],
+    'constraints': [
+        function (options, value) {
+            options.constraints = JSON.parse(decodeURIComponent(value));
+        },
+        function (value) {
+            return (value && typeof value === 'string');
+        }
+    ]
 };
 
 /**
@@ -138,26 +92,27 @@ export default xb.Popup = create('xb-popup', [
         accessors: {
 
             /**
-             * @prop {Object} default options
+             * @prop {Object} popupDefaultOptions default options
              * @readonly
              */
-            defaultOptions: {
-                get: tetherDefaultOptions
+            popupDefaultOptions: {
+                get: popupDefaultOptions
             },
 
             /**
-             * @prop {object} options the display options window
+             * @prop {Object} popupOptions the display options window
+             * @see http://tether.io/#options
              * @readonly
              */
-            options: {
+            popupOptions: {
                 get: function () {
-                    if (this._options) {
-                        return this._options;
+                    if (this[ ConstantPopup.OPTIONS ]) {
+                        return this[ ConstantPopup.OPTIONS ];
                     }
 
-                    this._options = this.defaultOptions;
+                    const popupOptions = this[ ConstantPopup.OPTIONS ] = this.popupDefaultOptions;
 
-                    var tetherAttrs = dom.attrs.get(this, {
+                    const attrs = dom.attrs.get(this, {
                         'attachment':        undefined,
                         'constraints':       undefined,
                         'offset':            undefined,
@@ -169,27 +124,27 @@ export default xb.Popup = create('xb-popup', [
                         'target':            undefined
                     });
 
-                    if (tetherAttrs[ 'target-parent' ]) {
-                        tetherAttrs[ 'target-parent' ] = this.parentNode;
+                    if (attrs[ 'target-parent' ]) {
+                        attrs[ 'target-parent' ] = this.parentNode;
                     }
 
-                    POPUP_COMMON.fillOptionsFromAttrs(this._options, tetherAttrs);
+                    fillOptionsFromAttrs(popupOptions, attrs);
 
-                    return this._options;
+                    return popupOptions;
                 }
             },
 
             /**
              * @readonly
-             * @prop {Tether} tether Tether the window object
+             * @prop {Tether} core Tether the window object
              */
-            tether: {
+            core: {
                 get: function () {
-                    if (!this._tether) {
-                        this._tether = new Tether(this.options);
+                    if (!this[ ConstantPopup.CORE ]) {
+                        this[ ConstantPopup.CORE ] = new Tether(this.popupOptions);
                     }
 
-                    return this._tether;
+                    return this[ ConstantPopup.CORE ];
                 }
             },
 
@@ -199,7 +154,7 @@ export default xb.Popup = create('xb-popup', [
              */
             opened: {
                 get: function () {
-                    return this.tether.enabled;
+                    return this.core.enabled;
                 }
             }
         },
@@ -211,40 +166,43 @@ export default xb.Popup = create('xb-popup', [
              * @param {object} nextOptions new settings
              */
             setOptions: function (nextOptions) {
-                _.assign(this.options, nextOptions);
+                _.assign(this.popupOptions, nextOptions);
 
-                var tether = this.tether;
-                tether.setOptions(this.options, false);
+                const core = this.core;
+                core.setOptions(this.popupOptions, false);
 
-                if (tether.enabled) {
-                    tether.position();
+                if (core.enabled) {
+                    core.position();
                 }
             },
 
             /**
              * Open the window
              * @memberOf xb.Popup.prototype
-             * @param {object} options new settings
+             * @param {object} popupOptions new settings
              * @returns {boolean}
              */
-            open: function (options) {
-                var tether = this.tether;
+            open: function (popupOptions) {
+                const core = this.core;
 
-                if (tether.enabled) {
+                if (core.enabled) {
                     return false;
                 }
 
-                if (typeof options === 'object') {
-                    this.setOptions(options);
+                if (_.isPlainObject(popupOptions)) {
+                    this.setOptions(popupOptions);
                 }
 
                 xevent.dispatch(this, 'xb-before-open');
 
-                tether.enable(true);
-                tether.target._xbpopup = this;
+                core.enable(true);
+                core.target[ ConstantPopup.POPUP ] = this;
 
                 // FireFox does not set the focus without delay
-                immediate.setImmediate(POPUP_COMMON.onOpen.bind(this));
+                immediate.setImmediate(() => {
+                    this.focus();
+                    xevent.dispatch(this, 'xb-open');
+                });
 
                 return true;
             },
@@ -255,20 +213,23 @@ export default xb.Popup = create('xb-popup', [
              * @returns {boolean}
              */
             close: function () {
-                var tether = this.tether;
+                const core = this.core;
 
-                if (!tether.enabled) {
+                if (!core.enabled) {
                     return false;
                 }
 
                 xevent.dispatch(this, 'xb-before-close');
 
-                tether.target._xbpopup = undefined;
-                tether.disable();
-                tether.clearCache();
+                core.target[ ConstantPopup.POPUP ] = undefined;
+                core.disable();
+                core.clearCache();
 
                 // FireFox does not fire a blur event
-                immediate.setImmediate(POPUP_COMMON.onClose.bind(this));
+                immediate.setImmediate(() => {
+                    this.blur();
+                    xevent.dispatch(this, 'xb-close');
+                });
 
                 return true;
             },
@@ -279,9 +240,47 @@ export default xb.Popup = create('xb-popup', [
              * @returns {boolean}
              */
             position: function () {
-                this.tether.position();
+                this.core.position();
                 return true;
             }
         }
     }
 ]);
+
+/**
+ * Check valid value for attribute by default
+ * @param {*} value value for attribute
+ * @returns {boolean}
+ * @private
+ */
+function checkDefaultAttr(value) {
+    return (typeof value !== 'undefined');
+}
+
+/**
+ * Association of attributes and options
+ * @param {Object} popupOptions popup options
+ * @param {Object} attrs attributes of element
+ * @private
+ */
+function fillOptionsFromAttrs(popupOptions, attrs) {
+    for (let attrName in attrs) {
+        let params = ATTRS_ALIGN[ attrName ];
+        if (!params) {
+            continue;
+        }
+
+        let optionName = params[0];
+        let checker = params[1] || checkDefaultAttr;
+        let value = attrs[ attrName ];
+
+        if (checker(value)) {
+            if (_.isFunction(optionName)) {
+                optionName(popupOptions, value);
+
+            } else {
+                popupOptions[ optionName ] = value;
+            }
+        }
+    }
+}

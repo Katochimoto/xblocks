@@ -1,5 +1,6 @@
 import context from 'context';
 import delegate from 'event/delegate';
+import ConstantPopup from 'constants/popup';
 
 context.document.addEventListener('contextmenu', delegate('[contextmenu]', function (event) {
     var element = event.delegateElement;
@@ -18,8 +19,8 @@ context.document.addEventListener('contextmenu', delegate('[contextmenu]', funct
     var targetElement = doc.getElementById(targetElementId);
 
     if (targetElement) {
-        if (targetElement._xbpopup) {
-            targetElement._xbpopup.close();
+        if (targetElement[ ConstantPopup.POPUP ]) {
+            targetElement[ ConstantPopup.POPUP ].close();
         }
 
     } else {

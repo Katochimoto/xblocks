@@ -6,12 +6,13 @@ import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import lazyFocus from 'utils/lazyFocus';
-import tetherDefaultOptions from 'utils/tetherDefaultOptions';
+import popupDefaultOptions from 'utils/popupDefaultOptions';
 import TableNavigator from 'utils/TableNavigator';
 import getParentMenu from 'utils/getParentMenu';
 import immediate from 'setimmediate2/src';
 import mixinElementMenu from 'mixin/element/menu';
 import ConstantMenu from 'constants/menu';
+import ConstantPopup from 'constants/popup';
 
 /**
  * xb-menu html element
@@ -38,10 +39,10 @@ export default xb.Menu = create('xb-menu', [
                     colLoop: true
                 });
 
-                var component = this.getComponent();
+                const component = this.getComponent();
                 if (component) {
                     // check show scroll navigator after open menu
-                    component.afterOpen(this._afterOpen.bind(this));
+                    component.afterOpen(::this._afterOpen);
 
                 } else {
                     this._afterOpen();
@@ -61,7 +62,7 @@ export default xb.Menu = create('xb-menu', [
                 this.close();
 
                 // focus of ancestor
-                var parentMenu = this.parentMenu;
+                const parentMenu = this.parentMenu;
                 if (parentMenu) {
                     lazyFocus(parentMenu);
                 }
@@ -71,7 +72,7 @@ export default xb.Menu = create('xb-menu', [
                 if (!this.hasOpenSubmenu) {
                     this.close();
                     // event.relatedTarget is null in firefox
-                    immediate.setImmediate(this._closeUpFocus.bind(this));
+                    immediate.setImmediate(::this._closeUpFocus);
                 }
             }
         },
@@ -85,11 +86,11 @@ export default xb.Menu = create('xb-menu', [
              * @prop {Object} default setting for the menu
              * @readonly
              */
-            defaultOptions: {
+            popupDefaultOptions: {
                 get: function () {
-                    let options = tetherDefaultOptions.call(this);
+                    const popupOptions = popupDefaultOptions.call(this);
 
-                    options.constraints = [
+                    popupOptions.constraints = [
                         {
                             'to': 'scrollParent',
                             'attachment': 'element'
@@ -100,7 +101,7 @@ export default xb.Menu = create('xb-menu', [
                         }
                     ];
 
-                    return options;
+                    return popupOptions;
                 }
             }
         },
@@ -114,9 +115,7 @@ export default xb.Menu = create('xb-menu', [
              * @param {xb.Menuitem} target
              */
             _closeSubmenu: function (target) {
-                if (target._xbpopup) {
-                    target._xbpopup.close();
-                }
+                _.invoke(target, [ ConstantPopup.POPUP, 'close' ]);
             },
 
             _afterOpen: function () {

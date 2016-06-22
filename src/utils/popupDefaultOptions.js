@@ -1,5 +1,6 @@
 /**
  * The default setting for the popup
+ * @see http://tether.io/#options
  * @returns {Object}
  * @this xb.Popup
  */
