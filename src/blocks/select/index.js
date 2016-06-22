@@ -26,7 +26,7 @@ export default xb.Select = create('xb-select', [
 
         lifecycle: {
             created: function () {
-                this[ ConstantSelect.SELECTED ] = initialDefinitionSelected(this);
+                this[ ConstantSelect.SELECTED ] = initialDefinitionSelected(this, true);
             }
         },
 
@@ -69,6 +69,16 @@ export default xb.Select = create('xb-select', [
             value: {
                 get: function () {
                     return this.selectMenuInstance.value;
+                }
+            },
+
+            /**
+             * @prop {HTMLElement[]} selectedItems the selected item
+             * @readonly
+             */
+            selectedItems: {
+                get: function () {
+                    return this.selectMenuInstance.selectedItems;
                 }
             }
         }

@@ -3,7 +3,7 @@ import { dom } from 'xblocks-core';
 import context from 'context';
 import ConstantMenuitem from 'constants/menuitem';
 
-export default function (element) {
+export default function (element, isSelectedDefault) {
     let root = dom.contentNode(element);
     if (root instanceof context.HTMLTemplateElement) {
         root = root.content;
@@ -15,6 +15,12 @@ export default function (element) {
 
     const selectedItems = _(items)
         .chain()
+        .compact()
+        .tap(function (array) {
+            if (isSelectedDefault && !array.length) {
+                array.push(root.querySelector('xb-menuitem'));
+            }
+        })
         .compact()
         .reduce(initialSelectIteratee, {})
         .value();
