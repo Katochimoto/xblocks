@@ -1280,9 +1280,11 @@ xb-button[hidden] {
   display: none;
 }
 a.xb-button {
+  position: relative;
   text-decoration: none;
 }
 .xb-button {
+  position: relative;
   font-weight: inherit;
 }
 .xb-button > ._content > ._text:not(:empty) + xb-ico,
@@ -3600,9 +3602,23 @@ xb-select[hidden] {
   display: none;
 }
 .xb-select {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  display: block;
+  font-weight: inherit;
   position: relative;
+}
+.xb-select._focused {
+  z-index: 2;
+  border-color: rgba(178,142,0,0.6);
+  outline: none;
+}
+.xb-select._focused:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-border-radius: inherit;
+          border-radius: inherit;
+  -webkit-box-shadow: 0 0 10px #fc0;
+          box-shadow: 0 0 10px #fc0;
 }

@@ -33,6 +33,10 @@ export default xb.Select = create('xb-select', [
         events: {
             'click': function () {
                 this.selectMenuInstance.open();
+            },
+
+            'keydown:keypass(32)': function () {
+                this.selectMenuInstance.open();
             }
         },
 
