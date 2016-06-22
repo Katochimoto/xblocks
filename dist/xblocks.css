@@ -3586,3 +3586,23 @@ xb-speech-recognition[hidden] {
 .xb-speech-recognition {
   cursor: pointer;
 }
+xb-select {
+  display: inline-block;
+}
+xb-select *,
+xb-select *:before,
+xb-select *:after {
+  -webkit-box-sizing: initial;
+     -moz-box-sizing: initial;
+          box-sizing: initial;
+}
+xb-select[hidden] {
+  display: none;
+}
+.xb-select {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  display: block;
+  position: relative;
+}

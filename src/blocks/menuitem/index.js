@@ -200,7 +200,7 @@ export default xb.Menuitem = create('xb-menuitem', [
                     return;
                 }
 
-                this[ ConstantMenuitem.SUBMENU_TIMER ] = context.setTimeout(submenu.open.bind(submenu), 200);
+                this[ ConstantMenuitem.SUBMENU_TIMER ] = context.setTimeout(::submenu.open, 200);
             },
 
             /**

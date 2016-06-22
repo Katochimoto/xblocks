@@ -115,7 +115,8 @@ export default {
          */
         parentMenu: {
             get: function () {
-                return _.get(this, 'core.target.menuInstance');
+                const parentMenu = _.get(this, 'core.target.menuInstance', null);
+                return (parentMenu === this) ? null : parentMenu;
             }
         },
 
