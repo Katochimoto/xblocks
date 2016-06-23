@@ -30,7 +30,7 @@ export default xb.MenuInline = create('xb-menu-inline', [
         events: {
             'xb-created': onCreated,
 
-            'xb-repaint': onCreated,
+            'xb-update': onCreated,
 
             'blur': function () {
                 if (!this.hasOpenSubmenu) {

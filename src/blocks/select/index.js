@@ -7,8 +7,21 @@ import { create, event as xevent } from 'xblocks-core';
 import ConstantMenu from 'constants/menu';
 import ConstantSelect from 'constants/select';
 import initialDefinitionSelected from 'utils/initialDefinitionSelected';
+import removeChild from 'dom/removeChild';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementFocus from 'mixin/element/focus';
+
+const MENU_ATTRS = {
+    'attachment': 'top left',
+    'target-attachment': 'bottom left',
+    'target-modifier': 'initial',
+    'constraints': encodeURIComponent(JSON.stringify([
+        {
+            'to': 'window',
+            'attachment': 'element together'
+        }
+    ]))
+};
 
 /**
  * xb-select html element
@@ -31,6 +44,15 @@ export default xb.Select = create('xb-select', [
         },
 
         events: {
+            'xb-destroy': function () {
+                this._menuRemove();
+                this[ ConstantSelect.SELECTED ] = {};
+            },
+
+            'xb-update': function () {
+                this._menuRemove();
+            },
+
             'click': function () {
                 this.selectMenuInstance.open();
             },
@@ -53,7 +75,7 @@ export default xb.Select = create('xb-select', [
                     let menu = this[ ConstantSelect.MENU ];
 
                     if (!menu) {
-                        menu = this[ ConstantSelect.MENU ] = createMenu(this);
+                        menu = this[ ConstantSelect.MENU ] = this._menuCreate();
                     }
 
                     return menu;
@@ -85,40 +107,49 @@ export default xb.Select = create('xb-select', [
                     return this.selectMenuInstance.selectedItems;
                 }
             }
+        },
+
+        methods: {
+            /**
+             * @private
+             */
+            _menuRemove: function () {
+                const menu = this[ ConstantSelect.MENU ];
+                if (!menu) {
+                    return;
+                }
+
+                this[ ConstantSelect.MENU ] = undefined;
+                menu.close();
+                removeChild(menu);
+            },
+
+            /**
+             * @returns {xb.Menu}
+             * @private
+             */
+            _menuCreate: function () {
+                const targetClassName = `_select-target-${this.xuid}`;
+                const menu = this.ownerDocument.createElement('xb-menu');
+                const attrs = _.merge({ target: `.${targetClassName}` }, MENU_ATTRS);
+
+                for (let attrName in attrs) {
+                    menu.setAttribute(attrName, attrs[ attrName ]);
+                }
+
+                menu[ ConstantMenu.SELECTED ] = this[ ConstantSelect.SELECTED ];
+
+                menu.selectable = true;
+                menu.multiple = this.multiple;
+                menu.innerHTML = this.content;
+                menu.addEventListener('xb-destroy', ::this._menuRemove, false);
+
+                xevent.forwardingEvents('change', menu, this);
+
+                this.classList.add(targetClassName);
+
+                return this.ownerDocument.body.appendChild(menu);
+            }
         }
     }
 ]);
-
-function createMenu(select) {
-    const targetClassName = `_select-target-${select.xuid}`;
-    const menu = select.ownerDocument.createElement('xb-menu');
-    const attrs = _.merge({
-        'target': `.${targetClassName}`
-    }, {
-        'attachment': 'top left',
-        'target-attachment': 'bottom left',
-        'target-modifier': 'initial',
-        'constraints': encodeURIComponent(JSON.stringify([
-            {
-                'to': 'window',
-                'attachment': 'element together'
-            }
-        ]))
-    });
-
-    for (let attrName in attrs) {
-        menu.setAttribute(attrName, attrs[ attrName ]);
-    }
-
-    menu[ ConstantMenu.SELECTED ] = select[ ConstantSelect.SELECTED ];
-
-    menu.selectable = true;
-    menu.multiple = select.multiple;
-    menu.innerHTML = select.content;
-
-    xevent.forwardingEvents('change', menu, select);
-
-    select.classList.add(targetClassName);
-
-    return select.ownerDocument.body.appendChild(menu);
-}

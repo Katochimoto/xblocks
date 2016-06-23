@@ -60,12 +60,7 @@ export default xb.Menu = create('xb-menu', [
 
             'keydown:keypass(27)': function () {
                 this.close();
-
-                // focus of ancestor
-                const parentMenu = this.parentMenu;
-                if (parentMenu) {
-                    lazyFocus(parentMenu);
-                }
+                _.invoke(this, 'parentMenu.focus');
             },
 
             'blur': function () {

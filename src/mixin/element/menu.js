@@ -8,9 +8,6 @@ import ConstantMenuitem from 'constants/menuitem';
 
 /**
  * Common interface for elements xb-menu and xb-menu-inline.
- *
- * @prop {boolean} hasOpenSubmenu The menu contains the open submenu
- * @type {Object}
  */
 export default {
     lifecycle: {
@@ -31,7 +28,7 @@ export default {
                 this.submenuInstance.open();
 
             } else if (this.menuInstance) {
-                menuitemSelect(this.menuInstance);
+                this.menuInstance.menuitemSelect();
             }
         },
 
@@ -52,7 +49,7 @@ export default {
          * @this xb.Menu
          */
         'keydown:keypass(32)': function () {
-            menuitemSelect(this);
+            this.menuitemSelect();
         },
 
         /**
@@ -154,55 +151,47 @@ export default {
             if (component) {
                 component.scrollIntoItem(menuitem);
             }
+        },
+
+        menuitemSelect: function () {
+            if (!this.selectable) {
+                return;
+            }
+
+            const selectedAttr = ConstantMenuitem.SELECTED_ATTR;
+            const item = this[ ConstantMenu.TABLE ].getItem();
+            const selected = !item.selected;
+            const uid = item.getAttribute(selectedAttr) || _.uniqueId('selected');
+            const firstParentMenu = this.firstParentMenu;
+
+            // сброс выбранных пунктов, если не мультиселект и текущий пункт будет выбран
+            if (!this.multiple && selected) {
+                _(firstParentMenu[ ConstantMenu.SELECTED ])
+                    .chain()
+                    .keys()
+                    .join(`"],xb-menuitem[${selectedAttr}="`)
+                    .thru(value => this.ownerDocument.querySelectorAll(`xb-menuitem[${selectedAttr}="${value}"]`))
+                    .forEach(node => {
+                        node.selected = false;
+                        node.removeAttribute(selectedAttr);
+                    })
+                    .value();
+
+                firstParentMenu[ ConstantMenu.SELECTED ] = {};
+            }
+
+            if (selected) {
+                item.selected = true;
+                item.setAttribute(selectedAttr, uid);
+                _.set(firstParentMenu, [ ConstantMenu.SELECTED, uid ], item);
+
+            } else {
+                item.selected = false;
+                item.removeAttribute(selectedAttr);
+                _.unset(firstParentMenu, [ ConstantMenu.SELECTED, uid ]);
+            }
+
+            xevent.dispatch(this, 'change', { detail: { item } });
         }
     }
 };
-
-/**
- * @param {xb.Menu} menu
- * @private
- */
-function menuitemSelect(menu) {
-    if (!menu.selectable) {
-        return;
-    }
-
-    const selectedAttr = ConstantMenuitem.SELECTED_ATTR;
-    const item = menu[ ConstantMenu.TABLE ].getItem();
-    const selected = !item.selected;
-    const uid = item.getAttribute(selectedAttr) || _.uniqueId('selected');
-    const firstParentMenu = menu.firstParentMenu;
-
-    // сброс выбранных пунктов, если не мультиселект и текущий пункт будет выбран
-    if (!menu.multiple && selected) {
-        _(firstParentMenu[ ConstantMenu.SELECTED ])
-            .chain()
-            .keys()
-            .join(`"],xb-menuitem[${selectedAttr}="`)
-            .thru(value => firstParentMenu.ownerDocument.querySelectorAll(`xb-menuitem[${selectedAttr}="${value}"]`))
-            .forEach(removePropSelectIterate)
-            .value();
-
-        firstParentMenu[ ConstantMenu.SELECTED ] = {};
-    }
-
-    if (selected) {
-        item.selected = true;
-        item.setAttribute(selectedAttr, uid);
-        _.set(firstParentMenu, [ ConstantMenu.SELECTED, uid ], item);
-
-    } else {
-        item.selected = false;
-        item.removeAttribute(selectedAttr);
-        _.unset(firstParentMenu, [ ConstantMenu.SELECTED, uid ]);
-    }
-
-    xevent.dispatch(menu, 'change', {
-        detail: { item }
-    });
-}
-
-function removePropSelectIterate(node) {
-    node.selected = false;
-    node.removeAttribute(ConstantMenuitem.SELECTED_ATTR);
-}

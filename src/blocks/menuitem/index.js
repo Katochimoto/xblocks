@@ -52,14 +52,7 @@ export default xb.Menuitem = create('xb-menuitem', [
              */
             'xb-created': function () {
                 this._submenuRemove();
-                updateSelection(this);
-            },
-
-            /**
-             * @callback
-             */
-            'xb-repaint': function () {
-                this._submenuRemove();
+                this._updateSelection();
             },
 
             /**
@@ -178,7 +171,7 @@ export default xb.Menuitem = create('xb-menuitem', [
                     let submenu = this[ ConstantMenuitem.SUBMENU ];
 
                     if (!submenu && submenu !== null) {
-                        submenu = this[ ConstantMenuitem.SUBMENU ] = createSubmenu(this);
+                        submenu = this[ ConstantMenuitem.SUBMENU ] = this.submenu ? this._submenuCreate() : null;
                     }
 
                     return submenu;
@@ -224,77 +217,75 @@ export default xb.Menuitem = create('xb-menuitem', [
                 }
 
                 this[ ConstantMenuitem.SUBMENU ] = undefined;
-
                 this._submenuCancel();
 
                 submenu.close();
                 removeChild(submenu);
+            },
+
+            /**
+             * @returns {xb.Menu}
+             * @private
+             */
+            _submenuCreate: function () {
+                const parentMenu = this.menuInstance;
+
+                // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
+                // меню может быть открыто в блоке со скролом,
+                // в этом случае ограничением для подменю будет блок со скролом
+                const parentAttrs = {
+                    constraints: parentMenu.getAttribute('constraints'),
+                    multiple: parentMenu.hasAttribute('multiple') && 'multiple',
+                    selectable: parentMenu.hasAttribute('selectable') && 'selectable'
+                };
+
+                const targetClassName = `_menuitem-target-${this.xuid}`;
+                const menu = this.ownerDocument.createElement('xb-menu');
+                const attrs = _.merge({ target: `.${targetClassName}` }, SUBMENU_ATTRS);
+
+                for (let attrName in parentAttrs) {
+                    if (parentAttrs[ attrName ]) {
+                        attrs[ attrName ] = parentAttrs[ attrName ];
+                    }
+                }
+
+                for (let attrName in attrs) {
+                    menu.setAttribute(attrName, attrs[ attrName ]);
+                }
+
+                menu.innerHTML = this.content;
+                menu.addEventListener('xb-destroy', ::this._submenuRemove, false);
+
+                this.classList.add(targetClassName);
+
+                return this.ownerDocument.body.appendChild(menu);
+            },
+
+            /**
+             * @private
+             */
+            _updateSelection: function () {
+                if (!this.parentNode) {
+                    return;
+                }
+
+                const uid = this.getAttribute(ConstantMenuitem.SELECTED_ATTR);
+                if (!uid) {
+                    return;
+                }
+
+                const menu = this.firstMenuInstance;
+                if (!menu) {
+                    return;
+                }
+
+                const selected = _.has(menu, [ ConstantMenu.SELECTED, uid ]);
+                this.selected = selected;
+
+                if (!selected) {
+                    this.removeAttribute(ConstantMenuitem.SELECTED_ATTR);
+                }
             }
         }
     }
 ]);
-
-/**
- * @param {xb.Menuitem} menuitem
- * @returns {xb.Menu|null}
- * @private
- */
-function createSubmenu(menuitem) {
-    if (!menuitem.submenu) {
-        return null;
-    }
-
-    const parentMenu = menuitem.menuInstance;
-
-    // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
-    // меню может быть открыто в блоке со скролом,
-    // в этом случае ограничением для подменю будет блок со скролом
-    const parentAttrs = {
-        constraints: parentMenu.getAttribute('constraints'),
-        multiple: parentMenu.hasAttribute('multiple') && 'multiple',
-        selectable: parentMenu.hasAttribute('selectable') && 'selectable'
-    };
-
-    const targetClassName = `_menuitem-target-${menuitem.xuid}`;
-    const menu = menuitem.ownerDocument.createElement('xb-menu');
-    const attrs = _.merge({ target: `.${targetClassName}` }, SUBMENU_ATTRS);
-
-    for (let attrName in parentAttrs) {
-        if (parentAttrs[ attrName ]) {
-            attrs[ attrName ] = parentAttrs[ attrName ];
-        }
-    }
-
-    for (let attrName in attrs) {
-        menu.setAttribute(attrName, attrs[ attrName ]);
-    }
-
-    menu.innerHTML = menuitem.content;
-
-    menuitem.classList.add(targetClassName);
-
-    return menuitem.ownerDocument.body.appendChild(menu);
-}
-
-function updateSelection(menuitem) {
-    if (!menuitem.parentNode) {
-        return;
-    }
-
-    const uid = menuitem.getAttribute(ConstantMenuitem.SELECTED_ATTR);
-    if (!uid) {
-        return;
-    }
-
-    const menu = menuitem.firstMenuInstance;
-    if (!menu) {
-        return;
-    }
-
-    const selected = _.has(menu, [ ConstantMenu.SELECTED, uid ]);
-    menuitem.selected = selected;
-
-    if (!selected) {
-        menuitem.removeAttribute(ConstantMenuitem.SELECTED_ATTR);
-    }
-}
