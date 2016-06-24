@@ -16,7 +16,7 @@ import mixinViewMenu from 'mixin/view/menu';
  */
 export default xv.Menu = view.register('xb-menu', [
     mixinViewCommonAttrs,
-    mixinViewMenu,
+    mixinViewMenu('xb-menu'),
 
     {
         displayName: 'xb-menu',

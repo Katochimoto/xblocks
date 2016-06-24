@@ -20,7 +20,7 @@ export default {
 
     events: {
         /**
-         * Оpen the submenu
+         * Оpen the submenu or menu item is selected
          * @this xb.Menuitem
          */
         'click:delegate(xb-menuitem:not([disabled]))': function () {
@@ -45,7 +45,7 @@ export default {
         },
 
         /**
-         * space
+         * The menu item is selected
          * @this xb.Menu
          */
         'keydown:keypass(32)': function () {
@@ -89,7 +89,16 @@ export default {
         },
 
         /**
-         * @prop {xb.Menu} [parentMenu] menu-ancestor
+         * @prop {boolean} autoclose closing the menu after selecting
+         */
+        autoclose: {
+            attribute: {
+                boolean: true
+            }
+        },
+
+        /**
+         * @prop {xb.Menu|null} parentMenu menu-ancestor
          * @readonly
          */
         parentMenu: {
@@ -126,12 +135,27 @@ export default {
         },
 
         /**
-         * @prop {HTMLElement[]} selectedItems the selected menu item
+         * @prop {HTMLElement[]} selectedItems selected menu items
          * @readonly
          */
         selectedItems: {
             get: function () {
                 return _.values(this.firstParentMenu[ ConstantMenu.SELECTED ]);
+            }
+        },
+
+        /**
+         * @prop {Object[]} selectedObjects the data of selected items
+         * @readonly
+         */
+        selectedObjects: {
+            get: function () {
+                return _.map(this.firstParentMenu[ ConstantMenu.SELECTED ], item => {
+                    return {
+                        label: item.getAttribute('label'),
+                        value: item.value
+                    };
+                });
             }
         }
     },
@@ -191,7 +215,11 @@ export default {
                 _.unset(firstParentMenu, [ ConstantMenu.SELECTED, uid ]);
             }
 
-            xevent.dispatch(this, 'change', { detail: { item } });
+            if (this.autoclose) {
+                firstParentMenu.close();
+            }
+
+            xevent.dispatch(firstParentMenu, 'change', { detail: { item } });
         }
     }
 };

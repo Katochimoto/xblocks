@@ -1286,19 +1286,23 @@ a.xb-button {
 .xb-button {
   position: relative;
   font-weight: inherit;
+  width: 100%;
+}
+.xb-button > ._content {
+  width: 100%;
 }
 .xb-button > ._content > ._text:not(:empty) + xb-ico,
 .xb-button > ._content > xb-ico + ._text:not(:empty) {
-  margin-left: 5px;
+  padding-left: 5px;
 }
 .xb-button > ._content > xb-ico {
   line-height: inherit;
 }
-.xb-button > ._content > xb-ico:last-child {
-  margin-right: -5px;
+.xb-button > ._content > xb-ico._after {
+  margin-left: auto !important;
 }
-.xb-button > ._content > xb-ico:first-child {
-  margin-left: -5px;
+.xb-button > ._content > xb-ico._before {
+  margin-right: auto !important;
 }
 .xb-button._theme-normal_size-s {
   z-index: 1;
@@ -3076,7 +3080,7 @@ xb-radio[hidden] {
 .xb-radio._size-l > ._view + ._label {
   padding-left: 7px;
 }
-xb-popup > ._popup > ._close {
+.xb-popup > ._close {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -3084,12 +3088,12 @@ xb-popup > ._popup > ._close {
   margin-top: -0.2em;
   background: 50% no-repeat;
 }
-xb-popup > ._popup > ._close {
+.xb-popup > ._close {
   width: 14px;
   height: 14px;
 }
-xb-popup > ._popup > ._close:before,
-xb-popup > ._popup > ._close:after {
+.xb-popup > ._close:before,
+.xb-popup > ._close:after {
   content: "";
   position: absolute;
   top: 50%;
@@ -3102,17 +3106,17 @@ xb-popup > ._popup > ._close:after {
     -o-transform: translateY(-0.5px) rotate(45deg);
        transform: translateY(-0.5px) rotate(45deg);
 }
-xb-popup > ._popup > ._close:after {
+.xb-popup > ._close:after {
   -webkit-transform: translateY(-0.5px) rotate(-45deg);
   -moz-transform: translateY(-0.5px) rotate(-45deg);
     -o-transform: translateY(-0.5px) rotate(-45deg);
        transform: translateY(-0.5px) rotate(-45deg);
 }
-xb-popup > ._popup > ._close {
+.xb-popup > ._close {
   cursor: pointer;
   opacity: 0.25;
 }
-xb-popup > ._popup > ._close:hover {
+.xb-popup > ._close:hover {
   opacity: 1;
 }
 xb-popup {
@@ -3133,33 +3137,33 @@ xb-popup[hidden] {
 xb-popup.xb-popup-enabled {
   display: inline-block;
 }
-xb-popup > ._popup {
+.xb-popup {
   background: #fff;
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.4);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.4);
   overflow: hidden;
   outline: none;
 }
-xb-popup > ._popup:focus {
+.xb-popup:focus {
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
 }
-xb-popup > ._popup > ._content {
+.xb-popup > ._content {
   display: block;
   padding: 0 20px 0 20px;
 }
-xb-popup > ._popup > ._content:before {
+.xb-popup > ._content:before {
   content: "";
   display: table;
   margin-bottom: 16px;
 }
-xb-popup > ._popup > ._content:after {
+.xb-popup > ._content:after {
   content: "";
   display: table;
   clear: both;
   margin-top: 16px;
 }
-xb-popup > ._popup > ._close {
+.xb-popup > ._close {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -3169,11 +3173,11 @@ xb-popup > ._popup > ._close {
   top: 2px;
   right: 2px;
 }
-xb-popup > ._popup > ._close + ._title,
-xb-popup > ._popup > ._close + ._content {
+.xb-popup > ._close + ._title,
+.xb-popup > ._close + ._content {
   padding-right: 32px !important;
 }
-xb-popup > ._popup > ._title {
+.xb-popup > ._title {
   font: 1.25em/1.125em Arial, sans-serif;
   padding: 10px;
   display: block;
@@ -3181,15 +3185,15 @@ xb-popup > ._popup > ._title {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-xb-popup > ._popup > ._buttons {
+.xb-popup > ._buttons {
   padding: 10px;
   padding-top: 10px;
 }
-xb-popup > ._popup._theme-modal > ._content {
+.xb-popup._theme-modal > ._content {
   font: 0.9376em/1.4667em Arial, sans-serif;
   padding: 0 10px;
 }
-xb-popup > ._popup._theme-island > ._title {
+.xb-popup._theme-island > ._title {
   padding: 0 16px;
   height: 50px;
   line-height: 50px;
@@ -3197,31 +3201,31 @@ xb-popup > ._popup._theme-island > ._title {
   background: #f6f5f3;
   border-bottom: 1px solid #d6d6d6;
 }
-xb-popup > ._popup._theme-island > ._content {
+.xb-popup._theme-island > ._content {
   padding: 0 16px;
 }
-xb-popup > ._popup._theme-island > ._buttons {
+.xb-popup._theme-island > ._buttons {
   margin-top: -1px;
   padding: 11px 10px 10px;
   -webkit-box-shadow: inset 0 1px rgba(0,0,0,0.15), 0 -2px rgba(0,0,0,0.04);
           box-shadow: inset 0 1px rgba(0,0,0,0.15), 0 -2px rgba(0,0,0,0.04);
 }
-xb-popup > ._popup._theme-error > ._content {
+.xb-popup._theme-error > ._content {
   line-height: 0;
 }
-xb-popup > ._popup._theme-blank {
+.xb-popup._theme-blank {
   background-color: transparent;
   border: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
-xb-popup > ._popup._theme-blank > ._content,
-xb-popup > ._popup._theme-blank > ._title,
-xb-popup > ._popup._theme-blank > ._buttons {
+.xb-popup._theme-blank > ._content,
+.xb-popup._theme-blank > ._title,
+.xb-popup._theme-blank > ._buttons {
   padding: 0;
 }
-xb-popup > ._popup._theme-blank > ._content:before,
-xb-popup > ._popup._theme-blank > ._content:after {
+.xb-popup._theme-blank > ._content:before,
+.xb-popup._theme-blank > ._content:after {
   margin: 0;
   display: none;
 }
@@ -3243,7 +3247,7 @@ xb-menu[hidden] {
 xb-menu.xb-menu-enabled {
   display: inline-block;
 }
-xb-menu > ._popup {
+.xb-menu {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -3268,16 +3272,16 @@ xb-menu > ._popup {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
-xb-menu > ._popup:before,
-xb-menu > ._popup:after {
+.xb-menu:before,
+.xb-menu:after {
   margin: 0;
   display: none;
 }
-xb-menu > ._popup:focus {
+.xb-menu:focus {
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 8px 30px -5px rgba(0,0,0,0.7);
 }
-xb-menu > ._popup > ._popup-content {
+.xb-menu > ._content {
   overflow-y: scroll;
   overflow-x: hidden;
   tap-highlight-color: rgba(0,0,0,0);
@@ -3287,20 +3291,20 @@ xb-menu > ._popup > ._popup-content {
   margin-right: -15px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  xb-menu > ._popup > ._popup-content {
+  .xb-menu > ._content {
     margin-right: auto !important;
   }
-  xb-menu > ._popup > ._popup-content::-webkit-scrollbar {
+  .xb-menu > ._content::-webkit-scrollbar {
     width: 0 !important;
   }
 }
-xb-menu > ._popup > ._popup-content > xb-menuitem:first-child {
+.xb-menu > ._content > xb-menuitem:first-child {
   margin-top: 5px;
 }
-xb-menu > ._popup > ._popup-content > xb-menuitem:last-child {
+.xb-menu > ._content > xb-menuitem:last-child {
   margin-bottom: 5px;
 }
-xb-menu > ._popup > ._popup-scroll-top {
+.xb-menu > ._scroll-top {
   height: 8px;
   position: absolute;
   background-color: #fff;
@@ -3311,7 +3315,7 @@ xb-menu > ._popup > ._popup-scroll-top {
   z-index: 2;
   cursor: n-resize;
 }
-xb-menu > ._popup > ._popup-scroll-top:after {
+.xb-menu > ._scroll-top:after {
   content: "";
   position: absolute;
   border: 4px solid transparent;
@@ -3321,7 +3325,7 @@ xb-menu > ._popup > ._popup-scroll-top:after {
   left: 50%;
   top: -2px;
 }
-xb-menu > ._popup > ._popup-scroll-bottom {
+.xb-menu > ._scroll-bottom {
   height: 8px;
   position: absolute;
   background-color: #fff;
@@ -3332,7 +3336,7 @@ xb-menu > ._popup > ._popup-scroll-bottom {
   display: none;
   z-index: 2;
 }
-xb-menu > ._popup > ._popup-scroll-bottom:after {
+.xb-menu > ._scroll-bottom:after {
   content: "";
   position: absolute;
   border: 4px solid transparent;
@@ -3355,7 +3359,7 @@ xb-menu-inline *:after {
 xb-menu-inline[hidden] {
   display: none;
 }
-xb-menu-inline > ._popup {
+.xb-menu-inline {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -3378,16 +3382,16 @@ xb-menu-inline > ._popup {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
-xb-menu-inline > ._popup:before,
-xb-menu-inline > ._popup:after {
+.xb-menu-inline:before,
+.xb-menu-inline:after {
   margin: 0;
   display: none;
 }
-xb-menu-inline > ._popup:focus {
+.xb-menu-inline:focus {
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
           box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
 }
-xb-menu-inline > ._popup > ._popup-content {
+.xb-menu-inline > ._content {
   overflow-y: scroll;
   overflow-x: hidden;
   tap-highlight-color: rgba(0,0,0,0);
@@ -3397,20 +3401,20 @@ xb-menu-inline > ._popup > ._popup-content {
   margin-right: -15px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  xb-menu-inline > ._popup > ._popup-content {
+  .xb-menu-inline > ._content {
     margin-right: auto !important;
   }
-  xb-menu-inline > ._popup > ._popup-content::-webkit-scrollbar {
+  .xb-menu-inline > ._content::-webkit-scrollbar {
     width: 0 !important;
   }
 }
-xb-menu-inline > ._popup > ._popup-content > xb-menuitem:first-child {
+.xb-menu-inline > ._content > xb-menuitem:first-child {
   margin-top: 5px;
 }
-xb-menu-inline > ._popup > ._popup-content > xb-menuitem:last-child {
+.xb-menu-inline > ._content > xb-menuitem:last-child {
   margin-bottom: 5px;
 }
-xb-menu-inline > ._popup > ._popup-scroll-top {
+.xb-menu-inline > ._scroll-top {
   height: 8px;
   position: absolute;
   background-color: #fff;
@@ -3421,7 +3425,7 @@ xb-menu-inline > ._popup > ._popup-scroll-top {
   z-index: 2;
   cursor: n-resize;
 }
-xb-menu-inline > ._popup > ._popup-scroll-top:after {
+.xb-menu-inline > ._scroll-top:after {
   content: "";
   position: absolute;
   border: 4px solid transparent;
@@ -3431,7 +3435,7 @@ xb-menu-inline > ._popup > ._popup-scroll-top:after {
   left: 50%;
   top: -2px;
 }
-xb-menu-inline > ._popup > ._popup-scroll-bottom {
+.xb-menu-inline > ._scroll-bottom {
   height: 8px;
   position: absolute;
   background-color: #fff;
@@ -3442,7 +3446,7 @@ xb-menu-inline > ._popup > ._popup-scroll-bottom {
   display: none;
   z-index: 2;
 }
-xb-menu-inline > ._popup > ._popup-scroll-bottom:after {
+.xb-menu-inline > ._scroll-bottom:after {
   content: "";
   position: absolute;
   border: 4px solid transparent;
@@ -3621,4 +3625,7 @@ xb-select[hidden] {
           border-radius: inherit;
   -webkit-box-shadow: 0 0 10px #fc0;
           box-shadow: 0 0 10px #fc0;
+}
+.xb-select > xb-button {
+  width: 100%;
 }

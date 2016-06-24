@@ -59,6 +59,10 @@ export default xb.Select = create('xb-select', [
 
             'keydown:keypass(32)': function () {
                 this.selectMenuInstance.open();
+            },
+
+            'change': function () {
+                this.getComponent().setState({ selected: this.selectedObjects });
             }
         },
 
@@ -66,6 +70,16 @@ export default xb.Select = create('xb-select', [
          * @lends xb.Select.prototype
          */
         accessors: {
+            /*
+            style: {
+                get: function () {
+                    return {
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                    };
+                }
+            },
+            */
+
             /**
              * @prop {xb.Menu} selectMenuInstance Menu instance
              * @readonly
@@ -94,6 +108,12 @@ export default xb.Select = create('xb-select', [
              */
             value: {
                 get: function () {
+                    // если меню ещё не открывалось
+                    // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости
+                    if (!this[ ConstantSelect.MENU ]) {
+                        return _.map(this[ ConstantSelect.SELECTED ], 'value');
+                    }
+
                     return this.selectMenuInstance.value;
                 }
             },
@@ -104,7 +124,34 @@ export default xb.Select = create('xb-select', [
              */
             selectedItems: {
                 get: function () {
+                    // если меню ещё не открывалось
+                    // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости
+                    if (!this[ ConstantSelect.MENU ]) {
+                        return _.values(this[ ConstantSelect.SELECTED ]);
+                    }
+
                     return this.selectMenuInstance.selectedItems;
+                }
+            },
+
+            /**
+             * @prop {Object[]} selectedObjects the selected item
+             * @readonly
+             */
+            selectedObjects: {
+                get: function () {
+                    // если меню ещё не открывалось
+                    // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости
+                    if (!this[ ConstantSelect.MENU ]) {
+                        return _.map(this[ ConstantSelect.SELECTED ], item => {
+                            return {
+                                label: item.getAttribute('label'),
+                                value: item.value
+                            };
+                        });
+                    }
+
+                    return this.selectMenuInstance.selectedObjects;
                 }
             }
         },
@@ -132,6 +179,11 @@ export default xb.Select = create('xb-select', [
                 const targetClassName = `_select-target-${this.xuid}`;
                 const menu = this.ownerDocument.createElement('xb-menu');
                 const attrs = _.merge({ target: `.${targetClassName}` }, MENU_ATTRS);
+                const size = Number(this.getAttribute('size') || 0);
+
+                if (size) {
+                    attrs.size = size;
+                }
 
                 for (let attrName in attrs) {
                     menu.setAttribute(attrName, attrs[ attrName ]);
@@ -141,6 +193,7 @@ export default xb.Select = create('xb-select', [
 
                 menu.selectable = true;
                 menu.multiple = this.multiple;
+                menu.autoclose = !this.multiple;
                 menu.innerHTML = this.content;
                 menu.addEventListener('xb-destroy', ::this._menuRemove, false);
 

@@ -16,7 +16,7 @@ import mixinViewMenu from 'mixin/view/menu';
  */
 export default xv.MenuInline = view.register('xb-menu-inline', [
     mixinViewCommonAttrs,
-    mixinViewMenu,
+    mixinViewMenu('xb-menu-inline'),
 
     {
         displayName: 'xb-menu-inline',

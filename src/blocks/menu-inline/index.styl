@@ -3,39 +3,39 @@
 xb-menu-inline
   skin: xb-inline-block
 
-  & > ._popup
-    skin: v3-menu (_size large)
-    overflow: hidden
-    padding: 0
-    outline: none
-    box-shadow: 0 0 0 1px rgba(#000, 0.1)
+.xb-menu-inline
+  skin: v3-menu (_size large)
+  overflow: hidden
+  padding: 0
+  outline: none
+  box-shadow: 0 0 0 1px rgba(#000, 0.1)
 
-    touch-action: none
-    -webkit-touch-callout: none
-    touch-callout: none
-    user-select: none
-    text-size-adjust: none
+  touch-action: none
+  -webkit-touch-callout: none
+  touch-callout: none
+  user-select: none
+  text-size-adjust: none
 
-    &:before,
-    &:after
-      margin: 0
-      display: none
+  &:before,
+  &:after
+    margin: 0
+    display: none
 
-    &:focus
-      box-shadow: 0 0 0 1px rgba(#000, 0.2)
+  &:focus
+    box-shadow: 0 0 0 1px rgba(#000, 0.2)
 
-    & > ._popup-content
-      skin: xb-scroll-x 18px
+  & > ._content
+    skin: xb-scroll-x 18px
 
-      & > xb-menuitem
-        &:first-child
-          margin-top: ($islands_s / 2)
+    & > xb-menuitem
+      &:first-child
+        margin-top: ($islands_s / 2)
 
-        &:last-child
-          margin-bottom: ($islands_s / 2)
+      &:last-child
+        margin-bottom: ($islands_s / 2)
 
-    & > ._popup-scroll-top
-      skin: xb-scroll-control-top
+  & > ._scroll-top
+    skin: xb-scroll-control-top
 
-    & > ._popup-scroll-bottom
-      skin: xb-scroll-control-bottom
+  & > ._scroll-bottom
+    skin: xb-scroll-control-bottom

@@ -25,21 +25,30 @@ a.xb-button
 .xb-button
   position: relative
   font-weight: inherit
+  width: 100%
 
   & > ._content
+    width: 100%
+
     & > ._text:not(:empty) + xb-ico,
     & > xb-ico + ._text:not(:empty)
-      margin-left: 0.5 * $islands_s
+      padding-left: 0.5 * $islands_s
 
   & > ._content
     & > xb-ico
       line-height: inherit
 
-      &:last-child
-        margin-right: -0.5 * $islands_s
+      &._after
+        margin-left: auto !important
 
-      &:first-child
-        margin-left: -0.5 * $islands_s
+      &._before
+        margin-right: auto !important
+
+      //&:last-child
+      //  margin-right: -0.5 * $islands_s
+
+      //&:first-child
+      //  margin-left: -0.5 * $islands_s
 
   &._theme-normal
     &_size-s

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { xv } from 'context';
 import { PropTypes } from 'react';
 import { view } from 'xblocks-core';
@@ -21,30 +22,33 @@ export default xv.Select = view.register('xb-select', [
         mixins: [ PureRenderMixin ],
 
         propTypes: {
-            autocapitalize:   PropTypes.oneOf([ 'on', 'off' ]),
-            autocomplete:     PropTypes.oneOf([ 'on', 'off' ]),
-            autocorrect:      PropTypes.oneOf([ 'on', 'off' ]),
-            autofocus:        PropTypes.bool,
-            form:             PropTypes.string,
-            name:             PropTypes.string,
-            required:         PropTypes.bool,
-            size:             PropTypes.string,
-            theme:            PropTypes.string
+            autofocus: PropTypes.bool,
+            form: PropTypes.string,
+            name: PropTypes.string,
+            required: PropTypes.bool,
+            theme: PropTypes.string
         },
 
         getDefaultProps: function () {
             return {
                 autofocus: false,
-                disabled:  false,
-                required:  false,
-                tabindex:  '0'
+                disabled: false,
+                required: false,
+                tabindex: '0'
             };
         },
 
         getInitialState: function () {
             return {
-                focused: false
+                focused: false,
+                selected: []
             };
+        },
+
+        componentWillMount: function () {
+            this.setState({
+                selected: _.get(this, 'props._container.selectedObjects', [])
+            });
         },
 
         _onFocus: function () {
@@ -78,14 +82,16 @@ export default xv.Select = view.register('xb-select', [
                 'xb-ico-type': 'dropdown'
             };
 
+            const label = this.state.selected.map((item, key) => (key && ', ' || '') + item.label).join('');
+
             return (
                 <div className={classes}
                     tabIndex={tabIndex}
                     onBlur={this._onBlur}
                     onFocus={this._onFocus}>
 
-                    <xb-button ref={(ref) => this._contentNode = ref} {...attrs}>
-                        Выбранное значение
+                    <xb-button {...attrs}>
+                        {label}
                     </xb-button>
                 </div>
             );

@@ -50,6 +50,16 @@ export default xb.Button = create('xb-button', [
         prototype: Object.create(HTMLInputElement.prototype),
 
         accessors: {
+            /*
+            style: {
+                get: function () {
+                    return {
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                    };
+                }
+            },
+            */
+
             defaultValue: {
                 get: function () {
                     var type = this.attrs.type;

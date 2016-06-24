@@ -40,6 +40,7 @@ export default xb.Menu = create('xb-menu', [
                 });
 
                 const component = this.getComponent();
+
                 if (component) {
                     // check show scroll navigator after open menu
                     component.afterOpen(::this._afterOpen);
@@ -50,9 +51,11 @@ export default xb.Menu = create('xb-menu', [
             },
 
             'xb-close': function () {
-                if (this[ ConstantMenu.TABLE ]) {
-                    this[ ConstantMenu.TABLE ].destroy();
+                const table = this[ ConstantMenu.TABLE ];
+
+                if (table) {
                     this[ ConstantMenu.TABLE ] = undefined;
+                    table.destroy();
                 }
 
                 this._closeAllSubmenu();
@@ -76,7 +79,6 @@ export default xb.Menu = create('xb-menu', [
          * @lends xb.Menu.prototype
          */
         accessors: {
-
             /**
              * @prop {Object} default setting for the menu
              * @readonly

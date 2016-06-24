@@ -7,9 +7,6 @@
 export default function () {
     return {
         attachment: 'middle center',
-        classes: {
-            element: this.xtagName
-        },
         classPrefix: this.xtagName,
         element: this,
         enabled: false,

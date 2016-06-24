@@ -53,13 +53,13 @@ export default xv.Menuitem = view.register('xb-menuitem', [
                 '_submenu':    this.props.submenu
             });
 
-            let children = [
+            const children = [
                 <span className="_label" key="label">
                     {this.props.label}
                 </span>
             ];
 
-            let icoProps = filterProps(REG_PROPS_ICO, this.props);
+            const icoProps = filterProps(REG_PROPS_ICO, this.props);
 
             if (!_.isEmpty(icoProps) && icoProps.type) {
                 icoProps.key = 'ico';

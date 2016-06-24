@@ -35,12 +35,12 @@ export default view.create({
         if (!_.isEmpty(this.props.ico) && this.props.ico.type) {
             if (!this.props.ico.float || this.props.ico.float === 'left') {
                 children.unshift(
-                    <xb-ico {...this.props.ico} className="_before" key="ico" />
+                    <xb-ico {...this.props.ico} class="_before" key="ico" />
                 );
 
             } else if (this.props.ico.float === 'right') {
                 children.push(
-                    <xb-ico {...this.props.ico} className="_after" key="ico" />
+                    <xb-ico {...this.props.ico} class="_after" key="ico" />
                 );
             }
         }

@@ -10,7 +10,6 @@ import mixinElementMenu from 'mixin/element/menu';
 import mixinElementFocus from 'mixin/element/focus';
 import ConstantMenu from 'constants/menu';
 
-
 /**
  * xb-menu-inline html element
  *
@@ -28,9 +27,21 @@ export default xb.MenuInline = create('xb-menu-inline', [
         prototype: Object.create(HTMLElement.prototype),
 
         events: {
-            'xb-created': onCreated,
+            'xb-created': function () {
+                this[ ConstantMenu.TABLE ] = new TableNavigator(this, {
+                    col: 'xb-menu-inline:not([disabled])',
+                    rowLoop: true,
+                    colLoop: true
+                });
+            },
 
-            'xb-update': onCreated,
+            'xb-destroy': function () {
+                const table = this[ ConstantMenu.TABLE ];
+                if (table) {
+                    this[ ConstantMenu.TABLE ] = undefined;
+                    table.destroy();
+                }
+            },
 
             'blur': function () {
                 if (!this.hasOpenSubmenu) {
@@ -49,15 +60,3 @@ export default xb.MenuInline = create('xb-menu-inline', [
         }
     }
 ]);
-
-function onCreated() {
-    if (this[ ConstantMenu.TABLE ]) {
-        this[ ConstantMenu.TABLE ].destroy();
-    }
-
-    this[ ConstantMenu.TABLE ] = new TableNavigator(this, {
-        col: 'xb-menu-inline:not([disabled])',
-        rowLoop: true,
-        colLoop: true
-    });
-}

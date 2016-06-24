@@ -49,7 +49,7 @@ export default xv.Popup = view.register('xb-popup', [
         },
 
         render: function () {
-            var children = [
+            const children = [
                 <div key="content"
                     className="_content"
                     data-xb-content={this.props._uid}
@@ -57,8 +57,8 @@ export default xv.Popup = view.register('xb-popup', [
             ];
 
             children.unshift(this.template('xb-popup-title', {
-                'key': 'title',
-                'className': '_title'
+                key: 'title',
+                className: '_title'
             }));
 
             if (this.props.close) {
@@ -73,7 +73,7 @@ export default xv.Popup = view.register('xb-popup', [
             }));
 
             const classes = classnames({
-                '_popup': true,
+                'xb-popup': true,
                 [ `_theme-${this.props.theme}` ]: Boolean(this.props.theme)
             });
 
