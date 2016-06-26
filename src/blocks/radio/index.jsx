@@ -37,7 +37,6 @@ export default xv.Radio = view.register('xb-radio', [
             return {
                 autofocus:    false,
                 checked:      false,
-                children:     '',
                 disabled:     false,
                 required:     false,
                 size:         'm',
@@ -105,8 +104,8 @@ export default xv.Radio = view.register('xb-radio', [
                     <span className="_view">
                         <span className="_icon">{String.fromCharCode(160)}</span>
                     </span>
-                    <span className="_label" data-xb-content={this.props._uid}>
-                        {this.props.children}
+                    <span className="_label">
+                        {this.context.content()}
                     </span>
                 </label>
             );
