@@ -50,7 +50,7 @@ export default xb.Button = create('xb-button', [
         prototype: Object.create(HTMLInputElement.prototype),
 
         accessors: {
-            style: {
+            componentStyle: {
                 get: function () {
                     return {
                         [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')

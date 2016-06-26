@@ -2,40 +2,7 @@
 
 xb-menu-inline
   skin: xb-inline-block
-
-.xb-menu-inline
-  skin: v3-menu (_size large)
-  overflow: hidden
-  padding: 0
   outline: none
-  box-shadow: 0 0 0 1px rgba(#000, 0.1)
-
-  touch-action: none
-  -webkit-touch-callout: none
-  touch-callout: none
-  user-select: none
-  text-size-adjust: none
-
-  &:before,
-  &:after
-    margin: 0
-    display: none
 
   &:focus
     box-shadow: 0 0 0 1px rgba(#000, 0.2)
-
-  & > ._content
-    skin: xb-scroll-x 18px
-
-    & > xb-menuitem
-      &:first-child
-        margin-top: ($islands_s / 2)
-
-      &:last-child
-        margin-bottom: ($islands_s / 2)
-
-  & > ._scroll-top
-    skin: xb-scroll-control-top
-
-  & > ._scroll-bottom
-    skin: xb-scroll-control-bottom

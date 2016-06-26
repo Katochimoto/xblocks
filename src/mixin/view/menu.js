@@ -192,7 +192,7 @@ export default function (tagName) {
             };
 
             return (
-                <div className={classes} tabIndex="0">
+                <div className={classes}>
                     <div style={scrollTopStyle}
                         className="_scroll-top"
                         onMouseEnter={this._onMouseEnterTop}
@@ -202,9 +202,10 @@ export default function (tagName) {
                         style={contentStyle}
                         className="_content"
                         onScroll={this._onScroll}
-                        onWheel={this._onWheel}
-                        data-xb-content={this.props._uid}
-                        dangerouslySetInnerHTML={{ __html: this.props.children }} />
+                        onWheel={this._onWheel}>
+
+                        {this.context.content(<div/>)}
+                    </div>
 
                     <div style={scrollBottomStyle}
                         className="_scroll-bottom"

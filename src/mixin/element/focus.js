@@ -25,13 +25,23 @@
  * @type {Object}
  */
 export default {
+    lifecycle: {
+        created: function () {
+            const tabindex = this.getAttribute('tabindex');
+            if (tabindex === null && !this.hasAttribute('disabled')) {
+                this.setAttribute('tabindex', '0');
+            }
+        }
+    }
+    /*
     methods: {
         focus: function () {
-            this.firstChild.focus();
+            _.invoke(ReactDOM.findDOMNode(this.getComponent()), 'focus');
         },
 
         blur: function () {
-            this.firstChild.blur();
+            _.invoke(ReactDOM.findDOMNode(this.getComponent()), 'blur');
         }
     }
+    */
 };

@@ -78,6 +78,20 @@ export default xb.Menu = create('xb-menu', [
          * @lends xb.Menu.prototype
          */
         accessors: {
+            componentStyle: {
+                get: function () {
+                    return {
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                    };
+                }
+            },
+
+            isShadowSupported: {
+                get: function () {
+                    return true;
+                }
+            },
+
             /**
              * @prop {Object} default setting for the menu
              * @readonly

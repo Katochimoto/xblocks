@@ -50,6 +50,25 @@ export default xb.MenuInline = create('xb-menu-inline', [
             }
         },
 
+        /**
+         * @lends xb.MenuInline.prototype
+         */
+        accessors: {
+            componentStyle: {
+                get: function () {
+                    return {
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                    };
+                }
+            },
+
+            isShadowSupported: {
+                get: function () {
+                    return true;
+                }
+            }
+        },
+
         methods: {
             open: _.noop,
 
