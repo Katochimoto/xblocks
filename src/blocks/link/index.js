@@ -18,6 +18,25 @@ export default xb.Link = create('xb-link', [
     mixinFocus,
 
     {
-        prototype: Object.create(HTMLAnchorElement.prototype)
+        prototype: Object.create(HTMLAnchorElement.prototype),
+
+        /**
+         * @lends xb.Link.prototype
+         */
+        accessors: {
+            componentStyle: {
+                get: function () {
+                    return {
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                    };
+                }
+            },
+
+            isShadowSupported: {
+                get: function () {
+                    return true;
+                }
+            }
+        }
     }
 ]);
