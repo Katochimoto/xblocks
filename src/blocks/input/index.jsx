@@ -76,12 +76,6 @@ export default xv.Input = view.register('xb-input', [
             this.refs.controller.dispatchEventToggleHint('', this.props.value);
         },
 
-        componentWillReceiveProps: function (nextProps) {
-            if (nextProps.hasOwnProperty('value')) {
-                this.setState({ value: nextProps.value });
-            }
-        },
-
         componentDidUpdate: function () {
             this.context.container[ ConstantInput.VALUE ] = this.state.value;
         },

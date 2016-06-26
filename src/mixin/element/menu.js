@@ -173,7 +173,7 @@ export default {
             const component = this.getComponent();
 
             if (component) {
-                component.setState({ scrollIntoItem: menuitem });
+                component.scrollIntoItem(menuitem);
             }
         },
 

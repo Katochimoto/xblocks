@@ -25,7 +25,6 @@ export default xv.Select = view.register('xb-select', [
             form: PropTypes.string,
             name: PropTypes.string,
             required: PropTypes.bool,
-            selected: PropTypes.array,
             theme: PropTypes.string
         },
 
@@ -34,7 +33,6 @@ export default xv.Select = view.register('xb-select', [
                 autofocus: false,
                 disabled: false,
                 required: false,
-                selected: [],
                 tabindex: '0'
             };
         },
@@ -42,7 +40,7 @@ export default xv.Select = view.register('xb-select', [
         getInitialState: function () {
             return {
                 focused: false,
-                selected: this.props.selected
+                selected: []
             };
         },
 
@@ -50,12 +48,6 @@ export default xv.Select = view.register('xb-select', [
             this.setState({
                 selected: this.context.container.selectedObjects
             });
-        },
-
-        componentWillReceiveProps: function (nextProps) {
-            if (nextProps.selected) {
-                this.setState({ selected: nextProps.selected });
-            }
         },
 
         _onFocus: function () {

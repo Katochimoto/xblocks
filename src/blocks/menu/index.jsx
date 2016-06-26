@@ -31,6 +31,10 @@ export default xv.Menu = view.register('xb-menu', [
             return {
                 size: ''
             };
+        },
+
+        afterOpen: function (callback) {
+            this._updateMaxHeight(this.props.size, callback);
         }
     }
 ]);

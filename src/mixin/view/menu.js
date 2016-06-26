@@ -31,15 +31,8 @@ export default function (tagName) {
         },
 
         componentWillReceiveProps: function (nextProps) {
-            const needUpdateMaxHeight = (nextProps.size !== this.props.size) ||
-                (nextProps.opened && !this.props.opened);
-
-            if (needUpdateMaxHeight) {
-                this._updateMaxHeight(_.get(nextProps, 'size', this.props.size), nextProps.onAfterOpen);
-            }
-
-            if (nextProps.scrollIntoItem) {
-                this._scrollIntoItem(nextProps.scrollIntoItem);
+            if (nextProps.size !== this.props.size) {
+                this._updateMaxHeight(nextProps.size);
             }
         },
 
@@ -160,7 +153,7 @@ export default function (tagName) {
         /**
          * @param {xb.Menuitem} menuitem
          */
-        _scrollIntoItem: function (menuitem) {
+        scrollIntoItem: function (menuitem) {
             var content = this._contentNode;
             var rectContent = content.getBoundingClientRect();
             var rectMenuitem = menuitem.getBoundingClientRect();

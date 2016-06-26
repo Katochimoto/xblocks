@@ -42,7 +42,7 @@ export default xb.Menu = create('xb-menu', [
                 const component = this.getComponent();
 
                 if (component) {
-                    component.setState({ opened: true, onAfterOpen: ::this._afterOpen });
+                    component.afterOpen(::this._afterOpen);
 
                 } else {
                     this._afterOpen();
@@ -55,12 +55,6 @@ export default xb.Menu = create('xb-menu', [
                 if (table) {
                     this[ ConstantMenu.TABLE ] = undefined;
                     table.destroy();
-                }
-
-                const component = this.getComponent();
-
-                if (component) {
-                    component.setState({ opened: false, onAfterOpen: undefined });
                 }
 
                 this._closeAllSubmenu();

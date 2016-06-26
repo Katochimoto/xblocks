@@ -103,7 +103,7 @@ export default xv.Button = view.register('xb-button', [
             const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
             const type = this.props.type;
             const content = (
-                <Content key="content" _uid={this.props._uid} ico={icoProps} />
+                <Content key="content" ico={icoProps} />
             );
 
             if (type === 'link') {
