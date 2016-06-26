@@ -1,3 +1,7 @@
+import Symbol from 'es6-symbol';
+
+const TABINDEX = Symbol('xblocks-tabindex');
+
 /**
  * Focus element interface
  *
@@ -30,6 +34,18 @@ export default {
             const tabindex = this.getAttribute('tabindex');
             if (tabindex === null && !this.hasAttribute('disabled')) {
                 this.setAttribute('tabindex', '0');
+            }
+        },
+
+        attributeChanged: function (attrName, oldValue, newValue) {
+            if (attrName === 'disabled') {
+                if (newValue === null) {
+                    this.setAttribute('tabindex', this[ TABINDEX ] !== null ? this[ TABINDEX ] : '0');
+
+                } else {
+                    this[ TABINDEX ] = this.getAttribute('tabindex');
+                    this.setAttribute('tabindex', '-1');
+                }
             }
         }
     }
