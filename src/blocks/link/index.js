@@ -3,6 +3,7 @@ import './index.jsx';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import mixinDisabled from 'mixin/element/disabled';
+import mixinFocus from 'mixin/element/focus';
 
 /**
  * xb-link html element
@@ -14,6 +15,7 @@ import mixinDisabled from 'mixin/element/disabled';
  */
 export default xb.Link = create('xb-link', [
     mixinDisabled,
+    mixinFocus,
 
     {
         prototype: Object.create(HTMLAnchorElement.prototype)

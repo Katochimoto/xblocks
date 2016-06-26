@@ -31,7 +31,7 @@ export default xv.Link = view.register('xb-link', [
         getDefaultProps: function () {
             return {
                 disabled: false,
-                tabindex: '1',
+                // tabindex: '1',
                 target:   '_self',
                 theme:    'normal'
             };
@@ -44,19 +44,15 @@ export default xv.Link = view.register('xb-link', [
                 [ `_theme-${this.props.theme}` ]: true
             });
 
-            const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
-
-            const content = this.props.value || this.props.children;
+            // const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 
             return (
                 <a name={this.props.name}
                     href={this.props.href}
                     target={this.props.target}
-                    tabIndex={tabIndex}
-                    className={classes}
-                    data-xb-content={this.props._uid}>
+                    className={classes}>
 
-                    {content}
+                    {this.context.content()}
                 </a>
             );
         }
