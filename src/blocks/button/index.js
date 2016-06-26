@@ -50,7 +50,6 @@ export default xb.Button = create('xb-button', [
         prototype: Object.create(HTMLInputElement.prototype),
 
         accessors: {
-            /*
             style: {
                 get: function () {
                     return {
@@ -58,7 +57,12 @@ export default xb.Button = create('xb-button', [
                     };
                 }
             },
-            */
+
+            isShadowSupported: {
+                get: function () {
+                    return false;
+                }
+            },
 
             defaultValue: {
                 get: function () {

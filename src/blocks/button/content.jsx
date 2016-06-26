@@ -19,18 +19,13 @@ export default view.create({
     },
 
     render: function () {
-        var children = [];
+        const children = [];
 
-        if (this.props.children) {
-            children.push(
-                <span className="_text"
-                    key="text"
-                    data-xb-content={this.props._uid}>
-
-                    {this.props.children}
-                </span>
-            );
-        }
+        children.push(
+            <span className="_text" key="text">
+                {this.context.content()}
+            </span>
+        );
 
         if (!_.isEmpty(this.props.ico) && this.props.ico.type) {
             if (!this.props.ico.float || this.props.ico.float === 'left') {

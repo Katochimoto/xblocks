@@ -44,7 +44,6 @@ export default xv.Button = view.register('xb-button', [
             return {
                 'autofocus':    false,
                 'checked':      false,
-                'children':     String.fromCharCode(160),
                 'disabled':     false,
                 'multiple':     false,
                 'required':     false,
@@ -70,18 +69,18 @@ export default xv.Button = view.register('xb-button', [
 
         componentWillUpdate: function (nextProps, nextState) {
             if (nextProps.type === 'radio' && nextState.checked) {
-                resetLastRadioChecked(this.container(), nextProps.name);
+                resetLastRadioChecked(this.context.container, nextProps.name);
             }
         },
 
         componentWillMount: function () {
             if (this.props.type === 'radio' && this.state.checked) {
-                resetLastRadioChecked(this.container(), this.props.name);
+                resetLastRadioChecked(this.context.container, this.props.name);
             }
         },
 
         _onChange: function (event) {
-            this.container().checked = event.target.checked;
+            this.context.container.checked = event.target.checked;
         },
 
         _onFocus: function () {
@@ -104,9 +103,7 @@ export default xv.Button = view.register('xb-button', [
             const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
             const type = this.props.type;
             const content = (
-                <Content key="content" _uid={this.props._uid} ico={icoProps}>
-                    {this.props.children}
-                </Content>
+                <Content key="content" _uid={this.props._uid} ico={icoProps} />
             );
 
             if (type === 'link') {

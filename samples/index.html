@@ -20,7 +20,11 @@
     <script src="../dist/xblocks.js"></script>
 </head>
 <body>
-    <xb-button>1</xb-button>
+    <xb-input></xb-input>
+
+    <xb-button>
+        123
+    </xb-button>
 
     <xb-select multiple>
         <xb-menuitem label="label 1" value="1">
@@ -36,7 +40,19 @@
         <xb-menuitem label="label 6" value="6"></xb-menuitem>
     </xb-select>
 
-<!--
+    <xb-menu-inline selectable>
+        <xb-menuitem label="label 1">
+            <xb-menuitem label="label 1.1" value="1.1" selected></xb-menuitem>
+            <xb-menuitem label="label 1.2" value="1.2"></xb-menuitem>
+            <xb-menuitem label="label 1.3" value="1.3"></xb-menuitem>
+            <xb-menuitem label="label 1.4" value="1.4"></xb-menuitem>
+        </xb-menuitem>
+        <xb-menuitem label="label 2" value="2" selected></xb-menuitem>
+        <xb-menuitem label="label 3" value="3"></xb-menuitem>
+        <xb-menuitem label="label 4" value="4"></xb-menuitem>
+        <xb-menuitem label="label 5" value="5"></xb-menuitem>
+    </xb-menu-inline>
+
     <xb-button type="radio" name="bt3" value="1">radio 1</xb-button>
     <xb-button type="radio" name="bt3" value="2" checked>radio 2</xb-button>
     <xb-button type="checkbox" name="bt1" value="1">checkbox 1</xb-button>
@@ -46,8 +62,7 @@
     <xb-radio name="radio" value="2">radio 2</xb-radio>
     <xb-radio name="radio" value="3" disabled>radio 3</xb-radio>
 
-
-    <xb-menu id="menu1" selectable>
+    <xb-menu id="menu1" selectable size="3">
         <xb-menuitem label="label 1">
             <xb-menuitem label="label 1.1" value="1.1" selected></xb-menuitem>
             <xb-menuitem label="label 1.2" value="1.2"></xb-menuitem>
@@ -59,6 +74,7 @@
         <xb-menuitem label="label 4" value="4"></xb-menuitem>
         <xb-menuitem label="label 5" value="5"></xb-menuitem>
     </xb-menu>
+
 
     <select name="hero" id="select1">
         <option value="t1">Гавейн</option>
@@ -74,6 +90,6 @@
             document.getElementById('menu1').open();
         }, false);
     </script>
--->
+
 </body>
 </html>

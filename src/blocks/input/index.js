@@ -1,11 +1,13 @@
 import './index.styl';
 import './index.jsx';
+
+import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import replaceTextSelection from 'dom/replaceTextSelection';
 import mixinDisabled from 'mixin/element/disabled';
 import mixinFocus from 'mixin/element/focus';
-import inputValueState from 'mixin/element/inputValueState';
+import ConstantInput from 'constants/input';
 
 /**
  * xb-input html element
@@ -34,12 +36,10 @@ import inputValueState from 'mixin/element/inputValueState';
  * @memberof xb
  * @augments HTMLInputElement
  * @mixes xblocks.mixin.eDisabled
- * @mixes xblocks.mixin.eInputValueState
  * @mixes xblocks.mixin.eFocus
  */
 export default xb.Input = create('xb-input', [
     mixinDisabled,
-    inputValueState,
     mixinFocus,
 
     {
@@ -97,6 +97,39 @@ export default xb.Input = create('xb-input', [
 
             'xb-speech-recognition-error': function () {
                 // console.log(event);
+            }
+        },
+
+        accessors: {
+
+            /**
+             * @prop {string} value
+             */
+            value: {
+                attribute: {
+                    name: 'value'
+                },
+
+                get: function () {
+                    return String(_.get(this, ConstantInput.VALUE, this.getAttribute('value') || this.defaultValue || ''));
+                },
+
+                set: function (value) {
+                    const component = this.getComponent();
+
+                    if (component) {
+                        component.setState({ value: String(value) });
+                    }
+                }
+            },
+
+            /**
+             * @prop {string} defaultValue
+             */
+            defaultValue: {
+                get: function () {
+                    return '';
+                }
             }
         }
     }

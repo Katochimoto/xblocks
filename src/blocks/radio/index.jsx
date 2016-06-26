@@ -60,18 +60,18 @@ export default xv.Radio = view.register('xb-radio', [
 
         componentWillUpdate: function (nextProps, nextState) {
             if (nextState.checked) {
-                resetLastRadioChecked(this.container(), nextProps.name);
+                resetLastRadioChecked(this.context.container, nextProps.name);
             }
         },
 
         componentWillMount: function () {
             if (this.state.checked) {
-                resetLastRadioChecked(this.container(), this.props.name);
+                resetLastRadioChecked(this.context.container, this.props.name);
             }
         },
 
         _onChange: function (event) {
-            this.container().checked = event.target.checked;
+            this.context.container.checked = event.target.checked;
         },
 
         render: function () {

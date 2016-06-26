@@ -31,8 +31,15 @@ export default function (tagName) {
         },
 
         componentWillReceiveProps: function (nextProps) {
-            if (nextProps.size !== this.props.size) {
-                this._updateMaxHeight(nextProps.size);
+            const needUpdateMaxHeight = (nextProps.size !== this.props.size) ||
+                (nextProps.opened && !this.props.opened);
+
+            if (needUpdateMaxHeight) {
+                this._updateMaxHeight(_.get(nextProps, 'size', this.props.size), nextProps.onAfterOpen);
+            }
+
+            if (nextProps.scrollIntoItem) {
+                this._scrollIntoItem(nextProps.scrollIntoItem);
             }
         },
 
@@ -73,7 +80,7 @@ export default function (tagName) {
                 this._onMouseLeaveBottom();
             }
 
-            if (callback) {
+            if (_.isFunction(callback)) {
                 callback();
             }
         },
@@ -153,7 +160,7 @@ export default function (tagName) {
         /**
          * @param {xb.Menuitem} menuitem
          */
-        scrollIntoItem: function (menuitem) {
+        _scrollIntoItem: function (menuitem) {
             var content = this._contentNode;
             var rectContent = content.getBoundingClientRect();
             var rectMenuitem = menuitem.getBoundingClientRect();

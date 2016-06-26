@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { xv } from 'context';
 import { PropTypes } from 'react';
 import { view } from 'xblocks-core';
@@ -26,6 +25,7 @@ export default xv.Select = view.register('xb-select', [
             form: PropTypes.string,
             name: PropTypes.string,
             required: PropTypes.bool,
+            selected: PropTypes.array,
             theme: PropTypes.string
         },
 
@@ -34,6 +34,7 @@ export default xv.Select = view.register('xb-select', [
                 autofocus: false,
                 disabled: false,
                 required: false,
+                selected: [],
                 tabindex: '0'
             };
         },
@@ -41,14 +42,20 @@ export default xv.Select = view.register('xb-select', [
         getInitialState: function () {
             return {
                 focused: false,
-                selected: []
+                selected: this.props.selected
             };
         },
 
         componentWillMount: function () {
             this.setState({
-                selected: _.get(this, 'props._container.selectedObjects', [])
+                selected: this.context.container.selectedObjects
             });
+        },
+
+        componentWillReceiveProps: function (nextProps) {
+            if (nextProps.selected) {
+                this.setState({ selected: nextProps.selected });
+            }
         },
 
         _onFocus: function () {

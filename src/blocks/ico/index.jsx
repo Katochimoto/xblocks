@@ -15,7 +15,6 @@ import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
  */
 export default xv.Ico = view.register('xb-ico', [
     mixinViewCommonAttrs,
-
     {
         displayName: 'xb-ico',
 

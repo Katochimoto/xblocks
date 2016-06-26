@@ -6,6 +6,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import mixinViewCommonAttrs from 'mixin/view/commonAttrs';
 import filterProps from 'utils/filterProps';
 import exportPropTypes from 'utils/exportPropTypes';
+import ConstantInput from 'constants/input';
 
 import Controller from './controller.jsx';
 
@@ -66,7 +67,7 @@ export default xv.Input = view.register('xb-input', [
 
         getInitialState: function () {
             return {
-                'value': this.props.value
+                value: this.props.value
             };
         },
 
@@ -75,15 +76,23 @@ export default xv.Input = view.register('xb-input', [
             this.refs.controller.dispatchEventToggleHint('', this.props.value);
         },
 
+        componentWillReceiveProps: function (nextProps) {
+            if (nextProps.hasOwnProperty('value')) {
+                this.setState({ value: nextProps.value });
+            }
+        },
+
+        componentDidUpdate: function () {
+            this.context.container[ ConstantInput.VALUE ] = this.state.value;
+        },
+
         /**
          * Remember current value in state
          * @param {Event} event
          * @private
          */
         onChange: function (event) {
-            this.setState({
-                'value': event.target.value
-            });
+            this.setState({ value: event.target.value });
         },
 
         /**
@@ -100,9 +109,7 @@ export default xv.Input = view.register('xb-input', [
          * @private
          */
         onClickReset: function () {
-            this.setState({
-                'value': ''
-            });
+            this.setState({ value: '' });
         },
 
         /**
