@@ -6,7 +6,7 @@ import { create } from 'xblocks-core';
 import mixinElementDisabled from 'mixin/element/disabled';
 import mixinElementChecked from 'mixin/element/checked';
 import mixinElementInputValueProps from 'mixin/element/inputValueProps';
-import mixinElementFocus from 'mixin/element/focus';
+import mixinFocusComponent from 'mixin/element/focusComponent';
 
 /**
  * xb-radio html element
@@ -33,7 +33,7 @@ export default xb.Radio = create('xb-radio', [
     mixinElementDisabled,
     mixinElementChecked,
     mixinElementInputValueProps,
-    mixinElementFocus,
+    mixinFocusComponent,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

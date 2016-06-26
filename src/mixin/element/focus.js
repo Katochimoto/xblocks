@@ -49,15 +49,4 @@ export default {
             }
         }
     }
-    /*
-    methods: {
-        focus: function () {
-            _.invoke(ReactDOM.findDOMNode(this.getComponent()), 'focus');
-        },
-
-        blur: function () {
-            _.invoke(ReactDOM.findDOMNode(this.getComponent()), 'blur');
-        }
-    }
-    */
 };

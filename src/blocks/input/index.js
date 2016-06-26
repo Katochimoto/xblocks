@@ -6,7 +6,7 @@ import { xb } from 'context';
 import { create } from 'xblocks-core';
 import replaceTextSelection from 'dom/replaceTextSelection';
 import mixinDisabled from 'mixin/element/disabled';
-import mixinFocus from 'mixin/element/focus';
+import mixinFocusComponent from 'mixin/element/focusComponent';
 import ConstantInput from 'constants/input';
 
 /**
@@ -40,7 +40,7 @@ import ConstantInput from 'constants/input';
  */
 export default xb.Input = create('xb-input', [
     mixinDisabled,
-    mixinFocus,
+    mixinFocusComponent,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),

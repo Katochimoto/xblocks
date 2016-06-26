@@ -9,7 +9,7 @@ import ConstantSelect from 'constants/select';
 import initialDefinitionSelected from 'utils/initialDefinitionSelected';
 import removeChild from 'dom/removeChild';
 import mixinElementDisabled from 'mixin/element/disabled';
-import mixinElementFocus from 'mixin/element/focus';
+import mixinFocusComponent from 'mixin/element/focusComponent';
 
 const MENU_ATTRS = {
     'attachment': 'top left',
@@ -32,7 +32,7 @@ const MENU_ATTRS = {
  */
 export default xb.Select = create('xb-select', [
     mixinElementDisabled,
-    mixinElementFocus,
+    mixinFocusComponent,
 
     {
         prototype: Object.create(HTMLElement.prototype),

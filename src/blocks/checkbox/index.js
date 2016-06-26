@@ -6,7 +6,7 @@ import { create } from 'xblocks-core';
 import mixinDisabled from 'mixin/element/disabled';
 import mixinChecked from 'mixin/element/checked';
 import mixinInputValueProps from 'mixin/element/inputValueProps';
-import mixinFocus from 'mixin/element/focus';
+import mixinFocusComponent from 'mixin/element/focusComponent';
 
 /**
  * xb-checkbox html element
@@ -33,7 +33,7 @@ export default xb.Checkbox = create('xb-checkbox', [
     mixinDisabled,
     mixinChecked,
     mixinInputValueProps,
-    mixinFocus,
+    mixinFocusComponent,
 
     {
         prototype: Object.create(HTMLInputElement.prototype),
