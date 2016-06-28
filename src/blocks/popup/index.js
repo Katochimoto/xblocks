@@ -8,7 +8,6 @@ import Tether from 'tether';
 import context from 'context';
 import popupDefaultOptions from 'utils/popupDefaultOptions';
 import immediate from 'setimmediate2/src';
-import mixinElementFocus from 'mixin/element/focus';
 import ConstantPopup from 'constants/popup';
 
 /**
@@ -67,13 +66,16 @@ const ATTRS_ALIGN = {
  * @class xb.Popup
  * @augments HTMLElement
  * @memberof xb
- * @mixes .mixin.eFocus
  */
 export default xb.Popup = create('xb-popup', [
-    mixinElementFocus,
-
     {
         prototype: Object.create(HTMLElement.prototype),
+
+        lifecycle: {
+            created: function () {
+                this.setAttribute('tabindex', '0');
+            }
+        },
 
         events: {
             'jsx-click-close': function (event) {

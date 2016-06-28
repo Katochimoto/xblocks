@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
  *
  * @example
  * import { create } from 'xblocks-core';
- * import mixinFocus from 'mixin/element/focus';
+ * import mixinFocus from 'mixin/element/focusComponent';
  *
  * create('xb-button', [
  *     mixinFocus,
