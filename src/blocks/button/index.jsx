@@ -24,6 +24,22 @@ export default xv.Button = view.register('xb-button', [
 
         mixins: [ PureRenderMixin ],
 
+        /**
+         * @prop {string} [size=m] size, possible values: s|m|l|xl
+         * @prop {string} [theme=normal] normal|action|dark|flying|pseudo-inverted|pseudo|promo
+         * @prop {string} [type=button] label|inline|link|file|button|submit|checkbox|radio
+         * @prop {string} [target] _blank|_self|_parent|_top
+         * @prop {string} [value]
+         * @prop {string} [href]
+         * @prop {string} [name]
+         * @prop {string} [form]
+         * @prop {string} [for]
+         * @prop {boolean} [multiple=false]
+         * @prop {boolean} [autofocus=false]
+         * @prop {boolean} [disabled=false]
+         * @prop {boolean} [checked=false]
+         * @prop {boolean} [required=false]
+         */
         propTypes: {
             'autofocus':    PropTypes.bool,
             'checked':      PropTypes.bool,
@@ -48,7 +64,6 @@ export default xv.Button = view.register('xb-button', [
                 'multiple':     false,
                 'required':     false,
                 'size':         'm',
-                'tabindex':     '0',
                 'theme':        'normal',
                 'type':         'button'
             };
@@ -94,13 +109,11 @@ export default xv.Button = view.register('xb-button', [
         render: function () {
             const classes = classnames({
                 'xb-button': true,
-                '_disabled': this.props.disabled,
                 '_focused': this.state.focused,
                 [ `_theme-${this.props.theme}_size-${this.props.size}` ]: true
             });
 
             const icoProps = filterProps(/^xb-ico-/, this.props);
-            const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
             const type = this.props.type;
             const content = (
                 <Content key="content" ico={icoProps} />
@@ -112,8 +125,7 @@ export default xv.Button = view.register('xb-button', [
                         href={this.props.href}
                         name={this.props.name}
                         target={this.props.target}
-                        title={this.props.title}
-                        tabIndex={tabIndex}>
+                        title={this.props.title}>
 
                         {content}
                     </a>
@@ -131,8 +143,7 @@ export default xv.Button = view.register('xb-button', [
                                     disabled={this.props.disabled}
                                     multiple={this.props.multiple}
                                     autoFocus={this.props.autofocus}
-                                    form={this.props.form}
-                                    tabIndex={tabIndex}/>
+                                    form={this.props.form}/>
 
                                 <span className="_xb-file-intruder-focus" />
                             </span>
@@ -158,7 +169,6 @@ export default xv.Button = view.register('xb-button', [
                             onFocus={this._onFocus}
                             readOnly={true}
                             required={this.props.required}
-                            tabIndex={tabIndex}
                             type={type}
                             value={this.props.value} />
                     );
@@ -173,8 +183,7 @@ export default xv.Button = view.register('xb-button', [
                                     type="button"
                                     form={this.props.form}
                                     disabled={this.props.disabled}
-                                    autoFocus={this.props.autofocus}
-                                    tabIndex={tabIndex}/>
+                                    autoFocus={this.props.autofocus}/>
 
                                 <span className="_xb-file-intruder-focus" />
                             </span>
@@ -192,7 +201,7 @@ export default xv.Button = view.register('xb-button', [
 
             } else if (type === 'inline') {
                 return (
-                    <span className={classes} tabIndex={tabIndex}>
+                    <span className={classes}>
                         {content}
                     </span>
                 );
@@ -205,7 +214,7 @@ export default xv.Button = view.register('xb-button', [
                         title={this.props.title}
                         name={this.props.name}
                         value={this.props.value}
-                        tabIndex={tabIndex}
+                        tabIndex="-1"
                         disabled={this.props.disabled}
                         autoFocus={this.props.autofocus}>
 

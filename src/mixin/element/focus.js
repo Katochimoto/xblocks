@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Symbol from 'es6-symbol';
 
 const TABINDEX = Symbol('xblocks-tabindex');
@@ -12,9 +13,6 @@ const TABINDEX = Symbol('xblocks-tabindex');
  * create('xb-button', [
  *     mixinFocus,
  *     {
- *         accessors: { ... },
- *         events: { ... },
- *         methods: { ... }
  *         ...
  *     }
  * ]);
@@ -32,8 +30,16 @@ export default {
     lifecycle: {
         created: function () {
             const tabindex = this.getAttribute('tabindex');
-            if (tabindex === null && !this.hasAttribute('disabled')) {
+            const disabled = this.hasAttribute('disabled');
+
+            this[ TABINDEX ] = null;
+
+            if (tabindex === null && !disabled) {
                 this.setAttribute('tabindex', '0');
+
+            } else if (tabindex && disabled) {
+                this[ TABINDEX ] = tabindex;
+                this.setAttribute('tabindex', '-1');
             }
         },
 
@@ -46,7 +52,20 @@ export default {
                     this[ TABINDEX ] = this.getAttribute('tabindex');
                     this.setAttribute('tabindex', '-1');
                 }
+
+            } else if (attrName === 'tabindex') {
+                this[ TABINDEX ] = newValue;
             }
+        }
+    },
+
+    events: {
+        'focus': function () {
+            _.invoke(this.getComponent(), 'setState', { focused: true });
+        },
+
+        'blur': function () {
+            _.invoke(this.getComponent(), 'setState', { focused: false });
         }
     }
 };
