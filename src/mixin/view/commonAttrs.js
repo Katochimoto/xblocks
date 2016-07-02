@@ -10,18 +10,24 @@ import { PropTypes } from 'react';
  * @prop {enum} propTypes.dir
  * @prop {boolean} propTypes.hidden
  * @prop {boolean} propTypes.spellcheck
- * @prop {string} propTypes.tabindex
+ * @prop {string} propTypes.data-xb-tabindex
  * @prop {string} propTypes.title
  */
 export default {
     propTypes: {
-        accesskey:    PropTypes.string,
-        contextmenu:  PropTypes.string,
-        dir:          PropTypes.oneOf([ 'ltr', 'rtl' ]),
-        disabled:     PropTypes.bool,
-        hidden:       PropTypes.bool,
-        spellcheck:   PropTypes.bool,
-        tabindex:     PropTypes.string,
-        title:        PropTypes.string
+        'accesskey': PropTypes.string,
+        'contextmenu': PropTypes.string,
+        'data-xb-tabindex': numberString,
+        'dir': PropTypes.oneOf([ 'ltr', 'rtl' ]),
+        'disabled': PropTypes.bool,
+        'hidden': PropTypes.bool,
+        'spellcheck': PropTypes.bool,
+        'title': PropTypes.string
     }
 };
+
+function numberString(props, propName, componentName) {
+    if (props.hasOwnProperty(propName) && !/^(\-?[0-9])?[0-9]*$/.test(props[ propName ])) {
+        return new Error(`Invalid prop "${propName}" supplied to "${componentName}". Validation failed.`);
+    }
+}

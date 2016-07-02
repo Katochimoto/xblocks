@@ -136,7 +136,7 @@ export default xv.Input = view.register('xb-input', [
 
             var controllerProps = {
                 'autoFocus':    this.props.autofocus,
-                'autocomplete': this.props.autocomplete,
+                'autoComplete': this.props.autocomplete,
                 'autosize':     this.props.autosize,
                 'className':    '_controller',
                 'cols':         this.props.cols,

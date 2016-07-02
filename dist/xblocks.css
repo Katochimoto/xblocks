@@ -1225,14 +1225,6 @@ xb-button *:after {
 xb-button[hidden] {
   display: none;
 }
-xb-button[disabled] {
-  cursor: default !important;
-  opacity: 0.6;
-  pointer-events: none;
-}
-xb-button[disabled] xb-button[disabled] {
-  opacity: 1;
-}
 xb-link {
   display: inline-block;
   position: relative;

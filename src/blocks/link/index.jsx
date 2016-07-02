@@ -22,35 +22,39 @@ export default xv.Link = view.register('xb-link', [
         mixins: [ PureRenderMixin ],
 
         propTypes: {
-            href:     PropTypes.string,
-            name:     PropTypes.string,
-            target:   PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]),
-            theme:    PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ]).isRequired
+            'href': PropTypes.string,
+            'name': PropTypes.string,
+            'rel': PropTypes.string,
+            'target': PropTypes.oneOf([ '_self', '_blank', '_parent', '_top' ]).isRequired,
+            'theme': PropTypes.oneOf([ 'normal', 'outer', 'pseudo', 'empty' ]).isRequired
         },
 
         getDefaultProps: function () {
             return {
-                disabled: false,
-                // tabindex: '1',
-                target:   '_self',
-                theme:    'normal'
+                'data-xb-tabindex': '0',
+                'disabled': false,
+                'rel': 'noopener noreferrer',
+                'target': '_self',
+                'theme': 'normal'
             };
         },
 
         render: function () {
             const classes = classnames({
-                'xb-link':   true,
+                'xb-link': true,
                 '_disabled': this.props.disabled,
                 [ `_theme-${this.props.theme}` ]: true
             });
 
-            // const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
+            const tabIndex = this.props.disabled ? '-1' : this.props[ 'data-xb-tabindex' ];
 
             return (
                 <a name={this.props.name}
                     href={this.props.href}
                     target={this.props.target}
-                    className={classes}>
+                    tabIndex={tabIndex}
+                    className={classes}
+                    rel={this.props.rel}>
 
                     {this.context.content()}
                 </a>

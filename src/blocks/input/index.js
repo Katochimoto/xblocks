@@ -15,7 +15,7 @@ import ConstantInput from 'constants/input';
  * @prop {string} [name]
  * @prop {string} [type=text] text|number|date|datetime|email|month|range|search|tel|time|url|week|color
  * @prop {string} [size=m] s|m|l|xl
- * @prop {string} [autocomplete] on|off
+ * @prop {string} [autoComplete] on|off
  * @prop {string} [rows=4]
  * @prop {string} [cols]
  * @prop {string} [placeholder]

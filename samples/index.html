@@ -24,9 +24,15 @@
 
     <xb-input></xb-input>
 
-    <xb-button tabindex="0">
+    <xb-button>
         123
     </xb-button>
+
+    <script>
+        document.querySelector('xb-button').addEventListener('focus', function (event) {
+            // console.log('>>1', this, event.target);
+        }, false);
+    </script>
 
 <!--
     <xb-select multiple>

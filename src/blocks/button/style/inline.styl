@@ -1,4 +1,4 @@
-@require "../../styl/init"
+@require "../../../styl/init"
 
 stylobate_defaults('skin-islands-v3-button',
   '_reset',
@@ -7,6 +7,7 @@ stylobate_defaults('skin-islands-v3-button',
   '_size' medium,
   '_align' center,
   '_hover' '&:hover',
+  '_focus' '&:focus',
   '_active' '&:active',
   '__content' '& > ._content',
   '__text' '& > ._content > ._text',
@@ -15,39 +16,22 @@ stylobate_defaults('skin-islands-v3-button',
   )
 
 a.xb-button
-  position: relative
   text-decoration: none
 
 .xb-button
-  position: relative
   font-weight: inherit
   width: 100%
-
-  &._focused
-    skin: v3-button_focus
 
   & > ._content
     width: 100%
 
-    & > ._text:not(:empty) + xb-ico,
-    & > xb-ico + ._text:not(:empty)
-      padding-left: 0.5 * $islands_s
-
-  & > ._content
-    & > xb-ico
+    & > ._ico
       line-height: inherit
 
-      &._after
-        margin-left: auto !important
-
-      &._before
-        margin-right: auto !important
-
-      //&:last-child
-      //  margin-right: -0.5 * $islands_s
-
-      //&:first-child
-      //  margin-left: -0.5 * $islands_s
+  & > ._content._empty
+    & > ._ico
+      margin-right: -0.5 * $islands_s !important
+      margin-left: -0.5 * $islands_s !important
 
   & > ._controller
     skin: v3-checkbox__controller
@@ -132,3 +116,9 @@ a.xb-button
 
     &_size-xl
       skin: v3-button (_type clear) (_size extra-large)
+
+  &._focused
+    skin: v3-button_focus
+
+  &._disabled
+    kind: disabled 0.6

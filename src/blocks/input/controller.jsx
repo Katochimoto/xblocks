@@ -10,7 +10,7 @@ export default view.create({
 
     propTypes: {
         'autoFocus':        PropTypes.bool,
-        'autocomplete':     PropTypes.oneOf([ 'on', 'off' ]),
+        'autoComplete':     PropTypes.oneOf([ 'on', 'off' ]),
         'autosize':         PropTypes.bool,
         'className':        PropTypes.string,
         'cols':             PropTypes.string,
@@ -86,7 +86,7 @@ export default view.create({
 
         var props = {
             'autoFocus':    this.props.autoFocus,
-            'autocomplete': this.props.autocomplete,
+            'autoComplete': this.props.autoComplete,
             'className':    this.props.className,
             'disabled':     this.props.disabled,
             'name':         this.props.name,

@@ -1,9 +1,9 @@
-import './index.styl';
+import './style';
 import './index.jsx';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import mixinDisabled from 'mixin/element/disabled';
-import mixinFocus from 'mixin/element/focus';
+import mixinFocusComponent from 'mixin/element/focusComponent';
 
 /**
  * xb-link html element
@@ -15,7 +15,7 @@ import mixinFocus from 'mixin/element/focus';
  */
 export default xb.Link = create('xb-link', [
     mixinDisabled,
-    mixinFocus,
+    mixinFocusComponent,
 
     {
         prototype: Object.create(HTMLAnchorElement.prototype),
@@ -27,7 +27,7 @@ export default xb.Link = create('xb-link', [
             componentStyle: {
                 get: function () {
                     return {
-                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./style/inline.styl')
                     };
                 }
             },

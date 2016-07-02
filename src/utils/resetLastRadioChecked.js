@@ -7,7 +7,7 @@ const CHECKED_CACHE = {};
  */
 export default function (element, name) {
     name = String(name);
-    var lastCheckedElement = CHECKED_CACHE[ name ];
+    const lastCheckedElement = CHECKED_CACHE[ name ];
 
     if (lastCheckedElement && lastCheckedElement !== element) {
         lastCheckedElement.checked = false;
