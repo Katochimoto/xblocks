@@ -83,6 +83,12 @@ var params = {
                 'NODE_ENV': JSON.stringify(nodeEnv)
             }
         }),
+        new webpack.ProvidePlugin({
+            '_': 'lodash',
+            'React': 'react',
+            'ReactDOM': 'react-dom',
+            'ReactDOMServer': 'react-dom/server'
+        }),
         new webpack.optimize.DedupePlugin(),
         new ExtractTextPlugin('[name].css', { 'allChunks': true })
     ],
