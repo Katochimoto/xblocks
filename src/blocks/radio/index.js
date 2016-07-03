@@ -1,6 +1,7 @@
-import './index.styl';
+import './style';
 import './index.jsx';
 
+import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import mixinElementDisabled from 'mixin/element/disabled';
@@ -10,16 +11,6 @@ import mixinFocusComponent from 'mixin/element/focusComponent';
 
 /**
  * xb-radio html element
- *
- * @prop {string} [size=m] size, possible values: s|m
- * @prop {string} [value=on]
- * @prop {string} [name]
- * @prop {string} [form]
- * @prop {string} [for]
- * @prop {boolean} [autofocus=false]
- * @prop {boolean} [disabled=false]
- * @prop {boolean} [checked=false]
- * @prop {boolean} [required=false]
  *
  * @class xb.Radio
  * @memberof xb
@@ -39,10 +30,20 @@ export default xb.Radio = create('xb-radio', [
         prototype: Object.create(HTMLInputElement.prototype),
 
         accessors: {
-            defaultValue: {
+            componentStyle: {
                 get: function () {
-                    return 'on';
+                    return {
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./style/inline.styl')
+                    };
                 }
+            },
+
+            isShadowSupported: {
+                get: _.stubTrue
+            },
+
+            defaultValue: {
+                get: _.constant('on')
             }
         }
     }

@@ -1,4 +1,4 @@
-import './index.styl';
+import './style';
 import './index.jsx';
 import './contextmenu';
 
@@ -81,7 +81,7 @@ export default xb.Menu = create('xb-menu', [
             componentStyle: {
                 get: function () {
                     return {
-                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./style/inline.styl')
                     };
                 }
             },

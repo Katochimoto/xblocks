@@ -115,7 +115,7 @@ export default xv.Button = view.register('xb-button', [
                 [ `_theme-${this.props.theme}_size-${this.props.size}` ]: true
             });
 
-            const tabIndex = this.props.disabled ? '-1' : this.props[ 'data-xb-tabindex' ];
+            const tabIndex = this.getTabIndex();
             const icoProps = filterProps(/^xb-ico-/, this.props);
             const type = this.props.type;
             const content = (

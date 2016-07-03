@@ -27,41 +27,63 @@ export default xv.Input = view.register('xb-input', [
 
         mixins: [ PureRenderMixin ],
 
+        /**
+         * @prop {string} [name]
+         * @prop {string} [type=text] text|number|date|datetime|email|month|range|search|tel|time|url|week|color
+         * @prop {string} [size=m] s|m|l|xl
+         * @prop {string} [autoComplete] on|off
+         * @prop {string} [rows=4]
+         * @prop {string} [cols]
+         * @prop {string} [placeholder]
+         * @prop {string} [value]
+         * @prop {string} [prefix]
+         * @prop {string} [postfix]
+         * @prop {string} [tabindex]
+         * @prop {boolean} [disabled=false]
+         * @prop {boolean} [autosize=false]
+         * @prop {boolean} [multiline=false]
+         * @prop {boolean} [required=false]
+         * @prop {boolean} [readonly=false]
+         * @prop {boolean} [reset=false]
+         * @prop {boolean} [autofocus=false]
+         * @prop {boolean} [ghost=false]
+         */
         propTypes: {
             'autocomplete': PropTypes.oneOf([ 'on', 'off' ]),
-            'autofocus':    PropTypes.bool,
-            'autosize':     PropTypes.bool,
-            'cols':         PropTypes.string,
-            'ghost':        PropTypes.bool,
-            'multiline':    PropTypes.bool,
-            'name':         PropTypes.string,
-            'placeholder':  PropTypes.string,
-            'postfix':      PropTypes.string,
-            'prefix':       PropTypes.string,
-            'readonly':     PropTypes.bool,
-            'required':     PropTypes.bool,
-            'reset':        PropTypes.bool,
-            'rows':         PropTypes.string,
-            'size':         PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]),
-            'type':         PropTypes.oneOf([ 'text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg' ]),
-            'value':        PropTypes.string,
-            'xb-link':      PropTypes.string
+            'autofocus': PropTypes.bool,
+            'autosize': PropTypes.bool,
+            'cols': PropTypes.string,
+            'ghost': PropTypes.bool,
+            'multiline': PropTypes.bool,
+            'name': PropTypes.string,
+            'placeholder': PropTypes.string,
+            'postfix': PropTypes.string,
+            'prefix': PropTypes.string,
+            'readonly': PropTypes.bool,
+            'required': PropTypes.bool,
+            'reset': PropTypes.bool,
+            'rows': PropTypes.string,
+            'size': PropTypes.oneOf([ 's', 'm', 'l', 'xl' ]).isRequired,
+            'type': PropTypes.oneOf([ 'text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg' ]).isRequired,
+            'value': PropTypes.string,
+            'xb-link': PropTypes.string
         },
 
         getDefaultProps: function () {
             return {
-                'autofocus':    false,
-                'autosize':     false,
-                'disabled':     false,
-                'ghost':        false,
-                'multiline':    false,
-                'readonly':     false,
-                'required':     false,
-                'reset':        false,
-                'rows':         '4',
-                'size':         'm',
-                'type':         'text',
-                'value':        undefined
+                'autofocus': false,
+                'autosize': false,
+                'data-xb-tabindex': '0',
+                'disabled': false,
+                'ghost': false,
+                'multiline': false,
+                'readonly': false,
+                'required': false,
+                'reset': false,
+                'rows': '4',
+                'size': 'm',
+                'type': 'text',
+                'value': undefined
             };
         },
 
@@ -73,7 +95,7 @@ export default xv.Input = view.register('xb-input', [
 
         componentDidMount: function () {
             // check show or hide placeholder after mount element
-            this.refs.controller.dispatchEventToggleHint('', this.props.value);
+            this._controller.dispatchEventToggleHint('', this.props.value);
         },
 
         componentDidUpdate: function () {
@@ -95,7 +117,7 @@ export default xv.Input = view.register('xb-input', [
          * @private
          */
         onHintToggle: function (toggle) {
-            this.refs.placeholder.style.visibility = (toggle ? 'inherit' : 'hidden');
+            this._placeholder.style.visibility = (toggle ? 'inherit' : 'hidden');
         },
 
         /**
@@ -123,47 +145,43 @@ export default xv.Input = view.register('xb-input', [
         },
 
         render: function () {
-            var isComplex = this.isComplex();
-            var classes = {
-                'xb-input':     true,
-                '_disabled':    this.props.disabled,
-                '_autosize':    this.props.autosize,
-                '_ghost':       this.props.ghost,
+            const isComplex = this.isComplex();
+            const classes = classnames({
+                'xb-input': true,
+                '_disabled': this.props.disabled,
+                '_autosize': this.props.autosize,
+                '_ghost': this.props.ghost,
                 [ `_${isComplex ? 'complex' : 'simple'}_size-${this.props.size}` ]: true
-            };
+            });
 
-            classes = classnames(classes);
-
-            var controllerProps = {
-                'autoFocus':    this.props.autofocus,
+            const controllerProps = {
+                'autoFocus': this.props.autofocus,
                 'autoComplete': this.props.autocomplete,
-                'autosize':     this.props.autosize,
-                'className':    '_controller',
-                'cols':         this.props.cols,
-                'disabled':     this.props.disabled,
-                'key':          'controller',
-                'multiline':    this.props.multiline,
-                'name':         this.props.name,
-                'onChange':     this.onChange,
+                'autosize': this.props.autosize,
+                'className': '_controller',
+                'cols': this.props.cols,
+                'disabled': this.props.disabled,
+                'key': 'controller',
+                'multiline': this.props.multiline,
+                'name': this.props.name,
+                'onChange': this.onChange,
                 'onHintToggle': this.onHintToggle,
-                'readOnly':     this.props.readonly,
-                'ref':          'controller',
-                'required':     this.props.required,
-                'rows':         this.props.rows,
-                'tabIndex':     this.props.tabindex,
-                'value':        this.state.value
+                'readOnly': this.props.readonly,
+                'ref': (ref) => this._controller = ref,
+                'required': this.props.required,
+                'rows': this.props.rows,
+                'tabIndex': this.getTabIndex(),
+                'value': this.state.value
             };
 
             if (isComplex) {
-                var children = [];
+                const children = [];
 
-                if (this.props['xb-link']) {
-                    var linkProps = filterProps(/^xb-link-/, this.props);
-                    linkProps['theme'] = 'empty';
-                    linkProps['key'] = 'label';
+                if (this.props[ 'xb-link' ]) {
+                    const linkProps = filterProps(/^xb-link-/, this.props);
 
                     children.push(
-                        <xb-link {...linkProps}>{this.props['xb-link']}</xb-link>
+                        <xb-link {...linkProps} theme="empty" key="label">{this.props[ 'xb-link' ]}</xb-link>
                     );
                 }
 
@@ -185,20 +203,22 @@ export default xv.Input = view.register('xb-input', [
                     );
                 }
 
-                var placeholder = null;
-                if (this.props.placeholder) {
-                    placeholder = (
-                        <span ref="placeholder" key="placeholder" className="_hint">
-                            <span className="_hint-inner">{this.props.placeholder}</span>
-                        </span>
-                    );
-                }
+                const placeholder = do {
+                    if (this.props.placeholder) {
+                        (
+                            <span ref={ref => this._placeholder = ref} key="placeholder" className="_hint">
+                                <span className="_hint-inner">{this.props.placeholder}</span>
+                            </span>
+                        );
+                    } else {
+                        null;
+                    }
+                };
 
                 children.push(
                     <span key="content" className="_content">
                         {placeholder}
-                        <Controller {...controllerProps}
-                            isPlaceholderHint={Boolean(placeholder)} />
+                        <Controller {...controllerProps} isPlaceholderHint={Boolean(placeholder)} />
                         <span key="view" className="_view">
                             {String.fromCharCode(160)}
                         </span>
@@ -212,9 +232,7 @@ export default xv.Input = view.register('xb-input', [
             } else {
 
                 return (
-                    <Controller {...controllerProps}
-                        className={classes}
-                        isPlaceholderHint={false} />
+                    <Controller {...controllerProps} className={classes} isPlaceholderHint={false} />
                 );
             }
         }

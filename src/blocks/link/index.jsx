@@ -46,13 +46,11 @@ export default xv.Link = view.register('xb-link', [
                 [ `_theme-${this.props.theme}` ]: true
             });
 
-            const tabIndex = this.props.disabled ? '-1' : this.props[ 'data-xb-tabindex' ];
-
             return (
                 <a name={this.props.name}
                     href={this.props.href}
                     target={this.props.target}
-                    tabIndex={tabIndex}
+                    tabIndex={this.getTabIndex()}
                     className={classes}
                     rel={this.props.rel}>
 

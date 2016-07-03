@@ -1,7 +1,4 @@
-@require "../../styl/init"
-
-xb-checkbox
-  skin: xb-inline-block
+@require "../../../styl/init"
 
 .xb-checkbox
   font-weight: inherit
@@ -19,3 +16,6 @@ xb-checkbox
           (__icon '& > ._icon') \
           (__text '& > ._label') \
           (__controller '& > ._controller')
+
+  &._disabled
+    kind: disabled 0.6

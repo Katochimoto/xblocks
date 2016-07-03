@@ -22,26 +22,37 @@ export default xv.Radio = view.register('xb-radio', [
 
         mixins: [ PureRenderMixin ],
 
+        /**
+         * @prop {string} [size=m] size, possible values: s|m
+         * @prop {string} [value=on]
+         * @prop {string} [name]
+         * @prop {string} [form]
+         * @prop {string} [for]
+         * @prop {boolean} [autofocus=false]
+         * @prop {boolean} [disabled=false]
+         * @prop {boolean} [checked=false]
+         * @prop {boolean} [required=false]
+         */
         propTypes: {
-            autofocus:    PropTypes.bool,
-            checked:      PropTypes.bool,
-            for:          PropTypes.string,
-            form:         PropTypes.string,
-            name:         PropTypes.string,
-            required:     PropTypes.bool,
-            size:         PropTypes.oneOf([ 'm', 'l' ]),
-            value:        PropTypes.string
+            'autofocus': PropTypes.bool,
+            'checked': PropTypes.bool,
+            'for': PropTypes.string,
+            'form': PropTypes.string,
+            'name': PropTypes.string,
+            'required': PropTypes.bool,
+            'size': PropTypes.oneOf([ 'm', 'l' ]).isRequired,
+            'value': PropTypes.string
         },
 
         getDefaultProps: function () {
             return {
-                autofocus:    false,
-                checked:      false,
-                disabled:     false,
-                required:     false,
-                size:         'm',
-                tabindex:     '0',
-                value:        'on'
+                'autofocus': false,
+                'checked': false,
+                'disabled': false,
+                'required': false,
+                'size': 'm',
+                'data-xb-tabindex': '0',
+                'value': 'on'
             };
         },
 
@@ -80,12 +91,10 @@ export default xv.Radio = view.register('xb-radio', [
                 [ `_size-${this.props.size}` ]: true
             });
 
-            const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
-
             return (
                 <label className={classes}
                     title={this.props.title}
-                    htmlFor={this.props['for']}>
+                    htmlFor={this.props[ 'for' ]}>
 
                     <input
                         autoFocus={this.props.autofocus}
@@ -97,7 +106,7 @@ export default xv.Radio = view.register('xb-radio', [
                         onChange={this._onChange}
                         readOnly={true}
                         required={this.props.required}
-                        tabIndex={tabIndex}
+                        tabIndex={this.getTabIndex()}
                         type="radio"
                         value={this.props.value} />
 

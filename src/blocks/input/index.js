@@ -1,4 +1,4 @@
-import './index.styl';
+import './style';
 import './index.jsx';
 
 import _ from 'lodash';
@@ -11,26 +11,6 @@ import ConstantInput from 'constants/input';
 
 /**
  * xb-input html element
- *
- * @prop {string} [name]
- * @prop {string} [type=text] text|number|date|datetime|email|month|range|search|tel|time|url|week|color
- * @prop {string} [size=m] s|m|l|xl
- * @prop {string} [autoComplete] on|off
- * @prop {string} [rows=4]
- * @prop {string} [cols]
- * @prop {string} [placeholder]
- * @prop {string} [value]
- * @prop {string} [prefix]
- * @prop {string} [postfix]
- * @prop {string} [tabindex]
- * @prop {boolean} [disabled=false]
- * @prop {boolean} [autosize=false]
- * @prop {boolean} [multiline=false]
- * @prop {boolean} [required=false]
- * @prop {boolean} [readonly=false]
- * @prop {boolean} [reset=false]
- * @prop {boolean} [autofocus=false]
- * @prop {boolean} [ghost=false]
  *
  * @class xb.Input
  * @memberof xb
@@ -101,6 +81,17 @@ export default xb.Input = create('xb-input', [
         },
 
         accessors: {
+            componentStyle: {
+                get: function () {
+                    return {
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./style/inline.styl')
+                    };
+                }
+            },
+
+            isShadowSupported: {
+                get: _.stubFalse
+            },
 
             /**
              * @prop {string} value
@@ -127,9 +118,7 @@ export default xb.Input = create('xb-input', [
              * @prop {string} defaultValue
              */
             defaultValue: {
-                get: function () {
-                    return '';
-                }
+                get: _.constant('')
             }
         }
     }

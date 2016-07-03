@@ -41,7 +41,7 @@ export default function (tagName) {
             var maxHeight = 0;
 
             if (size > 0) {
-                let contentNode = this._contentNode;
+                let contentNode = this._content;
                 let element = contentNode.children[ size - 1 ];
 
                 if (element) {
@@ -55,7 +55,7 @@ export default function (tagName) {
         },
 
         _redrawScrollNavigator: function (callback) {
-            var target = this._contentNode;
+            var target = this._content;
             var safeArea = 5;
             var height = Math.max(target.scrollHeight, target.clientHeight);
             var isShowScrollTop = (target.scrollTop > safeArea);
@@ -79,7 +79,7 @@ export default function (tagName) {
         },
 
         _onWheel: function (event) {
-            var content = this._contentNode;
+            var content = this._content;
             var delta = event.deltaY;
             var scrollTop = content.scrollTop;
             var offsetHeight = content.offsetHeight;
@@ -110,14 +110,14 @@ export default function (tagName) {
 
         _onScrollThrottle: function () {
             xevent.dispatch(
-                this._contentNode,
+                this._content,
                 'jsx-scroll-throttle',
                 { bubbles: true, cancelable: true }
             );
         },
 
         _animationScrollTop: function () {
-            this._contentNode.scrollTop--;
+            this._content.scrollTop--;
             this._enterTopFrame = requestAnimationFrame(this._animationScrollTop);
         },
 
@@ -134,7 +134,7 @@ export default function (tagName) {
         },
 
         _animationScrollBottom: function () {
-            this._contentNode.scrollTop++;
+            this._content.scrollTop++;
             this._enterBottomFrame = requestAnimationFrame(this._animationScrollBottom);
         },
 
@@ -154,7 +154,7 @@ export default function (tagName) {
          * @param {xb.Menuitem} menuitem
          */
         scrollIntoItem: function (menuitem) {
-            var content = this._contentNode;
+            var content = this._content;
             var rectContent = content.getBoundingClientRect();
             var rectMenuitem = menuitem.getBoundingClientRect();
 
@@ -198,7 +198,7 @@ export default function (tagName) {
                         onMouseEnter={this._onMouseEnterTop}
                         onMouseLeave={this._onMouseLeaveTop} />
 
-                    <div ref={(ref) => this._contentNode = ref}
+                    <div ref={(ref) => this._content = ref}
                         style={contentStyle}
                         className="_content"
                         onScroll={this._onScroll}

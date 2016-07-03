@@ -1,4 +1,4 @@
-import './index.styl';
+import './style';
 import './index.jsx';
 
 import _ from 'lodash';
@@ -57,7 +57,7 @@ export default xb.MenuInline = create('xb-menu-inline', [
             componentStyle: {
                 get: function () {
                     return {
-                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./style/inline.styl')
                     };
                 }
             },

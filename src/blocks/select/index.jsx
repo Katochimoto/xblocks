@@ -21,51 +21,39 @@ export default xv.Select = view.register('xb-select', [
         mixins: [ PureRenderMixin ],
 
         propTypes: {
-            autofocus: PropTypes.bool,
-            form: PropTypes.string,
-            name: PropTypes.string,
-            required: PropTypes.bool,
-            theme: PropTypes.string
+            'autofocus': PropTypes.bool,
+            'form': PropTypes.string,
+            'name': PropTypes.string,
+            'required': PropTypes.bool,
+            'theme': PropTypes.string
         },
 
         getDefaultProps: function () {
             return {
-                autofocus: false,
-                disabled: false,
-                required: false,
-                tabindex: '0'
+                'autofocus': false,
+                'data-xb-tabindex': '0',
+                'disabled': false,
+                'required': false
             };
         },
 
         getInitialState: function () {
             return {
-                focused: false,
-                selected: []
+                'selected': []
             };
         },
 
         componentWillMount: function () {
             this.setState({
-                selected: this.context.container.selectedObjects
+                'selected': this.context.container.selectedObjects
             });
-        },
-
-        _onFocus: function () {
-            this.setState({ focused: true });
-        },
-
-        _onBlur: function () {
-            this.setState({ focused: false });
         },
 
         render: function () {
             const classes = classnames({
                 'xb-select': true,
-                '_disabled': this.props.disabled,
-                '_focused': this.state.focused
+                '_disabled': this.props.disabled
             });
-
-            const tabIndex = this.props.disabled ? '-1' : this.props.tabindex;
 
             const attrs = {
                 'autofocus': this.props.autofocus || undefined,
@@ -73,7 +61,7 @@ export default xv.Select = view.register('xb-select', [
                 'form': this.props.form,
                 'name': this.props.name,
                 'required': this.props.required || undefined,
-                'tabindex': '-1',
+                'data-xb-tabindex': '-1',
                 'theme': this.props.theme,
                 'title': this.props.title,
                 'type': 'inline',
@@ -84,11 +72,7 @@ export default xv.Select = view.register('xb-select', [
             const label = this.state.selected.map((item, key) => (key && ', ' || '') + item.label).join('');
 
             return (
-                <div className={classes}
-                    tabIndex={tabIndex}
-                    onBlur={this._onBlur}
-                    onFocus={this._onFocus}>
-
+                <div className={classes} tabIndex={this.getTabIndex()}>
                     <xb-button {...attrs}>
                         {label}
                     </xb-button>

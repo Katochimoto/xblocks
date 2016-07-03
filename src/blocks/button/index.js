@@ -1,8 +1,9 @@
 import './style';
 import './index.jsx';
+
+import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
-
 import mixinDisabled from 'mixin/element/disabled';
 import mixinChecked from 'mixin/element/checked';
 import mixinInputValueProps from 'mixin/element/inputValueProps';
@@ -54,9 +55,7 @@ export default xb.Button = create('xb-button', [
             },
 
             isShadowSupported: {
-                get: function () {
-                    return false;
-                }
+                get: _.stubFalse
             },
 
             defaultValue: {

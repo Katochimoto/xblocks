@@ -1,4 +1,4 @@
-@require "../../styl/init"
+@require "../../../styl/init"
 
 $svg ?= {}
 
@@ -52,7 +52,7 @@ xb-ico
 
   for $icon, $icon-on in $svg-icons
     &._type-{$icon}
-      background-image: url('img/' + $icon + '.svg')
+      background-image: url('../img/' + $icon + '.svg')
 
       &:not(._active)
         skin: v3-icon

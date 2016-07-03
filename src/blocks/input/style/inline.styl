@@ -1,7 +1,4 @@
-@require "../../styl/init"
-
-xb-input
-  skin: xb-inline-block
+@require "../../../styl/init"
 
 input.xb-input
   appearance: textfield
@@ -98,3 +95,6 @@ stylobate_defaults('skin-islands-v3-input__placeholder',
 
     &_size-xl
       skin: v3-input (_size extra-large)
+
+  &._disabled
+    kind: disabled 0.6

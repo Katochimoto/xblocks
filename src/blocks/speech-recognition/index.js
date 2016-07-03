@@ -1,4 +1,4 @@
-import './index.styl';
+import './style';
 import './index.jsx';
 
 import context from 'context';

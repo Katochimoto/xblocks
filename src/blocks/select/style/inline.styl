@@ -1,14 +1,16 @@
-@require "../../styl/init"
-
-xb-select
-  skin: xb-inline-block
+@require "../../../styl/init"
 
 .xb-select
   font-weight: inherit
   position: relative
+  cursor: pointer
 
-  &._focused
+  &:focus
     skin: v3-button_focus
+
+    &:before
+      z-index: 2
 
   & > xb-button
     width: 100%
+    pointer-events: none

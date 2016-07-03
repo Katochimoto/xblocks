@@ -1,4 +1,4 @@
-import './index.styl';
+import './style';
 import './index.jsx';
 
 import _ from 'lodash';
@@ -70,15 +70,13 @@ export default xb.Select = create('xb-select', [
          * @lends xb.Select.prototype
          */
         accessors: {
-            /*
             componentStyle: {
                 get: function () {
                     return {
-                        [ this.xtagName ]: require('!!raw!postcss!stylus!./inline.styl')
+                        [ this.xtagName ]: require('!!raw!postcss!stylus!./style/inline.styl')
                     };
                 }
             },
-            */
 
             /**
              * @prop {xb.Menu} selectMenuInstance Menu instance

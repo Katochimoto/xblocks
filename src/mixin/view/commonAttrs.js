@@ -1,19 +1,19 @@
 import { PropTypes } from 'react';
 
-/**
- * Common attributes
- *
- * @type {Object}
- * @prop {Object} propTypes
- * @prop {string} propTypes.accesskey
- * @prop {string} propTypes.contextmenu
- * @prop {enum} propTypes.dir
- * @prop {boolean} propTypes.hidden
- * @prop {boolean} propTypes.spellcheck
- * @prop {string} propTypes.data-xb-tabindex
- * @prop {string} propTypes.title
- */
 export default {
+    /**
+     * Common attributes
+     *
+     * @type {Object}
+     * @prop {Object} propTypes
+     * @prop {string} propTypes.accesskey
+     * @prop {string} propTypes.contextmenu
+     * @prop {enum} propTypes.dir
+     * @prop {boolean} propTypes.hidden
+     * @prop {boolean} propTypes.spellcheck
+     * @prop {string} propTypes.data-xb-tabindex
+     * @prop {string} propTypes.title
+     */
     propTypes: {
         'accesskey': PropTypes.string,
         'contextmenu': PropTypes.string,
@@ -23,6 +23,13 @@ export default {
         'hidden': PropTypes.bool,
         'spellcheck': PropTypes.bool,
         'title': PropTypes.string
+    },
+
+    /**
+     * @returns {string}
+     */
+    getTabIndex: function () {
+        return this.props.disabled ? '-1' : this.props[ 'data-xb-tabindex' ];
     }
 };
 
