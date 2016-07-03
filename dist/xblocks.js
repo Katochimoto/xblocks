@@ -4003,7 +4003,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        isShadowSupported: {
 	            get: function get() {
-	                return true;
+	                return false;
 	            }
 	        },
 
@@ -5947,7 +5947,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        isShadowSupported: {
 	            get: function get() {
-	                return true;
+	                return false;
 	            }
 	        }
 	    },

@@ -88,7 +88,7 @@ export default xb.Menu = create('xb-menu', [
 
             isShadowSupported: {
                 get: function () {
-                    return true;
+                    return false;
                 }
             },
 

@@ -64,7 +64,7 @@ export default xb.MenuInline = create('xb-menu-inline', [
 
             isShadowSupported: {
                 get: function () {
-                    return true;
+                    return false;
                 }
             }
         },
