@@ -2499,6 +2499,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(60);
 
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
 	var _context = __webpack_require__(9);
 
 	var _xblocksCore = __webpack_require__(10);
@@ -2537,9 +2541,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 
 	        isShadowSupported: {
-	            get: function get() {
-	                return true;
-	            }
+	            get: _lodash2.default.stubTrue
 	        }
 	    }
 	}]);
@@ -2699,7 +2701,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 
 	        isShadowSupported: {
-	            get: _lodash2.default.stubTrue
+	            get: _lodash2.default.stubFalse
 	        },
 
 	        defaultValue: {
@@ -2920,7 +2922,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 
 	        isShadowSupported: {
-	            get: _lodash2.default.stubTrue
+	            get: _lodash2.default.stubFalse
 	        },
 
 	        defaultValue: {

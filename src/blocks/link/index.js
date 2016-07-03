@@ -1,5 +1,7 @@
 import './style';
 import './index.jsx';
+
+import _ from 'lodash';
 import { xb } from 'context';
 import { create } from 'xblocks-core';
 import mixinDisabled from 'mixin/element/disabled';
@@ -33,9 +35,7 @@ export default xb.Link = create('xb-link', [
             },
 
             isShadowSupported: {
-                get: function () {
-                    return true;
-                }
+                get: _.stubTrue
             }
         }
     }

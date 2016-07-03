@@ -98,25 +98,27 @@
     </script>
     -->
 
-<xb-menu id="menu3">
-    <xb-menuitem label="label 1" xb-ico-type="twitter" xb-ico-float="left"></xb-menuitem>
-    <xb-menuitem label="label 2" xb-ico-type="vk" xb-ico-float="right"></xb-menuitem>
-</xb-menu>
-
-<a href="#" onclick="event.preventDefault(); document.getElementById('menu3').open();">show menu</a>
-
-<xb-menu size="5" id="menu2">
-    <xb-menuitem label="label 1"></xb-menuitem>
+<xb-menu id="menu1">
+    <xb-menuitem label="label 1">
+        <xb-menuitem label="label 1.1"></xb-menuitem>
+        <xb-menuitem label="label 1.2"></xb-menuitem>
+        <xb-menuitem label="label 1.3">
+            <xb-menuitem label="label 1.3.1"></xb-menuitem>
+            <xb-menuitem label="label 1.3.2"></xb-menuitem>
+            <xb-menuitem label="label 1.3.3"></xb-menuitem>
+        </xb-menuitem>
+    </xb-menuitem>
     <xb-menuitem label="label 2"></xb-menuitem>
     <xb-menuitem label="label 3"></xb-menuitem>
-    <xb-menuitem label="label 4"></xb-menuitem>
-    <xb-menuitem label="label 5"></xb-menuitem>
-    <xb-menuitem label="label 6"></xb-menuitem>
-    <xb-menuitem label="label 7"></xb-menuitem>
-    <xb-menuitem label="label 8"></xb-menuitem>
+    <xb-menuseparator></xb-menuseparator>
+    <xb-menuitem label="label 4" disabled></xb-menuitem>
 </xb-menu>
 
-<a href="#" onclick="event.preventDefault(); document.getElementById('menu2').open();">show menu</a>
+<a href="#" onclick="event.preventDefault(); document.getElementById('menu1').open();">show menu</a>
+
+<xb-radio name="radio" value="1" checked>radio 1</xb-radio>
+<xb-radio name="radio" value="2">radio 2</xb-radio>
+<xb-radio name="radio" value="3" disabled>radio 3</xb-radio>
 
 </body>
 </html>

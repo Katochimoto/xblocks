@@ -39,7 +39,7 @@ export default xb.Radio = create('xb-radio', [
             },
 
             isShadowSupported: {
-                get: _.stubTrue
+                get: _.stubFalse
             },
 
             defaultValue: {

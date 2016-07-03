@@ -39,7 +39,7 @@ export default xb.Checkbox = create('xb-checkbox', [
             },
 
             isShadowSupported: {
-                get: _.stubTrue
+                get: _.stubFalse
             },
 
             defaultValue: {
