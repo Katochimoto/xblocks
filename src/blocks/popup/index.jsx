@@ -56,10 +56,7 @@ export default xv.Popup = view.register('xb-popup', [
                     dangerouslySetInnerHTML={{ __html: this.props.children }}></div>
             ];
 
-            children.unshift(this.template('xb-popup-title', {
-                key: 'title',
-                className: '_title'
-            }));
+            children.unshift(this.context.template('xb-popup-title', <div key="title" className="_title" />));
 
             if (this.props.close) {
                 children.unshift(
@@ -67,10 +64,7 @@ export default xv.Popup = view.register('xb-popup', [
                 );
             }
 
-            children.push(this.template('xb-popup-buttons', {
-                'key': 'buttons',
-                'className': '_buttons'
-            }));
+            children.push(this.context.template('xb-popup-buttons', <div key="buttons" className="_buttons" />));
 
             const classes = classnames({
                 'xb-popup': true,

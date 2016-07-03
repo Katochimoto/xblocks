@@ -3470,19 +3470,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'data-xb-content': this.props._uid,
 	            dangerouslySetInnerHTML: { __html: this.props.children } })];
 
-	        children.unshift(this.template('xb-popup-title', {
-	            key: 'title',
-	            className: '_title'
-	        }));
+	        children.unshift(this.context.template('xb-popup-title', React.createElement('div', { key: 'title', className: '_title' })));
 
 	        if (this.props.close) {
 	            children.unshift(React.createElement('a', { key: 'close', className: '_close', onClick: this.onClickClose }));
 	        }
 
-	        children.push(this.template('xb-popup-buttons', {
-	            'key': 'buttons',
-	            'className': '_buttons'
-	        }));
+	        children.push(this.context.template('xb-popup-buttons', React.createElement('div', { key: 'buttons', className: '_buttons' })));
 
 	        var classes = (0, _classnames3.default)(_defineProperty({
 	            'xb-popup': true
