@@ -173,7 +173,152 @@
 
             
 
-            <td class="description last"><p>the event parameters</p></td>
+            <td class="description last"><p>the event parameters</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bubbles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cancelable</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>detail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -214,7 +359,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xblocks_event.js.html">xblocks/event.js</a>, <a href="xblocks_event.js.html#line48">line 48</a>
+        <a href="xblocks_event.js.html">xblocks/event.js</a>, <a href="xblocks_event.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -241,16 +386,296 @@
 
     <h5>Example</h5>
     
-    
-        <pre class="prettyprint"><code>import { dispatch } from 'xblocks-core/event';
+    <pre class="prettyprint"><code>import { dispatch } from 'xblocks-core/event';
 dispatch(node, 'custom-event', {
     bubbles: true,
     cancelable: true,
     detail: { data: '123' }
 })</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".forwardingEvents"><span class="type-signature">(static) </span>forwardingEvents<span class="signature">(name, fromElement, toElement, capture<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
     
 
 
+
+<div class="description">
+    <p>Forwarding events</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>event name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fromElement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toElement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>capture</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="xblocks_event.js.html">xblocks/event.js</a>, <a href="xblocks_event.js.html#line68">line 68</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>callback</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import { forwardingEvents } from 'xblocks-core/event';
+forwardingEvents('custom-event', fromNode, toNode, false);</code></pre>
 
 
 
@@ -270,13 +695,13 @@ dispatch(node, 'custom-event', {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_element.html">xblocks-core/element</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_Component.html">xblocks-core/utils/Component</a></li><li><a href="module-xblocks-core_utils_createShadowRoot.html">xblocks-core/utils/createShadowRoot</a></li><li><a href="module-xblocks-core_utils_importStyle.html">xblocks-core/utils/importStyle</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Thu May 05 2016 22:33:42 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Sun Jul 03 2016 20:04:31 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

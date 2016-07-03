@@ -32,58 +32,46 @@
 
 import React, { PropTypes } from 'react';
 import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergeWith';
+import spread from 'lodash/spread';
+import castArray from 'lodash/castArray';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
+import wrap from 'lodash/wrap';
+import wrapperFunction from './utils/wrapperFunction';
+import checkOverriddenMethods from './utils/checkOverriddenMethods';
+
+const spreadMergeWith = spread(mergeWith);
+
+const METHODS_INHERITANCE = [
+    'componentDidMount',
+    'componentDidUpdate',
+    'componentWillMount',
+    'componentWillReceiveProps',
+    'componentWillUnmount',
+    'componentWillUpdate'
+];
+
+const METHODS_MERGE_RESULT = [
+    'getChildContext',
+    'getDefaultProps',
+    'getInitialState'
+];
 
 const VIEW_COMMON = {
-
     /**
-     * Required attributes.
      * @memberOf ReactElement.prototype
-     * @type {Object}
+     * @property {Object} contextTypes context types
+     * @property {HTMLElement} contextTypes.container the node associated with the view
+     * @property {function} contextTypes.content output function user content
+     * @property {function} contextTypes.template create node by template
+     * @property {function} contextTypes.isEmptyContent check empty content
      */
-    propTypes: {
-        _uid: PropTypes.node,
-        _container: PropTypes.any,  // Bad way ;(
-        children: PropTypes.node
-    },
-
-    /**
-     * Create node by template.
-     * @memberOf ReactElement.prototype
-     * @param {string} ref template name
-     * @param {Object} [props] the attributes of a node
-     * @returns {?ReactElement}
-     */
-    template: function (ref, props) {
-        const xtmpl = this.props._container &amp;&amp; this.props._container.xtmpl;
-
-        if (typeof xtmpl === 'object' &amp;&amp; xtmpl !== null &amp;&amp; xtmpl.hasOwnProperty(ref)) {
-            return (
-                &lt;div {...props} dangerouslySetInnerHTML={{ '__html': this.templatePrepare(xtmpl[ ref ]) }} />
-            );
-        }
-
-        return null;
-    },
-
-    /**
-     * Get the node associated with the view.
-     * @returns {HTMLElement}
-     */
-    container: function () {
-        return this.props._container;
-    }
-};
-
-const VIEW_COMMON_USER = {
-    /**
-     * Custom conversion template.
-     * @param {string} tmplString
-     * @returns {string}
-     */
-    templatePrepare: function (tmplString) {
-        return tmplString;
+    contextTypes: {
+        container: PropTypes.any,
+        content: PropTypes.func,
+        template: PropTypes.func,
+        isEmptyContent: PropTypes.func
     }
 };
 
@@ -121,11 +109,12 @@ const VIEW_COMPONENTS_CLASS = {};
  * @returns {function}
  */
 export function create(component) {
-    component = isArray(component) ? component : [ component ];
-    component.unshift({}, VIEW_COMMON_USER);
-    component.push(VIEW_COMMON);
+    component = castArray(component);
+    component.unshift({});
+    component.push(VIEW_COMMON, mergeCustomizer);
+    component = spreadMergeWith(component);
 
-    return React.createClass(merge.apply({}, component));
+    return React.createClass(component);
 }
 
 /**
@@ -147,11 +136,11 @@ export function create(component) {
  * @param {string} blockName the name of the new node
  * @param {Object|array|React.Component} component settings view creation
  * @returns {function}
+ * @throws Specified item "${blockName}" is already defined
  */
 export function register(blockName, component) {
     if (React.DOM.hasOwnProperty(blockName)) {
-        /* eslint no-throw-literal:0 */
-        throw 'Specified item "' + blockName + '" is already defined';
+        throw new Error(`Specified item "${blockName}" is already defined`);
     }
 
     const componentClass = isFunction(component) ?
@@ -184,6 +173,106 @@ export function getFactory(blockName) {
 export function getClass(blockName) {
     return VIEW_COMPONENTS_CLASS[ blockName ];
 }
+
+/**
+ * Special handler of merge.
+ * Arrays are merged by the concatenation.
+ * @example
+ * _.mergeWith(obj, src, mergeCustomizer);
+ * @param {*} objValue
+ * @param {*} srcValue
+ * @param {string} key
+ * @returns {Object|array|undefined}
+ * @throws The following methods are overridden
+ * @throws The "render" method you can override
+ * @throws The "displayName" property can not be redefined
+ * @private
+ */
+function mergeCustomizer(objValue, srcValue, key) {
+    if (isArray(objValue)) {
+        return objValue.concat(srcValue);
+    }
+
+    if (METHODS_INHERITANCE.indexOf(key) !== -1) {
+        return wrap(objValue, wrap(srcValue, wrapperFunction));
+    }
+
+    if (METHODS_MERGE_RESULT.indexOf(key) !== -1) {
+        return wrap(objValue, wrap(srcValue, wrapperMergeResult));
+    }
+
+    if (key === 'shouldComponentUpdate') {
+        return wrap(objValue, wrap(srcValue, wrapperOrResult));
+    }
+
+    if (key === 'statics') {
+        checkOverriddenMethods(objValue, srcValue);
+    }
+
+    if (key === 'render' &amp;&amp; objValue &amp;&amp; srcValue) {
+        throw new Error('The "render" method you can override');
+    }
+
+    if (key === 'displayName' &amp;&amp; objValue &amp;&amp; srcValue) {
+        throw new Error('The "displayName" property can not be redefined');
+    }
+
+    if (isFunction(objValue) &amp;&amp; isFunction(srcValue)) {
+        throw new Error(`The following methods are overridden: "${key}"`);
+    }
+}
+
+/**
+ * The implementation of the merger result.
+ * @example
+ * // call objFunc, srcFunc
+ * _.wrap(objFunc, _.wrap(srcFunc, wrapperMergeResult));
+ * @param {function} [srcFunc]
+ * @param {function} [objFunc]
+ * @param {...*} args
+ * @returns {Object}
+ * @private
+ */
+function wrapperMergeResult(srcFunc, objFunc, ...args) {
+    let resultObjFunction = {};
+    let resultSrcFunction = {};
+
+    if (isFunction(objFunc)) {
+        resultObjFunction = objFunc.apply(this, args);
+    }
+
+    if (isFunction(srcFunc)) {
+        resultSrcFunction = srcFunc.apply(this, args);
+    }
+
+    return merge({}, resultObjFunction, resultSrcFunction);
+}
+
+/**
+ * Merging the result of the logical "or".
+ * @example
+ * // call objFunc, srcFunc
+ * _.wrap(objFunc, _.wrap(srcFunc, wrapperOrResult));
+ * @param {function} [srcFunc]
+ * @param {function} [objFunc]
+ * @param {...*} args
+ * @returns {boolean}
+ * @private
+ */
+function wrapperOrResult(srcFunc, objFunc, ...args) {
+    let resultObjFunction = false;
+    let resultSrcFunction = false;
+
+    if (isFunction(objFunc)) {
+        resultObjFunction = objFunc.apply(this, args);
+    }
+
+    if (isFunction(srcFunc)) {
+        resultSrcFunction = srcFunc.apply(this, args);
+    }
+
+    return resultObjFunction || resultSrcFunction;
+}
 </code></pre>
         </article>
     </section>
@@ -194,13 +283,13 @@ export function getClass(blockName) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_element.html">xblocks-core/element</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_Component.html">xblocks-core/utils/Component</a></li><li><a href="module-xblocks-core_utils_createShadowRoot.html">xblocks-core/utils/createShadowRoot</a></li><li><a href="module-xblocks-core_utils_importStyle.html">xblocks-core/utils/importStyle</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Thu May 05 2016 22:33:42 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Sun Jul 03 2016 20:04:31 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

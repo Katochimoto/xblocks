@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: xblocks/utils/Component.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: xblocks/utils/Component.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { PropTypes } from 'react';
+import get from 'lodash/get';
+import isPlainObject from 'lodash/isPlainObject';
+import identity from 'lodash/identity';
+import clone from 'lodash/clone';
+import global from '../../context';
+import { getFactory } from '../view';
+import Constants from '../constants';
+
+/**
+ * The basic component. Required for the formation of context.
+ *
+ * @example
+ * import Component from 'xblocks-core/utils/Component';
+ * React.render(Component({ property: 'test' }), node);
+ *
+ * @module xblocks-core/utils/Component
+ * @returns {function}
+ */
+export default React.createFactory(React.createClass({
+    displayName: 'xb-component',
+
+    /**
+     * Types of context
+     * @property {Object} childContextTypes
+     * @property {HTMLElement} childContextTypes.container the node associated with the view
+     * @property {function} childContextTypes.content
+     * @property {function} childContextTypes.template
+     * @property {function} childContextTypes.isEmptyContent check empty content
+     */
+    childContextTypes: {
+        container: PropTypes.any,
+        content: PropTypes.func,
+        template: PropTypes.func,
+        isEmptyContent: PropTypes.func
+    },
+
+    /**
+     * The context value
+     * @returns {{ container: HTMLElement, content: function }}}
+     */
+    getChildContext() {
+        return {
+            container: this.props._container,
+
+            /**
+             * Output function user content
+             * @param {ReactElement} element
+             * @returns {ReactElement}
+             */
+            content: (element) => (
+                &lt;ComponentContent {...{ element }}>
+                    {this.props.children}
+                &lt;/ComponentContent>
+            ),
+
+            /**
+             * Create node by template.
+             * @param {string} tmplName template name
+             * @param {ReactElement} element
+             * @param {function} [interceptor] custom conversion template
+             * @returns {?ReactElement}
+             */
+            template: (tmplName, element, interceptor) => (
+                &lt;ComponentTemplate {...{ tmplName, element, interceptor }} />
+            ),
+
+            /**
+             * Check empty content.
+             * @returns {boolean}
+             */
+            isEmptyContent: () => {
+                const isShadow = get(this.props._container, [ Constants.BLOCK, 'isShadow' ], false);
+
+                if (isShadow) {
+                    return !this.props._container.hasChildNodes();
+
+                } else {
+                    return !this.props.children;
+                }
+            }
+        };
+    },
+
+    /**
+     * @returns {ReactElement}
+     */
+    render() {
+        const tagName = this.props._container[ Constants.TAGNAME ];
+        const props = clone(this.props);
+
+        delete props._container;
+        props.ref = (ref) => this.userComponent = ref;
+
+        return getFactory(tagName)(props);
+    }
+}));
+
+/**
+ * Item output custom content.
+ * @param {Object} props
+ * @param {ReactElement} [props.element]
+ * @param {string} props.children
+ * @param {Object} context
+ * @param {HTMLElement} context.container the node associated with the view
+ * @returns {ReactElement}
+ * @private
+ */
+const ComponentContent = function (props, context) {
+    const isShadow = get(context.container, [ Constants.BLOCK, 'isShadow' ], false);
+
+    if (isShadow) {
+        if (global.HTMLSlotElement) {
+            return &lt;slot />;
+
+        } else {
+            return &lt;content />;
+        }
+    }
+
+    const elementProps = {
+        'data-xb-content': context.container[ Constants.UID ],
+        'dangerouslySetInnerHTML': { __html: props.children }
+    };
+
+    if (props.element) {
+        return React.cloneElement(props.element, elementProps);
+
+    } else {
+        return &lt;span {...elementProps} />;
+    }
+};
+
+/**
+ * Types of context
+ * @property {Object} contextTypes
+ * @property {HTMLElement} contextTypes.container the node associated with the view
+ */
+ComponentContent.contextTypes = {
+    container: PropTypes.any
+};
+
+/**
+ * Item output custom template content.
+ * @param {Object} props
+ * @param {string} props.tmplName
+ * @param {ReactElement} [props.element]
+ * @param {function} [props.interceptor]
+ * @param {Object} context
+ * @param {HTMLElement} context.container the node associated with the view
+ * @returns {ReactElement}
+ * @private
+ */
+const ComponentTemplate = function (props, context) {
+    const isShadow = get(context.container, [ Constants.BLOCK, 'isShadow' ], false);
+
+    if (isShadow) {
+        if (global.HTMLSlotElement) {
+            return &lt;slot name={props.tmplName} />;
+
+        } else {
+            return &lt;content select={props.tmplName} />;
+        }
+    }
+
+    const templates = context.container[ Constants.TMPL ];
+
+    if (isPlainObject(templates) &amp;&amp; templates.hasOwnProperty(props.tmplName)) {
+        const interceptor = props.interceptor || identity;
+        const elementProps = {
+            'dangerouslySetInnerHTML': { __html: interceptor(templates[ props.tmplName ]) }
+        };
+
+        if (props.element) {
+            return React.cloneElement(props.element, elementProps);
+
+        } else {
+            return &lt;div {...elementProps} />;
+        }
+    }
+
+    return null;
+};
+
+/**
+ * Types of context
+ * @property {Object} contextTypes
+ * @property {HTMLElement} contextTypes.container the node associated with the view
+ */
+ComponentTemplate.contextTypes = {
+    container: PropTypes.any
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_Component.html">xblocks-core/utils/Component</a></li><li><a href="module-xblocks-core_utils_createShadowRoot.html">xblocks-core/utils/createShadowRoot</a></li><li><a href="module-xblocks-core_utils_importStyle.html">xblocks-core/utils/importStyle</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Sun Jul 03 2016 20:04:31 GMT+0300 (MSK)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

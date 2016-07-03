@@ -31,177 +31,158 @@
  */
 
 import * as xtag from 'xtag';
-import isPlainObject from 'lodash/isPlainObject';
-import isArray from 'lodash/isArray';
+import forEach from 'lodash/forEach';
+import isFunction from 'lodash/isFunction';
+import stubFalse from 'lodash/stubFalse';
 import merge from 'lodash/merge';
+import assign from 'lodash/assign';
+import mergeWith from 'lodash/mergeWith';
 import uniqueId from 'lodash/uniqueId';
+import spread from 'lodash/spread';
+import castArray from 'lodash/castArray';
+import isArray from 'lodash/isArray';
+import get from 'lodash/get';
+import wrap from 'lodash/wrap';
+import invoke from 'lodash/invoke';
+import trim from 'lodash/trim';
 import * as dom from './dom';
 import { XBElement } from './element';
 import { lazy, propTypes } from './utils';
+import Constants from './constants';
+import wrapperFunction from './utils/wrapperFunction';
+import checkOverriddenMethods from './utils/checkOverriddenMethods';
 
-const BLOCK_COMMON = {
-    lifecycle: {
+const spreadMergeWith = spread(mergeWith);
+
+const BLOCK_COMMON_ACCESSORS = {
+    mounted: {
         /**
-         * The callback of the create element.
+         * Check react mounted
+         * @returns {boolean}
+         * @readonly
          */
-        created: function () {
-            blockInit(this);
+        get: function () {
+            return Boolean(invoke(this, [ Constants.BLOCK, 'isMounted' ]));
+        }
+    },
+
+    content: {
+        /**
+         * Receiving the content.
+         * @returns {?string}
+         */
+        get: function () {
+            const content = this.mounted ?
+                invoke(this, [ Constants.BLOCK, 'getMountedContent' ]) :
+                dom.contentNode(this).innerHTML;
+
+            return trim(content);
         },
 
         /**
-         * The callback of the insert in DOM.
+         * Installing a new content.
+         * @param {string} content
          */
-        inserted: function () {
-            if (this.xinserted) {
-                return;
-            }
+        set: function (content) {
+            content = trim(content);
 
-            blockInit(this);
-
-            this.xinserted = true;
-
-            const isScriptContent = Boolean(this.querySelector('script'));
-
-            // asynchronous read content
-            // &lt;xb-test>&lt;script>...&lt;/script>&lt;div>not found&lt;/div>&lt;/xb-test>
-            if (isScriptContent) {
-                lazy(blockCreateLazy, this);
+            if (this.mounted) {
+                invoke(this, [ Constants.BLOCK, 'setMountedContent' ], content);
 
             } else {
-                blockCreate(this);
-            }
-        },
-
-        /**
-         * The callback of the remote in DOM.
-         */
-        removed: function () {
-            this.xinserted = false;
-
-            if (this.xblock) {
-                this.xblock.destroy();
-                this.xblock = undefined;
+                dom.contentNode(this).innerHTML = content;
+                this.upgrade();
             }
         }
     },
 
-    accessors: {
-        mounted: {
-            /**
-             * Check react mounted
-             * @returns {boolean}
-             */
-            get: function () {
-                return Boolean(this.xblock &amp;&amp; this.xblock.isMounted());
-            }
-        },
-
-        content: {
-            /**
-             * Receiving the content.
-             * @returns {?string}
-             */
-            get: function () {
-                if (this.mounted) {
-                    return this.xblock.getMountedContent();
-                }
-
-                return dom.contentNode(this).innerHTML;
-            },
-
-            /**
-             * Installing a new content.
-             * @param {string} content
-             */
-            set: function (content) {
-                if (this.mounted) {
-                    this.xblock.setMountedContent(content);
-
-                } else {
-                    dom.contentNode(this).innerHTML = content;
-                    this.upgrade();
-                }
-            }
-        },
-
-        attrs: {
-            /**
-             * Getting object attributes.
-             * @returns {Object}
-             */
-            get: function () {
-                return dom.attrs.toObject(this);
-            }
-        },
-
-        props: {
-            /**
-             * Getting object properties.
-             * @returns {Object}
-             */
-            get: function () {
-                const props = dom.attrs.toObject(this);
-                const xprops = this.xprops;
-                const eprops = xtag.tags[ this.xtagName ].accessors;
-                const common = BLOCK_COMMON.accessors;
-
-                for (let prop in eprops) {
-                    if (xprops.hasOwnProperty(prop) &amp;&amp;
-                        eprops.hasOwnProperty(prop) &amp;&amp;
-                        !common.hasOwnProperty(prop)) {
-
-                        props[ prop ] = this[ prop ];
-                    }
-                }
-
-                dom.attrs.typeConversion(props, xprops);
-                return props;
-            }
-        },
-
-        xprops: {
-            /**
-             * Getting react properties.
-             * @returns {Object}
-             */
-            get: function () {
-                return propTypes(this.xtagName);
-            }
-        },
-
-        outerHTML: dom.outerHTML
+    attrs: {
+        /**
+         * Getting object attributes.
+         * @returns {Object}
+         * @readonly
+         */
+        get: function () {
+            return dom.attrs.toObject(this);
+        }
     },
 
-    methods: {
+    props: {
         /**
-         * Recalculation of the internal structure.
+         * Getting object properties.
+         * @returns {Object}
+         * @readonly
          */
-        upgrade: function () {
-            dom.upgradeAll(this);
-        },
+        get: function () {
+            const props = dom.attrs.toObject(this);
+            const xprops = this.xprops;
+            const eprops = get(xtag, [ 'tags', this[ Constants.TAGNAME ], 'accessors' ], {});
 
-        /**
-         * Cloning a node.
-         * @param {boolean} deep true if the content to be saved
-         * @returns {HTMLElement}
-         */
-        cloneNode: function (deep) {
-            // not to clone the contents
-            const node = dom.cloneNode(this, false);
-            dom.upgrade(node);
+            for (let prop in eprops) {
+                if (xprops.hasOwnProperty(prop) &amp;&amp;
+                    eprops.hasOwnProperty(prop) &amp;&amp;
+                    !BLOCK_COMMON_ACCESSORS.hasOwnProperty(prop)) {
 
-            node.xtmpl = this.xtmpl;
-            node.xinserted = false;
-
-            if (deep) {
-                node.content = this.content;
+                    props[ prop ] = this[ prop ];
+                }
             }
 
-            // ???
-            // if ('checked' in this) clone.checked = this.checked;
-
-            return node;
+            dom.attrs.typeConversion(props, xprops);
+            return props;
         }
+    },
+
+    xprops: {
+        /**
+         * Getting react properties.
+         * @returns {Object}
+         * @readonly
+         */
+        get: function () {
+            return propTypes(this[ Constants.TAGNAME ]);
+        }
+    },
+
+    outerHTML: dom.outerHTML
+};
+
+const BLOCK_COMMON_METHODS = {
+    /**
+     * Obtaining the React components.
+     * @returns {?Constructor}
+     */
+    getComponent: function () {
+        return invoke(this, [ Constants.BLOCK, 'getUserComponent' ]);
+    },
+
+    /**
+     * Recalculation of the internal structure.
+     */
+    upgrade: function () {
+        dom.upgradeAll(this);
+    },
+
+    /**
+     * Cloning a node.
+     * @param {boolean} deep true if the content to be saved
+     * @returns {HTMLElement}
+     */
+    cloneNode: function (deep) {
+        // not to clone the contents
+        const node = dom.cloneNode(this, false);
+        dom.upgrade(node);
+
+        node[ Constants.TMPL ] = this[ Constants.TMPL ];
+        node[ Constants.INSERTED ] = false;
+
+        if (deep) {
+            node.content = this.content;
+        }
+
+        // ???
+        // if ('checked' in this) clone.checked = this.checked;
+
+        return node;
     }
 };
 
@@ -215,48 +196,37 @@ const BLOCK_COMMON = {
  * @public
  */
 export function create(blockName, options) {
-    options = isArray(options) ? options : [ options ];
-    options.unshift({});
-    options.push(BLOCK_COMMON);
+    options = castArray(options);
+    options.unshift({ lifecycle: { created: lifecycleCreated, inserted: lifecycleInserted } });
+    options.push(mergeCustomizer);
+    options = spreadMergeWith(options);
 
-    // error when merging prototype in FireFox &lt;=19
-    let proto;
-    let i = 1;
-    const l = options.length;
+    forEach(options.accessors, accessorsIterator);
 
-    for (; i &lt; l; i++) {
-        let o = options[ i ];
+    options.accessors = assign(options.accessors, BLOCK_COMMON_ACCESSORS);
+    options.methods = assign(options.methods, BLOCK_COMMON_METHODS);
 
-        if (isPlainObject(o) &amp;&amp; o.prototype) {
-            if (!proto) {
-                proto = o.prototype;
-            }
-
-            delete o.prototype;
-        }
-    }
-
-    options = merge.apply({}, options);
-
-    if (proto) {
-        options.prototype = proto;
-    }
+    // "removed" should be called after user handler
+    options.lifecycle.removed = wrap(options.lifecycle.removed, wrap(lifecycleRemoved, wrapperFunction));
 
     return xtag.register(blockName, options);
 }
 
 /**
  * Initialization of the element.
+ * @example
+ * blockInit(node);
  * @param {HTMLElement} node
  * @returns {boolean}
  * @private
  */
 function blockInit(node) {
-    if (!node.xtagName) {
-        node.xtagName = node.tagName.toLowerCase();
-        node.xtmpl = {};
-        node.xuid = uniqueId();
-        node.xinserted = false;
+    if (!node[ Constants.TAGNAME ]) {
+        node[ Constants.INSERTED ] = false;
+        node[ Constants.TAGNAME ] = node.tagName.toLowerCase();
+        node[ Constants.TMPL ] = {};
+        node[ Constants.UID ] = uniqueId();
+
         return true;
     }
 
@@ -265,6 +235,8 @@ function blockInit(node) {
 
 /**
  * Creating an item.
+ * @example
+ * blockCreate(node);
  * @param {HTMLElement} node
  * @private
  */
@@ -277,11 +249,13 @@ function blockCreate(node) {
         );
     }
 
-    node.xblock = new XBElement(node);
+    node[ Constants.BLOCK ] = new XBElement(node);
 }
 
 /**
  * Pending the creation of the item.
+ * @example
+ * blockCreateLazy([ node1, node2, ... ]);
  * @param {HTMLElement[]} nodes
  * @private
  */
@@ -291,12 +265,202 @@ function blockCreateLazy(nodes) {
 
 /**
  * The selection of templates.
+ * @example
+ * // append template to node
+ * tmplCompileIterator.call(node, tmplNode);
  * @param {HTMLElement} node
  * @this HTMLElement
  * @private
  */
 function tmplCompileIterator(node) {
-    this.xtmpl[ node.getAttribute('ref') ] = node.innerHTML;
+    this[ Constants.TMPL ][ node.getAttribute('ref') ] = node.innerHTML;
+}
+
+/**
+ * Special handler of merge.
+ * Arrays are merged by the concatenation.
+ * @example
+ * _.mergeWith(obj, src, mergeCustomizer);
+ * @param {*} objValue
+ * @param {*} srcValue
+ * @param {string} key
+ * @returns {Object|array|undefined}
+ * @throws The following methods are overridden
+ * @private
+ */
+function mergeCustomizer(objValue, srcValue, key) {
+    if (isArray(objValue)) {
+        return objValue.concat(srcValue);
+    }
+
+    if (key === 'lifecycle') {
+        return mergeWith(objValue, srcValue, lifecycleCustomizer);
+    }
+
+    if (key === 'events') {
+        return mergeWith(objValue, srcValue, eventsCustomizer);
+    }
+
+    if (key === 'accessors') {
+        return mergeWith(objValue, srcValue, accessorsCustomizer);
+    }
+
+    if (key === 'methods') {
+        checkOverriddenMethods(objValue, srcValue);
+    }
+}
+
+/**
+ * Inheritance lifecycle handler.
+ * @example
+ * _.mergeWith(objValue, srcValue, lifecycleCustomizer);
+ * @param {function} [objValue] the current handler
+ * @param {function} [srcValue] the new handler
+ * @returns {function}
+ * @private
+ */
+function lifecycleCustomizer(objValue, srcValue) {
+    return wrap(objValue, wrap(srcValue, wrapperFunction));
+}
+
+/**
+ * Inheritance event handler.
+ * @example
+ * _.mergeWith(objValue, srcValue, eventsCustomizer);
+ * @param {function} [objValue] the current handler
+ * @param {function} [srcValue] the new handler
+ * @returns {function}
+ * @private
+ */
+function eventsCustomizer(objValue, srcValue) {
+    return wrap(objValue, wrap(srcValue, wrapperEvents));
+}
+
+/**
+ * Inheritance events "set" property changes.
+ * @example
+ * _.mergeWith(objValue, srcValue, accessorsCustomizer);
+ * @param {Object} [objValue] the current value
+ * @param {Object} [srcValue] the new value
+ * @returns {Object}
+ * @private
+ */
+function accessorsCustomizer(objValue, srcValue) {
+    const objSetter = get(objValue, 'set');
+    const srcSetter = get(srcValue, 'set');
+
+    return merge({}, objValue, srcValue, {
+        set: wrap(objSetter, wrap(srcSetter, wrapperFunction))
+    });
+}
+
+/**
+ * Implementation of inherited event.
+ * @example
+ * // call objFunc, srcFunc
+ * _.wrap(objFunc, _.wrap(srcFunc, wrapperEvents));
+ * @param {function} [srcFunc]
+ * @param {function} [objFunc]
+ * @param {...*} args
+ * @private
+ */
+function wrapperEvents(srcFunc, objFunc, ...args) {
+    const event = (args[ 0 ] instanceof Event) &amp;&amp; args[ 0 ];
+    const isStopped = event ? () => event.immediatePropagationStopped : stubFalse;
+
+    if (!isStopped() &amp;&amp; isFunction(objFunc)) {
+        objFunc.apply(this, args);
+    }
+
+    if (!isStopped() &amp;&amp; isFunction(srcFunc)) {
+        srcFunc.apply(this, args);
+    }
+}
+
+/**
+ * The assignment of parameters accessors.
+ * @example
+ * _.forEach({}, accessorsIterator);
+ * @param {Object} options
+ * @param {string} name
+ * @param {Object} accessors
+ * @private
+ */
+function accessorsIterator(options, name, accessors) {
+    const optionsSetter = get(options, 'set');
+    const updateSetter = wrap(name, wrapperAccessorsSetUpdate);
+
+    accessors[ name ] = merge({}, options, {
+        set: wrap(optionsSetter, wrap(updateSetter, wrapperFunction))
+    });
+}
+
+/**
+ * Update element when a property is changed.
+ * @example
+ * // call node.xblock.update();
+ * _.wrap("accessor-name", wrapperAccessorsSetUpdate).call(node, 'newValue', 'oldValue');
+ * @param {string} accessorName the name of the property
+ * @param {*} nextValue
+ * @param {*} prevValue
+ * @this HTMLElement
+ * @private
+ */
+function wrapperAccessorsSetUpdate(accessorName, nextValue, prevValue) {
+    if (nextValue !== prevValue &amp;&amp; this.xprops.hasOwnProperty(accessorName) &amp;&amp; this.mounted) {
+        this[ Constants.BLOCK ].update();
+    }
+}
+
+/**
+ * The callback of the remote in DOM.
+ * @this HTMLElement
+ * @private
+ */
+function lifecycleRemoved() {
+    this[ Constants.INSERTED ] = false;
+
+    const block = this[ Constants.BLOCK ];
+
+    if (block) {
+        block.destroy();
+        this[ Constants.BLOCK ] = undefined;
+    }
+}
+
+/**
+ * The callback of the create element.
+ * @this HTMLElement
+ * @private
+ */
+function lifecycleCreated() {
+    blockInit(this);
+}
+
+/**
+ * The callback of the insert in DOM.
+ * @this HTMLElement
+ * @private
+ */
+function lifecycleInserted() {
+    if (this[ Constants.INSERTED ]) {
+        return;
+    }
+
+    blockInit(this);
+
+    this[ Constants.INSERTED ] = true;
+
+    const isScriptContent = Boolean(this.querySelector('script'));
+
+    // asynchronous read content
+    // &lt;xb-test>&lt;script>...&lt;/script>&lt;div>not found&lt;/div>&lt;/xb-test>
+    if (isScriptContent) {
+        lazy(blockCreateLazy, this);
+
+    } else {
+        blockCreate(this);
+    }
 }
 </code></pre>
         </article>
@@ -308,13 +472,13 @@ function tmplCompileIterator(node) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_element.html">xblocks-core/element</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_element-XBElement.html">XBElement</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul><h3>Events</h3><ul><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-created">xb-created</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-destroy">xb-destroy</a></li><li><a href="module-xblocks-core_element-XBElement.html#~event:event:xb-update">xb-update</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-xblocks-core_block.html">xblocks-core/block</a></li><li><a href="module-xblocks-core_decorator.html">xblocks-core/decorator</a></li><li><a href="module-xblocks-core_dom_attrs.html">xblocks-core/dom/attrs</a></li><li><a href="module-xblocks-core_dom_cloneNode.html">xblocks-core/dom/cloneNode</a></li><li><a href="module-xblocks-core_dom_contentNode.html">xblocks-core/dom/contentNode</a></li><li><a href="module-xblocks-core_dom_outerHTML.html">xblocks-core/dom/outerHTML</a></li><li><a href="module-xblocks-core_dom_upgrade.html">xblocks-core/dom/upgrade</a></li><li><a href="module-xblocks-core_dom_upgradeAll.html">xblocks-core/dom/upgradeAll</a></li><li><a href="module-xblocks-core_event.html">xblocks-core/event</a></li><li><a href="module-xblocks-core_utils_Component.html">xblocks-core/utils/Component</a></li><li><a href="module-xblocks-core_utils_createShadowRoot.html">xblocks-core/utils/createShadowRoot</a></li><li><a href="module-xblocks-core_utils_importStyle.html">xblocks-core/utils/importStyle</a></li><li><a href="module-xblocks-core_utils_lazy.html">xblocks-core/utils/lazy</a></li><li><a href="module-xblocks-core_utils_propTypes.html">xblocks-core/utils/propTypes</a></li><li><a href="module-xblocks-core_view.html">xblocks-core/view</a></li></ul><h3>Classes</h3><ul><li><a href="CustomEvent.html">CustomEvent</a></li><li><a href="module-xblocks-core_event-Custom.html">Custom</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Thu May 05 2016 22:33:42 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Sun Jul 03 2016 20:04:31 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -29,7 +29,7 @@ module.exports = {
             'react-addons-pure-render-mixin',
             'react-router',
             'react-intl',
-            'history/umd/History.js',
+            'history',
             'lodash',
             'classnames',
             'tether',
@@ -108,7 +108,6 @@ module.exports = {
     ],
     'module': {
         'noParse': [
-            /node_modules[\/\\]history[\/\\]umd[\/\\]History.js/,
             /node_modules[\/\\]es5-shim[\/\\]es5-shim.js/
         ],
         'preLoaders': [
