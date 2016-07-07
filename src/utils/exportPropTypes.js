@@ -5,12 +5,11 @@ import { utils } from 'xblocks-core';
  * @returns {Object}
  */
 export default function (tagName) {
-    var props = utils.propTypes(tagName);
-    var propTypes = {};
-    var prefix = tagName + '-';
-    var p;
+    const props = utils.propTypes(tagName);
+    const propTypes = {};
+    const prefix = tagName + '-';
 
-    for (p in props) {
+    for (const p in props) {
         if (props.hasOwnProperty(p) && p[ 0 ] !== '_') {
             propTypes[ prefix + p ] = props[ p ];
         }

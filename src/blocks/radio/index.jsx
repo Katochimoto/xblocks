@@ -48,10 +48,8 @@ export default xv.Radio = view.register('xb-radio', [
             return {
                 'autofocus': false,
                 'checked': false,
-                'disabled': false,
                 'required': false,
                 'size': 'm',
-                'data-xb-tabindex': '0',
                 'value': 'on'
             };
         },

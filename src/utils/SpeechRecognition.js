@@ -108,7 +108,7 @@ export default class SpeechRecognition extends EventEmitter {
     _applyParams(params, defaultParams) {
         Object.assign(this._params, defaultParams, params);
 
-        for (var param in this._params) {
+        for (const param in this._params) {
             this._engine[ param ] = this._params[ param ];
         }
     }

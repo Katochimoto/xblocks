@@ -17,8 +17,8 @@ export default function (name, context) {
 
     name = _.capitalize(name);
 
-    var vendor;
-    var x = 0;
+    let vendor;
+    let x = 0;
     for (; x < 4; ++x) {
         vendor = VENDORS[ x ];
         if (context[ vendor + name ]) {

@@ -7,8 +7,8 @@ import { requestAnimationFrame } from 'polyfills/requestAnimationFrame';
  * @returns {[type]}            [description]
  */
 export default function (callback, context) {
-    var throttle = 0;
-    var animationCallback = function () {
+    let throttle = 0;
+    const animationCallback = function () {
         throttle = 0;
     };
 

@@ -25,6 +25,14 @@ export default {
         'title': PropTypes.string
     },
 
+    getDefaultProps: function () {
+        return {
+            'data-xb-tabindex': '0',
+            'disabled': false,
+            'hidden': false
+        };
+    },
+
     /**
      * @returns {string}
      */

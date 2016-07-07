@@ -1,4 +1,5 @@
 import context from 'context';
+import ConstantEvent from 'constants/event';
 
 const doc = context.document;
 const html = doc.documentElement;
@@ -14,11 +15,11 @@ const clickWhich = {
  * @returns {Event}
  */
 export default function (event) {
-    if (event.xbWrapped) {
+    if (event.hasOwnProperty(ConstantEvent.WRAP)) {
         return event;
     }
 
-    event.xbWrapped = true;
+    event[ ConstantEvent.WRAP ] = true;
 
     if (event.srcElement && !event.target) {
         event.target = event.srcElement;

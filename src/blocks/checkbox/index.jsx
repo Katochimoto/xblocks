@@ -47,10 +47,8 @@ export default xv.Checkbox = view.register('xb-checkbox', [
             return {
                 'autofocus': false,
                 'checked': false,
-                'disabled': false,
                 'required': false,
                 'size': 'm',
-                'data-xb-tabindex': '0',
                 'value': 'on'
             };
         },

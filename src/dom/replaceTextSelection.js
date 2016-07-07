@@ -7,11 +7,11 @@
  * @param {function} setter
  */
 export default function (element, text, getter, setter) {
-    var start = element.selectionStart;
-    var end = element.selectionEnd;
-    var scrollLeft = element.scrollLeft;
-    var scrollTop = element.scrollTop;
-    var pos = start + text.length;
+    const start = element.selectionStart;
+    const end = element.selectionEnd;
+    const scrollLeft = element.scrollLeft;
+    const scrollTop = element.scrollTop;
+    const pos = start + text.length;
 
     getter(function (value) {
         value = value.substr(0, start) + text + value.substr(end);

@@ -31,8 +31,6 @@ export default xv.Link = view.register('xb-link', [
 
         getDefaultProps: function () {
             return {
-                'data-xb-tabindex': '0',
-                'disabled': false,
                 'rel': 'noopener noreferrer',
                 'target': '_self',
                 'theme': 'normal'

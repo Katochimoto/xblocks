@@ -9,7 +9,7 @@ import wrap from 'event/wrap';
 export default function (element, event, callback) {
     wrap(event);
 
-    var toElement = event.relatedTarget;
+    let toElement = event.relatedTarget;
 
     while (toElement && toElement !== element) {
         toElement = toElement.parentNode;

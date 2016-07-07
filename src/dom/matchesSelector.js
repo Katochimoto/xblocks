@@ -1,9 +1,9 @@
 import context from 'context';
 import vendor from 'utils/vendor';
 
-var indexOf = Array.prototype.indexOf;
-var proto = context.Element.prototype;
-var matches = proto.matches ||
+const indexOf = Array.prototype.indexOf;
+const proto = context.Element.prototype;
+const matches = proto.matches ||
     vendor('matchesSelector', proto) ||
     function (selector) {
         return (indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1);

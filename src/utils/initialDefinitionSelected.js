@@ -3,6 +3,12 @@ import { dom } from 'xblocks-core';
 import context from 'context';
 import ConstantMenuitem from 'constants/menuitem';
 
+/**
+ * [description]
+ * @param   {[type]}  element           [description]
+ * @param   {Boolean} isSelectedDefault [description]
+ * @returns {[type]}                    [description]
+ */
 export default function (element, isSelectedDefault) {
     let root = dom.contentNode(element);
     if (root instanceof context.HTMLTemplateElement) {

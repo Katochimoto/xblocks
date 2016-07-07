@@ -73,8 +73,6 @@ export default xv.Input = view.register('xb-input', [
             return {
                 'autofocus': false,
                 'autosize': false,
-                'data-xb-tabindex': '0',
-                'disabled': false,
                 'ghost': false,
                 'multiline': false,
                 'readonly': false,

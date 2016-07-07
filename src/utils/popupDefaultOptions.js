@@ -6,15 +6,15 @@
  */
 export default function () {
     return {
-        attachment: 'middle center',
-        classPrefix: this.xtagName,
-        element: this,
-        enabled: false,
-        optimizations: {
-            gpu: true
+        'attachment': 'middle center',
+        'classPrefix': this.xtagName,
+        'element': this,
+        'enabled': false,
+        'optimizations': {
+            'gpu': true
         },
-        target: this.ownerDocument.body,
-        targetAttachment: 'middle center',
-        targetModifier: 'visible'
+        'target': this.ownerDocument.body,
+        'targetAttachment': 'middle center',
+        'targetModifier': 'visible'
     };
 }

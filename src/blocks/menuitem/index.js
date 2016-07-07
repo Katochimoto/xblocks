@@ -234,8 +234,9 @@ export default xb.Menuitem = create('xb-menuitem', [
                 // меню может быть открыто в блоке со скролом,
                 // в этом случае ограничением для подменю будет блок со скролом
                 const parentAttrs = {
-                    constraints: parentMenu.getAttribute('constraints'),
+                    alwaysselected: parentMenu.hasAttribute('alwaysselected') && 'alwaysselected',
                     autoclose: parentMenu.hasAttribute('autoclose') && 'autoclose',
+                    constraints: parentMenu.getAttribute('constraints'),
                     multiple: parentMenu.hasAttribute('multiple') && 'multiple',
                     selectable: parentMenu.hasAttribute('selectable') && 'selectable'
                 };

@@ -1,5 +1,6 @@
 import context from 'context';
-var html = context.document.documentElement;
+
+const html = context.document.documentElement;
 
 /**
  * @function xblocks.dom.isParent

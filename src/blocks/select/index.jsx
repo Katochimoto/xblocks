@@ -31,8 +31,6 @@ export default xv.Select = view.register('xb-select', [
         getDefaultProps: function () {
             return {
                 'autofocus': false,
-                'data-xb-tabindex': '0',
-                'disabled': false,
                 'required': false
             };
         },

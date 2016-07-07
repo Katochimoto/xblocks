@@ -10,13 +10,13 @@ export default function (selector, target) {
         return;
     }
 
-    var match;
+    let match;
 
     if (matchesSelector(target, selector)) {
         match = target;
 
     } else if (matchesSelector(target, selector + ' *')) {
-        var parent = target.parentNode;
+        let parent = target.parentNode;
 
         while (parent) {
             if (matchesSelector(parent, selector)) {

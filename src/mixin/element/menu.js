@@ -88,6 +88,12 @@ export default {
             }
         },
 
+        alwaysselected: {
+            attribute: {
+                boolean: true
+            }
+        },
+
         /**
          * @prop {boolean} autoclose closing the menu after selecting
          */
@@ -204,22 +210,30 @@ export default {
                 firstParentMenu[ ConstantMenu.SELECTED ] = {};
             }
 
+            let changed = false;
+
             if (selected) {
+                changed = true;
                 item.selected = true;
                 item.setAttribute(selectedAttr, uid);
                 _.set(firstParentMenu, [ ConstantMenu.SELECTED, uid ], item);
 
-            } else {
+            } else if (!this.alwaysselected || _.size(firstParentMenu[ ConstantMenu.SELECTED ]) > 1) {
+                changed = true;
                 item.selected = false;
                 item.removeAttribute(selectedAttr);
                 _.unset(firstParentMenu, [ ConstantMenu.SELECTED, uid ]);
             }
 
-            if (this.autoclose) {
-                firstParentMenu.close();
-            }
+            if (changed) {
+                if (this.autoclose) {
+                    firstParentMenu.close();
+                }
 
-            xevent.dispatch(firstParentMenu, 'change', { detail: { item } });
+                xevent.dispatch(firstParentMenu, 'change', {
+                    detail: { item }
+                });
+            }
         }
     }
 };

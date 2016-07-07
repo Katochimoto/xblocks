@@ -190,6 +190,7 @@ export default xb.Select = create('xb-select', [
                 menu[ ConstantMenu.SELECTED ] = this[ ConstantSelect.SELECTED ];
 
                 menu.selectable = true;
+                menu.alwaysselected = true;
                 menu.multiple = this.multiple;
                 menu.autoclose = !this.multiple;
                 menu.innerHTML = this.content;

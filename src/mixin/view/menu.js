@@ -38,7 +38,7 @@ export default function (tagName) {
 
         _updateMaxHeight: function (size, callback) {
             size = Number(size);
-            var maxHeight = 0;
+            let maxHeight = 0;
 
             if (size > 0) {
                 let contentNode = this._content;
@@ -55,11 +55,11 @@ export default function (tagName) {
         },
 
         _redrawScrollNavigator: function (callback) {
-            var target = this._content;
-            var safeArea = 5;
-            var height = Math.max(target.scrollHeight, target.clientHeight);
-            var isShowScrollTop = (target.scrollTop > safeArea);
-            var isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
+            const target = this._content;
+            const safeArea = 5;
+            const height = Math.max(target.scrollHeight, target.clientHeight);
+            const isShowScrollTop = (target.scrollTop > safeArea);
+            const isShowScrollBottom = (target.scrollTop + target.clientHeight < height - safeArea);
 
             this.setState({ isShowScrollTop, isShowScrollBottom }, this._redrawScrollNavigatorSuccess.bind(this, callback));
         },
@@ -79,11 +79,11 @@ export default function (tagName) {
         },
 
         _onWheel: function (event) {
-            var content = this._content;
-            var delta = event.deltaY;
-            var scrollTop = content.scrollTop;
-            var offsetHeight = content.offsetHeight;
-            var scrollHeight = content.scrollHeight;
+            const content = this._content;
+            const delta = event.deltaY;
+            const scrollTop = content.scrollTop;
+            const offsetHeight = content.offsetHeight;
+            const scrollHeight = content.scrollHeight;
 
             if (delta < 0 && scrollTop === 0 ||
                 delta > 0 && scrollTop + offsetHeight >= scrollHeight ||
@@ -154,15 +154,15 @@ export default function (tagName) {
          * @param {xb.Menuitem} menuitem
          */
         scrollIntoItem: function (menuitem) {
-            var content = this._content;
-            var rectContent = content.getBoundingClientRect();
-            var rectMenuitem = menuitem.getBoundingClientRect();
+            const content = this._content;
+            const rectContent = content.getBoundingClientRect();
+            const rectMenuitem = menuitem.getBoundingClientRect();
 
             if (rectMenuitem.top < rectContent.bottom && rectMenuitem.bottom > rectContent.top) {
                 return;
             }
 
-            var offset = 0;
+            let offset = 0;
 
             if (rectMenuitem.top >= rectContent.bottom) {
                 offset = rectMenuitem.bottom - rectContent.bottom;

@@ -60,8 +60,6 @@ export default xv.Button = view.register('xb-button', [
             return {
                 'autofocus': false,
                 'checked': false,
-                'data-xb-tabindex': '0',
-                'disabled': false,
                 'multiple': false,
                 'required': false,
                 'size': 'm',

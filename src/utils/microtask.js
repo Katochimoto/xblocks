@@ -1,10 +1,10 @@
 import context from 'context';
 import vendor from 'utils/vendor';
 
-var iterations = 0;
-var callbacks = [];
-var twiddle = context.document.createTextNode('');
-var Mutation = vendor('MutationObserver') || context.JsMutationObserver;
+let iterations = 0;
+const callbacks = [];
+const twiddle = context.document.createTextNode('');
+const Mutation = vendor('MutationObserver') || context.JsMutationObserver;
 
 (new Mutation(function () {
     while (callbacks.length) {
