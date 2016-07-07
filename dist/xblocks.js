@@ -77,37 +77,193 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\n__webpack_require__(1);\n\n__webpack_require__(2);\n\n__webpack_require__(5);\n\n__webpack_require__(18);\n\n__webpack_require__(47);\n\n__webpack_require__(58);\n\n__webpack_require__(62);\n\n__webpack_require__(66);\n\n__webpack_require__(70);\n\n__webpack_require__(86);\n\n__webpack_require__(114);\n\n__webpack_require__(119);\n\n__webpack_require__(123);\n\n__webpack_require__(126);\n\n__webpack_require__(131);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./index.js\n ** module id = 0\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./index.js?");
+	'use strict';
+
+	__webpack_require__(1);
+
+	__webpack_require__(2);
+
+	__webpack_require__(5);
+
+	__webpack_require__(18);
+
+	__webpack_require__(47);
+
+	__webpack_require__(58);
+
+	__webpack_require__(62);
+
+	__webpack_require__(66);
+
+	__webpack_require__(70);
+
+	__webpack_require__(86);
+
+	__webpack_require__(115);
+
+	__webpack_require__(120);
+
+	__webpack_require__(124);
+
+	__webpack_require__(127);
+
+	__webpack_require__(132);
 
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
 
-	eval("// removed by extract-text-webpack-plugin\n\n/*****************\n ** WEBPACK FOOTER\n ** ./styl/index.styl\n ** module id = 1\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./styl/index.styl?");
+	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _xtag = __webpack_require__(4);\n\nvar _xtag2 = _interopRequireDefault(_xtag);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * @example\n * \"scroll:debounce(100,true,false)\": function () {}\n *\n * @type {Object}\n */\n_xtag2.default.pseudos.debounce = {\n    onCompiled: function onCompiled(listener, pseudo) {\n        var len = pseudo.arguments.length;\n        var wait = Number(pseudo.arguments[0]);\n        var leading = true;\n        var trailing = false;\n\n        if (len > 1) {\n            leading = pseudo.arguments[1] === 'true';\n        }\n\n        if (len > 2) {\n            trailing = pseudo.arguments[2] === 'true';\n        }\n\n        return _lodash2.default.debounce(listener, wait, {\n            leading: leading,\n            trailing: trailing\n        });\n    }\n};\n\n/**\n * @example\n * \"scroll:throttle(100,true,false)\": function () {}\n *\n * @type {Object}\n */\n_xtag2.default.pseudos.throttle = {\n    onCompiled: function onCompiled(listener, pseudo) {\n        var len = pseudo.arguments.length;\n        var wait = Number(pseudo.arguments[0]);\n        var leading = true;\n        var trailing = false;\n\n        if (len > 1) {\n            leading = pseudo.arguments[1] === 'true';\n        }\n\n        if (len > 2) {\n            trailing = pseudo.arguments[2] === 'true';\n        }\n\n        return _lodash2.default.throttle(listener, wait, {\n            leading: leading,\n            trailing: trailing\n        });\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./xtag.js\n ** module id = 2\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./xtag.js?");
+	'use strict';
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _xtag = __webpack_require__(4);
+
+	var _xtag2 = _interopRequireDefault(_xtag);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * @example
+	 * "scroll:debounce(100,true,false)": function () {}
+	 *
+	 * @type {Object}
+	 */
+	_xtag2.default.pseudos.debounce = {
+	    onCompiled: function onCompiled(listener, pseudo) {
+	        var len = pseudo.arguments.length;
+	        var wait = Number(pseudo.arguments[0]);
+	        var leading = true;
+	        var trailing = false;
+
+	        if (len > 1) {
+	            leading = pseudo.arguments[1] === 'true';
+	        }
+
+	        if (len > 2) {
+	            trailing = pseudo.arguments[2] === 'true';
+	        }
+
+	        return _lodash2.default.debounce(listener, wait, {
+	            leading: leading,
+	            trailing: trailing
+	        });
+	    }
+	};
+
+	/**
+	 * @example
+	 * "scroll:throttle(100,true,false)": function () {}
+	 *
+	 * @type {Object}
+	 */
+	_xtag2.default.pseudos.throttle = {
+	    onCompiled: function onCompiled(listener, pseudo) {
+	        var len = pseudo.arguments.length;
+	        var wait = Number(pseudo.arguments[0]);
+	        var leading = true;
+	        var trailing = false;
+
+	        if (len > 1) {
+	            leading = pseudo.arguments[1] === 'true';
+	        }
+
+	        if (len > 2) {
+	            trailing = pseudo.arguments[2] === 'true';
+	        }
+
+	        return _lodash2.default.throttle(listener, wait, {
+	            leading: leading,
+	            trailing: trailing
+	        });
+	    }
+	};
 
 /***/ },
 /* 3 */
 /***/ function(module, exports) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_3__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external {\"root\":\"_\",\"commonjs2\":\"lodash\",\"commonjs\":\"lodash\",\"amd\":\"lodash\"}\n ** module id = 3\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%7B%22root%22:%22_%22,%22commonjs2%22:%22lodash%22,%22commonjs%22:%22lodash%22,%22amd%22:%22lodash%22%7D?");
+	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_4__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external {\"root\":\"xtag\",\"commonjs2\":\"xtag\",\"commonjs\":\"xtag\",\"amd\":\"xtag\"}\n ** module id = 4\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%7B%22root%22:%22xtag%22,%22commonjs2%22:%22xtag%22,%22commonjs%22:%22xtag%22,%22amd%22:%22xtag%22%7D?");
+	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(6);\n\n__webpack_require__(7);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * xb-ico html element\n *\n * @prop {string} [value=&160;] the text inside the tag\n * @prop {boolean} [active=false]\n * @prop {boolean} [disabled=false]\n * @prop {string} [size=s] icon size, possible values: s|m\n * @prop {string} type icon type, possible values: attention|close|check|download|download-white|dropdown|\n * eye|link|link-white|mail|notification|odnoklassniki|pause|people|play|print|remove|services|\n * settings|three-dots|trash|trash-white|twitter|help|upload|upload-white|vk\n *\n * @example\n * &#60;xb-ico type=\"notification\" value=\"attribute value\">&#60;/xb-ico>\n * <xb-ico value=\"attribute value\" type=\"notification\"></xb-ico>\n *\n * @example\n * &#60;xb-ico disabled type=\"attention\">&#60;/xb-ico>\n * <xb-ico disabled type=\"attention\"></xb-ico>\n *\n * @example\n * &#60;xb-ico active type=\"attention\">&#60;/xb-ico>\n * <xb-ico active type=\"attention\"></xb-ico>\n *\n * @example\n * &#60;xb-ico size=\"m\" type=\"attention\">&#60;/xb-ico>\n * <xb-ico size=\"m\" type=\"attention\"></xb-ico>\n *\n * @class xb.Ico\n * @memberof xb\n * @augments HTMLElement\n * @mixes xblocks.mixin.eDisabled\n */\nexports.default = _context.xb.Ico = (0, _xblocksCore.create)('xb-ico', [_disabled2.default, {\n    accessors: {\n        active: {\n            attribute: {\n                boolean: true\n            }\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/ico/index.js\n ** module id = 5\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/ico/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(6);
+
+	__webpack_require__(7);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * xb-ico html element
+	 *
+	 * @prop {string} [value=&160;] the text inside the tag
+	 * @prop {boolean} [active=false]
+	 * @prop {boolean} [disabled=false]
+	 * @prop {string} [size=s] icon size, possible values: s|m
+	 * @prop {string} type icon type, possible values: attention|close|check|download|download-white|dropdown|
+	 * eye|link|link-white|mail|notification|odnoklassniki|pause|people|play|print|remove|services|
+	 * settings|three-dots|trash|trash-white|twitter|help|upload|upload-white|vk
+	 *
+	 * @example
+	 * &#60;xb-ico type="notification" value="attribute value">&#60;/xb-ico>
+	 * <xb-ico value="attribute value" type="notification"></xb-ico>
+	 *
+	 * @example
+	 * &#60;xb-ico disabled type="attention">&#60;/xb-ico>
+	 * <xb-ico disabled type="attention"></xb-ico>
+	 *
+	 * @example
+	 * &#60;xb-ico active type="attention">&#60;/xb-ico>
+	 * <xb-ico active type="attention"></xb-ico>
+	 *
+	 * @example
+	 * &#60;xb-ico size="m" type="attention">&#60;/xb-ico>
+	 * <xb-ico size="m" type="attention"></xb-ico>
+	 *
+	 * @class xb.Ico
+	 * @memberof xb
+	 * @augments HTMLElement
+	 * @mixes xblocks.mixin.eDisabled
+	 */
+	exports.default = _context.xb.Ico = (0, _xblocksCore.create)('xb-ico', [_disabled2.default, {
+	    accessors: {
+	        active: {
+	            attribute: {
+	                boolean: true
+	            }
+	        }
+	    }
+	}]);
 
 /***/ },
 /* 6 */
@@ -115,73 +271,583 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * The template node xb-ico\n *\n * @class xv.Ico\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.Ico = _xblocksCore.view.register('xb-ico', [_commonAttrs2.default, {\n    displayName: 'xb-ico',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        active: _react.PropTypes.bool,\n        size: _react.PropTypes.oneOf(['s', 'm']),\n        value: _react.PropTypes.string,\n        type: _react.PropTypes.oneOf(['attention', 'check', 'close', 'download', 'download-white', 'dropdown', 'eye', 'help', 'link', 'link-white', 'mail', 'mic-off', 'mic-on', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'upload', 'upload-white', 'vk'])\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            active: false,\n            disabled: false,\n            size: 's'\n        };\n    },\n\n    render: function render() {\n        var _classnames;\n\n        var classes = (0, _classnames3.default)((_classnames = {\n            'xb-ico': true,\n            '_active': this.props.active,\n            '_disabled': this.props.disabled\n        }, _defineProperty(_classnames, '_type-' + this.props.type, true), _defineProperty(_classnames, '_size-' + this.props.size, true), _classnames));\n\n        var content = this.props.value || this.props.children || String.fromCharCode(160);\n\n        return React.createElement(\n            'span',\n            { className: classes, 'data-xb-content': this.props._uid },\n            content\n        );\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/ico/index.jsx\n ** module id = 7\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/ico/index.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * The template node xb-ico
+	 *
+	 * @class xv.Ico
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.Ico = _xblocksCore.view.register('xb-ico', [_commonAttrs2.default, {
+	    displayName: 'xb-ico',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        active: _react.PropTypes.bool,
+	        size: _react.PropTypes.oneOf(['s', 'm']),
+	        value: _react.PropTypes.string,
+	        type: _react.PropTypes.oneOf(['attention', 'check', 'close', 'download', 'download-white', 'dropdown', 'eye', 'help', 'link', 'link-white', 'mail', 'mic-off', 'mic-on', 'notification', 'odnoklassniki', 'pause', 'people', 'play', 'print', 'remove', 'services', 'settings', 'three-dots', 'trash', 'trash-white', 'twitter', 'upload', 'upload-white', 'vk'])
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            active: false,
+	            disabled: false,
+	            size: 's'
+	        };
+	    },
+
+	    render: function render() {
+	        var _classnames;
+
+	        var classes = (0, _classnames3.default)((_classnames = {
+	            'xb-ico': true,
+	            '_active': this.props.active,
+	            '_disabled': this.props.disabled
+	        }, _defineProperty(_classnames, '_type-' + this.props.type, true), _defineProperty(_classnames, '_size-' + this.props.size, true), _classnames));
+
+	        var content = this.props.value || this.props.children || String.fromCharCode(160);
+
+	        return React.createElement(
+	            'span',
+	            { className: classes, 'data-xb-content': this.props._uid },
+	            content
+	        );
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 8 */
 /***/ function(module, exports) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_8__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external {\"root\":\"React\",\"commonjs2\":\"react\",\"commonjs\":\"react\",\"amd\":\"react\"}\n ** module id = 8\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%7B%22root%22:%22React%22,%22commonjs2%22:%22react%22,%22commonjs%22:%22react%22,%22amd%22:%22react%22%7D?");
+	module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 
 /***/ },
 /* 9 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nvar context = function () {\n    /* eslint no-eval: 0 */\n    return this || (1, eval)('this');\n}();\n\nvar xv = exports.xv = context.xv = {};\nvar xb = exports.xb = context.xb = {};\nexports.default = context;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./context.js\n ** module id = 9\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./context.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var context = function () {
+	    /* eslint no-eval: 0 */
+	    return this || (1, eval)('this');
+	}();
+
+	var xv = exports.xv = context.xv = {};
+	var xb = exports.xb = context.xb = {};
+	exports.default = context;
 
 /***/ },
 /* 10 */
 /***/ function(module, exports) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_10__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external {\"root\":\"xblocks-core\",\"commonjs2\":\"xblocks-core\",\"commonjs\":\"xblocks-core\",\"amd\":\"xblocks-core\"}\n ** module id = 10\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%7B%22root%22:%22xblocks-core%22,%22commonjs2%22:%22xblocks-core%22,%22commonjs%22:%22xblocks-core%22,%22amd%22:%22xblocks-core%22%7D?");
+	module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
 
 /***/ },
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n  Copyright (c) 2016 Jed Watson.\n  Licensed under the MIT License (MIT), see\n  http://jedwatson.github.io/classnames\n*/\n/* global define */\n\n(function () {\n\t'use strict';\n\n\tvar hasOwn = {}.hasOwnProperty;\n\n\tfunction classNames () {\n\t\tvar classes = [];\n\n\t\tfor (var i = 0; i < arguments.length; i++) {\n\t\t\tvar arg = arguments[i];\n\t\t\tif (!arg) continue;\n\n\t\t\tvar argType = typeof arg;\n\n\t\t\tif (argType === 'string' || argType === 'number') {\n\t\t\t\tclasses.push(arg);\n\t\t\t} else if (Array.isArray(arg)) {\n\t\t\t\tclasses.push(classNames.apply(null, arg));\n\t\t\t} else if (argType === 'object') {\n\t\t\t\tfor (var key in arg) {\n\t\t\t\t\tif (hasOwn.call(arg, key) && arg[key]) {\n\t\t\t\t\t\tclasses.push(key);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\treturn classes.join(' ');\n\t}\n\n\tif (typeof module !== 'undefined' && module.exports) {\n\t\tmodule.exports = classNames;\n\t} else if (true) {\n\t\t// register as 'classnames', consistent with npm package name\n\t\t!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {\n\t\t\treturn classNames;\n\t\t}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n\t} else {\n\t\twindow.classNames = classNames;\n\t}\n}());\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/classnames/index.js\n ** module id = 11\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/classnames/index.js?");
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
 
 /***/ },
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = __webpack_require__(13);\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/react-addons-pure-render-mixin/index.js\n ** module id = 12\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/react-addons-pure-render-mixin/index.js?");
+	module.exports = __webpack_require__(13);
 
 /***/ },
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n * @providesModule ReactComponentWithPureRenderMixin\n */\n\n'use strict';\n\nvar shallowCompare = __webpack_require__(14);\n\n/**\n * If your React component's render function is \"pure\", e.g. it will render the\n * same result given the same props and state, provide this mixin for a\n * considerable performance boost.\n *\n * Most React components have pure render functions.\n *\n * Example:\n *\n *   var ReactComponentWithPureRenderMixin =\n *     require('ReactComponentWithPureRenderMixin');\n *   React.createClass({\n *     mixins: [ReactComponentWithPureRenderMixin],\n *\n *     render: function() {\n *       return <div className={this.props.className}>foo</div>;\n *     }\n *   });\n *\n * Note: This only checks shallow equality for props and state. If these contain\n * complex data structures this mixin may have false-negatives for deeper\n * differences. Only mixin to components which have simple props and state, or\n * use `forceUpdate()` when you know deep data structures have changed.\n *\n * See https://facebook.github.io/react/docs/pure-render-mixin.html\n */\nvar ReactComponentWithPureRenderMixin = {\n  shouldComponentUpdate: function (nextProps, nextState) {\n    return shallowCompare(this, nextProps, nextState);\n  }\n};\n\nmodule.exports = ReactComponentWithPureRenderMixin;\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/react/lib/ReactComponentWithPureRenderMixin.js\n ** module id = 13\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/react/lib/ReactComponentWithPureRenderMixin.js?");
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactComponentWithPureRenderMixin
+	 */
+
+	'use strict';
+
+	var shallowCompare = __webpack_require__(14);
+
+	/**
+	 * If your React component's render function is "pure", e.g. it will render the
+	 * same result given the same props and state, provide this mixin for a
+	 * considerable performance boost.
+	 *
+	 * Most React components have pure render functions.
+	 *
+	 * Example:
+	 *
+	 *   var ReactComponentWithPureRenderMixin =
+	 *     require('ReactComponentWithPureRenderMixin');
+	 *   React.createClass({
+	 *     mixins: [ReactComponentWithPureRenderMixin],
+	 *
+	 *     render: function() {
+	 *       return <div className={this.props.className}>foo</div>;
+	 *     }
+	 *   });
+	 *
+	 * Note: This only checks shallow equality for props and state. If these contain
+	 * complex data structures this mixin may have false-negatives for deeper
+	 * differences. Only mixin to components which have simple props and state, or
+	 * use `forceUpdate()` when you know deep data structures have changed.
+	 *
+	 * See https://facebook.github.io/react/docs/pure-render-mixin.html
+	 */
+	var ReactComponentWithPureRenderMixin = {
+	  shouldComponentUpdate: function (nextProps, nextState) {
+	    return shallowCompare(this, nextProps, nextState);
+	  }
+	};
+
+	module.exports = ReactComponentWithPureRenderMixin;
 
 /***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n* @providesModule shallowCompare\n*/\n\n'use strict';\n\nvar shallowEqual = __webpack_require__(15);\n\n/**\n * Does a shallow comparison for props and state.\n * See ReactComponentWithPureRenderMixin\n * See also https://facebook.github.io/react/docs/shallow-compare.html\n */\nfunction shallowCompare(instance, nextProps, nextState) {\n  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);\n}\n\nmodule.exports = shallowCompare;\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/react/lib/shallowCompare.js\n ** module id = 14\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/react/lib/shallowCompare.js?");
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	* @providesModule shallowCompare
+	*/
+
+	'use strict';
+
+	var shallowEqual = __webpack_require__(15);
+
+	/**
+	 * Does a shallow comparison for props and state.
+	 * See ReactComponentWithPureRenderMixin
+	 * See also https://facebook.github.io/react/docs/shallow-compare.html
+	 */
+	function shallowCompare(instance, nextProps, nextState) {
+	  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
+	}
+
+	module.exports = shallowCompare;
 
 /***/ },
 /* 15 */
 /***/ function(module, exports) {
 
-	eval("/**\n * Copyright (c) 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n * @typechecks\n * \n */\n\n/*eslint-disable no-self-compare */\n\n'use strict';\n\nvar hasOwnProperty = Object.prototype.hasOwnProperty;\n\n/**\n * inlined Object.is polyfill to avoid requiring consumers ship their own\n * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is\n */\nfunction is(x, y) {\n  // SameValue algorithm\n  if (x === y) {\n    // Steps 1-5, 7-10\n    // Steps 6.b-6.e: +0 != -0\n    return x !== 0 || 1 / x === 1 / y;\n  } else {\n    // Step 6.a: NaN == NaN\n    return x !== x && y !== y;\n  }\n}\n\n/**\n * Performs equality by iterating through keys on an object and returning false\n * when any key has values which are not strictly equal between the arguments.\n * Returns true when the values of all keys are strictly equal.\n */\nfunction shallowEqual(objA, objB) {\n  if (is(objA, objB)) {\n    return true;\n  }\n\n  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {\n    return false;\n  }\n\n  var keysA = Object.keys(objA);\n  var keysB = Object.keys(objB);\n\n  if (keysA.length !== keysB.length) {\n    return false;\n  }\n\n  // Test for A's keys different from B.\n  for (var i = 0; i < keysA.length; i++) {\n    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {\n      return false;\n    }\n  }\n\n  return true;\n}\n\nmodule.exports = shallowEqual;\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/fbjs/lib/shallowEqual.js\n ** module id = 15\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/fbjs/lib/shallowEqual.js?");
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @typechecks
+	 * 
+	 */
+
+	/*eslint-disable no-self-compare */
+
+	'use strict';
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	/**
+	 * inlined Object.is polyfill to avoid requiring consumers ship their own
+	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	 */
+	function is(x, y) {
+	  // SameValue algorithm
+	  if (x === y) {
+	    // Steps 1-5, 7-10
+	    // Steps 6.b-6.e: +0 != -0
+	    return x !== 0 || 1 / x === 1 / y;
+	  } else {
+	    // Step 6.a: NaN == NaN
+	    return x !== x && y !== y;
+	  }
+	}
+
+	/**
+	 * Performs equality by iterating through keys on an object and returning false
+	 * when any key has values which are not strictly equal between the arguments.
+	 * Returns true when the values of all keys are strictly equal.
+	 */
+	function shallowEqual(objA, objB) {
+	  if (is(objA, objB)) {
+	    return true;
+	  }
+
+	  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+	    return false;
+	  }
+
+	  var keysA = Object.keys(objA);
+	  var keysB = Object.keys(objB);
+
+	  if (keysA.length !== keysB.length) {
+	    return false;
+	  }
+
+	  // Test for A's keys different from B.
+	  for (var i = 0; i < keysA.length; i++) {
+	    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+	      return false;
+	    }
+	  }
+
+	  return true;
+	}
+
+	module.exports = shallowEqual;
 
 /***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(8);\n\nexports.default = {\n    /**\n     * Common attributes\n     *\n     * @type {Object}\n     * @prop {Object} propTypes\n     * @prop {string} propTypes.accesskey\n     * @prop {string} propTypes.contextmenu\n     * @prop {enum} propTypes.dir\n     * @prop {boolean} propTypes.hidden\n     * @prop {boolean} propTypes.spellcheck\n     * @prop {string} propTypes.data-xb-tabindex\n     * @prop {string} propTypes.title\n     */\n    propTypes: {\n        'accesskey': _react.PropTypes.string,\n        'contextmenu': _react.PropTypes.string,\n        'data-xb-tabindex': numberString,\n        'dir': _react.PropTypes.oneOf(['ltr', 'rtl']),\n        'disabled': _react.PropTypes.bool,\n        'hidden': _react.PropTypes.bool,\n        'spellcheck': _react.PropTypes.bool,\n        'title': _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'data-xb-tabindex': '0',\n            'disabled': false,\n            'hidden': false\n        };\n    },\n\n    /**\n     * @returns {string}\n     */\n    getTabIndex: function getTabIndex() {\n        return this.props.disabled ? '-1' : this.props['data-xb-tabindex'];\n    }\n};\n\n\nfunction numberString(props, propName, componentName) {\n    if (props.hasOwnProperty(propName) && !/^(\\-?[0-9])?[0-9]*$/.test(props[propName])) {\n        return new Error('Invalid prop \"' + propName + '\" supplied to \"' + componentName + '\". Validation failed.');\n    }\n}\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/view/commonAttrs.js\n ** module id = 16\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/view/commonAttrs.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(8);
+
+	exports.default = {
+	    /**
+	     * Common attributes
+	     *
+	     * @type {Object}
+	     * @prop {Object} propTypes
+	     * @prop {string} propTypes.accesskey
+	     * @prop {string} propTypes.contextmenu
+	     * @prop {enum} propTypes.dir
+	     * @prop {boolean} propTypes.hidden
+	     * @prop {boolean} propTypes.spellcheck
+	     * @prop {string} propTypes.data-xb-tabindex
+	     * @prop {string} propTypes.title
+	     */
+	    propTypes: {
+	        'accesskey': _react.PropTypes.string,
+	        'contextmenu': _react.PropTypes.string,
+	        'data-xb-tabindex': numberString,
+	        'dir': _react.PropTypes.oneOf(['ltr', 'rtl']),
+	        'disabled': _react.PropTypes.bool,
+	        'hidden': _react.PropTypes.bool,
+	        'spellcheck': _react.PropTypes.bool,
+	        'title': _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'data-xb-tabindex': '0',
+	            'disabled': false,
+	            'hidden': false
+	        };
+	    },
+
+	    /**
+	     * @returns {string}
+	     */
+	    getTabIndex: function getTabIndex() {
+	        return this.props.disabled ? '-1' : this.props['data-xb-tabindex'];
+	    }
+	};
+
+
+	function numberString(props, propName, componentName) {
+	    if (props.hasOwnProperty(propName) && !/^(\-?[0-9])?[0-9]*$/.test(props[propName])) {
+	        return new Error('Invalid prop "' + propName + '" supplied to "' + componentName + '". Validation failed.');
+	    }
+	}
 
 /***/ },
 /* 17 */
 /***/ function(module, exports) {
 
-	eval("\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n/**\n * Disabled element interface\n *\n * <xb-button disabled>button</xb-button>\n *\n * @example\n * import { create } from 'xblocks-core';\n * import mixinDisabled from 'mixin/element/disabled';\n *\n * create('xb-button', [\n *     mixinDisabled,\n *     {\n *         accessors: { ... },\n *         events: { ... },\n *         methods: { ... }\n *         ...\n *     }\n * ]);\n *\n * var e = document.createElement('xb-button');\n * // read\n * console.log(e.disabled)\n * // false\n *\n * // write\n * e.disabled = true;\n * // true\n *\n * // jquery write\n * $(e).prop('disabled', false)\n * // false\n *\n * @prop {boolean} disabled\n * @type {Object}\n */\nexports.default = {\n    accessors: {\n        disabled: {\n            attribute: {\n                boolean: true\n            }\n        }\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/element/disabled.js\n ** module id = 17\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/element/disabled.js?");
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	/**
+	 * Disabled element interface
+	 *
+	 * <xb-button disabled>button</xb-button>
+	 *
+	 * @example
+	 * import { create } from 'xblocks-core';
+	 * import mixinDisabled from 'mixin/element/disabled';
+	 *
+	 * create('xb-button', [
+	 *     mixinDisabled,
+	 *     {
+	 *         accessors: { ... },
+	 *         events: { ... },
+	 *         methods: { ... }
+	 *         ...
+	 *     }
+	 * ]);
+	 *
+	 * var e = document.createElement('xb-button');
+	 * // read
+	 * console.log(e.disabled)
+	 * // false
+	 *
+	 * // write
+	 * e.disabled = true;
+	 * // true
+	 *
+	 * // jquery write
+	 * $(e).prop('disabled', false)
+	 * // false
+	 *
+	 * @prop {boolean} disabled
+	 * @type {Object}
+	 */
+	exports.default = {
+	    accessors: {
+	        disabled: {
+	            attribute: {
+	                boolean: true
+	            }
+	        }
+	    }
+	};
 
 /***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(19);\n\n__webpack_require__(20);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _replaceTextSelection = __webpack_require__(44);\n\nvar _replaceTextSelection2 = _interopRequireDefault(_replaceTextSelection);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _focusComponent = __webpack_require__(45);\n\nvar _focusComponent2 = _interopRequireDefault(_focusComponent);\n\nvar _input = __webpack_require__(23);\n\nvar _input2 = _interopRequireDefault(_input);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * xb-input html element\n *\n * @class xb.Input\n * @memberof xb\n * @augments HTMLInputElement\n * @mixes xblocks.mixin.eDisabled\n * @mixes xblocks.mixin.eFocus\n */\nexports.default = _context.xb.Input = (0, _xblocksCore.create)('xb-input', [_disabled2.default, _focusComponent2.default, {\n    prototype: Object.create(HTMLInputElement.prototype),\n\n    events: {\n        'xb-speech-recognition-start': function xbSpeechRecognitionStart() {\n            // console.log(event);\n        },\n\n        'xb-speech-recognition-result': function xbSpeechRecognitionResult(event) {\n            if (event.detail) {\n                var input = this.querySelector('input');\n\n                if (event.detail.interim) {\n                    var start = input.selectionStart;\n\n                    (0, _replaceTextSelection2.default)(input, event.detail.interim, function (callback) {\n                        callback(input.value);\n                    }, function (value, callback) {\n                        input.value = value;\n                        callback(function () {\n                            input.selectionStart = start;\n                            input.scrollLeft = input.scrollWidth;\n                        });\n                    });\n                } else if (event.detail.final) {\n                    this.value = event.detail.final;\n                    input.value = event.detail.final;\n                    var len = this.value.length;\n                    input.setSelectionRange(len, len);\n                    input.scrollLeft = input.scrollWidth;\n                }\n            }\n            // console.log(event.detail, this);\n        },\n\n        'xb-speech-recognition-end': function xbSpeechRecognitionEnd(event) {\n            if (event.detail) {\n                var input = this.querySelector('input');\n                this.value = event.detail.final;\n                input.value = event.detail.final;\n                var len = this.value.length;\n                input.setSelectionRange(len, len);\n                input.scrollLeft = input.scrollWidth;\n            }\n            // console.log(event.detail);\n        },\n\n        'xb-speech-recognition-error': function xbSpeechRecognitionError() {\n            // console.log(event);\n        }\n    },\n\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                return _defineProperty({}, this.xtagName, __webpack_require__(46));\n            }\n        },\n\n        isShadowSupported: {\n            get: _lodash2.default.stubFalse\n        },\n\n        /**\n         * @prop {string} value\n         */\n        value: {\n            attribute: {\n                name: 'value'\n            },\n\n            get: function get() {\n                return String(_lodash2.default.get(this, _input2.default.VALUE, this.getAttribute('value') || this.defaultValue || ''));\n            },\n\n            set: function set(value) {\n                var component = this.getComponent();\n\n                if (component) {\n                    component.setState({ value: String(value) });\n                }\n            }\n        },\n\n        /**\n         * @prop {string} defaultValue\n         */\n        defaultValue: {\n            get: _lodash2.default.constant('')\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/input/index.js\n ** module id = 18\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/input/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(19);
+
+	__webpack_require__(20);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _replaceTextSelection = __webpack_require__(44);
+
+	var _replaceTextSelection2 = _interopRequireDefault(_replaceTextSelection);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _focusComponent = __webpack_require__(45);
+
+	var _focusComponent2 = _interopRequireDefault(_focusComponent);
+
+	var _input = __webpack_require__(23);
+
+	var _input2 = _interopRequireDefault(_input);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * xb-input html element
+	 *
+	 * @class xb.Input
+	 * @memberof xb
+	 * @augments HTMLInputElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	exports.default = _context.xb.Input = (0, _xblocksCore.create)('xb-input', [_disabled2.default, _focusComponent2.default, {
+	    prototype: Object.create(HTMLInputElement.prototype),
+
+	    events: {
+	        'xb-speech-recognition-start': function xbSpeechRecognitionStart() {
+	            // console.log(event);
+	        },
+
+	        'xb-speech-recognition-result': function xbSpeechRecognitionResult(event) {
+	            if (event.detail) {
+	                var input = this.querySelector('input');
+
+	                if (event.detail.interim) {
+	                    var start = input.selectionStart;
+
+	                    (0, _replaceTextSelection2.default)(input, event.detail.interim, function (callback) {
+	                        callback(input.value);
+	                    }, function (value, callback) {
+	                        input.value = value;
+	                        callback(function () {
+	                            input.selectionStart = start;
+	                            input.scrollLeft = input.scrollWidth;
+	                        });
+	                    });
+	                } else if (event.detail.final) {
+	                    this.value = event.detail.final;
+	                    input.value = event.detail.final;
+	                    var len = this.value.length;
+	                    input.setSelectionRange(len, len);
+	                    input.scrollLeft = input.scrollWidth;
+	                }
+	            }
+	            // console.log(event.detail, this);
+	        },
+
+	        'xb-speech-recognition-end': function xbSpeechRecognitionEnd(event) {
+	            if (event.detail) {
+	                var input = this.querySelector('input');
+	                this.value = event.detail.final;
+	                input.value = event.detail.final;
+	                var len = this.value.length;
+	                input.setSelectionRange(len, len);
+	                input.scrollLeft = input.scrollWidth;
+	            }
+	            // console.log(event.detail);
+	        },
+
+	        'xb-speech-recognition-error': function xbSpeechRecognitionError() {
+	            // console.log(event);
+	        }
+	    },
+
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                return _defineProperty({}, this.xtagName, __webpack_require__(46));
+	            }
+	        },
+
+	        isShadowSupported: {
+	            get: _lodash2.default.stubFalse
+	        },
+
+	        /**
+	         * @prop {string} value
+	         */
+	        value: {
+	            attribute: {
+	                name: 'value'
+	            },
+
+	            get: function get() {
+	                return String(_lodash2.default.get(this, _input2.default.VALUE, this.getAttribute('value') || this.defaultValue || ''));
+	            },
+
+	            set: function set(value) {
+	                var component = this.getComponent();
+
+	                if (component) {
+	                    component.setState({ value: String(value) });
+	                }
+	            }
+	        },
+
+	        /**
+	         * @prop {string} defaultValue
+	         */
+	        defaultValue: {
+	            get: _lodash2.default.constant('')
+	        }
+	    }
+	}]);
 
 /***/ },
 /* 19 */
@@ -189,169 +855,1099 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nvar _filterProps = __webpack_require__(21);\n\nvar _filterProps2 = _interopRequireDefault(_filterProps);\n\nvar _exportPropTypes = __webpack_require__(22);\n\nvar _exportPropTypes2 = _interopRequireDefault(_exportPropTypes);\n\nvar _input = __webpack_require__(23);\n\nvar _input2 = _interopRequireDefault(_input);\n\nvar _controller = __webpack_require__(42);\n\nvar _controller2 = _interopRequireDefault(_controller);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * The template node xb-input\n *\n * @class xv.Input\n * @memberof xv\n * @mixes React.addons.PureRenderMixin\n * @mixes xblocks.mixin.vCommonAttrs\n */\nexports.default = _context.xv.Input = _xblocksCore.view.register('xb-input', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-link'), {\n    displayName: 'xb-input',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    /**\n     * @prop {string} [name]\n     * @prop {string} [type=text] text|number|date|datetime|email|month|range|search|tel|time|url|week|color\n     * @prop {string} [size=m] s|m|l|xl\n     * @prop {string} [autoComplete] on|off\n     * @prop {string} [rows=4]\n     * @prop {string} [cols]\n     * @prop {string} [placeholder]\n     * @prop {string} [value]\n     * @prop {string} [prefix]\n     * @prop {string} [postfix]\n     * @prop {string} [tabindex]\n     * @prop {boolean} [disabled=false]\n     * @prop {boolean} [autosize=false]\n     * @prop {boolean} [multiline=false]\n     * @prop {boolean} [required=false]\n     * @prop {boolean} [readonly=false]\n     * @prop {boolean} [reset=false]\n     * @prop {boolean} [autofocus=false]\n     * @prop {boolean} [ghost=false]\n     */\n    propTypes: {\n        'autocomplete': _react.PropTypes.oneOf(['on', 'off']),\n        'autofocus': _react.PropTypes.bool,\n        'autosize': _react.PropTypes.bool,\n        'cols': _react.PropTypes.string,\n        'ghost': _react.PropTypes.bool,\n        'multiline': _react.PropTypes.bool,\n        'name': _react.PropTypes.string,\n        'placeholder': _react.PropTypes.string,\n        'postfix': _react.PropTypes.string,\n        'prefix': _react.PropTypes.string,\n        'readonly': _react.PropTypes.bool,\n        'required': _react.PropTypes.bool,\n        'reset': _react.PropTypes.bool,\n        'rows': _react.PropTypes.string,\n        'size': _react.PropTypes.oneOf(['s', 'm', 'l', 'xl']).isRequired,\n        'type': _react.PropTypes.oneOf(['text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg']).isRequired,\n        'value': _react.PropTypes.string,\n        'xb-link': _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'autofocus': false,\n            'autosize': false,\n            'ghost': false,\n            'multiline': false,\n            'readonly': false,\n            'required': false,\n            'reset': false,\n            'rows': '4',\n            'size': 'm',\n            'type': 'text',\n            'value': undefined\n        };\n    },\n\n    getInitialState: function getInitialState() {\n        return {\n            value: this.props.value\n        };\n    },\n\n    componentDidMount: function componentDidMount() {\n        // check show or hide placeholder after mount element\n        this._controller.dispatchEventToggleHint('', this.props.value);\n    },\n\n    componentDidUpdate: function componentDidUpdate() {\n        this.context.container[_input2.default.VALUE] = this.state.value;\n    },\n\n    /**\n     * Remember current value in state\n     * @param {Event} event\n     * @private\n     */\n    onChange: function onChange(event) {\n        this.setState({ value: event.target.value });\n    },\n\n    /**\n     * Show or hide placeholder\n     * @param {boolean} toggle\n     * @private\n     */\n    onHintToggle: function onHintToggle(toggle) {\n        this._placeholder.style.visibility = toggle ? 'inherit' : 'hidden';\n    },\n\n    /**\n     * Click reset button\n     * @private\n     */\n    onClickReset: function onClickReset() {\n        this.setState({ value: '' });\n    },\n\n    /**\n     * Check show complex input\n     * @returns {boolean}\n     * @private\n     */\n    isComplex: function isComplex() {\n        return Boolean(this.props.postfix || this.props.prefix || this.props.reset || this.props.autosize || this.props['xb-link'] || this.props.placeholder);\n    },\n\n    render: function render() {\n        var _this = this;\n\n        var isComplex = this.isComplex();\n        var classes = (0, _classnames3.default)(_defineProperty({\n            'xb-input': true,\n            '_disabled': this.props.disabled,\n            '_autosize': this.props.autosize,\n            '_ghost': this.props.ghost\n        }, '_' + (isComplex ? 'complex' : 'simple') + '_size-' + this.props.size, true));\n\n        var controllerProps = {\n            'autoFocus': this.props.autofocus,\n            'autoComplete': this.props.autocomplete,\n            'autosize': this.props.autosize,\n            'className': '_controller',\n            'cols': this.props.cols,\n            'disabled': this.props.disabled,\n            'key': 'controller',\n            'multiline': this.props.multiline,\n            'name': this.props.name,\n            'onChange': this.onChange,\n            'onHintToggle': this.onHintToggle,\n            'readOnly': this.props.readonly,\n            'ref': function ref(_ref) {\n                return _this._controller = _ref;\n            },\n            'required': this.props.required,\n            'rows': this.props.rows,\n            'tabIndex': this.getTabIndex(),\n            'value': this.state.value\n        };\n\n        if (isComplex) {\n            var children = [];\n\n            if (this.props['xb-link']) {\n                var linkProps = (0, _filterProps2.default)(/^xb-link-/, this.props);\n\n                children.push(React.createElement(\n                    'xb-link',\n                    _extends({}, linkProps, { theme: 'empty', key: 'label' }),\n                    this.props['xb-link']\n                ));\n            }\n\n            if (this.props.prefix) {\n                children.push(React.createElement(\n                    'span',\n                    { key: 'prefix', className: '_left' },\n                    this.props.prefix\n                ));\n            }\n\n            if (this.props.reset) {\n                children.push(React.createElement('span', { key: 'reset', className: '_reset', onClick: this.onClickReset }));\n            }\n\n            if (this.props.postfix) {\n                children.push(React.createElement(\n                    'span',\n                    { key: 'postfix', className: '_right' },\n                    this.props.postfix\n                ));\n            }\n\n            var placeholder = this.props.placeholder ? React.createElement(\n                'span',\n                { ref: function ref(_ref2) {\n                        return _this._placeholder = _ref2;\n                    }, key: 'placeholder', className: '_hint' },\n                React.createElement(\n                    'span',\n                    { className: '_hint-inner' },\n                    this.props.placeholder\n                )\n            ) : null;\n\n            children.push(React.createElement(\n                'span',\n                { key: 'content', className: '_content' },\n                placeholder,\n                React.createElement(_controller2.default, _extends({}, controllerProps, { isPlaceholderHint: Boolean(placeholder) })),\n                React.createElement(\n                    'span',\n                    { key: 'view', className: '_view' },\n                    String.fromCharCode(160)\n                )\n            ));\n\n            return React.createElement(\n                'label',\n                { className: classes },\n                children\n            );\n        } else {\n\n            return React.createElement(_controller2.default, _extends({}, controllerProps, { className: classes, isPlaceholderHint: false }));\n        }\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/input/index.jsx\n ** module id = 20\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/input/index.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	var _filterProps = __webpack_require__(21);
+
+	var _filterProps2 = _interopRequireDefault(_filterProps);
+
+	var _exportPropTypes = __webpack_require__(22);
+
+	var _exportPropTypes2 = _interopRequireDefault(_exportPropTypes);
+
+	var _input = __webpack_require__(23);
+
+	var _input2 = _interopRequireDefault(_input);
+
+	var _controller = __webpack_require__(42);
+
+	var _controller2 = _interopRequireDefault(_controller);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * The template node xb-input
+	 *
+	 * @class xv.Input
+	 * @memberof xv
+	 * @mixes React.addons.PureRenderMixin
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 */
+	exports.default = _context.xv.Input = _xblocksCore.view.register('xb-input', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-link'), {
+	    displayName: 'xb-input',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    /**
+	     * @prop {string} [name]
+	     * @prop {string} [type=text] text|number|date|datetime|email|month|range|search|tel|time|url|week|color
+	     * @prop {string} [size=m] s|m|l|xl
+	     * @prop {string} [autoComplete] on|off
+	     * @prop {string} [rows=4]
+	     * @prop {string} [cols]
+	     * @prop {string} [placeholder]
+	     * @prop {string} [value]
+	     * @prop {string} [prefix]
+	     * @prop {string} [postfix]
+	     * @prop {string} [tabindex]
+	     * @prop {boolean} [disabled=false]
+	     * @prop {boolean} [autosize=false]
+	     * @prop {boolean} [multiline=false]
+	     * @prop {boolean} [required=false]
+	     * @prop {boolean} [readonly=false]
+	     * @prop {boolean} [reset=false]
+	     * @prop {boolean} [autofocus=false]
+	     * @prop {boolean} [ghost=false]
+	     */
+	    propTypes: {
+	        'autocomplete': _react.PropTypes.oneOf(['on', 'off']),
+	        'autofocus': _react.PropTypes.bool,
+	        'autosize': _react.PropTypes.bool,
+	        'cols': _react.PropTypes.string,
+	        'ghost': _react.PropTypes.bool,
+	        'multiline': _react.PropTypes.bool,
+	        'name': _react.PropTypes.string,
+	        'placeholder': _react.PropTypes.string,
+	        'postfix': _react.PropTypes.string,
+	        'prefix': _react.PropTypes.string,
+	        'readonly': _react.PropTypes.bool,
+	        'required': _react.PropTypes.bool,
+	        'reset': _react.PropTypes.bool,
+	        'rows': _react.PropTypes.string,
+	        'size': _react.PropTypes.oneOf(['s', 'm', 'l', 'xl']).isRequired,
+	        'type': _react.PropTypes.oneOf(['text', 'number', 'date', 'datetime', 'email', 'month', 'range', 'search', 'tel', 'time', 'url', 'week', 'color', 'wysiwyg']).isRequired,
+	        'value': _react.PropTypes.string,
+	        'xb-link': _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'autosize': false,
+	            'ghost': false,
+	            'multiline': false,
+	            'readonly': false,
+	            'required': false,
+	            'reset': false,
+	            'rows': '4',
+	            'size': 'm',
+	            'type': 'text',
+	            'value': undefined
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            value: this.props.value
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        // check show or hide placeholder after mount element
+	        this._controller.dispatchEventToggleHint('', this.props.value);
+	    },
+
+	    componentDidUpdate: function componentDidUpdate() {
+	        this.context.container[_input2.default.VALUE] = this.state.value;
+	    },
+
+	    /**
+	     * Remember current value in state
+	     * @param {Event} event
+	     * @private
+	     */
+	    onChange: function onChange(event) {
+	        this.setState({ value: event.target.value });
+	    },
+
+	    /**
+	     * Show or hide placeholder
+	     * @param {boolean} toggle
+	     * @private
+	     */
+	    onHintToggle: function onHintToggle(toggle) {
+	        this._placeholder.style.visibility = toggle ? 'inherit' : 'hidden';
+	    },
+
+	    /**
+	     * Click reset button
+	     * @private
+	     */
+	    onClickReset: function onClickReset() {
+	        this.setState({ value: '' });
+	    },
+
+	    /**
+	     * Check show complex input
+	     * @returns {boolean}
+	     * @private
+	     */
+	    isComplex: function isComplex() {
+	        return Boolean(this.props.postfix || this.props.prefix || this.props.reset || this.props.autosize || this.props['xb-link'] || this.props.placeholder);
+	    },
+
+	    render: function render() {
+	        var _this = this;
+
+	        var isComplex = this.isComplex();
+	        var classes = (0, _classnames3.default)(_defineProperty({
+	            'xb-input': true,
+	            '_disabled': this.props.disabled,
+	            '_autosize': this.props.autosize,
+	            '_ghost': this.props.ghost
+	        }, '_' + (isComplex ? 'complex' : 'simple') + '_size-' + this.props.size, true));
+
+	        var controllerProps = {
+	            'autoFocus': this.props.autofocus,
+	            'autoComplete': this.props.autocomplete,
+	            'autosize': this.props.autosize,
+	            'className': '_controller',
+	            'cols': this.props.cols,
+	            'disabled': this.props.disabled,
+	            'key': 'controller',
+	            'multiline': this.props.multiline,
+	            'name': this.props.name,
+	            'onChange': this.onChange,
+	            'onHintToggle': this.onHintToggle,
+	            'readOnly': this.props.readonly,
+	            'ref': function ref(_ref) {
+	                return _this._controller = _ref;
+	            },
+	            'required': this.props.required,
+	            'rows': this.props.rows,
+	            'tabIndex': this.getTabIndex(),
+	            'value': this.state.value
+	        };
+
+	        if (isComplex) {
+	            var children = [];
+
+	            if (this.props['xb-link']) {
+	                var linkProps = (0, _filterProps2.default)(/^xb-link-/, this.props);
+
+	                children.push(React.createElement(
+	                    'xb-link',
+	                    _extends({}, linkProps, { theme: 'empty', key: 'label' }),
+	                    this.props['xb-link']
+	                ));
+	            }
+
+	            if (this.props.prefix) {
+	                children.push(React.createElement(
+	                    'span',
+	                    { key: 'prefix', className: '_left' },
+	                    this.props.prefix
+	                ));
+	            }
+
+	            if (this.props.reset) {
+	                children.push(React.createElement('span', { key: 'reset', className: '_reset', onClick: this.onClickReset }));
+	            }
+
+	            if (this.props.postfix) {
+	                children.push(React.createElement(
+	                    'span',
+	                    { key: 'postfix', className: '_right' },
+	                    this.props.postfix
+	                ));
+	            }
+
+	            var placeholder = this.props.placeholder ? React.createElement(
+	                'span',
+	                { ref: function ref(_ref2) {
+	                        return _this._placeholder = _ref2;
+	                    }, key: 'placeholder', className: '_hint' },
+	                React.createElement(
+	                    'span',
+	                    { className: '_hint-inner' },
+	                    this.props.placeholder
+	                )
+	            ) : null;
+
+	            children.push(React.createElement(
+	                'span',
+	                { key: 'content', className: '_content' },
+	                placeholder,
+	                React.createElement(_controller2.default, _extends({}, controllerProps, { isPlaceholderHint: Boolean(placeholder) })),
+	                React.createElement(
+	                    'span',
+	                    { key: 'view', className: '_view' },
+	                    String.fromCharCode(160)
+	                )
+	            ));
+
+	            return React.createElement(
+	                'label',
+	                { className: classes },
+	                children
+	            );
+	        } else {
+
+	            return React.createElement(_controller2.default, _extends({}, controllerProps, { className: classes, isPlaceholderHint: false }));
+	        }
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (reg, props) {\n    props = _lodash2.default.pickBy(props, function (name, key) {\n        return reg.test(key);\n    });\n    return _lodash2.default.transform(props, function (result, value, key) {\n        result[key.replace(reg, '')] = value;\n    }, {});\n};\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/filterProps.js\n ** module id = 21\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/filterProps.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (reg, props) {
+	    props = _lodash2.default.pickBy(props, function (name, key) {
+	        return reg.test(key);
+	    });
+	    return _lodash2.default.transform(props, function (result, value, key) {
+	        result[key.replace(reg, '')] = value;
+	    }, {});
+	};
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (tagName) {\n    var props = _xblocksCore.utils.propTypes(tagName);\n    var propTypes = {};\n    var prefix = tagName + '-';\n\n    for (var p in props) {\n        if (props.hasOwnProperty(p) && p[0] !== '_') {\n            propTypes[prefix + p] = props[p];\n        }\n    }\n\n    return { propTypes: propTypes };\n};\n\nvar _xblocksCore = __webpack_require__(10);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/exportPropTypes.js\n ** module id = 22\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/exportPropTypes.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (tagName) {
+	    var props = _xblocksCore.utils.propTypes(tagName);
+	    var propTypes = {};
+	    var prefix = tagName + '-';
+
+	    for (var p in props) {
+	        if (props.hasOwnProperty(p) && p[0] !== '_') {
+	            propTypes[prefix + p] = props[p];
+	        }
+	    }
+
+	    return { propTypes: propTypes };
+	};
+
+	var _xblocksCore = __webpack_require__(10);
 
 /***/ },
 /* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _es6Symbol = __webpack_require__(24);\n\nvar _es6Symbol2 = _interopRequireDefault(_es6Symbol);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n    VALUE: (0, _es6Symbol2.default)('input-value')\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./constants/input.js\n ** module id = 23\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./constants/input.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _es6Symbol = __webpack_require__(24);
+
+	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    VALUE: (0, _es6Symbol2.default)('input-value')
+	};
 
 /***/ },
 /* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nmodule.exports = __webpack_require__(25)() ? Symbol : __webpack_require__(26);\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es6-symbol/index.js\n ** module id = 24\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es6-symbol/index.js?");
+	'use strict';
+
+	module.exports = __webpack_require__(25)() ? Symbol : __webpack_require__(26);
+
 
 /***/ },
 /* 25 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nvar validTypes = { object: true, symbol: true };\n\nmodule.exports = function () {\n\tvar symbol;\n\tif (typeof Symbol !== 'function') return false;\n\tsymbol = Symbol('test symbol');\n\ttry { String(symbol); } catch (e) { return false; }\n\n\t// Return 'true' also for polyfills\n\tif (!validTypes[typeof Symbol.iterator]) return false;\n\tif (!validTypes[typeof Symbol.toPrimitive]) return false;\n\tif (!validTypes[typeof Symbol.toStringTag]) return false;\n\n\treturn true;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es6-symbol/is-implemented.js\n ** module id = 25\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es6-symbol/is-implemented.js?");
+	'use strict';
+
+	var validTypes = { object: true, symbol: true };
+
+	module.exports = function () {
+		var symbol;
+		if (typeof Symbol !== 'function') return false;
+		symbol = Symbol('test symbol');
+		try { String(symbol); } catch (e) { return false; }
+
+		// Return 'true' also for polyfills
+		if (!validTypes[typeof Symbol.iterator]) return false;
+		if (!validTypes[typeof Symbol.toPrimitive]) return false;
+		if (!validTypes[typeof Symbol.toStringTag]) return false;
+
+		return true;
+	};
+
 
 /***/ },
 /* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("// ES2015 Symbol polyfill for environments that do not support it (or partially support it)\n\n'use strict';\n\nvar d              = __webpack_require__(27)\n  , validateSymbol = __webpack_require__(40)\n\n  , create = Object.create, defineProperties = Object.defineProperties\n  , defineProperty = Object.defineProperty, objPrototype = Object.prototype\n  , NativeSymbol, SymbolPolyfill, HiddenSymbol, globalSymbols = create(null)\n  , isNativeSafe;\n\nif (typeof Symbol === 'function') {\n\tNativeSymbol = Symbol;\n\ttry {\n\t\tString(NativeSymbol());\n\t\tisNativeSafe = true;\n\t} catch (ignore) {}\n}\n\nvar generateName = (function () {\n\tvar created = create(null);\n\treturn function (desc) {\n\t\tvar postfix = 0, name, ie11BugWorkaround;\n\t\twhile (created[desc + (postfix || '')]) ++postfix;\n\t\tdesc += (postfix || '');\n\t\tcreated[desc] = true;\n\t\tname = '@@' + desc;\n\t\tdefineProperty(objPrototype, name, d.gs(null, function (value) {\n\t\t\t// For IE11 issue see:\n\t\t\t// https://connect.microsoft.com/IE/feedbackdetail/view/1928508/\n\t\t\t//    ie11-broken-getters-on-dom-objects\n\t\t\t// https://github.com/medikoo/es6-symbol/issues/12\n\t\t\tif (ie11BugWorkaround) return;\n\t\t\tie11BugWorkaround = true;\n\t\t\tdefineProperty(this, name, d(value));\n\t\t\tie11BugWorkaround = false;\n\t\t}));\n\t\treturn name;\n\t};\n}());\n\n// Internal constructor (not one exposed) for creating Symbol instances.\n// This one is used to ensure that `someSymbol instanceof Symbol` always return false\nHiddenSymbol = function Symbol(description) {\n\tif (this instanceof HiddenSymbol) throw new TypeError('TypeError: Symbol is not a constructor');\n\treturn SymbolPolyfill(description);\n};\n\n// Exposed `Symbol` constructor\n// (returns instances of HiddenSymbol)\nmodule.exports = SymbolPolyfill = function Symbol(description) {\n\tvar symbol;\n\tif (this instanceof Symbol) throw new TypeError('TypeError: Symbol is not a constructor');\n\tif (isNativeSafe) return NativeSymbol(description);\n\tsymbol = create(HiddenSymbol.prototype);\n\tdescription = (description === undefined ? '' : String(description));\n\treturn defineProperties(symbol, {\n\t\t__description__: d('', description),\n\t\t__name__: d('', generateName(description))\n\t});\n};\ndefineProperties(SymbolPolyfill, {\n\tfor: d(function (key) {\n\t\tif (globalSymbols[key]) return globalSymbols[key];\n\t\treturn (globalSymbols[key] = SymbolPolyfill(String(key)));\n\t}),\n\tkeyFor: d(function (s) {\n\t\tvar key;\n\t\tvalidateSymbol(s);\n\t\tfor (key in globalSymbols) if (globalSymbols[key] === s) return key;\n\t}),\n\n\t// If there's native implementation of given symbol, let's fallback to it\n\t// to ensure proper interoperability with other native functions e.g. Array.from\n\thasInstance: d('', (NativeSymbol && NativeSymbol.hasInstance) || SymbolPolyfill('hasInstance')),\n\tisConcatSpreadable: d('', (NativeSymbol && NativeSymbol.isConcatSpreadable) ||\n\t\tSymbolPolyfill('isConcatSpreadable')),\n\titerator: d('', (NativeSymbol && NativeSymbol.iterator) || SymbolPolyfill('iterator')),\n\tmatch: d('', (NativeSymbol && NativeSymbol.match) || SymbolPolyfill('match')),\n\treplace: d('', (NativeSymbol && NativeSymbol.replace) || SymbolPolyfill('replace')),\n\tsearch: d('', (NativeSymbol && NativeSymbol.search) || SymbolPolyfill('search')),\n\tspecies: d('', (NativeSymbol && NativeSymbol.species) || SymbolPolyfill('species')),\n\tsplit: d('', (NativeSymbol && NativeSymbol.split) || SymbolPolyfill('split')),\n\ttoPrimitive: d('', (NativeSymbol && NativeSymbol.toPrimitive) || SymbolPolyfill('toPrimitive')),\n\ttoStringTag: d('', (NativeSymbol && NativeSymbol.toStringTag) || SymbolPolyfill('toStringTag')),\n\tunscopables: d('', (NativeSymbol && NativeSymbol.unscopables) || SymbolPolyfill('unscopables'))\n});\n\n// Internal tweaks for real symbol producer\ndefineProperties(HiddenSymbol.prototype, {\n\tconstructor: d(SymbolPolyfill),\n\ttoString: d('', function () { return this.__name__; })\n});\n\n// Proper implementation of methods exposed on Symbol.prototype\n// They won't be accessible on produced symbol instances as they derive from HiddenSymbol.prototype\ndefineProperties(SymbolPolyfill.prototype, {\n\ttoString: d(function () { return 'Symbol (' + validateSymbol(this).__description__ + ')'; }),\n\tvalueOf: d(function () { return validateSymbol(this); })\n});\ndefineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toPrimitive, d('', function () {\n\tvar symbol = validateSymbol(this);\n\tif (typeof symbol === 'symbol') return symbol;\n\treturn symbol.toString();\n}));\ndefineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toStringTag, d('c', 'Symbol'));\n\n// Proper implementaton of toPrimitive and toStringTag for returned symbol instances\ndefineProperty(HiddenSymbol.prototype, SymbolPolyfill.toStringTag,\n\td('c', SymbolPolyfill.prototype[SymbolPolyfill.toStringTag]));\n\n// Note: It's important to define `toPrimitive` as last one, as some implementations\n// implement `toPrimitive` natively without implementing `toStringTag` (or other specified symbols)\n// And that may invoke error in definition flow:\n// See: https://github.com/medikoo/es6-symbol/issues/13#issuecomment-164146149\ndefineProperty(HiddenSymbol.prototype, SymbolPolyfill.toPrimitive,\n\td('c', SymbolPolyfill.prototype[SymbolPolyfill.toPrimitive]));\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es6-symbol/polyfill.js\n ** module id = 26\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es6-symbol/polyfill.js?");
+	// ES2015 Symbol polyfill for environments that do not support it (or partially support it)
+
+	'use strict';
+
+	var d              = __webpack_require__(27)
+	  , validateSymbol = __webpack_require__(40)
+
+	  , create = Object.create, defineProperties = Object.defineProperties
+	  , defineProperty = Object.defineProperty, objPrototype = Object.prototype
+	  , NativeSymbol, SymbolPolyfill, HiddenSymbol, globalSymbols = create(null)
+	  , isNativeSafe;
+
+	if (typeof Symbol === 'function') {
+		NativeSymbol = Symbol;
+		try {
+			String(NativeSymbol());
+			isNativeSafe = true;
+		} catch (ignore) {}
+	}
+
+	var generateName = (function () {
+		var created = create(null);
+		return function (desc) {
+			var postfix = 0, name, ie11BugWorkaround;
+			while (created[desc + (postfix || '')]) ++postfix;
+			desc += (postfix || '');
+			created[desc] = true;
+			name = '@@' + desc;
+			defineProperty(objPrototype, name, d.gs(null, function (value) {
+				// For IE11 issue see:
+				// https://connect.microsoft.com/IE/feedbackdetail/view/1928508/
+				//    ie11-broken-getters-on-dom-objects
+				// https://github.com/medikoo/es6-symbol/issues/12
+				if (ie11BugWorkaround) return;
+				ie11BugWorkaround = true;
+				defineProperty(this, name, d(value));
+				ie11BugWorkaround = false;
+			}));
+			return name;
+		};
+	}());
+
+	// Internal constructor (not one exposed) for creating Symbol instances.
+	// This one is used to ensure that `someSymbol instanceof Symbol` always return false
+	HiddenSymbol = function Symbol(description) {
+		if (this instanceof HiddenSymbol) throw new TypeError('TypeError: Symbol is not a constructor');
+		return SymbolPolyfill(description);
+	};
+
+	// Exposed `Symbol` constructor
+	// (returns instances of HiddenSymbol)
+	module.exports = SymbolPolyfill = function Symbol(description) {
+		var symbol;
+		if (this instanceof Symbol) throw new TypeError('TypeError: Symbol is not a constructor');
+		if (isNativeSafe) return NativeSymbol(description);
+		symbol = create(HiddenSymbol.prototype);
+		description = (description === undefined ? '' : String(description));
+		return defineProperties(symbol, {
+			__description__: d('', description),
+			__name__: d('', generateName(description))
+		});
+	};
+	defineProperties(SymbolPolyfill, {
+		for: d(function (key) {
+			if (globalSymbols[key]) return globalSymbols[key];
+			return (globalSymbols[key] = SymbolPolyfill(String(key)));
+		}),
+		keyFor: d(function (s) {
+			var key;
+			validateSymbol(s);
+			for (key in globalSymbols) if (globalSymbols[key] === s) return key;
+		}),
+
+		// If there's native implementation of given symbol, let's fallback to it
+		// to ensure proper interoperability with other native functions e.g. Array.from
+		hasInstance: d('', (NativeSymbol && NativeSymbol.hasInstance) || SymbolPolyfill('hasInstance')),
+		isConcatSpreadable: d('', (NativeSymbol && NativeSymbol.isConcatSpreadable) ||
+			SymbolPolyfill('isConcatSpreadable')),
+		iterator: d('', (NativeSymbol && NativeSymbol.iterator) || SymbolPolyfill('iterator')),
+		match: d('', (NativeSymbol && NativeSymbol.match) || SymbolPolyfill('match')),
+		replace: d('', (NativeSymbol && NativeSymbol.replace) || SymbolPolyfill('replace')),
+		search: d('', (NativeSymbol && NativeSymbol.search) || SymbolPolyfill('search')),
+		species: d('', (NativeSymbol && NativeSymbol.species) || SymbolPolyfill('species')),
+		split: d('', (NativeSymbol && NativeSymbol.split) || SymbolPolyfill('split')),
+		toPrimitive: d('', (NativeSymbol && NativeSymbol.toPrimitive) || SymbolPolyfill('toPrimitive')),
+		toStringTag: d('', (NativeSymbol && NativeSymbol.toStringTag) || SymbolPolyfill('toStringTag')),
+		unscopables: d('', (NativeSymbol && NativeSymbol.unscopables) || SymbolPolyfill('unscopables'))
+	});
+
+	// Internal tweaks for real symbol producer
+	defineProperties(HiddenSymbol.prototype, {
+		constructor: d(SymbolPolyfill),
+		toString: d('', function () { return this.__name__; })
+	});
+
+	// Proper implementation of methods exposed on Symbol.prototype
+	// They won't be accessible on produced symbol instances as they derive from HiddenSymbol.prototype
+	defineProperties(SymbolPolyfill.prototype, {
+		toString: d(function () { return 'Symbol (' + validateSymbol(this).__description__ + ')'; }),
+		valueOf: d(function () { return validateSymbol(this); })
+	});
+	defineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toPrimitive, d('', function () {
+		var symbol = validateSymbol(this);
+		if (typeof symbol === 'symbol') return symbol;
+		return symbol.toString();
+	}));
+	defineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toStringTag, d('c', 'Symbol'));
+
+	// Proper implementaton of toPrimitive and toStringTag for returned symbol instances
+	defineProperty(HiddenSymbol.prototype, SymbolPolyfill.toStringTag,
+		d('c', SymbolPolyfill.prototype[SymbolPolyfill.toStringTag]));
+
+	// Note: It's important to define `toPrimitive` as last one, as some implementations
+	// implement `toPrimitive` natively without implementing `toStringTag` (or other specified symbols)
+	// And that may invoke error in definition flow:
+	// See: https://github.com/medikoo/es6-symbol/issues/13#issuecomment-164146149
+	defineProperty(HiddenSymbol.prototype, SymbolPolyfill.toPrimitive,
+		d('c', SymbolPolyfill.prototype[SymbolPolyfill.toPrimitive]));
+
 
 /***/ },
 /* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar assign        = __webpack_require__(28)\n  , normalizeOpts = __webpack_require__(35)\n  , isCallable    = __webpack_require__(36)\n  , contains      = __webpack_require__(37)\n\n  , d;\n\nd = module.exports = function (dscr, value/*, options*/) {\n\tvar c, e, w, options, desc;\n\tif ((arguments.length < 2) || (typeof dscr !== 'string')) {\n\t\toptions = value;\n\t\tvalue = dscr;\n\t\tdscr = null;\n\t} else {\n\t\toptions = arguments[2];\n\t}\n\tif (dscr == null) {\n\t\tc = w = true;\n\t\te = false;\n\t} else {\n\t\tc = contains.call(dscr, 'c');\n\t\te = contains.call(dscr, 'e');\n\t\tw = contains.call(dscr, 'w');\n\t}\n\n\tdesc = { value: value, configurable: c, enumerable: e, writable: w };\n\treturn !options ? desc : assign(normalizeOpts(options), desc);\n};\n\nd.gs = function (dscr, get, set/*, options*/) {\n\tvar c, e, options, desc;\n\tif (typeof dscr !== 'string') {\n\t\toptions = set;\n\t\tset = get;\n\t\tget = dscr;\n\t\tdscr = null;\n\t} else {\n\t\toptions = arguments[3];\n\t}\n\tif (get == null) {\n\t\tget = undefined;\n\t} else if (!isCallable(get)) {\n\t\toptions = get;\n\t\tget = set = undefined;\n\t} else if (set == null) {\n\t\tset = undefined;\n\t} else if (!isCallable(set)) {\n\t\toptions = set;\n\t\tset = undefined;\n\t}\n\tif (dscr == null) {\n\t\tc = true;\n\t\te = false;\n\t} else {\n\t\tc = contains.call(dscr, 'c');\n\t\te = contains.call(dscr, 'e');\n\t}\n\n\tdesc = { get: get, set: set, configurable: c, enumerable: e };\n\treturn !options ? desc : assign(normalizeOpts(options), desc);\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/d/index.js\n ** module id = 27\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/d/index.js?");
+	'use strict';
+
+	var assign        = __webpack_require__(28)
+	  , normalizeOpts = __webpack_require__(35)
+	  , isCallable    = __webpack_require__(36)
+	  , contains      = __webpack_require__(37)
+
+	  , d;
+
+	d = module.exports = function (dscr, value/*, options*/) {
+		var c, e, w, options, desc;
+		if ((arguments.length < 2) || (typeof dscr !== 'string')) {
+			options = value;
+			value = dscr;
+			dscr = null;
+		} else {
+			options = arguments[2];
+		}
+		if (dscr == null) {
+			c = w = true;
+			e = false;
+		} else {
+			c = contains.call(dscr, 'c');
+			e = contains.call(dscr, 'e');
+			w = contains.call(dscr, 'w');
+		}
+
+		desc = { value: value, configurable: c, enumerable: e, writable: w };
+		return !options ? desc : assign(normalizeOpts(options), desc);
+	};
+
+	d.gs = function (dscr, get, set/*, options*/) {
+		var c, e, options, desc;
+		if (typeof dscr !== 'string') {
+			options = set;
+			set = get;
+			get = dscr;
+			dscr = null;
+		} else {
+			options = arguments[3];
+		}
+		if (get == null) {
+			get = undefined;
+		} else if (!isCallable(get)) {
+			options = get;
+			get = set = undefined;
+		} else if (set == null) {
+			set = undefined;
+		} else if (!isCallable(set)) {
+			options = set;
+			set = undefined;
+		}
+		if (dscr == null) {
+			c = true;
+			e = false;
+		} else {
+			c = contains.call(dscr, 'c');
+			e = contains.call(dscr, 'e');
+		}
+
+		desc = { get: get, set: set, configurable: c, enumerable: e };
+		return !options ? desc : assign(normalizeOpts(options), desc);
+	};
+
 
 /***/ },
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nmodule.exports = __webpack_require__(29)()\n\t? Object.assign\n\t: __webpack_require__(30);\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/assign/index.js\n ** module id = 28\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/assign/index.js?");
+	'use strict';
+
+	module.exports = __webpack_require__(29)()
+		? Object.assign
+		: __webpack_require__(30);
+
 
 /***/ },
 /* 29 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nmodule.exports = function () {\n\tvar assign = Object.assign, obj;\n\tif (typeof assign !== 'function') return false;\n\tobj = { foo: 'raz' };\n\tassign(obj, { bar: 'dwa' }, { trzy: 'trzy' });\n\treturn (obj.foo + obj.bar + obj.trzy) === 'razdwatrzy';\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/assign/is-implemented.js\n ** module id = 29\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/assign/is-implemented.js?");
+	'use strict';
+
+	module.exports = function () {
+		var assign = Object.assign, obj;
+		if (typeof assign !== 'function') return false;
+		obj = { foo: 'raz' };
+		assign(obj, { bar: 'dwa' }, { trzy: 'trzy' });
+		return (obj.foo + obj.bar + obj.trzy) === 'razdwatrzy';
+	};
+
 
 /***/ },
 /* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar keys  = __webpack_require__(31)\n  , value = __webpack_require__(34)\n\n  , max = Math.max;\n\nmodule.exports = function (dest, src/*, …srcn*/) {\n\tvar error, i, l = max(arguments.length, 2), assign;\n\tdest = Object(value(dest));\n\tassign = function (key) {\n\t\ttry { dest[key] = src[key]; } catch (e) {\n\t\t\tif (!error) error = e;\n\t\t}\n\t};\n\tfor (i = 1; i < l; ++i) {\n\t\tsrc = arguments[i];\n\t\tkeys(src).forEach(assign);\n\t}\n\tif (error !== undefined) throw error;\n\treturn dest;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/assign/shim.js\n ** module id = 30\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/assign/shim.js?");
+	'use strict';
+
+	var keys  = __webpack_require__(31)
+	  , value = __webpack_require__(34)
+
+	  , max = Math.max;
+
+	module.exports = function (dest, src/*, …srcn*/) {
+		var error, i, l = max(arguments.length, 2), assign;
+		dest = Object(value(dest));
+		assign = function (key) {
+			try { dest[key] = src[key]; } catch (e) {
+				if (!error) error = e;
+			}
+		};
+		for (i = 1; i < l; ++i) {
+			src = arguments[i];
+			keys(src).forEach(assign);
+		}
+		if (error !== undefined) throw error;
+		return dest;
+	};
+
 
 /***/ },
 /* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nmodule.exports = __webpack_require__(32)()\n\t? Object.keys\n\t: __webpack_require__(33);\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/keys/index.js\n ** module id = 31\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/keys/index.js?");
+	'use strict';
+
+	module.exports = __webpack_require__(32)()
+		? Object.keys
+		: __webpack_require__(33);
+
 
 /***/ },
 /* 32 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nmodule.exports = function () {\n\ttry {\n\t\tObject.keys('primitive');\n\t\treturn true;\n\t} catch (e) { return false; }\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/keys/is-implemented.js\n ** module id = 32\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/keys/is-implemented.js?");
+	'use strict';
+
+	module.exports = function () {
+		try {
+			Object.keys('primitive');
+			return true;
+		} catch (e) { return false; }
+	};
+
 
 /***/ },
 /* 33 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nvar keys = Object.keys;\n\nmodule.exports = function (object) {\n\treturn keys(object == null ? object : Object(object));\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/keys/shim.js\n ** module id = 33\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/keys/shim.js?");
+	'use strict';
+
+	var keys = Object.keys;
+
+	module.exports = function (object) {
+		return keys(object == null ? object : Object(object));
+	};
+
 
 /***/ },
 /* 34 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nmodule.exports = function (value) {\n\tif (value == null) throw new TypeError(\"Cannot use null or undefined\");\n\treturn value;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/valid-value.js\n ** module id = 34\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/valid-value.js?");
+	'use strict';
+
+	module.exports = function (value) {
+		if (value == null) throw new TypeError("Cannot use null or undefined");
+		return value;
+	};
+
 
 /***/ },
 /* 35 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nvar forEach = Array.prototype.forEach, create = Object.create;\n\nvar process = function (src, obj) {\n\tvar key;\n\tfor (key in src) obj[key] = src[key];\n};\n\nmodule.exports = function (options/*, …options*/) {\n\tvar result = create(null);\n\tforEach.call(arguments, function (options) {\n\t\tif (options == null) return;\n\t\tprocess(Object(options), result);\n\t});\n\treturn result;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/normalize-options.js\n ** module id = 35\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/normalize-options.js?");
+	'use strict';
+
+	var forEach = Array.prototype.forEach, create = Object.create;
+
+	var process = function (src, obj) {
+		var key;
+		for (key in src) obj[key] = src[key];
+	};
+
+	module.exports = function (options/*, …options*/) {
+		var result = create(null);
+		forEach.call(arguments, function (options) {
+			if (options == null) return;
+			process(Object(options), result);
+		});
+		return result;
+	};
+
 
 /***/ },
 /* 36 */
 /***/ function(module, exports) {
 
-	eval("// Deprecated\n\n'use strict';\n\nmodule.exports = function (obj) { return typeof obj === 'function'; };\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/object/is-callable.js\n ** module id = 36\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/object/is-callable.js?");
+	// Deprecated
+
+	'use strict';
+
+	module.exports = function (obj) { return typeof obj === 'function'; };
+
 
 /***/ },
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nmodule.exports = __webpack_require__(38)()\n\t? String.prototype.contains\n\t: __webpack_require__(39);\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/string/#/contains/index.js\n ** module id = 37\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/string/#/contains/index.js?");
+	'use strict';
+
+	module.exports = __webpack_require__(38)()
+		? String.prototype.contains
+		: __webpack_require__(39);
+
 
 /***/ },
 /* 38 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nvar str = 'razdwatrzy';\n\nmodule.exports = function () {\n\tif (typeof str.contains !== 'function') return false;\n\treturn ((str.contains('dwa') === true) && (str.contains('foo') === false));\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/string/#/contains/is-implemented.js\n ** module id = 38\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/string/#/contains/is-implemented.js?");
+	'use strict';
+
+	var str = 'razdwatrzy';
+
+	module.exports = function () {
+		if (typeof str.contains !== 'function') return false;
+		return ((str.contains('dwa') === true) && (str.contains('foo') === false));
+	};
+
 
 /***/ },
 /* 39 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nvar indexOf = String.prototype.indexOf;\n\nmodule.exports = function (searchString/*, position*/) {\n\treturn indexOf.call(this, searchString, arguments[1]) > -1;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es5-ext/string/#/contains/shim.js\n ** module id = 39\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es5-ext/string/#/contains/shim.js?");
+	'use strict';
+
+	var indexOf = String.prototype.indexOf;
+
+	module.exports = function (searchString/*, position*/) {
+		return indexOf.call(this, searchString, arguments[1]) > -1;
+	};
+
 
 /***/ },
 /* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar isSymbol = __webpack_require__(41);\n\nmodule.exports = function (value) {\n\tif (!isSymbol(value)) throw new TypeError(value + \" is not a symbol\");\n\treturn value;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es6-symbol/validate-symbol.js\n ** module id = 40\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es6-symbol/validate-symbol.js?");
+	'use strict';
+
+	var isSymbol = __webpack_require__(41);
+
+	module.exports = function (value) {
+		if (!isSymbol(value)) throw new TypeError(value + " is not a symbol");
+		return value;
+	};
+
 
 /***/ },
 /* 41 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nmodule.exports = function (x) {\n\tif (!x) return false;\n\tif (typeof x === 'symbol') return true;\n\tif (!x.constructor) return false;\n\tif (x.constructor.name !== 'Symbol') return false;\n\treturn (x[x.constructor.toStringTag] === 'Symbol');\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/es6-symbol/is-symbol.js\n ** module id = 41\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/es6-symbol/is-symbol.js?");
+	'use strict';
+
+	module.exports = function (x) {
+		if (!x) return false;
+		if (typeof x === 'symbol') return true;
+		if (!x.constructor) return false;
+		if (x.constructor.name !== 'Symbol') return false;
+		return (x[x.constructor.toStringTag] === 'Symbol');
+	};
+
 
 /***/ },
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _reactDom = __webpack_require__(43);\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _xblocksCore.view.create({\n    displayName: 'xb-input_controller',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        'autoFocus': _react.PropTypes.bool,\n        'autoComplete': _react.PropTypes.oneOf(['on', 'off']),\n        'autosize': _react.PropTypes.bool,\n        'className': _react.PropTypes.string,\n        'cols': _react.PropTypes.string,\n        'disabled': _react.PropTypes.bool,\n        'isPlaceholderHint': _react.PropTypes.bool,\n        'multiline': _react.PropTypes.bool,\n        'name': _react.PropTypes.string,\n        'onChange': _react.PropTypes.func,\n        'onHintToggle': _react.PropTypes.func,\n        'placeholder': _react.PropTypes.string,\n        'readOnly': _react.PropTypes.bool,\n        'required': _react.PropTypes.bool,\n        'rows': _react.PropTypes.string,\n        'tabIndex': _react.PropTypes.string,\n        'value': _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'autoFocus': false,\n            'autosize': false,\n            'disabled': false,\n            'isPlaceholderHint': false,\n            'multiline': false,\n            'readOnly': false,\n            'required': false,\n            'value': undefined\n        };\n    },\n\n    componentDidUpdate: function componentDidUpdate(prevProps) {\n        this.recalculateSize();\n        this.dispatchEventToggleHint(prevProps.value, this.props.value);\n    },\n\n    componentDidMount: function componentDidMount() {\n        this.recalculateSize();\n    },\n\n    dispatchEventToggleHint: function dispatchEventToggleHint(prevValue, nextValue) {\n        if (this.props.isPlaceholderHint) {\n            var hasPrevValue = Boolean(prevValue);\n            var hasNestValue = Boolean(nextValue);\n\n            if (hasPrevValue ^ hasNestValue) {\n                this.props.onHintToggle(hasPrevValue && !hasNestValue);\n            }\n        }\n    },\n\n    recalculateSize: function recalculateSize() {\n        if (!this.props.autosize) {\n            return;\n        }\n\n        var node = _reactDom2.default.findDOMNode(this);\n\n        if (this.props.multiline) {\n            node.style.height = '0px';\n            node.style.height = node.scrollHeight + 'px';\n        } else {\n            node.style.width = '20px';\n            node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';\n        }\n    },\n\n    render: function render() {\n        var props = {\n            'autoFocus': this.props.autoFocus,\n            'autoComplete': this.props.autoComplete,\n            'className': this.props.className,\n            'disabled': this.props.disabled,\n            'name': this.props.name,\n            'onChange': this.props.onChange,\n            'placeholder': this.props.placeholder || '', // macos inserts placeholder default\n            'readOnly': this.props.readOnly,\n            'required': this.props.required,\n            'tabIndex': this.props.tabIndex,\n            'value': this.props.value\n        };\n\n        if (this.props.multiline) {\n            return React.createElement('textarea', _extends({}, props, { rows: this.props.rows, cols: this.props.cols }));\n        } else {\n            return React.createElement('input', _extends({}, props, { type: 'text' }));\n        }\n    }\n});\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/input/controller.jsx\n ** module id = 42\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/input/controller.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _reactDom = __webpack_require__(43);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _xblocksCore.view.create({
+	    displayName: 'xb-input_controller',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        'autoFocus': _react.PropTypes.bool,
+	        'autoComplete': _react.PropTypes.oneOf(['on', 'off']),
+	        'autosize': _react.PropTypes.bool,
+	        'className': _react.PropTypes.string,
+	        'cols': _react.PropTypes.string,
+	        'disabled': _react.PropTypes.bool,
+	        'isPlaceholderHint': _react.PropTypes.bool,
+	        'multiline': _react.PropTypes.bool,
+	        'name': _react.PropTypes.string,
+	        'onChange': _react.PropTypes.func,
+	        'onHintToggle': _react.PropTypes.func,
+	        'placeholder': _react.PropTypes.string,
+	        'readOnly': _react.PropTypes.bool,
+	        'required': _react.PropTypes.bool,
+	        'rows': _react.PropTypes.string,
+	        'tabIndex': _react.PropTypes.string,
+	        'value': _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autoFocus': false,
+	            'autosize': false,
+	            'disabled': false,
+	            'isPlaceholderHint': false,
+	            'multiline': false,
+	            'readOnly': false,
+	            'required': false,
+	            'value': undefined
+	        };
+	    },
+
+	    componentDidUpdate: function componentDidUpdate(prevProps) {
+	        this.recalculateSize();
+	        this.dispatchEventToggleHint(prevProps.value, this.props.value);
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        this.recalculateSize();
+	    },
+
+	    dispatchEventToggleHint: function dispatchEventToggleHint(prevValue, nextValue) {
+	        if (this.props.isPlaceholderHint) {
+	            var hasPrevValue = Boolean(prevValue);
+	            var hasNestValue = Boolean(nextValue);
+
+	            if (hasPrevValue ^ hasNestValue) {
+	                this.props.onHintToggle(hasPrevValue && !hasNestValue);
+	            }
+	        }
+	    },
+
+	    recalculateSize: function recalculateSize() {
+	        if (!this.props.autosize) {
+	            return;
+	        }
+
+	        var node = _reactDom2.default.findDOMNode(this);
+
+	        if (this.props.multiline) {
+	            node.style.height = '0px';
+	            node.style.height = node.scrollHeight + 'px';
+	        } else {
+	            node.style.width = '20px';
+	            node.style.width = (node.scrollWidth < 20 ? 20 : node.scrollWidth) + 'px';
+	        }
+	    },
+
+	    render: function render() {
+	        var props = {
+	            'autoFocus': this.props.autoFocus,
+	            'autoComplete': this.props.autoComplete,
+	            'className': this.props.className,
+	            'disabled': this.props.disabled,
+	            'name': this.props.name,
+	            'onChange': this.props.onChange,
+	            'placeholder': this.props.placeholder || '', // macos inserts placeholder default
+	            'readOnly': this.props.readOnly,
+	            'required': this.props.required,
+	            'tabIndex': this.props.tabIndex,
+	            'value': this.props.value
+	        };
+
+	        if (this.props.multiline) {
+	            return React.createElement('textarea', _extends({}, props, { rows: this.props.rows, cols: this.props.cols }));
+	        } else {
+	            return React.createElement('input', _extends({}, props, { type: 'text' }));
+	        }
+	    }
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 43 */
 /***/ function(module, exports) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_43__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external {\"root\":\"ReactDOM\",\"commonjs2\":\"react-dom\",\"commonjs\":\"react-dom\",\"amd\":\"react-dom\"}\n ** module id = 43\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%7B%22root%22:%22ReactDOM%22,%22commonjs2%22:%22react-dom%22,%22commonjs%22:%22react-dom%22,%22amd%22:%22react-dom%22%7D?");
+	module.exports = __WEBPACK_EXTERNAL_MODULE_43__;
 
 /***/ },
 /* 44 */
 /***/ function(module, exports) {
 
-	eval("\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (element, text, getter, setter) {\n    var start = element.selectionStart;\n    var end = element.selectionEnd;\n    var scrollLeft = element.scrollLeft;\n    var scrollTop = element.scrollTop;\n    var pos = start + text.length;\n\n    getter(function (value) {\n        value = value.substr(0, start) + text + value.substr(end);\n\n        setter(value, function (callback) {\n            element.selectionStart = pos;\n            element.selectionEnd = pos;\n            element.scrollTop = scrollTop;\n            element.scrollLeft = scrollLeft;\n            callback();\n        });\n    });\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/replaceTextSelection.js\n ** module id = 44\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/replaceTextSelection.js?");
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (element, text, getter, setter) {
+	    var start = element.selectionStart;
+	    var end = element.selectionEnd;
+	    var scrollLeft = element.scrollLeft;
+	    var scrollTop = element.scrollTop;
+	    var pos = start + text.length;
+
+	    getter(function (value) {
+	        value = value.substr(0, start) + text + value.substr(end);
+
+	        setter(value, function (callback) {
+	            element.selectionStart = pos;
+	            element.selectionEnd = pos;
+	            element.scrollTop = scrollTop;
+	            element.scrollLeft = scrollLeft;
+	            callback();
+	        });
+	    });
+	};
 
 /***/ },
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _reactDom = __webpack_require__(43);\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * Focus element interface\n *\n * @example\n * import { create } from 'xblocks-core';\n * import mixinFocus from 'mixin/element/focusComponent';\n *\n * create('xb-button', [\n *     mixinFocus,\n *     {\n *         accessors: { ... },\n *         events: { ... },\n *         methods: { ... }\n *         ...\n *     }\n * ]);\n *\n * var e = document.createElement('xb-button');\n * // set focus\n * e.focus();\n *\n * // set blur\n * e.blur();\n *\n * @type {Object}\n */\nexports.default = {\n    methods: {\n        focus: function focus() {\n            _lodash2.default.invoke(_reactDom2.default.findDOMNode(this.getComponent()), 'focus');\n        },\n\n        blur: function blur() {\n            _lodash2.default.invoke(_reactDom2.default.findDOMNode(this.getComponent()), 'blur');\n        }\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/element/focusComponent.js\n ** module id = 45\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/element/focusComponent.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _reactDom = __webpack_require__(43);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Focus element interface
+	 *
+	 * @example
+	 * import { create } from 'xblocks-core';
+	 * import mixinFocus from 'mixin/element/focusComponent';
+	 *
+	 * create('xb-button', [
+	 *     mixinFocus,
+	 *     {
+	 *         accessors: { ... },
+	 *         events: { ... },
+	 *         methods: { ... }
+	 *         ...
+	 *     }
+	 * ]);
+	 *
+	 * var e = document.createElement('xb-button');
+	 * // set focus
+	 * e.focus();
+	 *
+	 * // set blur
+	 * e.blur();
+	 *
+	 * @type {Object}
+	 */
+	exports.default = {
+	    methods: {
+	        focus: function focus() {
+	            _lodash2.default.invoke(_reactDom2.default.findDOMNode(this.getComponent()), 'focus');
+	        },
+
+	        blur: function blur() {
+	            _lodash2.default.invoke(_reactDom2.default.findDOMNode(this.getComponent()), 'blur');
+	        }
+	    }
+	};
 
 /***/ },
 /* 46 */
 /***/ function(module, exports) {
 
-	eval("module.exports = \".xb-input._simple_size-s,\\n.xb-input._simple_size-m,\\n.xb-input._simple_size-l,\\n.xb-input._simple_size-xl,\\n.xb-input._complex_size-s,\\n.xb-input._complex_size-s > ._content > ._controller,\\n.xb-input._complex_size-m,\\n.xb-input._complex_size-m > ._content > ._controller,\\n.xb-input._complex_size-l,\\n.xb-input._complex_size-l > ._content > ._controller,\\n.xb-input._complex_size-xl,\\n.xb-input._complex_size-xl > ._content > ._controller {\\n  padding: 0;\\n  margin: 0;\\n  border: none;\\n  background: transparent;\\n  font: inherit;\\n  -webkit-appearance: none;\\n}\\n.xb-input._simple_size-s::-ms-clear,\\n.xb-input._simple_size-m::-ms-clear,\\n.xb-input._simple_size-l::-ms-clear,\\n.xb-input._simple_size-xl::-ms-clear,\\n.xb-input._complex_size-s::-ms-clear,\\n.xb-input._complex_size-s > ._content > ._controller::-ms-clear,\\n.xb-input._complex_size-m::-ms-clear,\\n.xb-input._complex_size-m > ._content > ._controller::-ms-clear,\\n.xb-input._complex_size-l::-ms-clear,\\n.xb-input._complex_size-l > ._content > ._controller::-ms-clear,\\n.xb-input._complex_size-xl::-ms-clear,\\n.xb-input._complex_size-xl > ._content > ._controller::-ms-clear {\\n  display: none;\\n}\\n.xb-input._simple_size-s:focus,\\n.xb-input._simple_size-m:focus,\\n.xb-input._simple_size-l:focus,\\n.xb-input._simple_size-xl:focus,\\n.xb-input._complex_size-s:focus,\\n.xb-input._complex_size-s > ._content > ._controller:focus,\\n.xb-input._complex_size-m:focus,\\n.xb-input._complex_size-m > ._content > ._controller:focus,\\n.xb-input._complex_size-l:focus,\\n.xb-input._complex_size-l > ._content > ._controller:focus,\\n.xb-input._complex_size-xl:focus,\\n.xb-input._complex_size-xl > ._content > ._controller:focus {\\n  outline: none;\\n}\\n.xb-input._complex_size-s > ._reset,\\n.xb-input._complex_size-m > ._reset,\\n.xb-input._complex_size-l > ._reset,\\n.xb-input._complex_size-xl > ._reset {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  vertical-align: middle;\\n  margin-top: -0.2em;\\n  background: 50% no-repeat;\\n}\\n.xb-input._complex_size-s > ._reset,\\n.xb-input._complex_size-m > ._reset,\\n.xb-input._complex_size-l > ._reset,\\n.xb-input._complex_size-xl > ._reset {\\n  width: 14px;\\n  height: 14px;\\n}\\n.xb-input._complex_size-s > ._reset:before,\\n.xb-input._complex_size-m > ._reset:before,\\n.xb-input._complex_size-l > ._reset:before,\\n.xb-input._complex_size-xl > ._reset:before,\\n.xb-input._complex_size-s > ._reset:after,\\n.xb-input._complex_size-m > ._reset:after,\\n.xb-input._complex_size-l > ._reset:after,\\n.xb-input._complex_size-xl > ._reset:after {\\n  content: \\\"\\\";\\n  position: absolute;\\n  top: 50%;\\n  left: 50%;\\n  width: 20px;\\n  border-top: 1px solid;\\n  margin-left: -10px;\\n  -webkit-transform: translateY(-0.5px) rotate(45deg);\\n  -moz-transform: translateY(-0.5px) rotate(45deg);\\n    -o-transform: translateY(-0.5px) rotate(45deg);\\n       transform: translateY(-0.5px) rotate(45deg);\\n}\\n.xb-input._complex_size-s > ._reset:after,\\n.xb-input._complex_size-m > ._reset:after,\\n.xb-input._complex_size-l > ._reset:after,\\n.xb-input._complex_size-xl > ._reset:after {\\n  -webkit-transform: translateY(-0.5px) rotate(-45deg);\\n  -moz-transform: translateY(-0.5px) rotate(-45deg);\\n    -o-transform: translateY(-0.5px) rotate(-45deg);\\n       transform: translateY(-0.5px) rotate(-45deg);\\n}\\n.xb-input._complex_size-s > ._reset,\\n.xb-input._complex_size-m > ._reset,\\n.xb-input._complex_size-l > ._reset,\\n.xb-input._complex_size-xl > ._reset {\\n  cursor: pointer;\\n  opacity: 0.25;\\n}\\n.xb-input._complex_size-s > ._reset:hover,\\n.xb-input._complex_size-m > ._reset:hover,\\n.xb-input._complex_size-l > ._reset:hover,\\n.xb-input._complex_size-xl > ._reset:hover {\\n  opacity: 1;\\n}\\ninput.xb-input {\\n  -webkit-appearance: textfield;\\n     -moz-appearance: textfield;\\n          appearance: textfield;\\n}\\n.xb-input._ghost:not(:focus):not(:hover) {\\n  border: none;\\n  background: none;\\n  -webkit-box-shadow: none;\\n          box-shadow: none;\\n}\\n.xb-input._ghost:not(:focus):not(:hover) > ._content > ._controller:not(:focus) + ._view {\\n  border: none;\\n  background: none;\\n  -webkit-box-shadow: none;\\n          box-shadow: none;\\n}\\n.xb-input._simple_size-s {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  z-index: 1;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n  font-size: 13px;\\n  line-height: 16px;\\n  padding: 3px 6px;\\n  min-height: 24px;\\n}\\n.xb-input._simple_size-s,\\n.xb-input._simple_size-m,\\n.xb-input._simple_size-l,\\n.xb-input._simple_size-xl,\\n.xb-input._complex_size-s,\\n.xb-input._complex_size-s > ._content > ._controller,\\n.xb-input._complex_size-m,\\n.xb-input._complex_size-m > ._content > ._controller,\\n.xb-input._complex_size-l,\\n.xb-input._complex_size-l > ._content > ._controller,\\n.xb-input._complex_size-xl,\\n.xb-input._complex_size-xl > ._content > ._controller {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  max-width: 100%;\\n  cursor: text;\\n  vertical-align: baseline;\\n}\\n.xb-input._simple_size-s {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\ntextarea.xb-input._simple_size-s {\\n  vertical-align: top;\\n}\\n.xb-input._simple_size-s:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._simple_size-m {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  z-index: 1;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n  font-size: 13px;\\n  line-height: 16px;\\n  padding: 5px 8px;\\n  min-height: 28px;\\n}\\n.xb-input._simple_size-m {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\ntextarea.xb-input._simple_size-m {\\n  vertical-align: top;\\n}\\n.xb-input._simple_size-m:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._simple_size-l {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  z-index: 1;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n  font-size: 15px;\\n  line-height: 20px;\\n  padding: 5px 10px;\\n  min-height: 32px;\\n}\\n.xb-input._simple_size-l {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\ntextarea.xb-input._simple_size-l {\\n  vertical-align: top;\\n}\\n.xb-input._simple_size-l:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._simple_size-xl {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  z-index: 1;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n  font-size: 18px;\\n  line-height: 26px;\\n  padding: 4px 12px;\\n  min-height: 36px;\\n}\\n.xb-input._simple_size-xl {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\ntextarea.xb-input._simple_size-xl {\\n  vertical-align: top;\\n}\\n.xb-input._simple_size-xl:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._complex_size-s {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  font-size: 13px;\\n  line-height: 16px;\\n  padding: 3px 6px;\\n  min-height: 22px;\\n}\\n.xb-input._complex_size-s._autosize {\\n  width: auto !important;\\n}\\n.xb-input._complex_size-s > xb-link {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  cursor: pointer;\\n  padding: 0 6px;\\n  margin-left: -6px;\\n}\\n.xb-input._complex_size-s > xb-link,\\n.xb-input._complex_size-s > ._left,\\n.xb-input._complex_size-m > xb-link,\\n.xb-input._complex_size-m > ._left,\\n.xb-input._complex_size-l > xb-link,\\n.xb-input._complex_size-l > ._left,\\n.xb-input._complex_size-xl > xb-link,\\n.xb-input._complex_size-xl > ._left {\\n  position: relative;\\n  z-index: 9;\\n  float: left;\\n}\\n.xb-input._complex_size-s > xb-link > .xb-link {\\n  outline: 0;\\n}\\n.xb-input._complex_size-s {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\n.xb-input._complex_size-s > ._content > ._controller {\\n  width: 400px;\\n  z-index: 9;\\n  width: 100%;\\n  height: 100%;\\n  resize: none;\\n}\\ntextarea.xb-input._complex_size-s > ._content > ._controller {\\n  vertical-align: top;\\n}\\n.xb-input._complex_size-s > ._content > ._controller {\\n  -webkit-appearance: textfield;\\n     -moz-appearance: textfield;\\n          appearance: textfield;\\n}\\n.xb-input._complex_size-s > ._content > textarea._controller {\\n  resize: none;\\n  display: block;\\n}\\n.xb-input._complex_size-s > ._content > ._view {\\n  z-index: 1;\\n  position: absolute;\\n  top: -1px;\\n  right: -1px;\\n  bottom: -1px;\\n  left: -1px;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n}\\n.xb-input._complex_size-s :focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._complex_size-s > ._content > ._hint {\\n  position: relative;\\n  display: block;\\n  height: 0;\\n  color: rgba(0,0,0,0.5);\\n}\\n.xb-input._complex_size-s > ._content > ._hint > ._hint-inner {\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  font-size: 13px;\\n  line-height: 16px;\\n  pointer-events: none;\\n  z-index: 9;\\n  max-width: 100%;\\n  white-space: nowrap;\\n  overflow: hidden;\\n  text-overflow: ellipsis;\\n}\\n.xb-input._complex_size-s > ._content > ._hint > ._hint-ghost {\\n  visibility: hidden;\\n}\\n.xb-input._complex_size-s > ._left {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 6px;\\n  margin-left: -6px;\\n}\\n.xb-input._complex_size-s > ._right {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 6px;\\n  margin-right: -6px;\\n}\\n.xb-input._complex_size-s > ._right,\\n.xb-input._complex_size-s > ._reset,\\n.xb-input._complex_size-m > ._right,\\n.xb-input._complex_size-m > ._reset,\\n.xb-input._complex_size-l > ._right,\\n.xb-input._complex_size-l > ._reset,\\n.xb-input._complex_size-xl > ._right,\\n.xb-input._complex_size-xl > ._reset {\\n  -webkit-order: 1;\\n  -webkit-box-ordinal-group: 2;\\n     -moz-box-ordinal-group: 2;\\n          order: 1;\\n  position: relative;\\n  z-index: 9;\\n  float: right;\\n}\\n.xb-input._complex_size-s > ._content,\\n.xb-input._complex_size-m > ._content,\\n.xb-input._complex_size-l > ._content,\\n.xb-input._complex_size-xl > ._content {\\n  -webkit-flex-grow: 1;\\n  -webkit-box-flex: 1;\\n     -moz-box-flex: 1;\\n          flex-grow: 1;\\n  display: block;\\n  overflow: hidden;\\n  height: 100%;\\n}\\n.xb-input._complex_size-s > ._reset {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  font-size: 13px;\\n  line-height: 16px;\\n  padding: 3px 6px;\\n  min-height: 22px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  margin-top: -3px;\\n  margin-bottom: -3px;\\n  margin-right: -6px;\\n  color: #000;\\n  width: 23px;\\n}\\n.xb-input._complex_size-s > ._reset:before,\\n.xb-input._complex_size-s > ._reset:after {\\n  width: 14px;\\n  margin-left: -7px;\\n}\\n.xb-input._complex_size-m {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  font-size: 13px;\\n  line-height: 16px;\\n  padding: 5px 8px;\\n  min-height: 26px;\\n}\\n.xb-input._complex_size-m._autosize {\\n  width: auto !important;\\n}\\n.xb-input._complex_size-m > xb-link {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  cursor: pointer;\\n  padding: 0 8px;\\n  margin-left: -8px;\\n}\\n.xb-input._complex_size-m > xb-link > .xb-link {\\n  outline: 0;\\n}\\n.xb-input._complex_size-m {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\n.xb-input._complex_size-m > ._content > ._controller {\\n  width: 400px;\\n  z-index: 9;\\n  width: 100%;\\n  height: 100%;\\n  resize: none;\\n}\\ntextarea.xb-input._complex_size-m > ._content > ._controller {\\n  vertical-align: top;\\n}\\n.xb-input._complex_size-m > ._content > ._controller {\\n  -webkit-appearance: textfield;\\n     -moz-appearance: textfield;\\n          appearance: textfield;\\n}\\n.xb-input._complex_size-m > ._content > textarea._controller {\\n  resize: none;\\n  display: block;\\n}\\n.xb-input._complex_size-m > ._content > ._view {\\n  z-index: 1;\\n  position: absolute;\\n  top: -1px;\\n  right: -1px;\\n  bottom: -1px;\\n  left: -1px;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n}\\n.xb-input._complex_size-m :focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._complex_size-m > ._content > ._hint {\\n  position: relative;\\n  display: block;\\n  height: 0;\\n  color: rgba(0,0,0,0.5);\\n}\\n.xb-input._complex_size-m > ._content > ._hint > ._hint-inner {\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  font-size: 13px;\\n  line-height: 16px;\\n  pointer-events: none;\\n  z-index: 9;\\n  max-width: 100%;\\n  white-space: nowrap;\\n  overflow: hidden;\\n  text-overflow: ellipsis;\\n}\\n.xb-input._complex_size-m > ._content > ._hint > ._hint-ghost {\\n  visibility: hidden;\\n}\\n.xb-input._complex_size-m > ._left {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 8px;\\n  margin-left: -8px;\\n}\\n.xb-input._complex_size-m > ._right {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 8px;\\n  margin-right: -8px;\\n}\\n.xb-input._complex_size-m > ._reset {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  font-size: 13px;\\n  line-height: 16px;\\n  padding: 5px 8px;\\n  min-height: 26px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  margin-top: -5px;\\n  margin-bottom: -5px;\\n  margin-right: -8px;\\n  color: #000;\\n  width: 26px;\\n}\\n.xb-input._complex_size-m > ._reset:before,\\n.xb-input._complex_size-m > ._reset:after {\\n  width: 14px;\\n  margin-left: -7px;\\n}\\n.xb-input._complex_size-l {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  font-size: 15px;\\n  line-height: 20px;\\n  padding: 5px 10px;\\n  min-height: 30px;\\n}\\n.xb-input._complex_size-l._autosize {\\n  width: auto !important;\\n}\\n.xb-input._complex_size-l > xb-link {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  cursor: pointer;\\n  padding: 0 10px;\\n  margin-left: -10px;\\n}\\n.xb-input._complex_size-l > xb-link > .xb-link {\\n  outline: 0;\\n}\\n.xb-input._complex_size-l {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\n.xb-input._complex_size-l > ._content > ._controller {\\n  width: 400px;\\n  z-index: 9;\\n  width: 100%;\\n  height: 100%;\\n  resize: none;\\n}\\ntextarea.xb-input._complex_size-l > ._content > ._controller {\\n  vertical-align: top;\\n}\\n.xb-input._complex_size-l > ._content > ._controller {\\n  -webkit-appearance: textfield;\\n     -moz-appearance: textfield;\\n          appearance: textfield;\\n}\\n.xb-input._complex_size-l > ._content > textarea._controller {\\n  resize: none;\\n  display: block;\\n}\\n.xb-input._complex_size-l > ._content > ._view {\\n  z-index: 1;\\n  position: absolute;\\n  top: -1px;\\n  right: -1px;\\n  bottom: -1px;\\n  left: -1px;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n}\\n.xb-input._complex_size-l :focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._complex_size-l > ._content > ._hint {\\n  position: relative;\\n  display: block;\\n  height: 0;\\n  color: rgba(0,0,0,0.5);\\n}\\n.xb-input._complex_size-l > ._content > ._hint > ._hint-inner {\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  font-size: 15px;\\n  line-height: 20px;\\n  pointer-events: none;\\n  z-index: 9;\\n  max-width: 100%;\\n  white-space: nowrap;\\n  overflow: hidden;\\n  text-overflow: ellipsis;\\n}\\n.xb-input._complex_size-l > ._content > ._hint > ._hint-ghost {\\n  visibility: hidden;\\n}\\n.xb-input._complex_size-l > ._left {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 10px;\\n  margin-left: -10px;\\n}\\n.xb-input._complex_size-l > ._right {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 10px;\\n  margin-right: -10px;\\n}\\n.xb-input._complex_size-l > ._reset {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  font-size: 15px;\\n  line-height: 20px;\\n  padding: 5px 10px;\\n  min-height: 30px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  margin-top: -5px;\\n  margin-bottom: -5px;\\n  margin-right: -10px;\\n  color: #000;\\n  width: 35px;\\n}\\n.xb-input._complex_size-xl {\\n  position: relative;\\n  font-family: Arial, sans-serif;\\n  width: 400px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  font-size: 18px;\\n  line-height: 26px;\\n  padding: 4px 12px;\\n  min-height: 34px;\\n}\\n.xb-input._complex_size-xl._autosize {\\n  width: auto !important;\\n}\\n.xb-input._complex_size-xl > xb-link {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  cursor: pointer;\\n  padding: 0 12px;\\n  margin-left: -12px;\\n}\\n.xb-input._complex_size-xl > xb-link > .xb-link {\\n  outline: 0;\\n}\\n.xb-input._complex_size-xl {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n}\\n.xb-input._complex_size-xl > ._content > ._controller {\\n  width: 400px;\\n  z-index: 9;\\n  width: 100%;\\n  height: 100%;\\n  resize: none;\\n}\\ntextarea.xb-input._complex_size-xl > ._content > ._controller {\\n  vertical-align: top;\\n}\\n.xb-input._complex_size-xl > ._content > ._controller {\\n  -webkit-appearance: textfield;\\n     -moz-appearance: textfield;\\n          appearance: textfield;\\n}\\n.xb-input._complex_size-xl > ._content > textarea._controller {\\n  resize: none;\\n  display: block;\\n}\\n.xb-input._complex_size-xl > ._content > ._view {\\n  z-index: 1;\\n  position: absolute;\\n  top: -1px;\\n  right: -1px;\\n  bottom: -1px;\\n  left: -1px;\\n  color: #000;\\n  border: 1px solid rgba(0,0,0,0.2);\\n  background: -webkit-linear-gradient(#fff, #fff);\\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\\n  background: -moz-linear-gradient(#fff, #fff);\\n  background: -o-linear-gradient(#fff, #fff);\\n  background: linear-gradient(#fff, #fff);\\n  background-clip: padding-box;\\n  background-size: 16px 16px;\\n}\\n.xb-input._complex_size-xl :focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-input._complex_size-xl > ._content > ._hint {\\n  position: relative;\\n  display: block;\\n  height: 0;\\n  color: rgba(0,0,0,0.5);\\n}\\n.xb-input._complex_size-xl > ._content > ._hint > ._hint-inner {\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  font-size: 18px;\\n  line-height: 26px;\\n  pointer-events: none;\\n  z-index: 9;\\n  max-width: 100%;\\n  white-space: nowrap;\\n  overflow: hidden;\\n  text-overflow: ellipsis;\\n}\\n.xb-input._complex_size-xl > ._content > ._hint > ._hint-ghost {\\n  visibility: hidden;\\n}\\n.xb-input._complex_size-xl > ._left {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 12px;\\n  margin-left: -12px;\\n}\\n.xb-input._complex_size-xl > ._right {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  height: auto;\\n  padding: 0 12px;\\n  margin-right: -12px;\\n}\\n.xb-input._complex_size-xl > ._reset {\\n  margin: 0 0 0 0;\\n  padding: 0 0 0 0;\\n  font-size: 18px;\\n  line-height: 26px;\\n  padding: 4px 12px;\\n  min-height: 34px;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  margin-top: -4px;\\n  margin-bottom: -4px;\\n  margin-right: -12px;\\n  color: #000;\\n  width: 38px;\\n}\\n.xb-input._disabled {\\n  cursor: default !important;\\n  opacity: 0.6;\\n  pointer-events: none;\\n}\\n.xb-input._disabled .xb-input._disabled {\\n  opacity: 1;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/input/style/inline.styl\n ** module id = 46\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/input/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	module.exports = ".xb-input._simple_size-s,\n.xb-input._simple_size-m,\n.xb-input._simple_size-l,\n.xb-input._simple_size-xl,\n.xb-input._complex_size-s,\n.xb-input._complex_size-s > ._content > ._controller,\n.xb-input._complex_size-m,\n.xb-input._complex_size-m > ._content > ._controller,\n.xb-input._complex_size-l,\n.xb-input._complex_size-l > ._content > ._controller,\n.xb-input._complex_size-xl,\n.xb-input._complex_size-xl > ._content > ._controller {\n  padding: 0;\n  margin: 0;\n  border: none;\n  background: transparent;\n  font: inherit;\n  -webkit-appearance: none;\n}\n.xb-input._simple_size-s::-ms-clear,\n.xb-input._simple_size-m::-ms-clear,\n.xb-input._simple_size-l::-ms-clear,\n.xb-input._simple_size-xl::-ms-clear,\n.xb-input._complex_size-s::-ms-clear,\n.xb-input._complex_size-s > ._content > ._controller::-ms-clear,\n.xb-input._complex_size-m::-ms-clear,\n.xb-input._complex_size-m > ._content > ._controller::-ms-clear,\n.xb-input._complex_size-l::-ms-clear,\n.xb-input._complex_size-l > ._content > ._controller::-ms-clear,\n.xb-input._complex_size-xl::-ms-clear,\n.xb-input._complex_size-xl > ._content > ._controller::-ms-clear {\n  display: none;\n}\n.xb-input._simple_size-s:focus,\n.xb-input._simple_size-m:focus,\n.xb-input._simple_size-l:focus,\n.xb-input._simple_size-xl:focus,\n.xb-input._complex_size-s:focus,\n.xb-input._complex_size-s > ._content > ._controller:focus,\n.xb-input._complex_size-m:focus,\n.xb-input._complex_size-m > ._content > ._controller:focus,\n.xb-input._complex_size-l:focus,\n.xb-input._complex_size-l > ._content > ._controller:focus,\n.xb-input._complex_size-xl:focus,\n.xb-input._complex_size-xl > ._content > ._controller:focus {\n  outline: none;\n}\n.xb-input._complex_size-s > ._reset,\n.xb-input._complex_size-m > ._reset,\n.xb-input._complex_size-l > ._reset,\n.xb-input._complex_size-xl > ._reset {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  vertical-align: middle;\n  margin-top: -0.2em;\n  background: 50% no-repeat;\n}\n.xb-input._complex_size-s > ._reset,\n.xb-input._complex_size-m > ._reset,\n.xb-input._complex_size-l > ._reset,\n.xb-input._complex_size-xl > ._reset {\n  width: 14px;\n  height: 14px;\n}\n.xb-input._complex_size-s > ._reset:before,\n.xb-input._complex_size-m > ._reset:before,\n.xb-input._complex_size-l > ._reset:before,\n.xb-input._complex_size-xl > ._reset:before,\n.xb-input._complex_size-s > ._reset:after,\n.xb-input._complex_size-m > ._reset:after,\n.xb-input._complex_size-l > ._reset:after,\n.xb-input._complex_size-xl > ._reset:after {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 20px;\n  border-top: 1px solid;\n  margin-left: -10px;\n  -webkit-transform: translateY(-0.5px) rotate(45deg);\n  -moz-transform: translateY(-0.5px) rotate(45deg);\n    -o-transform: translateY(-0.5px) rotate(45deg);\n       transform: translateY(-0.5px) rotate(45deg);\n}\n.xb-input._complex_size-s > ._reset:after,\n.xb-input._complex_size-m > ._reset:after,\n.xb-input._complex_size-l > ._reset:after,\n.xb-input._complex_size-xl > ._reset:after {\n  -webkit-transform: translateY(-0.5px) rotate(-45deg);\n  -moz-transform: translateY(-0.5px) rotate(-45deg);\n    -o-transform: translateY(-0.5px) rotate(-45deg);\n       transform: translateY(-0.5px) rotate(-45deg);\n}\n.xb-input._complex_size-s > ._reset,\n.xb-input._complex_size-m > ._reset,\n.xb-input._complex_size-l > ._reset,\n.xb-input._complex_size-xl > ._reset {\n  cursor: pointer;\n  opacity: 0.25;\n}\n.xb-input._complex_size-s > ._reset:hover,\n.xb-input._complex_size-m > ._reset:hover,\n.xb-input._complex_size-l > ._reset:hover,\n.xb-input._complex_size-xl > ._reset:hover {\n  opacity: 1;\n}\ninput.xb-input {\n  -webkit-appearance: textfield;\n     -moz-appearance: textfield;\n          appearance: textfield;\n}\n.xb-input._ghost:not(:focus):not(:hover) {\n  border: none;\n  background: none;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.xb-input._ghost:not(:focus):not(:hover) > ._content > ._controller:not(:focus) + ._view {\n  border: none;\n  background: none;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.xb-input._simple_size-s {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 1;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n  font-size: 13px;\n  line-height: 16px;\n  padding: 3px 6px;\n  min-height: 24px;\n}\n.xb-input._simple_size-s,\n.xb-input._simple_size-m,\n.xb-input._simple_size-l,\n.xb-input._simple_size-xl,\n.xb-input._complex_size-s,\n.xb-input._complex_size-s > ._content > ._controller,\n.xb-input._complex_size-m,\n.xb-input._complex_size-m > ._content > ._controller,\n.xb-input._complex_size-l,\n.xb-input._complex_size-l > ._content > ._controller,\n.xb-input._complex_size-xl,\n.xb-input._complex_size-xl > ._content > ._controller {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  max-width: 100%;\n  cursor: text;\n  vertical-align: baseline;\n}\n.xb-input._simple_size-s {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\ntextarea.xb-input._simple_size-s {\n  vertical-align: top;\n}\n.xb-input._simple_size-s:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._simple_size-m {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 1;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n  font-size: 13px;\n  line-height: 16px;\n  padding: 5px 8px;\n  min-height: 28px;\n}\n.xb-input._simple_size-m {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\ntextarea.xb-input._simple_size-m {\n  vertical-align: top;\n}\n.xb-input._simple_size-m:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._simple_size-l {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 1;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n  font-size: 15px;\n  line-height: 20px;\n  padding: 5px 10px;\n  min-height: 32px;\n}\n.xb-input._simple_size-l {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\ntextarea.xb-input._simple_size-l {\n  vertical-align: top;\n}\n.xb-input._simple_size-l:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._simple_size-xl {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 1;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n  font-size: 18px;\n  line-height: 26px;\n  padding: 4px 12px;\n  min-height: 36px;\n}\n.xb-input._simple_size-xl {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\ntextarea.xb-input._simple_size-xl {\n  vertical-align: top;\n}\n.xb-input._simple_size-xl:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._complex_size-s {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 13px;\n  line-height: 16px;\n  padding: 3px 6px;\n  min-height: 22px;\n}\n.xb-input._complex_size-s._autosize {\n  width: auto !important;\n}\n.xb-input._complex_size-s > xb-link {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  cursor: pointer;\n  padding: 0 6px;\n  margin-left: -6px;\n}\n.xb-input._complex_size-s > xb-link,\n.xb-input._complex_size-s > ._left,\n.xb-input._complex_size-m > xb-link,\n.xb-input._complex_size-m > ._left,\n.xb-input._complex_size-l > xb-link,\n.xb-input._complex_size-l > ._left,\n.xb-input._complex_size-xl > xb-link,\n.xb-input._complex_size-xl > ._left {\n  position: relative;\n  z-index: 9;\n  float: left;\n}\n.xb-input._complex_size-s > xb-link > .xb-link {\n  outline: 0;\n}\n.xb-input._complex_size-s {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\n.xb-input._complex_size-s > ._content > ._controller {\n  width: 400px;\n  z-index: 9;\n  width: 100%;\n  height: 100%;\n  resize: none;\n}\ntextarea.xb-input._complex_size-s > ._content > ._controller {\n  vertical-align: top;\n}\n.xb-input._complex_size-s > ._content > ._controller {\n  -webkit-appearance: textfield;\n     -moz-appearance: textfield;\n          appearance: textfield;\n}\n.xb-input._complex_size-s > ._content > textarea._controller {\n  resize: none;\n  display: block;\n}\n.xb-input._complex_size-s > ._content > ._view {\n  z-index: 1;\n  position: absolute;\n  top: -1px;\n  right: -1px;\n  bottom: -1px;\n  left: -1px;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n}\n.xb-input._complex_size-s :focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._complex_size-s > ._content > ._hint {\n  position: relative;\n  display: block;\n  height: 0;\n  color: rgba(0,0,0,0.5);\n}\n.xb-input._complex_size-s > ._content > ._hint > ._hint-inner {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 13px;\n  line-height: 16px;\n  pointer-events: none;\n  z-index: 9;\n  max-width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.xb-input._complex_size-s > ._content > ._hint > ._hint-ghost {\n  visibility: hidden;\n}\n.xb-input._complex_size-s > ._left {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 6px;\n  margin-left: -6px;\n}\n.xb-input._complex_size-s > ._right {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 6px;\n  margin-right: -6px;\n}\n.xb-input._complex_size-s > ._right,\n.xb-input._complex_size-s > ._reset,\n.xb-input._complex_size-m > ._right,\n.xb-input._complex_size-m > ._reset,\n.xb-input._complex_size-l > ._right,\n.xb-input._complex_size-l > ._reset,\n.xb-input._complex_size-xl > ._right,\n.xb-input._complex_size-xl > ._reset {\n  -webkit-order: 1;\n  -webkit-box-ordinal-group: 2;\n     -moz-box-ordinal-group: 2;\n          order: 1;\n  position: relative;\n  z-index: 9;\n  float: right;\n}\n.xb-input._complex_size-s > ._content,\n.xb-input._complex_size-m > ._content,\n.xb-input._complex_size-l > ._content,\n.xb-input._complex_size-xl > ._content {\n  -webkit-flex-grow: 1;\n  -webkit-box-flex: 1;\n     -moz-box-flex: 1;\n          flex-grow: 1;\n  display: block;\n  overflow: hidden;\n  height: 100%;\n}\n.xb-input._complex_size-s > ._reset {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  font-size: 13px;\n  line-height: 16px;\n  padding: 3px 6px;\n  min-height: 22px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-top: -3px;\n  margin-bottom: -3px;\n  margin-right: -6px;\n  color: #000;\n  width: 23px;\n}\n.xb-input._complex_size-s > ._reset:before,\n.xb-input._complex_size-s > ._reset:after {\n  width: 14px;\n  margin-left: -7px;\n}\n.xb-input._complex_size-m {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 13px;\n  line-height: 16px;\n  padding: 5px 8px;\n  min-height: 26px;\n}\n.xb-input._complex_size-m._autosize {\n  width: auto !important;\n}\n.xb-input._complex_size-m > xb-link {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  cursor: pointer;\n  padding: 0 8px;\n  margin-left: -8px;\n}\n.xb-input._complex_size-m > xb-link > .xb-link {\n  outline: 0;\n}\n.xb-input._complex_size-m {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\n.xb-input._complex_size-m > ._content > ._controller {\n  width: 400px;\n  z-index: 9;\n  width: 100%;\n  height: 100%;\n  resize: none;\n}\ntextarea.xb-input._complex_size-m > ._content > ._controller {\n  vertical-align: top;\n}\n.xb-input._complex_size-m > ._content > ._controller {\n  -webkit-appearance: textfield;\n     -moz-appearance: textfield;\n          appearance: textfield;\n}\n.xb-input._complex_size-m > ._content > textarea._controller {\n  resize: none;\n  display: block;\n}\n.xb-input._complex_size-m > ._content > ._view {\n  z-index: 1;\n  position: absolute;\n  top: -1px;\n  right: -1px;\n  bottom: -1px;\n  left: -1px;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n}\n.xb-input._complex_size-m :focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._complex_size-m > ._content > ._hint {\n  position: relative;\n  display: block;\n  height: 0;\n  color: rgba(0,0,0,0.5);\n}\n.xb-input._complex_size-m > ._content > ._hint > ._hint-inner {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 13px;\n  line-height: 16px;\n  pointer-events: none;\n  z-index: 9;\n  max-width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.xb-input._complex_size-m > ._content > ._hint > ._hint-ghost {\n  visibility: hidden;\n}\n.xb-input._complex_size-m > ._left {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 8px;\n  margin-left: -8px;\n}\n.xb-input._complex_size-m > ._right {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 8px;\n  margin-right: -8px;\n}\n.xb-input._complex_size-m > ._reset {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  font-size: 13px;\n  line-height: 16px;\n  padding: 5px 8px;\n  min-height: 26px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-top: -5px;\n  margin-bottom: -5px;\n  margin-right: -8px;\n  color: #000;\n  width: 26px;\n}\n.xb-input._complex_size-m > ._reset:before,\n.xb-input._complex_size-m > ._reset:after {\n  width: 14px;\n  margin-left: -7px;\n}\n.xb-input._complex_size-l {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 15px;\n  line-height: 20px;\n  padding: 5px 10px;\n  min-height: 30px;\n}\n.xb-input._complex_size-l._autosize {\n  width: auto !important;\n}\n.xb-input._complex_size-l > xb-link {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  cursor: pointer;\n  padding: 0 10px;\n  margin-left: -10px;\n}\n.xb-input._complex_size-l > xb-link > .xb-link {\n  outline: 0;\n}\n.xb-input._complex_size-l {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\n.xb-input._complex_size-l > ._content > ._controller {\n  width: 400px;\n  z-index: 9;\n  width: 100%;\n  height: 100%;\n  resize: none;\n}\ntextarea.xb-input._complex_size-l > ._content > ._controller {\n  vertical-align: top;\n}\n.xb-input._complex_size-l > ._content > ._controller {\n  -webkit-appearance: textfield;\n     -moz-appearance: textfield;\n          appearance: textfield;\n}\n.xb-input._complex_size-l > ._content > textarea._controller {\n  resize: none;\n  display: block;\n}\n.xb-input._complex_size-l > ._content > ._view {\n  z-index: 1;\n  position: absolute;\n  top: -1px;\n  right: -1px;\n  bottom: -1px;\n  left: -1px;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n}\n.xb-input._complex_size-l :focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._complex_size-l > ._content > ._hint {\n  position: relative;\n  display: block;\n  height: 0;\n  color: rgba(0,0,0,0.5);\n}\n.xb-input._complex_size-l > ._content > ._hint > ._hint-inner {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 15px;\n  line-height: 20px;\n  pointer-events: none;\n  z-index: 9;\n  max-width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.xb-input._complex_size-l > ._content > ._hint > ._hint-ghost {\n  visibility: hidden;\n}\n.xb-input._complex_size-l > ._left {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 10px;\n  margin-left: -10px;\n}\n.xb-input._complex_size-l > ._right {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 10px;\n  margin-right: -10px;\n}\n.xb-input._complex_size-l > ._reset {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  font-size: 15px;\n  line-height: 20px;\n  padding: 5px 10px;\n  min-height: 30px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-top: -5px;\n  margin-bottom: -5px;\n  margin-right: -10px;\n  color: #000;\n  width: 35px;\n}\n.xb-input._complex_size-xl {\n  position: relative;\n  font-family: Arial, sans-serif;\n  width: 400px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 18px;\n  line-height: 26px;\n  padding: 4px 12px;\n  min-height: 34px;\n}\n.xb-input._complex_size-xl._autosize {\n  width: auto !important;\n}\n.xb-input._complex_size-xl > xb-link {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  cursor: pointer;\n  padding: 0 12px;\n  margin-left: -12px;\n}\n.xb-input._complex_size-xl > xb-link > .xb-link {\n  outline: 0;\n}\n.xb-input._complex_size-xl {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n}\n.xb-input._complex_size-xl > ._content > ._controller {\n  width: 400px;\n  z-index: 9;\n  width: 100%;\n  height: 100%;\n  resize: none;\n}\ntextarea.xb-input._complex_size-xl > ._content > ._controller {\n  vertical-align: top;\n}\n.xb-input._complex_size-xl > ._content > ._controller {\n  -webkit-appearance: textfield;\n     -moz-appearance: textfield;\n          appearance: textfield;\n}\n.xb-input._complex_size-xl > ._content > textarea._controller {\n  resize: none;\n  display: block;\n}\n.xb-input._complex_size-xl > ._content > ._view {\n  z-index: 1;\n  position: absolute;\n  top: -1px;\n  right: -1px;\n  bottom: -1px;\n  left: -1px;\n  color: #000;\n  border: 1px solid rgba(0,0,0,0.2);\n  background: -webkit-linear-gradient(#fff, #fff);\n  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));\n  background: -moz-linear-gradient(#fff, #fff);\n  background: -o-linear-gradient(#fff, #fff);\n  background: linear-gradient(#fff, #fff);\n  background-clip: padding-box;\n  background-size: 16px 16px;\n}\n.xb-input._complex_size-xl :focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-input._complex_size-xl > ._content > ._hint {\n  position: relative;\n  display: block;\n  height: 0;\n  color: rgba(0,0,0,0.5);\n}\n.xb-input._complex_size-xl > ._content > ._hint > ._hint-inner {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 18px;\n  line-height: 26px;\n  pointer-events: none;\n  z-index: 9;\n  max-width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.xb-input._complex_size-xl > ._content > ._hint > ._hint-ghost {\n  visibility: hidden;\n}\n.xb-input._complex_size-xl > ._left {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 12px;\n  margin-left: -12px;\n}\n.xb-input._complex_size-xl > ._right {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  height: auto;\n  padding: 0 12px;\n  margin-right: -12px;\n}\n.xb-input._complex_size-xl > ._reset {\n  margin: 0 0 0 0;\n  padding: 0 0 0 0;\n  font-size: 18px;\n  line-height: 26px;\n  padding: 4px 12px;\n  min-height: 34px;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  margin-top: -4px;\n  margin-bottom: -4px;\n  margin-right: -12px;\n  color: #000;\n  width: 38px;\n}\n.xb-input._disabled {\n  cursor: default !important;\n  opacity: 0.6;\n  pointer-events: none;\n}\n.xb-input._disabled .xb-input._disabled {\n  opacity: 1;\n}\n"
 
 /***/ },
 /* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(48);\n\n__webpack_require__(49);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _checked = __webpack_require__(52);\n\nvar _checked2 = _interopRequireDefault(_checked);\n\nvar _inputValueProps = __webpack_require__(53);\n\nvar _inputValueProps2 = _interopRequireDefault(_inputValueProps);\n\nvar _focusComponent = __webpack_require__(45);\n\nvar _focusComponent2 = _interopRequireDefault(_focusComponent);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * xb-button html element\n *\n * @example\n * &#60;xb-button type=\"checkbox\" name=\"checkbox\" value=\"1\">checkbox&#60;/xb-button>\n * <xb-button type=\"checkbox\" name=\"checkbox\" value=\"1\">checkbox</xb-button>\n *\n * @example\n * &#60;xb-button type=\"radio\" name=\"radio\" value=\"1\">radio 1&#60;/xb-button>\n * <xb-button type=\"radio\" name=\"radio\" value=\"1\">radio 1</xb-button> <xb-button type=\"radio\" name=\"radio\" value=\"2\">radio 2</xb-button>\n *\n * @augments HTMLInputElement\n * @mixes xblocks.mixin.eDisabled\n * @mixes xblocks.mixin.eChecked\n * @mixes xblocks.mixin.eInputValueProps\n * @mixes xblocks.mixin.eFocus\n */\nexports.default = _context.xb.Button = (0, _xblocksCore.create)('xb-button', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focusComponent2.default, {\n    prototype: Object.create(HTMLInputElement.prototype),\n\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                var type = this.attrs.type;\n                var styles = _defineProperty({}, this.xtagName, __webpack_require__(54));\n\n                switch (type) {\n                    case 'file':\n                    case 'label':\n                        styles[this.xtagName + '_' + type] = __webpack_require__(55)(\"./_\" + type + '.styl');\n                        break;\n                }\n\n                return styles;\n            }\n        },\n\n        isShadowSupported: {\n            get: _lodash2.default.stubFalse\n        },\n\n        defaultValue: {\n            get: function get() {\n                var type = this.attrs.type;\n\n                switch (type) {\n                    case 'checkbox':\n                    case 'radio':\n                        return 'on';\n                }\n\n                return '';\n            }\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/button/index.js\n ** module id = 47\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/button/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(48);
+
+	__webpack_require__(49);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _checked = __webpack_require__(52);
+
+	var _checked2 = _interopRequireDefault(_checked);
+
+	var _inputValueProps = __webpack_require__(53);
+
+	var _inputValueProps2 = _interopRequireDefault(_inputValueProps);
+
+	var _focusComponent = __webpack_require__(45);
+
+	var _focusComponent2 = _interopRequireDefault(_focusComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * xb-button html element
+	 *
+	 * @example
+	 * &#60;xb-button type="checkbox" name="checkbox" value="1">checkbox&#60;/xb-button>
+	 * <xb-button type="checkbox" name="checkbox" value="1">checkbox</xb-button>
+	 *
+	 * @example
+	 * &#60;xb-button type="radio" name="radio" value="1">radio 1&#60;/xb-button>
+	 * <xb-button type="radio" name="radio" value="1">radio 1</xb-button> <xb-button type="radio" name="radio" value="2">radio 2</xb-button>
+	 *
+	 * @augments HTMLInputElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eChecked
+	 * @mixes xblocks.mixin.eInputValueProps
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	exports.default = _context.xb.Button = (0, _xblocksCore.create)('xb-button', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focusComponent2.default, {
+	    prototype: Object.create(HTMLInputElement.prototype),
+
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                var type = this.attrs.type;
+	                var styles = _defineProperty({}, this.xtagName, __webpack_require__(54));
+
+	                switch (type) {
+	                    case 'file':
+	                    case 'label':
+	                        styles[this.xtagName + '_' + type] = __webpack_require__(55)("./_" + type + '.styl');
+	                        break;
+	                }
+
+	                return styles;
+	            }
+	        },
+
+	        isShadowSupported: {
+	            get: _lodash2.default.stubFalse
+	        },
+
+	        defaultValue: {
+	            get: function get() {
+	                var type = this.attrs.type;
+
+	                switch (type) {
+	                    case 'checkbox':
+	                    case 'radio':
+	                        return 'on';
+	                }
+
+	                return '';
+	            }
+	        }
+	    }
+	}]);
 
 /***/ },
 /* 48 */
@@ -359,49 +1955,536 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _resetLastRadioChecked = __webpack_require__(50);\n\nvar _resetLastRadioChecked2 = _interopRequireDefault(_resetLastRadioChecked);\n\nvar _filterProps = __webpack_require__(21);\n\nvar _filterProps2 = _interopRequireDefault(_filterProps);\n\nvar _exportPropTypes = __webpack_require__(22);\n\nvar _exportPropTypes2 = _interopRequireDefault(_exportPropTypes);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nvar _content = __webpack_require__(51);\n\nvar _content2 = _interopRequireDefault(_content);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * The template node xb-button\n *\n * @mixes React.addons.PureRenderMixin\n * @mixes xblocks.mixin.vCommonAttrs\n */\nexports.default = _context.xv.Button = _xblocksCore.view.register('xb-button', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {\n    displayName: 'xb-button',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    /**\n     * @prop {string} [size=m] size, possible values: s|m|l|xl\n     * @prop {string} [theme=normal] normal|action|dark|flying|pseudo-inverted|pseudo|promo\n     * @prop {string} [type=button] label|inline|link|file|button|submit|checkbox|radio\n     * @prop {string} [target] _blank|_self|_parent|_top\n     * @prop {string} [value]\n     * @prop {string} [href]\n     * @prop {string} [name]\n     * @prop {string} [form]\n     * @prop {string} [for]\n     * @prop {boolean} [multiple=false]\n     * @prop {boolean} [autofocus=false]\n     * @prop {boolean} [disabled=false]\n     * @prop {boolean} [checked=false]\n     * @prop {boolean} [required=false]\n     */\n    propTypes: {\n        'autofocus': _react.PropTypes.bool,\n        'checked': _react.PropTypes.bool,\n        'for': _react.PropTypes.string,\n        'form': _react.PropTypes.string,\n        'href': _react.PropTypes.string,\n        'multiple': _react.PropTypes.bool,\n        'name': _react.PropTypes.string,\n        'required': _react.PropTypes.bool,\n        'size': _react.PropTypes.oneOf(['s', 'm', 'l', 'xl']).isRequired,\n        'target': _react.PropTypes.oneOf(['_blank', '_self', '_parent', '_top']),\n        'theme': _react.PropTypes.oneOf(['action', 'dark', 'normal', 'clear', 'dark-pseudo', 'pseudo']).isRequired,\n        'type': _react.PropTypes.oneOf(['label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio']).isRequired,\n        'value': _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'autofocus': false,\n            'checked': false,\n            'multiple': false,\n            'required': false,\n            'size': 'm',\n            'theme': 'normal',\n            'type': 'button'\n        };\n    },\n\n    getInitialState: function getInitialState() {\n        return {\n            checked: this.props.checked,\n            focused: false\n        };\n    },\n\n    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {\n        this.setState({\n            checked: Boolean(nextProps.checked)\n        });\n    },\n\n    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {\n        if (nextProps.type === 'radio' && nextState.checked) {\n            (0, _resetLastRadioChecked2.default)(this.context.container, nextProps.name);\n        }\n    },\n\n    componentWillMount: function componentWillMount() {\n        if (this.props.type === 'radio' && this.state.checked) {\n            (0, _resetLastRadioChecked2.default)(this.context.container, this.props.name);\n        }\n    },\n\n    handleChange: function handleChange(event) {\n        this.context.container.checked = event.target.checked;\n    },\n\n    handleFocus: function handleFocus() {\n        this.setState({ focused: true });\n    },\n\n    handleBlur: function handleBlur() {\n        this.setState({ focused: false });\n    },\n\n    render: function render() {\n        var classes = (0, _classnames3.default)(_defineProperty({\n            'xb-button': true,\n            '_disabled': this.props.disabled,\n            '_focused': this.state.focused\n        }, '_theme-' + this.props.theme + '_size-' + this.props.size, true));\n\n        var tabIndex = this.getTabIndex();\n        var icoProps = (0, _filterProps2.default)(/^xb-ico-/, this.props);\n        var type = this.props.type;\n        var content = React.createElement(_content2.default, { key: 'content', ico: icoProps });\n\n        if (type === 'link') {\n            return React.createElement(\n                'a',\n                { className: classes,\n                    href: this.props.href,\n                    name: this.props.name,\n                    tabIndex: tabIndex,\n                    target: this.props.target,\n                    title: this.props.title },\n                content\n            );\n        } else if (type === 'file') {\n            return React.createElement(\n                'label',\n                { className: classes },\n                React.createElement(\n                    'span',\n                    { className: '_xb-file-intruder' },\n                    React.createElement(\n                        'span',\n                        { className: '_xb-file-intruder-inner' },\n                        React.createElement('input', { className: '_xb-file-intruder-input',\n                            type: 'file',\n                            name: this.props.name,\n                            title: this.props.title,\n                            disabled: this.props.disabled,\n                            multiple: this.props.multiple,\n                            autoFocus: this.props.autofocus,\n                            onBlur: this.handleBlur,\n                            onFocus: this.handleFocus,\n                            form: this.props.form,\n                            tabIndex: tabIndex })\n                    )\n                ),\n                content\n            );\n        } else if (type === 'label' || type === 'checkbox' || type === 'radio') {\n            var children = [];\n\n            if (type === 'checkbox' || type === 'radio') {\n                children.push(React.createElement('input', { key: 'checkControl',\n                    autoFocus: this.props.autofocus,\n                    checked: this.state.checked,\n                    className: '_controller',\n                    disabled: this.props.disabled,\n                    form: this.props.form,\n                    name: this.props.name,\n                    readOnly: true,\n                    required: this.props.required,\n                    onBlur: this.handleBlur,\n                    onFocus: this.handleFocus,\n                    onChange: this.handleChange,\n                    type: type,\n                    value: this.props.value,\n                    tabIndex: tabIndex }));\n            } else {\n                children.push(React.createElement(\n                    'span',\n                    { key: 'file-intruder', className: '_xb-file-intruder' },\n                    React.createElement(\n                        'span',\n                        { className: '_xb-file-intruder-inner' },\n                        React.createElement('input', { className: '_xb-file-intruder-input',\n                            type: 'button',\n                            form: this.props.form,\n                            disabled: this.props.disabled,\n                            autoFocus: this.props.autofocus,\n                            onBlur: this.handleBlur,\n                            onFocus: this.handleFocus,\n                            tabIndex: tabIndex })\n                    )\n                ));\n            }\n\n            children.push(content);\n\n            return React.createElement(\n                'label',\n                { className: classes,\n                    htmlFor: this.props['for'],\n                    title: this.props.title },\n                children\n            );\n        } else if (type === 'inline') {\n            return React.createElement(\n                'span',\n                { className: classes,\n                    tabIndex: tabIndex,\n                    title: this.props.title },\n                content\n            );\n        } else {\n            return React.createElement(\n                'button',\n                { className: classes,\n                    type: type,\n                    form: this.props.form,\n                    title: this.props.title,\n                    name: this.props.name,\n                    value: this.props.value,\n                    tabIndex: tabIndex,\n                    disabled: this.props.disabled,\n                    autoFocus: this.props.autofocus },\n                content\n            );\n        }\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/button/index.jsx\n ** module id = 49\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/button/index.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _resetLastRadioChecked = __webpack_require__(50);
+
+	var _resetLastRadioChecked2 = _interopRequireDefault(_resetLastRadioChecked);
+
+	var _filterProps = __webpack_require__(21);
+
+	var _filterProps2 = _interopRequireDefault(_filterProps);
+
+	var _exportPropTypes = __webpack_require__(22);
+
+	var _exportPropTypes2 = _interopRequireDefault(_exportPropTypes);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	var _content = __webpack_require__(51);
+
+	var _content2 = _interopRequireDefault(_content);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * The template node xb-button
+	 *
+	 * @mixes React.addons.PureRenderMixin
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 */
+	exports.default = _context.xv.Button = _xblocksCore.view.register('xb-button', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {
+	    displayName: 'xb-button',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    /**
+	     * @prop {string} [size=m] size, possible values: s|m|l|xl
+	     * @prop {string} [theme=normal] normal|action|dark|flying|pseudo-inverted|pseudo|promo
+	     * @prop {string} [type=button] label|inline|link|file|button|submit|checkbox|radio
+	     * @prop {string} [target] _blank|_self|_parent|_top
+	     * @prop {string} [value]
+	     * @prop {string} [href]
+	     * @prop {string} [name]
+	     * @prop {string} [form]
+	     * @prop {string} [for]
+	     * @prop {boolean} [multiple=false]
+	     * @prop {boolean} [autofocus=false]
+	     * @prop {boolean} [disabled=false]
+	     * @prop {boolean} [checked=false]
+	     * @prop {boolean} [required=false]
+	     */
+	    propTypes: {
+	        'autofocus': _react.PropTypes.bool,
+	        'checked': _react.PropTypes.bool,
+	        'for': _react.PropTypes.string,
+	        'form': _react.PropTypes.string,
+	        'href': _react.PropTypes.string,
+	        'multiple': _react.PropTypes.bool,
+	        'name': _react.PropTypes.string,
+	        'required': _react.PropTypes.bool,
+	        'size': _react.PropTypes.oneOf(['s', 'm', 'l', 'xl']).isRequired,
+	        'target': _react.PropTypes.oneOf(['_blank', '_self', '_parent', '_top']),
+	        'theme': _react.PropTypes.oneOf(['action', 'dark', 'normal', 'clear', 'dark-pseudo', 'pseudo']).isRequired,
+	        'type': _react.PropTypes.oneOf(['label', 'inline', 'link', 'file', 'button', 'submit', 'checkbox', 'radio']).isRequired,
+	        'value': _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'checked': false,
+	            'multiple': false,
+	            'required': false,
+	            'size': 'm',
+	            'theme': 'normal',
+	            'type': 'button'
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            checked: this.props.checked,
+	            focused: false
+	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            checked: Boolean(nextProps.checked)
+	        });
+	    },
+
+	    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
+	        if (nextProps.type === 'radio' && nextState.checked) {
+	            (0, _resetLastRadioChecked2.default)(this.context.container, nextProps.name);
+	        }
+	    },
+
+	    componentWillMount: function componentWillMount() {
+	        if (this.props.type === 'radio' && this.state.checked) {
+	            (0, _resetLastRadioChecked2.default)(this.context.container, this.props.name);
+	        }
+	    },
+
+	    handleChange: function handleChange(event) {
+	        this.context.container.checked = event.target.checked;
+	    },
+
+	    handleFocus: function handleFocus() {
+	        this.setState({ focused: true });
+	    },
+
+	    handleBlur: function handleBlur() {
+	        this.setState({ focused: false });
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames3.default)(_defineProperty({
+	            'xb-button': true,
+	            '_disabled': this.props.disabled,
+	            '_focused': this.state.focused
+	        }, '_theme-' + this.props.theme + '_size-' + this.props.size, true));
+
+	        var tabIndex = this.getTabIndex();
+	        var icoProps = (0, _filterProps2.default)(/^xb-ico-/, this.props);
+	        var type = this.props.type;
+	        var content = React.createElement(_content2.default, { key: 'content', ico: icoProps });
+
+	        if (type === 'link') {
+	            return React.createElement(
+	                'a',
+	                { className: classes,
+	                    href: this.props.href,
+	                    name: this.props.name,
+	                    tabIndex: tabIndex,
+	                    target: this.props.target,
+	                    title: this.props.title },
+	                content
+	            );
+	        } else if (type === 'file') {
+	            return React.createElement(
+	                'label',
+	                { className: classes },
+	                React.createElement(
+	                    'span',
+	                    { className: '_xb-file-intruder' },
+	                    React.createElement(
+	                        'span',
+	                        { className: '_xb-file-intruder-inner' },
+	                        React.createElement('input', { className: '_xb-file-intruder-input',
+	                            type: 'file',
+	                            name: this.props.name,
+	                            title: this.props.title,
+	                            disabled: this.props.disabled,
+	                            multiple: this.props.multiple,
+	                            autoFocus: this.props.autofocus,
+	                            onBlur: this.handleBlur,
+	                            onFocus: this.handleFocus,
+	                            form: this.props.form,
+	                            tabIndex: tabIndex })
+	                    )
+	                ),
+	                content
+	            );
+	        } else if (type === 'label' || type === 'checkbox' || type === 'radio') {
+	            var children = [];
+
+	            if (type === 'checkbox' || type === 'radio') {
+	                children.push(React.createElement('input', { key: 'checkControl',
+	                    autoFocus: this.props.autofocus,
+	                    checked: this.state.checked,
+	                    className: '_controller',
+	                    disabled: this.props.disabled,
+	                    form: this.props.form,
+	                    name: this.props.name,
+	                    readOnly: true,
+	                    required: this.props.required,
+	                    onBlur: this.handleBlur,
+	                    onFocus: this.handleFocus,
+	                    onChange: this.handleChange,
+	                    type: type,
+	                    value: this.props.value,
+	                    tabIndex: tabIndex }));
+	            } else {
+	                children.push(React.createElement(
+	                    'span',
+	                    { key: 'file-intruder', className: '_xb-file-intruder' },
+	                    React.createElement(
+	                        'span',
+	                        { className: '_xb-file-intruder-inner' },
+	                        React.createElement('input', { className: '_xb-file-intruder-input',
+	                            type: 'button',
+	                            form: this.props.form,
+	                            disabled: this.props.disabled,
+	                            autoFocus: this.props.autofocus,
+	                            onBlur: this.handleBlur,
+	                            onFocus: this.handleFocus,
+	                            tabIndex: tabIndex })
+	                    )
+	                ));
+	            }
+
+	            children.push(content);
+
+	            return React.createElement(
+	                'label',
+	                { className: classes,
+	                    htmlFor: this.props['for'],
+	                    title: this.props.title },
+	                children
+	            );
+	        } else if (type === 'inline') {
+	            return React.createElement(
+	                'span',
+	                { className: classes,
+	                    tabIndex: tabIndex,
+	                    title: this.props.title },
+	                content
+	            );
+	        } else {
+	            return React.createElement(
+	                'button',
+	                { className: classes,
+	                    type: type,
+	                    form: this.props.form,
+	                    title: this.props.title,
+	                    name: this.props.name,
+	                    value: this.props.value,
+	                    tabIndex: tabIndex,
+	                    disabled: this.props.disabled,
+	                    autoFocus: this.props.autofocus },
+	                content
+	            );
+	        }
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 50 */
 /***/ function(module, exports) {
 
-	eval("\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (element, name) {\n    name = String(name);\n    var lastCheckedElement = CHECKED_CACHE[name];\n\n    if (lastCheckedElement && lastCheckedElement !== element) {\n        lastCheckedElement.checked = false;\n    }\n\n    CHECKED_CACHE[name] = element;\n};\n\nvar CHECKED_CACHE = {};\n\n/**\n * FIXME don't work cloneNode\n * @param {HTMLElement} element\n * @param {string} name\n */\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/resetLastRadioChecked.js\n ** module id = 50\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/resetLastRadioChecked.js?");
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (element, name) {
+	    name = String(name);
+	    var lastCheckedElement = CHECKED_CACHE[name];
+
+	    if (lastCheckedElement && lastCheckedElement !== element) {
+	        lastCheckedElement.checked = false;
+	    }
+
+	    CHECKED_CACHE[name] = element;
+	};
+
+	var CHECKED_CACHE = {};
+
+	/**
+	 * FIXME don't work cloneNode
+	 * @param {HTMLElement} element
+	 * @param {string} name
+	 */
 
 /***/ },
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _classnames = __webpack_require__(11);\n\nvar _classnames2 = _interopRequireDefault(_classnames);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _xblocksCore.view.create({\n    displayName: 'xb-button_content',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        ico: _react.PropTypes.object\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            ico: {}\n        };\n    },\n\n    render: function render() {\n        var classes = (0, _classnames2.default)({\n            '_content': true,\n            '_empty': this.context.isEmptyContent()\n        });\n\n        var children = [React.createElement(\n            'span',\n            { className: '_text', key: 'text' },\n            this.context.content()\n        )];\n\n        if (!_lodash2.default.isEmpty(this.props.ico) && this.props.ico.type) {\n            var float = this.props.ico.float;\n\n            if (!float || float === 'left') {\n                children.unshift(React.createElement('xb-ico', _extends({}, this.props.ico, { 'class': '_ico _before', key: 'ico' })));\n            } else if (float === 'right') {\n                children.push(React.createElement('xb-ico', _extends({}, this.props.ico, { 'class': '_ico _after', key: 'ico' })));\n            }\n        }\n\n        return React.createElement(\n            'span',\n            { className: classes },\n            children\n        );\n    }\n});\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/button/content.jsx\n ** module id = 51\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/button/content.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _classnames = __webpack_require__(11);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _xblocksCore.view.create({
+	    displayName: 'xb-button_content',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        ico: _react.PropTypes.object
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            ico: {}
+	        };
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames2.default)({
+	            '_content': true,
+	            '_empty': this.context.isEmptyContent()
+	        });
+
+	        var children = [React.createElement(
+	            'span',
+	            { className: '_text', key: 'text' },
+	            this.context.content()
+	        )];
+
+	        if (!_lodash2.default.isEmpty(this.props.ico) && this.props.ico.type) {
+	            var float = this.props.ico.float;
+
+	            if (!float || float === 'left') {
+	                children.unshift(React.createElement('xb-ico', _extends({}, this.props.ico, { 'class': '_ico _before', key: 'ico' })));
+	            } else if (float === 'right') {
+	                children.push(React.createElement('xb-ico', _extends({}, this.props.ico, { 'class': '_ico _after', key: 'ico' })));
+	            }
+	        }
+
+	        return React.createElement(
+	            'span',
+	            { className: classes },
+	            children
+	        );
+	    }
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 52 */
 /***/ function(module, exports) {
 
-	eval("\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n/**\n * Checked element interface\n *\n * <xb-checkbox name=\"a\" checked>checkbox</xb-checkbox>\n * <xb-radio name=\"b\" checked>radio 1</xb-radio> <xb-radio name=\"b\">radio 2</xb-radio>\n * <xb-button name=\"c\" type=\"checkbox\" checked>button checkbox</xb-button>\n * <xb-button name=\"d\" type=\"radio\" checked>button radio 1</xb-button> <xb-button name=\"d\" type=\"radio\">button radio 2</xb-button>\n *\n * @example\n * import { create } from 'xblocks-core';\n * import mixinChecked from 'mixin/element/checked';\n *\n * create('xb-checkbox', [\n *     mixinChecked,\n *     {\n *         accessors: { ... },\n *         events: { ... },\n *         methods: { ... }\n *         ...\n *     }\n * ]);\n *\n * var e = document.createElement('xb-checkbox');\n * // read\n * console.log(e.checked)\n * // false\n *\n * // write\n * e.checked = true;\n * // true\n *\n * // jquery write\n * $(e).prop('checked', false)\n * // false\n *\n * @prop {boolean} checked\n * @type {Object}\n */\nexports.default = {\n    accessors: {\n        checked: {\n            attribute: {\n                boolean: true\n            }\n        }\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/element/checked.js\n ** module id = 52\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/element/checked.js?");
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	/**
+	 * Checked element interface
+	 *
+	 * <xb-checkbox name="a" checked>checkbox</xb-checkbox>
+	 * <xb-radio name="b" checked>radio 1</xb-radio> <xb-radio name="b">radio 2</xb-radio>
+	 * <xb-button name="c" type="checkbox" checked>button checkbox</xb-button>
+	 * <xb-button name="d" type="radio" checked>button radio 1</xb-button> <xb-button name="d" type="radio">button radio 2</xb-button>
+	 *
+	 * @example
+	 * import { create } from 'xblocks-core';
+	 * import mixinChecked from 'mixin/element/checked';
+	 *
+	 * create('xb-checkbox', [
+	 *     mixinChecked,
+	 *     {
+	 *         accessors: { ... },
+	 *         events: { ... },
+	 *         methods: { ... }
+	 *         ...
+	 *     }
+	 * ]);
+	 *
+	 * var e = document.createElement('xb-checkbox');
+	 * // read
+	 * console.log(e.checked)
+	 * // false
+	 *
+	 * // write
+	 * e.checked = true;
+	 * // true
+	 *
+	 * // jquery write
+	 * $(e).prop('checked', false)
+	 * // false
+	 *
+	 * @prop {boolean} checked
+	 * @type {Object}
+	 */
+	exports.default = {
+	    accessors: {
+	        checked: {
+	            attribute: {
+	                boolean: true
+	            }
+	        }
+	    }
+	};
 
 /***/ },
 /* 53 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n/**\n * Value element interface.\n * The value can be changed only through the attribute.\n *\n * @example\n * import { create } from 'xblocks-core';\n * import mixinInputValueProps from 'mixin/element/inputValueProps';\n *\n * create('xb-checkbox', [\n *     mixinInputValueProps,\n *     {\n *         accessors: {\n *             ...\n *             // override the default values\n *             'defaultValue': {\n *                 'get': function () {\n *                     return 'on';\n *                  }\n *              }\n *         },\n *         events: { ... },\n *         methods: { ... }\n *         ...\n *     }\n * ]);\n *\n * var e = document.createElement('xb-checkbox');\n * // read\n * console.log(e.value)\n * // 1\n *\n * // write\n * e.value = \"123\";\n * // 123\n *\n * // jquery write\n * $(e).attr('value', '321')\n * // 321\n *\n * @type {Object}\n */\nexports.default = {\n    accessors: {\n\n        /**\n         * @prop {string} value\n         */\n        value: {\n            attribute: {\n                name: 'value'\n            },\n\n            get: function get() {\n                return String(this.getAttribute('value') || this.defaultValue || '');\n            }\n        },\n\n        /**\n         * @prop {string} defaultValue\n         */\n        defaultValue: {\n            get: function get() {\n                return '';\n            }\n        }\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/element/inputValueProps.js\n ** module id = 53\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/element/inputValueProps.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	/**
+	 * Value element interface.
+	 * The value can be changed only through the attribute.
+	 *
+	 * @example
+	 * import { create } from 'xblocks-core';
+	 * import mixinInputValueProps from 'mixin/element/inputValueProps';
+	 *
+	 * create('xb-checkbox', [
+	 *     mixinInputValueProps,
+	 *     {
+	 *         accessors: {
+	 *             ...
+	 *             // override the default values
+	 *             'defaultValue': {
+	 *                 'get': function () {
+	 *                     return 'on';
+	 *                  }
+	 *              }
+	 *         },
+	 *         events: { ... },
+	 *         methods: { ... }
+	 *         ...
+	 *     }
+	 * ]);
+	 *
+	 * var e = document.createElement('xb-checkbox');
+	 * // read
+	 * console.log(e.value)
+	 * // 1
+	 *
+	 * // write
+	 * e.value = "123";
+	 * // 123
+	 *
+	 * // jquery write
+	 * $(e).attr('value', '321')
+	 * // 321
+	 *
+	 * @type {Object}
+	 */
+	exports.default = {
+	    accessors: {
+
+	        /**
+	         * @prop {string} value
+	         */
+	        value: {
+	            attribute: {
+	                name: 'value'
+	            },
+
+	            get: function get() {
+	                return String(this.getAttribute('value') || this.defaultValue || '');
+	            }
+	        },
+
+	        /**
+	         * @prop {string} defaultValue
+	         */
+	        defaultValue: {
+	            get: function get() {
+	                return '';
+	            }
+	        }
+	    }
+	};
 
 /***/ },
 /* 54 */
 /***/ function(module, exports) {
 
-	eval("module.exports = \".xb-button._theme-normal_size-s,\\n.xb-button._theme-normal_size-m,\\n.xb-button._theme-normal_size-l,\\n.xb-button._theme-normal_size-xl,\\n.xb-button._theme-action_size-s,\\n.xb-button._theme-action_size-m,\\n.xb-button._theme-action_size-l,\\n.xb-button._theme-action_size-xl,\\n.xb-button._theme-pseudo_size-s,\\n.xb-button._theme-pseudo_size-m,\\n.xb-button._theme-pseudo_size-l,\\n.xb-button._theme-pseudo_size-xl,\\n.xb-button._theme-dark_size-s,\\n.xb-button._theme-dark_size-m,\\n.xb-button._theme-dark_size-l,\\n.xb-button._theme-dark_size-xl,\\n.xb-button._theme-dark-pseudo_size-s,\\n.xb-button._theme-dark-pseudo_size-m,\\n.xb-button._theme-dark-pseudo_size-l,\\n.xb-button._theme-dark-pseudo_size-xl,\\n.xb-button._theme-clear_size-s,\\n.xb-button._theme-clear_size-m,\\n.xb-button._theme-clear_size-l,\\n.xb-button._theme-clear_size-xl {\\n  padding: 0;\\n  margin: 0;\\n  border: none;\\n  background: transparent;\\n  -moz-appearance: none;\\n  font: inherit;\\n}\\n.xb-button._theme-normal_size-s::-moz-focus-inner,\\n.xb-button._theme-normal_size-m::-moz-focus-inner,\\n.xb-button._theme-normal_size-l::-moz-focus-inner,\\n.xb-button._theme-normal_size-xl::-moz-focus-inner,\\n.xb-button._theme-action_size-s::-moz-focus-inner,\\n.xb-button._theme-action_size-m::-moz-focus-inner,\\n.xb-button._theme-action_size-l::-moz-focus-inner,\\n.xb-button._theme-action_size-xl::-moz-focus-inner,\\n.xb-button._theme-pseudo_size-s::-moz-focus-inner,\\n.xb-button._theme-pseudo_size-m::-moz-focus-inner,\\n.xb-button._theme-pseudo_size-l::-moz-focus-inner,\\n.xb-button._theme-pseudo_size-xl::-moz-focus-inner,\\n.xb-button._theme-dark_size-s::-moz-focus-inner,\\n.xb-button._theme-dark_size-m::-moz-focus-inner,\\n.xb-button._theme-dark_size-l::-moz-focus-inner,\\n.xb-button._theme-dark_size-xl::-moz-focus-inner,\\n.xb-button._theme-dark-pseudo_size-s::-moz-focus-inner,\\n.xb-button._theme-dark-pseudo_size-m::-moz-focus-inner,\\n.xb-button._theme-dark-pseudo_size-l::-moz-focus-inner,\\n.xb-button._theme-dark-pseudo_size-xl::-moz-focus-inner,\\n.xb-button._theme-clear_size-s::-moz-focus-inner,\\n.xb-button._theme-clear_size-m::-moz-focus-inner,\\n.xb-button._theme-clear_size-l::-moz-focus-inner,\\n.xb-button._theme-clear_size-xl::-moz-focus-inner {\\n  padding: 0;\\n  border: none;\\n}\\na.xb-button {\\n  text-decoration: none;\\n}\\n.xb-button {\\n  font-weight: inherit;\\n  width: 100%;\\n}\\n.xb-button > ._content {\\n  width: 100%;\\n}\\n.xb-button > ._content > ._ico {\\n  line-height: inherit;\\n}\\n.xb-button > ._content._empty > ._ico {\\n  margin-right: -5px !important;\\n  margin-left: -5px !important;\\n}\\n.xb-button > ._controller {\\n  position: absolute !important;\\n  clip: rect(1px,1px,1px,1px) !important;\\n}\\n.xb-button > ._controller:checked + ._content {\\n  border-color: rgba(153,122,0,0.5);\\n  -webkit-box-shadow: inset 0 90px #ffeba0;\\n          box-shadow: inset 0 90px #ffeba0;\\n}\\n.xb-button._theme-normal_size-s {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  border-color: rgba(0,0,0,0.2);\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n}\\n.xb-button._theme-normal_size-s,\\n.xb-button._theme-normal_size-m,\\n.xb-button._theme-normal_size-l,\\n.xb-button._theme-normal_size-xl,\\n.xb-button._theme-action_size-s,\\n.xb-button._theme-action_size-m,\\n.xb-button._theme-action_size-l,\\n.xb-button._theme-action_size-xl,\\n.xb-button._theme-pseudo_size-s,\\n.xb-button._theme-pseudo_size-m,\\n.xb-button._theme-pseudo_size-l,\\n.xb-button._theme-pseudo_size-xl,\\n.xb-button._theme-dark_size-s,\\n.xb-button._theme-dark_size-m,\\n.xb-button._theme-dark_size-l,\\n.xb-button._theme-dark_size-xl,\\n.xb-button._theme-dark-pseudo_size-s,\\n.xb-button._theme-dark-pseudo_size-m,\\n.xb-button._theme-dark-pseudo_size-l,\\n.xb-button._theme-dark-pseudo_size-xl,\\n.xb-button._theme-clear_size-s,\\n.xb-button._theme-clear_size-m,\\n.xb-button._theme-clear_size-l,\\n.xb-button._theme-clear_size-xl {\\n  display: inline-block;\\n  vertical-align: baseline;\\n  white-space: nowrap;\\n  text-decoration: none;\\n  position: relative;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  max-width: 100%;\\n  cursor: pointer;\\n  -webkit-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none;\\n}\\n.xb-button._theme-normal_size-s > ._content {\\n  background: #fff;\\n}\\n.xb-button._theme-normal_size-s:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-normal_size-s:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-normal_size-s:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-normal_size-s:active ._content {\\n  background: #f6f5f3;\\n}\\n.xb-button._theme-normal_size-s > ._content,\\n.xb-button._theme-normal_size-m > ._content,\\n.xb-button._theme-normal_size-l > ._content,\\n.xb-button._theme-normal_size-xl > ._content,\\n.xb-button._theme-action_size-s > ._content,\\n.xb-button._theme-action_size-m > ._content,\\n.xb-button._theme-action_size-l > ._content,\\n.xb-button._theme-action_size-xl > ._content,\\n.xb-button._theme-pseudo_size-s > ._content,\\n.xb-button._theme-pseudo_size-m > ._content,\\n.xb-button._theme-pseudo_size-l > ._content,\\n.xb-button._theme-pseudo_size-xl > ._content,\\n.xb-button._theme-dark_size-s > ._content,\\n.xb-button._theme-dark_size-m > ._content,\\n.xb-button._theme-dark_size-l > ._content,\\n.xb-button._theme-dark_size-xl > ._content,\\n.xb-button._theme-dark-pseudo_size-s > ._content,\\n.xb-button._theme-dark-pseudo_size-m > ._content,\\n.xb-button._theme-dark-pseudo_size-l > ._content,\\n.xb-button._theme-dark-pseudo_size-xl > ._content,\\n.xb-button._theme-clear_size-s > ._content,\\n.xb-button._theme-clear_size-m > ._content,\\n.xb-button._theme-clear_size-l > ._content,\\n.xb-button._theme-clear_size-xl > ._content {\\n  position: relative;\\n  display: block;\\n  display: -webkit-inline-flex;\\n  display: -webkit-inline-box;\\n  display: -moz-inline-box;\\n  display: inline-flex;\\n  -webkit-box-sizing: border-box;\\n     -moz-box-sizing: border-box;\\n          box-sizing: border-box;\\n  width: 100%;\\n  -webkit-border-radius: inherit;\\n          border-radius: inherit;\\n}\\n.xb-button._theme-normal_size-s > ._content:before,\\n.xb-button._theme-normal_size-m > ._content:before,\\n.xb-button._theme-normal_size-l > ._content:before,\\n.xb-button._theme-normal_size-xl > ._content:before,\\n.xb-button._theme-action_size-s > ._content:before,\\n.xb-button._theme-action_size-m > ._content:before,\\n.xb-button._theme-action_size-l > ._content:before,\\n.xb-button._theme-action_size-xl > ._content:before,\\n.xb-button._theme-pseudo_size-s > ._content:before,\\n.xb-button._theme-pseudo_size-m > ._content:before,\\n.xb-button._theme-pseudo_size-l > ._content:before,\\n.xb-button._theme-pseudo_size-xl > ._content:before,\\n.xb-button._theme-dark_size-s > ._content:before,\\n.xb-button._theme-dark_size-m > ._content:before,\\n.xb-button._theme-dark_size-l > ._content:before,\\n.xb-button._theme-dark_size-xl > ._content:before,\\n.xb-button._theme-dark-pseudo_size-s > ._content:before,\\n.xb-button._theme-dark-pseudo_size-m > ._content:before,\\n.xb-button._theme-dark-pseudo_size-l > ._content:before,\\n.xb-button._theme-dark-pseudo_size-xl > ._content:before,\\n.xb-button._theme-clear_size-s > ._content:before,\\n.xb-button._theme-clear_size-m > ._content:before,\\n.xb-button._theme-clear_size-l > ._content:before,\\n.xb-button._theme-clear_size-xl > ._content:before {\\n  float: left;\\n  content: \\\"\\\\a0\\\";\\n  width: 0;\\n  min-width: 0;\\n}\\n.xb-button._theme-normal_size-s > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-normal_size-s > ._content > ._text,\\n.xb-button._theme-normal_size-m > ._content > ._text,\\n.xb-button._theme-normal_size-l > ._content > ._text,\\n.xb-button._theme-normal_size-xl > ._content > ._text,\\n.xb-button._theme-action_size-s > ._content > ._text,\\n.xb-button._theme-action_size-m > ._content > ._text,\\n.xb-button._theme-action_size-l > ._content > ._text,\\n.xb-button._theme-action_size-xl > ._content > ._text,\\n.xb-button._theme-pseudo_size-s > ._content > ._text,\\n.xb-button._theme-pseudo_size-m > ._content > ._text,\\n.xb-button._theme-pseudo_size-l > ._content > ._text,\\n.xb-button._theme-pseudo_size-xl > ._content > ._text,\\n.xb-button._theme-dark_size-s > ._content > ._text,\\n.xb-button._theme-dark_size-m > ._content > ._text,\\n.xb-button._theme-dark_size-l > ._content > ._text,\\n.xb-button._theme-dark_size-xl > ._content > ._text,\\n.xb-button._theme-dark-pseudo_size-s > ._content > ._text,\\n.xb-button._theme-dark-pseudo_size-m > ._content > ._text,\\n.xb-button._theme-dark-pseudo_size-l > ._content > ._text,\\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._text,\\n.xb-button._theme-clear_size-s > ._content > ._text,\\n.xb-button._theme-clear_size-m > ._content > ._text,\\n.xb-button._theme-clear_size-l > ._content > ._text,\\n.xb-button._theme-clear_size-xl > ._content > ._text {\\n  display: block;\\n  -webkit-flex-shrink: 1;\\n  flex-shrink: 1;\\n  -webkit-flex-basis: 100%;\\n  flex-basis: 100%;\\n  overflow: hidden;\\n  text-overflow: ellipsis;\\n  min-width: 0;\\n}\\n_:-ms-input-placeholder,\\n:root .xb-button._theme-normal_size-s > ._content > ._text,\\n:root .xb-button._theme-normal_size-m > ._content > ._text,\\n:root .xb-button._theme-normal_size-l > ._content > ._text,\\n:root .xb-button._theme-normal_size-xl > ._content > ._text,\\n:root .xb-button._theme-action_size-s > ._content > ._text,\\n:root .xb-button._theme-action_size-m > ._content > ._text,\\n:root .xb-button._theme-action_size-l > ._content > ._text,\\n:root .xb-button._theme-action_size-xl > ._content > ._text,\\n:root .xb-button._theme-pseudo_size-s > ._content > ._text,\\n:root .xb-button._theme-pseudo_size-m > ._content > ._text,\\n:root .xb-button._theme-pseudo_size-l > ._content > ._text,\\n:root .xb-button._theme-pseudo_size-xl > ._content > ._text,\\n:root .xb-button._theme-dark_size-s > ._content > ._text,\\n:root .xb-button._theme-dark_size-m > ._content > ._text,\\n:root .xb-button._theme-dark_size-l > ._content > ._text,\\n:root .xb-button._theme-dark_size-xl > ._content > ._text,\\n:root .xb-button._theme-dark-pseudo_size-s > ._content > ._text,\\n:root .xb-button._theme-dark-pseudo_size-m > ._content > ._text,\\n:root .xb-button._theme-dark-pseudo_size-l > ._content > ._text,\\n:root .xb-button._theme-dark-pseudo_size-xl > ._content > ._text,\\n:root .xb-button._theme-clear_size-s > ._content > ._text,\\n:root .xb-button._theme-clear_size-m > ._content > ._text,\\n:root .xb-button._theme-clear_size-l > ._content > ._text,\\n:root .xb-button._theme-clear_size-xl > ._content > ._text {\\n  flex-basis: auto;\\n  width: 100%;\\n}\\n.xb-button._theme-normal_size-s > ._content > ._before,\\n.xb-button._theme-normal_size-m > ._content > ._before,\\n.xb-button._theme-normal_size-l > ._content > ._before,\\n.xb-button._theme-normal_size-xl > ._content > ._before,\\n.xb-button._theme-action_size-s > ._content > ._before,\\n.xb-button._theme-action_size-m > ._content > ._before,\\n.xb-button._theme-action_size-l > ._content > ._before,\\n.xb-button._theme-action_size-xl > ._content > ._before,\\n.xb-button._theme-pseudo_size-s > ._content > ._before,\\n.xb-button._theme-pseudo_size-m > ._content > ._before,\\n.xb-button._theme-pseudo_size-l > ._content > ._before,\\n.xb-button._theme-pseudo_size-xl > ._content > ._before,\\n.xb-button._theme-dark_size-s > ._content > ._before,\\n.xb-button._theme-dark_size-m > ._content > ._before,\\n.xb-button._theme-dark_size-l > ._content > ._before,\\n.xb-button._theme-dark_size-xl > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-s > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-m > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-l > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._before,\\n.xb-button._theme-clear_size-s > ._content > ._before,\\n.xb-button._theme-clear_size-m > ._content > ._before,\\n.xb-button._theme-clear_size-l > ._content > ._before,\\n.xb-button._theme-clear_size-xl > ._content > ._before {\\n  float: left;\\n  -webkit-align-self: center;\\n  align-self: center;\\n  -webkit-flex-shrink: 0;\\n  flex-shrink: 0;\\n}\\n.xb-button._theme-normal_size-s > ._content > ._before,\\n.xb-button._theme-action_size-s > ._content > ._before,\\n.xb-button._theme-pseudo_size-s > ._content > ._before,\\n.xb-button._theme-dark_size-s > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-s > ._content > ._before,\\n.xb-button._theme-clear_size-s > ._content > ._before {\\n  margin-right: 7px;\\n  margin-left: -2px;\\n}\\n.xb-button._theme-normal_size-s > ._content > ._before:only-child,\\n.xb-button._theme-action_size-s > ._content > ._before:only-child,\\n.xb-button._theme-pseudo_size-s > ._content > ._before:only-child,\\n.xb-button._theme-dark_size-s > ._content > ._before:only-child,\\n.xb-button._theme-dark-pseudo_size-s > ._content > ._before:only-child,\\n.xb-button._theme-clear_size-s > ._content > ._before:only-child {\\n  margin-right: -2px;\\n}\\n.xb-button._theme-normal_size-s > ._content > ._after,\\n.xb-button._theme-normal_size-m > ._content > ._after,\\n.xb-button._theme-normal_size-l > ._content > ._after,\\n.xb-button._theme-normal_size-xl > ._content > ._after,\\n.xb-button._theme-action_size-s > ._content > ._after,\\n.xb-button._theme-action_size-m > ._content > ._after,\\n.xb-button._theme-action_size-l > ._content > ._after,\\n.xb-button._theme-action_size-xl > ._content > ._after,\\n.xb-button._theme-pseudo_size-s > ._content > ._after,\\n.xb-button._theme-pseudo_size-m > ._content > ._after,\\n.xb-button._theme-pseudo_size-l > ._content > ._after,\\n.xb-button._theme-pseudo_size-xl > ._content > ._after,\\n.xb-button._theme-dark_size-s > ._content > ._after,\\n.xb-button._theme-dark_size-m > ._content > ._after,\\n.xb-button._theme-dark_size-l > ._content > ._after,\\n.xb-button._theme-dark_size-xl > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-s > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-m > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-l > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._after,\\n.xb-button._theme-clear_size-s > ._content > ._after,\\n.xb-button._theme-clear_size-m > ._content > ._after,\\n.xb-button._theme-clear_size-l > ._content > ._after,\\n.xb-button._theme-clear_size-xl > ._content > ._after {\\n  -webkit-order: 1;\\n  -webkit-box-ordinal-group: 2;\\n     -moz-box-ordinal-group: 2;\\n          order: 1;\\n  float: right;\\n  -webkit-align-self: center;\\n  align-self: center;\\n  -webkit-flex-shrink: 0;\\n  flex-shrink: 0;\\n}\\n.xb-button._theme-normal_size-s > ._content > ._after,\\n.xb-button._theme-action_size-s > ._content > ._after,\\n.xb-button._theme-pseudo_size-s > ._content > ._after,\\n.xb-button._theme-dark_size-s > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-s > ._content > ._after,\\n.xb-button._theme-clear_size-s > ._content > ._after {\\n  margin-left: 7px;\\n  margin-right: -2px;\\n}\\n.xb-button._theme-normal_size-s > ._content > ._after:only-child,\\n.xb-button._theme-action_size-s > ._content > ._after:only-child,\\n.xb-button._theme-pseudo_size-s > ._content > ._after:only-child,\\n.xb-button._theme-dark_size-s > ._content > ._after:only-child,\\n.xb-button._theme-dark-pseudo_size-s > ._content > ._after:only-child,\\n.xb-button._theme-clear_size-s > ._content > ._after:only-child {\\n  margin-left: -2px;\\n}\\n.xb-button._theme-normal_size-s > ._content {\\n  padding: 0 9px;\\n  line-height: 22px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-normal_size-m {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  border-color: rgba(0,0,0,0.2);\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n}\\n.xb-button._theme-normal_size-m > ._content {\\n  background: #fff;\\n}\\n.xb-button._theme-normal_size-m:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-normal_size-m:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-normal_size-m:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-normal_size-m:active ._content {\\n  background: #f6f5f3;\\n}\\n.xb-button._theme-normal_size-m > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-normal_size-m > ._content > ._before,\\n.xb-button._theme-action_size-m > ._content > ._before,\\n.xb-button._theme-pseudo_size-m > ._content > ._before,\\n.xb-button._theme-dark_size-m > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-m > ._content > ._before,\\n.xb-button._theme-clear_size-m > ._content > ._before {\\n  margin-right: 8px;\\n  margin-left: -4px;\\n}\\n.xb-button._theme-normal_size-m > ._content > ._before:only-child,\\n.xb-button._theme-action_size-m > ._content > ._before:only-child,\\n.xb-button._theme-pseudo_size-m > ._content > ._before:only-child,\\n.xb-button._theme-dark_size-m > ._content > ._before:only-child,\\n.xb-button._theme-dark-pseudo_size-m > ._content > ._before:only-child,\\n.xb-button._theme-clear_size-m > ._content > ._before:only-child {\\n  margin-right: -4px;\\n}\\n.xb-button._theme-normal_size-m > ._content > ._after,\\n.xb-button._theme-action_size-m > ._content > ._after,\\n.xb-button._theme-pseudo_size-m > ._content > ._after,\\n.xb-button._theme-dark_size-m > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-m > ._content > ._after,\\n.xb-button._theme-clear_size-m > ._content > ._after {\\n  margin-left: 8px;\\n  margin-right: -4px;\\n}\\n.xb-button._theme-normal_size-m > ._content > ._after:only-child,\\n.xb-button._theme-action_size-m > ._content > ._after:only-child,\\n.xb-button._theme-pseudo_size-m > ._content > ._after:only-child,\\n.xb-button._theme-dark_size-m > ._content > ._after:only-child,\\n.xb-button._theme-dark-pseudo_size-m > ._content > ._after:only-child,\\n.xb-button._theme-clear_size-m > ._content > ._after:only-child {\\n  margin-left: -4px;\\n}\\n.xb-button._theme-normal_size-m > ._content {\\n  padding: 0 12px;\\n  line-height: 26px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-normal_size-l {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  border-color: rgba(0,0,0,0.2);\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n}\\n.xb-button._theme-normal_size-l > ._content {\\n  background: #fff;\\n}\\n.xb-button._theme-normal_size-l:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-normal_size-l:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-normal_size-l:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-normal_size-l:active ._content {\\n  background: #f6f5f3;\\n}\\n.xb-button._theme-normal_size-l > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-normal_size-l > ._content > ._before,\\n.xb-button._theme-action_size-l > ._content > ._before,\\n.xb-button._theme-pseudo_size-l > ._content > ._before,\\n.xb-button._theme-dark_size-l > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-l > ._content > ._before,\\n.xb-button._theme-clear_size-l > ._content > ._before {\\n  margin-right: 9px;\\n  margin-left: -5px;\\n}\\n.xb-button._theme-normal_size-l > ._content > ._before:only-child,\\n.xb-button._theme-action_size-l > ._content > ._before:only-child,\\n.xb-button._theme-pseudo_size-l > ._content > ._before:only-child,\\n.xb-button._theme-dark_size-l > ._content > ._before:only-child,\\n.xb-button._theme-dark-pseudo_size-l > ._content > ._before:only-child,\\n.xb-button._theme-clear_size-l > ._content > ._before:only-child {\\n  margin-right: -5px;\\n}\\n.xb-button._theme-normal_size-l > ._content > ._after,\\n.xb-button._theme-action_size-l > ._content > ._after,\\n.xb-button._theme-pseudo_size-l > ._content > ._after,\\n.xb-button._theme-dark_size-l > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-l > ._content > ._after,\\n.xb-button._theme-clear_size-l > ._content > ._after {\\n  margin-left: 9px;\\n  margin-right: -5px;\\n}\\n.xb-button._theme-normal_size-l > ._content > ._after:only-child,\\n.xb-button._theme-action_size-l > ._content > ._after:only-child,\\n.xb-button._theme-pseudo_size-l > ._content > ._after:only-child,\\n.xb-button._theme-dark_size-l > ._content > ._after:only-child,\\n.xb-button._theme-dark-pseudo_size-l > ._content > ._after:only-child,\\n.xb-button._theme-clear_size-l > ._content > ._after:only-child {\\n  margin-left: -5px;\\n}\\n.xb-button._theme-normal_size-l > ._content {\\n  padding: 0 14px;\\n  line-height: 30px;\\n  font-size: 15px;\\n}\\n.xb-button._theme-normal_size-xl {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  border-color: rgba(0,0,0,0.2);\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n}\\n.xb-button._theme-normal_size-xl > ._content {\\n  background: #fff;\\n}\\n.xb-button._theme-normal_size-xl:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-normal_size-xl:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-normal_size-xl:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-normal_size-xl:active ._content {\\n  background: #f6f5f3;\\n}\\n.xb-button._theme-normal_size-xl > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-normal_size-xl > ._content > ._before,\\n.xb-button._theme-action_size-xl > ._content > ._before,\\n.xb-button._theme-pseudo_size-xl > ._content > ._before,\\n.xb-button._theme-dark_size-xl > ._content > ._before,\\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._before,\\n.xb-button._theme-clear_size-xl > ._content > ._before {\\n  margin-right: 11px;\\n  margin-left: -6px;\\n}\\n.xb-button._theme-normal_size-xl > ._content > ._before:only-child,\\n.xb-button._theme-action_size-xl > ._content > ._before:only-child,\\n.xb-button._theme-pseudo_size-xl > ._content > ._before:only-child,\\n.xb-button._theme-dark_size-xl > ._content > ._before:only-child,\\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._before:only-child,\\n.xb-button._theme-clear_size-xl > ._content > ._before:only-child {\\n  margin-right: -6px;\\n}\\n.xb-button._theme-normal_size-xl > ._content > ._after,\\n.xb-button._theme-action_size-xl > ._content > ._after,\\n.xb-button._theme-pseudo_size-xl > ._content > ._after,\\n.xb-button._theme-dark_size-xl > ._content > ._after,\\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._after,\\n.xb-button._theme-clear_size-xl > ._content > ._after {\\n  margin-left: 11px;\\n  margin-right: -6px;\\n}\\n.xb-button._theme-normal_size-xl > ._content > ._after:only-child,\\n.xb-button._theme-action_size-xl > ._content > ._after:only-child,\\n.xb-button._theme-pseudo_size-xl > ._content > ._after:only-child,\\n.xb-button._theme-dark_size-xl > ._content > ._after:only-child,\\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._after:only-child,\\n.xb-button._theme-clear_size-xl > ._content > ._after:only-child {\\n  margin-left: -6px;\\n}\\n.xb-button._theme-normal_size-xl > ._content {\\n  padding: 0 17px;\\n  line-height: 36px;\\n  font-size: 18px;\\n}\\n.xb-button._theme-action_size-s {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(191,153,0,0.8);\\n}\\n.xb-button._theme-action_size-s:hover {\\n  border-color: rgba(159,127,0,0.8);\\n}\\n.xb-button._theme-action_size-s:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-action_size-s:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-action_size-s:active ._content {\\n  background: #fc0;\\n}\\n.xb-button._theme-action_size-s > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-action_size-s > ._content {\\n  background: #ffdb4d;\\n}\\n.xb-button._theme-action_size-s > ._content {\\n  padding: 0 9px;\\n  line-height: 22px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-action_size-m {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(191,153,0,0.8);\\n}\\n.xb-button._theme-action_size-m:hover {\\n  border-color: rgba(159,127,0,0.8);\\n}\\n.xb-button._theme-action_size-m:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-action_size-m:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-action_size-m:active ._content {\\n  background: #fc0;\\n}\\n.xb-button._theme-action_size-m > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-action_size-m > ._content {\\n  background: #ffdb4d;\\n}\\n.xb-button._theme-action_size-m > ._content {\\n  padding: 0 12px;\\n  line-height: 26px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-action_size-l {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(191,153,0,0.8);\\n}\\n.xb-button._theme-action_size-l:hover {\\n  border-color: rgba(159,127,0,0.8);\\n}\\n.xb-button._theme-action_size-l:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-action_size-l:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-action_size-l:active ._content {\\n  background: #fc0;\\n}\\n.xb-button._theme-action_size-l > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-action_size-l > ._content {\\n  background: #ffdb4d;\\n}\\n.xb-button._theme-action_size-l > ._content {\\n  padding: 0 14px;\\n  line-height: 30px;\\n  font-size: 15px;\\n}\\n.xb-button._theme-action_size-xl {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(191,153,0,0.8);\\n}\\n.xb-button._theme-action_size-xl:hover {\\n  border-color: rgba(159,127,0,0.8);\\n}\\n.xb-button._theme-action_size-xl:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-action_size-xl:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-action_size-xl:active ._content {\\n  background: #fc0;\\n}\\n.xb-button._theme-action_size-xl > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-action_size-xl > ._content {\\n  background: #ffdb4d;\\n}\\n.xb-button._theme-action_size-xl > ._content {\\n  padding: 0 17px;\\n  line-height: 36px;\\n  font-size: 18px;\\n}\\n.xb-button._theme-pseudo_size-s {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(0,0,0,0.2);\\n}\\n.xb-button._theme-pseudo_size-s:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-pseudo_size-s:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-pseudo_size-s:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-pseudo_size-s:active ._content {\\n  background: rgba(0,0,0,0.05);\\n}\\n.xb-button._theme-pseudo_size-s > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-pseudo_size-s > ._content {\\n  padding: 0 9px;\\n  line-height: 22px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-pseudo_size-m {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(0,0,0,0.2);\\n}\\n.xb-button._theme-pseudo_size-m:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-pseudo_size-m:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-pseudo_size-m:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-pseudo_size-m:active ._content {\\n  background: rgba(0,0,0,0.05);\\n}\\n.xb-button._theme-pseudo_size-m > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-pseudo_size-m > ._content {\\n  padding: 0 12px;\\n  line-height: 26px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-pseudo_size-l {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(0,0,0,0.2);\\n}\\n.xb-button._theme-pseudo_size-l:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-pseudo_size-l:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-pseudo_size-l:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-pseudo_size-l:active ._content {\\n  background: rgba(0,0,0,0.05);\\n}\\n.xb-button._theme-pseudo_size-l > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-pseudo_size-l > ._content {\\n  padding: 0 14px;\\n  line-height: 30px;\\n  font-size: 15px;\\n}\\n.xb-button._theme-pseudo_size-xl {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(0,0,0,0.2);\\n}\\n.xb-button._theme-pseudo_size-xl:hover {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-button._theme-pseudo_size-xl:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-pseudo_size-xl:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-pseudo_size-xl:active ._content {\\n  background: rgba(0,0,0,0.05);\\n}\\n.xb-button._theme-pseudo_size-xl > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-pseudo_size-xl > ._content {\\n  padding: 0 17px;\\n  line-height: 36px;\\n  font-size: 18px;\\n}\\n.xb-button._theme-dark_size-s {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark_size-s:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark_size-s:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark_size-s:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark_size-s:active ._content {\\n  background: #111;\\n}\\n.xb-button._theme-dark_size-s > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark_size-s > ._content {\\n  background: #000;\\n}\\n.xb-button._theme-dark_size-s > ._content {\\n  padding: 0 9px;\\n  line-height: 22px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-dark_size-m {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark_size-m:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark_size-m:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark_size-m:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark_size-m:active ._content {\\n  background: #111;\\n}\\n.xb-button._theme-dark_size-m > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark_size-m > ._content {\\n  background: #000;\\n}\\n.xb-button._theme-dark_size-m > ._content {\\n  padding: 0 12px;\\n  line-height: 26px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-dark_size-l {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark_size-l:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark_size-l:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark_size-l:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark_size-l:active ._content {\\n  background: #111;\\n}\\n.xb-button._theme-dark_size-l > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark_size-l > ._content {\\n  background: #000;\\n}\\n.xb-button._theme-dark_size-l > ._content {\\n  padding: 0 14px;\\n  line-height: 30px;\\n  font-size: 15px;\\n}\\n.xb-button._theme-dark_size-xl {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark_size-xl:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark_size-xl:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark_size-xl:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark_size-xl:active ._content {\\n  background: #111;\\n}\\n.xb-button._theme-dark_size-xl > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark_size-xl > ._content {\\n  background: #000;\\n}\\n.xb-button._theme-dark_size-xl > ._content {\\n  padding: 0 17px;\\n  line-height: 36px;\\n  font-size: 18px;\\n}\\n.xb-button._theme-dark-pseudo_size-s {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark-pseudo_size-s:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark-pseudo_size-s:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark-pseudo_size-s:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark-pseudo_size-s:active ._content {\\n  background: rgba(255,255,255,0.1);\\n}\\n.xb-button._theme-dark-pseudo_size-s > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark-pseudo_size-s > ._content {\\n  padding: 0 9px;\\n  line-height: 22px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-dark-pseudo_size-m {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark-pseudo_size-m:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark-pseudo_size-m:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark-pseudo_size-m:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark-pseudo_size-m:active ._content {\\n  background: rgba(255,255,255,0.1);\\n}\\n.xb-button._theme-dark-pseudo_size-m > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark-pseudo_size-m > ._content {\\n  padding: 0 12px;\\n  line-height: 26px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-dark-pseudo_size-l {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark-pseudo_size-l:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark-pseudo_size-l:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark-pseudo_size-l:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark-pseudo_size-l:active ._content {\\n  background: rgba(255,255,255,0.1);\\n}\\n.xb-button._theme-dark-pseudo_size-l > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark-pseudo_size-l > ._content {\\n  padding: 0 14px;\\n  line-height: 30px;\\n  font-size: 15px;\\n}\\n.xb-button._theme-dark-pseudo_size-xl {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #fff;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: rgba(255,255,255,0.35);\\n}\\n.xb-button._theme-dark-pseudo_size-xl:hover {\\n  border-color: rgba(255,255,255,0.55);\\n}\\n.xb-button._theme-dark-pseudo_size-xl:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-dark-pseudo_size-xl:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-dark-pseudo_size-xl:active ._content {\\n  background: rgba(255,255,255,0.1);\\n}\\n.xb-button._theme-dark-pseudo_size-xl > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-dark-pseudo_size-xl > ._content {\\n  padding: 0 17px;\\n  line-height: 36px;\\n  font-size: 18px;\\n}\\n.xb-button._theme-clear_size-s {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: transparent;\\n}\\n.xb-button._theme-clear_size-s:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-clear_size-s:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-clear_size-s > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-clear_size-s > ._content {\\n  padding: 0 9px;\\n  line-height: 22px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-clear_size-m {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: transparent;\\n}\\n.xb-button._theme-clear_size-m:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-clear_size-m:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-clear_size-m > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-clear_size-m > ._content {\\n  padding: 0 12px;\\n  line-height: 26px;\\n  font-size: 13px;\\n}\\n.xb-button._theme-clear_size-l {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: transparent;\\n}\\n.xb-button._theme-clear_size-l:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-clear_size-l:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-clear_size-l > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-clear_size-l > ._content {\\n  padding: 0 14px;\\n  line-height: 30px;\\n  font-size: 15px;\\n}\\n.xb-button._theme-clear_size-xl {\\n  z-index: 1;\\n  border: 1px solid;\\n  font-family: Arial, sans-serif;\\n  color: #000;\\n  line-height: 0;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  text-align: center;\\n  -webkit-justify-content: center;\\n  -webkit-box-pack: center;\\n     -moz-box-pack: center;\\n          justify-content: center;\\n  border-color: transparent;\\n}\\n.xb-button._theme-clear_size-xl:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._theme-clear_size-xl:focus ._content {\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._theme-clear_size-xl > ._content {\\n  -webkit-border-radius: 2px;\\n          border-radius: 2px;\\n}\\n.xb-button._theme-clear_size-xl > ._content {\\n  padding: 0 17px;\\n  line-height: 36px;\\n  font-size: 18px;\\n}\\n.xb-button._focused {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-button._focused:before {\\n  content: \\\"\\\";\\n  position: absolute;\\n  top: 0;\\n  right: 0;\\n  bottom: 0;\\n  left: 0;\\n  -webkit-border-radius: inherit;\\n          border-radius: inherit;\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-button._disabled {\\n  cursor: default !important;\\n  opacity: 0.6;\\n  pointer-events: none;\\n}\\n.xb-button._disabled .xb-button._disabled {\\n  opacity: 1;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/button/style/inline.styl\n ** module id = 54\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/button/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	module.exports = ".xb-button._theme-normal_size-s,\n.xb-button._theme-normal_size-m,\n.xb-button._theme-normal_size-l,\n.xb-button._theme-normal_size-xl,\n.xb-button._theme-action_size-s,\n.xb-button._theme-action_size-m,\n.xb-button._theme-action_size-l,\n.xb-button._theme-action_size-xl,\n.xb-button._theme-pseudo_size-s,\n.xb-button._theme-pseudo_size-m,\n.xb-button._theme-pseudo_size-l,\n.xb-button._theme-pseudo_size-xl,\n.xb-button._theme-dark_size-s,\n.xb-button._theme-dark_size-m,\n.xb-button._theme-dark_size-l,\n.xb-button._theme-dark_size-xl,\n.xb-button._theme-dark-pseudo_size-s,\n.xb-button._theme-dark-pseudo_size-m,\n.xb-button._theme-dark-pseudo_size-l,\n.xb-button._theme-dark-pseudo_size-xl,\n.xb-button._theme-clear_size-s,\n.xb-button._theme-clear_size-m,\n.xb-button._theme-clear_size-l,\n.xb-button._theme-clear_size-xl {\n  padding: 0;\n  margin: 0;\n  border: none;\n  background: transparent;\n  -moz-appearance: none;\n  font: inherit;\n}\n.xb-button._theme-normal_size-s::-moz-focus-inner,\n.xb-button._theme-normal_size-m::-moz-focus-inner,\n.xb-button._theme-normal_size-l::-moz-focus-inner,\n.xb-button._theme-normal_size-xl::-moz-focus-inner,\n.xb-button._theme-action_size-s::-moz-focus-inner,\n.xb-button._theme-action_size-m::-moz-focus-inner,\n.xb-button._theme-action_size-l::-moz-focus-inner,\n.xb-button._theme-action_size-xl::-moz-focus-inner,\n.xb-button._theme-pseudo_size-s::-moz-focus-inner,\n.xb-button._theme-pseudo_size-m::-moz-focus-inner,\n.xb-button._theme-pseudo_size-l::-moz-focus-inner,\n.xb-button._theme-pseudo_size-xl::-moz-focus-inner,\n.xb-button._theme-dark_size-s::-moz-focus-inner,\n.xb-button._theme-dark_size-m::-moz-focus-inner,\n.xb-button._theme-dark_size-l::-moz-focus-inner,\n.xb-button._theme-dark_size-xl::-moz-focus-inner,\n.xb-button._theme-dark-pseudo_size-s::-moz-focus-inner,\n.xb-button._theme-dark-pseudo_size-m::-moz-focus-inner,\n.xb-button._theme-dark-pseudo_size-l::-moz-focus-inner,\n.xb-button._theme-dark-pseudo_size-xl::-moz-focus-inner,\n.xb-button._theme-clear_size-s::-moz-focus-inner,\n.xb-button._theme-clear_size-m::-moz-focus-inner,\n.xb-button._theme-clear_size-l::-moz-focus-inner,\n.xb-button._theme-clear_size-xl::-moz-focus-inner {\n  padding: 0;\n  border: none;\n}\na.xb-button {\n  text-decoration: none;\n}\n.xb-button {\n  font-weight: inherit;\n  width: 100%;\n}\n.xb-button > ._content {\n  width: 100%;\n}\n.xb-button > ._content > ._ico {\n  line-height: inherit;\n}\n.xb-button > ._content._empty > ._ico {\n  margin-right: -5px !important;\n  margin-left: -5px !important;\n}\n.xb-button > ._controller {\n  position: absolute !important;\n  clip: rect(1px,1px,1px,1px) !important;\n}\n.xb-button > ._controller:checked + ._content {\n  border-color: rgba(153,122,0,0.5);\n  -webkit-box-shadow: inset 0 90px #ffeba0;\n          box-shadow: inset 0 90px #ffeba0;\n}\n.xb-button._theme-normal_size-s {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  border-color: rgba(0,0,0,0.2);\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n}\n.xb-button._theme-normal_size-s,\n.xb-button._theme-normal_size-m,\n.xb-button._theme-normal_size-l,\n.xb-button._theme-normal_size-xl,\n.xb-button._theme-action_size-s,\n.xb-button._theme-action_size-m,\n.xb-button._theme-action_size-l,\n.xb-button._theme-action_size-xl,\n.xb-button._theme-pseudo_size-s,\n.xb-button._theme-pseudo_size-m,\n.xb-button._theme-pseudo_size-l,\n.xb-button._theme-pseudo_size-xl,\n.xb-button._theme-dark_size-s,\n.xb-button._theme-dark_size-m,\n.xb-button._theme-dark_size-l,\n.xb-button._theme-dark_size-xl,\n.xb-button._theme-dark-pseudo_size-s,\n.xb-button._theme-dark-pseudo_size-m,\n.xb-button._theme-dark-pseudo_size-l,\n.xb-button._theme-dark-pseudo_size-xl,\n.xb-button._theme-clear_size-s,\n.xb-button._theme-clear_size-m,\n.xb-button._theme-clear_size-l,\n.xb-button._theme-clear_size-xl {\n  display: inline-block;\n  vertical-align: baseline;\n  white-space: nowrap;\n  text-decoration: none;\n  position: relative;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  max-width: 100%;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.xb-button._theme-normal_size-s > ._content {\n  background: #fff;\n}\n.xb-button._theme-normal_size-s:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-normal_size-s:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-normal_size-s:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-normal_size-s:active ._content {\n  background: #f6f5f3;\n}\n.xb-button._theme-normal_size-s > ._content,\n.xb-button._theme-normal_size-m > ._content,\n.xb-button._theme-normal_size-l > ._content,\n.xb-button._theme-normal_size-xl > ._content,\n.xb-button._theme-action_size-s > ._content,\n.xb-button._theme-action_size-m > ._content,\n.xb-button._theme-action_size-l > ._content,\n.xb-button._theme-action_size-xl > ._content,\n.xb-button._theme-pseudo_size-s > ._content,\n.xb-button._theme-pseudo_size-m > ._content,\n.xb-button._theme-pseudo_size-l > ._content,\n.xb-button._theme-pseudo_size-xl > ._content,\n.xb-button._theme-dark_size-s > ._content,\n.xb-button._theme-dark_size-m > ._content,\n.xb-button._theme-dark_size-l > ._content,\n.xb-button._theme-dark_size-xl > ._content,\n.xb-button._theme-dark-pseudo_size-s > ._content,\n.xb-button._theme-dark-pseudo_size-m > ._content,\n.xb-button._theme-dark-pseudo_size-l > ._content,\n.xb-button._theme-dark-pseudo_size-xl > ._content,\n.xb-button._theme-clear_size-s > ._content,\n.xb-button._theme-clear_size-m > ._content,\n.xb-button._theme-clear_size-l > ._content,\n.xb-button._theme-clear_size-xl > ._content {\n  position: relative;\n  display: block;\n  display: -webkit-inline-flex;\n  display: -webkit-inline-box;\n  display: -moz-inline-box;\n  display: inline-flex;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 100%;\n  -webkit-border-radius: inherit;\n          border-radius: inherit;\n}\n.xb-button._theme-normal_size-s > ._content:before,\n.xb-button._theme-normal_size-m > ._content:before,\n.xb-button._theme-normal_size-l > ._content:before,\n.xb-button._theme-normal_size-xl > ._content:before,\n.xb-button._theme-action_size-s > ._content:before,\n.xb-button._theme-action_size-m > ._content:before,\n.xb-button._theme-action_size-l > ._content:before,\n.xb-button._theme-action_size-xl > ._content:before,\n.xb-button._theme-pseudo_size-s > ._content:before,\n.xb-button._theme-pseudo_size-m > ._content:before,\n.xb-button._theme-pseudo_size-l > ._content:before,\n.xb-button._theme-pseudo_size-xl > ._content:before,\n.xb-button._theme-dark_size-s > ._content:before,\n.xb-button._theme-dark_size-m > ._content:before,\n.xb-button._theme-dark_size-l > ._content:before,\n.xb-button._theme-dark_size-xl > ._content:before,\n.xb-button._theme-dark-pseudo_size-s > ._content:before,\n.xb-button._theme-dark-pseudo_size-m > ._content:before,\n.xb-button._theme-dark-pseudo_size-l > ._content:before,\n.xb-button._theme-dark-pseudo_size-xl > ._content:before,\n.xb-button._theme-clear_size-s > ._content:before,\n.xb-button._theme-clear_size-m > ._content:before,\n.xb-button._theme-clear_size-l > ._content:before,\n.xb-button._theme-clear_size-xl > ._content:before {\n  float: left;\n  content: \"\\a0\";\n  width: 0;\n  min-width: 0;\n}\n.xb-button._theme-normal_size-s > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-normal_size-s > ._content > ._text,\n.xb-button._theme-normal_size-m > ._content > ._text,\n.xb-button._theme-normal_size-l > ._content > ._text,\n.xb-button._theme-normal_size-xl > ._content > ._text,\n.xb-button._theme-action_size-s > ._content > ._text,\n.xb-button._theme-action_size-m > ._content > ._text,\n.xb-button._theme-action_size-l > ._content > ._text,\n.xb-button._theme-action_size-xl > ._content > ._text,\n.xb-button._theme-pseudo_size-s > ._content > ._text,\n.xb-button._theme-pseudo_size-m > ._content > ._text,\n.xb-button._theme-pseudo_size-l > ._content > ._text,\n.xb-button._theme-pseudo_size-xl > ._content > ._text,\n.xb-button._theme-dark_size-s > ._content > ._text,\n.xb-button._theme-dark_size-m > ._content > ._text,\n.xb-button._theme-dark_size-l > ._content > ._text,\n.xb-button._theme-dark_size-xl > ._content > ._text,\n.xb-button._theme-dark-pseudo_size-s > ._content > ._text,\n.xb-button._theme-dark-pseudo_size-m > ._content > ._text,\n.xb-button._theme-dark-pseudo_size-l > ._content > ._text,\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._text,\n.xb-button._theme-clear_size-s > ._content > ._text,\n.xb-button._theme-clear_size-m > ._content > ._text,\n.xb-button._theme-clear_size-l > ._content > ._text,\n.xb-button._theme-clear_size-xl > ._content > ._text {\n  display: block;\n  -webkit-flex-shrink: 1;\n  flex-shrink: 1;\n  -webkit-flex-basis: 100%;\n  flex-basis: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  min-width: 0;\n}\n_:-ms-input-placeholder,\n:root .xb-button._theme-normal_size-s > ._content > ._text,\n:root .xb-button._theme-normal_size-m > ._content > ._text,\n:root .xb-button._theme-normal_size-l > ._content > ._text,\n:root .xb-button._theme-normal_size-xl > ._content > ._text,\n:root .xb-button._theme-action_size-s > ._content > ._text,\n:root .xb-button._theme-action_size-m > ._content > ._text,\n:root .xb-button._theme-action_size-l > ._content > ._text,\n:root .xb-button._theme-action_size-xl > ._content > ._text,\n:root .xb-button._theme-pseudo_size-s > ._content > ._text,\n:root .xb-button._theme-pseudo_size-m > ._content > ._text,\n:root .xb-button._theme-pseudo_size-l > ._content > ._text,\n:root .xb-button._theme-pseudo_size-xl > ._content > ._text,\n:root .xb-button._theme-dark_size-s > ._content > ._text,\n:root .xb-button._theme-dark_size-m > ._content > ._text,\n:root .xb-button._theme-dark_size-l > ._content > ._text,\n:root .xb-button._theme-dark_size-xl > ._content > ._text,\n:root .xb-button._theme-dark-pseudo_size-s > ._content > ._text,\n:root .xb-button._theme-dark-pseudo_size-m > ._content > ._text,\n:root .xb-button._theme-dark-pseudo_size-l > ._content > ._text,\n:root .xb-button._theme-dark-pseudo_size-xl > ._content > ._text,\n:root .xb-button._theme-clear_size-s > ._content > ._text,\n:root .xb-button._theme-clear_size-m > ._content > ._text,\n:root .xb-button._theme-clear_size-l > ._content > ._text,\n:root .xb-button._theme-clear_size-xl > ._content > ._text {\n  flex-basis: auto;\n  width: 100%;\n}\n.xb-button._theme-normal_size-s > ._content > ._before,\n.xb-button._theme-normal_size-m > ._content > ._before,\n.xb-button._theme-normal_size-l > ._content > ._before,\n.xb-button._theme-normal_size-xl > ._content > ._before,\n.xb-button._theme-action_size-s > ._content > ._before,\n.xb-button._theme-action_size-m > ._content > ._before,\n.xb-button._theme-action_size-l > ._content > ._before,\n.xb-button._theme-action_size-xl > ._content > ._before,\n.xb-button._theme-pseudo_size-s > ._content > ._before,\n.xb-button._theme-pseudo_size-m > ._content > ._before,\n.xb-button._theme-pseudo_size-l > ._content > ._before,\n.xb-button._theme-pseudo_size-xl > ._content > ._before,\n.xb-button._theme-dark_size-s > ._content > ._before,\n.xb-button._theme-dark_size-m > ._content > ._before,\n.xb-button._theme-dark_size-l > ._content > ._before,\n.xb-button._theme-dark_size-xl > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-s > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-m > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-l > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._before,\n.xb-button._theme-clear_size-s > ._content > ._before,\n.xb-button._theme-clear_size-m > ._content > ._before,\n.xb-button._theme-clear_size-l > ._content > ._before,\n.xb-button._theme-clear_size-xl > ._content > ._before {\n  float: left;\n  -webkit-align-self: center;\n  align-self: center;\n  -webkit-flex-shrink: 0;\n  flex-shrink: 0;\n}\n.xb-button._theme-normal_size-s > ._content > ._before,\n.xb-button._theme-action_size-s > ._content > ._before,\n.xb-button._theme-pseudo_size-s > ._content > ._before,\n.xb-button._theme-dark_size-s > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-s > ._content > ._before,\n.xb-button._theme-clear_size-s > ._content > ._before {\n  margin-right: 7px;\n  margin-left: -2px;\n}\n.xb-button._theme-normal_size-s > ._content > ._before:only-child,\n.xb-button._theme-action_size-s > ._content > ._before:only-child,\n.xb-button._theme-pseudo_size-s > ._content > ._before:only-child,\n.xb-button._theme-dark_size-s > ._content > ._before:only-child,\n.xb-button._theme-dark-pseudo_size-s > ._content > ._before:only-child,\n.xb-button._theme-clear_size-s > ._content > ._before:only-child {\n  margin-right: -2px;\n}\n.xb-button._theme-normal_size-s > ._content > ._after,\n.xb-button._theme-normal_size-m > ._content > ._after,\n.xb-button._theme-normal_size-l > ._content > ._after,\n.xb-button._theme-normal_size-xl > ._content > ._after,\n.xb-button._theme-action_size-s > ._content > ._after,\n.xb-button._theme-action_size-m > ._content > ._after,\n.xb-button._theme-action_size-l > ._content > ._after,\n.xb-button._theme-action_size-xl > ._content > ._after,\n.xb-button._theme-pseudo_size-s > ._content > ._after,\n.xb-button._theme-pseudo_size-m > ._content > ._after,\n.xb-button._theme-pseudo_size-l > ._content > ._after,\n.xb-button._theme-pseudo_size-xl > ._content > ._after,\n.xb-button._theme-dark_size-s > ._content > ._after,\n.xb-button._theme-dark_size-m > ._content > ._after,\n.xb-button._theme-dark_size-l > ._content > ._after,\n.xb-button._theme-dark_size-xl > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-s > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-m > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-l > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._after,\n.xb-button._theme-clear_size-s > ._content > ._after,\n.xb-button._theme-clear_size-m > ._content > ._after,\n.xb-button._theme-clear_size-l > ._content > ._after,\n.xb-button._theme-clear_size-xl > ._content > ._after {\n  -webkit-order: 1;\n  -webkit-box-ordinal-group: 2;\n     -moz-box-ordinal-group: 2;\n          order: 1;\n  float: right;\n  -webkit-align-self: center;\n  align-self: center;\n  -webkit-flex-shrink: 0;\n  flex-shrink: 0;\n}\n.xb-button._theme-normal_size-s > ._content > ._after,\n.xb-button._theme-action_size-s > ._content > ._after,\n.xb-button._theme-pseudo_size-s > ._content > ._after,\n.xb-button._theme-dark_size-s > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-s > ._content > ._after,\n.xb-button._theme-clear_size-s > ._content > ._after {\n  margin-left: 7px;\n  margin-right: -2px;\n}\n.xb-button._theme-normal_size-s > ._content > ._after:only-child,\n.xb-button._theme-action_size-s > ._content > ._after:only-child,\n.xb-button._theme-pseudo_size-s > ._content > ._after:only-child,\n.xb-button._theme-dark_size-s > ._content > ._after:only-child,\n.xb-button._theme-dark-pseudo_size-s > ._content > ._after:only-child,\n.xb-button._theme-clear_size-s > ._content > ._after:only-child {\n  margin-left: -2px;\n}\n.xb-button._theme-normal_size-s > ._content {\n  padding: 0 9px;\n  line-height: 22px;\n  font-size: 13px;\n}\n.xb-button._theme-normal_size-m {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  border-color: rgba(0,0,0,0.2);\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n}\n.xb-button._theme-normal_size-m > ._content {\n  background: #fff;\n}\n.xb-button._theme-normal_size-m:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-normal_size-m:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-normal_size-m:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-normal_size-m:active ._content {\n  background: #f6f5f3;\n}\n.xb-button._theme-normal_size-m > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-normal_size-m > ._content > ._before,\n.xb-button._theme-action_size-m > ._content > ._before,\n.xb-button._theme-pseudo_size-m > ._content > ._before,\n.xb-button._theme-dark_size-m > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-m > ._content > ._before,\n.xb-button._theme-clear_size-m > ._content > ._before {\n  margin-right: 8px;\n  margin-left: -4px;\n}\n.xb-button._theme-normal_size-m > ._content > ._before:only-child,\n.xb-button._theme-action_size-m > ._content > ._before:only-child,\n.xb-button._theme-pseudo_size-m > ._content > ._before:only-child,\n.xb-button._theme-dark_size-m > ._content > ._before:only-child,\n.xb-button._theme-dark-pseudo_size-m > ._content > ._before:only-child,\n.xb-button._theme-clear_size-m > ._content > ._before:only-child {\n  margin-right: -4px;\n}\n.xb-button._theme-normal_size-m > ._content > ._after,\n.xb-button._theme-action_size-m > ._content > ._after,\n.xb-button._theme-pseudo_size-m > ._content > ._after,\n.xb-button._theme-dark_size-m > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-m > ._content > ._after,\n.xb-button._theme-clear_size-m > ._content > ._after {\n  margin-left: 8px;\n  margin-right: -4px;\n}\n.xb-button._theme-normal_size-m > ._content > ._after:only-child,\n.xb-button._theme-action_size-m > ._content > ._after:only-child,\n.xb-button._theme-pseudo_size-m > ._content > ._after:only-child,\n.xb-button._theme-dark_size-m > ._content > ._after:only-child,\n.xb-button._theme-dark-pseudo_size-m > ._content > ._after:only-child,\n.xb-button._theme-clear_size-m > ._content > ._after:only-child {\n  margin-left: -4px;\n}\n.xb-button._theme-normal_size-m > ._content {\n  padding: 0 12px;\n  line-height: 26px;\n  font-size: 13px;\n}\n.xb-button._theme-normal_size-l {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  border-color: rgba(0,0,0,0.2);\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n}\n.xb-button._theme-normal_size-l > ._content {\n  background: #fff;\n}\n.xb-button._theme-normal_size-l:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-normal_size-l:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-normal_size-l:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-normal_size-l:active ._content {\n  background: #f6f5f3;\n}\n.xb-button._theme-normal_size-l > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-normal_size-l > ._content > ._before,\n.xb-button._theme-action_size-l > ._content > ._before,\n.xb-button._theme-pseudo_size-l > ._content > ._before,\n.xb-button._theme-dark_size-l > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-l > ._content > ._before,\n.xb-button._theme-clear_size-l > ._content > ._before {\n  margin-right: 9px;\n  margin-left: -5px;\n}\n.xb-button._theme-normal_size-l > ._content > ._before:only-child,\n.xb-button._theme-action_size-l > ._content > ._before:only-child,\n.xb-button._theme-pseudo_size-l > ._content > ._before:only-child,\n.xb-button._theme-dark_size-l > ._content > ._before:only-child,\n.xb-button._theme-dark-pseudo_size-l > ._content > ._before:only-child,\n.xb-button._theme-clear_size-l > ._content > ._before:only-child {\n  margin-right: -5px;\n}\n.xb-button._theme-normal_size-l > ._content > ._after,\n.xb-button._theme-action_size-l > ._content > ._after,\n.xb-button._theme-pseudo_size-l > ._content > ._after,\n.xb-button._theme-dark_size-l > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-l > ._content > ._after,\n.xb-button._theme-clear_size-l > ._content > ._after {\n  margin-left: 9px;\n  margin-right: -5px;\n}\n.xb-button._theme-normal_size-l > ._content > ._after:only-child,\n.xb-button._theme-action_size-l > ._content > ._after:only-child,\n.xb-button._theme-pseudo_size-l > ._content > ._after:only-child,\n.xb-button._theme-dark_size-l > ._content > ._after:only-child,\n.xb-button._theme-dark-pseudo_size-l > ._content > ._after:only-child,\n.xb-button._theme-clear_size-l > ._content > ._after:only-child {\n  margin-left: -5px;\n}\n.xb-button._theme-normal_size-l > ._content {\n  padding: 0 14px;\n  line-height: 30px;\n  font-size: 15px;\n}\n.xb-button._theme-normal_size-xl {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  border-color: rgba(0,0,0,0.2);\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n}\n.xb-button._theme-normal_size-xl > ._content {\n  background: #fff;\n}\n.xb-button._theme-normal_size-xl:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-normal_size-xl:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-normal_size-xl:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-normal_size-xl:active ._content {\n  background: #f6f5f3;\n}\n.xb-button._theme-normal_size-xl > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-normal_size-xl > ._content > ._before,\n.xb-button._theme-action_size-xl > ._content > ._before,\n.xb-button._theme-pseudo_size-xl > ._content > ._before,\n.xb-button._theme-dark_size-xl > ._content > ._before,\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._before,\n.xb-button._theme-clear_size-xl > ._content > ._before {\n  margin-right: 11px;\n  margin-left: -6px;\n}\n.xb-button._theme-normal_size-xl > ._content > ._before:only-child,\n.xb-button._theme-action_size-xl > ._content > ._before:only-child,\n.xb-button._theme-pseudo_size-xl > ._content > ._before:only-child,\n.xb-button._theme-dark_size-xl > ._content > ._before:only-child,\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._before:only-child,\n.xb-button._theme-clear_size-xl > ._content > ._before:only-child {\n  margin-right: -6px;\n}\n.xb-button._theme-normal_size-xl > ._content > ._after,\n.xb-button._theme-action_size-xl > ._content > ._after,\n.xb-button._theme-pseudo_size-xl > ._content > ._after,\n.xb-button._theme-dark_size-xl > ._content > ._after,\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._after,\n.xb-button._theme-clear_size-xl > ._content > ._after {\n  margin-left: 11px;\n  margin-right: -6px;\n}\n.xb-button._theme-normal_size-xl > ._content > ._after:only-child,\n.xb-button._theme-action_size-xl > ._content > ._after:only-child,\n.xb-button._theme-pseudo_size-xl > ._content > ._after:only-child,\n.xb-button._theme-dark_size-xl > ._content > ._after:only-child,\n.xb-button._theme-dark-pseudo_size-xl > ._content > ._after:only-child,\n.xb-button._theme-clear_size-xl > ._content > ._after:only-child {\n  margin-left: -6px;\n}\n.xb-button._theme-normal_size-xl > ._content {\n  padding: 0 17px;\n  line-height: 36px;\n  font-size: 18px;\n}\n.xb-button._theme-action_size-s {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(191,153,0,0.8);\n}\n.xb-button._theme-action_size-s:hover {\n  border-color: rgba(159,127,0,0.8);\n}\n.xb-button._theme-action_size-s:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-action_size-s:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-action_size-s:active ._content {\n  background: #fc0;\n}\n.xb-button._theme-action_size-s > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-action_size-s > ._content {\n  background: #ffdb4d;\n}\n.xb-button._theme-action_size-s > ._content {\n  padding: 0 9px;\n  line-height: 22px;\n  font-size: 13px;\n}\n.xb-button._theme-action_size-m {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(191,153,0,0.8);\n}\n.xb-button._theme-action_size-m:hover {\n  border-color: rgba(159,127,0,0.8);\n}\n.xb-button._theme-action_size-m:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-action_size-m:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-action_size-m:active ._content {\n  background: #fc0;\n}\n.xb-button._theme-action_size-m > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-action_size-m > ._content {\n  background: #ffdb4d;\n}\n.xb-button._theme-action_size-m > ._content {\n  padding: 0 12px;\n  line-height: 26px;\n  font-size: 13px;\n}\n.xb-button._theme-action_size-l {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(191,153,0,0.8);\n}\n.xb-button._theme-action_size-l:hover {\n  border-color: rgba(159,127,0,0.8);\n}\n.xb-button._theme-action_size-l:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-action_size-l:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-action_size-l:active ._content {\n  background: #fc0;\n}\n.xb-button._theme-action_size-l > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-action_size-l > ._content {\n  background: #ffdb4d;\n}\n.xb-button._theme-action_size-l > ._content {\n  padding: 0 14px;\n  line-height: 30px;\n  font-size: 15px;\n}\n.xb-button._theme-action_size-xl {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(191,153,0,0.8);\n}\n.xb-button._theme-action_size-xl:hover {\n  border-color: rgba(159,127,0,0.8);\n}\n.xb-button._theme-action_size-xl:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-action_size-xl:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-action_size-xl:active ._content {\n  background: #fc0;\n}\n.xb-button._theme-action_size-xl > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-action_size-xl > ._content {\n  background: #ffdb4d;\n}\n.xb-button._theme-action_size-xl > ._content {\n  padding: 0 17px;\n  line-height: 36px;\n  font-size: 18px;\n}\n.xb-button._theme-pseudo_size-s {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(0,0,0,0.2);\n}\n.xb-button._theme-pseudo_size-s:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-pseudo_size-s:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-pseudo_size-s:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-pseudo_size-s:active ._content {\n  background: rgba(0,0,0,0.05);\n}\n.xb-button._theme-pseudo_size-s > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-pseudo_size-s > ._content {\n  padding: 0 9px;\n  line-height: 22px;\n  font-size: 13px;\n}\n.xb-button._theme-pseudo_size-m {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(0,0,0,0.2);\n}\n.xb-button._theme-pseudo_size-m:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-pseudo_size-m:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-pseudo_size-m:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-pseudo_size-m:active ._content {\n  background: rgba(0,0,0,0.05);\n}\n.xb-button._theme-pseudo_size-m > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-pseudo_size-m > ._content {\n  padding: 0 12px;\n  line-height: 26px;\n  font-size: 13px;\n}\n.xb-button._theme-pseudo_size-l {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(0,0,0,0.2);\n}\n.xb-button._theme-pseudo_size-l:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-pseudo_size-l:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-pseudo_size-l:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-pseudo_size-l:active ._content {\n  background: rgba(0,0,0,0.05);\n}\n.xb-button._theme-pseudo_size-l > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-pseudo_size-l > ._content {\n  padding: 0 14px;\n  line-height: 30px;\n  font-size: 15px;\n}\n.xb-button._theme-pseudo_size-xl {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(0,0,0,0.2);\n}\n.xb-button._theme-pseudo_size-xl:hover {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-button._theme-pseudo_size-xl:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-pseudo_size-xl:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-pseudo_size-xl:active ._content {\n  background: rgba(0,0,0,0.05);\n}\n.xb-button._theme-pseudo_size-xl > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-pseudo_size-xl > ._content {\n  padding: 0 17px;\n  line-height: 36px;\n  font-size: 18px;\n}\n.xb-button._theme-dark_size-s {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark_size-s:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark_size-s:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark_size-s:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark_size-s:active ._content {\n  background: #111;\n}\n.xb-button._theme-dark_size-s > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark_size-s > ._content {\n  background: #000;\n}\n.xb-button._theme-dark_size-s > ._content {\n  padding: 0 9px;\n  line-height: 22px;\n  font-size: 13px;\n}\n.xb-button._theme-dark_size-m {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark_size-m:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark_size-m:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark_size-m:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark_size-m:active ._content {\n  background: #111;\n}\n.xb-button._theme-dark_size-m > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark_size-m > ._content {\n  background: #000;\n}\n.xb-button._theme-dark_size-m > ._content {\n  padding: 0 12px;\n  line-height: 26px;\n  font-size: 13px;\n}\n.xb-button._theme-dark_size-l {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark_size-l:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark_size-l:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark_size-l:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark_size-l:active ._content {\n  background: #111;\n}\n.xb-button._theme-dark_size-l > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark_size-l > ._content {\n  background: #000;\n}\n.xb-button._theme-dark_size-l > ._content {\n  padding: 0 14px;\n  line-height: 30px;\n  font-size: 15px;\n}\n.xb-button._theme-dark_size-xl {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark_size-xl:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark_size-xl:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark_size-xl:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark_size-xl:active ._content {\n  background: #111;\n}\n.xb-button._theme-dark_size-xl > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark_size-xl > ._content {\n  background: #000;\n}\n.xb-button._theme-dark_size-xl > ._content {\n  padding: 0 17px;\n  line-height: 36px;\n  font-size: 18px;\n}\n.xb-button._theme-dark-pseudo_size-s {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark-pseudo_size-s:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark-pseudo_size-s:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark-pseudo_size-s:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark-pseudo_size-s:active ._content {\n  background: rgba(255,255,255,0.1);\n}\n.xb-button._theme-dark-pseudo_size-s > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark-pseudo_size-s > ._content {\n  padding: 0 9px;\n  line-height: 22px;\n  font-size: 13px;\n}\n.xb-button._theme-dark-pseudo_size-m {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark-pseudo_size-m:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark-pseudo_size-m:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark-pseudo_size-m:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark-pseudo_size-m:active ._content {\n  background: rgba(255,255,255,0.1);\n}\n.xb-button._theme-dark-pseudo_size-m > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark-pseudo_size-m > ._content {\n  padding: 0 12px;\n  line-height: 26px;\n  font-size: 13px;\n}\n.xb-button._theme-dark-pseudo_size-l {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark-pseudo_size-l:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark-pseudo_size-l:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark-pseudo_size-l:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark-pseudo_size-l:active ._content {\n  background: rgba(255,255,255,0.1);\n}\n.xb-button._theme-dark-pseudo_size-l > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark-pseudo_size-l > ._content {\n  padding: 0 14px;\n  line-height: 30px;\n  font-size: 15px;\n}\n.xb-button._theme-dark-pseudo_size-xl {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #fff;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: rgba(255,255,255,0.35);\n}\n.xb-button._theme-dark-pseudo_size-xl:hover {\n  border-color: rgba(255,255,255,0.55);\n}\n.xb-button._theme-dark-pseudo_size-xl:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-dark-pseudo_size-xl:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-dark-pseudo_size-xl:active ._content {\n  background: rgba(255,255,255,0.1);\n}\n.xb-button._theme-dark-pseudo_size-xl > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-dark-pseudo_size-xl > ._content {\n  padding: 0 17px;\n  line-height: 36px;\n  font-size: 18px;\n}\n.xb-button._theme-clear_size-s {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: transparent;\n}\n.xb-button._theme-clear_size-s:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-clear_size-s:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-clear_size-s > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-clear_size-s > ._content {\n  padding: 0 9px;\n  line-height: 22px;\n  font-size: 13px;\n}\n.xb-button._theme-clear_size-m {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: transparent;\n}\n.xb-button._theme-clear_size-m:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-clear_size-m:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-clear_size-m > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-clear_size-m > ._content {\n  padding: 0 12px;\n  line-height: 26px;\n  font-size: 13px;\n}\n.xb-button._theme-clear_size-l {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: transparent;\n}\n.xb-button._theme-clear_size-l:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-clear_size-l:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-clear_size-l > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-clear_size-l > ._content {\n  padding: 0 14px;\n  line-height: 30px;\n  font-size: 15px;\n}\n.xb-button._theme-clear_size-xl {\n  z-index: 1;\n  border: 1px solid;\n  font-family: Arial, sans-serif;\n  color: #000;\n  line-height: 0;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  text-align: center;\n  -webkit-justify-content: center;\n  -webkit-box-pack: center;\n     -moz-box-pack: center;\n          justify-content: center;\n  border-color: transparent;\n}\n.xb-button._theme-clear_size-xl:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._theme-clear_size-xl:focus ._content {\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._theme-clear_size-xl > ._content {\n  -webkit-border-radius: 2px;\n          border-radius: 2px;\n}\n.xb-button._theme-clear_size-xl > ._content {\n  padding: 0 17px;\n  line-height: 36px;\n  font-size: 18px;\n}\n.xb-button._focused {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-button._focused:before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-border-radius: inherit;\n          border-radius: inherit;\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-button._disabled {\n  cursor: default !important;\n  opacity: 0.6;\n  pointer-events: none;\n}\n.xb-button._disabled .xb-button._disabled {\n  opacity: 1;\n}\n"
 
 /***/ },
 /* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("var map = {\n\t\"./_file.styl\": 56,\n\t\"./_label.styl\": 57\n};\nfunction webpackContext(req) {\n\treturn __webpack_require__(webpackContextResolve(req));\n};\nfunction webpackContextResolve(req) {\n\treturn map[req] || (function() { throw new Error(\"Cannot find module '\" + req + \"'.\") }());\n};\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = 55;\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/button/style !../~/raw-loader!../~/postcss-loader!../~/stylus-loader!^\\.\\/_.*\\.styl$\n ** module id = 55\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///^\\.\\/_.*\\.styl$?./blocks/button/style_!../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	var map = {
+		"./_file.styl": 56,
+		"./_label.styl": 57
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 55;
+
 
 /***/ },
 /* 56 */
 /***/ function(module, exports) {
 
-	eval("module.exports = \"._xb-file-intruder {\\n  position: absolute;\\n  top: 0;\\n  right: 0;\\n  bottom: 0;\\n  left: 0;\\n  z-index: 11;\\n}\\n._xb-file-intruder-inner {\\n  float: right;\\n  text-align: right;\\n  overflow: hidden;\\n  width: 100%;\\n  height: 100%;\\n}\\n._xb-file-intruder-input {\\n  position: relative;\\n  z-index: 11;\\n  display: inline-block;\\n  vertical-align: 0;\\n  padding: 0;\\n  margin: -5em 0 0 -400px;\\n  width: 500px;\\n  cursor: pointer;\\n  font-size: 80px;\\n  opacity: 0;\\n}\\n._xb-file-intruder-input[type=\\\"button\\\"] {\\n  margin: 0;\\n  width: 100%;\\n  height: 100%;\\n  font-size: inherit;\\n}\\n._xb-file-intruder-input[type=\\\"file\\\"] {\\n  z-index: 0;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/button/style/_file.styl\n ** module id = 56\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/button/style/_file.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	module.exports = "._xb-file-intruder {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 11;\n}\n._xb-file-intruder-inner {\n  float: right;\n  text-align: right;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n}\n._xb-file-intruder-input {\n  position: relative;\n  z-index: 11;\n  display: inline-block;\n  vertical-align: 0;\n  padding: 0;\n  margin: -5em 0 0 -400px;\n  width: 500px;\n  cursor: pointer;\n  font-size: 80px;\n  opacity: 0;\n}\n._xb-file-intruder-input[type=\"button\"] {\n  margin: 0;\n  width: 100%;\n  height: 100%;\n  font-size: inherit;\n}\n._xb-file-intruder-input[type=\"file\"] {\n  z-index: 0;\n}\n"
 
 /***/ },
 /* 57 */
@@ -409,7 +2492,62 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(59);\n\n__webpack_require__(60);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _focusComponent = __webpack_require__(45);\n\nvar _focusComponent2 = _interopRequireDefault(_focusComponent);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * xb-link html element\n *\n * @class xb.Link\n * @memberof xb\n * @augments HTMLAnchorElement\n * @mixes xblocks.mixin.eDisabled\n */\nexports.default = _context.xb.Link = (0, _xblocksCore.create)('xb-link', [_disabled2.default, _focusComponent2.default, {\n    prototype: Object.create(HTMLAnchorElement.prototype),\n\n    /**\n     * @lends xb.Link.prototype\n     */\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                return _defineProperty({}, this.xtagName, __webpack_require__(61));\n            }\n        },\n\n        isShadowSupported: {\n            get: _lodash2.default.stubTrue\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/link/index.js\n ** module id = 58\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/link/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(59);
+
+	__webpack_require__(60);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _focusComponent = __webpack_require__(45);
+
+	var _focusComponent2 = _interopRequireDefault(_focusComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * xb-link html element
+	 *
+	 * @class xb.Link
+	 * @memberof xb
+	 * @augments HTMLAnchorElement
+	 * @mixes xblocks.mixin.eDisabled
+	 */
+	exports.default = _context.xb.Link = (0, _xblocksCore.create)('xb-link', [_disabled2.default, _focusComponent2.default, {
+	    prototype: Object.create(HTMLAnchorElement.prototype),
+
+	    /**
+	     * @lends xb.Link.prototype
+	     */
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                return _defineProperty({}, this.xtagName, __webpack_require__(61));
+	            }
+	        },
+
+	        isShadowSupported: {
+	            get: _lodash2.default.stubTrue
+	        }
+	    }
+	}]);
 
 /***/ },
 /* 59 */
@@ -417,19 +2555,161 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * The template node xb-link\n *\n * @class xv.Link\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.Link = _xblocksCore.view.register('xb-link', [_commonAttrs2.default, {\n    displayName: 'xb-link',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        'href': _react.PropTypes.string,\n        'name': _react.PropTypes.string,\n        'rel': _react.PropTypes.string,\n        'target': _react.PropTypes.oneOf(['_self', '_blank', '_parent', '_top']).isRequired,\n        'theme': _react.PropTypes.oneOf(['normal', 'outer', 'pseudo', 'empty']).isRequired\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'rel': 'noopener noreferrer',\n            'target': '_self',\n            'theme': 'normal'\n        };\n    },\n\n    render: function render() {\n        var classes = (0, _classnames3.default)(_defineProperty({\n            'xb-link': true,\n            '_disabled': this.props.disabled\n        }, '_theme-' + this.props.theme, true));\n\n        return React.createElement(\n            'a',\n            { name: this.props.name,\n                href: this.props.href,\n                target: this.props.target,\n                tabIndex: this.getTabIndex(),\n                className: classes,\n                rel: this.props.rel },\n            this.context.content()\n        );\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/link/index.jsx\n ** module id = 60\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/link/index.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * The template node xb-link
+	 *
+	 * @class xv.Link
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.Link = _xblocksCore.view.register('xb-link', [_commonAttrs2.default, {
+	    displayName: 'xb-link',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        'href': _react.PropTypes.string,
+	        'name': _react.PropTypes.string,
+	        'rel': _react.PropTypes.string,
+	        'target': _react.PropTypes.oneOf(['_self', '_blank', '_parent', '_top']).isRequired,
+	        'theme': _react.PropTypes.oneOf(['normal', 'outer', 'pseudo', 'empty']).isRequired
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'rel': 'noopener noreferrer',
+	            'target': '_self',
+	            'theme': 'normal'
+	        };
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames3.default)(_defineProperty({
+	            'xb-link': true,
+	            '_disabled': this.props.disabled
+	        }, '_theme-' + this.props.theme, true));
+
+	        return React.createElement(
+	            'a',
+	            { name: this.props.name,
+	                href: this.props.href,
+	                target: this.props.target,
+	                tabIndex: this.getTabIndex(),
+	                className: classes,
+	                rel: this.props.rel },
+	            this.context.content()
+	        );
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 61 */
 /***/ function(module, exports) {
 
-	eval("module.exports = \".xb-link._theme-normal {\\n  cursor: pointer;\\n  color: #22c;\\n  text-decoration: underline;\\n}\\n.xb-link._theme-normal:hover {\\n  color: #d00;\\n}\\n.xb-link._theme-outer {\\n  cursor: pointer;\\n  color: #070;\\n  text-decoration: underline;\\n}\\n.xb-link._theme-outer:hover {\\n  color: #d00;\\n}\\n.xb-link._theme-pseudo {\\n  cursor: pointer;\\n  color: #22c;\\n  text-decoration: none;\\n  text-decoration: none;\\n  border-bottom: 1px dotted;\\n}\\n.xb-link._theme-pseudo:hover {\\n  color: #d00;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/link/style/inline.styl\n ** module id = 61\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/link/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	module.exports = ".xb-link._theme-normal {\n  cursor: pointer;\n  color: #22c;\n  text-decoration: underline;\n}\n.xb-link._theme-normal:hover {\n  color: #d00;\n}\n.xb-link._theme-outer {\n  cursor: pointer;\n  color: #070;\n  text-decoration: underline;\n}\n.xb-link._theme-outer:hover {\n  color: #d00;\n}\n.xb-link._theme-pseudo {\n  cursor: pointer;\n  color: #22c;\n  text-decoration: none;\n  text-decoration: none;\n  border-bottom: 1px dotted;\n}\n.xb-link._theme-pseudo:hover {\n  color: #d00;\n}\n"
 
 /***/ },
 /* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(63);\n\n__webpack_require__(64);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _checked = __webpack_require__(52);\n\nvar _checked2 = _interopRequireDefault(_checked);\n\nvar _inputValueProps = __webpack_require__(53);\n\nvar _inputValueProps2 = _interopRequireDefault(_inputValueProps);\n\nvar _focusComponent = __webpack_require__(45);\n\nvar _focusComponent2 = _interopRequireDefault(_focusComponent);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * xb-checkbox html element\n *\n * @class xb.Checkbox\n * @memberof xb\n * @augments HTMLInputElement\n * @mixes xblocks.mixin.eDisabled\n * @mixes xblocks.mixin.eChecked\n * @mixes xblocks.mixin.eInputValueProps\n * @mixes xblocks.mixin.eFocus\n */\nexports.default = _context.xb.Checkbox = (0, _xblocksCore.create)('xb-checkbox', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focusComponent2.default, {\n    prototype: Object.create(HTMLInputElement.prototype),\n\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                return _defineProperty({}, this.xtagName, __webpack_require__(65));\n            }\n        },\n\n        isShadowSupported: {\n            get: _lodash2.default.stubFalse\n        },\n\n        defaultValue: {\n            get: _lodash2.default.constant('on')\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/checkbox/index.js\n ** module id = 62\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/checkbox/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(63);
+
+	__webpack_require__(64);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _checked = __webpack_require__(52);
+
+	var _checked2 = _interopRequireDefault(_checked);
+
+	var _inputValueProps = __webpack_require__(53);
+
+	var _inputValueProps2 = _interopRequireDefault(_inputValueProps);
+
+	var _focusComponent = __webpack_require__(45);
+
+	var _focusComponent2 = _interopRequireDefault(_focusComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * xb-checkbox html element
+	 *
+	 * @class xb.Checkbox
+	 * @memberof xb
+	 * @augments HTMLInputElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eChecked
+	 * @mixes xblocks.mixin.eInputValueProps
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	exports.default = _context.xb.Checkbox = (0, _xblocksCore.create)('xb-checkbox', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focusComponent2.default, {
+	    prototype: Object.create(HTMLInputElement.prototype),
+
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                return _defineProperty({}, this.xtagName, __webpack_require__(65));
+	            }
+	        },
+
+	        isShadowSupported: {
+	            get: _lodash2.default.stubFalse
+	        },
+
+	        defaultValue: {
+	            get: _lodash2.default.constant('on')
+	        }
+	    }
+	}]);
 
 /***/ },
 /* 63 */
@@ -437,19 +2717,218 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * The template node xb-checkbox\n *\n * @class xv.Checkbox\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.Checkbox = _xblocksCore.view.register('xb-checkbox', [_commonAttrs2.default, {\n    displayName: 'xb-checkbox',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    /**\n     * @prop {string} [size=m] size, possible values: s|m\n     * @prop {string} [value=on]\n     * @prop {string} [name]\n     * @prop {string} [form]\n     * @prop {string} [for]\n     * @prop {boolean} [autofocus=false]\n     * @prop {boolean} [disabled=false]\n     * @prop {boolean} [checked=false]\n     * @prop {boolean} [required=false]\n     */\n    propTypes: {\n        'autofocus': _react.PropTypes.bool,\n        'checked': _react.PropTypes.bool,\n        'for': _react.PropTypes.string,\n        'form': _react.PropTypes.string,\n        'name': _react.PropTypes.string,\n        'required': _react.PropTypes.bool,\n        'size': _react.PropTypes.oneOf(['m', 'l']).isRequired,\n        'value': _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'autofocus': false,\n            'checked': false,\n            'required': false,\n            'size': 'm',\n            'value': 'on'\n        };\n    },\n\n    getInitialState: function getInitialState() {\n        return {\n            checked: this.props.checked\n        };\n    },\n\n    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {\n        this.setState({\n            checked: nextProps.checked\n        });\n    },\n\n    _onChange: function _onChange(event) {\n        this.setState({\n            checked: event.target.checked\n        });\n    },\n\n    render: function render() {\n        var classes = (0, _classnames3.default)(_defineProperty({\n            'xb-checkbox': true,\n            '_disabled': this.props.disabled\n        }, '_size-' + this.props.size, true));\n\n        return React.createElement(\n            'label',\n            { className: classes,\n                title: this.props.title,\n                htmlFor: this.props['for'] },\n            React.createElement('input', {\n                autoFocus: this.props.autofocus,\n                checked: this.state.checked,\n                className: '_controller',\n                disabled: this.props.disabled,\n                form: this.props.form,\n                name: this.props.name,\n                onChange: this._onChange,\n                readOnly: true,\n                required: this.props.required,\n                tabIndex: this.getTabIndex(),\n                type: 'checkbox',\n                value: this.props.value }),\n            React.createElement(\n                'span',\n                { className: '_view' },\n                React.createElement(\n                    'span',\n                    { className: '_icon' },\n                    String.fromCharCode(160)\n                )\n            ),\n            React.createElement(\n                'span',\n                { className: '_label' },\n                this.context.content()\n            )\n        );\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/checkbox/index.jsx\n ** module id = 64\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/checkbox/index.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * The template node xb-checkbox
+	 *
+	 * @class xv.Checkbox
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.Checkbox = _xblocksCore.view.register('xb-checkbox', [_commonAttrs2.default, {
+	    displayName: 'xb-checkbox',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    /**
+	     * @prop {string} [size=m] size, possible values: s|m
+	     * @prop {string} [value=on]
+	     * @prop {string} [name]
+	     * @prop {string} [form]
+	     * @prop {string} [for]
+	     * @prop {boolean} [autofocus=false]
+	     * @prop {boolean} [disabled=false]
+	     * @prop {boolean} [checked=false]
+	     * @prop {boolean} [required=false]
+	     */
+	    propTypes: {
+	        'autofocus': _react.PropTypes.bool,
+	        'checked': _react.PropTypes.bool,
+	        'for': _react.PropTypes.string,
+	        'form': _react.PropTypes.string,
+	        'name': _react.PropTypes.string,
+	        'required': _react.PropTypes.bool,
+	        'size': _react.PropTypes.oneOf(['m', 'l']).isRequired,
+	        'value': _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'checked': false,
+	            'required': false,
+	            'size': 'm',
+	            'value': 'on'
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            checked: this.props.checked
+	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            checked: nextProps.checked
+	        });
+	    },
+
+	    _onChange: function _onChange(event) {
+	        this.setState({
+	            checked: event.target.checked
+	        });
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames3.default)(_defineProperty({
+	            'xb-checkbox': true,
+	            '_disabled': this.props.disabled
+	        }, '_size-' + this.props.size, true));
+
+	        return React.createElement(
+	            'label',
+	            { className: classes,
+	                title: this.props.title,
+	                htmlFor: this.props['for'] },
+	            React.createElement('input', {
+	                autoFocus: this.props.autofocus,
+	                checked: this.state.checked,
+	                className: '_controller',
+	                disabled: this.props.disabled,
+	                form: this.props.form,
+	                name: this.props.name,
+	                onChange: this._onChange,
+	                readOnly: true,
+	                required: this.props.required,
+	                tabIndex: this.getTabIndex(),
+	                type: 'checkbox',
+	                value: this.props.value }),
+	            React.createElement(
+	                'span',
+	                { className: '_view' },
+	                React.createElement(
+	                    'span',
+	                    { className: '_icon' },
+	                    String.fromCharCode(160)
+	                )
+	            ),
+	            React.createElement(
+	                'span',
+	                { className: '_label' },
+	                this.context.content()
+	            )
+	        );
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 65 */
 /***/ function(module, exports) {
 
-	eval("module.exports = \".xb-checkbox {\\n  font-weight: inherit;\\n}\\n.xb-checkbox._size-m {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  cursor: pointer;\\n  vertical-align: baseline;\\n}\\n.xb-checkbox._size-m > ._view {\\n  border-color: rgba(0,0,0,0.2);\\n  -webkit-box-shadow: inset 0 90px #fff;\\n          box-shadow: inset 0 90px #fff;\\n}\\n.xb-checkbox._size-m > ._view {\\n  width: 12px;\\n  height: 12px;\\n}\\n.xb-checkbox._size-m:hover > ._view {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-checkbox._size-m > input:focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-checkbox._size-m > input:focus + ._view:before {\\n  content: \\\"\\\";\\n  position: absolute;\\n  top: 0;\\n  right: 0;\\n  bottom: 0;\\n  left: 0;\\n  -webkit-border-radius: inherit;\\n          border-radius: inherit;\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-checkbox._size-m > input:active + ._view {\\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\\n          box-shadow: inset 0 90px #f6f5f3;\\n}\\n.xb-checkbox._size-m > input:checked + ._view {\\n  border-color: rgba(153,122,0,0.5);\\n  -webkit-box-shadow: inset 0 90px #ffeba0;\\n          box-shadow: inset 0 90px #ffeba0;\\n}\\n.xb-checkbox._size-m > input:checked + ._view > ._icon {\\n  visibility: inherit;\\n}\\n.xb-checkbox._size-m > ._view {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  -webkit-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none;\\n  vertical-align: middle;\\n  border-width: 1px;\\n  border-style: solid;\\n  margin-top: -3px;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n}\\n.xb-checkbox._size-m > ._view > ._icon {\\n  content: '';\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  border-right: 2px solid;\\n  border-bottom: 2px solid;\\n  color: #000;\\n  -webkit-transform: scale(0.85) rotate(47deg) skewX(12deg);\\n  -moz-transform: scale(0.85) rotate(47deg) skewX(12deg);\\n    -o-transform: scale(0.85) rotate(47deg) skewX(12deg);\\n       transform: scale(0.85) rotate(47deg) skewX(12deg);\\n  visibility: hidden;\\n}\\n.xb-checkbox._size-m > ._view > ._icon {\\n  margin: -10px 0 0 4px;\\n  width: 7px;\\n  height: 17px;\\n}\\n.xb-checkbox._size-m > ._label {\\n  font-size: 13px;\\n  line-height: 24px;\\n}\\n.xb-checkbox._size-m > ._view + ._label {\\n  padding-left: 5px;\\n}\\n.xb-checkbox._size-m > ._controller,\\n.xb-checkbox._size-l > ._controller {\\n  position: absolute !important;\\n  clip: rect(1px,1px,1px,1px) !important;\\n}\\n.xb-checkbox._size-l {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  cursor: pointer;\\n  vertical-align: baseline;\\n}\\n.xb-checkbox._size-l > ._view {\\n  border-color: rgba(0,0,0,0.2);\\n  -webkit-box-shadow: inset 0 90px #fff;\\n          box-shadow: inset 0 90px #fff;\\n}\\n.xb-checkbox._size-l:hover > ._view {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-checkbox._size-l > input:focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-checkbox._size-l > input:focus + ._view:before {\\n  content: \\\"\\\";\\n  position: absolute;\\n  top: 0;\\n  right: 0;\\n  bottom: 0;\\n  left: 0;\\n  -webkit-border-radius: inherit;\\n          border-radius: inherit;\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-checkbox._size-l > input:active + ._view {\\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\\n          box-shadow: inset 0 90px #f6f5f3;\\n}\\n.xb-checkbox._size-l > input:checked + ._view {\\n  border-color: rgba(153,122,0,0.5);\\n  -webkit-box-shadow: inset 0 90px #ffeba0;\\n          box-shadow: inset 0 90px #ffeba0;\\n}\\n.xb-checkbox._size-l > input:checked + ._view > ._icon {\\n  visibility: inherit;\\n}\\n.xb-checkbox._size-l > ._view {\\n  width: 15px;\\n  height: 15px;\\n}\\n.xb-checkbox._size-l > ._view {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  -webkit-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none;\\n  vertical-align: middle;\\n  border-width: 1px;\\n  border-style: solid;\\n  margin-top: -3px;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n}\\n.xb-checkbox._size-l > ._view > ._icon {\\n  content: '';\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  border-right: 2px solid;\\n  border-bottom: 2px solid;\\n  color: #000;\\n  -webkit-transform: scale(0.85) rotate(47deg) skewX(12deg);\\n  -moz-transform: scale(0.85) rotate(47deg) skewX(12deg);\\n    -o-transform: scale(0.85) rotate(47deg) skewX(12deg);\\n       transform: scale(0.85) rotate(47deg) skewX(12deg);\\n  visibility: hidden;\\n}\\n.xb-checkbox._size-l > ._view > ._icon {\\n  margin: -9px 0 0 5px;\\n  width: 7px;\\n  height: 18px;\\n}\\n.xb-checkbox._size-l > ._label {\\n  font-size: 15px;\\n  line-height: 30px;\\n}\\n.xb-checkbox._size-l > ._view + ._label {\\n  padding-left: 7px;\\n}\\n.xb-checkbox._disabled {\\n  cursor: default !important;\\n  opacity: 0.6;\\n  pointer-events: none;\\n}\\n.xb-checkbox._disabled .xb-checkbox._disabled {\\n  opacity: 1;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/checkbox/style/inline.styl\n ** module id = 65\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/checkbox/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	module.exports = ".xb-checkbox {\n  font-weight: inherit;\n}\n.xb-checkbox._size-m {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  cursor: pointer;\n  vertical-align: baseline;\n}\n.xb-checkbox._size-m > ._view {\n  border-color: rgba(0,0,0,0.2);\n  -webkit-box-shadow: inset 0 90px #fff;\n          box-shadow: inset 0 90px #fff;\n}\n.xb-checkbox._size-m > ._view {\n  width: 12px;\n  height: 12px;\n}\n.xb-checkbox._size-m:hover > ._view {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-checkbox._size-m > input:focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-checkbox._size-m > input:focus + ._view:before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-border-radius: inherit;\n          border-radius: inherit;\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-checkbox._size-m > input:active + ._view {\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\n          box-shadow: inset 0 90px #f6f5f3;\n}\n.xb-checkbox._size-m > input:checked + ._view {\n  border-color: rgba(153,122,0,0.5);\n  -webkit-box-shadow: inset 0 90px #ffeba0;\n          box-shadow: inset 0 90px #ffeba0;\n}\n.xb-checkbox._size-m > input:checked + ._view > ._icon {\n  visibility: inherit;\n}\n.xb-checkbox._size-m > ._view {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  vertical-align: middle;\n  border-width: 1px;\n  border-style: solid;\n  margin-top: -3px;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n}\n.xb-checkbox._size-m > ._view > ._icon {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  border-right: 2px solid;\n  border-bottom: 2px solid;\n  color: #000;\n  -webkit-transform: scale(0.85) rotate(47deg) skewX(12deg);\n  -moz-transform: scale(0.85) rotate(47deg) skewX(12deg);\n    -o-transform: scale(0.85) rotate(47deg) skewX(12deg);\n       transform: scale(0.85) rotate(47deg) skewX(12deg);\n  visibility: hidden;\n}\n.xb-checkbox._size-m > ._view > ._icon {\n  margin: -10px 0 0 4px;\n  width: 7px;\n  height: 17px;\n}\n.xb-checkbox._size-m > ._label {\n  font-size: 13px;\n  line-height: 24px;\n}\n.xb-checkbox._size-m > ._view + ._label {\n  padding-left: 5px;\n}\n.xb-checkbox._size-m > ._controller,\n.xb-checkbox._size-l > ._controller {\n  position: absolute !important;\n  clip: rect(1px,1px,1px,1px) !important;\n}\n.xb-checkbox._size-l {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  cursor: pointer;\n  vertical-align: baseline;\n}\n.xb-checkbox._size-l > ._view {\n  border-color: rgba(0,0,0,0.2);\n  -webkit-box-shadow: inset 0 90px #fff;\n          box-shadow: inset 0 90px #fff;\n}\n.xb-checkbox._size-l:hover > ._view {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-checkbox._size-l > input:focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-checkbox._size-l > input:focus + ._view:before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-border-radius: inherit;\n          border-radius: inherit;\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-checkbox._size-l > input:active + ._view {\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\n          box-shadow: inset 0 90px #f6f5f3;\n}\n.xb-checkbox._size-l > input:checked + ._view {\n  border-color: rgba(153,122,0,0.5);\n  -webkit-box-shadow: inset 0 90px #ffeba0;\n          box-shadow: inset 0 90px #ffeba0;\n}\n.xb-checkbox._size-l > input:checked + ._view > ._icon {\n  visibility: inherit;\n}\n.xb-checkbox._size-l > ._view {\n  width: 15px;\n  height: 15px;\n}\n.xb-checkbox._size-l > ._view {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  vertical-align: middle;\n  border-width: 1px;\n  border-style: solid;\n  margin-top: -3px;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n}\n.xb-checkbox._size-l > ._view > ._icon {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  border-right: 2px solid;\n  border-bottom: 2px solid;\n  color: #000;\n  -webkit-transform: scale(0.85) rotate(47deg) skewX(12deg);\n  -moz-transform: scale(0.85) rotate(47deg) skewX(12deg);\n    -o-transform: scale(0.85) rotate(47deg) skewX(12deg);\n       transform: scale(0.85) rotate(47deg) skewX(12deg);\n  visibility: hidden;\n}\n.xb-checkbox._size-l > ._view > ._icon {\n  margin: -9px 0 0 5px;\n  width: 7px;\n  height: 18px;\n}\n.xb-checkbox._size-l > ._label {\n  font-size: 15px;\n  line-height: 30px;\n}\n.xb-checkbox._size-l > ._view + ._label {\n  padding-left: 7px;\n}\n.xb-checkbox._disabled {\n  cursor: default !important;\n  opacity: 0.6;\n  pointer-events: none;\n}\n.xb-checkbox._disabled .xb-checkbox._disabled {\n  opacity: 1;\n}\n"
 
 /***/ },
 /* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(67);\n\n__webpack_require__(68);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _checked = __webpack_require__(52);\n\nvar _checked2 = _interopRequireDefault(_checked);\n\nvar _inputValueProps = __webpack_require__(53);\n\nvar _inputValueProps2 = _interopRequireDefault(_inputValueProps);\n\nvar _focusComponent = __webpack_require__(45);\n\nvar _focusComponent2 = _interopRequireDefault(_focusComponent);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * xb-radio html element\n *\n * @class xb.Radio\n * @memberof xb\n * @augments HTMLInputElement\n * @mixes xblocks.mixin.eDisabled\n * @mixes xblocks.mixin.eChecked\n * @mixes xblocks.mixin.eInputValueProps\n * @mixes xblocks.mixin.eFocus\n */\nexports.default = _context.xb.Radio = (0, _xblocksCore.create)('xb-radio', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focusComponent2.default, {\n    prototype: Object.create(HTMLInputElement.prototype),\n\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                return _defineProperty({}, this.xtagName, __webpack_require__(69));\n            }\n        },\n\n        isShadowSupported: {\n            get: _lodash2.default.stubFalse\n        },\n\n        defaultValue: {\n            get: _lodash2.default.constant('on')\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/radio/index.js\n ** module id = 66\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/radio/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(67);
+
+	__webpack_require__(68);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _checked = __webpack_require__(52);
+
+	var _checked2 = _interopRequireDefault(_checked);
+
+	var _inputValueProps = __webpack_require__(53);
+
+	var _inputValueProps2 = _interopRequireDefault(_inputValueProps);
+
+	var _focusComponent = __webpack_require__(45);
+
+	var _focusComponent2 = _interopRequireDefault(_focusComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * xb-radio html element
+	 *
+	 * @class xb.Radio
+	 * @memberof xb
+	 * @augments HTMLInputElement
+	 * @mixes xblocks.mixin.eDisabled
+	 * @mixes xblocks.mixin.eChecked
+	 * @mixes xblocks.mixin.eInputValueProps
+	 * @mixes xblocks.mixin.eFocus
+	 */
+	exports.default = _context.xb.Radio = (0, _xblocksCore.create)('xb-radio', [_disabled2.default, _checked2.default, _inputValueProps2.default, _focusComponent2.default, {
+	    prototype: Object.create(HTMLInputElement.prototype),
+
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                return _defineProperty({}, this.xtagName, __webpack_require__(69));
+	            }
+	        },
+
+	        isShadowSupported: {
+	            get: _lodash2.default.stubFalse
+	        },
+
+	        defaultValue: {
+	            get: _lodash2.default.constant('on')
+	        }
+	    }
+	}]);
 
 /***/ },
 /* 67 */
@@ -457,19 +2936,465 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _resetLastRadioChecked = __webpack_require__(50);\n\nvar _resetLastRadioChecked2 = _interopRequireDefault(_resetLastRadioChecked);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * The template node xb-radio\n *\n * @class xv.Radio\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.Radio = _xblocksCore.view.register('xb-radio', [_commonAttrs2.default, {\n    displayName: 'xb-radio',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    /**\n     * @prop {string} [size=m] size, possible values: s|m\n     * @prop {string} [value=on]\n     * @prop {string} [name]\n     * @prop {string} [form]\n     * @prop {string} [for]\n     * @prop {boolean} [autofocus=false]\n     * @prop {boolean} [disabled=false]\n     * @prop {boolean} [checked=false]\n     * @prop {boolean} [required=false]\n     */\n    propTypes: {\n        'autofocus': _react.PropTypes.bool,\n        'checked': _react.PropTypes.bool,\n        'for': _react.PropTypes.string,\n        'form': _react.PropTypes.string,\n        'name': _react.PropTypes.string,\n        'required': _react.PropTypes.bool,\n        'size': _react.PropTypes.oneOf(['m', 'l']).isRequired,\n        'value': _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'autofocus': false,\n            'checked': false,\n            'required': false,\n            'size': 'm',\n            'value': 'on'\n        };\n    },\n\n    getInitialState: function getInitialState() {\n        return {\n            checked: this.props.checked\n        };\n    },\n\n    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {\n        this.setState({\n            checked: Boolean(nextProps.checked)\n        });\n    },\n\n    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {\n        if (nextState.checked) {\n            (0, _resetLastRadioChecked2.default)(this.context.container, nextProps.name);\n        }\n    },\n\n    componentWillMount: function componentWillMount() {\n        if (this.state.checked) {\n            (0, _resetLastRadioChecked2.default)(this.context.container, this.props.name);\n        }\n    },\n\n    _onChange: function _onChange(event) {\n        this.context.container.checked = event.target.checked;\n    },\n\n    render: function render() {\n        var classes = (0, _classnames3.default)(_defineProperty({\n            'xb-radio': true,\n            '_disabled': this.props.disabled\n        }, '_size-' + this.props.size, true));\n\n        return React.createElement(\n            'label',\n            { className: classes,\n                title: this.props.title,\n                htmlFor: this.props['for'] },\n            React.createElement('input', {\n                autoFocus: this.props.autofocus,\n                checked: this.state.checked,\n                className: '_controller',\n                disabled: this.props.disabled,\n                form: this.props.form,\n                name: this.props.name,\n                onChange: this._onChange,\n                readOnly: true,\n                required: this.props.required,\n                tabIndex: this.getTabIndex(),\n                type: 'radio',\n                value: this.props.value }),\n            React.createElement(\n                'span',\n                { className: '_view' },\n                React.createElement(\n                    'span',\n                    { className: '_icon' },\n                    String.fromCharCode(160)\n                )\n            ),\n            React.createElement(\n                'span',\n                { className: '_label' },\n                this.context.content()\n            )\n        );\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/radio/index.jsx\n ** module id = 68\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/radio/index.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _resetLastRadioChecked = __webpack_require__(50);
+
+	var _resetLastRadioChecked2 = _interopRequireDefault(_resetLastRadioChecked);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * The template node xb-radio
+	 *
+	 * @class xv.Radio
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.Radio = _xblocksCore.view.register('xb-radio', [_commonAttrs2.default, {
+	    displayName: 'xb-radio',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    /**
+	     * @prop {string} [size=m] size, possible values: s|m
+	     * @prop {string} [value=on]
+	     * @prop {string} [name]
+	     * @prop {string} [form]
+	     * @prop {string} [for]
+	     * @prop {boolean} [autofocus=false]
+	     * @prop {boolean} [disabled=false]
+	     * @prop {boolean} [checked=false]
+	     * @prop {boolean} [required=false]
+	     */
+	    propTypes: {
+	        'autofocus': _react.PropTypes.bool,
+	        'checked': _react.PropTypes.bool,
+	        'for': _react.PropTypes.string,
+	        'form': _react.PropTypes.string,
+	        'name': _react.PropTypes.string,
+	        'required': _react.PropTypes.bool,
+	        'size': _react.PropTypes.oneOf(['m', 'l']).isRequired,
+	        'value': _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'checked': false,
+	            'required': false,
+	            'size': 'm',
+	            'value': 'on'
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            checked: this.props.checked
+	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            checked: Boolean(nextProps.checked)
+	        });
+	    },
+
+	    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
+	        if (nextState.checked) {
+	            (0, _resetLastRadioChecked2.default)(this.context.container, nextProps.name);
+	        }
+	    },
+
+	    componentWillMount: function componentWillMount() {
+	        if (this.state.checked) {
+	            (0, _resetLastRadioChecked2.default)(this.context.container, this.props.name);
+	        }
+	    },
+
+	    _onChange: function _onChange(event) {
+	        this.context.container.checked = event.target.checked;
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames3.default)(_defineProperty({
+	            'xb-radio': true,
+	            '_disabled': this.props.disabled
+	        }, '_size-' + this.props.size, true));
+
+	        return React.createElement(
+	            'label',
+	            { className: classes,
+	                title: this.props.title,
+	                htmlFor: this.props['for'] },
+	            React.createElement('input', {
+	                autoFocus: this.props.autofocus,
+	                checked: this.state.checked,
+	                className: '_controller',
+	                disabled: this.props.disabled,
+	                form: this.props.form,
+	                name: this.props.name,
+	                onChange: this._onChange,
+	                readOnly: true,
+	                required: this.props.required,
+	                tabIndex: this.getTabIndex(),
+	                type: 'radio',
+	                value: this.props.value }),
+	            React.createElement(
+	                'span',
+	                { className: '_view' },
+	                React.createElement(
+	                    'span',
+	                    { className: '_icon' },
+	                    String.fromCharCode(160)
+	                )
+	            ),
+	            React.createElement(
+	                'span',
+	                { className: '_label' },
+	                this.context.content()
+	            )
+	        );
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 69 */
 /***/ function(module, exports) {
 
-	eval("module.exports = \".xb-radio {\\n  font-weight: inherit;\\n}\\n.xb-radio._size-m {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  cursor: pointer;\\n  vertical-align: baseline;\\n}\\n.xb-radio._size-m > ._view {\\n  border-color: rgba(0,0,0,0.2);\\n  -webkit-box-shadow: inset 0 90px #fff;\\n          box-shadow: inset 0 90px #fff;\\n}\\n.xb-radio._size-m > ._view {\\n  width: 12px;\\n  height: 12px;\\n}\\n.xb-radio._size-m:hover > ._view {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-radio._size-m > input:focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-radio._size-m > input:focus + ._view:before {\\n  content: \\\"\\\";\\n  position: absolute;\\n  top: 0;\\n  right: 0;\\n  bottom: 0;\\n  left: 0;\\n  -webkit-border-radius: inherit;\\n          border-radius: inherit;\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-radio._size-m > input:active + ._view {\\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\\n          box-shadow: inset 0 90px #f6f5f3;\\n}\\n.xb-radio._size-m > input:checked + ._view {\\n  border-color: rgba(153,122,0,0.5);\\n  -webkit-box-shadow: inset 0 90px #ffeba0;\\n          box-shadow: inset 0 90px #ffeba0;\\n}\\n.xb-radio._size-m > input:checked + ._view > ._icon {\\n  visibility: inherit;\\n}\\n.xb-radio._size-m > ._view {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  -webkit-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none;\\n  vertical-align: middle;\\n  border-width: 1px;\\n  border-style: solid;\\n  margin-top: -3px;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  -webkit-border-radius: 999px;\\n          border-radius: 999px;\\n}\\n.xb-radio._size-m > ._view > ._icon {\\n  content: '';\\n  visibility: hidden;\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  background: #000;\\n  -webkit-border-radius: 50%;\\n          border-radius: 50%;\\n}\\n.xb-radio._size-m > ._view > ._icon {\\n  width: 6px;\\n  height: 6px;\\n  margin: 3px;\\n}\\n.xb-radio._size-m > ._label {\\n  font-size: 13px;\\n  line-height: 24px;\\n}\\n.xb-radio._size-m > ._view + ._label {\\n  padding-left: 5px;\\n}\\n.xb-radio._size-m > ._controller,\\n.xb-radio._size-l > ._controller {\\n  position: absolute !important;\\n  clip: rect(1px,1px,1px,1px) !important;\\n}\\n.xb-radio._size-l {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  cursor: pointer;\\n  vertical-align: baseline;\\n}\\n.xb-radio._size-l > ._view {\\n  border-color: rgba(0,0,0,0.2);\\n  -webkit-box-shadow: inset 0 90px #fff;\\n          box-shadow: inset 0 90px #fff;\\n}\\n.xb-radio._size-l:hover > ._view {\\n  border-color: rgba(0,0,0,0.4);\\n}\\n.xb-radio._size-l > input:focus + ._view {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-radio._size-l > input:focus + ._view:before {\\n  content: \\\"\\\";\\n  position: absolute;\\n  top: 0;\\n  right: 0;\\n  bottom: 0;\\n  left: 0;\\n  -webkit-border-radius: inherit;\\n          border-radius: inherit;\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-radio._size-l > input:active + ._view {\\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\\n          box-shadow: inset 0 90px #f6f5f3;\\n}\\n.xb-radio._size-l > input:checked + ._view {\\n  border-color: rgba(153,122,0,0.5);\\n  -webkit-box-shadow: inset 0 90px #ffeba0;\\n          box-shadow: inset 0 90px #ffeba0;\\n}\\n.xb-radio._size-l > input:checked + ._view > ._icon {\\n  visibility: inherit;\\n}\\n.xb-radio._size-l > ._view {\\n  width: 15px;\\n  height: 15px;\\n}\\n.xb-radio._size-l > ._view {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  -webkit-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none;\\n  vertical-align: middle;\\n  border-width: 1px;\\n  border-style: solid;\\n  margin-top: -3px;\\n  -webkit-border-radius: 3px;\\n          border-radius: 3px;\\n  -webkit-border-radius: 999px;\\n          border-radius: 999px;\\n}\\n.xb-radio._size-l > ._view > ._icon {\\n  content: '';\\n  visibility: hidden;\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  background: #000;\\n  -webkit-border-radius: 50%;\\n          border-radius: 50%;\\n}\\n.xb-radio._size-l > ._view > ._icon {\\n  width: 14px;\\n  height: 14px;\\n  -webkit-transform: scale(0.5) translate(1px, 1px);\\n  -moz-transform: scale(0.5) translate(1px, 1px);\\n    -o-transform: scale(0.5) translate(1px, 1px);\\n       transform: scale(0.5) translate(1px, 1px);\\n}\\n.xb-radio._size-l > ._label {\\n  font-size: 15px;\\n  line-height: 30px;\\n}\\n.xb-radio._size-l > ._view + ._label {\\n  padding-left: 7px;\\n}\\n.xb-radio._disabled {\\n  cursor: default !important;\\n  opacity: 0.6;\\n  pointer-events: none;\\n}\\n.xb-radio._disabled .xb-radio._disabled {\\n  opacity: 1;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/radio/style/inline.styl\n ** module id = 69\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/radio/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	module.exports = ".xb-radio {\n  font-weight: inherit;\n}\n.xb-radio._size-m {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  cursor: pointer;\n  vertical-align: baseline;\n}\n.xb-radio._size-m > ._view {\n  border-color: rgba(0,0,0,0.2);\n  -webkit-box-shadow: inset 0 90px #fff;\n          box-shadow: inset 0 90px #fff;\n}\n.xb-radio._size-m > ._view {\n  width: 12px;\n  height: 12px;\n}\n.xb-radio._size-m:hover > ._view {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-radio._size-m > input:focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-radio._size-m > input:focus + ._view:before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-border-radius: inherit;\n          border-radius: inherit;\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-radio._size-m > input:active + ._view {\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\n          box-shadow: inset 0 90px #f6f5f3;\n}\n.xb-radio._size-m > input:checked + ._view {\n  border-color: rgba(153,122,0,0.5);\n  -webkit-box-shadow: inset 0 90px #ffeba0;\n          box-shadow: inset 0 90px #ffeba0;\n}\n.xb-radio._size-m > input:checked + ._view > ._icon {\n  visibility: inherit;\n}\n.xb-radio._size-m > ._view {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  vertical-align: middle;\n  border-width: 1px;\n  border-style: solid;\n  margin-top: -3px;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  -webkit-border-radius: 999px;\n          border-radius: 999px;\n}\n.xb-radio._size-m > ._view > ._icon {\n  content: '';\n  visibility: hidden;\n  position: absolute;\n  top: 0;\n  left: 0;\n  background: #000;\n  -webkit-border-radius: 50%;\n          border-radius: 50%;\n}\n.xb-radio._size-m > ._view > ._icon {\n  width: 6px;\n  height: 6px;\n  margin: 3px;\n}\n.xb-radio._size-m > ._label {\n  font-size: 13px;\n  line-height: 24px;\n}\n.xb-radio._size-m > ._view + ._label {\n  padding-left: 5px;\n}\n.xb-radio._size-m > ._controller,\n.xb-radio._size-l > ._controller {\n  position: absolute !important;\n  clip: rect(1px,1px,1px,1px) !important;\n}\n.xb-radio._size-l {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  cursor: pointer;\n  vertical-align: baseline;\n}\n.xb-radio._size-l > ._view {\n  border-color: rgba(0,0,0,0.2);\n  -webkit-box-shadow: inset 0 90px #fff;\n          box-shadow: inset 0 90px #fff;\n}\n.xb-radio._size-l:hover > ._view {\n  border-color: rgba(0,0,0,0.4);\n}\n.xb-radio._size-l > input:focus + ._view {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-radio._size-l > input:focus + ._view:before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-border-radius: inherit;\n          border-radius: inherit;\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-radio._size-l > input:active + ._view {\n  -webkit-box-shadow: inset 0 90px #f6f5f3;\n          box-shadow: inset 0 90px #f6f5f3;\n}\n.xb-radio._size-l > input:checked + ._view {\n  border-color: rgba(153,122,0,0.5);\n  -webkit-box-shadow: inset 0 90px #ffeba0;\n          box-shadow: inset 0 90px #ffeba0;\n}\n.xb-radio._size-l > input:checked + ._view > ._icon {\n  visibility: inherit;\n}\n.xb-radio._size-l > ._view {\n  width: 15px;\n  height: 15px;\n}\n.xb-radio._size-l > ._view {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  vertical-align: middle;\n  border-width: 1px;\n  border-style: solid;\n  margin-top: -3px;\n  -webkit-border-radius: 3px;\n          border-radius: 3px;\n  -webkit-border-radius: 999px;\n          border-radius: 999px;\n}\n.xb-radio._size-l > ._view > ._icon {\n  content: '';\n  visibility: hidden;\n  position: absolute;\n  top: 0;\n  left: 0;\n  background: #000;\n  -webkit-border-radius: 50%;\n          border-radius: 50%;\n}\n.xb-radio._size-l > ._view > ._icon {\n  width: 14px;\n  height: 14px;\n  -webkit-transform: scale(0.5) translate(1px, 1px);\n  -moz-transform: scale(0.5) translate(1px, 1px);\n    -o-transform: scale(0.5) translate(1px, 1px);\n       transform: scale(0.5) translate(1px, 1px);\n}\n.xb-radio._size-l > ._label {\n  font-size: 15px;\n  line-height: 30px;\n}\n.xb-radio._size-l > ._view + ._label {\n  padding-left: 7px;\n}\n.xb-radio._disabled {\n  cursor: default !important;\n  opacity: 0.6;\n  pointer-events: none;\n}\n.xb-radio._disabled .xb-radio._disabled {\n  opacity: 1;\n}\n"
 
 /***/ },
 /* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(71);\n\n__webpack_require__(72);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _tether = __webpack_require__(73);\n\nvar _tether2 = _interopRequireDefault(_tether);\n\nvar _popupDefaultOptions = __webpack_require__(74);\n\nvar _popupDefaultOptions2 = _interopRequireDefault(_popupDefaultOptions);\n\nvar _src = __webpack_require__(75);\n\nvar _src2 = _interopRequireDefault(_src);\n\nvar _popup = __webpack_require__(85);\n\nvar _popup2 = _interopRequireDefault(_popup);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * Union rules attributes\n * @type {Object}\n * @constant\n */\nvar ATTRS_ALIGN = {\n    'attachment': ['attachment'],\n    'target-attachment': ['targetAttachment'],\n    'target-offset': ['targetOffset'],\n    'offset': ['offset'],\n    'target': ['target', function (value) {\n        return value && (typeof value === 'string' || value instanceof _context2.default.HTMLElement);\n    }],\n    'target-parent': [function (options, value) {\n        options.target = value;\n    }, function (value) {\n        return value && value instanceof _context2.default.HTMLElement;\n    }],\n    'target-modifier': [function (options, value) {\n        options.targetModifier = value === 'initial' ? undefined : value;\n    }, function (value) {\n        return value === 'initial' || value === 'visible' || value === 'scroll-handle';\n    }],\n    'optimizations-gpu': [function (options, value) {\n        options.optimizations.gpu = value;\n    }, function (value) {\n        return typeof value === 'boolean';\n    }],\n    'constraints': [function (options, value) {\n        options.constraints = JSON.parse(decodeURIComponent(value));\n    }, function (value) {\n        return value && typeof value === 'string';\n    }]\n};\n\n/**\n * xb-popup html element\n *\n * @class xb.Popup\n * @augments HTMLElement\n * @memberof xb\n */\nexports.default = _context.xb.Popup = (0, _xblocksCore.create)('xb-popup', [{\n    prototype: Object.create(HTMLElement.prototype),\n\n    lifecycle: {\n        created: function created() {\n            this.setAttribute('tabindex', '0');\n        }\n    },\n\n    events: {\n        'jsx-click-close': function jsxClickClose(event) {\n            event.stopImmediatePropagation();\n            this.close();\n        },\n\n        'keydown:keypass(27)': function keydownKeypass27() {\n            this.close();\n        }\n    },\n\n    /**\n     * @lends xb.Popup.prototype\n     */\n    accessors: {\n\n        /**\n         * @prop {Object} popupDefaultOptions default options\n         * @readonly\n         */\n        popupDefaultOptions: {\n            get: _popupDefaultOptions2.default\n        },\n\n        /**\n         * @prop {Object} popupOptions the display options window\n         * @see http://tether.io/#options\n         * @readonly\n         */\n        popupOptions: {\n            get: function get() {\n                if (this[_popup2.default.OPTIONS]) {\n                    return this[_popup2.default.OPTIONS];\n                }\n\n                var popupOptions = this[_popup2.default.OPTIONS] = this.popupDefaultOptions;\n\n                var attrs = _xblocksCore.dom.attrs.get(this, {\n                    'attachment': undefined,\n                    'constraints': undefined,\n                    'offset': undefined,\n                    'optimizations-gpu': true,\n                    'target-attachment': undefined,\n                    'target-modifier': undefined,\n                    'target-offset': undefined,\n                    'target-parent': false,\n                    'target': undefined\n                });\n\n                if (attrs['target-parent']) {\n                    attrs['target-parent'] = this.parentNode;\n                }\n\n                fillOptionsFromAttrs(popupOptions, attrs);\n\n                return popupOptions;\n            }\n        },\n\n        /**\n         * @readonly\n         * @prop {Tether} core Tether the window object\n         */\n        core: {\n            get: function get() {\n                if (!this[_popup2.default.CORE]) {\n                    this[_popup2.default.CORE] = new _tether2.default(this.popupOptions);\n                }\n\n                return this[_popup2.default.CORE];\n            }\n        },\n\n        /**\n         * @readonly\n         * @prop {boolean} opened window is open\n         */\n        opened: {\n            get: function get() {\n                return this.core.enabled;\n            }\n        }\n    },\n\n    methods: {\n        /**\n         * Change the settings window\n         * @memberOf xb.Popup.prototype\n         * @param {object} nextOptions new settings\n         */\n        setOptions: function setOptions(nextOptions) {\n            _lodash2.default.assign(this.popupOptions, nextOptions);\n\n            var core = this.core;\n            core.setOptions(this.popupOptions, false);\n\n            if (core.enabled) {\n                core.position();\n            }\n        },\n\n        /**\n         * Open the window\n         * @memberOf xb.Popup.prototype\n         * @param {object} popupOptions new settings\n         * @returns {boolean}\n         */\n        open: function open(popupOptions) {\n            var _this = this;\n\n            var core = this.core;\n\n            if (core.enabled) {\n                return false;\n            }\n\n            if (_lodash2.default.isPlainObject(popupOptions)) {\n                this.setOptions(popupOptions);\n            }\n\n            _xblocksCore.event.dispatch(this, 'xb-before-open');\n\n            core.enable(true);\n            core.target[_popup2.default.POPUP] = this;\n\n            // FireFox does not set the focus without delay\n            _src2.default.setImmediate(function () {\n                _this.focus();\n                _xblocksCore.event.dispatch(_this, 'xb-open');\n            });\n\n            return true;\n        },\n\n        /**\n         * Close the window\n         * @memberOf xb.Popup.prototype\n         * @returns {boolean}\n         */\n        close: function close() {\n            var _this2 = this;\n\n            var core = this.core;\n\n            if (!core.enabled) {\n                return false;\n            }\n\n            _xblocksCore.event.dispatch(this, 'xb-before-close');\n\n            core.target[_popup2.default.POPUP] = undefined;\n            core.disable();\n            core.clearCache();\n\n            // FireFox does not fire a blur event\n            _src2.default.setImmediate(function () {\n                _this2.blur();\n                _xblocksCore.event.dispatch(_this2, 'xb-close');\n            });\n\n            return true;\n        },\n\n        /**\n         * Recalculate the location\n         * @memberOf xb.Popup.prototype\n         * @returns {boolean}\n         */\n        position: function position() {\n            this.core.position();\n            return true;\n        }\n    }\n}]);\n\n/**\n * Check valid value for attribute by default\n * @param {*} value value for attribute\n * @returns {boolean}\n * @private\n */\n\nfunction checkDefaultAttr(value) {\n    return typeof value !== 'undefined';\n}\n\n/**\n * Association of attributes and options\n * @param {Object} popupOptions popup options\n * @param {Object} attrs attributes of element\n * @private\n */\nfunction fillOptionsFromAttrs(popupOptions, attrs) {\n    for (var attrName in attrs) {\n        var params = ATTRS_ALIGN[attrName];\n        if (!params) {\n            continue;\n        }\n\n        var optionName = params[0];\n        var checker = params[1] || checkDefaultAttr;\n        var value = attrs[attrName];\n\n        if (checker(value)) {\n            if (_lodash2.default.isFunction(optionName)) {\n                optionName(popupOptions, value);\n            } else {\n                popupOptions[optionName] = value;\n            }\n        }\n    }\n}\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/popup/index.js\n ** module id = 70\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/popup/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(71);
+
+	__webpack_require__(72);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _tether = __webpack_require__(73);
+
+	var _tether2 = _interopRequireDefault(_tether);
+
+	var _popupDefaultOptions = __webpack_require__(74);
+
+	var _popupDefaultOptions2 = _interopRequireDefault(_popupDefaultOptions);
+
+	var _src = __webpack_require__(75);
+
+	var _src2 = _interopRequireDefault(_src);
+
+	var _popup = __webpack_require__(85);
+
+	var _popup2 = _interopRequireDefault(_popup);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Union rules attributes
+	 * @type {Object}
+	 * @constant
+	 */
+	var ATTRS_ALIGN = {
+	    'attachment': ['attachment'],
+	    'target-attachment': ['targetAttachment'],
+	    'target-offset': ['targetOffset'],
+	    'offset': ['offset'],
+	    'target': ['target', function (value) {
+	        return value && (typeof value === 'string' || value instanceof _context2.default.HTMLElement);
+	    }],
+	    'target-parent': [function (options, value) {
+	        options.target = value;
+	    }, function (value) {
+	        return value && value instanceof _context2.default.HTMLElement;
+	    }],
+	    'target-modifier': [function (options, value) {
+	        options.targetModifier = value === 'initial' ? undefined : value;
+	    }, function (value) {
+	        return value === 'initial' || value === 'visible' || value === 'scroll-handle';
+	    }],
+	    'optimizations-gpu': [function (options, value) {
+	        options.optimizations.gpu = value;
+	    }, function (value) {
+	        return typeof value === 'boolean';
+	    }],
+	    'constraints': [function (options, value) {
+	        options.constraints = JSON.parse(decodeURIComponent(value));
+	    }, function (value) {
+	        return value && typeof value === 'string';
+	    }]
+	};
+
+	/**
+	 * xb-popup html element
+	 *
+	 * @class xb.Popup
+	 * @augments HTMLElement
+	 * @memberof xb
+	 */
+	exports.default = _context.xb.Popup = (0, _xblocksCore.create)('xb-popup', [{
+	    prototype: Object.create(HTMLElement.prototype),
+
+	    lifecycle: {
+	        created: function created() {
+	            this.setAttribute('tabindex', '0');
+	        }
+	    },
+
+	    events: {
+	        'jsx-click-close': function jsxClickClose(event) {
+	            event.stopImmediatePropagation();
+	            this.close();
+	        },
+
+	        'keydown:keypass(27)': function keydownKeypass27() {
+	            this.close();
+	        }
+	    },
+
+	    /**
+	     * @lends xb.Popup.prototype
+	     */
+	    accessors: {
+
+	        /**
+	         * @prop {Object} popupDefaultOptions default options
+	         * @readonly
+	         */
+	        popupDefaultOptions: {
+	            get: _popupDefaultOptions2.default
+	        },
+
+	        /**
+	         * @prop {Object} popupOptions the display options window
+	         * @see http://tether.io/#options
+	         * @readonly
+	         */
+	        popupOptions: {
+	            get: function get() {
+	                if (this[_popup2.default.OPTIONS]) {
+	                    return this[_popup2.default.OPTIONS];
+	                }
+
+	                var popupOptions = this[_popup2.default.OPTIONS] = this.popupDefaultOptions;
+
+	                var attrs = _xblocksCore.dom.attrs.get(this, {
+	                    'attachment': undefined,
+	                    'constraints': undefined,
+	                    'offset': undefined,
+	                    'optimizations-gpu': true,
+	                    'target-attachment': undefined,
+	                    'target-modifier': undefined,
+	                    'target-offset': undefined,
+	                    'target-parent': false,
+	                    'target': undefined
+	                });
+
+	                if (attrs['target-parent']) {
+	                    attrs['target-parent'] = this.parentNode;
+	                }
+
+	                fillOptionsFromAttrs(popupOptions, attrs);
+
+	                return popupOptions;
+	            }
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {Tether} core Tether the window object
+	         */
+	        core: {
+	            get: function get() {
+	                if (!this[_popup2.default.CORE]) {
+	                    this[_popup2.default.CORE] = new _tether2.default(this.popupOptions);
+	                }
+
+	                return this[_popup2.default.CORE];
+	            }
+	        },
+
+	        /**
+	         * @readonly
+	         * @prop {boolean} opened window is open
+	         */
+	        opened: {
+	            get: function get() {
+	                return this.core.enabled;
+	            }
+	        }
+	    },
+
+	    methods: {
+	        /**
+	         * Change the settings window
+	         * @memberOf xb.Popup.prototype
+	         * @param {object} nextOptions new settings
+	         */
+	        setOptions: function setOptions(nextOptions) {
+	            _lodash2.default.assign(this.popupOptions, nextOptions);
+
+	            var core = this.core;
+	            core.setOptions(this.popupOptions, false);
+
+	            if (core.enabled) {
+	                core.position();
+	            }
+	        },
+
+	        /**
+	         * Open the window
+	         * @memberOf xb.Popup.prototype
+	         * @param {object} popupOptions new settings
+	         * @returns {boolean}
+	         */
+	        open: function open(popupOptions) {
+	            var _this = this;
+
+	            var core = this.core;
+
+	            if (core.enabled) {
+	                return false;
+	            }
+
+	            if (_lodash2.default.isPlainObject(popupOptions)) {
+	                this.setOptions(popupOptions);
+	            }
+
+	            _xblocksCore.event.dispatch(this, 'xb-before-open');
+
+	            core.enable(true);
+	            core.target[_popup2.default.POPUP] = this;
+
+	            // FireFox does not set the focus without delay
+	            _src2.default.setImmediate(function () {
+	                _this.focus();
+	                _xblocksCore.event.dispatch(_this, 'xb-open');
+	            });
+
+	            return true;
+	        },
+
+	        /**
+	         * Close the window
+	         * @memberOf xb.Popup.prototype
+	         * @returns {boolean}
+	         */
+	        close: function close() {
+	            var _this2 = this;
+
+	            var core = this.core;
+
+	            if (!core.enabled) {
+	                return false;
+	            }
+
+	            _xblocksCore.event.dispatch(this, 'xb-before-close');
+
+	            core.target[_popup2.default.POPUP] = undefined;
+	            core.disable();
+	            core.clearCache();
+
+	            // FireFox does not fire a blur event
+	            _src2.default.setImmediate(function () {
+	                _this2.blur();
+	                _xblocksCore.event.dispatch(_this2, 'xb-close');
+	            });
+
+	            return true;
+	        },
+
+	        /**
+	         * Recalculate the location
+	         * @memberOf xb.Popup.prototype
+	         * @returns {boolean}
+	         */
+	        position: function position() {
+	            this.core.position();
+	            return true;
+	        }
+	    }
+	}]);
+
+	/**
+	 * Check valid value for attribute by default
+	 * @param {*} value value for attribute
+	 * @returns {boolean}
+	 * @private
+	 */
+
+	function checkDefaultAttr(value) {
+	    return typeof value !== 'undefined';
+	}
+
+	/**
+	 * Association of attributes and options
+	 * @param {Object} popupOptions popup options
+	 * @param {Object} attrs attributes of element
+	 * @private
+	 */
+	function fillOptionsFromAttrs(popupOptions, attrs) {
+	    for (var attrName in attrs) {
+	        var params = ATTRS_ALIGN[attrName];
+	        if (!params) {
+	            continue;
+	        }
+
+	        var optionName = params[0];
+	        var checker = params[1] || checkDefaultAttr;
+	        var value = attrs[attrName];
+
+	        if (checker(value)) {
+	            if (_lodash2.default.isFunction(optionName)) {
+	                optionName(popupOptions, value);
+	            } else {
+	                popupOptions[optionName] = value;
+	            }
+	        }
+	    }
+	}
 
 /***/ },
 /* 71 */
@@ -477,91 +3402,666 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _reactDom = __webpack_require__(43);\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * The template node xb-popup\n *\n * @class xv.Popup\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.Popup = _xblocksCore.view.register('xb-popup', [_commonAttrs2.default, {\n    displayName: 'xb-popup',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        close: _react.PropTypes.bool,\n        theme: _react.PropTypes.oneOf(['blank', 'error', 'island', 'modal', 'normal'])\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            close: false,\n            theme: 'normal'\n        };\n    },\n\n    onClickClose: function onClickClose() {\n        _xblocksCore.event.dispatch(_reactDom2.default.findDOMNode(this), 'jsx-click-close', { bubbles: true, cancelable: true });\n    },\n\n    render: function render() {\n        var children = [React.createElement('div', { key: 'content',\n            className: '_content',\n            'data-xb-content': this.props._uid,\n            dangerouslySetInnerHTML: { __html: this.props.children } })];\n\n        children.unshift(this.context.template('xb-popup-title', React.createElement('div', { key: 'title', className: '_title' })));\n\n        if (this.props.close) {\n            children.unshift(React.createElement('a', { key: 'close', className: '_close', onClick: this.onClickClose }));\n        }\n\n        children.push(this.context.template('xb-popup-buttons', React.createElement('div', { key: 'buttons', className: '_buttons' })));\n\n        var classes = (0, _classnames3.default)(_defineProperty({\n            'xb-popup': true\n        }, '_theme-' + this.props.theme, Boolean(this.props.theme)));\n\n        return React.createElement(\n            'div',\n            { className: classes, tabIndex: '0' },\n            children\n        );\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/popup/index.jsx\n ** module id = 72\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/popup/index.jsx?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _reactDom = __webpack_require__(43);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * The template node xb-popup
+	 *
+	 * @class xv.Popup
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.Popup = _xblocksCore.view.register('xb-popup', [_commonAttrs2.default, {
+	    displayName: 'xb-popup',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        close: _react.PropTypes.bool,
+	        theme: _react.PropTypes.oneOf(['blank', 'error', 'island', 'modal', 'normal'])
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            close: false,
+	            theme: 'normal'
+	        };
+	    },
+
+	    onClickClose: function onClickClose() {
+	        _xblocksCore.event.dispatch(_reactDom2.default.findDOMNode(this), 'jsx-click-close', { bubbles: true, cancelable: true });
+	    },
+
+	    render: function render() {
+	        var children = [React.createElement('div', { key: 'content',
+	            className: '_content',
+	            'data-xb-content': this.props._uid,
+	            dangerouslySetInnerHTML: { __html: this.props.children } })];
+
+	        children.unshift(this.context.template('xb-popup-title', React.createElement('div', { key: 'title', className: '_title' })));
+
+	        if (this.props.close) {
+	            children.unshift(React.createElement('a', { key: 'close', className: '_close', onClick: this.onClickClose }));
+	        }
+
+	        children.push(this.context.template('xb-popup-buttons', React.createElement('div', { key: 'buttons', className: '_buttons' })));
+
+	        var classes = (0, _classnames3.default)(_defineProperty({
+	            'xb-popup': true
+	        }, '_theme-' + this.props.theme, Boolean(this.props.theme)));
+
+	        return React.createElement(
+	            'div',
+	            { className: classes, tabIndex: '0' },
+	            children
+	        );
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 73 */
 /***/ function(module, exports) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_73__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external {\"root\":\"Tether\",\"commonjs2\":\"tether\",\"commonjs\":\"tether\",\"amd\":\"tether\"}\n ** module id = 73\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%7B%22root%22:%22Tether%22,%22commonjs2%22:%22tether%22,%22commonjs%22:%22tether%22,%22amd%22:%22tether%22%7D?");
+	module.exports = __WEBPACK_EXTERNAL_MODULE_73__;
 
 /***/ },
 /* 74 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function () {\n    return {\n        'attachment': 'middle center',\n        'classPrefix': this.xtagName,\n        'element': this,\n        'enabled': false,\n        'optimizations': {\n            'gpu': true\n        },\n        'target': this.ownerDocument.body,\n        'targetAttachment': 'middle center',\n        'targetModifier': 'visible'\n    };\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/popupDefaultOptions.js\n ** module id = 74\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/popupDefaultOptions.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function () {
+	    return {
+	        'attachment': 'middle center',
+	        'classPrefix': this.xtagName,
+	        'element': this,
+	        'enabled': false,
+	        'optimizations': {
+	            'gpu': true
+	        },
+	        'target': this.ownerDocument.body,
+	        'targetAttachment': 'middle center',
+	        'targetModifier': 'visible'
+	    };
+	};
 
 /***/ },
 /* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\nvar useNative = __webpack_require__(77);\nvar Timer = __webpack_require__(78);\nvar setTimeoutPolifill = __webpack_require__(79);\nvar polifills = [\n    __webpack_require__(80),\n    __webpack_require__(81),\n    __webpack_require__(82),\n    __webpack_require__(83),\n    __webpack_require__(84)\n];\nvar setImmediate;\nvar clearImmediate;\n\nif (useNative()) {\n    setImmediate = context.setImmediate ||\n        context.msSetImmediate ||\n        usePolifill(polifills, setTimeoutPolifill);\n\n    clearImmediate = context.clearImmediate ||\n        context.msClearImmediate ||\n        Timer.clear;\n\n} else {\n    setImmediate = setTimeoutPolifill.init();\n    clearImmediate = Timer.clear;\n}\n\nexports.setImmediate = setImmediate;\nexports.clearImmediate = clearImmediate;\n\nexports.msSetImmediate = setImmediate;\nexports.msClearImmediate = clearImmediate;\n\nfunction usePolifill(polifills, def) {\n    for (var i = 0; i < polifills.length; i++) {\n        var polifill = polifills[ i ];\n        if (polifill.canUse()) {\n            return polifill.init();\n        }\n    }\n\n    return def.init();\n}\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/index.js\n ** module id = 75\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/index.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+	var useNative = __webpack_require__(77);
+	var Timer = __webpack_require__(78);
+	var setTimeoutPolifill = __webpack_require__(79);
+	var polifills = [
+	    __webpack_require__(80),
+	    __webpack_require__(81),
+	    __webpack_require__(82),
+	    __webpack_require__(83),
+	    __webpack_require__(84)
+	];
+	var setImmediate;
+	var clearImmediate;
+
+	if (useNative()) {
+	    setImmediate = context.setImmediate ||
+	        context.msSetImmediate ||
+	        usePolifill(polifills, setTimeoutPolifill);
+
+	    clearImmediate = context.clearImmediate ||
+	        context.msClearImmediate ||
+	        Timer.clear;
+
+	} else {
+	    setImmediate = setTimeoutPolifill.init();
+	    clearImmediate = Timer.clear;
+	}
+
+	exports.setImmediate = setImmediate;
+	exports.clearImmediate = clearImmediate;
+
+	exports.msSetImmediate = setImmediate;
+	exports.msClearImmediate = clearImmediate;
+
+	function usePolifill(polifills, def) {
+	    for (var i = 0; i < polifills.length; i++) {
+	        var polifill = polifills[ i ];
+	        if (polifill.canUse()) {
+	            return polifill.init();
+	        }
+	    }
+
+	    return def.init();
+	}
+
 
 /***/ },
 /* 76 */
 /***/ function(module, exports) {
 
-	eval("/*jshint -W067*/\n'use strict';\n\nmodule.exports = (function() {\n    return this || (1, eval)('this');\n})();\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/context.js\n ** module id = 76\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/context.js?");
+	/*jshint -W067*/
+	'use strict';
+
+	module.exports = (function() {
+	    return this || (1, eval)('this');
+	})();
+
 
 /***/ },
 /* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("var context = __webpack_require__(76);\n\n// @see http://codeforhire.com/2013/09/21/setimmediate-and-messagechannel-broken-on-internet-explorer-10/\nmodule.exports = function() {\n    return !(context.navigator && /Trident|Edge/.test(context.navigator.userAgent));\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/useNative.js\n ** module id = 77\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/useNative.js?");
+	var context = __webpack_require__(76);
+
+	// @see http://codeforhire.com/2013/09/21/setimmediate-and-messagechannel-broken-on-internet-explorer-10/
+	module.exports = function() {
+	    return !(context.navigator && /Trident|Edge/.test(context.navigator.userAgent));
+	};
+
 
 /***/ },
 /* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\n\nvar nextId = 1;\nvar tasks = {};\nvar lock = false;\n\nfunction wrap(handler) {\n    var args = Array.prototype.slice.call(arguments, 1);\n\n    return function() {\n        handler.apply(undefined, args);\n    };\n}\n\nfunction create(args) {\n    tasks[ nextId ] = wrap.apply(undefined, args);\n    return nextId++;\n}\n\nfunction clear(handleId) {\n    delete tasks[ handleId ];\n}\n\nfunction run(handleId) {\n    if (lock) {\n        context.setTimeout( wrap( run, handleId ), 0 );\n\n    } else {\n        var task = tasks[ handleId ];\n\n        if (task) {\n            lock = true;\n\n            try {\n                task();\n\n            } finally {\n                clear( handleId );\n                lock = false;\n            }\n        }\n    }\n}\n\nexports.run = run;\nexports.wrap = wrap;\nexports.create = create;\nexports.clear = clear;\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/timer.js\n ** module id = 78\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/timer.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+
+	var nextId = 1;
+	var tasks = {};
+	var lock = false;
+
+	function wrap(handler) {
+	    var args = Array.prototype.slice.call(arguments, 1);
+
+	    return function() {
+	        handler.apply(undefined, args);
+	    };
+	}
+
+	function create(args) {
+	    tasks[ nextId ] = wrap.apply(undefined, args);
+	    return nextId++;
+	}
+
+	function clear(handleId) {
+	    delete tasks[ handleId ];
+	}
+
+	function run(handleId) {
+	    if (lock) {
+	        context.setTimeout( wrap( run, handleId ), 0 );
+
+	    } else {
+	        var task = tasks[ handleId ];
+
+	        if (task) {
+	            lock = true;
+
+	            try {
+	                task();
+
+	            } finally {
+	                clear( handleId );
+	                lock = false;
+	            }
+	        }
+	    }
+	}
+
+	exports.run = run;
+	exports.wrap = wrap;
+	exports.create = create;
+	exports.clear = clear;
+
 
 /***/ },
 /* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\nvar Timer = __webpack_require__(78);\n\nexports.init = function() {\n    var polifill = function() {\n        var handleId = Timer.create(arguments);\n        context.setTimeout( Timer.wrap( Timer.run, handleId ), 0 );\n        return handleId;\n    };\n    polifill.usePolifill = 'setTimeout';\n    return polifill;\n};\n\nexports.canUse = function() {\n    return true;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/polifill/setTimeout.js\n ** module id = 79\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/polifill/setTimeout.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+	var Timer = __webpack_require__(78);
+
+	exports.init = function() {
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        context.setTimeout( Timer.wrap( Timer.run, handleId ), 0 );
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'setTimeout';
+	    return polifill;
+	};
+
+	exports.canUse = function() {
+	    return true;
+	};
+
 
 /***/ },
 /* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\nvar Timer = __webpack_require__(78);\n\nexports.init = function() {\n    var polifill = function() {\n        var handleId = Timer.create(arguments);\n        context.process.nextTick( Timer.wrap( Timer.run, handleId ) );\n        return handleId;\n    };\n    polifill.usePolifill = 'nextTick';\n    return polifill;\n};\n\n// Don't get fooled by e.g. browserify environments.\n// For Node.js before 0.9\nexports.canUse = function() {\n    return (Object.prototype.toString.call(context.process) === '[object process]');\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/polifill/nextTick.js\n ** module id = 80\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/polifill/nextTick.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+	var Timer = __webpack_require__(78);
+
+	exports.init = function() {
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        context.process.nextTick( Timer.wrap( Timer.run, handleId ) );
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'nextTick';
+	    return polifill;
+	};
+
+	// Don't get fooled by e.g. browserify environments.
+	// For Node.js before 0.9
+	exports.canUse = function() {
+	    return (Object.prototype.toString.call(context.process) === '[object process]');
+	};
+
 
 /***/ },
 /* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\nvar Timer = __webpack_require__(78);\n\nexports.init = function() {\n    var messagePrefix = 'setImmediate$' + Math.random() + '$';\n\n    var onGlobalMessage = function(event) {\n        if (event.source === context &&\n            typeof(event.data) === 'string' &&\n            event.data.indexOf(messagePrefix) === 0) {\n\n            Timer.run(Number(event.data.slice(messagePrefix.length)));\n        }\n    };\n\n    if (context.addEventListener) {\n        context.addEventListener('message', onGlobalMessage, false);\n\n    } else {\n        context.attachEvent('onmessage', onGlobalMessage);\n    }\n\n    var polifill = function() {\n        var handleId = Timer.create(arguments);\n        context.postMessage(messagePrefix + handleId, '*');\n        return handleId;\n    };\n    polifill.usePolifill = 'postMessage';\n    return polifill;\n};\n\n// For non-IE10 modern browsers\nexports.canUse = function() {\n    if (context.importScripts || !context.postMessage) {\n        return false;\n    }\n\n    var asynch = true;\n    var oldOnMessage = context.onmessage;\n    context.onmessage = function() {\n        asynch = false;\n    };\n\n    context.postMessage('', '*');\n    context.onmessage = oldOnMessage;\n    return asynch;\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/polifill/postMessage.js\n ** module id = 81\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/polifill/postMessage.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+	var Timer = __webpack_require__(78);
+
+	exports.init = function() {
+	    var messagePrefix = 'setImmediate$' + Math.random() + '$';
+
+	    var onGlobalMessage = function(event) {
+	        if (event.source === context &&
+	            typeof(event.data) === 'string' &&
+	            event.data.indexOf(messagePrefix) === 0) {
+
+	            Timer.run(Number(event.data.slice(messagePrefix.length)));
+	        }
+	    };
+
+	    if (context.addEventListener) {
+	        context.addEventListener('message', onGlobalMessage, false);
+
+	    } else {
+	        context.attachEvent('onmessage', onGlobalMessage);
+	    }
+
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        context.postMessage(messagePrefix + handleId, '*');
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'postMessage';
+	    return polifill;
+	};
+
+	// For non-IE10 modern browsers
+	exports.canUse = function() {
+	    if (context.importScripts || !context.postMessage) {
+	        return false;
+	    }
+
+	    var asynch = true;
+	    var oldOnMessage = context.onmessage;
+	    context.onmessage = function() {
+	        asynch = false;
+	    };
+
+	    context.postMessage('', '*');
+	    context.onmessage = oldOnMessage;
+	    return asynch;
+	};
+
 
 /***/ },
 /* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\nvar Timer = __webpack_require__(78);\n\nexports.init = function() {\n    var channel = new context.MessageChannel();\n\n    channel.port1.onmessage = function(event) {\n        Timer.run(Number(event.data));\n    };\n\n    var polifill = function() {\n        var handleId = Timer.create(arguments);\n        channel.port2.postMessage(handleId);\n        return handleId;\n    };\n    polifill.usePolifill = 'messageChannel';\n    return polifill;\n};\n\n// For web workers, where supported\nexports.canUse = function() {\n    return Boolean(context.MessageChannel);\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/polifill/messageChannel.js\n ** module id = 82\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/polifill/messageChannel.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+	var Timer = __webpack_require__(78);
+
+	exports.init = function() {
+	    var channel = new context.MessageChannel();
+
+	    channel.port1.onmessage = function(event) {
+	        Timer.run(Number(event.data));
+	    };
+
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        channel.port2.postMessage(handleId);
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'messageChannel';
+	    return polifill;
+	};
+
+	// For web workers, where supported
+	exports.canUse = function() {
+	    return Boolean(context.MessageChannel);
+	};
+
 
 /***/ },
 /* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\nvar Timer = __webpack_require__(78);\n\nexports.init = function() {\n    var html = context.document.documentElement;\n    var polifill = function() {\n        var handleId = Timer.create(arguments);\n        var script = context.document.createElement('script');\n\n        script.onreadystatechange = function() {\n            Timer.run(handleId);\n            script.onreadystatechange = null;\n            html.removeChild(script);\n            script = null;\n        };\n\n        html.appendChild(script);\n        return handleId;\n    };\n\n    polifill.usePolifill = 'readyStateChange';\n    return polifill;\n};\n\n// For IE 6–8\nexports.canUse = function() {\n    return (context.document && ('onreadystatechange' in context.document.createElement('script')));\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/polifill/readyStateChange.js\n ** module id = 83\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/polifill/readyStateChange.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+	var Timer = __webpack_require__(78);
+
+	exports.init = function() {
+	    var html = context.document.documentElement;
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        var script = context.document.createElement('script');
+
+	        script.onreadystatechange = function() {
+	            Timer.run(handleId);
+	            script.onreadystatechange = null;
+	            html.removeChild(script);
+	            script = null;
+	        };
+
+	        html.appendChild(script);
+	        return handleId;
+	    };
+
+	    polifill.usePolifill = 'readyStateChange';
+	    return polifill;
+	};
+
+	// For IE 6–8
+	exports.canUse = function() {
+	    return (context.document && ('onreadystatechange' in context.document.createElement('script')));
+	};
+
 
 /***/ },
 /* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar context = __webpack_require__(76);\nvar Timer = __webpack_require__(78);\n\nexports.init = function() {\n    var polifill = function() {\n        var handleId = Timer.create(arguments);\n        var img = new context.Image();\n        img.onload = img.onerror = Timer.wrap( Timer.run, handleId );\n        img.src = '';\n\n        return handleId;\n    };\n    polifill.usePolifill = 'image';\n    return polifill;\n};\n\nexports.canUse = function() {\n    return Boolean(context.window && context.Image);\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/setimmediate2/src/polifill/image.js\n ** module id = 84\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/setimmediate2/src/polifill/image.js?");
+	'use strict';
+
+	var context = __webpack_require__(76);
+	var Timer = __webpack_require__(78);
+
+	exports.init = function() {
+	    var polifill = function() {
+	        var handleId = Timer.create(arguments);
+	        var img = new context.Image();
+	        img.onload = img.onerror = Timer.wrap( Timer.run, handleId );
+	        img.src = '';
+
+	        return handleId;
+	    };
+	    polifill.usePolifill = 'image';
+	    return polifill;
+	};
+
+	exports.canUse = function() {
+	    return Boolean(context.window && context.Image);
+	};
+
 
 /***/ },
 /* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _es6Symbol = __webpack_require__(24);\n\nvar _es6Symbol2 = _interopRequireDefault(_es6Symbol);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n    OPTIONS: (0, _es6Symbol2.default)('popup-options'),\n    CORE: (0, _es6Symbol2.default)('popup-core'),\n    POPUP: (0, _es6Symbol2.default)('popup-popup')\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./constants/popup.js\n ** module id = 85\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./constants/popup.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _es6Symbol = __webpack_require__(24);
+
+	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    OPTIONS: (0, _es6Symbol2.default)('popup-options'),
+	    CORE: (0, _es6Symbol2.default)('popup-core'),
+	    POPUP: (0, _es6Symbol2.default)('popup-popup')
+	};
 
 /***/ },
 /* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(87);\n\n__webpack_require__(88);\n\n__webpack_require__(93);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _lazyFocus = __webpack_require__(98);\n\nvar _lazyFocus2 = _interopRequireDefault(_lazyFocus);\n\nvar _popupDefaultOptions = __webpack_require__(74);\n\nvar _popupDefaultOptions2 = _interopRequireDefault(_popupDefaultOptions);\n\nvar _TableNavigator = __webpack_require__(99);\n\nvar _TableNavigator2 = _interopRequireDefault(_TableNavigator);\n\nvar _getParentMenu = __webpack_require__(108);\n\nvar _getParentMenu2 = _interopRequireDefault(_getParentMenu);\n\nvar _src = __webpack_require__(75);\n\nvar _src2 = _interopRequireDefault(_src);\n\nvar _menu = __webpack_require__(109);\n\nvar _menu2 = _interopRequireDefault(_menu);\n\nvar _menu3 = __webpack_require__(112);\n\nvar _menu4 = _interopRequireDefault(_menu3);\n\nvar _popup = __webpack_require__(85);\n\nvar _popup2 = _interopRequireDefault(_popup);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * xb-menu html element\n *\n * @class xb.Menu\n * @augments xb.Popup\n * @memberof xb\n * @mixes xblocks.mixin.menu\n */\nexports.default = _context.xb.Menu = (0, _xblocksCore.create)('xb-menu', [_menu2.default, {\n    prototype: Object.create(document.createElement('xb-popup').constructor).prototype,\n\n    events: {\n        'xb-before-open': function xbBeforeOpen() {\n            this.style.visibility = 'hidden';\n        },\n\n        'xb-open': function xbOpen() {\n            this[_menu4.default.TABLE] = new _TableNavigator2.default(this, {\n                rowLoop: true,\n                colLoop: true\n            });\n\n            var component = this.getComponent();\n\n            if (component) {\n                component.afterOpen(this._afterOpen.bind(this));\n            } else {\n                this._afterOpen();\n            }\n        },\n\n        'xb-close': function xbClose() {\n            var table = this[_menu4.default.TABLE];\n\n            if (table) {\n                this[_menu4.default.TABLE] = undefined;\n                table.destroy();\n            }\n\n            this._closeAllSubmenu();\n        },\n\n        'keydown:keypass(27)': function keydownKeypass27() {\n            this.close();\n            _lodash2.default.invoke(this, 'parentMenu.focus');\n        },\n\n        'blur': function blur() {\n            if (!this.hasOpenSubmenu) {\n                this.close();\n                // event.relatedTarget is null in firefox\n                _src2.default.setImmediate(this._closeUpFocus.bind(this));\n            }\n        }\n    },\n\n    /**\n     * @lends xb.Menu.prototype\n     */\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                return _defineProperty({}, this.xtagName, __webpack_require__(113));\n            }\n        },\n\n        isShadowSupported: {\n            get: function get() {\n                return false;\n            }\n        },\n\n        /**\n         * @prop {Object} default setting for the menu\n         * @readonly\n         */\n        popupDefaultOptions: {\n            get: function get() {\n                var popupOptions = _popupDefaultOptions2.default.call(this);\n\n                popupOptions.constraints = [{\n                    'to': 'scrollParent',\n                    'attachment': 'element'\n                }, {\n                    'to': 'window',\n                    'attachment': 'element'\n                }];\n\n                return popupOptions;\n            }\n        }\n    },\n\n    methods: {\n        _closeAllSubmenu: function _closeAllSubmenu() {\n            _lodash2.default.forEach(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), this._closeSubmenu);\n        },\n\n        /**\n         * @param {xb.Menuitem} target\n         */\n        _closeSubmenu: function _closeSubmenu(target) {\n            _lodash2.default.invoke(target, [_popup2.default.POPUP, 'close']);\n        },\n\n        _afterOpen: function _afterOpen() {\n            this.position();\n            this.style.visibility = 'visible';\n            // the focus is not put on the invisible element\n            // put again\n            (0, _lazyFocus2.default)(this);\n        },\n\n        _closeUpFocus: function _closeUpFocus() {\n            var focusMenu = (0, _getParentMenu2.default)(this.ownerDocument.activeElement);\n            var parent = this.parentMenu;\n\n            while (parent) {\n                if (parent === focusMenu) {\n                    break;\n                }\n\n                parent.close();\n                parent = parent.parentMenu;\n            }\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menu/index.js\n ** module id = 86\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menu/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(87);
+
+	__webpack_require__(88);
+
+	__webpack_require__(93);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _lazyFocus = __webpack_require__(99);
+
+	var _lazyFocus2 = _interopRequireDefault(_lazyFocus);
+
+	var _popupDefaultOptions = __webpack_require__(74);
+
+	var _popupDefaultOptions2 = _interopRequireDefault(_popupDefaultOptions);
+
+	var _TableNavigator = __webpack_require__(100);
+
+	var _TableNavigator2 = _interopRequireDefault(_TableNavigator);
+
+	var _getParentMenu = __webpack_require__(109);
+
+	var _getParentMenu2 = _interopRequireDefault(_getParentMenu);
+
+	var _src = __webpack_require__(75);
+
+	var _src2 = _interopRequireDefault(_src);
+
+	var _menu = __webpack_require__(110);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	var _menu3 = __webpack_require__(113);
+
+	var _menu4 = _interopRequireDefault(_menu3);
+
+	var _popup = __webpack_require__(85);
+
+	var _popup2 = _interopRequireDefault(_popup);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * xb-menu html element
+	 *
+	 * @class xb.Menu
+	 * @augments xb.Popup
+	 * @memberof xb
+	 * @mixes xblocks.mixin.menu
+	 */
+	exports.default = _context.xb.Menu = (0, _xblocksCore.create)('xb-menu', [_menu2.default, {
+	    prototype: Object.create(document.createElement('xb-popup').constructor).prototype,
+
+	    events: {
+	        'xb-before-open': function xbBeforeOpen() {
+	            this.style.visibility = 'hidden';
+	        },
+
+	        'xb-open': function xbOpen() {
+	            this[_menu4.default.TABLE] = new _TableNavigator2.default(this, {
+	                rowLoop: true,
+	                colLoop: true
+	            });
+
+	            var component = this.getComponent();
+
+	            if (component) {
+	                component.afterOpen(this._afterOpen.bind(this));
+	            } else {
+	                this._afterOpen();
+	            }
+	        },
+
+	        'xb-close': function xbClose() {
+	            var table = this[_menu4.default.TABLE];
+
+	            if (table) {
+	                this[_menu4.default.TABLE] = undefined;
+	                table.destroy();
+	            }
+
+	            this._closeAllSubmenu();
+	        },
+
+	        'keydown:keypass(27)': function keydownKeypass27() {
+	            this.close();
+	            _lodash2.default.invoke(this, 'parentMenu.focus');
+	        },
+
+	        'blur': function blur() {
+	            if (!this.hasOpenSubmenu) {
+	                this.close();
+	                // event.relatedTarget is null in firefox
+	                _src2.default.setImmediate(this._closeUpFocus.bind(this));
+	            }
+	        }
+	    },
+
+	    /**
+	     * @lends xb.Menu.prototype
+	     */
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                return _defineProperty({}, this.xtagName, __webpack_require__(114));
+	            }
+	        },
+
+	        isShadowSupported: {
+	            get: function get() {
+	                return false;
+	            }
+	        },
+
+	        /**
+	         * @prop {Object} default setting for the menu
+	         * @readonly
+	         */
+	        popupDefaultOptions: {
+	            get: function get() {
+	                var popupOptions = _popupDefaultOptions2.default.call(this);
+
+	                popupOptions.constraints = [{
+	                    'to': 'scrollParent',
+	                    'attachment': 'element'
+	                }, {
+	                    'to': 'window',
+	                    'attachment': 'element'
+	                }];
+
+	                return popupOptions;
+	            }
+	        }
+	    },
+
+	    methods: {
+	        _closeAllSubmenu: function _closeAllSubmenu() {
+	            _lodash2.default.forEach(this.querySelectorAll('.xb-menu-target.xb-menu-enabled'), this._closeSubmenu);
+	        },
+
+	        /**
+	         * @param {xb.Menuitem} target
+	         */
+	        _closeSubmenu: function _closeSubmenu(target) {
+	            _lodash2.default.invoke(target, [_popup2.default.POPUP, 'close']);
+	        },
+
+	        _afterOpen: function _afterOpen() {
+	            this.position();
+	            this.style.visibility = 'visible';
+	            // the focus is not put on the invisible element
+	            // put again
+	            (0, _lazyFocus2.default)(this);
+	        },
+
+	        _closeUpFocus: function _closeUpFocus() {
+	            var focusMenu = (0, _getParentMenu2.default)(this.ownerDocument.activeElement);
+	            var parent = this.parentMenu;
+
+	            while (parent) {
+	                if (parent === focusMenu) {
+	                    break;
+	                }
+
+	                parent.close();
+	                parent = parent.parentMenu;
+	            }
+	        }
+	    }
+	}]);
 
 /***/ },
 /* 87 */
@@ -569,275 +4069,3652 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nvar _menu = __webpack_require__(89);\n\nvar _menu2 = _interopRequireDefault(_menu);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * The template node xb-menu\n *\n * @class xv.Menu\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes xblocks.mixin.vMenu\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.Menu = _xblocksCore.view.register('xb-menu', [_commonAttrs2.default, (0, _menu2.default)('xb-menu'), {\n    displayName: 'xb-menu',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        size: _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            size: ''\n        };\n    },\n\n    afterOpen: function afterOpen(callback) {\n        this._updateMaxHeight(this.props.size, callback);\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menu/index.jsx\n ** module id = 88\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menu/index.jsx?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	var _menu = __webpack_require__(89);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * The template node xb-menu
+	 *
+	 * @class xv.Menu
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes xblocks.mixin.vMenu
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.Menu = _xblocksCore.view.register('xb-menu', [_commonAttrs2.default, (0, _menu2.default)('xb-menu'), {
+	    displayName: 'xb-menu',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        size: _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            size: ''
+	        };
+	    },
+
+	    afterOpen: function afterOpen(callback) {
+	        this._updateMaxHeight(this.props.size, callback);
+	    }
+	}]);
 
 /***/ },
 /* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (tagName) {\n    return {\n        getInitialState: function getInitialState() {\n            return {\n                maxHeight: 0,\n                isShowScrollTop: false,\n                isShowScrollBottom: false\n            };\n        },\n\n        componentWillMount: function componentWillMount() {\n            this._enterTopFrame = 0;\n            this._enterBottomFrame = 0;\n            this._lockScroll = false;\n            this._onScroll = (0, _throttleAnimationFrame2.default)(this._onScroll);\n            this._onScrollThrottle = _lodash2.default.throttle(this._onScrollThrottle, 500, {\n                leading: true,\n                trailing: false\n            });\n        },\n\n        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {\n            if (nextProps.size !== this.props.size) {\n                this._updateMaxHeight(nextProps.size);\n            }\n        },\n\n        _updateMaxHeight: function _updateMaxHeight(size, callback) {\n            size = Number(size);\n            var maxHeight = 0;\n\n            if (size > 0) {\n                var contentNode = this._content;\n                var element = contentNode.children[size - 1];\n\n                if (element) {\n                    var rectContent = contentNode.getBoundingClientRect();\n                    var rectElement = element.getBoundingClientRect();\n                    maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;\n                }\n            }\n\n            this.setState({ maxHeight: maxHeight }, this._redrawScrollNavigator.bind(this, callback));\n        },\n\n        _redrawScrollNavigator: function _redrawScrollNavigator(callback) {\n            var target = this._content;\n            var safeArea = 5;\n            var height = Math.max(target.scrollHeight, target.clientHeight);\n            var isShowScrollTop = target.scrollTop > safeArea;\n            var isShowScrollBottom = target.scrollTop + target.clientHeight < height - safeArea;\n\n            this.setState({ isShowScrollTop: isShowScrollTop, isShowScrollBottom: isShowScrollBottom }, this._redrawScrollNavigatorSuccess.bind(this, callback));\n        },\n\n        _redrawScrollNavigatorSuccess: function _redrawScrollNavigatorSuccess(callback) {\n            if (!this.state.isShowScrollTop) {\n                this._onMouseLeaveTop();\n            }\n\n            if (!this.state.isShowScrollBottom) {\n                this._onMouseLeaveBottom();\n            }\n\n            if (_lodash2.default.isFunction(callback)) {\n                callback();\n            }\n        },\n\n        _onWheel: function _onWheel(event) {\n            var content = this._content;\n            var delta = event.deltaY;\n            var scrollTop = content.scrollTop;\n            var offsetHeight = content.offsetHeight;\n            var scrollHeight = content.scrollHeight;\n\n            if (delta < 0 && scrollTop === 0 || delta > 0 && scrollTop + offsetHeight >= scrollHeight || offsetHeight === scrollHeight) {\n\n                event.preventDefault();\n                event.nativeEvent.stopImmediatePropagation();\n            }\n        },\n\n        _onScroll: function _onScroll() {\n            if (this._lockScroll) {\n                return;\n            }\n\n            this._lockScroll = true;\n            this._onScrollThrottle();\n            this._redrawScrollNavigator(this._onScrollSuccess);\n        },\n\n        _onScrollSuccess: function _onScrollSuccess() {\n            this._lockScroll = false;\n        },\n\n        _onScrollThrottle: function _onScrollThrottle() {\n            _xblocksCore.event.dispatch(this._content, 'jsx-scroll-throttle', { bubbles: true, cancelable: true });\n        },\n\n        _animationScrollTop: function _animationScrollTop() {\n            this._content.scrollTop--;\n            this._enterTopFrame = (0, _requestAnimationFrame.requestAnimationFrame)(this._animationScrollTop);\n        },\n\n        _onMouseEnterTop: function _onMouseEnterTop() {\n            this._onMouseLeaveTop();\n            this._animationScrollTop();\n        },\n\n        _onMouseLeaveTop: function _onMouseLeaveTop() {\n            if (this._enterTopFrame) {\n                (0, _requestAnimationFrame.cancelAnimationFrame)(this._enterTopFrame);\n                this._enterTopFrame = 0;\n            }\n        },\n\n        _animationScrollBottom: function _animationScrollBottom() {\n            this._content.scrollTop++;\n            this._enterBottomFrame = (0, _requestAnimationFrame.requestAnimationFrame)(this._animationScrollBottom);\n        },\n\n        _onMouseEnterBottom: function _onMouseEnterBottom() {\n            this._onMouseLeaveBottom();\n            this._animationScrollBottom();\n        },\n\n        _onMouseLeaveBottom: function _onMouseLeaveBottom() {\n            if (this._enterBottomFrame) {\n                (0, _requestAnimationFrame.cancelAnimationFrame)(this._enterBottomFrame);\n                this._enterBottomFrame = 0;\n            }\n        },\n\n        /**\n         * @param {xb.Menuitem} menuitem\n         */\n        scrollIntoItem: function scrollIntoItem(menuitem) {\n            var content = this._content;\n            var rectContent = content.getBoundingClientRect();\n            var rectMenuitem = menuitem.getBoundingClientRect();\n\n            if (rectMenuitem.top < rectContent.bottom && rectMenuitem.bottom > rectContent.top) {\n                return;\n            }\n\n            var offset = 0;\n\n            if (rectMenuitem.top >= rectContent.bottom) {\n                offset = rectMenuitem.bottom - rectContent.bottom;\n            } else if (rectMenuitem.bottom <= rectContent.top) {\n                offset = rectMenuitem.top - rectContent.top;\n            }\n\n            content.scrollTop = content.scrollTop + offset;\n        },\n\n        render: function render() {\n            var _this = this;\n\n            var classes = (0, _classnames3.default)(_defineProperty({}, tagName, true));\n\n            var scrollTopStyle = {\n                'display': this.state.isShowScrollTop ? 'block' : 'none'\n            };\n\n            var scrollBottomStyle = {\n                'display': this.state.isShowScrollBottom ? 'block' : 'none'\n            };\n\n            var contentStyle = {\n                'maxHeight': this.state.maxHeight ? this.state.maxHeight + 'px' : 'none'\n            };\n\n            return React.createElement(\n                'div',\n                { className: classes },\n                React.createElement('div', { style: scrollTopStyle,\n                    className: '_scroll-top',\n                    onMouseEnter: this._onMouseEnterTop,\n                    onMouseLeave: this._onMouseLeaveTop }),\n                React.createElement(\n                    'div',\n                    { ref: function ref(_ref) {\n                            return _this._content = _ref;\n                        },\n                        style: contentStyle,\n                        className: '_content',\n                        onScroll: this._onScroll,\n                        onWheel: this._onWheel },\n                    this.context.content(React.createElement('div', null))\n                ),\n                React.createElement('div', { style: scrollBottomStyle,\n                    className: '_scroll-bottom',\n                    onMouseEnter: this._onMouseEnterBottom,\n                    onMouseLeave: this._onMouseLeaveBottom })\n            );\n        }\n    };\n};\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _classnames2 = __webpack_require__(11);\n\nvar _classnames3 = _interopRequireDefault(_classnames2);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _throttleAnimationFrame = __webpack_require__(90);\n\nvar _throttleAnimationFrame2 = _interopRequireDefault(_throttleAnimationFrame);\n\nvar _requestAnimationFrame = __webpack_require__(91);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * Common interface for views xb-menu and xb-menu-inline\n * @param {string} tagName\n * @returns {Object}\n */\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/view/menu.js\n ** module id = 89\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/view/menu.js?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (tagName) {
+	    return {
+	        getInitialState: function getInitialState() {
+	            return {
+	                maxHeight: 0,
+	                isShowScrollTop: false,
+	                isShowScrollBottom: false
+	            };
+	        },
+
+	        componentWillMount: function componentWillMount() {
+	            this._enterTopFrame = 0;
+	            this._enterBottomFrame = 0;
+	            this._lockScroll = false;
+	            this._onScroll = (0, _throttleAnimationFrame2.default)(this._onScroll);
+	            this._onScrollThrottle = _lodash2.default.throttle(this._onScrollThrottle, 500, {
+	                leading: true,
+	                trailing: false
+	            });
+	        },
+
+	        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	            if (nextProps.size !== this.props.size) {
+	                this._updateMaxHeight(nextProps.size);
+	            }
+	        },
+
+	        _updateMaxHeight: function _updateMaxHeight(size, callback) {
+	            size = Number(size);
+	            var maxHeight = 0;
+
+	            if (size > 0) {
+	                var contentNode = this._content;
+	                var element = contentNode.children[size - 1];
+
+	                if (element) {
+	                    var rectContent = contentNode.getBoundingClientRect();
+	                    var rectElement = element.getBoundingClientRect();
+	                    maxHeight = rectElement.top + rectElement.height + contentNode.scrollTop - rectContent.top;
+	                }
+	            }
+
+	            this.setState({ maxHeight: maxHeight }, this._redrawScrollNavigator.bind(this, callback));
+	        },
+
+	        _redrawScrollNavigator: function _redrawScrollNavigator(callback) {
+	            var target = this._content;
+	            var safeArea = 5;
+	            var height = Math.max(target.scrollHeight, target.clientHeight);
+	            var isShowScrollTop = target.scrollTop > safeArea;
+	            var isShowScrollBottom = target.scrollTop + target.clientHeight < height - safeArea;
+
+	            this.setState({ isShowScrollTop: isShowScrollTop, isShowScrollBottom: isShowScrollBottom }, this._redrawScrollNavigatorSuccess.bind(this, callback));
+	        },
+
+	        _redrawScrollNavigatorSuccess: function _redrawScrollNavigatorSuccess(callback) {
+	            if (!this.state.isShowScrollTop) {
+	                this._onMouseLeaveTop();
+	            }
+
+	            if (!this.state.isShowScrollBottom) {
+	                this._onMouseLeaveBottom();
+	            }
+
+	            if (_lodash2.default.isFunction(callback)) {
+	                callback();
+	            }
+	        },
+
+	        _onWheel: function _onWheel(event) {
+	            var content = this._content;
+	            var delta = event.deltaY;
+	            var scrollTop = content.scrollTop;
+	            var offsetHeight = content.offsetHeight;
+	            var scrollHeight = content.scrollHeight;
+
+	            if (delta < 0 && scrollTop === 0 || delta > 0 && scrollTop + offsetHeight >= scrollHeight || offsetHeight === scrollHeight) {
+
+	                event.preventDefault();
+	                event.nativeEvent.stopImmediatePropagation();
+	            }
+	        },
+
+	        _onScroll: function _onScroll() {
+	            if (this._lockScroll) {
+	                return;
+	            }
+
+	            this._lockScroll = true;
+	            this._onScrollThrottle();
+	            this._redrawScrollNavigator(this._onScrollSuccess);
+	        },
+
+	        _onScrollSuccess: function _onScrollSuccess() {
+	            this._lockScroll = false;
+	        },
+
+	        _onScrollThrottle: function _onScrollThrottle() {
+	            _xblocksCore.event.dispatch(this._content, 'jsx-scroll-throttle', { bubbles: true, cancelable: true });
+	        },
+
+	        _animationScrollTop: function _animationScrollTop() {
+	            this._content.scrollTop--;
+	            this._enterTopFrame = (0, _requestAnimationFrame.requestAnimationFrame)(this._animationScrollTop);
+	        },
+
+	        _onMouseEnterTop: function _onMouseEnterTop() {
+	            this._onMouseLeaveTop();
+	            this._animationScrollTop();
+	        },
+
+	        _onMouseLeaveTop: function _onMouseLeaveTop() {
+	            if (this._enterTopFrame) {
+	                (0, _requestAnimationFrame.cancelAnimationFrame)(this._enterTopFrame);
+	                this._enterTopFrame = 0;
+	            }
+	        },
+
+	        _animationScrollBottom: function _animationScrollBottom() {
+	            this._content.scrollTop++;
+	            this._enterBottomFrame = (0, _requestAnimationFrame.requestAnimationFrame)(this._animationScrollBottom);
+	        },
+
+	        _onMouseEnterBottom: function _onMouseEnterBottom() {
+	            this._onMouseLeaveBottom();
+	            this._animationScrollBottom();
+	        },
+
+	        _onMouseLeaveBottom: function _onMouseLeaveBottom() {
+	            if (this._enterBottomFrame) {
+	                (0, _requestAnimationFrame.cancelAnimationFrame)(this._enterBottomFrame);
+	                this._enterBottomFrame = 0;
+	            }
+	        },
+
+	        /**
+	         * @param {xb.Menuitem} menuitem
+	         */
+	        scrollIntoItem: function scrollIntoItem(menuitem) {
+	            var content = this._content;
+	            var rectContent = content.getBoundingClientRect();
+	            var rectMenuitem = menuitem.getBoundingClientRect();
+
+	            if (rectMenuitem.top < rectContent.bottom && rectMenuitem.bottom > rectContent.top) {
+	                return;
+	            }
+
+	            var offset = 0;
+
+	            if (rectMenuitem.top >= rectContent.bottom) {
+	                offset = rectMenuitem.bottom - rectContent.bottom;
+	            } else if (rectMenuitem.bottom <= rectContent.top) {
+	                offset = rectMenuitem.top - rectContent.top;
+	            }
+
+	            content.scrollTop = content.scrollTop + offset;
+	        },
+
+	        render: function render() {
+	            var _this = this;
+
+	            var classes = (0, _classnames3.default)(_defineProperty({}, tagName, true));
+
+	            var scrollTopStyle = {
+	                'display': this.state.isShowScrollTop ? 'block' : 'none'
+	            };
+
+	            var scrollBottomStyle = {
+	                'display': this.state.isShowScrollBottom ? 'block' : 'none'
+	            };
+
+	            var contentStyle = {
+	                'maxHeight': this.state.maxHeight ? this.state.maxHeight + 'px' : 'none'
+	            };
+
+	            return React.createElement(
+	                'div',
+	                { className: classes },
+	                React.createElement('div', { style: scrollTopStyle,
+	                    className: '_scroll-top',
+	                    onMouseEnter: this._onMouseEnterTop,
+	                    onMouseLeave: this._onMouseLeaveTop }),
+	                React.createElement(
+	                    'div',
+	                    { ref: function ref(_ref) {
+	                            return _this._content = _ref;
+	                        },
+	                        style: contentStyle,
+	                        className: '_content',
+	                        onScroll: this._onScroll,
+	                        onWheel: this._onWheel },
+	                    this.context.content(React.createElement('div', null))
+	                ),
+	                React.createElement('div', { style: scrollBottomStyle,
+	                    className: '_scroll-bottom',
+	                    onMouseEnter: this._onMouseEnterBottom,
+	                    onMouseLeave: this._onMouseLeaveBottom })
+	            );
+	        }
+	    };
+	};
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _classnames2 = __webpack_require__(11);
+
+	var _classnames3 = _interopRequireDefault(_classnames2);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _throttleAnimationFrame = __webpack_require__(90);
+
+	var _throttleAnimationFrame2 = _interopRequireDefault(_throttleAnimationFrame);
+
+	var _requestAnimationFrame = __webpack_require__(91);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * Common interface for views xb-menu and xb-menu-inline
+	 * @param {string} tagName
+	 * @returns {Object}
+	 */
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (callback, context) {\n    var throttle = 0;\n    var animationCallback = function animationCallback() {\n        throttle = 0;\n    };\n\n    return function () {\n        if (throttle) {\n            return;\n        }\n\n        throttle = (0, _requestAnimationFrame.requestAnimationFrame)(animationCallback);\n\n        callback.apply(context || this, arguments);\n    };\n};\n\nvar _requestAnimationFrame = __webpack_require__(91);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/throttleAnimationFrame.js\n ** module id = 90\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/throttleAnimationFrame.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (callback, context) {
+	    var throttle = 0;
+	    var animationCallback = function animationCallback() {
+	        throttle = 0;
+	    };
+
+	    return function () {
+	        if (throttle) {
+	            return;
+	        }
+
+	        throttle = (0, _requestAnimationFrame.requestAnimationFrame)(animationCallback);
+
+	        callback.apply(context || this, arguments);
+	    };
+	};
+
+	var _requestAnimationFrame = __webpack_require__(91);
 
 /***/ },
 /* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.cancelAnimationFrame = exports.requestAnimationFrame = undefined;\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _vendor = __webpack_require__(92);\n\nvar _vendor2 = _interopRequireDefault(_vendor);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar lastTime = 0;\n\nvar requestAnimationFrame = exports.requestAnimationFrame = _context2.default.requestAnimationFrame = (0, _vendor2.default)('requestAnimationFrame') || function (callback) {\n    var currTime = Date.now();\n    var timeToCall = Math.max(0, 16 - (currTime - lastTime));\n    var id = _context2.default.setTimeout(function () {\n        callback(currTime + timeToCall);\n    }, timeToCall);\n    lastTime = currTime + timeToCall;\n    return id;\n};\n\nvar cancelAnimationFrame = exports.cancelAnimationFrame = _context2.default.cancelAnimationFrame = (0, _vendor2.default)('cancelAnimationFrame') || (0, _vendor2.default)('cancelRequestAnimationFrame') || function (id) {\n    _context2.default.clearTimeout(id);\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./polyfills/requestAnimationFrame.js\n ** module id = 91\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./polyfills/requestAnimationFrame.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.cancelAnimationFrame = exports.requestAnimationFrame = undefined;
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _vendor = __webpack_require__(92);
+
+	var _vendor2 = _interopRequireDefault(_vendor);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var lastTime = 0;
+
+	var requestAnimationFrame = exports.requestAnimationFrame = _context2.default.requestAnimationFrame = (0, _vendor2.default)('requestAnimationFrame') || function (callback) {
+	    var currTime = Date.now();
+	    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+	    var id = _context2.default.setTimeout(function () {
+	        callback(currTime + timeToCall);
+	    }, timeToCall);
+	    lastTime = currTime + timeToCall;
+	    return id;
+	};
+
+	var cancelAnimationFrame = exports.cancelAnimationFrame = _context2.default.cancelAnimationFrame = (0, _vendor2.default)('cancelAnimationFrame') || (0, _vendor2.default)('cancelRequestAnimationFrame') || function (id) {
+	    _context2.default.clearTimeout(id);
+	};
 
 /***/ },
 /* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (name, context) {\n    context = context || _context2.default;\n\n    if (context[name]) {\n        return context[name];\n    }\n\n    name = _lodash2.default.capitalize(name);\n\n    var vendor = void 0;\n    var x = 0;\n    for (; x < 4; ++x) {\n        vendor = VENDORS[x];\n        if (context[vendor + name]) {\n            return context[vendor + name];\n        }\n    }\n};\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar VENDORS = ['ms', 'moz', 'webkit', 'o'];\n\n/**\n * @param {string} name\n * @param {Object} [context]\n * @returns {*}\n */\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/vendor.js\n ** module id = 92\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/vendor.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (name, context) {
+	    context = context || _context2.default;
+
+	    if (context[name]) {
+	        return context[name];
+	    }
+
+	    name = _lodash2.default.capitalize(name);
+
+	    var vendor = void 0;
+	    var x = 0;
+	    for (; x < 4; ++x) {
+	        vendor = VENDORS[x];
+	        if (context[vendor + name]) {
+	            return context[vendor + name];
+	        }
+	    }
+	};
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var VENDORS = ['ms', 'moz', 'webkit', 'o'];
+
+	/**
+	 * @param {string} name
+	 * @param {Object} [context]
+	 * @returns {*}
+	 */
 
 /***/ },
 /* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _delegate = __webpack_require__(94);\n\nvar _delegate2 = _interopRequireDefault(_delegate);\n\nvar _popup = __webpack_require__(85);\n\nvar _popup2 = _interopRequireDefault(_popup);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_context2.default.document.addEventListener('contextmenu', (0, _delegate2.default)('[contextmenu]', function (event) {\n    var element = event.delegateElement;\n    var doc = element.ownerDocument;\n    var menuId = element.getAttribute('contextmenu');\n    var menuElement = menuId && doc.getElementById(menuId);\n\n    if (!menuElement || menuElement.xtagName !== 'xb-menu') {\n        return;\n    }\n\n    event.preventDefault();\n    event.stopImmediatePropagation();\n\n    var targetElementId = 'xb-contextmenu-target';\n    var targetElement = doc.getElementById(targetElementId);\n\n    if (targetElement) {\n        if (targetElement[_popup2.default.POPUP]) {\n            targetElement[_popup2.default.POPUP].close();\n        }\n    } else {\n        targetElement = doc.createElement('div');\n        targetElement.id = targetElementId;\n        targetElement.style.position = 'absolute';\n        targetElement.style.visibility = 'hidden';\n        doc.body.appendChild(targetElement);\n    }\n\n    targetElement.style.top = event.pageY + 'px';\n    targetElement.style.left = event.pageX + 'px';\n\n    menuElement.open({\n        target: targetElement,\n        attachment: 'top left',\n        targetAttachment: 'bottom left',\n        targetModifier: undefined,\n        optimizations: {\n            moveElement: false\n        },\n        constraints: [{\n            to: 'scrollParent',\n            attachment: 'element'\n        }, {\n            to: 'window',\n            attachment: 'element'\n        }]\n    });\n}), false);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menu/contextmenu.js\n ** module id = 93\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menu/contextmenu.js?");
+	'use strict';
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _delegate = __webpack_require__(94);
+
+	var _delegate2 = _interopRequireDefault(_delegate);
+
+	var _popup = __webpack_require__(85);
+
+	var _popup2 = _interopRequireDefault(_popup);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	_context2.default.document.addEventListener('contextmenu', (0, _delegate2.default)('[contextmenu]', function (event) {
+	    var element = event.delegateElement;
+	    var doc = element.ownerDocument;
+	    var menuId = element.getAttribute('contextmenu');
+	    var menuElement = menuId && doc.getElementById(menuId);
+
+	    if (!menuElement || menuElement.xtagName !== 'xb-menu') {
+	        return;
+	    }
+
+	    event.preventDefault();
+	    event.stopImmediatePropagation();
+
+	    var targetElementId = 'xb-contextmenu-target';
+	    var targetElement = doc.getElementById(targetElementId);
+
+	    if (targetElement) {
+	        if (targetElement[_popup2.default.POPUP]) {
+	            targetElement[_popup2.default.POPUP].close();
+	        }
+	    } else {
+	        targetElement = doc.createElement('div');
+	        targetElement.id = targetElementId;
+	        targetElement.style.position = 'absolute';
+	        targetElement.style.visibility = 'hidden';
+	        doc.body.appendChild(targetElement);
+	    }
+
+	    targetElement.style.top = event.pageY + 'px';
+	    targetElement.style.left = event.pageX + 'px';
+
+	    menuElement.open({
+	        target: targetElement,
+	        attachment: 'top left',
+	        targetAttachment: 'bottom left',
+	        targetModifier: undefined,
+	        optimizations: {
+	            moveElement: false
+	        },
+	        constraints: [{
+	            to: 'scrollParent',
+	            attachment: 'element'
+	        }, {
+	            to: 'window',
+	            attachment: 'element'
+	        }]
+	    });
+	}), false);
 
 /***/ },
 /* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (selector, callback) {\n\n    return function (event) {\n        (0, _wrap2.default)(event);\n\n        var match = (0, _delegateMatch2.default)(selector, event.target);\n\n        if (!match) {\n            return;\n        }\n\n        event.delegateElement = match;\n\n        callback.call(match, event);\n    };\n};\n\nvar _delegateMatch = __webpack_require__(95);\n\nvar _delegateMatch2 = _interopRequireDefault(_delegateMatch);\n\nvar _wrap = __webpack_require__(97);\n\nvar _wrap2 = _interopRequireDefault(_wrap);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./event/delegate.js\n ** module id = 94\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./event/delegate.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (selector, callback) {
+
+	    return function (event) {
+	        (0, _wrap2.default)(event);
+
+	        var match = (0, _delegateMatch2.default)(selector, event.target);
+
+	        if (!match) {
+	            return;
+	        }
+
+	        event.delegateElement = match;
+
+	        callback.call(match, event);
+	    };
+	};
+
+	var _delegateMatch = __webpack_require__(95);
+
+	var _delegateMatch2 = _interopRequireDefault(_delegateMatch);
+
+	var _wrap = __webpack_require__(97);
+
+	var _wrap2 = _interopRequireDefault(_wrap);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (selector, target) {\n    if (!target || !target.tagName) {\n        return;\n    }\n\n    var match = void 0;\n\n    if ((0, _matchesSelector2.default)(target, selector)) {\n        match = target;\n    } else if ((0, _matchesSelector2.default)(target, selector + ' *')) {\n        var parent = target.parentNode;\n\n        while (parent) {\n            if ((0, _matchesSelector2.default)(parent, selector)) {\n                match = parent;\n                break;\n            }\n\n            parent = parent.parentNode;\n        }\n    }\n\n    return match;\n};\n\nvar _matchesSelector = __webpack_require__(96);\n\nvar _matchesSelector2 = _interopRequireDefault(_matchesSelector);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./event/delegateMatch.js\n ** module id = 95\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./event/delegateMatch.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (selector, target) {
+	    if (!target || !target.tagName) {
+	        return;
+	    }
+
+	    var match = void 0;
+
+	    if ((0, _matchesSelector2.default)(target, selector)) {
+	        match = target;
+	    } else if ((0, _matchesSelector2.default)(target, selector + ' *')) {
+	        var parent = target.parentNode;
+
+	        while (parent) {
+	            if ((0, _matchesSelector2.default)(parent, selector)) {
+	                match = parent;
+	                break;
+	            }
+
+	            parent = parent.parentNode;
+	        }
+	    }
+
+	    return match;
+	};
+
+	var _matchesSelector = __webpack_require__(96);
+
+	var _matchesSelector2 = _interopRequireDefault(_matchesSelector);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (element, selector) {\n    return element.nodeType === 1 ? matches.call(element, selector) : false;\n};\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _vendor = __webpack_require__(92);\n\nvar _vendor2 = _interopRequireDefault(_vendor);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar indexOf = Array.prototype.indexOf;\nvar proto = _context2.default.Element.prototype;\nvar matches = proto.matches || (0, _vendor2.default)('matchesSelector', proto) || function (selector) {\n    return indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1;\n};\n\n/**\n * @function xblocks.dom.matchesSelector\n * @param   {[type]} element  [description]\n * @param   {[type]} selector [description]\n * @returns {boolean}\n */\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/matchesSelector.js\n ** module id = 96\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/matchesSelector.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (element, selector) {
+	    return element.nodeType === 1 ? matches.call(element, selector) : false;
+	};
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _vendor = __webpack_require__(92);
+
+	var _vendor2 = _interopRequireDefault(_vendor);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var indexOf = Array.prototype.indexOf;
+	var proto = _context2.default.Element.prototype;
+	var matches = proto.matches || (0, _vendor2.default)('matchesSelector', proto) || function (selector) {
+	    return indexOf.call((this.parentNode || this.ownerDocument).querySelectorAll(selector), this) !== -1;
+	};
+
+	/**
+	 * @function xblocks.dom.matchesSelector
+	 * @param   {[type]} element  [description]
+	 * @param   {[type]} selector [description]
+	 * @returns {boolean}
+	 */
 
 /***/ },
 /* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (event) {\n    if (event.hasOwnProperty(_event2.default.WRAP)) {\n        return event;\n    }\n\n    event[_event2.default.WRAP] = true;\n\n    if (event.srcElement && !event.target) {\n        event.target = event.srcElement;\n    }\n\n    if (!event.relatedTarget && event.fromElement) {\n        event.relatedTarget = event.fromElement === event.target ? event.toElement : event.fromElement;\n    }\n\n    if (!hop.call(event, 'pageX') && hop.call(event, 'clientX')) {\n        event.pageX = event.clientX;\n        event.pageY = event.clientY;\n\n        if (html) {\n            event.pageX += html.scrollLeft - (html.clientLeft || 0);\n            event.pageY += html.scrollTop - (html.clientTop || 0);\n        } else if (doc.body) {\n            event.pageX += doc.body.scrollLeft;\n            event.pageY += doc.body.scrollTop;\n        }\n    }\n\n    if (!event.which && event.button) {\n        /* jshint -W016 */\n        if (event.button & 1) {\n            event.which = 1;\n        } else if (event.button & 4) {\n            event.which = 2;\n        } else if (event.button & 2) {\n            event.which = 3;\n        }\n    }\n\n    if (event.which) {\n        event.whichStr = clickWhich[event.which];\n    }\n\n    return event;\n};\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _event = __webpack_require__(136);\n\nvar _event2 = _interopRequireDefault(_event);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar doc = _context2.default.document;\nvar html = doc.documentElement;\nvar hop = Object.prototype.hasOwnProperty;\nvar clickWhich = {\n    1: 'left',\n    2: 'center',\n    3: 'right'\n};\n\n/**\n * @param {Event} event\n * @returns {Event}\n */\n\n/*****************\n ** WEBPACK FOOTER\n ** ./event/wrap.js\n ** module id = 97\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./event/wrap.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (event) {
+	    if (event.hasOwnProperty(_event2.default.WRAP)) {
+	        return event;
+	    }
+
+	    event[_event2.default.WRAP] = true;
+
+	    if (event.srcElement && !event.target) {
+	        event.target = event.srcElement;
+	    }
+
+	    if (!event.relatedTarget && event.fromElement) {
+	        event.relatedTarget = event.fromElement === event.target ? event.toElement : event.fromElement;
+	    }
+
+	    if (!hop.call(event, 'pageX') && hop.call(event, 'clientX')) {
+	        event.pageX = event.clientX;
+	        event.pageY = event.clientY;
+
+	        if (html) {
+	            event.pageX += html.scrollLeft - (html.clientLeft || 0);
+	            event.pageY += html.scrollTop - (html.clientTop || 0);
+	        } else if (doc.body) {
+	            event.pageX += doc.body.scrollLeft;
+	            event.pageY += doc.body.scrollTop;
+	        }
+	    }
+
+	    if (!event.which && event.button) {
+	        /* jshint -W016 */
+	        if (event.button & 1) {
+	            event.which = 1;
+	        } else if (event.button & 4) {
+	            event.which = 2;
+	        } else if (event.button & 2) {
+	            event.which = 3;
+	        }
+	    }
+
+	    if (event.which) {
+	        event.whichStr = clickWhich[event.which];
+	    }
+
+	    return event;
+	};
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _event = __webpack_require__(98);
+
+	var _event2 = _interopRequireDefault(_event);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var doc = _context2.default.document;
+	var html = doc.documentElement;
+	var hop = Object.prototype.hasOwnProperty;
+	var clickWhich = {
+	    1: 'left',
+	    2: 'center',
+	    3: 'right'
+	};
+
+	/**
+	 * @param {Event} event
+	 * @returns {Event}
+	 */
 
 /***/ },
 /* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nexports.default = function (node) {\n  _context2.default.setTimeout(node.focus.bind(node), 0);\n};\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/lazyFocus.js\n ** module id = 98\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/lazyFocus.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _es6Symbol = __webpack_require__(24);
+
+	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    WRAP: (0, _es6Symbol2.default)('xb-wrap-event')
+	};
 
 /***/ },
 /* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _delegate = __webpack_require__(94);\n\nvar _delegate2 = _interopRequireDefault(_delegate);\n\nvar _filterClick = __webpack_require__(100);\n\nvar _filterClick2 = _interopRequireDefault(_filterClick);\n\nvar _filterMouse = __webpack_require__(101);\n\nvar _filterMouse2 = _interopRequireDefault(_filterMouse);\n\nvar _matchesSelector = __webpack_require__(96);\n\nvar _matchesSelector2 = _interopRequireDefault(_matchesSelector);\n\nvar _eachAfter = __webpack_require__(102);\n\nvar _eachAfter2 = _interopRequireDefault(_eachAfter);\n\nvar _eachBefore = __webpack_require__(105);\n\nvar _eachBefore2 = _interopRequireDefault(_eachBefore);\n\nvar _index = __webpack_require__(107);\n\nvar _index2 = _interopRequireDefault(_index);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar pop = Array.prototype.pop;\nvar slice = Array.prototype.slice;\nvar EVENT_BLUR = 'xb-blur';\nvar EVENT_FOCUS = 'xb-focus';\n\nvar TableNavigator = function () {\n    function TableNavigator(node, options) {\n        _classCallCheck(this, TableNavigator);\n\n        this._options = _lodash2.default.merge({\n            col: 'xb-menu:not([disabled])',\n            row: 'xb-menuitem:not([disabled])',\n            colLoop: false,\n            rowLoop: false\n        }, options);\n\n        this._node = node;\n        this._item = undefined;\n        this._originalEvent = undefined;\n\n        this._onKeydown = this._onKeydown.bind(this);\n        this._onMouseover = (0, _delegate2.default)(this._options.row, this._onMouseover.bind(this));\n        this._onMouseout = (0, _delegate2.default)(this._options.row, this._onMouseout.bind(this));\n        this._onMousemove = _lodash2.default.throttle((0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));\n        this._onClick = (0, _filterClick2.default)('left', (0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));\n\n        this._bind();\n    }\n\n    _createClass(TableNavigator, [{\n        key: 'destroy',\n        value: function destroy() {\n            this._unbind();\n            this._node = undefined;\n            this._originalEvent = undefined;\n            this.blurItem();\n        }\n    }, {\n        key: 'getItem',\n        value: function getItem() {\n            return this._item;\n        }\n    }, {\n        key: 'blurItem',\n        value: function blurItem() {\n            if (this._item) {\n                var item = this._item;\n                this._item = undefined;\n                _xblocksCore.event.dispatch(item, EVENT_BLUR);\n            }\n        }\n    }, {\n        key: '_bind',\n        value: function _bind() {\n            this._node.addEventListener('keydown', this._onKeydown, false);\n            this._node.addEventListener('click', this._onClick, false);\n            this._node.addEventListener('mouseover', this._onMouseover, false);\n            this._node.addEventListener('mouseout', this._onMouseout, false);\n            this._node.addEventListener('mousemove', this._onMousemove, false);\n        }\n    }, {\n        key: '_unbind',\n        value: function _unbind() {\n            this._node.removeEventListener('keydown', this._onKeydown, false);\n            this._node.removeEventListener('click', this._onClick, false);\n            this._node.removeEventListener('mouseover', this._onMouseover, false);\n            this._node.removeEventListener('mouseout', this._onMouseout, false);\n            this._node.removeEventListener('mousemove', this._onMousemove, false);\n        }\n    }, {\n        key: '_col',\n        value: function _col(item) {\n            if (!item) {\n                return;\n            }\n\n            var col = item;\n            while (col = col.parentNode) {\n                if ((0, _matchesSelector2.default)(col, this._options.col)) {\n                    return col;\n                }\n\n                if (col === this._node) {\n                    break;\n                }\n            }\n        }\n    }, {\n        key: '_colFirst',\n        value: function _colFirst() {\n            return this._node.querySelector(this._options.col) || this._node;\n        }\n    }, {\n        key: '_colLast',\n        value: function _colLast() {\n            return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;\n        }\n    }, {\n        key: '_colMatchIterate',\n        value: function _colMatchIterate(data, element) {\n            if ((0, _matchesSelector2.default)(element, this._options.col)) {\n                data.col = element;\n                return false;\n            }\n        }\n    }, {\n        key: '_colNext',\n        value: function _colNext(col) {\n            var data = {};\n            (0, _eachAfter2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);\n            return data.col;\n        }\n    }, {\n        key: '_colPrev',\n        value: function _colPrev(col) {\n            var data = {};\n            (0, _eachBefore2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);\n            return data.col;\n        }\n    }, {\n        key: '_rowFirst',\n        value: function _rowFirst(col) {\n            return col.querySelector(this._options.row);\n        }\n    }, {\n        key: '_rowLast',\n        value: function _rowLast(col) {\n            return pop.call(slice.call(col.querySelectorAll(this._options.row)));\n        }\n    }, {\n        key: '_rowMatchIterate',\n        value: function _rowMatchIterate(data, element) {\n            if ((0, _matchesSelector2.default)(element, this._options.row)) {\n                data.row = element;\n                return false;\n            }\n        }\n    }, {\n        key: '_rowNext',\n        value: function _rowNext(row) {\n            var data = {};\n            (0, _eachAfter2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);\n            return data.row;\n        }\n    }, {\n        key: '_rowPrev',\n        value: function _rowPrev(row) {\n            var data = {};\n            (0, _eachBefore2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);\n            return data.row;\n        }\n    }, {\n        key: '_rowIndex',\n        value: function _rowIndex(row) {\n            return (0, _index2.default)(this._options.row, row, this._col(row));\n        }\n    }, {\n        key: '_rowByIndex',\n        value: function _rowByIndex(col, idx) {\n            return col.querySelectorAll(this._options.row)[idx];\n        }\n    }, {\n        key: '_focus',\n        value: function _focus(element) {\n            if (element === this._item) {\n                return;\n            }\n\n            if (this._item) {\n                _xblocksCore.event.dispatch(this._item, EVENT_BLUR, {\n                    detail: { originalEvent: this._originalEvent }\n                });\n            }\n\n            this._item = element;\n            _xblocksCore.event.dispatch(this._item, EVENT_FOCUS, {\n                detail: { originalEvent: this._originalEvent }\n            });\n        }\n    }, {\n        key: '_onKeydown',\n        value: function _onKeydown(event) {\n            if (event.altKey || event.metaKey || event.shiftKey) {\n                return;\n            }\n\n            var action;\n\n            switch (event.keyCode) {\n                case 37:\n                    // ArrowLeft\n                    action = '_onArrowLeft';\n                    break;\n                case 38:\n                    // ArrowUp\n                    action = '_onArrowUp';\n                    break;\n                case 39:\n                    // ArrowRight\n                    action = '_onArrowRight';\n                    break;\n                case 40:\n                    // ArrowDown\n                    action = '_onArrowDown';\n                    break;\n            }\n\n            if (!action) {\n                return;\n            }\n\n            event.preventDefault();\n            event.stopPropagation();\n            this._originalEvent = event;\n\n            this[action]();\n        }\n    }, {\n        key: '_onMouseAction',\n        value: function _onMouseAction(event) {\n            if (!this._item || this._item !== event.delegateElement) {\n                this._originalEvent = event;\n                this._focus(event.delegateElement);\n            }\n        }\n    }, {\n        key: '_onMouseover',\n        value: function _onMouseover(event) {\n            (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));\n        }\n    }, {\n        key: '_onMouseout',\n        value: function _onMouseout(event) {\n            (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));\n        }\n    }, {\n        key: '_onArrowLeft',\n        value: function _onArrowLeft() {\n            if (!this._item) {\n                this._focus(this._rowFirst(this._colFirst()));\n            } else {\n                var idx = this._rowIndex(this._item);\n                var col = this._colPrev(this._col(this._item));\n\n                if (!col) {\n                    col = this._colLast();\n                    if (!this._options.colLoop) {\n                        idx--;\n                    }\n                }\n\n                var row = this._rowByIndex(col, idx);\n\n                if (!row) {\n                    row = this._rowLast(col);\n                }\n\n                this._focus(row);\n            }\n        }\n    }, {\n        key: '_onArrowRight',\n        value: function _onArrowRight() {\n            if (!this._item) {\n                this._focus(this._rowFirst(this._colFirst()));\n            } else {\n                var idx = this._rowIndex(this._item);\n                var col = this._colNext(this._col(this._item));\n\n                if (!col) {\n                    col = this._colFirst();\n                    if (!this._options.colLoop) {\n                        idx++;\n                    }\n                }\n\n                var row = this._rowByIndex(col, idx);\n\n                if (!row) {\n                    row = this._rowFirst(col);\n                }\n\n                this._focus(row);\n            }\n        }\n    }, {\n        key: '_onArrowUp',\n        value: function _onArrowUp() {\n            if (!this._item) {\n                this._focus(this._rowFirst(this._colFirst()));\n            } else {\n                var row = this._rowPrev(this._item);\n\n                if (!row) {\n                    var col = void 0;\n\n                    if (this._options.rowLoop) {\n                        col = this._col(this._item);\n                    } else {\n                        col = this._colPrev(this._col(this._item)) || this._colLast();\n                    }\n\n                    row = this._rowLast(col);\n                }\n\n                this._focus(row);\n            }\n        }\n    }, {\n        key: '_onArrowDown',\n        value: function _onArrowDown() {\n            if (!this._item) {\n                this._focus(this._rowFirst(this._colFirst()));\n            } else {\n                var row = this._rowNext(this._item);\n\n                if (!row) {\n                    var col = void 0;\n\n                    if (this._options.rowLoop) {\n                        col = this._col(this._item);\n                    } else {\n                        col = this._colNext(this._col(this._item)) || this._colFirst();\n                    }\n\n                    row = this._rowFirst(col);\n                }\n\n                this._focus(row);\n            }\n        }\n    }]);\n\n    return TableNavigator;\n}();\n\nexports.default = TableNavigator;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/TableNavigator.js\n ** module id = 99\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/TableNavigator.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (node) {
+	  _context2.default.setTimeout(node.focus.bind(node), 0);
+	};
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (which, callback) {\n    which = Array.isArray(which) ? which : [which];\n\n    return function (event) {\n        if (event.type !== 'click') {\n            return;\n        }\n\n        (0, _wrap2.default)(event);\n\n        if (which.indexOf(event.whichStr) !== -1) {\n            callback.call(this, event);\n        }\n    };\n};\n\nvar _wrap = __webpack_require__(97);\n\nvar _wrap2 = _interopRequireDefault(_wrap);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./event/filterClick.js\n ** module id = 100\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./event/filterClick.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _delegate = __webpack_require__(94);
+
+	var _delegate2 = _interopRequireDefault(_delegate);
+
+	var _filterClick = __webpack_require__(101);
+
+	var _filterClick2 = _interopRequireDefault(_filterClick);
+
+	var _filterMouse = __webpack_require__(102);
+
+	var _filterMouse2 = _interopRequireDefault(_filterMouse);
+
+	var _matchesSelector = __webpack_require__(96);
+
+	var _matchesSelector2 = _interopRequireDefault(_matchesSelector);
+
+	var _eachAfter = __webpack_require__(103);
+
+	var _eachAfter2 = _interopRequireDefault(_eachAfter);
+
+	var _eachBefore = __webpack_require__(106);
+
+	var _eachBefore2 = _interopRequireDefault(_eachBefore);
+
+	var _index = __webpack_require__(108);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var pop = Array.prototype.pop;
+	var slice = Array.prototype.slice;
+	var EVENT_BLUR = 'xb-blur';
+	var EVENT_FOCUS = 'xb-focus';
+
+	var TableNavigator = function () {
+	    function TableNavigator(node, options) {
+	        _classCallCheck(this, TableNavigator);
+
+	        this._options = _lodash2.default.merge({
+	            col: 'xb-menu:not([disabled])',
+	            row: 'xb-menuitem:not([disabled])',
+	            colLoop: false,
+	            rowLoop: false
+	        }, options);
+
+	        this._node = node;
+	        this._item = undefined;
+	        this._originalEvent = undefined;
+
+	        this._onKeydown = this._onKeydown.bind(this);
+	        this._onMouseover = (0, _delegate2.default)(this._options.row, this._onMouseover.bind(this));
+	        this._onMouseout = (0, _delegate2.default)(this._options.row, this._onMouseout.bind(this));
+	        this._onMousemove = _lodash2.default.throttle((0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));
+	        this._onClick = (0, _filterClick2.default)('left', (0, _delegate2.default)(this._options.row, this._onMouseAction.bind(this)));
+
+	        this._bind();
+	    }
+
+	    _createClass(TableNavigator, [{
+	        key: 'destroy',
+	        value: function destroy() {
+	            this._unbind();
+	            this._node = undefined;
+	            this._originalEvent = undefined;
+	            this.blurItem();
+	        }
+	    }, {
+	        key: 'getItem',
+	        value: function getItem() {
+	            return this._item;
+	        }
+	    }, {
+	        key: 'blurItem',
+	        value: function blurItem() {
+	            if (this._item) {
+	                var item = this._item;
+	                this._item = undefined;
+	                _xblocksCore.event.dispatch(item, EVENT_BLUR);
+	            }
+	        }
+	    }, {
+	        key: '_bind',
+	        value: function _bind() {
+	            this._node.addEventListener('keydown', this._onKeydown, false);
+	            this._node.addEventListener('click', this._onClick, false);
+	            this._node.addEventListener('mouseover', this._onMouseover, false);
+	            this._node.addEventListener('mouseout', this._onMouseout, false);
+	            this._node.addEventListener('mousemove', this._onMousemove, false);
+	        }
+	    }, {
+	        key: '_unbind',
+	        value: function _unbind() {
+	            this._node.removeEventListener('keydown', this._onKeydown, false);
+	            this._node.removeEventListener('click', this._onClick, false);
+	            this._node.removeEventListener('mouseover', this._onMouseover, false);
+	            this._node.removeEventListener('mouseout', this._onMouseout, false);
+	            this._node.removeEventListener('mousemove', this._onMousemove, false);
+	        }
+	    }, {
+	        key: '_col',
+	        value: function _col(item) {
+	            if (!item) {
+	                return;
+	            }
+
+	            var col = item;
+	            while (col = col.parentNode) {
+	                if ((0, _matchesSelector2.default)(col, this._options.col)) {
+	                    return col;
+	                }
+
+	                if (col === this._node) {
+	                    break;
+	                }
+	            }
+	        }
+	    }, {
+	        key: '_colFirst',
+	        value: function _colFirst() {
+	            return this._node.querySelector(this._options.col) || this._node;
+	        }
+	    }, {
+	        key: '_colLast',
+	        value: function _colLast() {
+	            return pop.call(slice.call(this._node.querySelectorAll(this._options.col))) || this._node;
+	        }
+	    }, {
+	        key: '_colMatchIterate',
+	        value: function _colMatchIterate(data, element) {
+	            if ((0, _matchesSelector2.default)(element, this._options.col)) {
+	                data.col = element;
+	                return false;
+	            }
+	        }
+	    }, {
+	        key: '_colNext',
+	        value: function _colNext(col) {
+	            var data = {};
+	            (0, _eachAfter2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);
+	            return data.col;
+	        }
+	    }, {
+	        key: '_colPrev',
+	        value: function _colPrev(col) {
+	            var data = {};
+	            (0, _eachBefore2.default)(col, this._colMatchIterate.bind(this, data), this._node, false);
+	            return data.col;
+	        }
+	    }, {
+	        key: '_rowFirst',
+	        value: function _rowFirst(col) {
+	            return col.querySelector(this._options.row);
+	        }
+	    }, {
+	        key: '_rowLast',
+	        value: function _rowLast(col) {
+	            return pop.call(slice.call(col.querySelectorAll(this._options.row)));
+	        }
+	    }, {
+	        key: '_rowMatchIterate',
+	        value: function _rowMatchIterate(data, element) {
+	            if ((0, _matchesSelector2.default)(element, this._options.row)) {
+	                data.row = element;
+	                return false;
+	            }
+	        }
+	    }, {
+	        key: '_rowNext',
+	        value: function _rowNext(row) {
+	            var data = {};
+	            (0, _eachAfter2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+	            return data.row;
+	        }
+	    }, {
+	        key: '_rowPrev',
+	        value: function _rowPrev(row) {
+	            var data = {};
+	            (0, _eachBefore2.default)(row, this._rowMatchIterate.bind(this, data), this._col(row), false);
+	            return data.row;
+	        }
+	    }, {
+	        key: '_rowIndex',
+	        value: function _rowIndex(row) {
+	            return (0, _index2.default)(this._options.row, row, this._col(row));
+	        }
+	    }, {
+	        key: '_rowByIndex',
+	        value: function _rowByIndex(col, idx) {
+	            return col.querySelectorAll(this._options.row)[idx];
+	        }
+	    }, {
+	        key: '_focus',
+	        value: function _focus(element) {
+	            if (element === this._item) {
+	                return;
+	            }
+
+	            if (this._item) {
+	                _xblocksCore.event.dispatch(this._item, EVENT_BLUR, {
+	                    detail: { originalEvent: this._originalEvent }
+	                });
+	            }
+
+	            this._item = element;
+	            _xblocksCore.event.dispatch(this._item, EVENT_FOCUS, {
+	                detail: { originalEvent: this._originalEvent }
+	            });
+	        }
+	    }, {
+	        key: '_onKeydown',
+	        value: function _onKeydown(event) {
+	            if (event.altKey || event.metaKey || event.shiftKey) {
+	                return;
+	            }
+
+	            var action;
+
+	            switch (event.keyCode) {
+	                case 37:
+	                    // ArrowLeft
+	                    action = '_onArrowLeft';
+	                    break;
+	                case 38:
+	                    // ArrowUp
+	                    action = '_onArrowUp';
+	                    break;
+	                case 39:
+	                    // ArrowRight
+	                    action = '_onArrowRight';
+	                    break;
+	                case 40:
+	                    // ArrowDown
+	                    action = '_onArrowDown';
+	                    break;
+	            }
+
+	            if (!action) {
+	                return;
+	            }
+
+	            event.preventDefault();
+	            event.stopPropagation();
+	            this._originalEvent = event;
+
+	            this[action]();
+	        }
+	    }, {
+	        key: '_onMouseAction',
+	        value: function _onMouseAction(event) {
+	            if (!this._item || this._item !== event.delegateElement) {
+	                this._originalEvent = event;
+	                this._focus(event.delegateElement);
+	            }
+	        }
+	    }, {
+	        key: '_onMouseover',
+	        value: function _onMouseover(event) {
+	            (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));
+	        }
+	    }, {
+	        key: '_onMouseout',
+	        value: function _onMouseout(event) {
+	            (0, _filterMouse2.default)(event.delegateElement, event, this._onMouseAction.bind(this));
+	        }
+	    }, {
+	        key: '_onArrowLeft',
+	        value: function _onArrowLeft() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var idx = this._rowIndex(this._item);
+	                var col = this._colPrev(this._col(this._item));
+
+	                if (!col) {
+	                    col = this._colLast();
+	                    if (!this._options.colLoop) {
+	                        idx--;
+	                    }
+	                }
+
+	                var row = this._rowByIndex(col, idx);
+
+	                if (!row) {
+	                    row = this._rowLast(col);
+	                }
+
+	                this._focus(row);
+	            }
+	        }
+	    }, {
+	        key: '_onArrowRight',
+	        value: function _onArrowRight() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var idx = this._rowIndex(this._item);
+	                var col = this._colNext(this._col(this._item));
+
+	                if (!col) {
+	                    col = this._colFirst();
+	                    if (!this._options.colLoop) {
+	                        idx++;
+	                    }
+	                }
+
+	                var row = this._rowByIndex(col, idx);
+
+	                if (!row) {
+	                    row = this._rowFirst(col);
+	                }
+
+	                this._focus(row);
+	            }
+	        }
+	    }, {
+	        key: '_onArrowUp',
+	        value: function _onArrowUp() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var row = this._rowPrev(this._item);
+
+	                if (!row) {
+	                    var col = void 0;
+
+	                    if (this._options.rowLoop) {
+	                        col = this._col(this._item);
+	                    } else {
+	                        col = this._colPrev(this._col(this._item)) || this._colLast();
+	                    }
+
+	                    row = this._rowLast(col);
+	                }
+
+	                this._focus(row);
+	            }
+	        }
+	    }, {
+	        key: '_onArrowDown',
+	        value: function _onArrowDown() {
+	            if (!this._item) {
+	                this._focus(this._rowFirst(this._colFirst()));
+	            } else {
+	                var row = this._rowNext(this._item);
+
+	                if (!row) {
+	                    var col = void 0;
+
+	                    if (this._options.rowLoop) {
+	                        col = this._col(this._item);
+	                    } else {
+	                        col = this._colNext(this._col(this._item)) || this._colFirst();
+	                    }
+
+	                    row = this._rowFirst(col);
+	                }
+
+	                this._focus(row);
+	            }
+	        }
+	    }]);
+
+	    return TableNavigator;
+	}();
+
+	exports.default = TableNavigator;
 
 /***/ },
 /* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (element, event, callback) {\n    (0, _wrap2.default)(event);\n\n    var toElement = event.relatedTarget;\n\n    while (toElement && toElement !== element) {\n        toElement = toElement.parentNode;\n    }\n\n    if (toElement === element) {\n        return;\n    }\n\n    return callback.call(element, event);\n};\n\nvar _wrap = __webpack_require__(97);\n\nvar _wrap2 = _interopRequireDefault(_wrap);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./event/filterMouse.js\n ** module id = 101\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./event/filterMouse.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (which, callback) {
+	    which = Array.isArray(which) ? which : [which];
+
+	    return function (event) {
+	        if (event.type !== 'click') {
+	            return;
+	        }
+
+	        (0, _wrap2.default)(event);
+
+	        if (which.indexOf(event.whichStr) !== -1) {
+	            callback.call(this, event);
+	        }
+	    };
+	};
+
+	var _wrap = __webpack_require__(97);
+
+	var _wrap2 = _interopRequireDefault(_wrap);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (node, callback, context, inner) {\n    inner = typeof inner === 'undefined' ? true : Boolean(inner);\n    var next;\n    var cbcall;\n\n    do {\n        if (context && !(0, _isParent2.default)(context, node)) {\n            return;\n        }\n\n        next = node;\n\n        while (next = next.nextSibling) {\n            cbcall = inner ? (0, _eachInnerFollowing2.default)(next, callback) : callback && callback(next);\n\n            if (typeof cbcall !== 'undefined' && !cbcall) {\n                return false;\n            }\n        }\n    } while (node = node.parentNode);\n};\n\nvar _isParent = __webpack_require__(103);\n\nvar _isParent2 = _interopRequireDefault(_isParent);\n\nvar _eachInnerFollowing = __webpack_require__(104);\n\nvar _eachInnerFollowing2 = _interopRequireDefault(_eachInnerFollowing);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/eachAfter.js\n ** module id = 102\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/eachAfter.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (element, event, callback) {
+	    (0, _wrap2.default)(event);
+
+	    var toElement = event.relatedTarget;
+
+	    while (toElement && toElement !== element) {
+	        toElement = toElement.parentNode;
+	    }
+
+	    if (toElement === element) {
+	        return;
+	    }
+
+	    return callback.call(element, event);
+	};
+
+	var _wrap = __webpack_require__(97);
+
+	var _wrap2 = _interopRequireDefault(_wrap);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar html = _context2.default.document.documentElement;\n\n/**\n * @function xblocks.dom.isParent\n * @param {HTMLElement} container\n * @param {HTMLElement} element\n * @returns {boolean}\n */\n\nexports.default = function () {\n\n    if ('compareDocumentPosition' in html) {\n        return function (container, element) {\n            return (container.compareDocumentPosition(element) & 16) === 16;\n        };\n    } else if ('contains' in html) {\n        return function (container, element) {\n            return container !== element && container.contains(element);\n        };\n    } else {\n        return function (container, element) {\n            while (element = element.parentNode) {\n                if (element === container) {\n                    return true;\n                }\n            }\n\n            return false;\n        };\n    }\n}();\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/isParent.js\n ** module id = 103\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/isParent.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (node, callback, context, inner) {
+	    inner = typeof inner === 'undefined' ? true : Boolean(inner);
+	    var next;
+	    var cbcall;
+
+	    do {
+	        if (context && !(0, _isParent2.default)(context, node)) {
+	            return;
+	        }
+
+	        next = node;
+
+	        while (next = next.nextSibling) {
+	            cbcall = inner ? (0, _eachInnerFollowing2.default)(next, callback) : callback && callback(next);
+
+	            if (typeof cbcall !== 'undefined' && !cbcall) {
+	                return false;
+	            }
+	        }
+	    } while (node = node.parentNode);
+	};
+
+	var _isParent = __webpack_require__(104);
+
+	var _isParent2 = _interopRequireDefault(_isParent);
+
+	var _eachInnerFollowing = __webpack_require__(105);
+
+	var _eachInnerFollowing2 = _interopRequireDefault(_eachInnerFollowing);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 104 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (node, callback) {\n    var stack = [node];\n    var item;\n    var cbcall;\n    var childsLength;\n\n    while (item = stack.pop()) {\n        cbcall = callback && callback(item, stack);\n\n        if (typeof cbcall !== 'undefined' && !cbcall) {\n            return false;\n        } else if (cbcall === 'next') {\n            continue;\n        }\n\n        if (item.nodeType !== 1) {\n            continue;\n        }\n\n        if (!item.hasChildNodes()) {\n            continue;\n        }\n\n        childsLength = item.childNodes.length;\n\n        while (childsLength--) {\n            stack.push(item.childNodes[childsLength]);\n        }\n    }\n\n    return true;\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/eachInnerFollowing.js\n ** module id = 104\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/eachInnerFollowing.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var html = _context2.default.document.documentElement;
+
+	/**
+	 * @function xblocks.dom.isParent
+	 * @param {HTMLElement} container
+	 * @param {HTMLElement} element
+	 * @returns {boolean}
+	 */
+
+	exports.default = function () {
+
+	    if ('compareDocumentPosition' in html) {
+	        return function (container, element) {
+	            return (container.compareDocumentPosition(element) & 16) === 16;
+	        };
+	    } else if ('contains' in html) {
+	        return function (container, element) {
+	            return container !== element && container.contains(element);
+	        };
+	    } else {
+	        return function (container, element) {
+	            while (element = element.parentNode) {
+	                if (element === container) {
+	                    return true;
+	                }
+	            }
+
+	            return false;
+	        };
+	    }
+	}();
 
 /***/ },
 /* 105 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (node, callback, context, inner) {\n    inner = typeof inner === 'undefined' ? true : Boolean(inner);\n    var prev;\n    var cbcall;\n\n    do {\n        if (context && !(0, _isParent2.default)(context, node)) {\n            return;\n        }\n\n        prev = node;\n\n        while (prev = prev.previousSibling) {\n            cbcall = inner ? (0, _eachInnerPrevious2.default)(prev, callback) : callback && callback(prev);\n\n            if (typeof cbcall !== 'undefined' && !cbcall) {\n                return false;\n            }\n        }\n    } while (node = node.parentNode);\n};\n\nvar _isParent = __webpack_require__(103);\n\nvar _isParent2 = _interopRequireDefault(_isParent);\n\nvar _eachInnerPrevious = __webpack_require__(106);\n\nvar _eachInnerPrevious2 = _interopRequireDefault(_eachInnerPrevious);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/eachBefore.js\n ** module id = 105\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/eachBefore.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (node, callback) {
+	    var stack = [node];
+	    var item;
+	    var cbcall;
+	    var childsLength;
+
+	    while (item = stack.pop()) {
+	        cbcall = callback && callback(item, stack);
+
+	        if (typeof cbcall !== 'undefined' && !cbcall) {
+	            return false;
+	        } else if (cbcall === 'next') {
+	            continue;
+	        }
+
+	        if (item.nodeType !== 1) {
+	            continue;
+	        }
+
+	        if (!item.hasChildNodes()) {
+	            continue;
+	        }
+
+	        childsLength = item.childNodes.length;
+
+	        while (childsLength--) {
+	            stack.push(item.childNodes[childsLength]);
+	        }
+	    }
+
+	    return true;
+	};
 
 /***/ },
 /* 106 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (node, callback) {\n    var stack = [node];\n    var item;\n    var cbcall;\n    var i;\n    var childsLength;\n\n    while (item = stack.pop()) {\n        cbcall = callback && callback(item, stack);\n\n        if (typeof cbcall !== 'undefined' && !cbcall) {\n            return false;\n        } else if (cbcall === 'next') {\n            continue;\n        }\n\n        if (item.nodeType !== 1) {\n            continue;\n        }\n\n        if (!item.hasChildNodes()) {\n            continue;\n        }\n\n        childsLength = item.childNodes.length;\n        i = 0;\n\n        for (; i < childsLength; i++) {\n            stack.push(item.childNodes[i]);\n        }\n    }\n\n    return true;\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/eachInnerPrevious.js\n ** module id = 106\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/eachInnerPrevious.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (node, callback, context, inner) {
+	    inner = typeof inner === 'undefined' ? true : Boolean(inner);
+	    var prev;
+	    var cbcall;
+
+	    do {
+	        if (context && !(0, _isParent2.default)(context, node)) {
+	            return;
+	        }
+
+	        prev = node;
+
+	        while (prev = prev.previousSibling) {
+	            cbcall = inner ? (0, _eachInnerPrevious2.default)(prev, callback) : callback && callback(prev);
+
+	            if (typeof cbcall !== 'undefined' && !cbcall) {
+	                return false;
+	            }
+	        }
+	    } while (node = node.parentNode);
+	};
+
+	var _isParent = __webpack_require__(104);
+
+	var _isParent2 = _interopRequireDefault(_isParent);
+
+	var _eachInnerPrevious = __webpack_require__(107);
+
+	var _eachInnerPrevious2 = _interopRequireDefault(_eachInnerPrevious);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 107 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nexports.default = function (selector, element, context) {\n  context = context || _context2.default.document;\n  return indexOf.call(context.querySelectorAll(selector), element);\n};\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar indexOf = Array.prototype.indexOf;\n\n/**\n * @function xblocks.dom.index\n * @param   {[type]} selector [description]\n * @param   {[type]} element  [description]\n * @param   {[type]} context  [description]\n * @returns {[type]}          [description]\n */\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/index.js\n ** module id = 107\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/index.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (node, callback) {
+	    var stack = [node];
+	    var item;
+	    var cbcall;
+	    var i;
+	    var childsLength;
+
+	    while (item = stack.pop()) {
+	        cbcall = callback && callback(item, stack);
+
+	        if (typeof cbcall !== 'undefined' && !cbcall) {
+	            return false;
+	        } else if (cbcall === 'next') {
+	            continue;
+	        }
+
+	        if (item.nodeType !== 1) {
+	            continue;
+	        }
+
+	        if (!item.hasChildNodes()) {
+	            continue;
+	        }
+
+	        childsLength = item.childNodes.length;
+	        i = 0;
+
+	        for (; i < childsLength; i++) {
+	            stack.push(item.childNodes[i]);
+	        }
+	    }
+
+	    return true;
+	};
 
 /***/ },
 /* 108 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (node) {\n    var parent = node;\n\n    while (parent) {\n        if (parent.xtagName === MENU_TAG || parent.xtagName === MENU_INLINE_TAG) {\n            return parent;\n        }\n\n        parent = parent.parentNode;\n    }\n\n    return null;\n};\n\nvar MENU_TAG = 'xb-menu';\nvar MENU_INLINE_TAG = 'xb-menu-inline';\n\n/**\n * @param {HTMLElement} node\n * @returns {HTMLElement|null}\n */\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/getParentMenu.js\n ** module id = 108\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/getParentMenu.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (selector, element, context) {
+	  context = context || _context2.default.document;
+	  return indexOf.call(context.querySelectorAll(selector), element);
+	};
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var indexOf = Array.prototype.indexOf;
+
+	/**
+	 * @function xblocks.dom.index
+	 * @param   {[type]} selector [description]
+	 * @param   {[type]} element  [description]
+	 * @param   {[type]} context  [description]
+	 * @returns {[type]}          [description]
+	 */
 
 /***/ },
 /* 109 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _lazyFocus = __webpack_require__(98);\n\nvar _lazyFocus2 = _interopRequireDefault(_lazyFocus);\n\nvar _initialDefinitionSelected = __webpack_require__(110);\n\nvar _initialDefinitionSelected2 = _interopRequireDefault(_initialDefinitionSelected);\n\nvar _isParent = __webpack_require__(103);\n\nvar _isParent2 = _interopRequireDefault(_isParent);\n\nvar _menu = __webpack_require__(112);\n\nvar _menu2 = _interopRequireDefault(_menu);\n\nvar _menuitem = __webpack_require__(111);\n\nvar _menuitem2 = _interopRequireDefault(_menuitem);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * Common interface for elements xb-menu and xb-menu-inline.\n */\nexports.default = {\n    lifecycle: {\n        created: function created() {\n            if (this.selectable) {\n                this[_menu2.default.SELECTED] = (0, _initialDefinitionSelected2.default)(this);\n            }\n        }\n    },\n\n    events: {\n        /**\n         * Оpen the submenu or menu item is selected\n         * @this xb.Menuitem\n         */\n        'click:delegate(xb-menuitem:not([disabled]))': function clickDelegateXbMenuitemNotDisabled() {\n            if (this.submenuInstance) {\n                this.submenuInstance.open();\n            } else if (this.menuInstance) {\n                this.menuInstance.menuitemSelect();\n            }\n        },\n\n        /**\n         * Оpen the submenu\n         * @this xb.Menu\n         */\n        'keydown:keypass(13,39)': function keydownKeypass1339() {\n            var item = this[_menu2.default.TABLE].getItem();\n\n            if (item && item.submenuInstance) {\n                item.submenuInstance.open();\n            }\n        },\n\n        /**\n         * The menu item is selected\n         * @this xb.Menu\n         */\n        'keydown:keypass(32)': function keydownKeypass32() {\n            this.menuitemSelect();\n        },\n\n        /**\n         * Restore focus\n         * @param {Event} event\n         * @this xb.Menu\n         */\n        'jsx-scroll-throttle': function jsxScrollThrottle(event) {\n            // close all submenu\n            event.stopImmediatePropagation();\n            (0, _lazyFocus2.default)(this);\n        }\n    },\n\n    accessors: {\n\n        /**\n         * The menu contains the open submenu\n         * @prop {boolean} hasOpenSubmenu\n         */\n        hasOpenSubmenu: {\n            get: function get() {\n                return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));\n            }\n        },\n\n        selectable: {\n            attribute: {\n                boolean: true\n            }\n        },\n\n        multiple: {\n            attribute: {\n                boolean: true\n            }\n        },\n\n        alwaysselected: {\n            attribute: {\n                boolean: true\n            }\n        },\n\n        /**\n         * @prop {boolean} autoclose closing the menu after selecting\n         */\n        autoclose: {\n            attribute: {\n                boolean: true\n            }\n        },\n\n        /**\n         * @prop {xb.Menu|null} parentMenu menu-ancestor\n         * @readonly\n         */\n        parentMenu: {\n            get: function get() {\n                var parentMenu = _lodash2.default.get(this, 'core.target.menuInstance', null);\n                return parentMenu === this ? null : parentMenu;\n            }\n        },\n\n        /**\n         * @prop {xb.Menu} [firstParentMenu] the first menu ancestor\n         * @readonly\n         */\n        firstParentMenu: {\n            get: function get() {\n                var parentMenu = this.parentMenu;\n\n                if (parentMenu) {\n                    return parentMenu.firstParentMenu || parentMenu;\n                }\n\n                return this;\n            }\n        },\n\n        /**\n         * @prop {string[]} value the values of the selected menu item\n         * @readonly\n         */\n        value: {\n            get: function get() {\n                return _lodash2.default.map(this.firstParentMenu[_menu2.default.SELECTED], 'value');\n            }\n        },\n\n        /**\n         * @prop {HTMLElement[]} selectedItems selected menu items\n         * @readonly\n         */\n        selectedItems: {\n            get: function get() {\n                return _lodash2.default.values(this.firstParentMenu[_menu2.default.SELECTED]);\n            }\n        },\n\n        /**\n         * @prop {Object[]} selectedObjects the data of selected items\n         * @readonly\n         */\n        selectedObjects: {\n            get: function get() {\n                return _lodash2.default.map(this.firstParentMenu[_menu2.default.SELECTED], function (item) {\n                    return {\n                        label: item.getAttribute('label'),\n                        value: item.value\n                    };\n                });\n            }\n        }\n    },\n\n    methods: {\n\n        /**\n         * @param {xb.Menuitem} menuitem\n         */\n        scrollIntoItem: function scrollIntoItem(menuitem) {\n            if (!(0, _isParent2.default)(this, menuitem)) {\n                return;\n            }\n\n            var component = this.getComponent();\n\n            if (component) {\n                component.scrollIntoItem(menuitem);\n            }\n        },\n\n        menuitemSelect: function menuitemSelect() {\n            var _this = this;\n\n            if (!this.selectable) {\n                return;\n            }\n\n            var selectedAttr = _menuitem2.default.SELECTED_ATTR;\n            var item = this[_menu2.default.TABLE].getItem();\n            var selected = !item.selected;\n            var uid = item.getAttribute(selectedAttr) || _lodash2.default.uniqueId('selected');\n            var firstParentMenu = this.firstParentMenu;\n\n            // сброс выбранных пунктов, если не мультиселект и текущий пункт будет выбран\n            if (!this.multiple && selected) {\n                (0, _lodash2.default)(firstParentMenu[_menu2.default.SELECTED]).chain().keys().join('\"],xb-menuitem[' + selectedAttr + '=\"').thru(function (value) {\n                    return _this.ownerDocument.querySelectorAll('xb-menuitem[' + selectedAttr + '=\"' + value + '\"]');\n                }).forEach(function (node) {\n                    node.selected = false;\n                    node.removeAttribute(selectedAttr);\n                }).value();\n\n                firstParentMenu[_menu2.default.SELECTED] = {};\n            }\n\n            var changed = false;\n\n            if (selected) {\n                changed = true;\n                item.selected = true;\n                item.setAttribute(selectedAttr, uid);\n                _lodash2.default.set(firstParentMenu, [_menu2.default.SELECTED, uid], item);\n            } else if (!this.alwaysselected || _lodash2.default.size(firstParentMenu[_menu2.default.SELECTED]) > 1) {\n                changed = true;\n                item.selected = false;\n                item.removeAttribute(selectedAttr);\n                _lodash2.default.unset(firstParentMenu, [_menu2.default.SELECTED, uid]);\n            }\n\n            if (changed) {\n                if (this.autoclose) {\n                    firstParentMenu.close();\n                }\n\n                _xblocksCore.event.dispatch(firstParentMenu, 'change', {\n                    detail: { item: item }\n                });\n            }\n        }\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/element/menu.js\n ** module id = 109\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/element/menu.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (node) {
+	    var parent = node;
+
+	    while (parent) {
+	        if (parent.xtagName === MENU_TAG || parent.xtagName === MENU_INLINE_TAG) {
+	            return parent;
+	        }
+
+	        parent = parent.parentNode;
+	    }
+
+	    return null;
+	};
+
+	var MENU_TAG = 'xb-menu';
+	var MENU_INLINE_TAG = 'xb-menu-inline';
+
+	/**
+	 * @param {HTMLElement} node
+	 * @returns {HTMLElement|null}
+	 */
 
 /***/ },
 /* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (element, isSelectedDefault) {\n    var root = _xblocksCore.dom.contentNode(element);\n    if (root instanceof _context2.default.HTMLTemplateElement) {\n        root = root.content;\n    }\n\n    var items = element.multiple ? _lodash2.default.toArray(root.querySelectorAll('xb-menuitem[selected]')) : _lodash2.default.castArray(root.querySelector('xb-menuitem[selected]'));\n\n    var selectedItems = (0, _lodash2.default)(items).chain().compact().tap(function (array) {\n        if (isSelectedDefault && !array.length) {\n            array.push(root.querySelector('xb-menuitem'));\n        }\n    }).compact().reduce(initialSelectIteratee, {}).value();\n\n    // сброс выделения элементов, которые не попали в список выбранных\n    // актуально в случае multiple=false\n    _lodash2.default.forEach(root.querySelectorAll('xb-menuitem[selected]:not([' + _menuitem2.default.SELECTED_ATTR + '])'), removeAttrSelectIterate);\n\n    return selectedItems;\n};\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _menuitem = __webpack_require__(111);\n\nvar _menuitem2 = _interopRequireDefault(_menuitem);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction initialSelectIteratee(result, node) {\n    var uid = _lodash2.default.uniqueId('selected');\n    node.setAttribute(_menuitem2.default.SELECTED_ATTR, uid);\n    result[uid] = node;\n    return result;\n}\n\n/**\n * [description]\n * @param   {[type]}  element           [description]\n * @param   {Boolean} isSelectedDefault [description]\n * @returns {[type]}                    [description]\n */\n\n\nfunction removeAttrSelectIterate(node) {\n    node.removeAttribute('selected');\n}\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/initialDefinitionSelected.js\n ** module id = 110\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/initialDefinitionSelected.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _lazyFocus = __webpack_require__(99);
+
+	var _lazyFocus2 = _interopRequireDefault(_lazyFocus);
+
+	var _initialDefinitionSelected = __webpack_require__(111);
+
+	var _initialDefinitionSelected2 = _interopRequireDefault(_initialDefinitionSelected);
+
+	var _isParent = __webpack_require__(104);
+
+	var _isParent2 = _interopRequireDefault(_isParent);
+
+	var _menu = __webpack_require__(113);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	var _menuitem = __webpack_require__(112);
+
+	var _menuitem2 = _interopRequireDefault(_menuitem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Common interface for elements xb-menu and xb-menu-inline.
+	 */
+	exports.default = {
+	    lifecycle: {
+	        created: function created() {
+	            if (this.selectable) {
+	                this[_menu2.default.SELECTED] = (0, _initialDefinitionSelected2.default)(this);
+	            }
+	        }
+	    },
+
+	    events: {
+	        /**
+	         * Оpen the submenu or menu item is selected
+	         * @this xb.Menuitem
+	         */
+	        'click:delegate(xb-menuitem:not([disabled]))': function clickDelegateXbMenuitemNotDisabled() {
+	            if (this.submenuInstance) {
+	                this.submenuInstance.open();
+	            } else if (this.menuInstance) {
+	                this.menuInstance.menuitemSelect();
+	            }
+	        },
+
+	        /**
+	         * Оpen the submenu
+	         * @this xb.Menu
+	         */
+	        'keydown:keypass(13,39)': function keydownKeypass1339() {
+	            var item = this[_menu2.default.TABLE].getItem();
+
+	            if (item && item.submenuInstance) {
+	                item.submenuInstance.open();
+	            }
+	        },
+
+	        /**
+	         * The menu item is selected
+	         * @this xb.Menu
+	         */
+	        'keydown:keypass(32)': function keydownKeypass32() {
+	            this.menuitemSelect();
+	        },
+
+	        /**
+	         * Restore focus
+	         * @param {Event} event
+	         * @this xb.Menu
+	         */
+	        'jsx-scroll-throttle': function jsxScrollThrottle(event) {
+	            // close all submenu
+	            event.stopImmediatePropagation();
+	            (0, _lazyFocus2.default)(this);
+	        }
+	    },
+
+	    accessors: {
+
+	        /**
+	         * The menu contains the open submenu
+	         * @prop {boolean} hasOpenSubmenu
+	         */
+	        hasOpenSubmenu: {
+	            get: function get() {
+	                return Boolean(this.querySelector('.xb-menu-target.xb-menu-enabled'));
+	            }
+	        },
+
+	        selectable: {
+	            attribute: {
+	                boolean: true
+	            }
+	        },
+
+	        multiple: {
+	            attribute: {
+	                boolean: true
+	            }
+	        },
+
+	        alwaysselected: {
+	            attribute: {
+	                boolean: true
+	            }
+	        },
+
+	        /**
+	         * @prop {boolean} autoclose closing the menu after selecting
+	         */
+	        autoclose: {
+	            attribute: {
+	                boolean: true
+	            }
+	        },
+
+	        /**
+	         * @prop {xb.Menu|null} parentMenu menu-ancestor
+	         * @readonly
+	         */
+	        parentMenu: {
+	            get: function get() {
+	                var parentMenu = _lodash2.default.get(this, 'core.target.menuInstance', null);
+	                return parentMenu === this ? null : parentMenu;
+	            }
+	        },
+
+	        /**
+	         * @prop {xb.Menu} [firstParentMenu] the first menu ancestor
+	         * @readonly
+	         */
+	        firstParentMenu: {
+	            get: function get() {
+	                var parentMenu = this.parentMenu;
+
+	                if (parentMenu) {
+	                    return parentMenu.firstParentMenu || parentMenu;
+	                }
+
+	                return this;
+	            }
+	        },
+
+	        /**
+	         * @prop {string[]} value the values of the selected menu item
+	         * @readonly
+	         */
+	        value: {
+	            get: function get() {
+	                return _lodash2.default.map(this.firstParentMenu[_menu2.default.SELECTED], 'value');
+	            }
+	        },
+
+	        /**
+	         * @prop {HTMLElement[]} selectedItems selected menu items
+	         * @readonly
+	         */
+	        selectedItems: {
+	            get: function get() {
+	                return _lodash2.default.values(this.firstParentMenu[_menu2.default.SELECTED]);
+	            }
+	        },
+
+	        /**
+	         * @prop {Object[]} selectedObjects the data of selected items
+	         * @readonly
+	         */
+	        selectedObjects: {
+	            get: function get() {
+	                return _lodash2.default.map(this.firstParentMenu[_menu2.default.SELECTED], function (item) {
+	                    return {
+	                        label: item.getAttribute('label'),
+	                        value: item.value
+	                    };
+	                });
+	            }
+	        }
+	    },
+
+	    methods: {
+
+	        /**
+	         * @param {xb.Menuitem} menuitem
+	         */
+	        scrollIntoItem: function scrollIntoItem(menuitem) {
+	            if (!(0, _isParent2.default)(this, menuitem)) {
+	                return;
+	            }
+
+	            var component = this.getComponent();
+
+	            if (component) {
+	                component.scrollIntoItem(menuitem);
+	            }
+	        },
+
+	        menuitemSelect: function menuitemSelect() {
+	            var _this = this;
+
+	            if (!this.selectable) {
+	                return;
+	            }
+
+	            var selectedAttr = _menuitem2.default.SELECTED_ATTR;
+	            var item = this[_menu2.default.TABLE].getItem();
+	            var selected = !item.selected;
+	            var uid = item.getAttribute(selectedAttr) || _lodash2.default.uniqueId('selected');
+	            var firstParentMenu = this.firstParentMenu;
+
+	            // сброс выбранных пунктов, если не мультиселект и текущий пункт будет выбран
+	            if (!this.multiple && selected) {
+	                (0, _lodash2.default)(firstParentMenu[_menu2.default.SELECTED]).chain().keys().join('"],xb-menuitem[' + selectedAttr + '="').thru(function (value) {
+	                    return _this.ownerDocument.querySelectorAll('xb-menuitem[' + selectedAttr + '="' + value + '"]');
+	                }).forEach(function (node) {
+	                    node.selected = false;
+	                    node.removeAttribute(selectedAttr);
+	                }).value();
+
+	                firstParentMenu[_menu2.default.SELECTED] = {};
+	            }
+
+	            var changed = false;
+
+	            if (selected) {
+	                changed = true;
+	                item.selected = true;
+	                item.setAttribute(selectedAttr, uid);
+	                _lodash2.default.set(firstParentMenu, [_menu2.default.SELECTED, uid], item);
+	            } else if (!this.alwaysselected || _lodash2.default.size(firstParentMenu[_menu2.default.SELECTED]) > 1) {
+	                changed = true;
+	                item.selected = false;
+	                item.removeAttribute(selectedAttr);
+	                _lodash2.default.unset(firstParentMenu, [_menu2.default.SELECTED, uid]);
+	            }
+
+	            if (changed) {
+	                if (this.autoclose) {
+	                    firstParentMenu.close();
+	                }
+
+	                _xblocksCore.event.dispatch(firstParentMenu, 'change', {
+	                    detail: { item: item }
+	                });
+	            }
+	        }
+	    }
+	};
 
 /***/ },
 /* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _es6Symbol = __webpack_require__(24);\n\nvar _es6Symbol2 = _interopRequireDefault(_es6Symbol);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n    FOCUSED: (0, _es6Symbol2.default)('menuitem-focused'),\n    MENU: (0, _es6Symbol2.default)('menuitem-menu'),\n    SUBMENU: (0, _es6Symbol2.default)('menuitem-submenu'),\n    SUBMENU_TIMER: (0, _es6Symbol2.default)('menuitem-submenu-timer'),\n    SELECTED_ATTR: 'data-xb-selected'\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./constants/menuitem.js\n ** module id = 111\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./constants/menuitem.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (element, isSelectedDefault) {
+	    var root = _xblocksCore.dom.contentNode(element);
+	    if (root instanceof _context2.default.HTMLTemplateElement) {
+	        root = root.content;
+	    }
+
+	    var items = element.multiple ? _lodash2.default.toArray(root.querySelectorAll('xb-menuitem[selected]')) : _lodash2.default.castArray(root.querySelector('xb-menuitem[selected]'));
+
+	    var selectedItems = (0, _lodash2.default)(items).chain().compact().tap(function (array) {
+	        if (isSelectedDefault && !array.length) {
+	            array.push(root.querySelector('xb-menuitem'));
+	        }
+	    }).compact().reduce(initialSelectIteratee, {}).value();
+
+	    // сброс выделения элементов, которые не попали в список выбранных
+	    // актуально в случае multiple=false
+	    _lodash2.default.forEach(root.querySelectorAll('xb-menuitem[selected]:not([' + _menuitem2.default.SELECTED_ATTR + '])'), removeAttrSelectIterate);
+
+	    return selectedItems;
+	};
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _menuitem = __webpack_require__(112);
+
+	var _menuitem2 = _interopRequireDefault(_menuitem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function initialSelectIteratee(result, node) {
+	    var uid = _lodash2.default.uniqueId('selected');
+	    node.setAttribute(_menuitem2.default.SELECTED_ATTR, uid);
+	    result[uid] = node;
+	    return result;
+	}
+
+	/**
+	 * [description]
+	 * @param   {[type]}  element           [description]
+	 * @param   {Boolean} isSelectedDefault [description]
+	 * @returns {[type]}                    [description]
+	 */
+
+
+	function removeAttrSelectIterate(node) {
+	    node.removeAttribute('selected');
+	}
 
 /***/ },
 /* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _es6Symbol = __webpack_require__(24);\n\nvar _es6Symbol2 = _interopRequireDefault(_es6Symbol);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n    TABLE: (0, _es6Symbol2.default)('menu-table'),\n    SELECTED: (0, _es6Symbol2.default)('menu-selected')\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./constants/menu.js\n ** module id = 112\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./constants/menu.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _es6Symbol = __webpack_require__(24);
+
+	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    FOCUSED: (0, _es6Symbol2.default)('menuitem-focused'),
+	    MENU: (0, _es6Symbol2.default)('menuitem-menu'),
+	    SUBMENU: (0, _es6Symbol2.default)('menuitem-submenu'),
+	    SUBMENU_TIMER: (0, _es6Symbol2.default)('menuitem-submenu-timer'),
+	    SELECTED_ATTR: 'data-xb-selected'
+	};
 
 /***/ },
 /* 113 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = \".xb-menu {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  vertical-align: top;\\n  padding: 5px 0;\\n  font-size: 15px;\\n  line-height: 28px;\\n  position: relative;\\n  overflow: hidden;\\n  padding: 0;\\n  background-color: #fff;\\n  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15);\\n          box-shadow: 0 0 0 1px rgba(0,0,0,0.15);\\n  touch-action: none;\\n  -webkit-touch-callout: none;\\n  touch-callout: none;\\n  -webkit-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none;\\n  -webkit-text-size-adjust: none;\\n  text-size-adjust: none;\\n}\\n.xb-menu:before,\\n.xb-menu:after {\\n  margin: 0;\\n  display: none;\\n}\\n.xb-menu > ._content {\\n  overflow-y: scroll;\\n  overflow-x: hidden;\\n  tap-highlight-color: rgba(0,0,0,0);\\n  -webkit-transform: translateZ(0);\\n  -moz-transform: translateZ(0);\\n       transform: translateZ(0);\\n  margin-right: -15px;\\n}\\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\\n  .xb-menu > ._content {\\n    margin-right: auto !important;\\n  }\\n  .xb-menu > ._content::-webkit-scrollbar {\\n    width: 0 !important;\\n  }\\n}\\n.xb-menu > ._content > xb-menuitem:first-child {\\n  margin-top: 5px;\\n}\\n.xb-menu > ._content > xb-menuitem:last-child {\\n  margin-bottom: 5px;\\n}\\n.xb-menu > ._scroll-top {\\n  height: 8px;\\n  position: absolute;\\n  background-color: #fff;\\n  left: 0;\\n  top: 0;\\n  width: 100%;\\n  display: none;\\n  z-index: 2;\\n  cursor: n-resize;\\n}\\n.xb-menu > ._scroll-top:after {\\n  content: \\\"\\\";\\n  position: absolute;\\n  border: 4px solid transparent;\\n  border-bottom: 4px solid rgba(0,0,0,0.3);\\n  clear: both;\\n  margin-left: -4px;\\n  left: 50%;\\n  top: -2px;\\n}\\n.xb-menu > ._scroll-bottom {\\n  height: 8px;\\n  position: absolute;\\n  background-color: #fff;\\n  left: 0;\\n  bottom: 0;\\n  cursor: s-resize;\\n  width: 100%;\\n  display: none;\\n  z-index: 2;\\n}\\n.xb-menu > ._scroll-bottom:after {\\n  content: \\\"\\\";\\n  position: absolute;\\n  border: 4px solid transparent;\\n  border-top: 4px solid rgba(0,0,0,0.3);\\n  top: 2px;\\n  clear: both;\\n  margin-left: -4px;\\n  left: 50%;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/menu/style/inline.styl\n ** module id = 113\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menu/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _es6Symbol = __webpack_require__(24);
+
+	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    TABLE: (0, _es6Symbol2.default)('menu-table'),
+	    SELECTED: (0, _es6Symbol2.default)('menu-selected')
+	};
 
 /***/ },
 /* 114 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(115);\n\n__webpack_require__(116);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _lazyFocus = __webpack_require__(98);\n\nvar _lazyFocus2 = _interopRequireDefault(_lazyFocus);\n\nvar _TableNavigator = __webpack_require__(99);\n\nvar _TableNavigator2 = _interopRequireDefault(_TableNavigator);\n\nvar _menu = __webpack_require__(109);\n\nvar _menu2 = _interopRequireDefault(_menu);\n\nvar _focus = __webpack_require__(117);\n\nvar _focus2 = _interopRequireDefault(_focus);\n\nvar _menu3 = __webpack_require__(112);\n\nvar _menu4 = _interopRequireDefault(_menu3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n/**\n * xb-menu-inline html element\n *\n * @class xb.MenuInline\n * @memberof xb\n * @augments HTMLElement\n * @mixes xblocks.mixin.eFocus\n * @mixes xblocks.mixin.eMenu\n */\nexports.default = _context.xb.MenuInline = (0, _xblocksCore.create)('xb-menu-inline', [_focus2.default, _menu2.default, {\n    prototype: Object.create(HTMLElement.prototype),\n\n    events: {\n        'xb-created': function xbCreated() {\n            this[_menu4.default.TABLE] = new _TableNavigator2.default(this, {\n                col: 'xb-menu-inline:not([disabled])',\n                rowLoop: true,\n                colLoop: true\n            });\n        },\n\n        'xb-destroy': function xbDestroy() {\n            var table = this[_menu4.default.TABLE];\n            if (table) {\n                this[_menu4.default.TABLE] = undefined;\n                table.destroy();\n            }\n        },\n\n        'blur': function blur() {\n            if (!this.hasOpenSubmenu) {\n                this[_menu4.default.TABLE].blurItem();\n            }\n        }\n    },\n\n    /**\n     * @lends xb.MenuInline.prototype\n     */\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                return _defineProperty({}, this.xtagName, __webpack_require__(118));\n            }\n        },\n\n        isShadowSupported: {\n            get: _lodash2.default.stubFalse\n        }\n    },\n\n    methods: {\n        open: _lodash2.default.noop,\n\n        close: function close() {\n            // FireFox does not fire a blur event\n            (0, _lazyFocus2.default)(this);\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menu-inline/index.js\n ** module id = 114\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menu-inline/index.js?");
+	module.exports = ".xb-menu {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  vertical-align: top;\n  padding: 5px 0;\n  font-size: 15px;\n  line-height: 28px;\n  position: relative;\n  overflow: hidden;\n  padding: 0;\n  background-color: #fff;\n  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15);\n          box-shadow: 0 0 0 1px rgba(0,0,0,0.15);\n  touch-action: none;\n  -webkit-touch-callout: none;\n  touch-callout: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -webkit-text-size-adjust: none;\n  text-size-adjust: none;\n}\n.xb-menu:before,\n.xb-menu:after {\n  margin: 0;\n  display: none;\n}\n.xb-menu > ._content {\n  overflow-y: scroll;\n  overflow-x: hidden;\n  tap-highlight-color: rgba(0,0,0,0);\n  -webkit-transform: translateZ(0);\n  -moz-transform: translateZ(0);\n       transform: translateZ(0);\n  margin-right: -15px;\n}\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  .xb-menu > ._content {\n    margin-right: auto !important;\n  }\n  .xb-menu > ._content::-webkit-scrollbar {\n    width: 0 !important;\n  }\n}\n.xb-menu > ._content > xb-menuitem:first-child {\n  margin-top: 5px;\n}\n.xb-menu > ._content > xb-menuitem:last-child {\n  margin-bottom: 5px;\n}\n.xb-menu > ._scroll-top {\n  height: 8px;\n  position: absolute;\n  background-color: #fff;\n  left: 0;\n  top: 0;\n  width: 100%;\n  display: none;\n  z-index: 2;\n  cursor: n-resize;\n}\n.xb-menu > ._scroll-top:after {\n  content: \"\";\n  position: absolute;\n  border: 4px solid transparent;\n  border-bottom: 4px solid rgba(0,0,0,0.3);\n  clear: both;\n  margin-left: -4px;\n  left: 50%;\n  top: -2px;\n}\n.xb-menu > ._scroll-bottom {\n  height: 8px;\n  position: absolute;\n  background-color: #fff;\n  left: 0;\n  bottom: 0;\n  cursor: s-resize;\n  width: 100%;\n  display: none;\n  z-index: 2;\n}\n.xb-menu > ._scroll-bottom:after {\n  content: \"\";\n  position: absolute;\n  border: 4px solid transparent;\n  border-top: 4px solid rgba(0,0,0,0.3);\n  top: 2px;\n  clear: both;\n  margin-left: -4px;\n  left: 50%;\n}\n"
 
 /***/ },
 /* 115 */
-1,
-/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nvar _menu = __webpack_require__(89);\n\nvar _menu2 = _interopRequireDefault(_menu);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * The template node xb-menu-inline\n *\n * @class xv.MenuInline\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes xblocks.mixin.vMenu\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.MenuInline = _xblocksCore.view.register('xb-menu-inline', [_commonAttrs2.default, (0, _menu2.default)('xb-menu-inline'), {\n    displayName: 'xb-menu-inline',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        size: _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            size: ''\n        };\n    },\n\n    componentDidMount: function componentDidMount() {\n        this._updateMaxHeight(this.props.size);\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menu-inline/index.jsx\n ** module id = 116\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menu-inline/index.jsx?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(116);
+
+	__webpack_require__(117);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _lazyFocus = __webpack_require__(99);
+
+	var _lazyFocus2 = _interopRequireDefault(_lazyFocus);
+
+	var _TableNavigator = __webpack_require__(100);
+
+	var _TableNavigator2 = _interopRequireDefault(_TableNavigator);
+
+	var _menu = __webpack_require__(110);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	var _focus = __webpack_require__(118);
+
+	var _focus2 = _interopRequireDefault(_focus);
+
+	var _menu3 = __webpack_require__(113);
+
+	var _menu4 = _interopRequireDefault(_menu3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/**
+	 * xb-menu-inline html element
+	 *
+	 * @class xb.MenuInline
+	 * @memberof xb
+	 * @augments HTMLElement
+	 * @mixes xblocks.mixin.eFocus
+	 * @mixes xblocks.mixin.eMenu
+	 */
+	exports.default = _context.xb.MenuInline = (0, _xblocksCore.create)('xb-menu-inline', [_focus2.default, _menu2.default, {
+	    prototype: Object.create(HTMLElement.prototype),
+
+	    events: {
+	        'xb-created': function xbCreated() {
+	            this[_menu4.default.TABLE] = new _TableNavigator2.default(this, {
+	                col: 'xb-menu-inline:not([disabled])',
+	                rowLoop: true,
+	                colLoop: true
+	            });
+	        },
+
+	        'xb-destroy': function xbDestroy() {
+	            var table = this[_menu4.default.TABLE];
+	            if (table) {
+	                this[_menu4.default.TABLE] = undefined;
+	                table.destroy();
+	            }
+	        },
+
+	        'blur': function blur() {
+	            if (!this.hasOpenSubmenu) {
+	                this[_menu4.default.TABLE].blurItem();
+	            }
+	        }
+	    },
+
+	    /**
+	     * @lends xb.MenuInline.prototype
+	     */
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                return _defineProperty({}, this.xtagName, __webpack_require__(119));
+	            }
+	        },
+
+	        isShadowSupported: {
+	            get: _lodash2.default.stubFalse
+	        }
+	    },
+
+	    methods: {
+	        open: _lodash2.default.noop,
+
+	        close: function close() {
+	            // FireFox does not fire a blur event
+	            (0, _lazyFocus2.default)(this);
+	        }
+	    }
+	}]);
 
 /***/ },
+/* 116 */
+1,
 /* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _es6Symbol = __webpack_require__(24);\n\nvar _es6Symbol2 = _interopRequireDefault(_es6Symbol);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar TABINDEX = (0, _es6Symbol2.default)('xblocks-tabindex');\n\n/**\n * Focus element interface\n *\n * @example\n * import { create } from 'xblocks-core';\n * import mixinFocus from 'mixin/element/focus';\n *\n * create('xb-button', [\n *     mixinFocus,\n *     {\n *         ...\n *     }\n * ]);\n *\n * var e = document.createElement('xb-button');\n * // set focus\n * e.focus();\n *\n * // set blur\n * e.blur();\n *\n * @type {Object}\n */\nexports.default = {\n    lifecycle: {\n        created: function created() {\n            var tabindex = this.getAttribute('tabindex');\n            var disabled = this.hasAttribute('disabled');\n\n            this[TABINDEX] = null;\n\n            if (tabindex === null && !disabled) {\n                this.setAttribute('tabindex', '0');\n            } else if (tabindex && disabled) {\n                this[TABINDEX] = tabindex;\n                this.setAttribute('tabindex', '-1');\n            }\n        },\n\n        attributeChanged: function attributeChanged(attrName, oldValue, newValue) {\n            if (attrName === 'disabled') {\n                if (newValue === null) {\n                    this.setAttribute('tabindex', this[TABINDEX] !== null ? this[TABINDEX] : '0');\n                } else {\n                    this[TABINDEX] = this.getAttribute('tabindex');\n                    this.setAttribute('tabindex', '-1');\n                }\n            } else if (attrName === 'tabindex') {\n                this[TABINDEX] = newValue;\n            }\n        }\n    },\n\n    events: {\n        'focus': function focus() {\n            _lodash2.default.invoke(this.getComponent(), 'setState', { focused: true });\n        },\n\n        'blur': function blur() {\n            _lodash2.default.invoke(this.getComponent(), 'setState', { focused: false });\n        }\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./mixin/element/focus.js\n ** module id = 117\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./mixin/element/focus.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	var _menu = __webpack_require__(89);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * The template node xb-menu-inline
+	 *
+	 * @class xv.MenuInline
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes xblocks.mixin.vMenu
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.MenuInline = _xblocksCore.view.register('xb-menu-inline', [_commonAttrs2.default, (0, _menu2.default)('xb-menu-inline'), {
+	    displayName: 'xb-menu-inline',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        size: _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            size: ''
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        this._updateMaxHeight(this.props.size);
+	    }
+	}]);
 
 /***/ },
 /* 118 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = \".xb-menu-inline {\\n  position: relative;\\n  display: inline-block;\\n  vertical-align: top;\\n  vertical-align: top;\\n  padding: 5px 0;\\n  font-size: 15px;\\n  line-height: 28px;\\n  overflow: hidden;\\n  padding: 0;\\n  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);\\n          box-shadow: 0 0 0 1px rgba(0,0,0,0.1);\\n  touch-action: none;\\n  -webkit-touch-callout: none;\\n  touch-callout: none;\\n  -webkit-user-select: none;\\n  -moz-user-select: none;\\n  -ms-user-select: none;\\n  user-select: none;\\n  -webkit-text-size-adjust: none;\\n  text-size-adjust: none;\\n}\\n.xb-menu-inline:before,\\n.xb-menu-inline:after {\\n  margin: 0;\\n  display: none;\\n}\\n.xb-menu-inline > ._content {\\n  overflow-y: scroll;\\n  overflow-x: hidden;\\n  tap-highlight-color: rgba(0,0,0,0);\\n  -webkit-transform: translateZ(0);\\n  -moz-transform: translateZ(0);\\n       transform: translateZ(0);\\n  margin-right: -15px;\\n}\\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\\n  .xb-menu-inline > ._content {\\n    margin-right: auto !important;\\n  }\\n  .xb-menu-inline > ._content::-webkit-scrollbar {\\n    width: 0 !important;\\n  }\\n}\\n.xb-menu-inline > ._content > xb-menuitem:first-child {\\n  margin-top: 5px;\\n}\\n.xb-menu-inline > ._content > xb-menuitem:last-child {\\n  margin-bottom: 5px;\\n}\\n.xb-menu-inline > ._scroll-top {\\n  height: 8px;\\n  position: absolute;\\n  background-color: #fff;\\n  left: 0;\\n  top: 0;\\n  width: 100%;\\n  display: none;\\n  z-index: 2;\\n  cursor: n-resize;\\n}\\n.xb-menu-inline > ._scroll-top:after {\\n  content: \\\"\\\";\\n  position: absolute;\\n  border: 4px solid transparent;\\n  border-bottom: 4px solid rgba(0,0,0,0.3);\\n  clear: both;\\n  margin-left: -4px;\\n  left: 50%;\\n  top: -2px;\\n}\\n.xb-menu-inline > ._scroll-bottom {\\n  height: 8px;\\n  position: absolute;\\n  background-color: #fff;\\n  left: 0;\\n  bottom: 0;\\n  cursor: s-resize;\\n  width: 100%;\\n  display: none;\\n  z-index: 2;\\n}\\n.xb-menu-inline > ._scroll-bottom:after {\\n  content: \\\"\\\";\\n  position: absolute;\\n  border: 4px solid transparent;\\n  border-top: 4px solid rgba(0,0,0,0.3);\\n  top: 2px;\\n  clear: both;\\n  margin-left: -4px;\\n  left: 50%;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/menu-inline/style/inline.styl\n ** module id = 118\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menu-inline/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _es6Symbol = __webpack_require__(24);
+
+	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TABINDEX = (0, _es6Symbol2.default)('xblocks-tabindex');
+
+	/**
+	 * Focus element interface
+	 *
+	 * @example
+	 * import { create } from 'xblocks-core';
+	 * import mixinFocus from 'mixin/element/focus';
+	 *
+	 * create('xb-button', [
+	 *     mixinFocus,
+	 *     {
+	 *         ...
+	 *     }
+	 * ]);
+	 *
+	 * var e = document.createElement('xb-button');
+	 * // set focus
+	 * e.focus();
+	 *
+	 * // set blur
+	 * e.blur();
+	 *
+	 * @type {Object}
+	 */
+	exports.default = {
+	    lifecycle: {
+	        created: function created() {
+	            var tabindex = this.getAttribute('tabindex');
+	            var disabled = this.hasAttribute('disabled');
+
+	            this[TABINDEX] = null;
+
+	            if (tabindex === null && !disabled) {
+	                this.setAttribute('tabindex', '0');
+	            } else if (tabindex && disabled) {
+	                this[TABINDEX] = tabindex;
+	                this.setAttribute('tabindex', '-1');
+	            }
+	        },
+
+	        attributeChanged: function attributeChanged(attrName, oldValue, newValue) {
+	            if (attrName === 'disabled') {
+	                if (newValue === null) {
+	                    this.setAttribute('tabindex', this[TABINDEX] !== null ? this[TABINDEX] : '0');
+	                } else {
+	                    this[TABINDEX] = this.getAttribute('tabindex');
+	                    this.setAttribute('tabindex', '-1');
+	                }
+	            } else if (attrName === 'tabindex') {
+	                this[TABINDEX] = newValue;
+	            }
+	        }
+	    },
+
+	    events: {
+	        'focus': function focus() {
+	            _lodash2.default.invoke(this.getComponent(), 'setState', { focused: true });
+	        },
+
+	        'blur': function blur() {
+	            _lodash2.default.invoke(this.getComponent(), 'setState', { focused: false });
+	        }
+	    }
+	};
 
 /***/ },
 /* 119 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(120);\n\n__webpack_require__(121);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _lazyFocus = __webpack_require__(98);\n\nvar _lazyFocus2 = _interopRequireDefault(_lazyFocus);\n\nvar _getParentMenu = __webpack_require__(108);\n\nvar _getParentMenu2 = _interopRequireDefault(_getParentMenu);\n\nvar _removeChild = __webpack_require__(122);\n\nvar _removeChild2 = _interopRequireDefault(_removeChild);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _inputValueProps = __webpack_require__(53);\n\nvar _inputValueProps2 = _interopRequireDefault(_inputValueProps);\n\nvar _menuitem = __webpack_require__(111);\n\nvar _menuitem2 = _interopRequireDefault(_menuitem);\n\nvar _menu = __webpack_require__(112);\n\nvar _menu2 = _interopRequireDefault(_menu);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar SUBMENU_ATTRS = {\n    'attachment': 'top left',\n    'target-attachment': 'top right',\n    'target-modifier': 'initial',\n    'constraints': encodeURIComponent(JSON.stringify([{\n        'to': 'window',\n        'attachment': 'element together'\n    }]))\n};\n\n/**\n * xb-menuitem html element\n *\n * @class xb.Menuitem\n * @memberof xb\n * @augments HTMLElement\n * @mixes mixin/element/disabled\n * @mixes mixin/element/inputValueProps\n * @listens xblocks.utils:TableNavigator~event:xb-focus\n * @listens xblocks.utils:TableNavigator~event:xb-blur\n * @listens xblocks.Element~event:xb-repaint\n * @listens xblocks.Element~event:xb-created\n * @listens xblocks.Element~event:xb-destroy\n */\nexports.default = _context.xb.Menuitem = (0, _xblocksCore.create)('xb-menuitem', [_disabled2.default, _inputValueProps2.default, {\n    prototype: Object.create(HTMLElement.prototype),\n\n    events: {\n        /**\n         * @callback\n         */\n        'xb-created': function xbCreated() {\n            this._submenuRemove();\n            this._updateSelection();\n        },\n\n        /**\n         * @callback\n         */\n        'xb-destroy': function xbDestroy() {\n            this._submenuRemove();\n        },\n\n        /**\n         * @callback\n         */\n        'xb-blur': function xbBlur() {\n            this.focused = false;\n            this._submenuCancel();\n\n            var submenu = this.submenuInstance;\n            if (submenu && submenu.opened) {\n                // to close the submenu and return focus\n                (0, _lazyFocus2.default)(this.menuInstance);\n            }\n        },\n\n        /**\n         * @callback\n         * @param {Event} event\n         */\n        'xb-focus': function xbFocus(event) {\n            this.focused = true;\n\n            // scroll menu only keyboard events\n            if (event.detail.originalEvent.type === 'keydown') {\n                this.menuInstance.scrollIntoItem(this);\n\n                // open the submenu only event-mouse\n            } else {\n                    this._submenuOpen();\n                }\n        }\n    },\n\n    /**\n     * @lends xb.Menuitem.prototype\n     */\n    accessors: {\n        /**\n         * @prop {boolean} [focused=false] Item in focus\n         */\n        focused: {\n            get: function get() {\n                return Boolean(this[_menuitem2.default.FOCUSED]);\n            },\n\n            set: function set(value) {\n                this[_menuitem2.default.FOCUSED] = Boolean(value);\n            }\n        },\n\n        /**\n         * @prop {boolean} [selected=false] Item is selected\n         */\n        selected: {\n            attribute: {\n                boolean: true\n            },\n\n            set: function set(value) {\n                if (value && this.submenu) {\n                    this.selected = false;\n                }\n            }\n        },\n\n        /**\n         * @prop {boolean} [submenu=false] Item has a submenu\n         * @readonly\n         */\n        submenu: {\n            get: function get() {\n                return Boolean(this.content);\n            }\n        },\n\n        /**\n         * @prop {xb.Menu|xb.MenuInline|null} menuInstance Menu instance\n         * @readonly\n         */\n        menuInstance: {\n            get: function get() {\n                var menu = this[_menuitem2.default.MENU];\n\n                if (!menu && menu !== null) {\n                    menu = this[_menuitem2.default.MENU] = (0, _getParentMenu2.default)(this);\n                }\n\n                return menu;\n            }\n        },\n\n        /**\n         * @prop {xb.Menu|xb.MenuInline|null} menuInstance First menu instance\n         * @readonly\n         */\n        firstMenuInstance: {\n            get: function get() {\n                return _lodash2.default.get(this, 'menuInstance.firstParentMenu');\n            }\n        },\n\n        /**\n         * @prop {xb.Menu|null} submenuInstance Submenu instance\n         * @readonly\n         */\n        submenuInstance: {\n            get: function get() {\n                var submenu = this[_menuitem2.default.SUBMENU];\n\n                if (!submenu && submenu !== null) {\n                    submenu = this[_menuitem2.default.SUBMENU] = this.submenu ? this._submenuCreate() : null;\n                }\n\n                return submenu;\n            }\n        }\n    },\n\n    methods: {\n        /**\n         * @private\n         */\n        _submenuOpen: function _submenuOpen() {\n            if (this[_menuitem2.default.SUBMENU_TIMER]) {\n                return;\n            }\n\n            var submenu = this.submenuInstance;\n            if (!submenu) {\n                return;\n            }\n\n            this[_menuitem2.default.SUBMENU_TIMER] = _context2.default.setTimeout(submenu.open.bind(submenu), 200);\n        },\n\n        /**\n         * @private\n         */\n        _submenuCancel: function _submenuCancel() {\n            var timer = this[_menuitem2.default.SUBMENU_TIMER];\n            if (timer) {\n                _context2.default.clearTimeout(timer);\n                this[_menuitem2.default.SUBMENU_TIMER] = 0;\n            }\n        },\n\n        /**\n         * @private\n         */\n        _submenuRemove: function _submenuRemove() {\n            var submenu = this[_menuitem2.default.SUBMENU];\n            if (!submenu) {\n                return;\n            }\n\n            this[_menuitem2.default.SUBMENU] = undefined;\n            this._submenuCancel();\n\n            submenu.close();\n            (0, _removeChild2.default)(submenu);\n        },\n\n        /**\n         * @returns {xb.Menu}\n         * @private\n         */\n        _submenuCreate: function _submenuCreate() {\n            var parentMenu = this.menuInstance;\n\n            // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт\n            // меню может быть открыто в блоке со скролом,\n            // в этом случае ограничением для подменю будет блок со скролом\n            var parentAttrs = {\n                alwaysselected: parentMenu.hasAttribute('alwaysselected') && 'alwaysselected',\n                autoclose: parentMenu.hasAttribute('autoclose') && 'autoclose',\n                constraints: parentMenu.getAttribute('constraints'),\n                multiple: parentMenu.hasAttribute('multiple') && 'multiple',\n                selectable: parentMenu.hasAttribute('selectable') && 'selectable'\n            };\n\n            var targetClassName = '_menuitem-target-' + this.xuid;\n            var menu = this.ownerDocument.createElement('xb-menu');\n            var attrs = _lodash2.default.merge({ target: '.' + targetClassName }, SUBMENU_ATTRS);\n\n            for (var attrName in parentAttrs) {\n                if (parentAttrs[attrName]) {\n                    attrs[attrName] = parentAttrs[attrName];\n                }\n            }\n\n            for (var _attrName in attrs) {\n                menu.setAttribute(_attrName, attrs[_attrName]);\n            }\n\n            menu.innerHTML = this.content;\n            menu.addEventListener('xb-destroy', this._submenuRemove.bind(this), false);\n\n            this.classList.add(targetClassName);\n\n            return this.ownerDocument.body.appendChild(menu);\n        },\n\n        /**\n         * @private\n         */\n        _updateSelection: function _updateSelection() {\n            if (!this.parentNode) {\n                return;\n            }\n\n            var uid = this.getAttribute(_menuitem2.default.SELECTED_ATTR);\n            if (!uid) {\n                return;\n            }\n\n            var menu = this.firstMenuInstance;\n            if (!menu) {\n                return;\n            }\n\n            var selected = _lodash2.default.has(menu, [_menu2.default.SELECTED, uid]);\n            this.selected = selected;\n\n            if (!selected) {\n                this.removeAttribute(_menuitem2.default.SELECTED_ATTR);\n            }\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menuitem/index.js\n ** module id = 119\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menuitem/index.js?");
+	module.exports = ".xb-menu-inline {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  vertical-align: top;\n  padding: 5px 0;\n  font-size: 15px;\n  line-height: 28px;\n  overflow: hidden;\n  padding: 0;\n  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);\n          box-shadow: 0 0 0 1px rgba(0,0,0,0.1);\n  touch-action: none;\n  -webkit-touch-callout: none;\n  touch-callout: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -webkit-text-size-adjust: none;\n  text-size-adjust: none;\n}\n.xb-menu-inline:before,\n.xb-menu-inline:after {\n  margin: 0;\n  display: none;\n}\n.xb-menu-inline > ._content {\n  overflow-y: scroll;\n  overflow-x: hidden;\n  tap-highlight-color: rgba(0,0,0,0);\n  -webkit-transform: translateZ(0);\n  -moz-transform: translateZ(0);\n       transform: translateZ(0);\n  margin-right: -15px;\n}\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  .xb-menu-inline > ._content {\n    margin-right: auto !important;\n  }\n  .xb-menu-inline > ._content::-webkit-scrollbar {\n    width: 0 !important;\n  }\n}\n.xb-menu-inline > ._content > xb-menuitem:first-child {\n  margin-top: 5px;\n}\n.xb-menu-inline > ._content > xb-menuitem:last-child {\n  margin-bottom: 5px;\n}\n.xb-menu-inline > ._scroll-top {\n  height: 8px;\n  position: absolute;\n  background-color: #fff;\n  left: 0;\n  top: 0;\n  width: 100%;\n  display: none;\n  z-index: 2;\n  cursor: n-resize;\n}\n.xb-menu-inline > ._scroll-top:after {\n  content: \"\";\n  position: absolute;\n  border: 4px solid transparent;\n  border-bottom: 4px solid rgba(0,0,0,0.3);\n  clear: both;\n  margin-left: -4px;\n  left: 50%;\n  top: -2px;\n}\n.xb-menu-inline > ._scroll-bottom {\n  height: 8px;\n  position: absolute;\n  background-color: #fff;\n  left: 0;\n  bottom: 0;\n  cursor: s-resize;\n  width: 100%;\n  display: none;\n  z-index: 2;\n}\n.xb-menu-inline > ._scroll-bottom:after {\n  content: \"\";\n  position: absolute;\n  border: 4px solid transparent;\n  border-top: 4px solid rgba(0,0,0,0.3);\n  top: 2px;\n  clear: both;\n  margin-left: -4px;\n  left: 50%;\n}\n"
 
 /***/ },
 /* 120 */
-1,
-/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _classnames = __webpack_require__(11);\n\nvar _classnames2 = _interopRequireDefault(_classnames);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nvar _exportPropTypes = __webpack_require__(22);\n\nvar _exportPropTypes2 = _interopRequireDefault(_exportPropTypes);\n\nvar _filterProps = __webpack_require__(21);\n\nvar _filterProps2 = _interopRequireDefault(_filterProps);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar REG_PROPS_ICO = /^xb-ico-/;\n\n/**\n * The template node xb-menuitem\n *\n * @class xv.Menuitem\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n * @mixes React.addons.PureRenderMixin\n */\nexports.default = _context.xv.Menuitem = _xblocksCore.view.register('xb-menuitem', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {\n    displayName: 'xb-menuitem',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        'focused': _react.PropTypes.bool,\n        'ico': _react.PropTypes.object,\n        'label': _react.PropTypes.string.isRequired,\n        'selected': _react.PropTypes.bool,\n        'submenu': _react.PropTypes.bool\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'disabled': false,\n            'focused': false,\n            'selected': false,\n            'submenu': false\n        };\n    },\n\n    render: function render() {\n        var classes = (0, _classnames2.default)({\n            'xb-menuitem': true,\n            '_disabled': this.props.disabled,\n            '_focused': this.props.focused,\n            '_selected': this.props.selected,\n            '_submenu': this.props.submenu\n        });\n\n        var children = [React.createElement(\n            'span',\n            { className: '_label', key: 'label' },\n            this.props.label\n        )];\n\n        var icoProps = (0, _filterProps2.default)(REG_PROPS_ICO, this.props);\n\n        if (!_lodash2.default.isEmpty(icoProps) && icoProps.type) {\n            icoProps.key = 'ico';\n\n            if (!icoProps.float || icoProps.float === 'left') {\n                children.unshift(React.createElement('xb-ico', icoProps));\n            } else if (icoProps.float === 'right') {\n                children.push(React.createElement('xb-ico', icoProps));\n            }\n        }\n\n        return React.createElement(\n            'div',\n            { className: classes },\n            children\n        );\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menuitem/index.jsx\n ** module id = 121\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menuitem/index.jsx?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(121);
+
+	__webpack_require__(122);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _lazyFocus = __webpack_require__(99);
+
+	var _lazyFocus2 = _interopRequireDefault(_lazyFocus);
+
+	var _getParentMenu = __webpack_require__(109);
+
+	var _getParentMenu2 = _interopRequireDefault(_getParentMenu);
+
+	var _removeChild = __webpack_require__(123);
+
+	var _removeChild2 = _interopRequireDefault(_removeChild);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _inputValueProps = __webpack_require__(53);
+
+	var _inputValueProps2 = _interopRequireDefault(_inputValueProps);
+
+	var _menuitem = __webpack_require__(112);
+
+	var _menuitem2 = _interopRequireDefault(_menuitem);
+
+	var _menu = __webpack_require__(113);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SUBMENU_ATTRS = {
+	    'attachment': 'top left',
+	    'target-attachment': 'top right',
+	    'target-modifier': 'initial',
+	    'constraints': encodeURIComponent(JSON.stringify([{
+	        'to': 'window',
+	        'attachment': 'element together'
+	    }]))
+	};
+
+	/**
+	 * xb-menuitem html element
+	 *
+	 * @class xb.Menuitem
+	 * @memberof xb
+	 * @augments HTMLElement
+	 * @mixes mixin/element/disabled
+	 * @mixes mixin/element/inputValueProps
+	 * @listens xblocks.utils:TableNavigator~event:xb-focus
+	 * @listens xblocks.utils:TableNavigator~event:xb-blur
+	 * @listens xblocks.Element~event:xb-repaint
+	 * @listens xblocks.Element~event:xb-created
+	 * @listens xblocks.Element~event:xb-destroy
+	 */
+	exports.default = _context.xb.Menuitem = (0, _xblocksCore.create)('xb-menuitem', [_disabled2.default, _inputValueProps2.default, {
+	    prototype: Object.create(HTMLElement.prototype),
+
+	    events: {
+	        /**
+	         * @callback
+	         */
+	        'xb-created': function xbCreated() {
+	            this._submenuRemove();
+	            this._updateSelection();
+	        },
+
+	        /**
+	         * @callback
+	         */
+	        'xb-destroy': function xbDestroy() {
+	            this._submenuRemove();
+	        },
+
+	        /**
+	         * @callback
+	         */
+	        'xb-blur': function xbBlur() {
+	            this.focused = false;
+	            this._submenuCancel();
+
+	            var submenu = this.submenuInstance;
+	            if (submenu && submenu.opened) {
+	                // to close the submenu and return focus
+	                (0, _lazyFocus2.default)(this.menuInstance);
+	            }
+	        },
+
+	        /**
+	         * @callback
+	         * @param {Event} event
+	         */
+	        'xb-focus': function xbFocus(event) {
+	            this.focused = true;
+
+	            // scroll menu only keyboard events
+	            if (event.detail.originalEvent.type === 'keydown') {
+	                this.menuInstance.scrollIntoItem(this);
+
+	                // open the submenu only event-mouse
+	            } else {
+	                    this._submenuOpen();
+	                }
+	        }
+	    },
+
+	    /**
+	     * @lends xb.Menuitem.prototype
+	     */
+	    accessors: {
+	        /**
+	         * @prop {boolean} [focused=false] Item in focus
+	         */
+	        focused: {
+	            get: function get() {
+	                return Boolean(this[_menuitem2.default.FOCUSED]);
+	            },
+
+	            set: function set(value) {
+	                this[_menuitem2.default.FOCUSED] = Boolean(value);
+	            }
+	        },
+
+	        /**
+	         * @prop {boolean} [selected=false] Item is selected
+	         */
+	        selected: {
+	            attribute: {
+	                boolean: true
+	            },
+
+	            set: function set(value) {
+	                if (value && this.submenu) {
+	                    this.selected = false;
+	                }
+	            }
+	        },
+
+	        /**
+	         * @prop {boolean} [submenu=false] Item has a submenu
+	         * @readonly
+	         */
+	        submenu: {
+	            get: function get() {
+	                return Boolean(this.content);
+	            }
+	        },
+
+	        /**
+	         * @prop {xb.Menu|xb.MenuInline|null} menuInstance Menu instance
+	         * @readonly
+	         */
+	        menuInstance: {
+	            get: function get() {
+	                var menu = this[_menuitem2.default.MENU];
+
+	                if (!menu && menu !== null) {
+	                    menu = this[_menuitem2.default.MENU] = (0, _getParentMenu2.default)(this);
+	                }
+
+	                return menu;
+	            }
+	        },
+
+	        /**
+	         * @prop {xb.Menu|xb.MenuInline|null} menuInstance First menu instance
+	         * @readonly
+	         */
+	        firstMenuInstance: {
+	            get: function get() {
+	                return _lodash2.default.get(this, 'menuInstance.firstParentMenu');
+	            }
+	        },
+
+	        /**
+	         * @prop {xb.Menu|null} submenuInstance Submenu instance
+	         * @readonly
+	         */
+	        submenuInstance: {
+	            get: function get() {
+	                var submenu = this[_menuitem2.default.SUBMENU];
+
+	                if (!submenu && submenu !== null) {
+	                    submenu = this[_menuitem2.default.SUBMENU] = this.submenu ? this._submenuCreate() : null;
+	                }
+
+	                return submenu;
+	            }
+	        }
+	    },
+
+	    methods: {
+	        /**
+	         * @private
+	         */
+	        _submenuOpen: function _submenuOpen() {
+	            if (this[_menuitem2.default.SUBMENU_TIMER]) {
+	                return;
+	            }
+
+	            var submenu = this.submenuInstance;
+	            if (!submenu) {
+	                return;
+	            }
+
+	            this[_menuitem2.default.SUBMENU_TIMER] = _context2.default.setTimeout(submenu.open.bind(submenu), 200);
+	        },
+
+	        /**
+	         * @private
+	         */
+	        _submenuCancel: function _submenuCancel() {
+	            var timer = this[_menuitem2.default.SUBMENU_TIMER];
+	            if (timer) {
+	                _context2.default.clearTimeout(timer);
+	                this[_menuitem2.default.SUBMENU_TIMER] = 0;
+	            }
+	        },
+
+	        /**
+	         * @private
+	         */
+	        _submenuRemove: function _submenuRemove() {
+	            var submenu = this[_menuitem2.default.SUBMENU];
+	            if (!submenu) {
+	                return;
+	            }
+
+	            this[_menuitem2.default.SUBMENU] = undefined;
+	            this._submenuCancel();
+
+	            submenu.close();
+	            (0, _removeChild2.default)(submenu);
+	        },
+
+	        /**
+	         * @returns {xb.Menu}
+	         * @private
+	         */
+	        _submenuCreate: function _submenuCreate() {
+	            var parentMenu = this.menuInstance;
+
+	            // для подменю необходимо наследовать набор ограничений т.к. по умолчанию ограничением является вьюпорт
+	            // меню может быть открыто в блоке со скролом,
+	            // в этом случае ограничением для подменю будет блок со скролом
+	            var parentAttrs = {
+	                alwaysselected: parentMenu.hasAttribute('alwaysselected') && 'alwaysselected',
+	                autoclose: parentMenu.hasAttribute('autoclose') && 'autoclose',
+	                constraints: parentMenu.getAttribute('constraints'),
+	                multiple: parentMenu.hasAttribute('multiple') && 'multiple',
+	                selectable: parentMenu.hasAttribute('selectable') && 'selectable'
+	            };
+
+	            var targetClassName = '_menuitem-target-' + this.xuid;
+	            var menu = this.ownerDocument.createElement('xb-menu');
+	            var attrs = _lodash2.default.merge({ target: '.' + targetClassName }, SUBMENU_ATTRS);
+
+	            for (var attrName in parentAttrs) {
+	                if (parentAttrs[attrName]) {
+	                    attrs[attrName] = parentAttrs[attrName];
+	                }
+	            }
+
+	            for (var _attrName in attrs) {
+	                menu.setAttribute(_attrName, attrs[_attrName]);
+	            }
+
+	            menu.innerHTML = this.content;
+	            menu.addEventListener('xb-destroy', this._submenuRemove.bind(this), false);
+
+	            this.classList.add(targetClassName);
+
+	            return this.ownerDocument.body.appendChild(menu);
+	        },
+
+	        /**
+	         * @private
+	         */
+	        _updateSelection: function _updateSelection() {
+	            if (!this.parentNode) {
+	                return;
+	            }
+
+	            var uid = this.getAttribute(_menuitem2.default.SELECTED_ATTR);
+	            if (!uid) {
+	                return;
+	            }
+
+	            var menu = this.firstMenuInstance;
+	            if (!menu) {
+	                return;
+	            }
+
+	            var selected = _lodash2.default.has(menu, [_menu2.default.SELECTED, uid]);
+	            this.selected = selected;
+
+	            if (!selected) {
+	                this.removeAttribute(_menuitem2.default.SELECTED_ATTR);
+	            }
+	        }
+	    }
+	}]);
 
 /***/ },
+/* 121 */
+1,
 /* 122 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (element) {\n    if (element.parentNode) {\n        return element.parentNode.removeChild(element);\n    }\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./dom/removeChild.js\n ** module id = 122\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./dom/removeChild.js?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _classnames = __webpack_require__(11);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	var _exportPropTypes = __webpack_require__(22);
+
+	var _exportPropTypes2 = _interopRequireDefault(_exportPropTypes);
+
+	var _filterProps = __webpack_require__(21);
+
+	var _filterProps2 = _interopRequireDefault(_filterProps);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var REG_PROPS_ICO = /^xb-ico-/;
+
+	/**
+	 * The template node xb-menuitem
+	 *
+	 * @class xv.Menuitem
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 * @mixes React.addons.PureRenderMixin
+	 */
+	exports.default = _context.xv.Menuitem = _xblocksCore.view.register('xb-menuitem', [_commonAttrs2.default, (0, _exportPropTypes2.default)('xb-ico'), {
+	    displayName: 'xb-menuitem',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        'focused': _react.PropTypes.bool,
+	        'ico': _react.PropTypes.object,
+	        'label': _react.PropTypes.string.isRequired,
+	        'selected': _react.PropTypes.bool,
+	        'submenu': _react.PropTypes.bool
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'disabled': false,
+	            'focused': false,
+	            'selected': false,
+	            'submenu': false
+	        };
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames2.default)({
+	            'xb-menuitem': true,
+	            '_disabled': this.props.disabled,
+	            '_focused': this.props.focused,
+	            '_selected': this.props.selected,
+	            '_submenu': this.props.submenu
+	        });
+
+	        var children = [React.createElement(
+	            'span',
+	            { className: '_label', key: 'label' },
+	            this.props.label
+	        )];
+
+	        var icoProps = (0, _filterProps2.default)(REG_PROPS_ICO, this.props);
+
+	        if (!_lodash2.default.isEmpty(icoProps) && icoProps.type) {
+	            icoProps.key = 'ico';
+
+	            if (!icoProps.float || icoProps.float === 'left') {
+	                children.unshift(React.createElement('xb-ico', icoProps));
+	            } else if (icoProps.float === 'right') {
+	                children.push(React.createElement('xb-ico', icoProps));
+	            }
+	        }
+
+	        return React.createElement(
+	            'div',
+	            { className: classes },
+	            children
+	        );
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 123 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(124);\n\n__webpack_require__(125);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\n/**\n * xb-menuseparator html element\n *\n * @class xb.Menuseparator\n * @memberof xb\n * @augments HTMLElement\n */\nexports.default = _context.xb.Menuseparator = (0, _xblocksCore.create)('xb-menuseparator', [{\n    prototype: Object.create(HTMLElement.prototype)\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menuseparator/index.js\n ** module id = 123\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menuseparator/index.js?");
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (element) {
+	    if (element.parentNode) {
+	        return element.parentNode.removeChild(element);
+	    }
+	};
 
 /***/ },
 /* 124 */
-1,
-/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\n/**\n * The template node xb-menuseparator\n *\n * @class xv.Menuseparator\n * @memberof xv\n */\nexports.default = _context.xv.Menuseparator = _xblocksCore.view.register('xb-menuseparator', {\n    displayName: 'xb-menuseparator',\n\n    render: function render() {\n        return React.createElement('div', { className: 'xb-menuseparator' });\n    }\n});\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/menuseparator/index.jsx\n ** module id = 125\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/menuseparator/index.jsx?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(125);
+
+	__webpack_require__(126);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	/**
+	 * xb-menuseparator html element
+	 *
+	 * @class xb.Menuseparator
+	 * @memberof xb
+	 * @augments HTMLElement
+	 */
+	exports.default = _context.xb.Menuseparator = (0, _xblocksCore.create)('xb-menuseparator', [{
+	    prototype: Object.create(HTMLElement.prototype)
+	}]);
 
 /***/ },
+/* 125 */
+1,
 /* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol ? \"symbol\" : typeof obj; };\n\n__webpack_require__(127);\n\n__webpack_require__(128);\n\nvar _context = __webpack_require__(9);\n\nvar _context2 = _interopRequireDefault(_context);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _SpeechRecognition = __webpack_require__(129);\n\nvar _SpeechRecognition2 = _interopRequireDefault(_SpeechRecognition);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar SR_EVENTS = {\n    end: 1,\n    error: 1,\n    result: 1,\n    start: 1\n};\n\nvar SR_LANG_DEFAULT = 'en-US';\n\n/**\n * xb-speech-recognition html element\n *\n * @class xb.SpeechRecognition\n * @augments HTMLElement\n * @memberof xb\n * @mixes xblocks.mixin.eDisabled\n * @listens xblocks.Element~event:xb-created\n * @listens xblocks.Element~event:xb-update\n * @listens xblocks.Element~event:xb-destroy\n */\nexports.default = _context.xb.SpeechRecognition = (0, _xblocksCore.create)('xb-speech-recognition', [_disabled2.default, {\n    prototype: Object.create(HTMLElement.prototype),\n\n    events: {\n        'xb-created': function xbCreated() {\n            this.xbSpeechRecognition = new _SpeechRecognition2.default({\n                lang: this.lang || _context2.default.navigator && _context2.default.navigator.language || SR_LANG_DEFAULT,\n                continuous: this.continuous,\n                interimResults: this.interimResults\n            });\n\n            var passEventToTarget = this._passEventToTarget.bind(this);\n            for (var eventName in SR_EVENTS) {\n                this.xbSpeechRecognition.on(eventName, passEventToTarget);\n            }\n\n            this.xbSpeechRecognition.toggle(this.active);\n        },\n\n        'xb-update': function xbUpdate() {\n            this.xbSpeechRecognition.toggle(this.active);\n        },\n\n        'xb-destroy': function xbDestroy() {\n            this.xbSpeechRecognition.removeAllListeners();\n            this.xbSpeechRecognition.abort();\n            this.xbSpeechRecognition = undefined;\n        },\n\n        'click': function click() {\n            this.active = !this.active;\n        }\n    },\n\n    /**\n     * @lends xb.SpeechRecognition.prototype\n     */\n    accessors: {\n        active: {\n            attribute: {\n                boolean: true\n            }\n        },\n\n        lang: {\n            attribute: {\n                name: 'lang'\n            }\n        },\n\n        continuous: {\n            attribute: {\n                boolean: true\n            }\n        },\n\n        interimResults: {\n            attribute: {\n                boolean: true,\n                name: 'interim-results'\n            }\n        },\n\n        target: {\n            attribute: {\n                name: 'target'\n            }\n        }\n    },\n\n    methods: {\n        _passEventToTarget: function _passEventToTarget(event) {\n            var target = this.target;\n            var targetType = typeof target === 'undefined' ? 'undefined' : _typeof(target);\n            var targetEvent = new _xblocksCore.event.Custom('xb-speech-recognition-' + event.type, {\n                bubbles: false,\n                cancelable: false,\n                detail: event.detail\n            });\n\n            if (targetType === 'function') {\n                target(targetEvent);\n            } else {\n                if (targetType === 'string') {\n                    target = this.ownerDocument.querySelector(target);\n                }\n\n                if (target instanceof HTMLElement) {\n                    target.dispatchEvent(targetEvent);\n                }\n            }\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/speech-recognition/index.js\n ** module id = 126\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/speech-recognition/index.js?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	/**
+	 * The template node xb-menuseparator
+	 *
+	 * @class xv.Menuseparator
+	 * @memberof xv
+	 */
+	exports.default = _context.xv.Menuseparator = _xblocksCore.view.register('xb-menuseparator', {
+	    displayName: 'xb-menuseparator',
+
+	    render: function render() {
+	        return React.createElement('div', { className: 'xb-menuseparator' });
+	    }
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 127 */
-1,
-/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _classnames = __webpack_require__(11);\n\nvar _classnames2 = _interopRequireDefault(_classnames);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * The template node xb-speech-recognition\n *\n * @class xv.SpeechRecognition\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n */\nexports.default = _context.xv.SpeechRecognition = _xblocksCore.view.register('xb-speech-recognition', [_commonAttrs2.default, {\n    displayName: 'xb-speech-recognition',\n\n    propTypes: {\n        active: _react.PropTypes.bool\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            active: false,\n            disabled: false\n        };\n    },\n\n    render: function render() {\n        var classes = (0, _classnames2.default)({\n            'xb-speech-recognition': true,\n            '_active': this.props.active,\n            '_disabled': this.props.disabled\n        });\n\n        var props = {\n            'class': classes,\n            'type': this.props.active ? 'mic-on' : 'mic-off'\n        };\n\n        return React.createElement('xb-ico', props);\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/speech-recognition/index.jsx\n ** module id = 128\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/speech-recognition/index.jsx?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	__webpack_require__(128);
+
+	__webpack_require__(129);
+
+	var _context = __webpack_require__(9);
+
+	var _context2 = _interopRequireDefault(_context);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _SpeechRecognition = __webpack_require__(130);
+
+	var _SpeechRecognition2 = _interopRequireDefault(_SpeechRecognition);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SR_EVENTS = {
+	    end: 1,
+	    error: 1,
+	    result: 1,
+	    start: 1
+	};
+
+	var SR_LANG_DEFAULT = 'en-US';
+
+	/**
+	 * xb-speech-recognition html element
+	 *
+	 * @class xb.SpeechRecognition
+	 * @augments HTMLElement
+	 * @memberof xb
+	 * @mixes xblocks.mixin.eDisabled
+	 * @listens xblocks.Element~event:xb-created
+	 * @listens xblocks.Element~event:xb-update
+	 * @listens xblocks.Element~event:xb-destroy
+	 */
+	exports.default = _context.xb.SpeechRecognition = (0, _xblocksCore.create)('xb-speech-recognition', [_disabled2.default, {
+	    prototype: Object.create(HTMLElement.prototype),
+
+	    events: {
+	        'xb-created': function xbCreated() {
+	            this.xbSpeechRecognition = new _SpeechRecognition2.default({
+	                lang: this.lang || _context2.default.navigator && _context2.default.navigator.language || SR_LANG_DEFAULT,
+	                continuous: this.continuous,
+	                interimResults: this.interimResults
+	            });
+
+	            var passEventToTarget = this._passEventToTarget.bind(this);
+	            for (var eventName in SR_EVENTS) {
+	                this.xbSpeechRecognition.on(eventName, passEventToTarget);
+	            }
+
+	            this.xbSpeechRecognition.toggle(this.active);
+	        },
+
+	        'xb-update': function xbUpdate() {
+	            this.xbSpeechRecognition.toggle(this.active);
+	        },
+
+	        'xb-destroy': function xbDestroy() {
+	            this.xbSpeechRecognition.removeAllListeners();
+	            this.xbSpeechRecognition.abort();
+	            this.xbSpeechRecognition = undefined;
+	        },
+
+	        'click': function click() {
+	            this.active = !this.active;
+	        }
+	    },
+
+	    /**
+	     * @lends xb.SpeechRecognition.prototype
+	     */
+	    accessors: {
+	        active: {
+	            attribute: {
+	                boolean: true
+	            }
+	        },
+
+	        lang: {
+	            attribute: {
+	                name: 'lang'
+	            }
+	        },
+
+	        continuous: {
+	            attribute: {
+	                boolean: true
+	            }
+	        },
+
+	        interimResults: {
+	            attribute: {
+	                boolean: true,
+	                name: 'interim-results'
+	            }
+	        },
+
+	        target: {
+	            attribute: {
+	                name: 'target'
+	            }
+	        }
+	    },
+
+	    methods: {
+	        _passEventToTarget: function _passEventToTarget(event) {
+	            var target = this.target;
+	            var targetType = typeof target === 'undefined' ? 'undefined' : _typeof(target);
+	            var targetEvent = new _xblocksCore.event.Custom('xb-speech-recognition-' + event.type, {
+	                bubbles: false,
+	                cancelable: false,
+	                detail: event.detail
+	            });
+
+	            if (targetType === 'function') {
+	                target(targetEvent);
+	            } else {
+	                if (targetType === 'string') {
+	                    target = this.ownerDocument.querySelector(target);
+	                }
+
+	                if (target instanceof HTMLElement) {
+	                    target.dispatchEvent(targetEvent);
+	                }
+	            }
+	        }
+	    }
+	}]);
 
 /***/ },
+/* 128 */
+1,
 /* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _vendor = __webpack_require__(92);\n\nvar _vendor2 = _interopRequireDefault(_vendor);\n\nvar _events = __webpack_require__(130);\n\nvar _events2 = _interopRequireDefault(_events);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar SR = (0, _vendor2.default)('SpeechRecognition');\n\nvar ENGINE_EVENTS = {\n    onend: function onend(event) {\n        event.detail = { final: this._transcript };\n        this.emit('end', event);\n    },\n\n    onerror: function onerror(event) {\n        this.emit('error', event);\n    },\n\n    onresult: function onresult(event) {\n        var transcript = '';\n\n        for (var i = event.resultIndex; i < event.results.length; ++i) {\n            var result = event.results[i];\n\n            if (result.isFinal) {\n                this._transcript += result[0].transcript;\n            } else {\n                transcript += result[0].transcript;\n            }\n        }\n\n        event.detail = { final: this._transcript };\n\n        if (this._params.interimResults) {\n            event.detail.interim = transcript;\n        }\n\n        this.emit('result', event);\n    },\n\n    onstart: function onstart(event) {\n        this.emit('start', event);\n    }\n};\n\n/**\n *\n * @param {Object} params\n * @param {string} [params.lang=en-US] язык, который будет распозноваться\n * @param {boolean} [params.continuous=false] продолжать распознование при остановке диктовки\n * @param {boolean} [params.interimResults=false] выводить промежуточные не откорректированные результаты\n */\n\nvar SpeechRecognition = function (_EventEmitter) {\n    _inherits(SpeechRecognition, _EventEmitter);\n\n    function SpeechRecognition(params) {\n        _classCallCheck(this, SpeechRecognition);\n\n        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpeechRecognition).call(this));\n\n        _this._params = {};\n        _this._started = false;\n        _this._engine = new SR();\n        _this._applyParams(params, {\n            continuous: false,\n            interimResults: false,\n            lang: 'en-US',\n            maxAlternatives: 1\n        });\n\n        for (var eventName in ENGINE_EVENTS) {\n            _this._engine[eventName] = ENGINE_EVENTS[eventName].bind(_this);\n        }\n        return _this;\n    }\n\n    _createClass(SpeechRecognition, [{\n        key: 'toggle',\n        value: function toggle(state, params) {\n            if (state) {\n                this.start(params);\n            } else {\n                this.stop();\n            }\n        }\n    }, {\n        key: 'start',\n        value: function start(params) {\n            if (this._started) {\n                return;\n            }\n\n            this._started = true;\n            this._transcript = '';\n            this._applyParams(params);\n            this._engine.start();\n        }\n    }, {\n        key: 'stop',\n        value: function stop() {\n            if (!this._started) {\n                return;\n            }\n\n            this._started = false;\n            this._engine.stop();\n        }\n    }, {\n        key: 'abort',\n        value: function abort() {\n            if (!this._started) {\n                return;\n            }\n\n            this._started = false;\n            this._engine.abort();\n        }\n    }, {\n        key: '_applyParams',\n        value: function _applyParams(params, defaultParams) {\n            Object.assign(this._params, defaultParams, params);\n\n            for (var param in this._params) {\n                this._engine[param] = this._params[param];\n            }\n        }\n    }]);\n\n    return SpeechRecognition;\n}(_events2.default);\n\nexports.default = SpeechRecognition;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./utils/SpeechRecognition.js\n ** module id = 129\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./utils/SpeechRecognition.js?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _classnames = __webpack_require__(11);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * The template node xb-speech-recognition
+	 *
+	 * @class xv.SpeechRecognition
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 */
+	exports.default = _context.xv.SpeechRecognition = _xblocksCore.view.register('xb-speech-recognition', [_commonAttrs2.default, {
+	    displayName: 'xb-speech-recognition',
+
+	    propTypes: {
+	        active: _react.PropTypes.bool
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            active: false,
+	            disabled: false
+	        };
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames2.default)({
+	            'xb-speech-recognition': true,
+	            '_active': this.props.active,
+	            '_disabled': this.props.disabled
+	        });
+
+	        var props = {
+	            'class': classes,
+	            'type': this.props.active ? 'mic-on' : 'mic-off'
+	        };
+
+	        return React.createElement('xb-ico', props);
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 130 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("// Copyright Joyent, Inc. and other Node contributors.\n//\n// Permission is hereby granted, free of charge, to any person obtaining a\n// copy of this software and associated documentation files (the\n// \"Software\"), to deal in the Software without restriction, including\n// without limitation the rights to use, copy, modify, merge, publish,\n// distribute, sublicense, and/or sell copies of the Software, and to permit\n// persons to whom the Software is furnished to do so, subject to the\n// following conditions:\n//\n// The above copyright notice and this permission notice shall be included\n// in all copies or substantial portions of the Software.\n//\n// THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\n// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN\n// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\n// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\n// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\n// USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nfunction EventEmitter() {\n  this._events = this._events || {};\n  this._maxListeners = this._maxListeners || undefined;\n}\nmodule.exports = EventEmitter;\n\n// Backwards-compat with node 0.10.x\nEventEmitter.EventEmitter = EventEmitter;\n\nEventEmitter.prototype._events = undefined;\nEventEmitter.prototype._maxListeners = undefined;\n\n// By default EventEmitters will print a warning if more than 10 listeners are\n// added to it. This is a useful default which helps finding memory leaks.\nEventEmitter.defaultMaxListeners = 10;\n\n// Obviously not all Emitters should be limited to 10. This function allows\n// that to be increased. Set to zero for unlimited.\nEventEmitter.prototype.setMaxListeners = function(n) {\n  if (!isNumber(n) || n < 0 || isNaN(n))\n    throw TypeError('n must be a positive number');\n  this._maxListeners = n;\n  return this;\n};\n\nEventEmitter.prototype.emit = function(type) {\n  var er, handler, len, args, i, listeners;\n\n  if (!this._events)\n    this._events = {};\n\n  // If there is no 'error' event listener then throw.\n  if (type === 'error') {\n    if (!this._events.error ||\n        (isObject(this._events.error) && !this._events.error.length)) {\n      er = arguments[1];\n      if (er instanceof Error) {\n        throw er; // Unhandled 'error' event\n      }\n      throw TypeError('Uncaught, unspecified \"error\" event.');\n    }\n  }\n\n  handler = this._events[type];\n\n  if (isUndefined(handler))\n    return false;\n\n  if (isFunction(handler)) {\n    switch (arguments.length) {\n      // fast cases\n      case 1:\n        handler.call(this);\n        break;\n      case 2:\n        handler.call(this, arguments[1]);\n        break;\n      case 3:\n        handler.call(this, arguments[1], arguments[2]);\n        break;\n      // slower\n      default:\n        args = Array.prototype.slice.call(arguments, 1);\n        handler.apply(this, args);\n    }\n  } else if (isObject(handler)) {\n    args = Array.prototype.slice.call(arguments, 1);\n    listeners = handler.slice();\n    len = listeners.length;\n    for (i = 0; i < len; i++)\n      listeners[i].apply(this, args);\n  }\n\n  return true;\n};\n\nEventEmitter.prototype.addListener = function(type, listener) {\n  var m;\n\n  if (!isFunction(listener))\n    throw TypeError('listener must be a function');\n\n  if (!this._events)\n    this._events = {};\n\n  // To avoid recursion in the case that type === \"newListener\"! Before\n  // adding it to the listeners, first emit \"newListener\".\n  if (this._events.newListener)\n    this.emit('newListener', type,\n              isFunction(listener.listener) ?\n              listener.listener : listener);\n\n  if (!this._events[type])\n    // Optimize the case of one listener. Don't need the extra array object.\n    this._events[type] = listener;\n  else if (isObject(this._events[type]))\n    // If we've already got an array, just append.\n    this._events[type].push(listener);\n  else\n    // Adding the second element, need to change to array.\n    this._events[type] = [this._events[type], listener];\n\n  // Check for listener leak\n  if (isObject(this._events[type]) && !this._events[type].warned) {\n    if (!isUndefined(this._maxListeners)) {\n      m = this._maxListeners;\n    } else {\n      m = EventEmitter.defaultMaxListeners;\n    }\n\n    if (m && m > 0 && this._events[type].length > m) {\n      this._events[type].warned = true;\n      console.error('(node) warning: possible EventEmitter memory ' +\n                    'leak detected. %d listeners added. ' +\n                    'Use emitter.setMaxListeners() to increase limit.',\n                    this._events[type].length);\n      if (typeof console.trace === 'function') {\n        // not supported in IE 10\n        console.trace();\n      }\n    }\n  }\n\n  return this;\n};\n\nEventEmitter.prototype.on = EventEmitter.prototype.addListener;\n\nEventEmitter.prototype.once = function(type, listener) {\n  if (!isFunction(listener))\n    throw TypeError('listener must be a function');\n\n  var fired = false;\n\n  function g() {\n    this.removeListener(type, g);\n\n    if (!fired) {\n      fired = true;\n      listener.apply(this, arguments);\n    }\n  }\n\n  g.listener = listener;\n  this.on(type, g);\n\n  return this;\n};\n\n// emits a 'removeListener' event iff the listener was removed\nEventEmitter.prototype.removeListener = function(type, listener) {\n  var list, position, length, i;\n\n  if (!isFunction(listener))\n    throw TypeError('listener must be a function');\n\n  if (!this._events || !this._events[type])\n    return this;\n\n  list = this._events[type];\n  length = list.length;\n  position = -1;\n\n  if (list === listener ||\n      (isFunction(list.listener) && list.listener === listener)) {\n    delete this._events[type];\n    if (this._events.removeListener)\n      this.emit('removeListener', type, listener);\n\n  } else if (isObject(list)) {\n    for (i = length; i-- > 0;) {\n      if (list[i] === listener ||\n          (list[i].listener && list[i].listener === listener)) {\n        position = i;\n        break;\n      }\n    }\n\n    if (position < 0)\n      return this;\n\n    if (list.length === 1) {\n      list.length = 0;\n      delete this._events[type];\n    } else {\n      list.splice(position, 1);\n    }\n\n    if (this._events.removeListener)\n      this.emit('removeListener', type, listener);\n  }\n\n  return this;\n};\n\nEventEmitter.prototype.removeAllListeners = function(type) {\n  var key, listeners;\n\n  if (!this._events)\n    return this;\n\n  // not listening for removeListener, no need to emit\n  if (!this._events.removeListener) {\n    if (arguments.length === 0)\n      this._events = {};\n    else if (this._events[type])\n      delete this._events[type];\n    return this;\n  }\n\n  // emit removeListener for all listeners on all events\n  if (arguments.length === 0) {\n    for (key in this._events) {\n      if (key === 'removeListener') continue;\n      this.removeAllListeners(key);\n    }\n    this.removeAllListeners('removeListener');\n    this._events = {};\n    return this;\n  }\n\n  listeners = this._events[type];\n\n  if (isFunction(listeners)) {\n    this.removeListener(type, listeners);\n  } else if (listeners) {\n    // LIFO order\n    while (listeners.length)\n      this.removeListener(type, listeners[listeners.length - 1]);\n  }\n  delete this._events[type];\n\n  return this;\n};\n\nEventEmitter.prototype.listeners = function(type) {\n  var ret;\n  if (!this._events || !this._events[type])\n    ret = [];\n  else if (isFunction(this._events[type]))\n    ret = [this._events[type]];\n  else\n    ret = this._events[type].slice();\n  return ret;\n};\n\nEventEmitter.prototype.listenerCount = function(type) {\n  if (this._events) {\n    var evlistener = this._events[type];\n\n    if (isFunction(evlistener))\n      return 1;\n    else if (evlistener)\n      return evlistener.length;\n  }\n  return 0;\n};\n\nEventEmitter.listenerCount = function(emitter, type) {\n  return emitter.listenerCount(type);\n};\n\nfunction isFunction(arg) {\n  return typeof arg === 'function';\n}\n\nfunction isNumber(arg) {\n  return typeof arg === 'number';\n}\n\nfunction isObject(arg) {\n  return typeof arg === 'object' && arg !== null;\n}\n\nfunction isUndefined(arg) {\n  return arg === void 0;\n}\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/events/events.js\n ** module id = 130\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///../~/events/events.js?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _vendor = __webpack_require__(92);
+
+	var _vendor2 = _interopRequireDefault(_vendor);
+
+	var _events = __webpack_require__(131);
+
+	var _events2 = _interopRequireDefault(_events);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SR = (0, _vendor2.default)('SpeechRecognition');
+
+	var ENGINE_EVENTS = {
+	    onend: function onend(event) {
+	        event.detail = { final: this._transcript };
+	        this.emit('end', event);
+	    },
+
+	    onerror: function onerror(event) {
+	        this.emit('error', event);
+	    },
+
+	    onresult: function onresult(event) {
+	        var transcript = '';
+
+	        for (var i = event.resultIndex; i < event.results.length; ++i) {
+	            var result = event.results[i];
+
+	            if (result.isFinal) {
+	                this._transcript += result[0].transcript;
+	            } else {
+	                transcript += result[0].transcript;
+	            }
+	        }
+
+	        event.detail = { final: this._transcript };
+
+	        if (this._params.interimResults) {
+	            event.detail.interim = transcript;
+	        }
+
+	        this.emit('result', event);
+	    },
+
+	    onstart: function onstart(event) {
+	        this.emit('start', event);
+	    }
+	};
+
+	/**
+	 *
+	 * @param {Object} params
+	 * @param {string} [params.lang=en-US] язык, который будет распозноваться
+	 * @param {boolean} [params.continuous=false] продолжать распознование при остановке диктовки
+	 * @param {boolean} [params.interimResults=false] выводить промежуточные не откорректированные результаты
+	 */
+
+	var SpeechRecognition = function (_EventEmitter) {
+	    _inherits(SpeechRecognition, _EventEmitter);
+
+	    function SpeechRecognition(params) {
+	        _classCallCheck(this, SpeechRecognition);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpeechRecognition).call(this));
+
+	        _this._params = {};
+	        _this._started = false;
+	        _this._engine = new SR();
+	        _this._applyParams(params, {
+	            continuous: false,
+	            interimResults: false,
+	            lang: 'en-US',
+	            maxAlternatives: 1
+	        });
+
+	        for (var eventName in ENGINE_EVENTS) {
+	            _this._engine[eventName] = ENGINE_EVENTS[eventName].bind(_this);
+	        }
+	        return _this;
+	    }
+
+	    _createClass(SpeechRecognition, [{
+	        key: 'toggle',
+	        value: function toggle(state, params) {
+	            if (state) {
+	                this.start(params);
+	            } else {
+	                this.stop();
+	            }
+	        }
+	    }, {
+	        key: 'start',
+	        value: function start(params) {
+	            if (this._started) {
+	                return;
+	            }
+
+	            this._started = true;
+	            this._transcript = '';
+	            this._applyParams(params);
+	            this._engine.start();
+	        }
+	    }, {
+	        key: 'stop',
+	        value: function stop() {
+	            if (!this._started) {
+	                return;
+	            }
+
+	            this._started = false;
+	            this._engine.stop();
+	        }
+	    }, {
+	        key: 'abort',
+	        value: function abort() {
+	            if (!this._started) {
+	                return;
+	            }
+
+	            this._started = false;
+	            this._engine.abort();
+	        }
+	    }, {
+	        key: '_applyParams',
+	        value: function _applyParams(params, defaultParams) {
+	            Object.assign(this._params, defaultParams, params);
+
+	            for (var param in this._params) {
+	                this._engine[param] = this._params[param];
+	            }
+	        }
+	    }]);
+
+	    return SpeechRecognition;
+	}(_events2.default);
+
+	exports.default = SpeechRecognition;
 
 /***/ },
 /* 131 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\n__webpack_require__(132);\n\n__webpack_require__(133);\n\nvar _lodash = __webpack_require__(3);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _context = __webpack_require__(9);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _menu = __webpack_require__(112);\n\nvar _menu2 = _interopRequireDefault(_menu);\n\nvar _select = __webpack_require__(134);\n\nvar _select2 = _interopRequireDefault(_select);\n\nvar _initialDefinitionSelected = __webpack_require__(110);\n\nvar _initialDefinitionSelected2 = _interopRequireDefault(_initialDefinitionSelected);\n\nvar _removeChild = __webpack_require__(122);\n\nvar _removeChild2 = _interopRequireDefault(_removeChild);\n\nvar _disabled = __webpack_require__(17);\n\nvar _disabled2 = _interopRequireDefault(_disabled);\n\nvar _focusComponent = __webpack_require__(45);\n\nvar _focusComponent2 = _interopRequireDefault(_focusComponent);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\nvar MENU_ATTRS = {\n    'attachment': 'top left',\n    'target-attachment': 'bottom left',\n    'target-modifier': 'initial',\n    'constraints': encodeURIComponent(JSON.stringify([{\n        'to': 'window',\n        'attachment': 'element together'\n    }]))\n};\n\n/**\n * xb-select html element\n *\n * @class xb.Select\n * @memberof xb\n * @augments HTMLElement\n */\nexports.default = _context.xb.Select = (0, _xblocksCore.create)('xb-select', [_disabled2.default, _focusComponent2.default, {\n    prototype: Object.create(HTMLElement.prototype),\n\n    lifecycle: {\n        created: function created() {\n            this[_select2.default.SELECTED] = (0, _initialDefinitionSelected2.default)(this, true);\n        }\n    },\n\n    events: {\n        'xb-destroy': function xbDestroy() {\n            this._menuRemove();\n            this[_select2.default.SELECTED] = {};\n        },\n\n        'xb-update': function xbUpdate() {\n            this._menuRemove();\n        },\n\n        'click': function click() {\n            this.selectMenuInstance.open();\n        },\n\n        'keydown:keypass(32)': function keydownKeypass32() {\n            this.selectMenuInstance.open();\n        },\n\n        'change': function change() {\n            this.getComponent().setState({ selected: this.selectedObjects });\n        }\n    },\n\n    /**\n     * @lends xb.Select.prototype\n     */\n    accessors: {\n        componentStyle: {\n            get: function get() {\n                return _defineProperty({}, this.xtagName, __webpack_require__(135));\n            }\n        },\n\n        /**\n         * @prop {xb.Menu} selectMenuInstance Menu instance\n         * @readonly\n         */\n        selectMenuInstance: {\n            get: function get() {\n                var menu = this[_select2.default.MENU];\n\n                if (!menu) {\n                    menu = this[_select2.default.MENU] = this._menuCreate();\n                }\n\n                return menu;\n            }\n        },\n\n        multiple: {\n            attribute: {\n                boolean: true\n            }\n        },\n\n        /**\n         * @prop {string[]} value the values of the selected item\n         * @readonly\n         */\n        value: {\n            get: function get() {\n                // если меню ещё не открывалось\n                // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости\n                if (!this[_select2.default.MENU]) {\n                    return _lodash2.default.map(this[_select2.default.SELECTED], 'value');\n                }\n\n                return this.selectMenuInstance.value;\n            }\n        },\n\n        /**\n         * @prop {HTMLElement[]} selectedItems the selected item\n         * @readonly\n         */\n        selectedItems: {\n            get: function get() {\n                // если меню ещё не открывалось\n                // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости\n                if (!this[_select2.default.MENU]) {\n                    return _lodash2.default.values(this[_select2.default.SELECTED]);\n                }\n\n                return this.selectMenuInstance.selectedItems;\n            }\n        },\n\n        /**\n         * @prop {Object[]} selectedObjects the selected item\n         * @readonly\n         */\n        selectedObjects: {\n            get: function get() {\n                // если меню ещё не открывалось\n                // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости\n                if (!this[_select2.default.MENU]) {\n                    return _lodash2.default.map(this[_select2.default.SELECTED], function (item) {\n                        return {\n                            label: item.getAttribute('label'),\n                            value: item.value\n                        };\n                    });\n                }\n\n                return this.selectMenuInstance.selectedObjects;\n            }\n        }\n    },\n\n    methods: {\n        /**\n         * @private\n         */\n        _menuRemove: function _menuRemove() {\n            var menu = this[_select2.default.MENU];\n            if (!menu) {\n                return;\n            }\n\n            this[_select2.default.MENU] = undefined;\n            menu.close();\n            (0, _removeChild2.default)(menu);\n        },\n\n        /**\n         * @returns {xb.Menu}\n         * @private\n         */\n        _menuCreate: function _menuCreate() {\n            var targetClassName = '_select-target-' + this.xuid;\n            var menu = this.ownerDocument.createElement('xb-menu');\n            var attrs = _lodash2.default.merge({ target: '.' + targetClassName }, MENU_ATTRS);\n            var size = Number(this.getAttribute('size') || 0);\n\n            if (size) {\n                attrs.size = size;\n            }\n\n            for (var attrName in attrs) {\n                menu.setAttribute(attrName, attrs[attrName]);\n            }\n\n            menu[_menu2.default.SELECTED] = this[_select2.default.SELECTED];\n\n            menu.selectable = true;\n            menu.alwaysselected = true;\n            menu.multiple = this.multiple;\n            menu.autoclose = !this.multiple;\n            menu.innerHTML = this.content;\n            menu.addEventListener('xb-destroy', this._menuRemove.bind(this), false);\n\n            _xblocksCore.event.forwardingEvents('change', menu, this);\n\n            this.classList.add(targetClassName);\n\n            return this.ownerDocument.body.appendChild(menu);\n        }\n    }\n}]);\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/select/index.js\n ** module id = 131\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/select/index.js?");
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	function EventEmitter() {
+	  this._events = this._events || {};
+	  this._maxListeners = this._maxListeners || undefined;
+	}
+	module.exports = EventEmitter;
+
+	// Backwards-compat with node 0.10.x
+	EventEmitter.EventEmitter = EventEmitter;
+
+	EventEmitter.prototype._events = undefined;
+	EventEmitter.prototype._maxListeners = undefined;
+
+	// By default EventEmitters will print a warning if more than 10 listeners are
+	// added to it. This is a useful default which helps finding memory leaks.
+	EventEmitter.defaultMaxListeners = 10;
+
+	// Obviously not all Emitters should be limited to 10. This function allows
+	// that to be increased. Set to zero for unlimited.
+	EventEmitter.prototype.setMaxListeners = function(n) {
+	  if (!isNumber(n) || n < 0 || isNaN(n))
+	    throw TypeError('n must be a positive number');
+	  this._maxListeners = n;
+	  return this;
+	};
+
+	EventEmitter.prototype.emit = function(type) {
+	  var er, handler, len, args, i, listeners;
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // If there is no 'error' event listener then throw.
+	  if (type === 'error') {
+	    if (!this._events.error ||
+	        (isObject(this._events.error) && !this._events.error.length)) {
+	      er = arguments[1];
+	      if (er instanceof Error) {
+	        throw er; // Unhandled 'error' event
+	      }
+	      throw TypeError('Uncaught, unspecified "error" event.');
+	    }
+	  }
+
+	  handler = this._events[type];
+
+	  if (isUndefined(handler))
+	    return false;
+
+	  if (isFunction(handler)) {
+	    switch (arguments.length) {
+	      // fast cases
+	      case 1:
+	        handler.call(this);
+	        break;
+	      case 2:
+	        handler.call(this, arguments[1]);
+	        break;
+	      case 3:
+	        handler.call(this, arguments[1], arguments[2]);
+	        break;
+	      // slower
+	      default:
+	        args = Array.prototype.slice.call(arguments, 1);
+	        handler.apply(this, args);
+	    }
+	  } else if (isObject(handler)) {
+	    args = Array.prototype.slice.call(arguments, 1);
+	    listeners = handler.slice();
+	    len = listeners.length;
+	    for (i = 0; i < len; i++)
+	      listeners[i].apply(this, args);
+	  }
+
+	  return true;
+	};
+
+	EventEmitter.prototype.addListener = function(type, listener) {
+	  var m;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // To avoid recursion in the case that type === "newListener"! Before
+	  // adding it to the listeners, first emit "newListener".
+	  if (this._events.newListener)
+	    this.emit('newListener', type,
+	              isFunction(listener.listener) ?
+	              listener.listener : listener);
+
+	  if (!this._events[type])
+	    // Optimize the case of one listener. Don't need the extra array object.
+	    this._events[type] = listener;
+	  else if (isObject(this._events[type]))
+	    // If we've already got an array, just append.
+	    this._events[type].push(listener);
+	  else
+	    // Adding the second element, need to change to array.
+	    this._events[type] = [this._events[type], listener];
+
+	  // Check for listener leak
+	  if (isObject(this._events[type]) && !this._events[type].warned) {
+	    if (!isUndefined(this._maxListeners)) {
+	      m = this._maxListeners;
+	    } else {
+	      m = EventEmitter.defaultMaxListeners;
+	    }
+
+	    if (m && m > 0 && this._events[type].length > m) {
+	      this._events[type].warned = true;
+	      console.error('(node) warning: possible EventEmitter memory ' +
+	                    'leak detected. %d listeners added. ' +
+	                    'Use emitter.setMaxListeners() to increase limit.',
+	                    this._events[type].length);
+	      if (typeof console.trace === 'function') {
+	        // not supported in IE 10
+	        console.trace();
+	      }
+	    }
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+	EventEmitter.prototype.once = function(type, listener) {
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  var fired = false;
+
+	  function g() {
+	    this.removeListener(type, g);
+
+	    if (!fired) {
+	      fired = true;
+	      listener.apply(this, arguments);
+	    }
+	  }
+
+	  g.listener = listener;
+	  this.on(type, g);
+
+	  return this;
+	};
+
+	// emits a 'removeListener' event iff the listener was removed
+	EventEmitter.prototype.removeListener = function(type, listener) {
+	  var list, position, length, i;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events || !this._events[type])
+	    return this;
+
+	  list = this._events[type];
+	  length = list.length;
+	  position = -1;
+
+	  if (list === listener ||
+	      (isFunction(list.listener) && list.listener === listener)) {
+	    delete this._events[type];
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+
+	  } else if (isObject(list)) {
+	    for (i = length; i-- > 0;) {
+	      if (list[i] === listener ||
+	          (list[i].listener && list[i].listener === listener)) {
+	        position = i;
+	        break;
+	      }
+	    }
+
+	    if (position < 0)
+	      return this;
+
+	    if (list.length === 1) {
+	      list.length = 0;
+	      delete this._events[type];
+	    } else {
+	      list.splice(position, 1);
+	    }
+
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.removeAllListeners = function(type) {
+	  var key, listeners;
+
+	  if (!this._events)
+	    return this;
+
+	  // not listening for removeListener, no need to emit
+	  if (!this._events.removeListener) {
+	    if (arguments.length === 0)
+	      this._events = {};
+	    else if (this._events[type])
+	      delete this._events[type];
+	    return this;
+	  }
+
+	  // emit removeListener for all listeners on all events
+	  if (arguments.length === 0) {
+	    for (key in this._events) {
+	      if (key === 'removeListener') continue;
+	      this.removeAllListeners(key);
+	    }
+	    this.removeAllListeners('removeListener');
+	    this._events = {};
+	    return this;
+	  }
+
+	  listeners = this._events[type];
+
+	  if (isFunction(listeners)) {
+	    this.removeListener(type, listeners);
+	  } else if (listeners) {
+	    // LIFO order
+	    while (listeners.length)
+	      this.removeListener(type, listeners[listeners.length - 1]);
+	  }
+	  delete this._events[type];
+
+	  return this;
+	};
+
+	EventEmitter.prototype.listeners = function(type) {
+	  var ret;
+	  if (!this._events || !this._events[type])
+	    ret = [];
+	  else if (isFunction(this._events[type]))
+	    ret = [this._events[type]];
+	  else
+	    ret = this._events[type].slice();
+	  return ret;
+	};
+
+	EventEmitter.prototype.listenerCount = function(type) {
+	  if (this._events) {
+	    var evlistener = this._events[type];
+
+	    if (isFunction(evlistener))
+	      return 1;
+	    else if (evlistener)
+	      return evlistener.length;
+	  }
+	  return 0;
+	};
+
+	EventEmitter.listenerCount = function(emitter, type) {
+	  return emitter.listenerCount(type);
+	};
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+
 
 /***/ },
 /* 132 */
-1,
-/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(React) {'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _context = __webpack_require__(9);\n\nvar _react = __webpack_require__(8);\n\nvar _xblocksCore = __webpack_require__(10);\n\nvar _classnames = __webpack_require__(11);\n\nvar _classnames2 = _interopRequireDefault(_classnames);\n\nvar _reactAddonsPureRenderMixin = __webpack_require__(12);\n\nvar _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);\n\nvar _commonAttrs = __webpack_require__(16);\n\nvar _commonAttrs2 = _interopRequireDefault(_commonAttrs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * The template node xb-select\n *\n * @class xv.Select\n * @memberof xv\n * @mixes xblocks.mixin.vCommonAttrs\n */\nexports.default = _context.xv.Select = _xblocksCore.view.register('xb-select', [_commonAttrs2.default, {\n    displayName: 'xb-select',\n\n    mixins: [_reactAddonsPureRenderMixin2.default],\n\n    propTypes: {\n        'autofocus': _react.PropTypes.bool,\n        'form': _react.PropTypes.string,\n        'name': _react.PropTypes.string,\n        'required': _react.PropTypes.bool,\n        'theme': _react.PropTypes.string\n    },\n\n    getDefaultProps: function getDefaultProps() {\n        return {\n            'autofocus': false,\n            'required': false\n        };\n    },\n\n    getInitialState: function getInitialState() {\n        return {\n            'selected': []\n        };\n    },\n\n    componentWillMount: function componentWillMount() {\n        this.setState({\n            'selected': this.context.container.selectedObjects\n        });\n    },\n\n    render: function render() {\n        var classes = (0, _classnames2.default)({\n            'xb-select': true,\n            '_disabled': this.props.disabled\n        });\n\n        var attrs = {\n            'autofocus': this.props.autofocus || undefined,\n            'disabled': this.props.disabled || undefined,\n            'form': this.props.form,\n            'name': this.props.name,\n            'required': this.props.required || undefined,\n            'data-xb-tabindex': '-1',\n            'theme': this.props.theme,\n            'title': this.props.title,\n            'type': 'inline',\n            'xb-ico-float': 'right',\n            'xb-ico-type': 'dropdown'\n        };\n\n        var label = this.state.selected.map(function (item, key) {\n            return (key && ', ' || '') + item.label;\n        }).join('');\n\n        return React.createElement(\n            'div',\n            { className: classes, tabIndex: this.getTabIndex() },\n            React.createElement(\n                'xb-button',\n                attrs,\n                label\n            )\n        );\n    }\n}]);\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))\n\n/*****************\n ** WEBPACK FOOTER\n ** ./blocks/select/index.jsx\n ** module id = 133\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/select/index.jsx?");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(133);
+
+	__webpack_require__(134);
+
+	var _lodash = __webpack_require__(3);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _context = __webpack_require__(9);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _menu = __webpack_require__(113);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	var _select = __webpack_require__(135);
+
+	var _select2 = _interopRequireDefault(_select);
+
+	var _initialDefinitionSelected = __webpack_require__(111);
+
+	var _initialDefinitionSelected2 = _interopRequireDefault(_initialDefinitionSelected);
+
+	var _removeChild = __webpack_require__(123);
+
+	var _removeChild2 = _interopRequireDefault(_removeChild);
+
+	var _disabled = __webpack_require__(17);
+
+	var _disabled2 = _interopRequireDefault(_disabled);
+
+	var _focusComponent = __webpack_require__(45);
+
+	var _focusComponent2 = _interopRequireDefault(_focusComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var MENU_ATTRS = {
+	    'attachment': 'top left',
+	    'target-attachment': 'bottom left',
+	    'target-modifier': 'initial',
+	    'constraints': encodeURIComponent(JSON.stringify([{
+	        'to': 'window',
+	        'attachment': 'element together'
+	    }]))
+	};
+
+	/**
+	 * xb-select html element
+	 *
+	 * @class xb.Select
+	 * @memberof xb
+	 * @augments HTMLElement
+	 */
+	exports.default = _context.xb.Select = (0, _xblocksCore.create)('xb-select', [_disabled2.default, _focusComponent2.default, {
+	    prototype: Object.create(HTMLElement.prototype),
+
+	    lifecycle: {
+	        created: function created() {
+	            this[_select2.default.SELECTED] = (0, _initialDefinitionSelected2.default)(this, true);
+	        }
+	    },
+
+	    events: {
+	        'xb-destroy': function xbDestroy() {
+	            this._menuRemove();
+	            this[_select2.default.SELECTED] = {};
+	        },
+
+	        'xb-update': function xbUpdate() {
+	            this._menuRemove();
+	        },
+
+	        'click': function click() {
+	            this.selectMenuInstance.open();
+	        },
+
+	        'keydown:keypass(32)': function keydownKeypass32() {
+	            this.selectMenuInstance.open();
+	        },
+
+	        'change': function change() {
+	            this.getComponent().setState({ selected: this.selectedObjects });
+	        }
+	    },
+
+	    /**
+	     * @lends xb.Select.prototype
+	     */
+	    accessors: {
+	        componentStyle: {
+	            get: function get() {
+	                return _defineProperty({}, this.xtagName, __webpack_require__(136));
+	            }
+	        },
+
+	        /**
+	         * @prop {xb.Menu} selectMenuInstance Menu instance
+	         * @readonly
+	         */
+	        selectMenuInstance: {
+	            get: function get() {
+	                var menu = this[_select2.default.MENU];
+
+	                if (!menu) {
+	                    menu = this[_select2.default.MENU] = this._menuCreate();
+	                }
+
+	                return menu;
+	            }
+	        },
+
+	        multiple: {
+	            attribute: {
+	                boolean: true
+	            }
+	        },
+
+	        /**
+	         * @prop {string[]} value the values of the selected item
+	         * @readonly
+	         */
+	        value: {
+	            get: function get() {
+	                // если меню ещё не открывалось
+	                // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости
+	                if (!this[_select2.default.MENU]) {
+	                    return _lodash2.default.map(this[_select2.default.SELECTED], 'value');
+	                }
+
+	                return this.selectMenuInstance.value;
+	            }
+	        },
+
+	        /**
+	         * @prop {HTMLElement[]} selectedItems the selected item
+	         * @readonly
+	         */
+	        selectedItems: {
+	            get: function get() {
+	                // если меню ещё не открывалось
+	                // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости
+	                if (!this[_select2.default.MENU]) {
+	                    return _lodash2.default.values(this[_select2.default.SELECTED]);
+	                }
+
+	                return this.selectMenuInstance.selectedItems;
+	            }
+	        },
+
+	        /**
+	         * @prop {Object[]} selectedObjects the selected item
+	         * @readonly
+	         */
+	        selectedObjects: {
+	            get: function get() {
+	                // если меню ещё не открывалось
+	                // вызывать selectMenuInstance не нужно, чтобы не создавать меню без необходимости
+	                if (!this[_select2.default.MENU]) {
+	                    return _lodash2.default.map(this[_select2.default.SELECTED], function (item) {
+	                        return {
+	                            label: item.getAttribute('label'),
+	                            value: item.value
+	                        };
+	                    });
+	                }
+
+	                return this.selectMenuInstance.selectedObjects;
+	            }
+	        }
+	    },
+
+	    methods: {
+	        /**
+	         * @private
+	         */
+	        _menuRemove: function _menuRemove() {
+	            var menu = this[_select2.default.MENU];
+	            if (!menu) {
+	                return;
+	            }
+
+	            this[_select2.default.MENU] = undefined;
+	            menu.close();
+	            (0, _removeChild2.default)(menu);
+	        },
+
+	        /**
+	         * @returns {xb.Menu}
+	         * @private
+	         */
+	        _menuCreate: function _menuCreate() {
+	            var targetClassName = '_select-target-' + this.xuid;
+	            var menu = this.ownerDocument.createElement('xb-menu');
+	            var attrs = _lodash2.default.merge({ target: '.' + targetClassName }, MENU_ATTRS);
+	            var size = Number(this.getAttribute('size') || 0);
+
+	            if (size) {
+	                attrs.size = size;
+	            }
+
+	            for (var attrName in attrs) {
+	                menu.setAttribute(attrName, attrs[attrName]);
+	            }
+
+	            menu[_menu2.default.SELECTED] = this[_select2.default.SELECTED];
+
+	            menu.selectable = true;
+	            menu.alwaysselected = true;
+	            menu.multiple = this.multiple;
+	            menu.autoclose = !this.multiple;
+	            menu.innerHTML = this.content;
+	            menu.addEventListener('xb-destroy', this._menuRemove.bind(this), false);
+
+	            _xblocksCore.event.forwardingEvents('change', menu, this);
+
+	            this.classList.add(targetClassName);
+
+	            return this.ownerDocument.body.appendChild(menu);
+	        }
+	    }
+	}]);
 
 /***/ },
+/* 133 */
+1,
 /* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _es6Symbol = __webpack_require__(24);\n\nvar _es6Symbol2 = _interopRequireDefault(_es6Symbol);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n    MENU: (0, _es6Symbol2.default)('select-menu'),\n    SELECTED: (0, _es6Symbol2.default)('select-selected')\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./constants/select.js\n ** module id = 134\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./constants/select.js?");
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _context = __webpack_require__(9);
+
+	var _react = __webpack_require__(8);
+
+	var _xblocksCore = __webpack_require__(10);
+
+	var _classnames = __webpack_require__(11);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(12);
+
+	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _commonAttrs = __webpack_require__(16);
+
+	var _commonAttrs2 = _interopRequireDefault(_commonAttrs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * The template node xb-select
+	 *
+	 * @class xv.Select
+	 * @memberof xv
+	 * @mixes xblocks.mixin.vCommonAttrs
+	 */
+	exports.default = _context.xv.Select = _xblocksCore.view.register('xb-select', [_commonAttrs2.default, {
+	    displayName: 'xb-select',
+
+	    mixins: [_reactAddonsPureRenderMixin2.default],
+
+	    propTypes: {
+	        'autofocus': _react.PropTypes.bool,
+	        'form': _react.PropTypes.string,
+	        'name': _react.PropTypes.string,
+	        'required': _react.PropTypes.bool,
+	        'theme': _react.PropTypes.string
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            'autofocus': false,
+	            'required': false
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            'selected': []
+	        };
+	    },
+
+	    componentWillMount: function componentWillMount() {
+	        this.setState({
+	            'selected': this.context.container.selectedObjects
+	        });
+	    },
+
+	    render: function render() {
+	        var classes = (0, _classnames2.default)({
+	            'xb-select': true,
+	            '_disabled': this.props.disabled
+	        });
+
+	        var attrs = {
+	            'autofocus': this.props.autofocus || undefined,
+	            'disabled': this.props.disabled || undefined,
+	            'form': this.props.form,
+	            'name': this.props.name,
+	            'required': this.props.required || undefined,
+	            'data-xb-tabindex': '-1',
+	            'theme': this.props.theme,
+	            'title': this.props.title,
+	            'type': 'inline',
+	            'xb-ico-float': 'right',
+	            'xb-ico-type': 'dropdown'
+	        };
+
+	        var label = this.state.selected.map(function (item, key) {
+	            return (key && ', ' || '') + item.label;
+	        }).join('');
+
+	        return React.createElement(
+	            'div',
+	            { className: classes, tabIndex: this.getTabIndex() },
+	            React.createElement(
+	                'xb-button',
+	                attrs,
+	                label
+	            )
+	        );
+	    }
+	}]);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 135 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = \".xb-select {\\n  font-weight: inherit;\\n  position: relative;\\n  cursor: pointer;\\n}\\n.xb-select:focus {\\n  z-index: 2;\\n  border-color: rgba(178,142,0,0.6);\\n  outline: none;\\n}\\n.xb-select:focus:before {\\n  content: \\\"\\\";\\n  position: absolute;\\n  top: 0;\\n  right: 0;\\n  bottom: 0;\\n  left: 0;\\n  -webkit-border-radius: inherit;\\n          border-radius: inherit;\\n  -webkit-box-shadow: 0 0 10px #fc0;\\n          box-shadow: 0 0 10px #fc0;\\n}\\n.xb-select:focus:before {\\n  z-index: 2;\\n}\\n.xb-select > xb-button {\\n  width: 100%;\\n  pointer-events: none;\\n}\\n\"\n\n/*****************\n ** WEBPACK FOOTER\n ** ../~/raw-loader!../~/postcss-loader!../~/stylus-loader!./blocks/select/style/inline.styl\n ** module id = 135\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./blocks/select/style/inline.styl?../~/raw-loader!../~/postcss-loader!../~/stylus-loader");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _es6Symbol = __webpack_require__(24);
+
+	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    MENU: (0, _es6Symbol2.default)('select-menu'),
+	    SELECTED: (0, _es6Symbol2.default)('select-selected')
+	};
 
 /***/ },
 /* 136 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _es6Symbol = __webpack_require__(24);\n\nvar _es6Symbol2 = _interopRequireDefault(_es6Symbol);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = {\n    WRAP: (0, _es6Symbol2.default)('xb-wrap-event')\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./constants/event.js\n ** module id = 136\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./constants/event.js?");
+	module.exports = ".xb-select {\n  font-weight: inherit;\n  position: relative;\n  cursor: pointer;\n}\n.xb-select:focus {\n  z-index: 2;\n  border-color: rgba(178,142,0,0.6);\n  outline: none;\n}\n.xb-select:focus:before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-border-radius: inherit;\n          border-radius: inherit;\n  -webkit-box-shadow: 0 0 10px #fc0;\n          box-shadow: 0 0 10px #fc0;\n}\n.xb-select:focus:before {\n  z-index: 2;\n}\n.xb-select > xb-button {\n  width: 100%;\n  pointer-events: none;\n}\n"
 
 /***/ }
 /******/ ])))
