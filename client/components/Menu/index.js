@@ -76,6 +76,10 @@ export default React.createClass({
                             {
                                 hash: '/examples/menu',
                                 title: <FormattedMessage id="menu.menu" />
+                            },
+                            {
+                                hash: '/examples/select',
+                                title: <FormattedMessage id="menu.select" />
                             }
                         ]
                     }
@@ -117,6 +121,10 @@ export default React.createClass({
                             {
                                 hash: '/controls/menu',
                                 title: <FormattedMessage id="menu.menu" />
+                            },
+                            {
+                                hash: '/controls/select',
+                                title: <FormattedMessage id="menu.select" />
                             }
                         ]
                     }

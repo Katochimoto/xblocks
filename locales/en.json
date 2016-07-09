@@ -19,6 +19,7 @@
     "menu.support": "Browser and device support",
     "menu.block": "Web-component",
     "menu.view": "View",
+    "menu.select": "Select",
 
     "getting_started.descr0": "An overview of Xblocks, how to download and use, basic templates, and more.",
     "getting_started.download": "Download library",
@@ -61,6 +62,9 @@
     "examples.menu_descr3": "Show menu for the target object:",
     "examples.menu_descr4": "Context menu:",
     "examples.menu_descr5": "Inline menu:",
+    "examples.menu_descr6": "Menu with select items:",
+
+    "examples.select_descr0": "To display menu, use the tag <code>&lt;xb-select&gt;</code>.",
 
     "examples.popup_descr0": "To display popup, use the tag <code>&lt;xb-popup&gt;</code>.",
     "examples.popup_descr1": "Complex window:",
@@ -162,6 +166,11 @@
     "controls.menu__attrs_target-offset": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
     "controls.menu__attrs_target-parent": "Attach an item to the ancestor.",
     "controls.menu__attrs_target": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+
+    "controls.select__title": "Select",
+    "controls.select__descr_p1": "The <code>&lt;xb-select&gt;</code> allows you to create a widget in a drop-down list and a list with one or multiple choice.",
+    "controls.select__attrs_multiple": "multiple choice",
+    "controls.select__attrs_value": "selected values",
 
     "extension.es6": "ES6 and decorators",
     "extension.descr0": "To create your own elements, it is sufficient to use the library <a href=\"https://github.com/Katochimoto/xblocks-core\" target=\"_blank\">xblocks-core</a>.",

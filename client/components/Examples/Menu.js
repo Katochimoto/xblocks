@@ -9,6 +9,7 @@ import sample3 from './sample3.txt';
 import sample4 from './sample4.txt';
 import sample5 from './sample5.txt';
 import sample6 from './sample6.txt';
+import sample37 from './sample37.txt';
 
 export default React.createClass({
     render() {
@@ -59,6 +60,13 @@ export default React.createClass({
                 <div className="panel panel-example">
                     <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample1 }} />
                     <Code className="panel-body" value={sample1} />
+                </div>
+
+                <FormattedMessage id="examples.menu_descr6" />
+
+                <div className="panel panel-example">
+                    <div className="panel-heading" dangerouslySetInnerHTML={{ __html: sample37 }} />
+                    <Code className="panel-body" value={sample37} />
                 </div>
 
                 <Link to="/controls/menu">

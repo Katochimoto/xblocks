@@ -9,6 +9,7 @@ import Radio from './Radio';
 import Input from './Input';
 import Popup from './Popup';
 import Menu from './Menu';
+import Select from './Select';
 
 export default React.createClass({
     displayName: 'Controls',
@@ -28,6 +29,7 @@ export default React.createClass({
                 <Input />
                 <Popup />
                 <Menu />
+                <Select />
             </div>
         );
     }

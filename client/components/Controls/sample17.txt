@@ -1,0 +1,8 @@
+<xb-select multiple>
+    <xb-menuitem label="label 1" value="1" selected></xb-menuitem>
+    <xb-menuitem label="label 2" value="2" selected></xb-menuitem>
+    <xb-menuitem label="label 3" value="3"></xb-menuitem>
+    <xb-menuitem label="label 4" value="4"></xb-menuitem>
+    <xb-menuitem label="label 5" value="5"></xb-menuitem>
+    <xb-menuitem label="label 6" value="6"></xb-menuitem>
+</xb-select>

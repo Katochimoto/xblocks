@@ -18,6 +18,7 @@
     "menu.support": "Поддержка браузеров",
     "menu.block": "Веб-компонент",
     "menu.view": "Вид",
+    "menu.select": "Select",
 
     "getting_started.descr0": "Обзор Xblocks, как скачать и пользоваться, базовые шаблоны, и многое другое.",
     "getting_started.download": "Установите библиотеку",
@@ -60,6 +61,9 @@
     "examples.menu_descr3": "Показать меню для целевого объекта:",
     "examples.menu_descr4": "Контекстное меню:",
     "examples.menu_descr5": "Встроенное меню:",
+    "examples.menu_descr6": "Меню с возможностью выбора элементов:",
+
+    "examples.select_descr0": "Для отображения меню, используйте тег <code>&lt;xb-select&gt;</code>.",
 
     "examples.popup_descr0": "Для отображения окна, используйте тег <code>&lt;xb-popup&gt;</code>.",
     "examples.popup_descr1": "Сложное окно:",
@@ -161,6 +165,11 @@
     "controls.menu__attrs_target-offset": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
     "controls.menu__attrs_target-parent": "Прикрепить элемент к предку.",
     "controls.menu__attrs_target": "<a href=\"http://tether.io/#options\" target=\"_blank\">tether.io/#options</a>",
+
+    "controls.select__title": "Select",
+    "controls.select__descr_p1": "Тег <code>&lt;xb-select&gt;</code> позволяет создать элемент интерфейса в виде раскрывающегося списка, а также список с одним или множественным выбором.",
+    "controls.select__attrs_multiple": "множественный выбор",
+    "controls.select__attrs_value": "выбранные значения",
 
     "extension.es6": "ES6 и декораторы",
     "extension.descr0": "Для создания собственных элементов достаточно использовать библиотеку <a href=\"https://github.com/Katochimoto/xblocks-core\" target=\"_blank\">xblocks-core</a>.",
