@@ -4,7 +4,7 @@ HTML custom elements
 
 ## Documentation
 
-[Documentation](http://xblocks.info)
+[Documentation](https://katochimoto.github.io/xblocks/)
 
 ## Dependencies
 
